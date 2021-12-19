@@ -588,7 +588,7 @@ text-align: left;
 .products_container_products_inner_divs img {
     height: 250px;
     width: 260px;
-    transform: rotateY(20deg);
+    transform: rotateY(0deg);
     transition: transform 0.3s;
 }
 .products_container_products_inner_divs:hover > img {
@@ -688,7 +688,7 @@ text-align: left;
 .hot_deals_products_containers img {
     height: 270px;
     width: 250px;
-    transform: rotateY(20deg);
+    transform: rotateY(0deg);
     transition: transform 0.3s;
 }
 .hot_deals_products_time_container {
