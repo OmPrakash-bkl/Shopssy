@@ -442,7 +442,7 @@ text-align: left;
     width: 100%;
     background-color: black;
     opacity: 0.4;
-    position: absolute;
+    position: fixed;
     z-index: 1;
     display: none;
     
