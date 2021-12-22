@@ -692,6 +692,7 @@ text-align: left;
     transition: transform 0.3s;
 }
 .hot_deals_products_time_container {
+    height: 50px;
     display: block;
     transition: display 0.3s;
     
