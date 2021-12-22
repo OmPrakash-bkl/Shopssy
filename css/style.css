@@ -788,6 +788,11 @@ text-align: left;
 .iphone_ad_banner_container img:hover {
     width: 98%;
 }
+.top_categories_container {
+    height: 400px;
+    width: 90%;
+    border: 1px solid red;
+}
 
 /*Keyframes Start*/
 
