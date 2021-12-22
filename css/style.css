@@ -776,7 +776,18 @@ text-align: left;
 .hot_deals_products_text_container h2 del {
     color: #CDBDCA;
 }
-
+.iphone_ad_banner_container {
+    max-width: 1200px;
+}
+.iphone_ad_banner_container img {
+    width: 95%;
+    border: 0px;
+    border-radius: 30px;
+    transition: width 0.3s;
+}
+.iphone_ad_banner_container img:hover {
+    width: 98%;
+}
 
 /*Keyframes Start*/
 
