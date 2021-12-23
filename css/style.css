@@ -860,6 +860,68 @@ display: inline-block;
 .top_categories_container_products_navlink_div .show_all:hover {
     color: rgb(141, 141, 141);
 }
+.news_letter_container {
+    max-width: 1200px;
+    border: 0px;
+    border-radius: 45px;
+    background: linear-gradient(to right, #21A2FD, #9471EA);
+}
+
+.news_letter_container_text_div, .news_letter_container_email_div, .news_letter_container_icons_div {
+    display: inline-block;
+    padding: 15px 0px;
+}
+.news_letter_container_icons_div {
+    margin-left: 25%;
+}
+
+.news_letter_container_text_div h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: white;
+    margin: 0px 15px 0px 0px;
+}
+
+.news_letter_container_icons_div span {
+    margin: 10px;
+}
+ .news_letter_container_icons_div a {
+     color: white;
+ }
+ .news_letter_container_icons_div i {
+    transition: transform 0.5s;
+}
+ .news_letter_container_icons_div i:hover {
+    transform: rotate(360deg);
+}
+.news_letter_container_email_inner_div {
+    padding: 5px 2px;
+    background-color: white;
+    border: 0px;
+    border-radius: 30px;
+}
+.news_letter_container_email_inner_div input {
+   padding: 10px 10px;
+   border: 0px;
+   border-radius: 30px;
+   outline: none;
+   width: 250px;
+}
+.news_letter_container_email_inner_div button {
+    padding: 12px 12px;
+    border: 0px;
+    border-radius: 25px;
+    background-color: #21A2FD;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    transition: color 0.8s;
+ }
+ .news_letter_container_email_inner_div button:hover {
+   background-color: #137bc5;
+ }
+
+
 
 
 /*Keyframes Start*/
@@ -927,6 +989,9 @@ display: inline-block;
          .top_categories_container_product_nav_div .no_border {
             border-bottom: 1px solid #E0E0E0;
          }
+         .news_letter_container_icons_div {
+            margin-left: 12%;
+        }
         
 }
 @media only screen and (max-width: 1000px) {
@@ -945,6 +1010,18 @@ display: inline-block;
     }
     #img_slider_image_container_3 p:nth-child(3) {
         font-size: 20px;
+    }
+    .news_letter_container_text_div, .news_letter_container_email_div, .news_letter_container_icons_div {
+        display: block;
+    }
+    .news_letter_container {
+      border-radius: 0px;
+    }
+    .news_letter_container_icons_div {
+        margin-left:0%;
+    }
+    .news_letter_container_email_inner_div {
+        width: 365px;
     }
 }
 @media only screen and (min-width: 800px) {
@@ -1151,6 +1228,16 @@ display: inline-block;
     }
     .top_categories_container_products_navlink_div {
         width: 100px;
+    }
+    .news_letter_container_email_inner_div {
+        width: 240px;
+    }
+    .news_letter_container_email_inner_div input {
+        width: 130px;
+     }
+     .news_letter_container_text_div h1 {
+       font-size: 18px;
+       margin: 0px;
     }
 }
 
