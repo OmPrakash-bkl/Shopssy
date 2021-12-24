@@ -448,7 +448,7 @@ text-align: left;
     
 }
 .nav_hamburger_content_division {
-    height: 640px;
+    height: 100%;
     width: 200px;
     position: absolute;
     left: -200px;
@@ -458,7 +458,9 @@ text-align: left;
    display: none;
    transition: left 0.5s;
    box-shadow: rgba(0, 0, 0, 0.40) 0px 3px 8px;
+   overflow: scroll;
 }
+
 .nav_hamburger_content_division table {
     width: 100%;
     border-spacing: 0px 10px;
@@ -522,7 +524,7 @@ text-align: left;
     max-width: 1200px;
 }
 .products_container_button_div {
-    padding: 5px 0px;
+    padding: 5px 5px;
 }
 .products_container_button_inner_div_1 {
     float: left;
@@ -647,7 +649,7 @@ text-align: left;
     max-width: 1200px;
 }
 .hot_deals_text_container {
-    padding-bottom: 5px;
+    padding: 0px 5px 5px 5px;
     border-bottom: 2px solid rgb(153, 153, 153);
 }
 .hot_deals_text_container_div1 {
@@ -1196,6 +1198,9 @@ margin-bottom: 20px;
         width: 30px;
         border-radius: 0px;
      }
+     .top_categories_container_headtext_div h2 {
+      margin-left: 5px;
+    }
     
 }
 
@@ -1311,6 +1316,8 @@ margin-bottom: 20px;
     }
     .three_ad_inner_containers img {
         width: 200px;
+        height: 110px;
+        border-radius: 10px;
     }
     .products_container_button_inner_div_1 button {
         border: 1px solid #CDBDCA;
@@ -1344,7 +1351,7 @@ margin-bottom: 20px;
         background-color: #2D9AE8;
     }
     .products_container_products_inner_divs {
-        height: 210px;
+        height: 220px;
         width: 120px;
         margin: 10px 5px;
         padding: 0px 5px;
@@ -1392,6 +1399,9 @@ margin-bottom: 20px;
      .news_letter_container_text_div h1 {
        font-size: 18px;
        margin: 0px;
+    }
+    .top_categories_container_headtext_div h2 {
+        float: none;
     }
 }
 
