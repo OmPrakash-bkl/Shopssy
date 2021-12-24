@@ -205,3 +205,21 @@ document.getElementsByClassName("nav_hamburger_division")[0].style.display="none
 document.getElementsByClassName("mob_hamburger_btn")[0].style.transform = "rotate(0deg)";
     }
 })
+
+let back_to_top_arrow_container = document.getElementsByClassName("back_to_top_arrow_container")[0];
+window.onscroll = function(){
+    scrollFunction();
+}
+function scrollFunction() {
+    if(document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+        back_to_top_arrow_container.style.display="block";
+    } else {
+        back_to_top_arrow_container.style.display="none";
+    }
+}
+
+document.getElementById("back_to_top_arrow").addEventListener("click",function(){
+document.body.scrollTop=0;
+document.documentElement.scrollTop=0;
+});
+
