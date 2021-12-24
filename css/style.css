@@ -7,6 +7,18 @@
 html {
     scroll-behavior: smooth;
 }
+a:hover, a:active, a:visited, a:link, a:focus {
+    outline: none;
+    background: none;
+    border: none;
+    background-color: none;
+}
+:focus {
+    outline: none !important;
+}
+a{
+    -webkit-tap-highlight-color: transparent;
+ }
 
 /*Navbar Start*/
 .navbar_container {
