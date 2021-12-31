@@ -176,7 +176,7 @@ document.getElementById("hamburger_container_dir_arrow_tiger4").addEventListener
    if(e.clientY > 395 || e.clientY < 380) {
     document.getElementsByClassName("hamburger_container_dir_arrow4")[0].style.display="none";
     document.getElementsByClassName("smartphone_container_table2")[0].style.display="none";
-    console.log("hii");
+   
    }
 });
 
