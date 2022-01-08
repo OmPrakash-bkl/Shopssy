@@ -1288,6 +1288,200 @@ margin-bottom: 20px;
     font-size: 15px;
     line-height: 20px;
 }
+.spec_container {
+    max-width: 1200px;
+    text-align: left;
+    margin: 10px 0px;
+}
+
+.spec_container h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px 0px;
+}
+.spec_container div {
+    border: 1px solid #cecece;
+    padding: 10px 10px;
+}
+.spec_container .content table {
+   width: 100%;
+}
+.spec_container .content th {
+    padding: 10px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #44444A;
+}
+.spec_container .content td {
+    color: #666666;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.review_container {
+    max-width: 1200px;
+    text-align: left;
+    margin: 10px 0px;
+}
+.review_container h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px 0px;
+}
+.review_container div {
+    border: 1px solid #cecece;
+    padding: 10px 10px;
+}
+.review_container .heading button {
+    padding: 10px 20px;
+    background-color: transparent;
+    color: black;
+    border: none;
+    cursor: pointer;
+    float: right;
+    transition: color 0.3s;
+}
+.review_container .heading button:hover {
+   color: #45B0E3;
+}
+
+.review_container .heading::after {
+ content: "";
+ clear: both;
+ display: table;   
+}
+.review_container .content label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #44444A;
+   }
+   .review_container .content input, .review_container .content textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px 0px;
+    padding: 10px 10px;
+   }
+   .review_container .content .inp1, .review_container .content .inp2 {
+   height: 40px;
+   width: 100%;
+   border: 1px solid #cecece;
+   }
+   .review_container .content .inp2 {
+       height: 100px;
+       border: 1px solid #cecece;
+   }
+   .review_container .content .inp3 {
+    padding: 0px;
+    width: 20%;
+}
+.review_form_container {
+    display: none;
+}
+.review_form_container button {
+    padding: 10px 20px;
+    border: 0px;
+    background-color: #45B0E3;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.review_form_container button:hover {
+  background-color: rgb(0, 160, 0);
+}
+.customer_review_container h3 {
+    padding: 8px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: #44444A;
+}
+.customer_review_container .fa-star {
+   color: #CDBDCA;
+   padding: 5px 0px;
+}
+.customer_review_container .checked {
+    color: #FFA500;
+ }
+
+ .customer_review_container p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+ }
+.ques_and_ans_container {
+    max-width: 1200px;
+    text-align: left;
+    margin: 30px 0px;
+    border: 1px solid #cecece;
+    padding: 10px 10px;
+}
+.ques_and_ans_container .content {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.ques_and_ans_container .content div {
+    border: 1px solid #cecece;
+    margin: 10px 0px;
+    padding: 10px 10px 0px 10px;
+}
+.ques_and_ans_container h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px 0px;
+}
+.ques_and_ans_container .search_container {
+    border: 1px solid #cecece;
+    display: inline-block;
+    border-radius: 5px;
+}
+.ques_and_ans_container .heading input {
+  width: 330px;
+  height: 38px;
+  padding: 0px 10px;
+  outline: none;
+  border: none;
+  margin-right: 0px;
+}
+.ques_and_ans_container .heading button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: #45B0E3;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  }
+  .ques_and_ans_container .heading button:hover {
+   background-color: black;
+    }
+  .ques_and_ans_container .content .h5tag {
+    color: #44444A;
+    font-size: 18px;
+}
+  .ques_and_ans_container .content .h5tag1 {
+      display: inline-block;
+      color: #44444A;
+      font-size: 18px;
+  }
+  .ques_and_ans_container .content span {
+    display: inline-block;
+    margin: 5px 0px;
+    color: gray;
+}
+.ques_and_ans_container .content .thumbs {
+    margin: 0px 30px 0px 0px;
+  }
+.ques_and_ans_container .content .thumbs button {
+  color: #909090;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+.ques_and_ans_container .content .thumbs button:hover {
+   color: #45B0E3;
+  }
+.products_container_button_inner_div_1 h2 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
 
 /*Keyframes Start*/
 
@@ -1700,6 +1894,9 @@ margin-bottom: 20px;
         height: 300px;
         width: 280px;
        }
+       .ques_and_ans_container .heading input {
+        width: 180px;
+      }
 }
 
 @media only screen and (max-width: 300px) {
