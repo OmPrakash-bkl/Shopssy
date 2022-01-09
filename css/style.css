@@ -1903,6 +1903,9 @@ margin-bottom: 20px;
        .ques_and_ans_container .heading input {
         width: 180px;
       }
+      .img_slider_image_container img {
+        opacity: 0.5;
+    }
 }
 
 @media only screen and (max-width: 300px) {
