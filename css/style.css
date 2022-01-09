@@ -1067,7 +1067,7 @@ margin-bottom: 20px;
     .sub_navigation_inner_container span a {
       color: #666666;
       text-decoration: none;
-      
+      margin-left: 10px;
    }
    .sub_navigation_inner_container a {
     transition: color 0.3s;
@@ -1677,6 +1677,12 @@ margin-bottom: 20px;
         height: 450px;
         width: 500px;
        }
+       .products_container_products_inner_text_divs div h2 del {
+       display: block;
+    }
+    .products_container_products_inner_divs {
+        height: 430px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -1728,7 +1734,7 @@ margin-bottom: 20px;
      display: none;
     }
     .products_container_products_inner_divs {
-        height: 250px;
+        height: 280px;
         width: 180px;
         margin: 10px 5px;
         padding: 0px 10px;
