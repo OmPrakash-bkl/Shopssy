@@ -37,3 +37,23 @@ document.getElementsByClassName("rating_container")[0].addEventListener("click",
                 document.getElementById("arrow_of_product4").className = "fa fa-angle-down";
             }
             });
+
+            document.getElementsByClassName("size_container")[0].addEventListener("click", function(){
+                if(document.getElementsByClassName("size_list_container")[0].style.display == "none") {
+                    document.getElementsByClassName("size_list_container")[0].style.display = "block";
+                    document.getElementById("arrow_of_product6").className = "fa fa-angle-up";
+                } else {
+                    document.getElementsByClassName("size_list_container")[0].style.display = "none";
+                    document.getElementById("arrow_of_product6").className = "fa fa-angle-down";
+                }
+                });
+
+            document.getElementsByClassName("select_container")[0].addEventListener("click", function(){
+                if(document.getElementsByClassName("select_inner_container")[0].style.display=="none") {
+                    document.getElementsByClassName("select_inner_container")[0].style.display="block";
+                    document.getElementById("arrow_of_product5").className = "fa fa-angle-up";
+                } else {
+                    document.getElementsByClassName("select_inner_container")[0].style.display="none";
+                    document.getElementById("arrow_of_product5").className = "fa fa-angle-down";
+                }
+            });
