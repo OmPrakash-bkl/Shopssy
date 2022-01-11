@@ -57,3 +57,26 @@ document.getElementsByClassName("rating_container")[0].addEventListener("click",
                     document.getElementById("arrow_of_product5").className = "fa fa-angle-down";
                 }
             });
+
+            document.getElementsByClassName("filter_mobile_arrow")[0].addEventListener("click", function() {
+                document.getElementsByClassName("filter_for_mobile_container")[0].style.display="none";
+            })
+            document.getElementsByClassName("filter_btn")[0].addEventListener("click", function(){
+                document.getElementsByClassName("filter_for_mobile_container")[0].style.display="block";
+            });
+
+            let temp = 1;
+            function show_checkboxes(p) {
+                document.getElementsByClassName(`filter_for_mobile_container_body_container_inner_container2_div${temp}`)[0].style.display="none";
+                document.getElementsByClassName(`filter_for_mobile_container_body_container_inner_container2_div${p}`)[0].style.display="block";
+                temp = p;
+                
+            }
+
+            document.getElementsByClassName("sort_btn")[0].addEventListener("click", function(){
+                document.getElementsByClassName("sort_for_mobile_container")[0].style.display="block";
+            });
+
+            document.getElementsByClassName("close_icon_container")[0].addEventListener("click", function(){
+                document.getElementsByClassName("sort_for_mobile_container")[0].style.display="none";
+            });
