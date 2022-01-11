@@ -1539,7 +1539,7 @@ margin-bottom: 20px;
     margin-left: 15px;
   }
 .product_section_container {
- 
+    display: flex;
     max-width: 1200px;
 }
 .product_section_container div {
@@ -1547,10 +1547,10 @@ margin-bottom: 20px;
     display: inline-block;
 }
 .product_section_sub_container_1 {
-    width: 270px;
+   
     text-align: left;
     padding: 0px 5px;
-  
+    flex: 25%;
     background-color: white;
 }
 .product_section_sub_container_1 h1 {
@@ -1565,17 +1565,17 @@ margin-bottom: 20px;
 }
 .product_section_sub_container_brands_container .text_div, .product_section_sub_container_customer_rating_container .text_div, .product_section_sub_container_colors_container .text_div, .product_section_sub_container_price_container .text_div, .product_section_sub_container_size_container .text_div {
     
-    padding-right: 150px;
+    padding-right: 175px;
     font-family: Arial, Helvetica, sans-serif;
 }
 .product_section_sub_container_customer_rating_container .text_div {
-    padding-right: 50px;
+    padding-right: 77px;
 }
 .product_section_sub_container_price_container .text_div {
-    padding-right: 170px;
+    padding-right: 190px;
 }
 .product_section_sub_container_size_container .text_div {
-    padding-right: 180px;
+    padding-right: 205px;
 }
 .product_section_sub_container_brands_container div > div, .product_section_sub_container_customer_rating_container div > div, .product_section_sub_container_colors_container div > div, .product_section_sub_container_price_container div > div, .product_section_sub_container_size_container div > div {
     padding: 5px 5px;
@@ -1586,11 +1586,11 @@ margin-bottom: 20px;
     cursor: pointer;
 }
 .brands_container, .rating_container, .colors_container, .price_container, .size_container {
-    border-bottom: 1px solid #5a5a5a;
+    border-bottom: none;
 }
 .brand_list_container, .rating_list_container, .color_list_container, .price_bar_container, .size_list_container  {
     width: 100%;
-    border-bottom: 1px solid #5a5a5a;
+    border-bottom: none;
   
 }
 .brand_list_container div, .rating_list_container div, .color_list_container div, .price_bar_container div, .size_list_container div {
@@ -1605,7 +1605,7 @@ margin-bottom: 20px;
 }
 
 .price_bar_container input {
-    width: 70%;
+    width: 60%;
 }
 .brand_list_container label, .rating_list_container label, .color_list_container label,  .price_bar_container label, .size_list_container label {
     font-size: 16px;
@@ -1613,8 +1613,7 @@ margin-bottom: 20px;
     padding-left: 5px;
  }
 .product_section_sub_container_2  {
-   
-   width: 75%;
+    flex: 75%;
    text-align: left;
    margin: 0px 10px;
    position: relative;
@@ -1623,7 +1622,7 @@ margin-bottom: 20px;
  .product_section_sub_container_2 h1 {
     font-family: Arial, Helvetica, sans-serif;
     display: inline-block;
-   margin-right: 680px;
+   margin-right: 640px;
 }
 
 .product_section_inner_container_2 .select_container {
@@ -1737,7 +1736,7 @@ margin-bottom: 20px;
 }
 .next_page_container {
     width: 100%;
-    margin-top: 20px;
+    margin: 20px 0px;
     border-top: 1px solid #959595;
 }
 .next_page_container button {
@@ -1773,11 +1772,25 @@ margin-bottom: 20px;
 /*Keyframes Start*/
 @media only screen and (max-width: 1200px) {
     .product_section_sub_container_2 h1 {
-       margin-right: 500px;
+       margin-right: 600px;
     }
     .product_section_sub_container_2  {
      width: 68%;
      }
+     .product_section_sub_container_brands_container .text_div, .product_section_sub_container_customer_rating_container .text_div, .product_section_sub_container_colors_container .text_div, .product_section_sub_container_price_container .text_div, .product_section_sub_container_size_container .text_div {
+    
+        padding-right: 125px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .product_section_sub_container_customer_rating_container .text_div {
+        padding-right: 27px;
+    }
+    .product_section_sub_container_price_container .text_div {
+        padding-right: 140px;
+    }
+    .product_section_sub_container_size_container .text_div {
+        padding-right: 155px;
+    }
 }
 
 @media only screen and (max-width: 1150px) {
@@ -1860,11 +1873,9 @@ margin-bottom: 20px;
             width: 70px;
         }
         .product_section_sub_container_2 h1 {
-            margin-right: 400px;
+            margin-right: 500px;
          }
-         .product_section_sub_container_2  {
-          width: 64%;
-          }
+        
 }
 @media only screen and (max-width: 1000px) {
     .navbar_main_container_childs_two input {
@@ -1921,15 +1932,18 @@ margin-bottom: 20px;
            display: none;
        }
        .product_section_sub_container_2 h1 {
-        margin-right: 225px;
+        margin-right: 300px;
      }
-     .product_section_sub_container_2  {
-      width: 55%;
-      }
+    
       .product_section_inner_container_2 .select_container div {
        width: auto;
     }
-      
+    .product_section_sub_container_1 {
+        flex: 35%;
+      }
+      .product_section_sub_container_2 {
+          flex: 65%;
+      }
 }
 @media only screen and (min-width: 800px) {
     .nav_hamburger_division, .nav_hamburger_content_division  {
@@ -2011,15 +2025,16 @@ margin-bottom: 20px;
       width: 100%;
       border: none;
       }
-      .product_section_inner_container {
-          width: 100%;
-      }
+      
       #product_section_inner_container_2 {
           display: none;
       }
       .product_section_sub_container_2 {
           margin: 0px;
       }
+      .product_section_sub_container_2 {
+        flex: 100%;
+    }
 }
 
 @media only screen and (max-width: 600px) {
