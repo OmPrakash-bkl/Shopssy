@@ -1569,10 +1569,10 @@ margin-bottom: 20px;
     padding-right: 77px;
 }
 .product_section_sub_container_price_container .text_div {
-    padding-right: 190px;
+    padding-right: 195px;
 }
 .product_section_sub_container_size_container .text_div {
-    padding-right: 205px;
+    padding-right: 210px;
 }
 .product_section_sub_container_brands_container div > div, .product_section_sub_container_customer_rating_container div > div, .product_section_sub_container_colors_container div > div, .product_section_sub_container_price_container div > div, .product_section_sub_container_size_container div > div {
     padding: 5px 5px;
@@ -1907,7 +1907,7 @@ text-align: left;
     clear: both;
     display: table;
 }
-.login_container {
+.login_register_container {
     padding: 4% 25% 4% 25%;
     max-width: 1200px;
     font-family: Arial, Helvetica, sans-serif;
@@ -1915,15 +1915,15 @@ text-align: left;
     color: rgb(109, 109, 109);
     margin: 0% auto;
 }
-.login_container div {
+.login_register_container div {
     margin: 15px 0px;
 }
-.login_container label {
+.login_register_container label {
     text-align: left;
     display: inline-block;
    margin: 5px 0px;
 }
-.login_container input {
+.login_register_container input {
    width: 100%;
    border: 1px solid gainsboro;
    padding: 0px 10px;
@@ -1931,33 +1931,101 @@ text-align: left;
    height: 30px;
    border-radius: 5px;
 }
-.login_container button {
+.login_register_container button {
     display: block;
     margin: 10px auto;
     padding: 10px 12px;
     color: white;
     font-weight: bold;
     background-color: #2D9AE8;
-    font-size: 12px;
+    font-size: 11px;
     border: 0px;
     border-radius: 20px;
  }
- .login_container button:hover {
+ .login_register_container button:hover {
     background-color: #127cc7;
  }
 
- .login_container span {
+ .login_register_container span {
     display: inline-block;
    margin: 5px 2px;
  }
- .login_container span > a {
+ .login_register_container span > a {
     text-decoration: none;
     color: rgb(109, 109, 109);
  }
- .login_container span > a:hover {
+ .login_register_container span > a:hover {
     color: #2D9AE8;
  }
+.contactus_container {
+    max-width: 1200px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0px 20px;
+    margin-bottom: 40px;
+}
 
+.contactus_container h2 {
+   margin: 20px 0px;
+}
+
+.mail_add_line_inner_container {
+    display: inline-block;
+    margin: 1% 5.5%;
+  
+}
+.mail_add_line_inner_container th > i {
+    color: #2D9AE8;
+    display: inline-block;
+    margin: 0px 5px;
+    font-size: 25px;
+}
+
+.mail_add_line_inner_container .heading {
+    font-size: 13px;
+    color: rgb(59, 59, 59);
+}
+.mail_add_line_inner_container td {
+    font-size: 13px;
+    color: gray;
+}
+.messanger_icon_container {
+    margin: 40px 0px;
+}
+.messanger_icon_container i {
+   font-size: 60px;
+   color: #2D9AE8;
+}
+.contactus_form_container div {
+    margin: 10px 0px;
+}
+.contactus_form_container input, .contactus_form_container textarea {
+    width: 50%;
+    padding: 10px;
+    font-size: 13px;
+    background-color: #ECECEC;
+    border: 0px;
+    border-radius: 2px;
+}
+.contactus_form_container input {
+    height: 40px;
+    padding: 10px;
+   color: rgb(68, 68, 68);
+}
+.contactus_form_container button {
+    width: 50%;
+    padding: 10px 0px;
+    height: 45px;
+    border: 0px;
+    border-radius: 25px;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(to right, #21A2FD, #9471EA);
+}
+.contactus_form_container button:hover {
+    background: linear-gradient(to right, #9471EA, #21A2FD);
+}
 
 /*Keyframes Start*/
 @media only screen and (max-width: 1200px) {
@@ -2225,6 +2293,16 @@ text-align: left;
       .product_section_sub_container_2 {
         flex: 100%;
     }
+    .login_register_container {
+        padding: 4% 10% 4% 10%;
+    }
+    .contactus_form_container input, .contactus_form_container textarea {
+        width: 80%;
+    }
+    .contactus_form_container button {
+        width: 80%;
+    }
+    
 }
 
 @media only screen and (max-width: 600px) {
