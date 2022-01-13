@@ -50,11 +50,11 @@ document.getElementsByClassName("rating_container")[0].addEventListener("click",
                 });
 
             document.getElementsByClassName("select_container")[0].addEventListener("click", function(){
-                if(document.getElementById("select_inner_container").style.display=="none") {
-                    document.getElementById("select_inner_container").style.display="block";
+                if(document.getElementsByClassName("select_inner_container")[0].style.display=="none") {
+                    document.getElementsByClassName("select_inner_container")[0].style.display="block";
                     document.getElementById("arrow_of_product5").className = "fa fa-angle-up";
                 } else {
-                    document.getElementById("select_inner_container").style.display="none";
+                    document.getElementsByClassName("select_inner_container")[0].style.display="none";
                     document.getElementById("arrow_of_product5").className = "fa fa-angle-down";
                 }
             });
