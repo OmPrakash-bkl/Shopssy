@@ -2552,7 +2552,31 @@ transition: color 0.3s;
     font-size: 16px;
     margin-right: 8%;
 }
+.information_inner_container_for_mobile {
+    background-color: #FAFAFA;
+    margin:20px 0px;
+    display: none;
+}
+.information_inner_container_for_mobile button {
+    padding: 15px 10px;
+    background-color: transparent;
+    border: none;
+    color: #2889cf;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+.information_inner_container_for_mobile button:hover {
+    color: #2377b3;
+}
 
+.information_inner_container_for_mobile span {
+    display: inline-block;
+    font-weight: bold;
+    margin-left: 40%;
+}
+.information_inner_container2_of_mobile {
+    display: none;
+}
 
 
 /*Keyframes Start*/
@@ -2921,7 +2945,43 @@ transition: color 0.3s;
         width: 100%;
         margin: 5px 0px;
     }
+    
+    .information_inner_container_for_mobile {
+        display: block;
+    }
+    .information_inner_container2_of_mobile .information_inner_container2_divs_image img {
+        height: 50px;
+        width: 50px;
+    }
+    .information_inner_container2_of_mobile .information_inner_container2_divs_title  {
+        margin: auto 10px;
+    }
    
+
+    .information_inner_container2_of_mobile .information_inner_container2_divs_title, .information_inner_container2_of_mobile .information_inner_container2_divs_qty {
+        flex: 0%;
+    }
+    
+    .information_inner_container2_of_mobile .information_inner_container2_divs_txt {
+        flex: 60%;
+    }
+    .information_inner_container2_of_mobile .information_inner_container2_divs_pricez {
+        flex-direction: 32%;
+    }
+
+    .information_inner_container2_of_mobile .information_inner_container2_divs_image {
+        flex: 5%;
+    }
+    .information_inner_container2_of_mobile .information_inner_container2_divs_title1 {
+        flex: 48%;
+    }
+    .information_inner_container2_of_mobile .information_inner_container2_divs_qty1 {
+        flex: 14%;
+    }
+    .information_inner_container2_of_mobile .information_inner_container2_divs_price {
+        flex: 30%;
+    }
+    
 }
 
 @media only screen and (max-width: 600px) {
@@ -3040,6 +3100,10 @@ transition: color 0.3s;
             height: 200px;
             width: 300px;
          }
+         .information_inner_container_for_mobile span {
+            margin-left: 10%;
+            font-size: 13px;
+        }
 }
 @media only screen and (max-width: 400px) {
     #img_slider_image_container_3 h1 {

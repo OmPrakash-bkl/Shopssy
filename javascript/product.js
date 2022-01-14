@@ -81,3 +81,5 @@ document.getElementsByClassName("rating_container")[0].addEventListener("click",
             document.getElementsByClassName("close_icon_container")[0].addEventListener("click", function(){
                 document.getElementsByClassName("sort_for_mobile_container")[0].style.display="none";
             });
+
+           
