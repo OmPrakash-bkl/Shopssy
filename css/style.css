@@ -2336,6 +2336,222 @@ text-align: left;
 .shopping_cart_note_and_btn_container_inner_div button:hover {
     background-color: #0080DB;
 }
+.information_container {
+    max-width: 1200px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+}
+.information_inner_container1, .information_inner_container2 {
+    flex: 48%;
+    padding: 40px 20px;
+}
+.information_inner_container1 {
+    text-align: left;
+}
+.information_inner_container1 .heading_of_info_div a {
+    color: #1792E9;
+    text-decoration: none;
+    font-size: 40px;
+    font-weight: lighter;
+}
+.sub_navigation_of_info_div_inner_container {
+    max-width: 1200px;
+}
+.sub_navigation_of_info_div_inner_container span {
+    float: left;
+    margin: 10px 5px 15px 0px;
+}
+.sub_navigation_of_info_div_inner_container span a {
+    color: #2D9AE8;
+    text-decoration: none;
+    margin-left: 5px;
+    font-size: 12px;
+}
+.sub_navigation_of_info_div_inner_container span .active {
+   color: black;
+   }
+   
+.sub_navigation_of_info_div_inner_container a {
+   transition: color 0.3s;
+}
+.sub_navigation_of_info_div_inner_container a:hover {
+   color: #2889cf;
+}
+.sub_navigation_of_info_div_inner_container span .active:hover {
+    color: black;
+    }
+.sub_navigation_of_info_div_inner_container::after {
+   content: "";
+   clear: both;
+   display: table;
+}
+.information_inner_container1 h3 {
+    color: rgb(46, 46, 46);
+    font-weight: lighter;
+    margin-bottom: 20px;
+}
+.login_email_container {
+    margin-bottom: 20px;
+}
+.login_email_container div {
+    display: inline-block;
+}
+.user_icon_div {
+    background-color: #D8D8D8;
+    border: 0px;
+    border-radius: 10px;
+    margin-right: 10px;
+  
+}
+.user_icon_div span {
+   display: inline-block;
+   background-color: #2D9AE8;
+   border: 1px solid white;
+   border-radius: 50%;
+   padding: 10px;
+}
+.user_icon_div i {
+    font-size: 30px;
+    color: white;
+ }
+.login_email_text_container p {
+    font-size: 13px;
+    margin: 3px 0px;
+    color: rgb(78, 78, 78);
+}
+.login_email_text_container a {
+   text-decoration: none;
+   color: #2D9AE8;
+   transition: color 0.3s;
+}
+.login_email_text_container a:hover {
+    color: rgb(78, 78, 78);
+ }
+ #email_of_news_and_offer {
+    font-size: 13px;
+    margin-left: 5px;
+    color: rgb(78, 78, 78);
+    cursor: pointer;
+ }
+.checkbox_container {
+    margin: 10px 0px 30px 0px;
+}
+.information_inner_container_main_div input, .information_inner_container_main_div select {
+    width: 90%;
+    margin: 5px 0px;
+    padding: 12px 10px;
+    border: 1px solid rgb(189, 189, 189);
+    border-radius: 5px;
+    transition: border 0.2s;
+}
+.information_inner_container_main_div select {
+    color: gray;
+}
+.information_inner_container_main_div select:focus {
+    color: black;
+    border: 2px solid #2D9AE8;
+}
+.information_inner_container_main_div input:focus {
+    border:2px solid #2D9AE8;
+   
+}
+.information_inner_container_main_div .fname, .information_inner_container_main_div .lname {
+    width: 44%;
+    margin: 5px 3px;
+}
+.information_inner_container_main_div .city, .information_inner_container_main_div .state, .information_inner_container_main_div .pin {
+    width: 29%;
+    margin: 5px 2px;
+}
+.information_inner_container_main_div .continue_btn {
+padding: 20px 14px;
+background-color: #1f2d47;
+color: white;
+border: 0px;
+border-radius: 5px;
+margin: 15px 15px 15px 0px;
+transition: background-color 0.2s;
+cursor: pointer;
+}
+.information_inner_container_main_div .continue_btn:hover {
+    background-color: #131B2B;
+}
+.information_inner_container_main_div .return_link a {
+text-decoration: none;
+color: #2D9AE8;
+font-size: 13px;
+transition: color 0.3s;
+}
+
+.information_inner_container_main_div .return_link a:hover {
+    color: #278dd6;
+    }
+.information_inner_container2 {
+    background-color: #E8F3F6;
+    padding: 40px 20px;
+}
+.information_inner_container2_1st {
+    border-bottom: 1px solid rgb(189, 189, 189);
+    margin-bottom: 20px;
+}
+.information_inner_container2_divs {
+    display: flex;
+}
+.information_inner_container2_divs div {
+    margin: 10px 0px;
+}
+.information_inner_container2_divs_image img {
+    height: 70px;
+    width: 70px;
+}
+.information_inner_container2_divs_image {
+    flex: 10%;
+}
+.information_inner_container2_divs_image img {
+    border-radius: 10px;
+}
+.information_inner_container2_divs_title {
+    flex: 45%;
+    padding: 20px 0px;
+}
+.information_inner_container2_divs_title p {
+    font-size: 12px;
+    color: rgb(78, 78, 78);
+    margin: 5px 0px;
+}
+.information_inner_container2_divs_qty {
+    flex: 15%;
+    padding: 20px 0px;
+    color: rgb(78, 78, 78);
+}
+.information_inner_container2_divs_price {
+    flex: 30%;
+    padding: 20px 0px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.information_inner_container2_divs_txt p {
+    color: rgb(78, 78, 78);
+    font-size: 14px;
+}
+.information_inner_container2_divs_pricez {
+    font-weight: bold;
+    font-size: 13px;
+    margin-right: 10%;
+}
+.information_inner_container2_divs1 {
+    display: flex;
+   
+}
+.information_inner_container2_divs_txt1 p {
+    color: rgb(66, 66, 66);
+    font-size: 18px;
+}
+.information_inner_container2_divs_pricez1 {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 8%;
+}
 
 
 
@@ -2688,6 +2904,23 @@ text-align: left;
       display: block;
       width: 90%;
     }
+    .information_inner_container2 {
+        display: none;
+    }
+    .information_inner_container1 {
+       flex: 100%;
+    }
+    .information_inner_container_main_div input, .information_inner_container_main_div select {
+        width: 100%;
+    }
+    .information_inner_container_main_div .fname, .information_inner_container_main_div .lname {
+        width: 100%;
+        margin: 5px 0px;
+    }
+    .information_inner_container_main_div .city, .information_inner_container_main_div .state, .information_inner_container_main_div .pin {
+        width: 100%;
+        margin: 5px 0px;
+    }
    
 }
 
@@ -2959,7 +3192,23 @@ text-align: left;
         height: 25px;
         padding: 0px 5px;
     }
-     
+    .user_icon_div {
+        background-color: transparent;
+        width: 0px;
+    }
+    .user_icon_div span {
+       padding: 5px 7px;
+       display: none;
+    }
+    .user_icon_div i {
+        font-size: 15px;
+     }
+     .information_inner_container_main_div .continue_btn {
+        padding: 20px 8px;
+        }
+        .information_inner_container1 {
+            padding: 40px 8px;
+        }
 }
 
 @media only screen and (max-width: 300px) {
