@@ -267,3 +267,11 @@ document.getElementsByClassName("user_id_and_cancel_btn_container_btn1")[0].addE
 document.getElementsByClassName("savelist_close_btn_of_wishlist")[0].addEventListener("click", function() {
     document.getElementsByClassName("save_your_list_container")[0].style.display = "none";
 });
+
+document.getElementsByClassName("user_id_and_cancel_btn_container_btn2")[0].addEventListener("click", function() {
+    document.getElementsByClassName("save_your_list_container1")[0].style.display = "block";
+});
+
+document.getElementsByClassName("savelist_close_btn_of_wishlist1")[0].addEventListener("click", function() {
+document.getElementsByClassName("save_your_list_container1")[0].style.display = "none";
+});

@@ -3073,6 +3073,25 @@ width: 100%;
 .save_your_list_container .btn_2:hover {
    background-color: #565a6d;
 }
+.save_your_list_container1 {
+    display: block;
+}
+.save_your_list_container1 a {
+  text-decoration: none;
+} 
+.save_your_list_container1 .btn_1, .save_your_list_container1 .btn_2 {
+    display: block;
+    width: 80%;
+    border: 1px solid #292b35;
+}
+.save_your_list_container1 {
+    display: none;
+}
+.user_id_and_cancel_btn_container_btn2 {
+    display: none;
+}
+
+
 
 
 
