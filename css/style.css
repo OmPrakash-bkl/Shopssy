@@ -2929,7 +2929,62 @@ width: 100%;
   .share_email_form_container .share_list_btn:hover {
     background-color:#5f6379;
 }
+.clear_list_container {
+    width: 50%;
+    background-color: white;
+    position: absolute;
+    left: 25%;
+    top: 150px;
+    padding: 10px 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: none;
+}
+.clearlist_close_btn_of_wishlist {
+    margin: 10px 0px;
+    width: 30px;
+    font-size: 20px;
+}
+.clear_list_container h2 {
+    font-weight: lighter;
+    margin: 30px 0px 20px 0px;
+}
+.clear_list_container p {
+    color: gray;
+    font-size: 13px;
+    margin: 20px 0px;
+}
+.clear_list_container button {
+    padding: 10px 10px;
+    border: none;
+    margin: 0px 0px 20px 0px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.clear_list_container .btn1 {
+    background-color: #434655;
+    color: white;
+    width: 70%;
+}
+.clear_list_container .btn1:hover {
+    background-color: #565a6d;
+}
 
+.clear_list_container .btn2 {
+    background-color: white;
+    border: 1px solid black;
+    color: #434655;
+    width: 70%;
+    transition: color 0.3s;
+}
+.clear_list_container .btn2:hover {
+    color: #636986;
+}
+.clear_list_container .clearlist_close_btn_of_wishlist {
+    display: block;
+    margin: 0% 0% 1% 98%;
+    font-size: 20px;
+    background-color: white;
+}
 
 
 /*Keyframes Start*/
@@ -3171,6 +3226,17 @@ width: 100%;
     .share_email_form_container .share_list_btn {
         width: 26%;
         margin-left: 37%;
+    }
+    .clear_list_container {
+        width: 80%;
+        left: 10%;
+    }
+    .clear_list_container button {
+        width: 100%;
+    }
+    .clear_list_container .clearlist_close_btn_of_wishlist {
+        margin: 0% 0% 1% 98%;
+        width: 30px;
     }
 }
 @media only screen and (min-width: 800px) {
@@ -3489,6 +3555,10 @@ width: 100%;
         .share_email_form_container .share_list_btn {
             width: 70%;
             margin-left: 15%;
+        }
+        .clear_list_container .clearlist_close_btn_of_wishlist {
+            margin: 0% 0% 1% 96%;
+           
         }
 }
 @media only screen and (max-width: 400px) {

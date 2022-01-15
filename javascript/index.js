@@ -250,3 +250,12 @@ document.getElementsByClassName("share_email_button")[0].addEventListener("click
 document.getElementsByClassName("email_close_btn_of_wishlist")[0].addEventListener("click", function() {
     document.getElementsByClassName("share_email_container")[0].style.display="none";
 });
+
+document.getElementsByClassName("delete_email_button")[0].addEventListener("click", function() {
+document.getElementsByClassName("clear_list_container")[0].style.display = "block";
+document.getElementsByClassName("share_and_clear_container")[0].style.display="none";
+});
+
+document.getElementsByClassName("clearlist_close_btn_of_wishlist")[0].addEventListener("click", function() {
+    document.getElementsByClassName("clear_list_container")[0].style.display = "none";
+    });
