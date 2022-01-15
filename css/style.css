@@ -3012,6 +3012,68 @@ width: 100%;
 .empty_message_container button:hover {
     background-color: #565a6d;
 }
+.save_your_list_container {
+    width: 40%;
+    background-color: white;
+    position: absolute;
+    left: 30%;
+    top: 150px;
+    padding: 10px 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    text-align: left;
+    display: none;
+}
+.savelist_close_btn_of_wishlist {
+    margin: 10px 0px;
+    width: 30px;
+    margin: 0% 0% 1% 98%;
+    font-size: 20px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+.save_your_list_container h2 {
+    font-size: 20px;
+    color: rgb(53, 53, 53);
+    margin: 5px 0px 20px 0px;
+}
+.save_your_list_container p {
+    font-size: 15px;
+    color: gray;
+    margin: 5px 0px;
+}
+.save_your_list_container b {
+    font-size: 15px;
+    color: rgb(102, 102, 102);
+    margin: 5px 0px;
+}
+.save_your_list_container .btn_1 {
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #292b35;
+    background-color: white;
+    transition: color 0.3s;
+    margin: 10px 10px;
+    cursor: pointer;
+}
+.save_your_list_container .btn_1:hover {
+ color: #565a6d;
+}
+.save_your_list_container .btn_2 {
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+   color: white;
+    background-color: #292b35;
+    transition: background-color 0.3s;
+    margin: 10px 10px;
+    cursor: pointer;
+}
+.save_your_list_container .btn_2:hover {
+   background-color: #565a6d;
+}
+
 
 
 /*Keyframes Start*/
@@ -3454,6 +3516,11 @@ width: 100%;
         width: 90%;
         left: 5%;
     }
+    .save_your_list_container {
+        width: 70%;
+        left: 15%;
+    }
+    
 }
 
 @media only screen and (max-width: 600px) {
@@ -3589,6 +3656,10 @@ width: 100%;
         }
         .empty_message_container {
             width: 90%;
+        }
+        .save_your_list_container {
+            width: 90%;
+            left: 5%;
         }
 }
 @media only screen and (max-width: 400px) {
