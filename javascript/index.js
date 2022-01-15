@@ -223,3 +223,30 @@ document.body.scrollTop=0;
 document.documentElement.scrollTop=0;
 });
 
+document.getElementsByClassName("wishlist_btn")[0].addEventListener("click", function() {
+        document.getElementsByClassName("wishlist_container")[0].style.display="block";
+});
+
+document.getElementsByClassName("close_btn_of_wishlist")[0].addEventListener("click", function() {
+    document.getElementsByClassName("wishlist_container")[0].style.display="none";
+});
+
+document.getElementsByClassName("three_dot_btn")[0].addEventListener("click", function() {
+    if(document.getElementsByClassName("share_and_clear_container")[0].style.display=="none") {
+        document.getElementsByClassName("share_and_clear_container")[0].style.display="block";
+       document.getElementsByClassName("wishlist_heading_and_product_parent_container")[0].style.overflowY = "hidden";
+    } else {
+        document.getElementsByClassName("share_and_clear_container")[0].style.display="none";
+        document.getElementsByClassName("wishlist_heading_and_product_parent_container")[0].style.overflowY = "scroll";
+    }
+})
+
+
+document.getElementsByClassName("share_email_button")[0].addEventListener("click", function() {
+    document.getElementsByClassName("share_email_container")[0].style.display="block";
+    document.getElementsByClassName("share_and_clear_container")[0].style.display="none";
+});
+
+document.getElementsByClassName("email_close_btn_of_wishlist")[0].addEventListener("click", function() {
+    document.getElementsByClassName("share_email_container")[0].style.display="none";
+});
