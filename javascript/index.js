@@ -275,3 +275,11 @@ document.getElementsByClassName("user_id_and_cancel_btn_container_btn2")[0].addE
 document.getElementsByClassName("savelist_close_btn_of_wishlist1")[0].addEventListener("click", function() {
 document.getElementsByClassName("save_your_list_container1")[0].style.display = "none";
 });
+
+document.getElementsByClassName("savelist_close_btn_of_wishlist1_savelist_btn")[0].addEventListener("click", function() {
+    document.getElementsByClassName("enter_email_address_container")[0].style.display = "block";
+});
+
+document.getElementsByClassName("email_close_btn_of_wishlist2")[0].addEventListener("click", function() {
+document.getElementsByClassName("enter_email_address_container")[0].style.display = "none";
+});

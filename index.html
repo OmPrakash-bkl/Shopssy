@@ -75,11 +75,30 @@
                 <p>You are currently shopping anonymously. Either log in or save your wishlist items by entering your email address.</p>
                <br>
                 <center>
-                <a href="#"><button class="btn_1">LOG IN</button></a>
-                <button class="btn_2">SAVE LIST</button>
+                <a href="./login.html"><button class="btn_1">LOG IN</button></a>
+                <button class="btn_2 savelist_close_btn_of_wishlist1_savelist_btn">SAVE LIST</button>
                 </center>
             </div>
             <!--save your list container 2 end-->
+
+            <!--save your list container 3 start-->
+            <div class="enter_email_address_container">
+                <button class="email_close_btn_of_wishlist email_close_btn_of_wishlist2"><i class="far fa-window-close"></i></button>
+                <h2 class="email_heading">Share List Via Email</h2>
+                <p>Please enter your email address. You will be sent a validation link to click on.</p>
+                <form action="">
+                    <label for="name_of_container">First Name</label> <br>
+                    <input type="text" id="name_of_container" placeholder="First Name (Optional)"> <br>
+                    <label for="lname_of_container">Last Name</label> <br>
+                    <input type="text" id="lname_of_container" placeholder="Last Name (Optional)"> <br>
+                    <label for="email_of_container">Email Address <span class="astri">*</span></label> <br>
+                    <input type="email" id="email_of_container" placeholder="Enter your email address"> <br>
+                   <center>
+                    <button type="submit" class="save_list_btn">SAVE LIST</button>
+                   </center>
+                </form>
+            </div>
+            <!--save your list container 3 end -->
 
             <!--clear list conform container start-->
             <div class="clear_list_container">
