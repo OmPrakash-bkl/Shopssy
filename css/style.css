@@ -2610,9 +2610,9 @@ transition: color 0.3s;
 }
 .semi_final_details_container .mail_and_home_add {
     display: inline-block;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: lighter;
-    color: black;
+    color: rgb(71, 71, 71);
     margin: 0px 40px;
 }
 .semi_final_details_container table {
@@ -2669,6 +2669,42 @@ transition: color 0.3s;
 .mode_container .two {
   font-weight: bold;
 }
+.payment_container {
+    margin: 0px;
+    border: none;
+}
+.payment_container input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.payment_container input {
+    width: 100%;
+    margin: 5px 0px;
+    padding: 12px 10px;
+    border: 1px solid rgb(189, 189, 189);
+    border-radius: 5px;
+    transition: border 0.2s;
+}
+.payment_container input:focus {
+    border:2px solid #2D9AE8;
+}
+.payment_container button {
+padding: 15px 20px;
+margin: 15px 0px;
+background-color: rgb(0, 161, 0);
+border: 0px;
+border-radius: 5px;
+color: white;
+transition: background-color 0.3s;
+cursor: pointer;
+font-weight: bold;
+width: 100%;
+}
+.payment_container button:hover {
+   background-color: green;
+    }
+
 
 /*Keyframes Start*/
 @media only screen and (max-width: 1200px) {
