@@ -2805,7 +2805,7 @@ width: 100%;
     display: inline-block;
     border: 1px solid #434655;
     background-color: white;
-    width: 180px;
+    width: 200px;
     text-align: left;
     margin: 10px 30px;
 }
@@ -2813,7 +2813,7 @@ width: 100%;
     background-color: #434655;
 }
 .wishlist_product_inner_container .cross_btn {
-    margin: 5px 2px 5px 150px;
+    margin: 5px 2px 5px 170px;
     font-size: 20px;
     background-color: #434655;
     color: white;
@@ -2824,7 +2824,7 @@ width: 100%;
 .wishlist_product_inner_container img {
     height: 140px;
     width: 130px;
-   margin: 5px 25px;
+   margin: 5px 35px;
 }
 .wishlist_product_inner_container h2 {
    font-size: 18px;
@@ -2984,6 +2984,33 @@ width: 100%;
     margin: 0% 0% 1% 98%;
     font-size: 20px;
     background-color: white;
+}
+.empty_message_container {
+    width: 60%;
+    background-color: transparent;
+    display: none;
+}
+.empty_message_container h2 {
+    font-size: 20px;
+    color: rgb(53, 53, 53);
+    margin: 30px 0px;
+}
+.empty_message_container p {
+    font-size: 15px;
+    color: gray;
+    line-height: 20px;
+    margin: 5px 0px 20px 0px;
+}
+.empty_message_container button {
+    background-color: #434655;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.empty_message_container button:hover {
+    background-color: #565a6d;
 }
 
 
@@ -3559,6 +3586,9 @@ width: 100%;
         .clear_list_container .clearlist_close_btn_of_wishlist {
             margin: 0% 0% 1% 96%;
            
+        }
+        .empty_message_container {
+            width: 90%;
         }
 }
 @media only screen and (max-width: 400px) {
