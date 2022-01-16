@@ -3274,11 +3274,142 @@ width: 100%;
   .address_details_table_container1, .address_details_table_container3 {
       display: none;
   }
+  .shortcut_link_for_user_container {
+      position: absolute;
+      background-color: white;
+      left: 84%;
+      top: 150px;
+      z-index: 2;
+      margin: 0px 10px;
+      padding: 10px 20px;
+      border: 1px solid gainsboro;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+      display: none;
+      font-family: Arial, Helvetica, sans-serif;
+  }
+  .shortcut_link_for_user_container button {
+      margin: 0px 5px;
+      border: none;
+      background-color: white;
+      cursor: pointer;
+      font-size: 13px;
+      color: #666666;
+      transition: color 0.2s;
+  }
+  .shortcut_link_for_user_container button:hover {
+  color:  #45B0E3;
+}  
+.mini_cart_container {
+    position: absolute;
+    background-color: white;
+    top: 150px;
+    z-index: 2;
+    margin: 0px 10px;
+    padding: 10px 20px;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 400px;
+    left: 60%;
+    display: none;
+}
+.mini_cart_container_images {
+    height: 100px;
+    width: 100px;
+    margin: 5px 10px;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+}
+.delete_btn_border {
+    border-bottom: 1px solid gainsboro;
+}
+.mini_cart_container .product_title {
+    font-size: 18px;
+}
+.mini_cart_container .product_title a {
+    color: rgb(61, 61, 61);
+    text-decoration: none;
+    font-weight: bold;
+}
+.mini_cart_container .product_title a:hover {
+    color: #45B0E3;
+}
+.mini_cart_container .product_prz {
+    font-size: 15px;
+    color: gray;
+}
+.mini_cart_container .product_prz b {
+    color: rgb(61, 61, 61);
+}
+.mini_cart_container .delete_btn_border a {
+    font-size: 18px;
+    color: gray;
+}
+.mini_cart_container .delete_btn_border a:hover {
+    color: #45B0E3;
+}
+.mini_cart_products_container {
+    height: 240px;
+    overflow-y: scroll;
+}
+.mini_cart_form_container {
+    text-align: left;
+}
+.mini_cart_form_container p {
+    font-size: 14px;
+    color: gray;
+    margin: 5px 0px;
+}
+.mini_cart_form_container textarea {
+    width: 100%;
+    height: 70px;
+    border: 1px solid gainsboro;
+}
+.mini_cart_form_container .money_container {
+    text-align: right;
+}
+.mini_cart_form_container .money_container h2 {
+    display: inline-block;
+    margin: 8px 0px;
+}
+.mini_cart_form_container .money_container #h2_one {
+    font-size: 18px;
+    color: rgb(61, 61, 61);
+}
+
+.mini_cart_form_container .money_container #h2_two {
+    font-size: 18px;
+    color: #45B0E3;
+}
+.mini_cart_form_container button {
+    padding: 10px 20px;
+    border: 0px;
+    border-radius: 20px;
+    background-color: gray;
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    cursor: pointer;
+    margin: 10px 5px;
+    transition: background-color 0.2s;
+}
+
+.mini_cart_form_container button:hover {
+    background-color: #22A1FD;
+}
 
 
-  
 
 /*Keyframes Start*/
+
+@media only screen and (min-width: 1600px) {
+    .shortcut_link_for_user_container {
+        left: 78%;
+    }
+}
+
 @media only screen and (max-width: 1200px) {
     .product_section_sub_container_2 h1 {
        margin-right: 600px;
@@ -3306,6 +3437,10 @@ width: 100%;
     .share_and_clear_container {
         right: 13%;
     }
+    .shortcut_link_for_user_container {
+        left: 83%;
+    }
+   
 }
 
 @media only screen and (max-width: 1150px) {
@@ -3390,7 +3525,12 @@ width: 100%;
         .product_section_sub_container_2 h1 {
             margin-right: 500px;
          }
-       
+         .shortcut_link_for_user_container {
+            left: 81%;
+        }
+        .mini_cart_container {
+            left: 55%;
+        }
 }
 @media only screen and (max-width: 1000px) {
     .navbar_main_container_childs_two input {
@@ -3532,6 +3672,12 @@ width: 100%;
     .enter_email_address_container {
         width:90%;
         left: 5%;
+    }
+    .shortcut_link_for_user_container {
+        left: 78%;
+    }
+    .mini_cart_container {
+        left: 45%;
     }
 }
 @media only screen and (min-width: 800px) {

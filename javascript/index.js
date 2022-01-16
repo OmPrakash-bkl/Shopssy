@@ -283,3 +283,32 @@ document.getElementsByClassName("savelist_close_btn_of_wishlist1_savelist_btn")[
 document.getElementsByClassName("email_close_btn_of_wishlist2")[0].addEventListener("click", function() {
 document.getElementsByClassName("enter_email_address_container")[0].style.display = "none";
 });
+
+
+document.getElementsByClassName("user_icon_of_homepage")[0].addEventListener("click", function() {
+    if(document.getElementsByClassName("shortcut_link_for_user_container")[0].style.display=="none") {
+        document.getElementsByClassName("shortcut_link_for_user_container")[0].style.display="block";
+    } else {
+        document.getElementsByClassName("shortcut_link_for_user_container")[0].style.display="none";
+    }
+})
+
+document.getElementsByClassName("wishlist_btn_of_homepage")[0].addEventListener("click", function() {
+    document.getElementsByClassName("wishlist_container")[0].style.display="block";
+    document.getElementsByClassName("shortcut_link_for_user_container")[0].style.display="none";
+});
+
+document.getElementsByClassName("cart_icon_of_homepage")[0].addEventListener("mousemove", function(e) {
+    if(e.clientY > 100 && e.clientY < 133) {
+        document.getElementsByClassName("mini_cart_container")[0].style.display="block";
+    } else {
+        document.getElementsByClassName("mini_cart_container")[0].style.display="none";
+    }
+    if(e.clientY > 134) {
+        document.getElementsByClassName("mini_cart_container")[0].style.display="block";
+    } 
+});
+
+document.getElementsByClassName("mini_cart_container")[0].addEventListener("mouseleave", function() {
+    document.getElementsByClassName("mini_cart_container")[0].style.display="none";
+});
