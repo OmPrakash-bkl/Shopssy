@@ -3194,6 +3194,89 @@ width: 100%;
     color: rgb(102, 102, 102);
     margin-bottom: 20px;
 }
+.my_address_container {
+    text-align: left;
+    max-width: 1200px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0px 10px;
+}
+.my_address_container .heading1, .my_address_container .heading2 {
+    margin: 20px 0px 30px 0px;
+}
+.my_address_container .return_link {
+    display: inline-block;
+    margin: 10px 0px;
+}
+.my_address_container .return_link a {
+    font-size: 13px;
+    color: rgb(102, 102, 102);
+  text-decoration: none;
+}
+.my_address_container .return_link a:hover {
+  color: #22A1FD;
+}
+.my_address_container button {
+    padding: 10px 20px;
+    border: 0px;
+    border-radius: 20px;
+    background-color: #22A1FD;
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    cursor: pointer;
+    margin: 10px 15px 25px 0px;
+    transition: background-color 0.2s;
+}
+.my_address_container button:hover {
+    background-color: #1a87d4;
+  }
+  .my_address_container table {
+      width: 80%;
+  }
+.address_details_table_container1 th, .address_details_table_container3 th {
+    color: rgb(102, 102, 102);
+      font-size: 14px;
+      font-weight: lighter;
+      display: inline-block;
+      margin-bottom: 5px;
+}
+.address_details_table_container1 .inp_box, .address_details_table_container3 .inp_box {
+    width: 100%;
+    height: 40px;
+    padding: 0px 10px;
+  border: 1px solid rgb(200, 200, 200);
+  color: rgb(56, 56, 56);
+  margin-bottom: 20px;
+  -webkit-appearance: none;
+}
+.address_details_table_container1 select option, .address_details_table_container3 select option {
+    color: gray;
+    
+}
+
+.address_details_table_container2 table {
+    width: 80%;
+}
+.address_details_table_container2 td,  .address_details_table_container2 th {
+    padding: 15px 0px;
+  }
+  .address_details_table_container2 th {
+      font-size: 15px;
+  }
+  .address_details_table_container2 td {
+      color: rgb(102, 102, 102);
+      font-size: 14px;
+  }
+  .address_details_table_container2 .bottom_border {
+    border-bottom: 1px solid rgb(200, 200, 200);
+    padding: 0px;
+  }
+  .address_details_table_container1, .address_details_table_container3 {
+      display: none;
+  }
+
+
+  
 
 /*Keyframes Start*/
 @media only screen and (max-width: 1200px) {
@@ -3642,6 +3725,12 @@ width: 100%;
     .save_your_list_container {
         width: 70%;
         left: 15%;
+    }
+    .my_address_container table {
+        width: 100%;
+    }
+    .address_details_table_container2 table {
+        width: 100%;
     }
     
 }
