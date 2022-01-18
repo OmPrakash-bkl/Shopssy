@@ -1,3 +1,5 @@
+/* Home Page Image Slider Functions Start*/
+
 let i = 1;
 
 document.getElementById(`img_slider_image_container_${3}`).style.display = "block";
@@ -66,6 +68,10 @@ setInterval(function() {
     document.getElementById("image_slider_words_container_three_text2").style.transform = "translate(0px, 0px) rotate(0deg)";
     document.getElementById("image_slider_words_container_three_text3").style.transform = "translate(0px, 0px)";
 }, 3000);
+
+/* Home Page Image Slider Functions End */
+
+/* Main Navbar Functions Start */
 
 document.getElementById("table_navbar_showing_container").addEventListener("click", function() {
     if(document.getElementsByClassName("hamburger_main_container_table")[0].style.display=="block") {
@@ -180,6 +186,11 @@ document.getElementById("hamburger_container_dir_arrow_tiger4").addEventListener
    }
 });
 
+/* Main Navbar Functions End */
+
+/* Navbar for Mobiles Start */
+
+
 document.getElementsByClassName("mob_hamburger_btn")[0].addEventListener("click", function(){
 document.getElementsByClassName("mob_hamburger_btn")[0].style.transform = "rotate(45deg)";
 document.getElementsByClassName("nav_hamburger_content_division")[0].style.display="block";
@@ -206,6 +217,10 @@ document.getElementsByClassName("mob_hamburger_btn")[0].style.transform = "rotat
     }
 })
 
+/* Navbar for Mobiles End */
+
+/* Back To Top Arrow Button Functions Start */
+
 let back_to_top_arrow_container = document.getElementsByClassName("back_to_top_arrow_container")[0];
 window.onscroll = function(){
     scrollFunction();
@@ -222,6 +237,10 @@ document.getElementById("back_to_top_arrow").addEventListener("click",function()
 document.body.scrollTop=0;
 document.documentElement.scrollTop=0;
 });
+
+/* Back To Top Arrow Functions End */
+
+/* Wishlist Functions Start */
 
 document.getElementsByClassName("wishlist_btn")[0].addEventListener("click", function() {
         document.getElementsByClassName("wishlist_container")[0].style.display="block";
@@ -284,6 +303,10 @@ document.getElementsByClassName("email_close_btn_of_wishlist2")[0].addEventListe
 document.getElementsByClassName("enter_email_address_container")[0].style.display = "none";
 });
 
+/* Wishlist Functions End */
+
+/* User Icon Container Functions Start */
+
 
 document.getElementsByClassName("user_icon_of_homepage")[0].addEventListener("click", function() {
     if(document.getElementsByClassName("shortcut_link_for_user_container")[0].style.display=="none") {
@@ -293,10 +316,20 @@ document.getElementsByClassName("user_icon_of_homepage")[0].addEventListener("cl
     }
 })
 
+/* User Icon Container Functions End */
+
+/* Wishlist Functions Start */
+
+
 document.getElementsByClassName("wishlist_btn_of_homepage")[0].addEventListener("click", function() {
     document.getElementsByClassName("wishlist_container")[0].style.display="block";
     document.getElementsByClassName("shortcut_link_for_user_container")[0].style.display="none";
 });
+
+/* Wishlist Functions End */
+
+/* Mini Shopping Cart of Homepage Functions Start */
+
 
 document.getElementsByClassName("cart_icon_of_homepage")[0].addEventListener("mousemove", function(e) {
     if(e.clientY > 100 && e.clientY < 133) {
@@ -312,3 +345,5 @@ document.getElementsByClassName("cart_icon_of_homepage")[0].addEventListener("mo
 document.getElementsByClassName("mini_cart_container")[0].addEventListener("mouseleave", function() {
     document.getElementsByClassName("mini_cart_container")[0].style.display="none";
 });
+
+/* Mini Shopping Cart of Homepage Functions End */
