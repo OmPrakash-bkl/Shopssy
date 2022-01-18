@@ -94,7 +94,7 @@ document.getElementById("hamburger_container_dir_arrow_tiger4").addEventListener
 });
 
 document.getElementById("hamburger_container_dir_arrow_tiger4").addEventListener("mousemove", function(e) {
-    console.log(e.clientY);
+   
    if(e.clientX > 100) {
     document.getElementsByClassName("hamburger_container_dir_arrow4")[0].style.display="block";
     document.getElementsByClassName("smartphone_container_table2")[0].style.display="block";

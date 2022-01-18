@@ -166,20 +166,6 @@ document.getElementsByClassName(`small_images_container_images${image_num}`)[0].
 
 } 
 
-let counter = 1;
-document.getElementsByClassName("incre")[0].addEventListener("click", function() {
-counter++;
-document.getElementsByClassName("counter")[0].innerHTML = counter;
-});
-document.getElementsByClassName("decre")[0].addEventListener("click", function() {
-    if(counter > 1) {
-        counter--;
-        document.getElementsByClassName("counter")[0].innerHTML = counter;
-    } else {
-        document.getElementsByClassName("counter")[0].innerHTML = 1;
-    }
-
-    });
 
 
 document.getElementsByClassName("review_btn")[0].addEventListener("click", function() {
