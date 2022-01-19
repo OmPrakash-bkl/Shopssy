@@ -24,7 +24,7 @@
                 </center>
                 <h3>We're sorry — something has gone wrong on our end.</h3>
                 <p>If difficulties persist, please contact the System Administrator of this site and report the error below.</p>
-                <a href="./index.html"><button><i class="fas fa-home"></i> BACK TO HOME</button></a>
+                <a href="./index.php"><button><i class="fas fa-home"></i> BACK TO HOME</button></a>
              </div>
      
              <div class="not_found_inner_container_2">

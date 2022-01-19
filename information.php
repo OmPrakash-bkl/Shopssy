@@ -135,13 +135,13 @@
             </div>
 
             <div class="sub_navigation_of_info_div_inner_container">
-                <span><a href="./cart.html">Cart</a></span>
+                <span><a href="./cart.php">Cart</a></span>
                 <span><i class="fa fa-angle-right" style="color: #666666;font-size: 14px;"></i></span>
                 <span><a class="active">Information</a></span>
                 <span><i class="fa fa-angle-right" style="color: #666666;font-size: 14px;"></i></span>
-                <span><a href="./shipping.html">Shipping</a></span>
+                <span><a href="./shipping.php">Shipping</a></span>
                 <span><i class="fa fa-angle-right" style="color: #666666;font-size: 14px;"></i></span>
-                <span><a href="./information.html">Payment</a></span>
+                <span><a href="./information.php">Payment</a></span>
             </div>
 
             <h3>Contact information</h3>

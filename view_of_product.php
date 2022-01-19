@@ -7,7 +7,7 @@ include './header.php';
     <div class="sub_navigation_container">
 <center>
     <div class="sub_navigation_inner_container">
-        <span><a href="./index.html">Home</a></span>
+        <span><a href="./index.php">Home</a></span>
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
         <span><a href="#">Lorem ipsum dolor sit</a></span>
     </div>

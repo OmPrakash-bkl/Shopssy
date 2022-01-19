@@ -17,10 +17,10 @@
         <center>
             <div class="all_categories_sub_container">
                 <center>
-                 <a href="./product.html">
+                 <a href="./product.php">
                      <img src="./images/all_categories_mobiles.jpg" alt="mobiles">
                 </a>
-                <a href="./product.html" class="product_link">Smartphone & Tablets</a>
+                <a href="./product.php" class="product_link">Smartphone & Tablets</a>
                 </center>
              </div>
 

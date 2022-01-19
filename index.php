@@ -81,7 +81,7 @@ include './header.php';
         <div class="products_container_products_div">
             <div class="products_container_products_inner_divs">
                 <img src="./images/mob_image_2.jpg" alt="products images">
-               <a href="./view_of_product.html">
+               <a href="./view_of_product.php">
                 <div class="products_container_products_inner_text_divs">
                     <div>
                         <span class="fa fa-star checked"></span>
