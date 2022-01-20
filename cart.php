@@ -1,4 +1,5 @@
 <?php 
+include './action.php';
 $title = "Your Shopping Cart - Shopssy";
 include './header.php';
 ?>    

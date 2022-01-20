@@ -1,4 +1,5 @@
 <?php 
+include './action.php';
 $title = "Contact Us - Shopssy";
 include './header.php';
 ?> 

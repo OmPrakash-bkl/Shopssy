@@ -1,3 +1,6 @@
+<?php 
+include './action.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

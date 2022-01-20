@@ -1,5 +1,5 @@
 <?php 
-include './db_con.php';
+include './action.php';
 $title = "Shopssy | Online Shopping Site for Mobiles, Electronics and More.";
 include './header.php';
 ?>

@@ -1,7 +1,3 @@
-<?php 
-include './db_con.php';
-?>
-
 
     <!--news letter div start-->
     <center>
@@ -12,8 +8,8 @@ include './db_con.php';
                 </div>
                 <div class="news_letter_container_email_div">
                     <div class="news_letter_container_email_inner_div">
-                       <form action="index.php" method="POST">
-                        <input type="email" placeholder="Enter Your Email" name="user_email">
+                       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                        <input type="email" placeholder="Enter Your Email" name="user_email" value="" required>
                         <button type="submit">SUBSCRIBE</button>
                        </form>
                     </div>

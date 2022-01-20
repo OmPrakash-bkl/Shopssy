@@ -1,4 +1,5 @@
 <?php 
+include './action.php';
 $title = "RC Drone - Shoppy";
 include './header.php';
 ?>

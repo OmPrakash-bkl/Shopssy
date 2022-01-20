@@ -5,4 +5,4 @@ use shopssy_onlineshop;
 1. email_subscription:-
 
 create table email_subscription(id int(100) AUTO_INCREMENT, user_email varchar(200), primary key(id));
-insert into email_subscription(user_email) values ('keerthiu1@gmail.com'), ('prakashz@gmail.com');
+insert into email_subscription(user_email) values ('kumaru1@gmail.com'), ('priya123@gmail.com');
