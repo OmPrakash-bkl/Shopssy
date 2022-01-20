@@ -2,7 +2,7 @@
 include './db_con.php';
 
 // Email Validation Start
-if($_POST['user_email']) {
+if(isset($_POST['user_email'])) {
   $email = test_input_data($_POST['user_email']);
   if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $sql = "INSERT INTO `email_subscription` (`user_email`) VALUES('$email');";

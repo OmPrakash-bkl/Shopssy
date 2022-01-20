@@ -2,6 +2,23 @@
 include './action.php';
 $title = "Contact Us - Shopssy";
 include './header.php';
+
+if(isset($_POST['submit'])) {
+$name = $_POST['name'];
+$email = $_POST['email'];
+$phone = $_POST['phone'];
+$message = $_POST['message'];
+$nameval = "/^[a-zA-Z ]+$/";
+$emailval = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$/";
+$numberval = "/^[0-9]+$/";
+
+if(preg_match($nameval, $name) and preg_match($emailval, $email) and preg_match($numberval, $phone) and strlen($phone)==10) {
+    $sql = "INSERT INTO `contact_us` (`name`, `email`, `phone`, `message`) VALUES ('$name', '$email', '$phone', '$message');";
+    mysqli_query($con, $sql);
+}
+
+}
+
 ?> 
  
     <!--sub navigation container start-->
@@ -76,21 +93,21 @@ include './header.php';
         </div>
 
         <div class="contactus_form_container">
-            <form action="">
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                 <div>
-                    <input type="text" placeholder="NAME">
+                    <input type="text" placeholder="NAME" name="name" required>
                 </div>
                 <div>
-                    <input type="email" placeholder="EMAIL">
+                    <input type="email" placeholder="EMAIL" name="email" required>
                 </div>
                 <div>
-                    <input type="text" placeholder="PHONE NUMBER">
+                    <input type="text" placeholder="PHONE NUMBER" name="phone" required>
                 </div>
                 <div>
-                    <textarea rows="15" placeholder="MESSAGE"></textarea>
+                    <textarea rows="15" placeholder="MESSAGE" name="message" required></textarea>
                 </div>
                 <div>
-                    <button type="submit">SEND MESSAGE</button>
+                    <button type="submit" name="submit">SEND MESSAGE</button>
                 </div>
             </form>
         </div>
