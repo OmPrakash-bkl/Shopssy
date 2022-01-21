@@ -341,14 +341,100 @@ insert into products(cats_id, subs_cat_identification_id, b_and_i_identification
 (1, 1.2, 101.01, 322.3, 'I KALL N19 Tablet (8 Inch, 2GB, 16GB, Dual Sim, 4G Connectivity) (Black)', 'ikall_tablets3_image1.jpg', 4, 9599.00, 6599.00),
 (1, 1.2, 101.01, 322.4, 'I KALL N16 3G Dual Sim Calling Tablet (8" Display, 2GB, 16GB) (Grey)', 'ikall_tablets4_image1.jpg', 4, 7599.00, 5599.00),
 
+(2, 2.1, 102.1, 323.1, 'Acer Aspire 5 A514-54 Thin and Light Laptop | 14" Full HD IPS Display | 11th Gen Intel Core i5-1135G7 Processor ', 'acer_laptops1_image1.jpg', 4, 66599.00, 46999.00),
+(2, 2.1, 102.1, 323.2, 'Acer Nitro 5 AN515-57 Gaming Laptop | Intel Core i5-11400H |NVIDIA GeForce RTX 3050 Laptop Graphics', 'acer_laptops2_image1.jpg', 5, 109999.00, 69999.00),
+(2, 2.1, 102.1, 323.3, 'Acer Aspire 3 AMD Athlon Silver 3050U Dual-core Processor 15.6" (39.6 cms) Laptop ', 'acer_laptops3_image1.jpg', 4, 36599.00, 28999.00),
+(2, 2.1, 102.1, 323.4, 'Acer Extensa 15 Thin & Light Intel Processor Pentium Silver N5030 15.6 inches Business Laptop', 'acer_laptops4_image1.jpg', 4, 38599.00, 30599.00),
 
+(2, 2.1, 102.2, 324.1, '2020 Apple MacBook Air Laptop: Apple M1 chip, 13.3-inch/33.74 cm Retina Display, 8GB RAM, 512GB SSD Storage', 'apple_laptops1_image1.jpg', 5, 106599.00, 104999.00),
+(2, 2.1, 102.2, 324.2, '2020 Apple MacBook Pro (13.3-inch/33.78 cm, Apple M1 chip with 8‑core CPU and 8‑core GPU, 8GB RAM, 512GB SSD) - Space Grey', 'apple_laptops2_image1.jpg', 4, 129999.00, 127999.00),
+(2, 2.1, 102.2, 324.3, '2020 Apple MacBook Air Laptop: Apple M1 chip, 13.3-inch/33.74 cm Retina Display, 8GB RAM, 512GB SSD Storage', 'apple_laptops3_image1.jpg', 5, 108599.00, 106999.00),
+(2, 2.1, 102.2, 324.4, '2021 Apple MacBook Pro (16-inch/41.05 cm, Apple M1 Pro chip with 10‑core CPU and 16‑core GPU, 16GB RAM, 1TB SSD) - Silver', 'apple_laptops4_image1.jpg', 4, 130599.00, 128599.00),
 
+(2, 2.1, 102.3, 325.1, 'ASUS ROG Strix G17 (2021) 17.3-inch (43.94 cms) FHD 144Hz, AMD Ryzen 7 4800H, GTX 1650 4GB Graphics, Gaming Laptop (8GB/512GB SSD/Windows 10/Gray/2.4 Kg), G713IH-HX020T', 'asus_laptops1_image1.jpg', 4, 76599.00, 74999.00),
+(2, 2.1, 102.3, 325.2, 'ASUS VivoBook 14 (2021), Intel Core i3-1115G4 11th Gen, 14-inch (35.56 cms) FHD Thin and Light Laptop', 'asus_laptops2_image1.jpg', 4, 39999.00, 37999.00),
+(2, 2.1, 102.3, 325.3, 'ASUS TUF Gaming A15 (2021) 15.6-inch (39.62 cms) FHD 144Hz, AMD Ryzen 7 4800H, RTX 3050 4GB Graphics, Gaming Laptop ', 'asus_laptops3_image1.jpg', 4, 68599.00, 66999.00),
+(2, 2.1, 102.3, 325.4, 'ASUS Zenbook 13 Intel Core i5-1135G7 11th Gen 13.3 inches OLED FHD OLED, Business Laptop', 'asus_laptops4_image1.jpg', 4, 68599.00, 67599.00),
 
+(2, 2.1, 102.4, 326.1, 'Dell 15 (2021) AMD Ryzen 7-5800H Gaming Laptop, 16GB DDR4, 512GB SSD', 'dell_laptops1_image1.jpg', 5, 106599.00, 104999.00),
+(2, 2.1, 102.4, 326.2, 'Dell New 14 Thin & Light Intel i3-1005G1 Laptop, 4Gb RAM, 1TB HDD + 256GB SSD, 14 inches FHD AG Display', 'dell_laptops2_image1.jpg', 5, 45999.00, 42999.00),
+(2, 2.1, 102.4, 326.3, 'Dell Inspiron 3502 15.6 inches HD Display Laptop', 'dell_laptops3_image1.jpg', 3, 36599.00, 34999.00),
+(2, 2.1, 102.4, 326.4, 'Dell New 14 Ryzen 3-3250U, 8GB, 1TB HDD, Win 11 + MS Office'21, AMD Vega Graphics', 'dell_laptops4_image1.jpg', 4, 39599.00, 37599.00),
 
+(2, 2.1, 102.5, 327.1, 'HP Pavilion Gaming AMD Ryzen 5 5600H 39.6 cm(15.6-inch) FHD Gaming Laptop', 'hp_laptops1_image1.jpg', 4, 66599.00, 63999.00),
+(2, 2.1, 102.5, 327.2, 'HP 15s 11th Gen Intel Core i3-8GB RAM/512GB SSD 15.6 inch(39.6 cm) Laptop', 'hp_laptops2_image1.jpg', 5, 47999.00, 44999.00),
+(2, 2.1, 102.5, 327.3, 'HP Chromebook 14 Intel Celeron N4020-4GB SDRAM/64GB eMMC + 256GB Expandable Storage 14inch(35.6 cm) Thin & Light Touchscreen Laptop', 'hp_laptops3_image1.jpg', 3, 27599.00, 25999.00),
+(2, 2.1, 102.5, 327.4, 'HP Pavilion 14, Intel 11th Gen i5 16GB RAM/512GB SSD 14 inch(35.6 cm) Laptop', 'hp_laptops4_image1.jpg', 5, 69599.00, 67599.00),
 
+(2, 2.1, 102.6, 328.1, 'AVITA Cosmos 2 in 1 Intel Celeron Dual Core 11.6 inches (4 GB/64 GB EMMC Storage/Windows 10 Home)', 'avita_laptops1_image1.jpg', 3, 18599.00, 15999.00),
+(2, 2.1, 102.6, 328.2, 'AVITA Essential Refresh NE14A2INC44A-MB Intel Celeron-N4020 14 inches', 'avita_laptops2_image1.jpg', 4, 25999.00, 23999.00),
+(2, 2.1, 102.6, 328.3, 'AVITA PURA E14 NS14A6ING541 - WBA 14 inches Laptop AMD Radeon R4', 'avita_laptops3_image1.jpg', 3, 29599.00, 26999.00),
+(2, 2.1, 102.6, 328.4, 'AVITA Essential Refresh NE14A2INC44A-CR Intel Celeron-N4020 14 inches Laptop, 4GB/256GB SSD', 'avita_laptops4_image1.jpg', 4, 28999.00, 24599.00),
 
+(2, 2.1, 102.7, 329.1, 'Redmi Book Pro Intel Core i5 11th Gen 15.6 inches Thin and Light Laptop', 'redmi_laptops1_image1.jpg', 4, 49599.00, 46999.00),
+(2, 2.1, 102.7, 329.2, 'Mi Notebook Ultra 3K Resolution Display Intel Core i5-11300H 11th Gen 15.6-inch(39.62 cms) Thin and Light Laptop', 'redmi_laptops2_image1.jpg', 5, 62999.00, 59999.00),
+(2, 2.1, 102.7, 329.3, 'Mi Notebook Horizon Edition 14 Intel Core i7-10510U 10th Gen Thin and Light Laptop', 'redmi_laptops3_image1.jpg', 3, 51599.00, 49999.00),
+(2, 2.1, 102.7, 329.4, 'RedmiBook 15 e-Learning Edition Core i3 11th Gen/8 GB/256 GB SSD', 'redmi_laptops4_image1.jpg', 3, 39999.00, 36599.00),
 
+(2, 2.1, 102.8, 330.1, 'LG Gram 14-Inches Ultra-Light Intel Evo 11th Gen Core i7,16 GB RAM, 512 GB SSD', 'lg_laptops1_image1.jpg', 5, 89599.00, 87999.00),
+(2, 2.1, 102.8, 330.2, 'LG Gram 14 Intel Evo 11th Gen Core i5 14 inches Ultra-Light Laptop', 'lg_laptops2_image1.jpg', 5, 75999.00, 72999.00),
+(2, 2.1, 102.8, 330.3, 'LG Gram 10th Gen Intel Core i5-1035G7 cm 38.1 cm (15-inch) IPS Full HD (1920X1080) Thin and Light Laptop', 'lg_laptops3_image1.jpg', 3, 77599.00, 75999.00),
+(2, 2.1, 102.8, 330.4, 'LG Gram 17-inches Ultra-Light Intel Evo 11th Gen Core i5,8 GB RAM, 512 GB SSD, New Win-11 Preload, Iris Xe Graphics', 'lg_laptops4_image1.jpg', 5, 85999.00, 82599.00),
 
+(2, 2.1, 102.9, 331.1, 'Lenovo IdeaPad 3 10th Gen Intel Core i3 15.6 HD Thin and Light Laptop', 'lenovo_laptops1_image1.jpg', 4, 39599.00, 36999.00),
+(2, 2.1, 102.9, 331.2, 'Lenovo IdeaPad Slim 1 Intel Celeron N4020 11.6" (29.46cm) HD Thin & Light Laptop', 'lenovo_laptops2_image1.jpg', 4, 31599.00, 29999.00),
+(2, 2.1, 102.9, 331.3, 'Lenovo V15 Intel Celeron N4020 15.6" FHD (1080p)(39.62 cm) HD Thin and Light Laptop ', 'lenovo_laptops3_image1.jpg', 5, 32599.00, 27999.00),
+(2, 2.1, 102.9, 331.4, 'Lenovo IdeaPad 3 11th Gen Intel Core i3 15.6 FHD Thin and Light Laptop', 'lenovo_laptops4_image1.jpg', 5, 45999.00, 42999.00),
+
+(2, 2.2, 103.1, 332.1, 'Lenovo Intel Core i3-6th Gen17 inch(43.18 cms) 1398 x 780 Desktop', 'lenovo_computers1_image1.jpg', 5, 23599.00, 21999.00),
+(2, 2.2, 103.1, 332.2, 'Lenovo thinkcentre i5 Tiny PC Full Set M93p', 'lenovo_computers2_image1.jpg', 4, 26599.00, 22999.00),
+(2, 2.2, 103.1, 332.3, 'Lenovo ThinkCenter M80 Desktop', 'lenovo_computers3_image1.jpg', 4, 29599.00, 27599.00),
+(2, 2.2, 103.1, 332.4, 'Lenovo Intel Core I5 4th Gen 17 inch(43.18 cms) 1398 x 780 Desktop', 'lenovo_computers4_image1.jpg', 5, 33999.00, 31599.00),
+
+(2, 2.2, 103.2, 333.1, 'HP All-in-One 21.5-Inch(54.6 cm) FHD with Alexa', 'hp_computers1_image1.jpg', 4, 31999.00, 28599.00),
+(2, 2.2, 103.2, 333.2, 'HP All-in-One PC 23.8-Inch(60.8 cm) FHD Desktop PC Ryzen 3 4300U with Alexa', 'hp_computers2_image1.jpg', 4, 53599.00, 51999.00),
+(2, 2.2, 103.2, 333.3, 'HP AIO 11th Gen Intel Core i3 23.8-Inch(60.5 cm) FHD Desktop PC', 'hp_computers3_image1.jpg', 4, 47599.00, 45599.00),
+(2, 2.2, 103.2, 333.4, 'HP AlO 11th Gen Intel Core i3 23.8 inches FHD All-in-One Personal Desktop', 'hp_computers4_image1.jpg', 4, 48599.00, 46999.00),
+
+(2, 2.2, 103.3, 334.1, 'Dell Optiplex 380 17 inch (43.18 cms) Desktop', 'dell_computers1_image1.jpg', 5, 21999.00, 18599.00),
+(2, 2.2, 103.3, 334.2, 'Dell Optiplex 19 Inch Desktop Set', 'dell_computers2_image1.jpg', 5, 25999.00, 23499.00),
+(2, 2.2, 103.3, 334.3, 'Dell Optiplex 790 17-inch (43.18 cm) Desktop', 'dell_computers3_image1.jpg', 4, 20599.00, 18599.00),
+(2, 2.2, 103.3, 334.4, 'DELL S2721DGF Quad HD 27” LCD Gaming Monitor', 'dell_computers4_image1.jpg', 3, 46599.00, 43499.00),
+
+(2, 2.2, 103.4, 335.1, 'Apple iMac with Retina 5K Display (27-inch/68.58 cm, 8GB RAM, 3.1GHz 6-core 10th-Generation Intel Core i5 Processor, 256GB SSD Storage) - Silver', 'apple_computers1_image1.jpg', 4, 163999.00, 161999.00),
+(2, 2.2, 103.4, 335.2, 'Apple iMac (21.5-inch/54.61 cm, 8GB RAM, 2.3GHz Dual-core 7th-Generation Intel Core i5 Processor, 256GB SSD Storage) - Silver', 'apple_computers2_image1.jpg', 5, 102999.00, 99999.00),
+(2, 2.2, 103.4, 335.3, '2021 Apple iMac with 4.5K Retina Display (24-inch/60.96 cm, Apple M1 chip with 8‑core CPU and 8‑core GPU, 8GB RAM, 512GB) - Silver', 'apple_computers3_image1.jpg', 5, 160599.00, 158599.00),
+(2, 2.2, 103.4, 335.4, '2021 Apple iMac with 4.5K Retina Display (24-inch/60.96 cm, Apple M1 chip with 8‑core CPU and 8‑core GPU, 8GB RAM, 256GB) - Pink', 'apple_computers4_image1.jpg', 4, 135599.00, 132599.00),
+
+(2, 2.2, 103.5, 336.1, 'Acer V206HQL 19.5-inch LED Backlit Computer Monitor', 'acer_computers1_image1.jpg', 5, 9999.00, 8999.00),
+(2, 2.2, 103.5, 336.2, 'Acer Nitro QG221Q 21.5 Inch (54.61 cm) Full HD Gaming Monitor', 'acer_computers2_image1.jpg', 5, 11999.00, 10999.00),
+(2, 2.2, 103.5, 336.3, 'Acer SA240Y 23.8-inch IPS Full HD Ultra Slim Backlit LED Monitor ', 'acer_computers3_image1.jpg', 5, 12599.00, 11599.00),
+(2, 2.2, 103.5, 336.4, 'Acer 23.8 Inch Full HD IPS Ultra Slim (6.6mm Thick) Monitor', 'acer_computers4_image1.jpg', 5, 13599.00, 12599.00),
+
+(2, 2.2, 103.6, 337.1, 'ASUS Vivo AiO V222, 21.5" (54.61 cm) FHD, Intel Pentium Gold 6405U, All-in-One Desktop', 'asus_computers1_image1.jpg', 4, 38999.00, 36999.00),
+(2, 2.2, 103.6, 337.2, 'ASUS AIO M241, 23.8" FHD, Dual Core AMD Ryzen 3 3250U All-in-One Desktop', 'asus_computers2_image1.jpg', 5, 40999.00, 38999.00),
+(2, 2.2, 103.6, 337.3, 'Asus VA24EHE 23.8-inch LCD Backlit Computer Monitor, HDMI VGA D-Sub DVI-D, Adaptive-Sync', 'asus_computers3_image1.jpg', 4, 14599.00, 12999.00),
+(2, 2.2, 103.6, 337.4, 'ASUS Vivo AiO 24, 60.45 cm FHD Touch, Intel Core i5 8th Gen, All-in-One Desktop', 'asus_computers4_image1.jpg', 5, 66599.00, 64599.00),
+
+(2, 2.2, 103.7, 338.1, 'BenQ GW2780 27-inch 1080p FHD Eye-Care, IPS Monitor, Ultra-Slim Bezel, 60 Hz, Brightness Intelligence', 'benq_computers1_image1.jpg', 5, 18999.00, 14999.00),
+(2, 2.2, 103.7, 338.2, 'BenQ EW2780 27" Eye-Care, Entertainment and Gaming Monitor, HDR, IPS, Edge to Edge Slim Bezel, FreeSync', 'benq_computers2_image1.jpg', 5, 19999.00, 17999.00),
+(2, 2.2, 103.7, 338.3, 'BenQ EW3270U 32-inch 4K UHD Monitor, Bezel-Less, HDR, 95% DCI P3, 3000:1, AMD FreeSync, 2Wx2 Speakers, 60Hz, Brightness Intelligence Plus', 'benq_computers3_image1.jpg', 3, 33599.00, 31999.00),
+(2, 2.2, 103.7, 338.4, 'BenQ EW2780Q 27-Inch 2K QHD HDRi Entertainment Monitor, IPS, HDMI, DP, 2560x1440, sRGB 99%, Built-in Speakers, Anti-Glare, Flicker-Free', 'benq_computers4_image1.jpg', 3, 30599.00, 28599.00),
+
+(2, 2.2, 103.8, 339.1, 'Zebronics ZEB-A22FHD 21.5" LED Backlit Computer Monitor Full HD with VGA/HDMI Ports (Black)', 'zebronics_computers1_image1.jpg', 4, 11999.00, 9999.00),
+(2, 2.2, 103.8, 339.2, 'Zebronics ZEB-AC32FHD 31.5" LED Curved Computer Monitor Full HD with VGA/HDMI Ports', 'zebronics_computers2_image1.jpg', 4, 18999.00, 14999.00),
+(2, 2.2, 103.8, 339.3, 'Zebronics 21.5 inch (54.6cm) LED Monitor', 'zebronics_computers3_image1.jpg', 5, 10599.00, 8999.00),
+(2, 2.2, 103.8, 339.4, 'Zebronics 27 inch (68.5 cm) LED Monitor with Full HD Display, HDMI and VGA Port, Built in Speaker, Slim Bezel, Metal Stand and Wall Mountable', 'zebronics_computers4_image1.jpg', 4, 18599.00, 16599.00),
+
+(2, 2.2, 103.9, 340.1, 'Samsung 59.8 cm (23.5 inch) Curved LED Backlit Computer Monitor - Full HD, VA Panel with VGA, HDMI, Audio Ports - LC24F390FHWXXL (Black)', 'samsung_computers1_image1.jpg', 4, 13499.00, 11999.00),
+(2, 2.2, 103.9, 340.2, 'Samsung 23.5 inch (59.8 cm) LED Backlit Computer Monitor - Full HD, Super Slim AH-IPS Panel with VGA, HDMI Ports - LS24F350FHWXXL (Black)', 'samsung_computers2_image1.jpg', 5, 14599.00, 12999.00),
+(2, 2.2, 103.9, 340.3, 'Samsung 27 inch (68.6 cm) LED Flat Computer Monitor - Full HD, Super Slim AH-IPS Panel - LS27R350FHWXXL (Dark Blue Gray)', 'samsung_computers3_image1.jpg', 3, 19599.00, 17999.00),
+(2, 2.2, 103.9, 340.4, 'Samsung 80 Series 68.4 cm (27 inch) 4K UHD (3840x2160) Computer Monitor, IPS Panel, HDR10 (1 Billion Colors), Height Adjustable Stand, Energy Star, Intelligent Eye Care LS27A800NMWXXL (Black)', 'samsung_computers4_image1.jpg', 4, 36599.00, 34999.00),
+
+(2, 2.2, 103.01, 341.1, 'Entwino Assembled Desktop Computer Core 2 Duo, 500GB HDD, 4GB RAM, 15.1 inch LED Windows 7 & MS Office Installed Trial Version for Online Class and Office Work', 'entwino_computers1_image1.jpg', 5, 13499.00, 11499.00),
+(2, 2.2, 103.01, 341.2, 'Entwino Assembled Desktop Computer i3 550, 500GB HDD, 4GB RAM, 15.1 inch LED Windows 7 & MS Office Installed Trial Version for Online Class and Office Work', 'entwino_computers2_image1.jpg', 4, 15599.00, 13999.00),
+(2, 2.2, 103.01, 341.3, 'Entwino Assembled Desktop Computer i5 650, 500GB HDD, 8GB RAM, 15.1 inch LED Windows 7 & MS Office Installed Trial Version for Online Class and Office Work', 'entwino_computers3_image1.jpg', 5, 17599.00, 15599.00),
+(2, 2.2, 103.01, 341.4, 'Entwino Assembled Desktop Computer i3 550, 500GB HDD, 120 GB SSD, 8GB RAM, 18.5 inch LED Windows 10 & MS Office Installed Trial Version for Online Class and Office Work (8 GB 1 TB)', 'entwino_computers4_image1.jpg', 4, 20599.00, 18999.00),
 
 
 
