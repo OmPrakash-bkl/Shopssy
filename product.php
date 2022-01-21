@@ -143,9 +143,9 @@ include './header.php';
     <div class="sub_navigation_container">
 <center>
     <div class="sub_navigation_inner_container">
-        <span><a href="./index.html">Home</a></span>
+        <span><a href="./index.php">Home</a></span>
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
-        <span><a href="./all_categories.html">All Categories</a></span>
+        <span><a href="./all_categories.php">All Categories</a></span>
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
         <span><a href="#">Mobiles</a></span>
     </div>
