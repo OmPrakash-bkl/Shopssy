@@ -575,6 +575,72 @@ insert into products(cats_id, subs_cat_identification_id, b_and_i_identification
 (4, 4.1, 106.7, 368.3, 'Klipsch RP-140SA Dolby Atmos Speaker (Pair) - Black', 'klipschspeakers3_image1.jpg', 5, 4959.00, 3699.00),
 (4, 4.1, 106.7, 368.4, 'Klipsch Heritage Groove 20 Watt Wireless Bluetooth Speaker (Matte Black)', 'klipschspeakers4_image1.jpg', 4, 18999.00, 16549.00),
 
+(4, 4.2, 107.1, 370.1, 'Sony Dynamic MDR-ZX310-L Wired Headphone without Mic (Blue)', 'sonyheadphones1_image1.jpg', 4, 2599.00, 2199.00),
+(4, 4.2, 107.1, 370.2, 'Sony WH-CH510 Bluetooth Wireless On Ear Headphones with Mic (Blue)', 'sonyheadphones2_image1.jpg', 3, 3399.00, 2989.00),
+(4, 4.2, 107.1, 370.3, 'Sony MDR-EX150AP Wired In Ear Headphone with Mic (Blue)', 'sonyheadphones3_image1.jpg', 5, 2559.00, 1949.00),
+(4, 4.2, 107.1, 370.4, 'Sony MDR-XB450AP Wired Extra Bass On-Ear Headphones with Tangle Free Cable, 3.5mm Jack, Headset with Mic for Phone Calls and 1 Year Warranty - (Black)', 'sonyheadphones4_image1.jpg', 5, 2999.00, 2199.00),
+
+(4, 4.2, 107.2, 371.1, 'Infinity (JBL) Glide 500, 20 Hrs Playtime with Quick Charge, Wireless On Ear Headphone with Mic', 'infinityheadphones1_image1.jpg', 5, 1999.00, 1699.00),
+(4, 4.2, 107.2, 371.2, 'Infinity (JBL) Zip 100 in-Ear Deep Bass Headphones with Mic (Charcoal Black)', 'infinityheadphones2_image1.jpg', 4, 559.00, 389.00),
+(4, 4.2, 107.2, 371.3, 'Infinity by Harman Tranz 300 Wireless in-Ear Dual EQ Deep Bass IPX5 Sweatproof Headphones with Mic (Blue)', 'infinityheadphones3_image1.jpg', 3, 1259.00, 949.00),
+(4, 4.2, 107.2, 371.4, 'Infinity (JBL) Swing 350, True Wireless Earbuds with Mic, 24 Hours Playtime with Quick Charge, Deep Bass, Dual Equalizer', 'infinityheadphones4_image1.jpg', 5, 1999.00, 1599.00),
+
+
+(4, 4.2, 107.3, 372.1, 'Sennheiser HD 206 507364 Headphones (Black)', 'sennheiserheadphones1_image1.jpg', 4, 1999.00, 1499.00),
+(4, 4.2, 107.3, 372.2, 'Sennheiser CX 180 Street II In-Ear Headphone (Black), without Mic', 'sennheiserheadphones2_image1.jpg', 3, 999.00, 869.00),
+(4, 4.2, 107.3, 372.3, 'Sennheiser HD 400s Wired Over The Ear Headphone with Mic (Black)', 'sennheiserheadphones3_image1.jpg', 4, 5569.00, 4649.00),
+(4, 4.2, 107.3, 372.4, 'Sennheiser HD 280 PRO ideal Over-Ear Headphones for Home & Recording studio, DJ's, Mixing and Listening Music.', 'sennheiserheadphones4_image1.jpg', 4, 7999.00, 6599.00),
+
+
+(4, 4.2, 107.4, 373.1, 'Audio-Technica ATH-M50x Over-Ear Professional Studio Monitor Headphones (Black)', 'audiotechnicaheadphones1_image1.jpg', 4, 12599.00, 11699.00),
+(4, 4.2, 107.4, 373.2, 'Audio-Technica ATH-M20x Over-Ear Professional Studio Monitor Headphones (Black)', 'audiotechnicaheadphones2_image1.jpg', 5, 4999.00, 4589.00),
+(4, 4.2, 107.4, 373.3, 'Audio-Technica ATH-M40X Professional Studio Monitor Over-ear Headphones (Black)', 'audiotechnicaheadphones3_image1.jpg', 3, 9599.00, 8999.00),
+(4, 4.2, 107.4, 373.4, 'Audio-Technica ATH-S100iS_BBL Over-The Ear Wired Headphone with 36mm Powerful Dynamic Drivers, Rich Bass, HD Sound & Built-in-Mic (Black-Blue)', 'audiotechnicaheadphones4_image1.jpg', 5, 2499.00, 1899.00),
+
+
+(4, 4.2, 107.5, 374.1, 'JBL C50HI Wired in Ear Earphones with Mic (Blue)', 'jblheadphones1_image1.jpg', 5, 799.00, 499.00),
+(4, 4.2, 107.5, 374.2, 'JBL C100SI In-Ear Headphones with Mic (Red)', 'jblheadphones2_image1.jpg', 4, 999.00, 679.00),
+(4, 4.2, 107.5, 374.3, 'JBL Live 650BTNC, Over Ear Active Noise Cancelling Headphones with Mic, JBL Signature Sound, Quick Charge, Dual Pairing', 'jblheadphones3_image1.jpg', 5, 9059.00, 8469.00),
+(4, 4.2, 107.5, 374.4, 'JBL Quantum 100, Wired Over Ear Gaming Headphones with Detachable Mic for PC, Mobile, Laptop, PS4, Xbox, Nintendo Switch, VR (Black)', 'jblheadphones4_image1.jpg', 4, 2599.00, 1799.00),
+
+(4, 4.2, 107.6, 375.1, 'beyerdynamic DT 770 PRO 250 Ohm Studio Headphone', 'beyerdynamicheadphones1_image1.jpg', 4, 16599.00, 14699.00),
+(4, 4.2, 107.6, 375.2, 'beyerdynamic DT 990 Wired Headphone with Mic (Silver/Black)', 'beyerdynamicheadphones2_image1.jpg', 5, 24959.00, 22589.00),
+(4, 4.2, 107.6, 375.3, 'beyerdynamic DT 240 Pro Wired Over The Ear Headphone (Black)', 'beyerdynamicheadphones3_image1.jpg', 3, 8559.00, 7699.00),
+(4, 4.2, 107.6, 375.4, 'Beyerdynamic MMX 102 iE in-Ear Headphones (Black/Silver)', 'beyerdynamicheadphones4_image1.jpg', 5, 1999.00, 1599.00),
+
+(4, 4.2, 107.7, 376.1, 'Jabra Elite 85t True Wireless Earbuds- Advanced Active Noise Cancellation with Long Battery Life and Powerful Speakers - Wireless Charging Case - Black', 'jabraheadphones1_image1.jpg', 5, 11599.00, 9689.00),
+(4, 4.2, 107.7, 376.2, 'Jabra GN Netcom Evolve 20 UC Duo MS Optimized, USB Headband', 'jabraheadphones2_image1.jpg', 3, 6999.00, 6589.00),
+(4, 4.2, 107.7, 376.3, 'Jabra Elite 25E Wireless in Ear Bluetooth Headphone with Mic (Black)', 'jabraheadphones3_image1.jpg', 4, 4259.00, 3249.00),
+(4, 4.2, 107.7, 376.4, 'Jabra Elite 75t True Wireless Active Noise Cancelling (ANC) Bluetooth Earbuds, Long Battery Life for Calls & Music, Voice Assistant Enabled, Titanium Black', 'jabraheadphones4_image1.jpg', 4, 8999.00, 6599.00),
+
+(4, 4.2, 107.8, 377.1, 'Jaybird JF4MBL Freedom F5 Wireless In-Ear Headphones (Black)', 'jaybirdheadphones1_image1.jpg', 4, 11599.00, 10699.00),
+(4, 4.2, 107.8, 377.2, 'Jaybird Store Jaybird Tarah Bluetooth Wireless Sport Headphones', 'jaybirdheadphones2_image1.jpg', 5, 10999.00, 8589.00),
+(4, 4.2, 107.8, 377.3, 'Jaybird RUN True Wireless Headphones, Sweat-Proof and Water Resistant, Custom Sound, 12 Hours In Your Pocket, Music + Calls (Jet)', 'jaybirdheadphones3_image1.jpg', 3, 32599.00, 30699.00),
+(4, 4.2, 107.8, 377.4, 'Jaybird X2 Sport Wireless Bluetooth Headphones - Storm White', 'jaybirdheadphones4_image1.jpg', 5, 9999.00, 8599.00),
+
+
+(4, 4.2, 107.9, 378.1, 'Razer Kraken Gaming Headset: Lightweight Aluminum Frame - Retractable Noise Isolating Microphone', 'razerheadphones1_image1.jpg', 3, 10599.00, 8659.00),
+(4, 4.2, 107.9, 378.2, 'Razer Kraken X Wired Console Gaming Headset', 'razerheadphones2_image1.jpg', 3, 5959.00, 4589.00),
+(4, 4.2, 107.9, 378.3, 'Razer Nari Essential 7.1 Surround Sound Wireless Gaming Headset - Black', 'razerheadphones3_image1.jpg', 4, 9559.00, 8649.00),
+(4, 4.2, 107.9, 378.4, 'Razer BlackShark V2 Pro - Wireless Gaming Headset - Rainbow Six Edition', 'razerheadphones4_image1.jpg', 5, 25999.00, 22599.00),
+
+
+(4, 4.2, 107.01, 379.1, 'Poly by Plantronics - Voyager 5200 (Poly) - Bluetooth Over-The-Ear (Monaural) Headset', 'plantronicsheadphones1_image1.jpg', 3, 9599.00, 7699.00),
+(4, 4.2, 107.01, 379.2, 'Poly by Plantronics - Blackwire 3220 USB-A Wired Headset - Dual Ear (Stereo) with Boom Mic - Connect to PC/Mac via USB-A', 'plantronicsheadphones2_image1.jpg', 3, 5999.00, 4589.00),
+(4, 4.2, 107.01, 379.3, 'Plantronics BackBeat Go 600 Wireless Bluetooth Over the Ear Headphone with Mic (Black)', 'plantronicsheadphones3_image1.jpg', 4, 6559.00, 5649.00),
+(4, 4.2, 107.01, 379.4, 'Audio-Technica ATH-M20x Over-Ear Professional Studio Monitor Headphones (Black)', 'plantronicsheadphones4_image1.jpg', 5, 5969.00, 4589.00),
+
+
+(4, 4.2, 107.11, 380.1, 'HyperX Cloud Stinger Core with in-line Audio Control Headphones for PC (HX-HSCSC2-BK/WW), Black', 'hyberxheadphones1_image1.jpg', 4, 4599.00, 3699.00),
+(4, 4.2, 107.11, 380.2, 'HyperX Cloud Core 7.1 Wired Gaming Headphones with Mic Black', 'hyberxheadphones2_image1.jpg', 5, 7999.00, 6589.00),
+(4, 4.2, 107.11, 380.3, 'HyperX Cloud Stinger Core - Gaming Headset for PlayStation 4 and PlayStation 5, Over-Ear Wired Headset with Mic', 'hyberxheadphones3_image1.jpg', 3, 3559.00, 2649.00),
+(4, 4.2, 107.11, 380.4, 'HyperX Cloud Earbuds Gaming Headphones with Mic for Nintendo Switch and Mobile Gaming - Red (HX-HSCEB-RD)', 'hyberxheadphones4_image1.jpg', 5, 5949.00, 3559.00),
+
+(4, 4.2, 107.12, 381.1, 'Logitech G431 Wired Gaming Headset, 7.1 Surround Sound, DTS Headphone', 'logitechheadphones1_image1.jpg', 4, 6599.00, 5469.00),
+(4, 4.2, 107.12, 381.2, 'Logitech H111 Wired On Ear Headphones With Mic Black', 'logitechheadphones2_image1.jpg', 5, 999.00, 789.00),
+(4, 4.2, 107.12, 381.3, 'Logitech H340 Wired USB Business On-Ear Stereo Headphones with Noise-Cancelling Microphone', 'logitechheadphones3_image1.jpg', 4, 3159.00, 2649.00),
+(4, 4.2, 107.12, 381.4, 'Logitech G435 Lightspeed and Bluetooth Wireless Gaming Headset', 'logitechheadphones4_image1.jpg', 3, 7999.00, 6559.00),
+
 
 
 
