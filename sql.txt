@@ -641,6 +641,45 @@ insert into products(cats_id, subs_cat_identification_id, b_and_i_identification
 (4, 4.2, 107.12, 381.3, 'Logitech H340 Wired USB Business On-Ear Stereo Headphones with Noise-Cancelling Microphone', 'logitechheadphones3_image1.jpg', 4, 3159.00, 2649.00),
 (4, 4.2, 107.12, 381.4, 'Logitech G435 Lightspeed and Bluetooth Wireless Gaming Headset', 'logitechheadphones4_image1.jpg', 3, 7999.00, 6559.00),
 
+(5, 5.1, 108.1, 382.1, 'Canon EOS 1500D 24.1 Digital SLR Camera (Black) with EF S18-55 is II Lens', 'canoncameras1_image1.jpg', 5, 36599.00, 33499.00),
+(5, 5.1, 108.1, 382.2, 'Canon PowerShot SX620HS 20.2MP Digital Camera with 25x Optical Zoom (Black) + 16GB Memory Card + Camera Case', 'canoncameras2_image1.jpg', 3, 14999.00, 12489.00),
+(5, 5.1, 108.1, 382.3, 'Canon EOS M200 Mirrorless Camera, EF-M 15-45mm f/3.5-6.3 is STM Lens, 24.1 MP, 16 GB Memory Card', 'canoncameras3_image1.jpg', 4, 45199.00, 43699.00),
+(5, 5.1, 108.1, 382.4, 'CANON Power Shot G7X Mark II Digital 20.1-Megapixel (Black),Camera with 16GB card + Case Cover', 'canoncameras4_image1.jpg', 5, 35999.00, 33559.00),
+
+(5, 5.1, 108.2, 383.1, 'Nikon D3500 DX-Format DSLR Two Lens Kit with AF-P DX Nikkor 18-55mm f/3.5-5.6G VR & AF-P DX Nikkor 70-300mm f/4.5-6.3G ED (Black)', 'nikoncameras1_image1.jpg', 5, 56599.00, 52499.00),
+(5, 5.1, 108.2, 383.2, 'Nikon Z50 Mirrorless Camera Body with Z DX 16-50mm f/3.5-6.3 VR Lens', 'nikoncameras2_image1.jpg', 4, 71949.00, 69789.00),
+(5, 5.1, 108.2, 383.3, 'Nikon Digital Camera Z 5 Kit with NIKKOR Z 24-50mm f/4-6.3 Lens', 'nikoncameras3_image1.jpg', 4, 125199.00, 122649.00),
+(5, 5.1, 108.2, 383.4, 'Nikon Digital Camera Z 5 Kit with NIKKOR Z 24-200mm f/4-6.3 Lens', 'nikoncameras4_image1.jpg', 3, 152999.00, 146559.00),
+
+(5, 5.1, 108.3, 384.1, 'Sony DSC W830 Cyber-Shot 20.1 MP Point and Shoot Camera (Black) with 8X Optical Zoom', 'sonycameras1_image1.jpg', 5, 16549.00, 11499.00),
+(5, 5.1, 108.3, 384.2, 'Sony Digital Vlog Camera ZV-1 Only (Compact, Video Eye AF, Flip Screen, in-Built Microphone, 4K Vlogging Camera and Content Creation) – Black', 'sonycameras2_image1.jpg', 4, 61999.00, 59789.00),
+(5, 5.1, 108.3, 384.3, 'Sony RX100M7 Premium Compact Camera with 1.0-Type Stacked CMOS Sensor (DSC-RX100M7)', 'sonycameras3_image1.jpg', 4, 93199.00, 85999.00),
+(5, 5.1, 108.3, 384.4, 'Sony W800/S 20.1 MP Digital Camera (Silver)', 'sonycameras4_image1.jpg',3, 14959.00, 12559.00),
+
+
+(5, 5.1, 108.4, 385.1, 'Panasonic LUMIX G7 16.00 MP 4K Mirrorless Interchangeable Lens Camera Kit with 14-42 mm Lens (Black)"', 'panasoniccameras1_image1.jpg', 5, 41549.00, 39499.00),
+(5, 5.1, 108.4, 385.2, 'Panasonic LUMIX G7 16.00 MP 4K Mirrorless Interchangeable Lens Camera Kit with 14-42 mm Lens (Black)"', 'panasoniccameras2_image1.jpg', 4, 41999.00, 39799.00),
+(5, 5.1, 108.4, 385.3, 'Panasonic Lumix FZ80 4K Digital Camera, 18.1 Megapixel Video Camera', 'panasoniccameras3_image1.jpg', 4, 56169.00, 52699.00),
+(5, 5.1, 108.4, 385.4, 'Panasonic HC-PV100GW Professional Camcorder (Black)', 'panasoniccameras4_image1.jpg', 4, 97999.00, 90599.00),
+
+
+(5, 5.1, 108.5, 386.1, 'Fujifilm Instax Mini 40 Instant Film Camera', 'fujifilmcameras1_image1.jpg', 5, 6549.00, 5749.00),
+(5, 5.1, 108.5, 386.2, 'Fujifilm Instax Square SQ1 Camera - Chalk White', 'fujifilmcameras2_image1.jpg', 3, 6999.00, 6789.00),
+(5, 5.1, 108.5, 386.3, 'Fujifilm Instax Mini 11 Instant Camera (Charcoal Grey)', 'fujifilmcameras3_image1.jpg', 5, 5999.00, 5649.00),
+(5, 5.1, 108.5, 386.4, 'Fujifilm Instax Mini 9 Instant Camera (Smokey White)', 'fujifilmcameras4_image1.jpg', 5, 3999.00, 3559.00),
+
+
+(5, 5.1, 108.6, 387.1, 'Olympus OM-D E-M10 Mark III Mirrorless Micro Four Thirds Digital Camera with 14-42mm EZ Lens & 16GB SDHC Card (Black) (Silver)', 'olympuscameras1_image1.jpg', 5, 56599.00, 53499.00),
+(5, 5.1, 108.6, 387.2, 'Olympus OMD-EM-1-Mark-III Mirrorless Digital Camera with Lens 12-40mm F2.8 Pro.Black (V207101BE000)', 'olympuscameras2_image1.jpg', 4, 231999.00, 229789.00),
+(5, 5.1, 108.6, 387.3, 'Olympus Tough TG-6 Waterproof Camera, Red', 'olympuscameras3_image1.jpg', 4, 8199.00, 7699.00),
+(5, 5.1, 108.6, 387.4, 'Olympus Mark II OM-D E-M5 17.2 MP Digital Camera with 3.3x Optical Zoom and 8GB Card (Black and Silver)', 'olympuscameras4_image1.jpg', 3, 58999.00, 56559.00),
+
+
+(5, 5.1, 108.7, 388.1, 'GoPro Hero 8 Black CHDHX-801 12 MP Action Camera', 'goprocameras1_image1.jpg', 5, 32599.00, 30499.00),
+(5, 5.1, 108.7, 388.2, 'GoPro HERO9 Black — Waterproof Action Camera with 1 Year Warranty', 'goprocameras2_image1.jpg', 3, 34999.00, 32789.00),
+(5, 5.1, 108.7, 388.3, 'GoPro HERO10 Black - Waterproof Action Camera with Front LCD and Touch Rear Screens, 5.3K60 Ultra HD Video, 23MP Photos, 1080p Live Streaming, Webcam, Stabilization', 'goprocameras3_image1.jpg', 5, 55499.00, 50699.00),
+(5, 5.1, 108.7, 388.4, 'GoPro MAX Action Camera', 'goprocameras4_image1.jpg', 3, 59999.00, 56559.00),
+
 
 
 
