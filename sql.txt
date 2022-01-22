@@ -436,6 +436,51 @@ insert into products(cats_id, subs_cat_identification_id, b_and_i_identification
 (2, 2.2, 103.01, 341.3, 'Entwino Assembled Desktop Computer i5 650, 500GB HDD, 8GB RAM, 15.1 inch LED Windows 7 & MS Office Installed Trial Version for Online Class and Office Work', 'entwino_computers3_image1.jpg', 5, 17599.00, 15599.00),
 (2, 2.2, 103.01, 341.4, 'Entwino Assembled Desktop Computer i3 550, 500GB HDD, 120 GB SSD, 8GB RAM, 18.5 inch LED Windows 10 & MS Office Installed Trial Version for Online Class and Office Work (8 GB 1 TB)', 'entwino_computers4_image1.jpg', 4, 20599.00, 18999.00),
 
+(2, 2.3, 104.1, 342.1, 'Zebronics Zeb-Transformer Gaming Keyboard and Mouse Combo (USB, Braided Cable)', 'keyboards1_image1.jpg', 4, 1499.00, 1299.00),
+(2, 2.3, 104.1, 342.2, 'Zebronics ZEB-KM2100 Multimedia USB Keyboard Comes with 114 Keys Including 12 Dedicated Multimedia Keys & with Rupee Key', 'keyboards2_image1.jpg', 5, 499.00, 299.00),
+(2, 2.3, 104.1, 342.3, 'Zebronics Wired Keyboard and Mouse Combo with 104 Keys and a USB Mouse with 1200 DPI - JUDWAA 750', 'keyboards3_image1.jpg', 4, 599.00, 399.00),
+(2, 2.3, 104.1, 342.4, 'Zebronics USB Keyboard with Rupee Key, USB Interface and Retractable Stand - K20', 'keyboards4_image1.jpg', 5, 499.00, 329.00),
+
+(2, 2.3, 104.2, 343.1, 'Zebronics Zeb-Transformer-M Optical USB Gaming Mouse with LED Effect(Black)', 'mouses1_image1.jpg', 5, 499.00, 369.00),
+(2, 2.3, 104.2, 343.2, 'ZEBRONICS Zeb-Dash Plus 2.4 GHz Wireless Mouse with USB Nano Receiver, 4 Buttons, Power Saving Mode, for PC/Mac/Laptops (Black)', 'mouses2_image1.jpg', 5, 399.00, 229.00),
+(2, 2.3, 104.2, 343.3, 'Lenovo 530 Wireless Mouse (Graphite): Ambidextrous, Ergonomic Mouse, Up to 8 Million clicks for Left and Right Buttons, Optical Sensor 1200 DPI, 2.4 GHz Wireless Technology via Nano USB Receiver', 'mouses3_image1.jpg', 5, 1299.00, 999.00),
+(2, 2.3, 104.2, 343.4, 'HP M100 Wired Gaming Optical Mouse (Black)', 'mouses4_image1.jpg', 3, 499.00, 399.00),
+
+(2, 2.3, 104.3, 344.1, 'E-COSMOS(Unbranded) Micro USB OTG Cable for OTG Supported Tablets and Mobiles,Black', 'otgcable1_image1.jpg', 4, 79.00, 49.00),
+(2, 2.3, 104.3, 344.2, 'ONCRO® 2 in 1 OTG Adapter Cable Micro USB + USB C to USB 2.0 Female Connector Cable, 0.6ft Short OTG Cable, Compatible Interface Transmission & Charging, for Android Mobile Phones, pendrive & Tablets', 'otgcable2_image1.jpg', 4, 499.00, 389.00),
+(2, 2.3, 104.3, 344.3, 'REDOCKS 2in1 Metal OTG Adapter, USB 3.0 to Type-C with Micro-USB Port Converter, High Speed Data Transfer Adapter for All Android & Type-C Smartphone(Multi Colour)', 'otgcable3_image1.jpg', 5, 299.00, 199.00),
+(2, 2.3, 104.3, 344.4, 'Tfpro OTG Cable Micro USB to USB OTG Cable On The Go OTG Cables Connector Adapter for Android Mobiles Smartphone and Tablet White (Pack of 1)', 'otgcable4_image1.jpg', 4, 99.00, 69.00),
+
+(2, 2.3, 104.4, 345.1, 'HP v236w 64GB USB 2.0 Pen Drive', 'pendrives1_image1.jpg', 3, 669.00, 599.00),
+(2, 2.3, 104.4, 345.2, 'SanDisk Ultra Dual 64GB USB 3.0 OTG Pen Drive', 'pendrives2_image1.jpg', 4, 799.00, 689.00),
+(2, 2.3, 104.4, 345.3, 'SanDisk Ultra (SDCZ48-064G-135/SDCZ48-064G-UAM46) USB 3.0 Pen Drive (Black)', 'pendrives3_image1.jpg', 4, 299.00, 199.00),
+(2, 2.3, 104.4, 345.4, 'SanDisk Ultra SDDDC2-064G-I35 64 GB Pen Drives (Black, Silver)', 'pendrives4_image1.jpg', 5, 899.00, 799.00),
+
+(2, 2.3, 104.5, 346.1, 'iBall CR CR24 Card Reader (Black)', 'cardreaders1_image1.jpg', 4, 489.00, 399.00),
+(2, 2.3, 104.5, 346.2, 'Brand Conquer 3 in 1 SD Card Reader | USB Type C, USB 3.0 and Micro USB, OTG, Memory Card | Portable Card Reader', 'cardreaders2_image1.jpg', 5, 699.00, 499.00),
+(2, 2.3, 104.5, 346.3, 'Famous Quality® SD Card Reader, 3-in-1 USB 3.0, USB C, Micro USB Card Reader SD, Micro SD, SDXC, SDHC, Micro SDHC, Micro SDXC Memory Card Reader for MacBook PC Tablets Smartphones (Silver)', 'cardreaders3_image1.jpg', 4, 599.00, 439.00),
+(2, 2.3, 104.5, 346.4, 'eErlik Latest USB Type C, USB 3.0 and Micro USB OTG Memory Card Reader Adapter Portable 1 Slots for TF, SD, Micro SD, SDXC, SDHC, MMC, RS-MMC, Micro SDXC, Micro SDHC, UHS-I, USB 3.0', 'cardreaders4_image1.jpg', 4, 699.00, 549.00),
+
+(2, 2.3, 104.6, 347.1, 'Western Digital WD Elements USB 3.0 1TB Portable External Hard Drive Compatible with PC, Mac, PS4 and Xbox - (WDBHHG0010BBK-EESN)', 'harddisks1_image1.jpg', 5, 4689.00, 3699.00),
+(2, 2.3, 104.6, 347.2, 'Western Digital WD 1.5TB Elements USB 3.0 Portable External Hard Drive Compatible with PC, PS4 & Xbox - (WDBU6Y0015BBK-WESN)', 'harddisks2_image1.jpg', 5, 4999.00, 3999.00),
+(2, 2.3, 104.6, 347.3, 'Seagate Expansion 1 TB External HDD - USB 3.0 for PC Laptop, 3 yr Data Recovery Services, Portable Hard Drive (STEA1000400)', 'harddisks3_image1.jpg', 3, 5599.00, 4939.00),
+(2, 2.3, 104.6, 347.4, 'Lenovo Portable 1TB External Hard Disk Drive HDD – USB 3.0 for PC Laptop | Lightweight Pocket Sized (129 GMS) | 7.6 x 11.8 x 1.28 cm | 2.5 inch formfactor | (GXB0Z91293) | Grey', 'harddisks4_image1.jpg', 5, 4899.00, 4649.00),
+
+(2, 2.3, 104.7, 348.1, 'D-Link DIR-825 MU-MIMO Gigabit Wireless Router, Dual Band, 1200 Mbps Wi-Fi Speed, 5 Gigabit Port, 4 External Antenna, Router | Access Point |Repeater Mode', 'routers1_image1.jpg', 4, 3489.00, 2499.00),
+(2, 2.3, 104.7, 348.2, 'D-Link DSL-2730U Wireless-N 150 ADSL2+ 4-Port Router (Black)', 'routers2_image1.jpg', 4, 1599.00, 1299.00),
+(2, 2.3, 104.7, 348.3, 'TP-Link Archer AC1200 Archer C6 Wi-Fi Speed Up to 867 Mbps/5 GHz + 300 Mbps/2.4 GHz, 5 Gigabit Ports, 4 External Antennas, MU-MIMO, Dual Band, WiFi Coverage with Access Point Mode, Wireless Router', 'routers3_image1.jpg', 5, 2699.00, 2339.00),
+(2, 2.3, 104.7, 348.4, 'D-Link DIR-650IN Wireless N300 Router with 4 Antennas, Router |AP | Repeater | Client | WISP Client/Repeater Modes', 'routers4_image1.jpg', 5, 1299.00, 949.00),
+
+(2, 2.3, 104.8, 349.1, 'MESTEK Car Bluetooth Device with Audio Receiver (Black)', 'bluetooths1_image1.jpg', 5, 489.00, 299.00),
+(2, 2.3, 104.8, 349.2, 'TP-Link USB Bluetooth Adapter for PC 4.0 Bluetooth Dongle Receiver', 'bluetooths2_image1.jpg', 4, 699.00, 499.00),
+(2, 2.3, 104.8, 349.3, 'Pagaria 2 in 1 Bluetooth 5.0 Transmitter Receiver 3.5mm Stereo Audio Adapter with Easy Slide Switch Mode, Model: KN330', 'bluetooths3_image1.jpg', 4, 699.00, 439.00),
+(2, 2.3, 104.8, 349.4, 'AVMART Car Bluetooth Receiver USB BT 4.0+EDR Plug and Play Dongle Device for USB Players', 'bluetooths4_image1.jpg', 4, 299.00, 149.00),
+
+(2, 2.3, 104.7, 350.1, 'EFERMONE® Premium Blue Ray Cut Blue Light Filter Computer Glasses With Antiglare for Eye protection And Also Specialized Lens For Night Driving (Zero Power,Blue Coated)', 'comglasses1_image1.jpg', 5, 689.00, 499.00),
+(2, 2.3, 104.7, 350.2, 'CREEK Blue Light Blocking Blue Cut Anti Glare Round Glasses Men and Women for Eye Protection from UV by Computer/Tablet/Laptop/Mobile', 'comglasses2_image1.jpg', 3, 429.00, 329.00),
+(2, 2.3, 104.7, 350.3, 'Intellilens Unisex Round Blue Cut Anti Glare UV Protection Full Frame Spectacles Glasses For Mobile Laptop Tablet Computer - ( Zero Power )', 'comglasses3_image1.jpg', 5, 799.00, 699.00),
+(2, 2.3, 104.7, 350.4, 'Santimo Valtina lens aviater Anti Glare Round Glasses Men and Women for Eye Protection from UV ', 'comglasses4_image1.jpg', 4, 449.00, 249.00),
+
 
 
 
