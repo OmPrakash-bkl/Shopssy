@@ -680,6 +680,45 @@ insert into products(cats_id, subs_cat_identification_id, b_and_i_identification
 (5, 5.1, 108.7, 388.3, 'GoPro HERO10 Black - Waterproof Action Camera with Front LCD and Touch Rear Screens, 5.3K60 Ultra HD Video, 23MP Photos, 1080p Live Streaming, Webcam, Stabilization', 'goprocameras3_image1.jpg', 5, 55499.00, 50699.00),
 (5, 5.1, 108.7, 388.4, 'GoPro MAX Action Camera', 'goprocameras4_image1.jpg', 3, 59999.00, 56559.00),
 
+(5, 5.2, 109.1, 389.1, 'QUBO Smart Cam 360|1080p Full HD Wi-Fi Camera|Trust of Hero Group|360° Deg Coverage with Pan & Tilt|Intruder Alarm System|Full Color in Low Light', 'domecameras1_image1.jpg', 4, 3299.00, 2849.00),
+(5, 5.2, 109.1, 389.2, 'Hikvision 5 MP Indoor Dome CCTV Camera with inbuilt Audio Mic DS-2CE76H0T-ITPFS + USEWELL BNC/DC, White', 'domecameras2_image1.jpg', 3, 2599.00, 1989.00),
+(5, 5.2, 109.1, 389.3, 'Dahua 2MP 20 Mtrs HD Dome Camera DH-HAC-T1A21P', 'domecameras3_image1.jpg', 4, 1449.00, 939.00),
+(5, 5.2, 109.1, 389.4, 'Machsmart Latest Smart 360° Smart Pan Tilt Home Office WiFi Outdoor PTZ CCTV Camera | Wireless Outdoor Security 360° 1080P (Full Hd)', 'domecameras4_image1.jpg', 5, 3599.00, 2959.00),
+
+(5, 5.2, 109.2, 390.1, 'Hikvision 5 MP Outdoor Bullet CCTV Camera with inbuilt Audio Mic IP67 DS-2CE16H0T-ITPFS + USEWELL BNC/DC, White', 'bulletcameras1_image1.jpg', 5, 2599.00, 2099.00),
+(5, 5.2, 109.2, 390.2, 'CP PLUS HDCVI Bullet IR Camera', 'bulletcameras2_image1.jpg', 4, 1999.00, 1189.00),
+(5, 5.2, 109.2, 390.3, 'D-Link 2 MP Full HD Day and Night Fixed Lens 20 Mtr IR Range Bullet Camera', 'bulletcameras3_image1.jpg', 5, 1949.00, 1089.00),
+(5, 5.2, 109.2, 390.4, 'Hikvision 1MP CMOS IR Night Vision Bullet Camera (White)', 'bulletcameras4_image1.jpg', 3, 1799.00, 1059.00),
+
+(5, 5.2, 109.3, 391.1, 'USEWELL Wired 1080p HD 2MP Security Camera, White', 'usewellcameras1_image1.jpg', 5, 1299.00, 849.00),
+(5, 5.2, 109.3, 391.2, 'USEWELL Wired 1080p HD 2MP Security Camera, White', 'usewellcameras2_image1.jpg', 3, 1399.00, 799.00),
+(5, 5.2, 109.3, 391.3, 'USEWELL HIKVISION 5MP Ultra HD Indoor Dome Camera DS 2CE5AHOT ITPF Night Vision White (Pack of 4)', 'usewellcameras3_image1.jpg', 4, 8399.00, 7649.00),
+(5, 5.2, 109.3, 391.4, 'USEWELL Indigo Series CP-Plus Plug-n-Play 2.4 MP Dome Full HD 1080P Night Vision Camera with BNC and DC connectors , CP-VAC-D24L2 , White', 'usewellcameras4_image1.jpg', 3, 1799.00, 1259.00),
+
+(5, 5.2, 109.4, 392.1, 'Imou 360 Degree WiFi Security Camera (White), Up to 256GB SD Card Support, 1080P Full HD, Privacy Mode, Alexa Google Assistant, Motion Detection & Human Detection, 2-Way Audio, Night Vision', 'daynightcctvcameras1_image1.jpg', 3, 3199.00, 2599.00),
+(5, 5.2, 109.4, 392.2, 'PATRANCE 2MP Wireless WiFi Outdoor PTZ CCTV Camera with Day/Night Color, Two-Way Audio, Motion Detection, 128 GB Micro SD TF Card Slot Mobile APP : V380 PRO _ White', 'daynightcctvcameras2_image1.jpg', 3, 3109.00, 2789.00),
+(5, 5.2, 109.4, 392.3, 'Conbre MultipleXR2 Pro {Upgraded} HD Smart WiFi Wireless IP CCTV Security Camera | Night Vision | 2-Way Audio | Support 64 GB Micro SD Card Slot', 'daynightcctvcameras3_image1.jpg', 5, 1949.00, 1699.00),
+(5, 5.2, 109.4, 392.4, 'TP-Link Outdoor Security Wi-Fi Camera/CCTV, Weatherproof, No Hub Required, Works with Alexa & Google Home, 3MP High Definition, Built-in Siren with Night Vision, 2-Way Audio, SD Storage (Tapo C310)', 'daynightcctvcameras4_image1.jpg', 5, 4299.00, 3659.00),
+
+(5, 5.2, 109.5, 393.1, 'Beetel 360° Smart Home Security Camera, Full HD Picture 1080p, Infrared Night Vision, 360° Panorama View, 2 Way Talk Back, Motion Detection, Storage on Cloud or SD Card', 'infrarednightvisioncctvcameras1_image1.jpg', 4, 2999.00, 2099.00),
+(5, 5.2, 109.5, 393.2, 'Mi 360° Home Security Camera 1080P l Full HD Picture l AI Powered Motion Detection l Infrared Night Vision | 360° Panorama | Talk Back Feature (2-Way Audio)', 'infrarednightvisioncctvcameras2_image1.jpg', 3, 2999.00, 2789.00),
+(5, 5.2, 109.5, 393.3, 'DUMBEL StoneX CareCam Smart WiFi Outdoor Bullet CCTV Camera 1080p (Full HD) | 9 Infrared and LED Burst for Color Night Vision', 'infrarednightvisioncctvcameras3_image1.jpg', 5, 3199.00, 2349.00),
+(5, 5.2, 109.5, 393.4, 'PKST Mini WiFi Full HD Spy IP Camera Hidden Wireless CCTV Security with Microphone Cloud Based Storage Night Vision Motion Detection', 'infrarednightvisioncctvcameras4_image1.jpg', 4, 1999.00, 1359.00),
+
+(5, 5.2, 109.6, 394.1, 'AUSHA® CCTV Camera WiFi , 360° Panoramic Camera Bulb, Security Bulb Camera WiFi Outdoor 2.4GHz WiFi Home Security Cameras with Night Vision, Two Way Audio, Motion Detection', 'hiddencameras1_image1.jpg', 5, 2949.00, 2199.00),
+(5, 5.2, 109.6, 394.2, 'AUSHA® Adapter Smart Camera for Home Security with Night Vision and Full HD Recording', 'hiddencameras2_image1.jpg', 5, 2999.00, 2489.00),
+(5, 5.2, 109.6, 394.3, 'AUSHA® Full HD Wireless CCTV Camera with Motion Detection and Night Vision', 'hiddencameras3_image1.jpg', 5, 1499.00, 999.00),
+(5, 5.2, 109.6, 394.4, 'AUSHA®C9 CCTV Mini WiFi Camera, Wireless CCTV 1080P IR Night Viewing 2 Way Audio Smart Surveillance Camera for Home Security', 'hiddencameras4_image1.jpg', 5, 2799.00, 1749.00),
+
+(5, 5.2, 109.7, 395.1, 'QUBO Smart Outdoor Security WiFi Camera (White)| Trust of Hero Group| Face Mask Detection | Intruder Alarm System | Weatherproof ', 'wirelesscameras1_image1.jpg', 5, 4499.00, 3489.00),
+(5, 5.2, 109.7, 395.2, 'TP-Link Tapo C100 1080p Full HD Indoor WiFi Home Smart Security Camera| Night Vision | Two Way Audio| Intruder Alert | Works with Alexa and Google, White', 'wirelesscameras2_image1.jpg', 4, 1999.00, 1789.00),
+(5, 5.2, 109.7, 395.3, 'CP PLUS Intelligent Home PT Camera with Cloud Remote Viewing – 1080 Full HD , Wireless / WiFi, 360 Degree Viewing ,Motion Detection ,Two Way Communication ,Superior Night Vision , Pan- Tilt option,SD Card Slot.', 'wirelesscameras3_image1.jpg', 5, 3129.00, 2379.00),
+(5, 5.2, 109.7, 395.4, 'realme 360 Deg 1080p Full HD WiFi Smart Security Camera (White) | Alexa Enabled | 2-Way Audio | Night Vision | Motion Tracking & Intruder Alert, 7.1cm x 6.58cm x 11.43cm (RMH2001)', 'wirelesscameras4_image1.jpg', 3, 3999.00, 3059.00),
+
+(5, 5.2, 109.8, 396.1, 'Spy Camera Wired HD Audio and Video Recorder 720p Hidden Mini Secret Cam in Button Shape DVR Small Portable Updated Mini Spy Button Cameras with SD Card Slot Up to 32GB Support6', 'buttoncameras1_image1.jpg', 5, 1279.00, 999.00),
+(5, 5.2, 109.8, 396.2, 'BabyTiger Wired HD Security Camera', 'buttoncameras2_image1.jpg', 3, 1239.00, 749.00),
+(5, 5.2, 109.8, 396.3, 'M S TECH 1080 HD Spy Wireless Small Camera with WiFi Module IP P2P Video Recorder(Multicolour) Security Nanny Motion Detection for car Office Home Room Indoor and Outdoor Max Card Support Upto 64 GB', 'buttoncameras3_image1.jpg', 5, 3199.00, 2479.00),
+(5, 5.2, 109.8, 396.4, 'Sekuai® FHD Ultra Slim Eyewear Hidden Glasses Camera with Built in DVR are Designed Capture Video footage Subject Matter in 1080p high Definition, Lightweight, Modern Style, Male and Female Users.', 'buttoncameras4_image1.jpg', 4, 5499.00, 4559.00),
 
 
 
