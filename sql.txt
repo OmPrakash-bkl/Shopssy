@@ -537,6 +537,44 @@ insert into products(cats_id, subs_cat_identification_id, b_and_i_identification
 (3, 3.1, 105.11, 361.3, 'Pigeon by Stovekraft Brewster Coffee Maker. A Small Size Coffee Maker of Home Machine (Black)', 'coffeemakers3_image1.jpg', 4, 1999.00, 1699.00),
 (3, 3.1, 105.11, 361.4, 'Philips HD7431/20 760-Watt Coffee Maker (Black)', 'coffeemakers4_image1.jpg', 4, 4999.00, 3399.00),
 
+(4, 4.1, 106.1, 362.1, 'Sony SRS-XB13 Wireless Extra Bass Portable Compact Bluetooth Speaker with 16 Hours Battery Life', 'sonyspeakers1_image1.jpg', 3, 4699.00, 3699.00),
+(4, 4.1, 106.1, 362.2, 'Sony SRS-XB43 Wireless Extra Bass Bluetooth Speaker with 24 hrs Battery, Party Lights, Party Connect, Waterproof', 'sonyspeakers2_image1.jpg', 5, 17999.00, 16999.00),
+(4, 4.1, 106.1, 362.3, 'Marshall Emberton 20 Watt Wireless Bluetooth Portable Speaker (Black)', 'sonyspeakers3_image1.jpg', 3, 17499.00, 14999.00),
+(4, 4.1, 106.1, 362.4, 'Sony SA-D20 C E12 60 Watt 2.1 Channel Wireless Bluetooth Multimedia Speaker (Black)', 'sonyspeakers4_image1.jpg', 4, 9999.00, 7499.00),
+
+(4, 4.1, 106.2, 363.1, 'Bose SoundLink Color Bluetooth Speaker II - Aquatic Blue', 'bosespeakers1_image1.jpg', 5, 13899.00, 11699.00),
+(4, 4.1, 106.2, 363.2, 'Bose SoundLink Micro, Portable Outdoor Speaker, (Wireless Bluetooth Connectivity), Black', 'bosespeakers2_image1.jpg', 4, 9999.00, 8999.00),
+(4, 4.1, 106.2, 363.3, 'Bose TV Speaker', 'bosespeakers3_image1.jpg', 3, 29999.00, 26999.00),
+(4, 4.1, 106.2, 363.4, 'Bose Portable Wireless Bluetooth Speaker with 4W Explosive Sound', 'bosespeakers4_image1.jpg', 5, 1999.00, 1699.00),
+
+(4, 4.1, 106.3, 364.1, 'JBL Go 2, Wireless Portable Bluetooth Speaker with Mic, JBL Signature Sound, Vibrant Color Options with IPX7 Waterproof & AUX (Black)', 'jblspeakers1_image1.jpg', 4, 3499.00, 2499.00),
+(4, 4.1, 106.3, 364.2, 'JBL Go 3, Wireless Ultra Portable Bluetooth Speaker, JBL Pro Sound, Vibrant Colors with Rugged Fabric Design, Waterproof, Type C (Without Mic, Blue)', 'jblspeakers2_image1.jpg', 5, 3999.00, 2999.00),
+(4, 4.1, 106.3, 364.3, 'JBL Go, Wireless Portable Bluetooth Speaker with Mic, JBL Signature Sound, Vibrant color options, Bluetooth & AUX Connectivity (Blue)', 'jblspeakers3_image1.jpg', 5, 2699.00, 1799.00),
+(4, 4.1, 106.3, 364.4, 'JBL Charge 5, Wireless Portable Bluetooth Speaker with JBL Pro Sound, 20 Hrs Playtime, Powerful Bass Radiators, Built-in 7500mAh Powerbank', 'jblspeakers4_image1.jpg', 3, 17999.00, 15999.00),
+
+
+(4, 4.1, 106.4, 365.1, 'YAMAHA Unified Communications YVC-200 Portable Wireless Bluetooth USB Conference Speaker', 'yamahaspeakers1_image1.jpg', 4, 16999.00, 14999.00),
+(4, 4.1, 106.4, 365.2, 'Yamaha NS-333 150 Watt Bookshelf Speaker (Black)', 'yamahaspeakers2_image1.jpg', 3, 21549.00, 19949.00),
+(4, 4.1, 106.4, 365.3, 'Yamaha YAS-109 Sound Bar with Built-in Subwoofers, Bluetooth, and Alexa Voice Control Built-in', 'yamahaspeakers3_image1.jpg', 4, 22999.00, 20699.00),
+(4, 4.1, 106.4, 365.4, 'Yamaha YAS-209 Sound Bar with Wireless Subwoofer, Bluetooth, and Alexa Voice Control Built-in', 'yamahaspeakers4_image1.jpg', 4, 34899.00, 32899.00),
+
+
+(4, 4.1, 106.5, 366.1, 'Pioneer TS-R6951S 3 Way Coaxial Speaker (Black)', 'pioneerspeakers1_image1.jpg', 5, 2999.00, 2399.00),
+(4, 4.1, 106.5, 366.2, 'Pioneer TS-C601IN Separate 2 Way Component Speaker (Black)', 'pioneerspeakers2_image1.jpg', 5, 7959.00, 6999.00),
+(4, 4.1, 106.5, 366.3, 'Pioneer TS-R1620S-2 Speaker (Black)', 'pioneerspeakers3_image1.jpg', 3, 3199.00, 2199.00),
+(4, 4.1, 106.5, 366.4, 'Pioneer TS-W1212S4 500 Watt RMS 12"(30cm) Champion Series Subwoofer', 'pioneerspeakers4_image1.jpg', 3, 7999.00, 6999.00),
+
+(4, 4.1, 106.6, 367.1, 'Pioneer XW-SMA3-K A3 Portable Wi-Fi Speaker', 'polkaudiospeakers1_image1.jpg', 3, 15899.00, 13699.00),
+(4, 4.1, 106.6, 367.2, 'Pioneer TS-1602IN 2 Way Coaxial Speaker', 'polkaudiospeakers2_image1.jpg', 5, 3549.00, 2499.00),
+(4, 4.1, 106.6, 367.3, 'Pioneer TS-WX300TA Subwoofer (Black)', 'polkaudiospeakers3_image1.jpg', 3, 12599.00, 10999.00),
+(4, 4.1, 106.6, 367.4, 'Pioneer TS-A6977S A-Series 6" x 9" deep 4-Way Coaxial 650 Watts Car Audio Speaker', 'polkaudiospeakers4_image1.jpg', 4, 4669.00, 3699.00),
+
+
+(4, 4.1, 106.7, 368.1, 'Klipsch R-15M Bookshelf Monitor Speakers - Pair', 'klipschspeakers1_image1.jpg', 4, 11899.00, 9699.00),
+(4, 4.1, 106.7, 368.2, 'Klipsch RP-140D Black Surround Home Speaker Matte Black', 'klipschspeakers2_image1.jpg', 5, 1999.00, 1589.00),
+(4, 4.1, 106.7, 368.3, 'Klipsch RP-140SA Dolby Atmos Speaker (Pair) - Black', 'klipschspeakers3_image1.jpg', 5, 4959.00, 3699.00),
+(4, 4.1, 106.7, 368.4, 'Klipsch Heritage Groove 20 Watt Wireless Bluetooth Speaker (Matte Black)', 'klipschspeakers4_image1.jpg', 4, 18999.00, 16549.00),
+
 
 
 
