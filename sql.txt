@@ -481,6 +481,52 @@ insert into products(cats_id, subs_cat_identification_id, b_and_i_identification
 (2, 2.3, 104.7, 350.3, 'Intellilens Unisex Round Blue Cut Anti Glare UV Protection Full Frame Spectacles Glasses For Mobile Laptop Tablet Computer - ( Zero Power )', 'comglasses3_image1.jpg', 5, 799.00, 699.00),
 (2, 2.3, 104.7, 350.4, 'Santimo Valtina lens aviater Anti Glare Round Glasses Men and Women for Eye Protection from UV ', 'comglasses4_image1.jpg', 4, 449.00, 249.00),
 
+(3, 3.1, 105.1, 351.1, 'AmazonBasics 139cm (55 inch) 4K Ultra HD Smart LED Fire TV AB55U20PS (Black)', 'televisions1_image1.jpg', 4, 39659.00, 37449.00),
+(2, 3.1, 105.1, 351.2, 'AmazonBasics 80cm (32 inch) HD Ready Smart LED Fire TV AB32E10SS (Black) (2020 Model)', 'televisions2_image1.jpg', 5, 18499.00, 15999.00),
+(2, 3.1, 105.1, 351.3, 'Redmi 108 cm (43 inches) Full HD Smart LED TV | L43M6-RA (Black) (2021 Model) | With Android 11', 'televisions3_image1.jpg', 4, 26799.00, 24699.00),
+(2, 3.1, 105.1, 351.4, 'Sony Bravia 108 cm (43 inches) 4K Ultra HD Smart Android LED TV KD-43X75 (Black) (2021 Model) | with Alexa Compatibility', 'televisions4_image1.jpg', 4, 60449.00, 57949.00),
+
+(3, 3.1, 105.2, 352.1, 'LG 6.5 Kg 5 Star Smart Inverter Fully-Automatic Top Loading Washing Machine (T65SKSF4Z, Middle Free Silver)', 'washingmachines1_image1.jpg', 5, 18659.00, 16949.00),
+(2, 3.1, 105.2, 352.2, 'LG 6.5 Kg 5 Star Smart Inverter Fully-Automatic Top Loading Washing Machine (T65SKSF4Z, Middle Free Silver)', 'washingmachines2_image1.jpg', 4, 18499.00, 16999.00),
+(2, 3.1, 105.2, 352.3, 'Samsung 6.0 Kg Inverter 5 star Fully-Automatic Front Loading Washing Machine (WW60R20GLSS/TL, Silver, Hygiene steam)', 'washingmachines3_image1.jpg', 4, 25799.00, 23699.00),
+(2, 3.1, 105.2, 352.4, 'Panasonic 6.5 kg 5 Star Semi-Automatic Top Loading Washing Machine (NA-W65E5ARB, Blue, Powerful Motor)', 'washingmachines4_image1.jpg', 5, 10449.00, 8949.00),
+
+(3, 3.1, 105.3, 353.1, 'LG 1.5 Ton 2 Star DUAL Inverter Split AC (Copper, Convertible 4-in-1 Cooling, HD Filter, 2022 Model, PS-Q18ZNVE, White)', 'airconditioners1_image1.jpg', 4, 40659.00, 33949.00),
+(2, 3.1, 105.3, 353.2, 'Hitachi 1.5 Ton 3 Star Inverter Split AC (Copper, Dust Filter, 2021 Model, RSNS317HEEA, White)', 'airconditioners2_image1.jpg', 5, 38499.00, 36999.00),
+(2, 3.1, 105.3, 353.3, 'Samsung 1.5 Ton 3 Star Inverter Split AC (Copper, Convertible 5 in 1, HD Filter, 2021 Model, Floral pattern, AR18AYLYATBNNA)', 'airconditioners3_image1.jpg', 4, 35799.00, 32699.00),
+(2, 3.1, 105.3, 353.4, 'Godrej 1 Ton 3 Star Inverter Split AC (Copper, Anti-bacterial filter filter, AC 1T GIC 12TTC3-WUA Split, White)', 'airconditioners4_image1.jpg', 4, 28449.00, 25949.00),
+
+
+(3, 3.1, 105.4, 354.1, 'Whirlpool 200 L 4 Star Inverter Direct-Cool Single Door Refrigerator (215 ICEMAGIC PRO ROY 4S INV, Sapphire Mulia, Base Stand)', 'refrigerators1_image1.jpg', 5, 18659.00, 16949.00),
+(2, 3.1, 105.4, 354.2, 'LG 190 L 4 Star Inverter Direct-Cool Single Door Refrigerator (GL-D201ASCY, Scarlet Charm, Base stand with Drawer)', 'refrigerators2_image1.jpg', 4, 18999.00, 15999.00),
+(2, 3.1, 105.4, 354.3, 'Godrej 190 L 3 Star Inverter Direct-Cool Single Door Refrigerator with Jumbo Vegetable Tray (RD 1903 PTI 33 DR BL, Royal Drenim, Inverter Compressor)', 'refrigerators3_image1.jpg', 4, 15799.00, 13699.00),
+(2, 3.1, 105.4, 354.4, 'Samsung 198 L 5 Star Inverter Direct-Cool Single Door Refrigerator (RR21T2G2WCR/HL, Camellia Purple)', 'refrigerators4_image1.jpg', 3, 19949.00, 17449.00),
+
+(3, 3.1, 105.5, 355.1, 'Usha Bloom Magnolia 1250mm wattage 78 Goodbye Dust Ceiling Fan with Anti Dust Feature(Sparkle Grey and Blue)', 'fans1_image1.jpg', 4, 3699.00, 2999.00),
+(2, 3.1, 105.5, 355.2, 'Havells Ambrose 1200mm Ceiling Fan (Gold Mist Wood)', 'fans2_image1.jpg', 5, 2999.00, 2299.00),
+(2, 3.1, 105.5, 355.3, 'Havells Festiva 1200mm Dust Resistant Ceiling Fan (Ocean Blue)', 'fans3_image1.jpg', 3, 3999.00, 2799.00),
+(2, 3.1, 105.5, 355.4, 'Candes Florence 1200mm/48 inch High Speed Anti-dust Decorative 5 Star Rated Ceiling Fan', 'fans4_image1.jpg', 3, 1999.00, 1499.00),
+
+(3, 3.1, 105.6, 356.1, 'wipro Vesta 1250W Cordless Steam Iron with Steam Burst, Vertical and Horizontal Ironing, Non-Stick Coated Soleplate, White and Light Blue, Standard (VD051125)', 'irons1_image1.jpg', 5, 2899.00, 1999.00),
+(2, 3.1, 105.6, 356.2, 'Rico SI2110 2200 Watts Japanese Technology Ideal Temperature Steam Iron With Spray| Burn Free | Press Iron Clothing | Auto Shut-Off', 'irons2_image1.jpg', 3, 6999.00, 4999.00),
+(2, 3.1, 105.6, 356.3, 'BLACK+DECKER Steam Iron Press 2400-Watt with Auto Shut Off and Ceramic Sole Plate Coating (Blue)', 'irons3_image1.jpg', 4, 5999.00, 4799.00),
+(2, 3.1, 105.6, 356.4, 'Wipro Smartlife Super Deluxe Dry Iron- 1000W', 'irons4_image1.jpg', 5, 999.00, 699.00),
+
+(3, 3.1, 105.7, 357.1, 'Philips HD6975/00 25 Litre Digital Oven Toaster Grill, Grey, 25 liter', 'microwaveovens1_image1.jpg', 4, 7699.00, 6599.00),
+(2, 3.1, 105.7, 357.2, 'Panasonic 23L Convection Microwave Oven(NN-CT353BFDG,Black Mirror, 360° Heat Wrap)', 'microwaveovens2_image1.jpg', 3, 10999.00, 9999.00),
+(2, 3.1, 105.7, 357.3, 'IFB 30 L Convection Microwave Oven (30BRC2, Black, With Starter Kit)', 'microwaveovens3_image1.jpg', 5, 16499.00, 14799.00),
+(2, 3.1, 105.7, 357.4, 'AmazonBasics 23 L Convection Microwave (Black)', 'microwaveovens4_image1.jpg', 4, 9499.00, 8999.00),
+
+(3, 3.1, 105.8, 358.1, 'Elica 60 cm 880 m3/hr Chimney (Strip CF 60 NERO, 2 Cassette Filters, Black)', 'chimneys1_image1.jpg', 4, 5999.00, 4999.00),
+(2, 3.1, 105.8, 358.2, 'Inalsa 60 cm, 1050 m3/hr Kitchen Chimney Enya BKBF with Stainless Steel Baffle Filters, Push Button Control, (Black) (Cooker Hood Enya 60BKBF)', 'chimneys2_image1.jpg', 3, 6999.00, 5499.00),
+(2, 3.1, 105.8, 358.3, 'Faber 60 cm 1000 m³/HR Pyramid Kitchen Chimney (HOOD CLASS PLUS PB BK LTW 60, 2 Baffle Filters,Black)', 'chimneys3_image1.jpg', 5, 8999.00, 7699.00),
+(2, 3.1, 105.8, 358.4, 'Elica 90 cm 1200 m3/hr Filterless Auto Clean Chimney (WDFL 906 HAC MS NERO, Touch + Motion Sensor Control, Black)', 'chimneys4_image1.jpg', 4, 14999.00, 12999.00),
+
+(3, 3.1, 105.9, 359.1, 'Kent Sandwich Maker, (16024), 700W, Non-Toxic Ceramic Coating Plate, Make 4 Sandwiches, Black, Standard', 'sanwichmakers1_image1.jpg', 5, 1899.00, 1699.00),
+(2, 3.1, 105.9, 359.2, 'Prestige Sandwich Maker PGMFD 01', 'sanwichmakers2_image1.jpg', 3, 1999.00, 1299.00),
+(2, 3.1, 105.9, 359.3, 'KENT 16025 Sandwich Grill 700W | Non-Toxic Ceramic Coating | Automatic Temperature Cut-off with LED Indicator | Adjustable Height Control, Black, Standard', 'sanwichmakers3_image1.jpg', 4, 1999.00, 1699.00),
+(2, 3.1, 105.9, 359.4, 'Borosil Super Jumbo 2000-Watt Grill Sandwich Maker (Black)', 'sanwichmakers4_image1.jpg', 5, 5799.00, 4399.00),
+
 
 
 
