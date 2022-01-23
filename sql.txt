@@ -760,5 +760,40 @@ insert into products(cats_id, subs_cat_identification_id, b_and_i_identification
 (6, 6.1, 110.8, 404.3, 'Cover Sticker- Vader Fury - Skin for Sony PS Vita 2000', 'pspconsoles3_image1.jpg', 4, 999.00, 629.00),
 (6, 6.1, 110.8, 404.4, 'Exploding Vader - Skin for Sony PS Vita 2000', 'pspconsoles4_image1.jpg', 5, 959.00, 699.00),
 
+(6, 6.2, 111.1, 405.1, 'TOSKA Wooden TK-MRF'S VK 18 Cricket Bat Full Size Popular Willow Cricket BAT for Tennis Ball, Leather Ball, Rubber Ball (Men, Women)', 'crickets1_image1.jpg', 3, 999.00, 649.00),
+(6, 6.2, 111.1, 405.2, 'Elevar Gully - Kashmir Willow Tennis Ball Bat for Hard and Soft Tennis Balls', 'crickets2_image1.jpg', 5, 2599.00, 2299.00),
+(6, 6.2, 111.1, 405.3, 'Ske New Solid Popular Willow Cricket Bat for All Tennis Balls Full Size…', 'crickets3_image1.jpg', 3, 799.00, 499.00),
+(6, 6.2, 111.1, 405.4, 'Lycan Beast PVC Cricket Bat for All Age Groups', 'crickets4_image1.jpg', 4, 659.00, 399.00),
+
+(6, 6.2, 111.2, 406.1, 'StarX Aluminium Shaft Badminton Racket, Set of 2 Piece Light Weight, Soft Grip with Shuttle Cock for Unisex (Multicolor)', 'badmintons1_image1.jpg', 3, 599.00, 299.00),
+(6, 6.2, 111.2, 406.2, 'Yonex GR 303 Aluminum Blend Badminton Racquet with Full Cover', 'badmintons2_image1.jpg', 5, 799.00, 599.00),
+(6, 6.2, 111.2, 406.3, 'FEROC 2 Pieces Aluminium Badminton Racket with 3 Pieces Feather Shuttles with Full-Cover Set', 'badmintons3_image1.jpg', 4, 799.00, 500.00),
+(6, 6.2, 111.2, 406.4, 'Silver's Kids SIL-Pedal Combo-5 Aluminum 2 Badminton Racquets and 3 Shuttlecocks Set, White', 'badmintons4_image1.jpg', 5, 659.00, 449.00),
+
+(6, 6.2, 111.3, 407.1, 'Hero Kyoto 26T Single Speed 18 inches Frame Mountain Bike (Black, Ideal For : 12+ Years )', 'cyclings1_image1.jpg', 3, 6399.00, 5399.00),
+(6, 6.2, 111.3, 407.2, 'omo for Unisex Omobikes Panda Freeride Cycle with Steel Frame and Tubular Wheels (20 inches Wheel , Frame- 12 Inches, Green, under 13 Years)', 'cyclings2_image1.jpg', 4, 5899.00, 5209.00),
+(6, 6.2, 111.3, 407.3, 'Lifelong LLBC2601 Escape 26T Cycle (Black) Ideal for: Adults (Above 12 Years) I Frame Size: 18" | Ideal Height : 5 ft 4 inch+ I Unisex Cycle| 85% Assembled (Easy self-Assembly)', 'cyclings3_image1.jpg', 3, 6999.00, 5999.00),
+(6, 6.2, 111.3, 407.4, 'Omobikes Ladakh X7 MTB Bike', 'cyclings4_image1.jpg', 5, 14949.00, 12499.00),
+
+(6, 6.2, 111.4, 408.1, 'Vector X THUNDER Rubber Hand Stiched IMS (International Match Standard) Football, Size 5 (White-Orange-Black)', 'footballs1_image1.jpg', 3, 899.00, 699.00),
+(6, 6.2, 111.4, 408.2, 'VOODANIA Telstar Combo Pack 1 Football & 1 pump PU material multi color size 5 for All Age Groups Kids', 'footballs2_image1.jpg', 5, 549.00, 399.00),
+(6, 6.2, 111.4, 408.3, 'Nivia Storm Football - Size 5', 'footballs3_image1.jpg', 3, 579.00, 379.00),
+(6, 6.2, 111.4, 408.4, 'Vector X Fun Machine Stitched Football (White-Red-Blue)', 'footballs4_image1.jpg', 5, 549.00, 349.00),
+
+(6, 6.2, 111.5, 409.1, 'Lucario Skating Shoe Have Different Size and with PU LED Wheel in-line Skates Safe and Durable Inline Skates, Fashionable Roller Skates for Women, Youth and Adults', 'skatings1_image1.jpg', 3, 2299.00, 1999.00),
+(6, 6.2, 111.5, 409.2, 'KAVISH Enterprise Inline Skates with PU Flashing Wheel Aluminum Body in-Line Skates with Adjustable Length for Age 10-16 Years (Multicolor)', 'skatings2_image1.jpg', 5, 1999.00, 1499.00),
+(6, 6.2, 111.5, 409.3, 'TEC TAVAKKAL Roller Skates for Kids Age Group 5-15 Years Adjustable Inline Skating Shoes (Blue)', 'skatings3_image1.jpg', 5, 899.00, 629.00),
+(6, 6.2, 111.5, 409.4, 'Pankhudi ® Skateboard Kid's Skating Board (Multicolour, 24 x 6 inch, Medium, 3-12 Years )', 'skatings4_image1.jpg', 4, 689.00, 489.00),
+
+(6, 6.2, 111.6, 410.1, 'PrimAlite Swimming Goggles Silicone Anti-Fog, UV Protection for Adults Men Women Kids with Protection Case Kit', 'swimmings1_image1.jpg', 3, 999.00, 699.00),
+(6, 6.2, 111.6, 410.2, 'Quada Compression Swimming t Shirt Full Sleevs for Men', 'swimmings2_image1.jpg', 5, 969.00, 469.00),
+(6, 6.2, 111.6, 410.3, 'Speedo 811355B346 Men's Poly Viscose Gala Logo Jammer Swimwear (32, Black, Lava Red)', 'swimmings3_image1.jpg', 2, 1369.00, 1069.00),
+(6, 6.2, 111.6, 410.4, 'KREATIVE MARCHE Above Ground Portable Swimming Pool for Kids and Adults', 'swimmings4_image1.jpg', 4, 16959.00, 14999.00),
+
+(6, 6.2, 111.7, 411.1, 'Olly Drone with 4K Camera Live Video,WiFi FPV Drone for Adults with 4K HD 120 Wide Angle Camera 1200 Mah Long Flight time Auto Hover Fold able RC Drone Quad-copter', 'remotecontrols1_image1.jpg', 3, 6699.00, 5399.00),
+(6, 6.2, 111.7, 411.2, 'SMART PICKS Plastic Rechargeable 4wd Rally Car Rock Crawler R/C Monster Truck (Blue)', 'remotecontrols2_image1.jpg', 5, 2499.00, 1999.00),
+(6, 6.2, 111.7, 411.3, 'Aalok Enterprise Remote Control Flying Helicopter Toys for Kids & Adults (Multicolor)', 'remotecontrols3_image1.jpg', 3, 1999.00, 1399.00),
+(6, 6.2, 111.7, 411.4, 'The Flyers Bay Wireless high speed Remote Control RC Racing Boat with Flip in Water Function, multicolor', 'remotecontrols4_image1.jpg', 3, 5359.00, 4999.00),
+
 
 
