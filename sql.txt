@@ -720,5 +720,45 @@ insert into products(cats_id, subs_cat_identification_id, b_and_i_identification
 (5, 5.2, 109.8, 396.3, 'M S TECH 1080 HD Spy Wireless Small Camera with WiFi Module IP P2P Video Recorder(Multicolour) Security Nanny Motion Detection for car Office Home Room Indoor and Outdoor Max Card Support Upto 64 GB', 'buttoncameras3_image1.jpg', 5, 3199.00, 2479.00),
 (5, 5.2, 109.8, 396.4, 'Sekuai® FHD Ultra Slim Eyewear Hidden Glasses Camera with Built in DVR are Designed Capture Video footage Subject Matter in 1080p high Definition, Lightweight, Modern Style, Male and Female Users.', 'buttoncameras4_image1.jpg', 4, 5499.00, 4559.00),
 
+(6, 6.1, 110.1, 397.1, 'Xbox One Series S', 'xboxseriesxconsoles1_image1.jpg', 4, 36599.00, 34499.00),
+(6, 6.1, 110.1, 397.2, 'Firefly Xbox Series X|S Controller Skin, Silicone Cover - Biohazard Red', 'xboxseriesxconsoles2_image1.jpg', 5, 799.00, 599.00),
+(6, 6.1, 110.1, 397.3, 'PowerA Enhanced Wired Gaming Controller for Xbox Series X/S and Xbox One, Black (Officially Licensed)', 'xboxseriesxconsoles3_image1.jpg', 5, 2999.00, 2649.00),
+(6, 6.1, 110.1, 397.4, 'Redgear Pro Series Wired Gamepad Plug and Play Support for All PC Games Supports Windows/8/8.1/10', 'xboxseriesxconsoles4_image1.jpg', 4, 1249.00, 999.00),
+
+(6, 6.1, 110.2, 398.1, 'PSS PS5 Faceplate Side Plate for PS5, Anti-Scratch Dustproof Protective Shell Cover for Playstation 5, Hard Shockproof Playstation 5 Plates Disk Edition - Black', 'playstation5consoles1_image1.jpg', 5, 2999.00, 2469.00),
+(6, 6.1, 110.2, 398.2, 'MrDeal PS5 Stand PS5 Cooling Station for Playstation 5 Console, PS5 Stand Cooling Fan with Controller Charger & 13 Game Storage, Multifunction PS5 Vertical Stand with Docking Station PS5 Assecories', 'playstation5consoles2_image1.jpg', 5, 2499.00, 1999.00),
+(6, 6.1, 110.2, 398.3, 'WALLTON PS5 Skin Protective Wrap Cover Vinyl Sticker Decals for PlayStation 5 Disk Version Console and Two Dual Sense 5 Sticker Skins Black PS5 Skin - Spider - Man Red', 'playstation5consoles3_image1.jpg', 3, 1259.00, 899.00),
+(6, 6.1, 110.2, 398.4, 'New world Dust Cover For PS5 , Soft Neat Lining Dust Guard for PS5 Console, Anti Scratch Waterproof Cover Sleeve for Playstation 5 Console Digital Edition & Disc Edition', 'playstation5consoles4_image1.jpg', 4, 1999.00, 1299.00),
+
+(6, 6.1, 110.3, 399.1, 'EvoFox Elite Ops Wireless Gamepad for PC (X Input) and Android TV with Type C Charging, Dual Vibration and 8+ Hours of Play Time', 'xboxconsoles1_image1.jpg', 5, 1999.00, 1449.00),
+(6, 6.1, 110.3, 399.2, 'Logitech G F310 Wired Gamepad, Controller Console Like Layout, 4 Switch D-Pad, 1.8-Meter Cord, PC/Steam/Windows/AndroidTV - Grey/Blue', 'xboxconsoles2_image1.jpg', 3, 2999.00, 2195.00),
+(6, 6.1, 110.3, 399.3, 'DualSense Wireless Controller Black (PlayStation 5)', 'xboxconsoles3_image1.jpg', 4, 6499.00, 5699.00),
+(6, 6.1, 110.3, 399.4, 'Cosmic Byte C3070W Nebula 2.4G Wireless Gamepad for PC/PS3 supports Windows XP/7/8/10, Rubberized Texture (Camo Black)', 'xboxconsoles4_image1.jpg', 3, 1999.00, 1799.00),
+
+(6, 6.1, 110.4, 400.1, 'Amkette EvoFox Game Box Gaming Console with Android 9.0, 4GB RAM, 32GB Storage, Dual Band WiFi, USB 3.0, 4K HDMI, Bluetooth 5.0 with Air Remote and Elite Pro Wireless Gamepad for LCDs, LEDs, OLED TVs', 'playstationconsoles1_image1.jpg', 5, 11599.00, 9499.00),
+(6, 6.1, 110.4, 400.2, 'Mitashi GameIn Infrazone NX TV Gaming Console', 'playstationconsoles2_image1.jpg', 4, 2299.00, 1899.00),
+(6, 6.1, 110.4, 400.3, 'PS4/Slim/Pro Wireless Charging Dock Station, Microware PS Play Station 4 Joystick Charger for Sony PlayStation 4 Game Base', 'playstationconsoles3_image1.jpg', 5, 3199.00, 2799.00),
+(6, 6.1, 110.4, 400.4, 'TASLAR Vinyl Skin Decal Sticker Pattern Cover Set Skin Blue Ice Fire Compatible with PS4 Playstation 4 Console and Controller (Blue Flame)', 'playstationconsoles4_image1.jpg', 3, 999.00, 579.00),
+
+(6, 6.1, 110.5, 401.1, 'PowerA GameCube Style Wired Gaming Controller for Nintendo Switch, Black (Officially Licensed)', 'supernintendoconsoles1_image1.jpg', 5, 899.00, 639.00),
+(6, 6.1, 110.5, 401.2, 'Logitech G F310 Wired Gamepad, Controller Console Like Layout, 4 Switch D-Pad, 1.8-Meter Cord, PC/Steam/Windows/AndroidTV - Grey/Blue', 'supernintendoconsoles2_image1.jpg', 3, 2999.00, 2199.00),
+(6, 6.1, 110.5, 401.3, 'Logitech G F710 Wireless Gamepad, 2.4 GHz Wireless with USB Nano-Receiver, Controller Dual Vibration Feedback, 4 Switch D-Pad, PC/Steam/Windows/AndroidTV', 'supernintendoconsoles3_image1.jpg', 4, 3999.00, 3789.00),
+(6, 6.1, 110.5, 401.4, 'Navizone Classic Retro Video Gaming Player Colorful LCD Screen USB Rechargeable Portable Game Console with 400 Classic Old Games Best Toy Gift for Kids', 'supernintendoconsoles4_image1.jpg', 4, 999.00, 759.00),
+
+(6, 6.1, 110.6, 402.1, 'Generic For PlayStation 4 Slim Console PS4 Slim 2 in 1 Vertical Stand w/ Cooling Fan Charger Charging Station w/ Dual Charger Ports USB', 'playstation4consoles1_image1.jpg', 5, 1999.00, 1499.00),
+(6, 6.1, 110.6, 402.2, 'Thrustmaster Thrustmaster(R) 4169085 T-Flight HOTAS 4 - PlayStation 4', 'playstation4consoles2_image1.jpg', 3, 4999.00, 4589.00),
+(6, 6.1, 110.6, 402.3, 'New World Wireless Controller for Ps4 , Wireless Controller Gamepad Joystick for PS4 Playstation 4/Pro/Slim with Touchpad ,headphone jack,Vibration and Six-axis Function -White', 'playstation4consoles3_image1.jpg', 4, 2999.00, 2499.00),
+(6, 6.1, 110.6, 402.4, 'GAMENOPHOBIA Wireless Controller Gamepad for Playstation 4 Console, Wireless Controller with Somatosensory Vibration Six-axis Burst Function', 'playstation4consoles4_image1.jpg', 3, 2999.00, 2299.00),
+
+(6, 6.1, 110.7, 403.1, 'Nintendo Switch OLED model With Neon Red & Neon Blue Joy-Con', 'nintendoswitchconsoles1_image1.jpg', 5, 39599.00, 37499.00),
+(6, 6.1, 110.7, 403.2, 'Nintendo Switch Lite-Blue Console', 'nintendoswitchconsoles2_image1.jpg', 3, 21999.00, 20989.00),
+(6, 6.1, 110.7, 403.3, 'Nintendo Switch Blue/ Neon Yellow Joy-Con', 'nintendoswitchconsoles3_image1.jpg', 3, 7299.00, 6799.00),
+(6, 6.1, 110.7, 403.4, 'Nintendo Switch OLED model With White Joy-Con Bundled With MICROMINI X-Ninja Wireless Controller Transparent for Nintendo Switch Red', 'nintendoswitchconsoles4_image1.jpg', 4, 42949.00, 41299.00),
+
+(6, 6.1, 110.8, 404.1, 'Fusine PVP 2 Digital Pocket System | Handheld Video Game | With inbuilt 999888 in 1 Games | with 1 Extra Games Cassettes Included | Rechargeable', 'pspconsoles1_image1.jpg', 3, 1999.00, 1399.00),
+(6, 6.1, 110.8, 404.2, 'POWERNRI 3000 Digital Games PVP Play Station (Blue)', 'pspconsoles2_image1.jpg', 5, 1949.00, 1589.00),
+(6, 6.1, 110.8, 404.3, 'Cover Sticker- Vader Fury - Skin for Sony PS Vita 2000', 'pspconsoles3_image1.jpg', 4, 999.00, 629.00),
+(6, 6.1, 110.8, 404.4, 'Exploding Vader - Skin for Sony PS Vita 2000', 'pspconsoles4_image1.jpg', 5, 959.00, 699.00),
+
 
 
