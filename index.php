@@ -80,22 +80,78 @@ include './header.php';
         </div>
         
         <div class="products_container_products_div">
+
+        <?php
+        
+        $products_query = "SELECT * FROM `products` WHERE `cats_id` = 1 ;";
+        $products_result = mysqli_query($con, $products_query);
+       while($row = mysqli_fetch_assoc($products_result)) {
+           $product_p_image = $row['p_image'];
+           $product_p_title = $row['p_title'];
+           $product_p_a_price = $row['p_a_price'];
+           $product_p_o_price = $row['p_o_price'];
+           $product_p_star_rat = $row['p_star_rat'];
+        
+        ?>
+
             <div class="products_container_products_inner_divs">
-                <img src="./images/mob_image_2.jpg" alt="products images">
+                <img src="./images/<?php echo $product_p_image; ?>" alt="products images">
                <a href="./view_of_product.php">
                 <div class="products_container_products_inner_text_divs">
                     <div>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
+                        <?php
+                        switch($product_p_star_rat) {
+                            case 1:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 2:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 3:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 4:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 5:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>';
+                            break;
+
+                        }
+    
+                        ?>
                     </div>
                     <div>
-                        <h4>Lorem ipsum dolor sit.</h4>
+                        <h4><?php
+                        if(strlen($product_p_title) > 30) {
+                            echo substr($product_p_title, 0, 35)." ...";
+                        } else {
+                            echo $product_p_title;
+                        }
+                         ?></h4>
                     </div>
                     <div>
-                        <h2>$450.50 <del>$600.50</del></h2>
+                        <h2>&#8377;<?php echo $product_p_a_price; ?> <del>&#8377;<?php echo $product_p_o_price; ?></del></h2>
                     </div>
                 </div>
                </a>
@@ -105,181 +161,11 @@ include './header.php';
                     <button title="Quick View"><i class="fas fa-search"></i></button>
                 </div>
             </div>
-            <div class="products_container_products_inner_divs">
-                <img src="./images/tab_image_2.jpg" alt="products images">
-                <a href="#">
-                    <div class="products_container_products_inner_text_divs">
-                        <div>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                        <div>
-                            <h4>Lorem ipsum dolor sit.</h4>
-                        </div>
-                        <div>
-                            <h2>$450.50 <del>$600.50</del></h2>
-                        </div>
-                    </div>
-                </a>
-                <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-            <div class="products_container_products_inner_divs">
-                    <img src="./images/drone_image_1.jpg" alt="products images">
-              <a href="#">
-                <div class="products_container_products_inner_text_divs">
-                    <div>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                    <div>
-                        <h4>Lorem ipsum dolor sit.</h4>
-                    </div>
-                    <div>
-                        <h2>$450.50 <del>$600.50</del></h2>
-                    </div>
-                </div>
-              </a>
-                <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-            <div class="products_container_products_inner_divs">
-                    <img src="./images/smart_watch_image_2.jpg" alt="products images">
-                <a href="#">
-                    <div class="products_container_products_inner_text_divs">
-                        <div>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                        <div>
-                            <h4>Lorem ipsum dolor sit.</h4>
-                        </div>
-                        <div>
-                            <h2>$450.50 <del>$600.50</del></h2>
-                        </div>
-                    </div>
-                </a>
-                <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-            <div class="products_container_products_inner_divs">
-                    <img src="./images/cam_image_1.jpg" alt="products images">
-                <a href="#">
-                    <div class="products_container_products_inner_text_divs">
-                        <div>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                        <div>
-                            <h4>Lorem ipsum dolor sit.</h4>
-                        </div>
-                        <div>
-                            <h2>$450.50 <del>$600.50</del></h2>
-                        </div>
-                    </div>
-                </a>
-                <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-            <div class="products_container_products_inner_divs">
-                    <img src="./images/speaker1_image_1.jpg" alt="products images">
-                <a href="#">
-                    <div class="products_container_products_inner_text_divs">
-                        <div>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                        <div>
-                            <h4>Lorem ipsum dolor sit.</h4>
-                        </div>
-                        <div>
-                            <h2>$450.50 <del>$600.50</del></h2>
-                        </div>
-                    </div>
-                </a>
-                <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-            <div class="products_container_products_inner_divs">
-                    <img src="./images/speaker_case_image1.jpg" alt="products images">
-                <a href="#">
-                    <div class="products_container_products_inner_text_divs">
-                        <div>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                        <div>
-                            <h4>Lorem ipsum dolor sit.</h4>
-                        </div>
-                        <div>
-                            <h2>$450.50 <del>$600.50</del></h2>
-                        </div>
-                    </div>
-                </a>
-                <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-            <div class="products_container_products_inner_divs">
-                    <img src="./images/suround_speak_image_1.jpg" alt="products images">
-                <a href="#">
-                    <div class="products_container_products_inner_text_divs">
-                        <div>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                        <div>
-                            <h4>Lorem ipsum dolor sit.</h4>
-                        </div>
-                        <div>
-                            <h2>$450.50 <del>$600.50</del></h2>
-                        </div>
-                    </div>
-                </a>
-                <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
+            
+            <?php } ?>
+
+
+            
         </div>
     </div>
    </center>
@@ -692,5 +578,4 @@ include './header.php';
     <script src="./javascript/index.js"></script>
 </body>
 </html>
-
 

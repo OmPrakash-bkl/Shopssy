@@ -14,19 +14,20 @@ insert into contact_us(name, email, phone, message) values('prakash', 'prakash@g
 
 3. Category
 
-create table category(cat_id int(100) AUTO_INCREMENT, cat_title varchar(200), cat_image_name varchar(200), primary key(cat_id));
-insert into category(cat_title, cat_image_name) values('Smartphones & Tablets', 'all_categories_mobiles.jpg'),
- ('Laptops & Accessories', 'all_categories_laptop.jpg'), 
-('Electronics', 'coffee_image_1.jpg'), 
-('Audio & Sound Devices', 'all_categories_sound.jpg'),
-('Cameras', 'all_categories_securiy_cam.jpg'), 
-('Games & Toys', 'all_categories_gaming_console.jpg'), 
-('Cloths', 'all_categories_mobiles.jpg'), 
-('Footwears', 'all_categories_mobiles.jpg'), 
-('Watches', 'all_categories_mobiles.jpg'),
-('Bags & Accessories', 'all_categories_mobiles.jpg'),
-('Home Furniture', 'all_categories_mobiles.jpg'),
-('Books & Stationery Items', 'all_categories_mobiles.jpg');
+create table category(cat_id int(100) AUTO_INCREMENT, cat_title varchar(200), cat_image_name varchar(200), cat_icon_name varchar(200), cat_name_description varchar(200), primary key(cat_id));
+
+insert into category(cat_title, cat_image_name, cat_icon_name, cat_name_description) values('Smartphones & Tablets', 'all_categories_mobiles.jpg', 'fa fa-mobile', 'Iphone, Oppo, Samsung, Sony ...'),
+ ('Laptops & Accessories', 'all_categories_laptop.jpg', 'fas fa-laptop', 'Dell, Hp, Macbook, Redmi ...'), 
+('Electronics', 'coffee_image_1.jpg', 'fa fa-microchip', 'Fan, Iron, Chimneys, TV ...'), 
+('Audio & Sound Devices', 'all_categories_sound.jpg', 'fas fa-headset', 'Speaker, Headphone, Soundcard ...'),
+('Cameras', 'all_categories_securiy_cam.jpg', 'fas fa-camera', 'Sony, Panasonic, Fujifilm ...'), 
+('Games & Toys', 'all_categories_gaming_console.jpg', 'fas fa-gamepad', 'Xbox, Playstation, PSP ...'), 
+('Cloths', 'all_categories_mobiles.jpg', 'fas fa-tshirt', 'Sarees, Blouse, Gowns ...'), 
+('Footwears', 'all_categories_mobiles.jpg', 'fas fa-shoe-prints', 'Boots, Sneakers, Flats ...'), 
+('Watches', 'all_categories_mobiles.jpg', 'fa-solid fa-watch', 'Casio, Titan, Fossil ...'),
+('Bags & Accessories', 'all_categories_mobiles.jpg', 'fas fa-suitcase-rolling', 'HandBag, SchoolBag, LunchBag ...'),
+('Home Furniture', 'all_categories_mobiles.jpg', 'fas fa-couch', 'Sofa, Beds, TV Units ...'),
+('Books & Stationery Items', 'all_categories_mobiles.jpg', 'fas fa-book', 'Pens, Diaries, Calculators ...');
 
 4. Sub_Category
 
