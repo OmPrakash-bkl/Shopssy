@@ -239,22 +239,24 @@ $products_details_p_a_price = $row['p_a_price'];
             </div>
             <div class="content">
                 <table>
+
+                <?php 
+
+                $products_specification_query = "SELECT * FROM `products_specification` WHERE `p_id`=$product_id;";
+                $products_specification_result = mysqli_query($con, $products_specification_query);
+
+                while($row = mysqli_fetch_assoc($products_specification_result)) {
+                    $products_specification_p_spec_title = $row['p_spec_title'];
+                    $products_specification_p_spec_details = $row['p_spec_details'];
+               
+                
+                ?>
+
                     <tr>
-                        <th>In The Box:</th>
-                        <td>Handset, Adapter (9V/2A), USB Type C Cable, SIM Card Tool, Screen Protect Film, Important Info Booklet with Warranty Card, Quick Guide</td>
+                        <th><?php echo $products_specification_p_spec_title; ?>: </th>
+                        <td><?php echo $products_specification_p_spec_details; ?></td>
                     </tr>
-                    <tr>
-                        <th>Model Number:</th>
-                        <td>RMX3430</td>
-                    </tr>
-                    <tr>
-                        <th>Color:</th>
-                        <td>Oxygen Blue</td>
-                    </tr>
-                    <tr>
-                        <th>Warranty:</th>
-                        <td>1 Year Warranty for Mobile and 6 Months for Accessories</td>
-                    </tr>
+                    <?php } ?>
                 </table>
             </div>
         </div>
@@ -292,6 +294,10 @@ $products_details_p_a_price = $row['p_a_price'];
                     <span class="fa fa-star"></span>
                     <span class="fa fa-star"></span>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae atque, quod fuga dolor ipsam voluptatum, omnis inventore ipsum alias, itaque assumenda praesentium! Ratione quia debitis deserunt doloribus aliquam harum optio amet molestiae, officia ipsam deleniti quam distinctio ab impedit, repellendus omnis dolor recusandae quibusdam quas assumenda natus nostrum! Enim odio deserunt rerum nihil autem? Nulla rerum possimus adipisci eligendi? Porro architecto ipsam, natus quaerat excepturi repellendus. Est, quia alias nostrum numquam eaque saepe ipsam aliquid fugit esse quasi odio eum!</p>
+                    <form action="">
+                    <span class="customer_review_container_thumbs"><button><i class="fas fa-thumbs-up"></i></button> 400</span>
+                    <span class="customer_review_container_thumbs"><button><i class="fas fa-thumbs-down"></i></button> 100</span>
+                    </form>
                 </div>
                 <div class="customer_review_container">
                     <h3>Nilesh Pethkar</h3>
@@ -342,8 +348,10 @@ $products_details_p_a_price = $row['p_a_price'];
                 <h5 class="h5tag">Q: Which type Charging Pin Type C ya normal?</h5>
                 <span><h5 class="h5tag1">A: </h5>Type C</span> <br>
                 <span>Rama Krishna</span> <br>
+                <form action="">
                 <span class="thumbs"><button><i class="fas fa-thumbs-up"></i></button> 400</span>
                 <span class="thumbs"><button><i class="fas fa-thumbs-down"></i></button> 100</span>
+                </form>
             </div>
             <div>
                 <h5 class="h5tag">Q: What is the nice colour blue or oxygen green?</h5>

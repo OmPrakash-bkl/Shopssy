@@ -1539,6 +1539,23 @@ margin-bottom: 20px;
     font-size: 13px;
     line-height: 20px;
  }
+ .customer_review_container_thumbs {
+     display: inline-block;
+    margin: 10px 30px 0px 0px;
+ }
+ 
+ .customer_review_container_thumbs button {
+    color: #909090;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s;
+ }
+ .customer_review_container_thumbs button:hover {
+    color: #45B0E3;
+ }
+
 
  /* Review Container End */
 

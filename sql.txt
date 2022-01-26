@@ -958,6 +958,31 @@ create table products_sub(products_sub_id int(100) AUTO_INCREMENT, p_id int(100)
 
 insert into products_sub(p_id, p_image, p_s_image1, p_s_image2, p_s_image3, p_avail, p_tags1, p_tags2, p_tags3, p_desc) values (1, 'samsung_mobiles1_image1.jpg', 'samsung_mobiles1_image2.jpg', 'samsung_mobiles1_image3.jpg', 'samsung_mobiles1_image4.jpg', 'In Stock', 'Smart Phones', 'Low Budget Mobiles', 'Trending Mobiles', 'Samsung Galaxy M32 5G mobile comes with a 6.50-inch touchscreen display with a resolution of 720x1600 pixels. Samsung Galaxy M32 5G is powered by an octa-core MediaTek Dimensity 720 processor. It comes with 6GB of RAM. The Samsung Galaxy M32 5G runs Android 11 and is powered by a 5000mAh battery. The Samsung Galaxy M32 5G supports proprietary fast charging.');
 
+8. Products_Specifications
+
+create table products_specification(p_spec_id int(100) AUTO_INCREMENT, p_id int(100), p_spec_title varchar(200), p_spec_details varchar(400), primary key(p_spec_id)); 
+
+insert into products_specification(p_id, p_spec_title, p_spec_details) values
+(1, 'In The Box', '
+Handset, Adaptor (15W), Charging Cable, Sim Ejector Pin, User Manual'),
+(1, 'Model Number', 'SM-M326BZKHINS'),
+(1, 'Model Name', 'Galaxy M32 5G'),
+(1, 'Operating System', 'Android Android 11'),
+(1, 'Processor Type', 'Dimensity 720 5G'),
+(1, 'Processor Core', 'Octa Core'),
+(1, 'Internal Storage', '128 GB'),
+(1, 'RAM', '8 GB'),
+(1, 'Expandable Storage', '1 TB'),
+(1, 'Primary Camera', '48MP + 8MP + 5MP + 2MP'),
+(1, 'Secondary Camera', '13MP Front Camera'),
+(1, 'Network Type', '5G'),
+(1, 'User Interface', 'One UI 3.1'),
+(1, 'Battery Capacity', '5000 mAh'),
+(1, 'Battery Type', 'Li-ion'),
+(1, 'Battery Capacity', '5000 mAh'),
+(1, 'Warranty Summary', '1 Year Warranty Provided by the Manufacturer from Date of Purchase');
+
+
 
 
 
