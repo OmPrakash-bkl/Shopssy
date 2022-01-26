@@ -58,14 +58,52 @@ include './header.php';
 $products_details_query = "SELECT * FROM `products` WHERE `p_id`=$product_id;";
 $products_details_result = mysqli_query($con, $products_details_query);
 while($row = mysqli_fetch_assoc($products_details_result)) {
-    
+$products_details_b_and_i_identification_id = $row['b_and_i_identification_id'];
 $products_details_p_title = $row['p_title'];
 $products_details_p_rating = $row['p_star_rat'];
 $products_details_p_o_price = $row['p_o_price'];
 $products_details_p_a_price = $row['p_a_price'];
 }
 
+if(isset($_GET['review_sub_btn'])) {
 
+    $pro_id = $_GET['p_id'];
+    $p_cus_name = $_GET['p_customer_name'];
+    $p_cus_rating = $_GET['p_rating'];
+    $p_cus_description = $_GET['p_desc'];
+    $nameval = "/^[a-zA-Z ]+$/";
+    
+    if(preg_match($nameval, $p_cus_name)) {
+        $pro_review_query = "INSERT INTO `reviews` (`p_id`, `p_customer_name`, `p_rating`, `p_desc`) VALUES ('$pro_id', '$p_cus_name', '$p_cus_rating', '$p_cus_description');";
+        mysqli_query($con, $pro_review_query);
+    }
+}
+
+if(isset($_GET['review_id'])) {
+    $p_review_id = $_GET['review_id'];
+    if(isset($_GET['p_like'])) {
+        $p_like_count = $_GET['p_like'];
+        $review_like_and_dislike_alter_query = "UPDATE `reviews` SET `p_like` = $p_like_count WHERE `review_id` = $p_review_id;";
+        mysqli_query($con, $review_like_and_dislike_alter_query);
+    } else {
+        $p_dislike_count = $_GET['p_dislike'];
+        $review_like_and_dislike_alter_query = "UPDATE `reviews` SET `p_dislike` = $p_dislike_count WHERE `review_id` = $p_review_id;";
+        mysqli_query($con, $review_like_and_dislike_alter_query);
+    }
+    
+}
+if(isset($_GET['p_q_and_a_id'])) {
+    $p_p_q_and_a_id = $_GET['p_q_and_a_id'];
+    if(isset($_GET['p_q_like'])) {
+        $p_q_like_count = $_GET['p_q_like'];
+        $products_p_q_and_q_alter_query = "UPDATE `product_questions_and_answers` SET `p_q_like` = $p_q_like_count WHERE `p_q_and_a_id`=$p_p_q_and_a_id;";
+        mysqli_query($con, $products_p_q_and_q_alter_query);
+    } else {
+     $p_q_dislike_count = $_GET['p_q_dislike'];
+     $products_p_q_and_q_alter_query = "UPDATE `product_questions_and_answers` SET `p_q_dislike` = $p_q_dislike_count WHERE `p_q_and_a_id`=$p_p_q_and_a_id;";
+     mysqli_query($con, $products_p_q_and_q_alter_query);
+    }
+}
 
 ?>
 
@@ -272,60 +310,94 @@ $products_details_p_a_price = $row['p_a_price'];
         </div>
         <div class="content">
             <div class="review_form_container">
-                <form action="">
-                    <label for="">Name</label> <br>
-                    <input type="text" placeholder="Enter your name" class="inp1"> <br>
-                    <label for="">Rating</label> <br>
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
+                    <input type="hidden" name="p_id" value="<?php echo $product_id;?>">
+                    <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
+                    <label for="cus_name">Name</label> <br>
+                    <input type="text" placeholder="Enter your name" id="cus_name" name="p_customer_name" class="inp1" required> <br>
+                    <label for="cus_rat">Rating</label> <br>
                     <label for="">1</label>
-                    <input type="range" min="1" max="5" class="inp3">
+                    <input type="range" min="1" max="5" id="cus_rat" value="4" name="p_rating" class="inp3">
                     <label for="">5</label> <br>
-                    <label for="">Body of Review</label> <br>
-                    <textarea placeholder="write a comments here" class="inp2"></textarea> <br>
+                    <label for="cus_desc">Body of Review</label> <br>
+                    <textarea placeholder="write a comments here" name="p_desc" id="cus_desc" class="inp2" required></textarea>
+                     <br>
+
                    <center>
-                    <button type="submit">SUBMIT REVIEW</button>
+                    <button type="submit" name="review_sub_btn" value="1">SUBMIT REVIEW</button>
                    </center>
                 </form>
             </div>
+
+            <?php 
+            
+            $product_review_query = "SELECT * FROM `reviews` WHERE `p_id`=$product_id;";
+            $product_review_result = mysqli_query($con, $product_review_query);
+
+            while($row = mysqli_fetch_assoc($product_review_result)) {
+                $review_cus_name = $row['p_customer_name'];
+                $reviews_rating_count = $row['p_rating'];
+                $review_product_description = $row['p_desc'];
+                $review_p_like = $row['p_like'];
+                $review_p_dislike = $row['p_dislike'];
+                $review_review_id = $row['review_id'];
+
+            ?>
+
             <div class="customer_review_container">
-                    <h3>yash vardhan</h3>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae atque, quod fuga dolor ipsam voluptatum, omnis inventore ipsum alias, itaque assumenda praesentium! Ratione quia debitis deserunt doloribus aliquam harum optio amet molestiae, officia ipsam deleniti quam distinctio ab impedit, repellendus omnis dolor recusandae quibusdam quas assumenda natus nostrum! Enim odio deserunt rerum nihil autem? Nulla rerum possimus adipisci eligendi? Porro architecto ipsam, natus quaerat excepturi repellendus. Est, quia alias nostrum numquam eaque saepe ipsam aliquid fugit esse quasi odio eum!</p>
-                    <form action="">
-                    <span class="customer_review_container_thumbs"><button><i class="fas fa-thumbs-up"></i></button> 400</span>
-                    <span class="customer_review_container_thumbs"><button><i class="fas fa-thumbs-down"></i></button> 100</span>
+                    <h3><?php echo $review_cus_name; ?></h3>
+                    <?php 
+                     switch($reviews_rating_count) {
+                        case 1:
+                            echo '<span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>';
+                        break;
+                        case 2:
+                            echo '<span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>';
+                        break;
+                        case 3:
+                            echo '<span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>';
+                        break;
+                        case 4:
+                            echo '<span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star"></span>';
+                        break;
+                        case 5:
+                            echo '<span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>';
+                        break;
+
+                    }
+                    ?>
+                    <p><?php echo $review_product_description; ?></p>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
+                    <input type="hidden" name="p_id" value="<?php echo $product_id;?>">
+                    <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
+                    <input type="hidden" name="review_id" value="<?php echo $review_review_id; ?>">
+                    <span class="customer_review_container_thumbs"><button name="p_like" value="<?php echo $review_p_like+1; ?>"><i class="fas fa-thumbs-up"></i></button> <?php echo $review_p_like; ?></span>
+                    <span class="customer_review_container_thumbs"><button name="p_dislike" value="<?php echo $review_p_dislike+1; ?>"><i class="fas fa-thumbs-down"></i></button> <?php echo $review_p_dislike; ?></span>
                     </form>
                 </div>
-                <div class="customer_review_container">
-                    <h3>Nilesh Pethkar</h3>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae atque, quod fuga dolor ipsam voluptatum, omnis inventore ipsum alias, itaque assumenda praesentium! Ratione quia debitis deserunt doloribus aliquam harum optio amet molestiae, officia ipsam deleniti quam distinctio ab impedit, repellendus omnis dolor recusandae quibusdam quas assumenda natus nostrum! Enim odio deserunt rerum nihil autem? Nulla rerum possimus adipisci eligendi? Porro architecto ipsam, natus quaerat excepturi repellendus. Est, quia alias nostrum numquam eaque saepe ipsam aliquid fugit esse quasi odio eum!</p>
-                </div>
-                <div class="customer_review_container">
-                    <h3>Saikat Thakurta</h3>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae atque, quod fuga dolor ipsam voluptatum, omnis inventore ipsum alias, itaque assumenda praesentium! Ratione quia debitis deserunt doloribus aliquam harum optio amet molestiae, officia ipsam deleniti quam distinctio ab impedit, repellendus omnis dolor recusandae quibusdam quas assumenda natus nostrum! Enim odio deserunt rerum nihil autem? Nulla rerum possimus adipisci eligendi? Porro architecto ipsam, natus quaerat excepturi repellendus. Est, quia alias nostrum numquam eaque saepe ipsam aliquid fugit esse quasi odio eum!</p>
-                </div>
-                <div class="customer_review_container">
-                    <h3>Parmeshwar Munde</h3>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae atque, quod fuga dolor ipsam voluptatum, omnis inventore ipsum alias, itaque assumenda praesentium! Ratione quia debitis deserunt doloribus aliquam harum optio amet molestiae, officia ipsam deleniti quam distinctio ab impedit, repellendus omnis dolor recusandae quibusdam quas assumenda natus nostrum! Enim odio deserunt rerum nihil autem? Nulla rerum possimus adipisci eligendi? Porro architecto ipsam, natus quaerat excepturi repellendus. Est, quia alias nostrum numquam eaque saepe ipsam aliquid fugit esse quasi odio eum!</p>
-                </div>
+                
+                <?php } ?>
+                
         </div>
     </div>
 </center>
@@ -344,36 +416,36 @@ $products_details_p_a_price = $row['p_a_price'];
             </div>
         </div>
         <div class="content">
+
+        <?php 
+
+        $products_q_and_a_query = "SELECT * FROM `product_questions_and_answers` WHERE `p_id`=$product_id;";
+        $products_q_and_a_result = mysqli_query($con, $products_q_and_a_query);
+
+        while($row = mysqli_fetch_assoc($products_q_and_a_result)) {
+            $product_p_q_and_a_id = $row['p_q_and_a_id'];
+            $product_ques_person_name = $row['ques_person_name'];
+            $product_p_ques = $row['p_ques'];
+            $product_p_ans = $row['p_ans'];
+            $product_p_q_like = $row['p_q_like'];
+            $product_p_q_dislike = $row['p_q_dislike'];
+
+        ?>
             <div>
-                <h5 class="h5tag">Q: Which type Charging Pin Type C ya normal?</h5>
-                <span><h5 class="h5tag1">A: </h5>Type C</span> <br>
-                <span>Rama Krishna</span> <br>
-                <form action="">
-                <span class="thumbs"><button><i class="fas fa-thumbs-up"></i></button> 400</span>
-                <span class="thumbs"><button><i class="fas fa-thumbs-down"></i></button> 100</span>
+                <h5 class="h5tag">Q: <?php echo $product_p_ques; ?></h5>
+                <span><h5 class="h5tag1">A: </h5><?php echo $product_p_ans; ?></span> <br>
+                <span><?php echo $product_ques_person_name; ?></span> <br>
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
+                <input type="hidden" name="p_id" value="<?php echo $product_id;?>">
+                <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
+                <input type="hidden" name="p_q_and_a_id" value="<?php echo $product_p_q_and_a_id; ?>">
+                <span class="thumbs"><button name="p_q_like" value="<?php echo $product_p_q_like+1; ?>"><i class="fas fa-thumbs-up"></i></button> <?php echo $product_p_q_like; ?></span>
+                <span class="thumbs"><button name="p_q_dislike" value="<?php echo $product_p_q_dislike+1; ?>" ><i class="fas fa-thumbs-down"></i></button> <?php echo $product_p_q_dislike; ?></span>
                 </form>
             </div>
-            <div>
-                <h5 class="h5tag">Q: What is the nice colour blue or oxygen green?</h5>
-                <span><h5 class="h5tag1">A: </h5>Blue</span> <br>
-                <span>Anonymous</span> <br>
-                <span class="thumbs"><button><i class="fas fa-thumbs-up"></i></button> 400</span>
-                <span class="thumbs"><button><i class="fas fa-thumbs-down"></i></button> 100</span>
-            </div>
-            <div>
-                <h5 class="h5tag">Q: WiFi calling available in this phone?</h5>
-                <span><h5 class="h5tag1">A: </h5>yes</span> <br>
-                <span>Dev Bhardwaj</span> <br>
-                <span class="thumbs"><button><i class="fas fa-thumbs-up"></i></button> 400</span>
-                <span class="thumbs"><button><i class="fas fa-thumbs-down"></i></button> 100</span>
-            </div>
-            <div>
-                <h5 class="h5tag">Q: WiFi calling available in this phone?</h5>
-                <span><h5 class="h5tag1">A: </h5>Yes</span> <br>
-                <span>Krishna Srinivas</span> <br>
-                <span class="thumbs"><button><i class="fas fa-thumbs-up"></i></button> 400</span>
-                <span class="thumbs"><button><i class="fas fa-thumbs-down"></i></button> 100</span>
-            </div>
+           
+           <?php  } ?>
+            
         </div>
     </div>
 </center>
@@ -393,22 +465,80 @@ $products_details_p_a_price = $row['p_a_price'];
         </div>
         
         <div class="products_container_products_div">
+
+        <?php 
+
+        $related_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id`=$products_details_b_and_i_identification_id;";
+        $related_products_result = mysqli_query($con, $related_products_query);
+      while($row = mysqli_fetch_assoc($related_products_result)) {
+        $related_products_p_image = $row['p_image'];
+        $related_products_p_title = $row['p_title'];
+        $related_products_p_a_price = $row['p_a_price'];
+        $related_products_p_o_price = $row['p_o_price'];
+        $related_products_p_star_rat = $row['p_star_rat'];
+        $related_products_p_id = $row['p_id'];
+        $related_products_subs_cat_identification_id = $row['subs_cat_identification_id'];
+    
+        ?>
+
             <div class="products_container_products_inner_divs">
-                <img src="./images/mob_image_2.jpg" alt="products images">
-               <a href="./view_of_product.html">
+                <img src="./images/<?php echo $related_products_p_image; ?>" alt="products images">
+               <a href="./view_of_product.php?p_id=<?php echo $related_products_p_id; ?>&sub_cat_id=<?php echo $related_products_subs_cat_identification_id; ?>">
                 <div class="products_container_products_inner_text_divs">
                     <div>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
+                    <?php
+                        switch($related_products_p_star_rat) {
+                            case 1:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 2:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 3:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 4:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 5:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>';
+                            break;
+
+                        }
+    
+                        ?>
                     </div>
                     <div>
-                        <h4>Lorem ipsum dolor sit.</h4>
+                        <h4><?php
+                        if(strlen($related_products_p_title) > 30) {
+                            echo substr($related_products_p_title, 0, 35)." ...";
+                        } else {
+                            echo $related_products_p_title;
+                        }
+                         ?></h4>
                     </div>
                     <div>
-                        <h2>$450.50 <del>$600.50</del></h2>
+                        <h2>&#8377;<?php echo $related_products_p_a_price; ?> <del>&#8377;<?php echo $related_products_p_o_price; ?></del></h2>
                     </div>
                 </div>
                </a>
@@ -418,81 +548,8 @@ $products_details_p_a_price = $row['p_a_price'];
                     <button title="Quick View"><i class="fas fa-search"></i></button>
                 </div>
             </div>
-            <div class="products_container_products_inner_divs">
-                <img src="./images/tab_image_2.jpg" alt="products images">
-                <a href="#">
-                    <div class="products_container_products_inner_text_divs">
-                        <div>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                        <div>
-                            <h4>Lorem ipsum dolor sit.</h4>
-                        </div>
-                        <div>
-                            <h2>$450.50 <del>$600.50</del></h2>
-                        </div>
-                    </div>
-                </a>
-                <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-            <div class="products_container_products_inner_divs">
-                    <img src="./images/drone_image_1.jpg" alt="products images">
-              <a href="#">
-                <div class="products_container_products_inner_text_divs">
-                    <div>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                    <div>
-                        <h4>Lorem ipsum dolor sit.</h4>
-                    </div>
-                    <div>
-                        <h2>$450.50 <del>$600.50</del></h2>
-                    </div>
-                </div>
-              </a>
-                <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-            <div class="products_container_products_inner_divs">
-                    <img src="./images/smart_watch_image_2.jpg" alt="products images">
-                <a href="#">
-                    <div class="products_container_products_inner_text_divs">
-                        <div>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                        <div>
-                            <h4>Lorem ipsum dolor sit.</h4>
-                        </div>
-                        <div>
-                            <h2>$450.50 <del>$600.50</del></h2>
-                        </div>
-                    </div>
-                </a>
-                <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
+           
+            <?php } ?>
            
            
         </div>

@@ -982,6 +982,24 @@ Handset, Adaptor (15W), Charging Cable, Sim Ejector Pin, User Manual'),
 (1, 'Battery Capacity', '5000 mAh'),
 (1, 'Warranty Summary', '1 Year Warranty Provided by the Manufacturer from Date of Purchase');
 
+9. Reviews 
+
+create table reviews(review_id int(100) AUTO_INCREMENT, p_id int(100), p_customer_name varchar(200), p_rating int(50), p_desc varchar(400), p_like int(100) default 0, p_dislike int(100) default 0, primary key(review_id));
+
+insert into reviews(p_id, p_customer_name, p_rating, p_desc, p_like, p_dislike) values
+(1, 'Prakash', '4', 'very good product. all youtuber and negative opinion are fake. this is really a good product.', 5, 2);
+
+10. Product_Questions_and_Answers
+
+create table product_questions_and_answers(p_q_and_a_id int(100) AUTO_INCREMENT, p_id int(100), ques_person_name varchar(200), p_ques varchar(200), p_ans varchar(300), p_q_like int(100) default 0, p_q_dislike int(100) default 0, primary key(p_q_and_a_id));
+
+insert into product_questions_and_answers(p_id, ques_person_name, p_ques, p_ans, p_q_like, p_q_dislike) values
+(1, 'Prakash', 'Which type Charging Pin Type C ya normal?', 'Type C', 1, 1),
+(1, 'Aathi', 'What is the nice colour blue or oxygen green?', 'Blue', 1, 1),
+(1, 'Aarthi', 'WiFi calling available in this phone?', 'Yes', 1, 1),
+(1, 'Keerthi', 'Popup Camera is available in this phone?', 'Yes', 1, 1);
+
+
 
 
 
