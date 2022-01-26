@@ -280,7 +280,8 @@ float: right;
 /*Slider End*/
 
 /* Navigation Table Container Start */
-.hamburger_main_container_table {
+
+ .hamburger_main_container_table {
     margin-top: 30px;
     background-color: white;
     position: absolute;
@@ -318,6 +319,21 @@ float: right;
 .hamburger_main_container_table b:hover {
     color: #45b2ff;
  }
+.hamburger_main_container_table_h3_tag {
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 10px;
+
+}
+.hamburger_main_container_table_h3_tag a {
+    color: rgba(53, 53, 53, 0.8);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.hamburger_main_container_table_h3_tag a:hover {
+    color: #45b2ff;
+}
+
 .hamburger_sub_container {
     border: 0px;
     border-radius: 10px;
@@ -421,7 +437,7 @@ text-align: left;
 .table_of_hamburger_sub_container {
     display: none;
 }
-
+ 
 
 
 /*Navigation Table Container End */

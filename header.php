@@ -294,7 +294,7 @@ include './db_con.php';
 
                 <?php 
 
-                $category_query = "SELECT * FROM `category`;";
+                $category_query = "SELECT * FROM `category` WHERE `cat_id` BETWEEN 1 AND 4;";
                 $category_result = mysqli_query($con, $category_query);
                while($row = mysqli_fetch_assoc($category_result)) {
                    $category_cat_id = $row['cat_id'];
@@ -306,18 +306,18 @@ include './db_con.php';
                 ?>
 
                     <tr>
-                        <td class="hamburger_main_container_table_td_tag" rowspan="2"><i class="<?php echo $category_cat_icon_name; ?>" style="color: #A1A1A1;font-size: 25px;"></i></td>
+                        <td rowspan="2"><i class="<?php echo $category_cat_icon_name; ?>" style="color: #A1A1A1;font-size: 25px;"></i></td>
                     </tr>
-                    <tr id="hamburger_container_dir_arrow_tiger<?php echo $category_cat_id; ?>">
-                        <td class="hamburger_main_container_table_td_tag"><a href="#"><b><?php echo $category_cat_title; ?></b></a> <br>
-                         <a href="#"><p class="hamburger_main_container_table_p_tag"><?php echo $category_cat_name_description; ?></p></a>
+                    <tr class="hamburger_container_dir_arrow_tiger<?php echo $category_cat_id; ?>" id="hamburger_container_dir_arrow_tiger<?php echo $category_cat_id; ?>">
+                        <td><a href="#"><b><?php echo $category_cat_title; ?></b></a> <br>
+                         <a href="#"><p><?php echo $category_cat_name_description; ?></p></a>
                         </td>
                     </tr>
 
                     <?php } ?>
                     
                 </table>
-
+                <h3 class="hamburger_main_container_table_h3_tag"><a href="#">View All Categories <i class="fa fa-angle-double-right"></i></a></h3>
             </div>
 
             <!--hamburger container end-->
@@ -466,7 +466,7 @@ include './db_con.php';
 
                 <?php 
 
-                $sub_cat_query = "SELECT * FROM `sub_category`";
+                $sub_cat_query = "SELECT * FROM `sub_category` WHERE `cats_id` BETWEEN 1 AND 4";
                 $sub_cat_result = mysqli_query($con, $sub_cat_query);
                while($row1 = mysqli_fetch_assoc($sub_cat_result)) {
                 $subcategory_cats_id = $row1['cats_id'];
