@@ -317,7 +317,7 @@ include './db_con.php';
                     <?php } ?>
                     
                 </table>
-                <h3 class="hamburger_main_container_table_h3_tag"><a href="#">View All Categories <i class="fa fa-angle-double-right"></i></a></h3>
+                <h3 class="hamburger_main_container_table_h3_tag"><a href="./all_categories.php">View All Categories <i class="fa fa-angle-double-right"></i></a></h3>
             </div>
 
             <!--hamburger container end-->

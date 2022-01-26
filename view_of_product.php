@@ -1,7 +1,72 @@
 <?php 
 include './action.php';
-$title = "RC Drone - Shoppy";
+
+$product_id = $_GET['p_id'];
+$product_sub_cat_id = $_GET['sub_cat_id'];
+
+
+
+$product_sub_query = "SELECT * FROM `products_sub` WHERE `p_id`=$product_id;";
+$product_sub_result = mysqli_query($con, $product_sub_query);
+
+while($row = mysqli_fetch_assoc($product_sub_result)) {
+    $product_sub_p_image = $row['p_image'];
+    $product_sub_p_s_image1 = $row['p_s_image1'];
+    $product_sub_p_s_image2 = $row['p_s_image2'];
+    $product_sub_p_s_image3 = $row['p_s_image3'];
+    $product_sub_p_avail = $row['p_avail'];
+    $product_sub_p_tags1 = $row['p_tags1'];
+    $product_sub_p_tags2 = $row['p_tags2'];
+    $product_sub_p_tags3 = $row['p_tags3'];
+    $product_sub_p_desc = $row['p_desc'];
+}
+
+
+$product_sub_cat_id_query = "SELECT `subs_cat_title` FROM `sub_category` WHERE `cats_id`=round($product_sub_cat_id);";
+$product_sub_cat_id_result = mysqli_query($con, $product_sub_cat_id_query);
+$temp = round($product_sub_cat_id);
+
+
+$i = 0;
+while($row = mysqli_fetch_assoc($product_sub_cat_id_result)) {
+
+    $titles[$i] = $row['subs_cat_title'];
+    $i++;
+}
+$x = 1;
+$y = 2;
+$z = 3;
+$temp1 = $temp.".".$x;
+$temp1 = (float)$temp1;
+if($product_sub_cat_id ==  $temp1) {
+    $sub_navigation_title = $titles[0];
+}
+$temp2 = $temp.".".$y;
+$temp2 = (float)$temp2;
+if($product_sub_cat_id ==  $temp2) {
+    $sub_navigation_title = $titles[1];
+}
+$temp3 = $temp.".".$z;
+$temp3 = (float)$temp3;
+if($product_sub_cat_id ==  $temp3) {
+    $sub_navigation_title = $titles[2];
+}
+
+$title = $sub_navigation_title . " - Shopssy";
 include './header.php';
+
+$products_details_query = "SELECT * FROM `products` WHERE `p_id`=$product_id;";
+$products_details_result = mysqli_query($con, $products_details_query);
+while($row = mysqli_fetch_assoc($products_details_result)) {
+    
+$products_details_p_title = $row['p_title'];
+$products_details_p_rating = $row['p_star_rat'];
+$products_details_p_o_price = $row['p_o_price'];
+$products_details_p_a_price = $row['p_a_price'];
+}
+
+
+
 ?>
 
     <!--sub navigation container start-->
@@ -10,7 +75,7 @@ include './header.php';
     <div class="sub_navigation_inner_container">
         <span><a href="./index.php">Home</a></span>
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
-        <span><a href="#">Lorem ipsum dolor sit</a></span>
+        <span><a href="#"><?php echo $sub_navigation_title; ?></a></span>
     </div>
 </center>
     </div>
@@ -21,32 +86,68 @@ include './header.php';
         <div class="product_image_and_cost_description_container">
             <div class="PIandC_image_container">
                 <div class="PIandC_image_container_big_image_container">
-                    <img src="./images/product_mobile1_image_1.jpg" alt="mobile image" class="big_image_container_image">
+                    <img src="./images/<?php echo $product_sub_p_image; ?>" alt="mobile image" class="big_image_container_image">
                 </div>
                 <div class="PIandC_image_container_small_images_container">
                     <div>
-                        <img src="./images/product_mobile1_image_1.jpg" alt="mobile image" class="small_images_container_images small_images_container_images1 active" onclick="change_big_image(1)">
+                        <img src="./images/<?php echo $product_sub_p_image; ?>" alt="mobile image" class="small_images_container_images small_images_container_images1 active" onclick="change_big_image('<?php echo $product_sub_p_image; ?>', 1)">
                     </div>
                    <div>
-                    <img src="./images/product_mobile1_image_2.jpg" alt="mobile image" class="small_images_container_images small_images_container_images2" onclick="change_big_image(2)">
+                    <img src="./images/<?php echo $product_sub_p_s_image1; ?>" alt="mobile image" class="small_images_container_images small_images_container_images2" onclick="change_big_image('<?php echo $product_sub_p_s_image1; ?>', 2)">
                    </div>
                     <div>
-                        <img src="./images/product_mobile1_image_3.jpg" alt="tab image" class="small_images_container_images small_images_container_images3" onclick="change_big_image(3)">
+                        <img src="./images/<?php echo $product_sub_p_s_image2; ?>" alt="tab image" class="small_images_container_images small_images_container_images3" onclick="change_big_image('<?php echo $product_sub_p_s_image2; ?>', 3)">
                     </div>
                     <div>
-                        <img src="./images/product_mobile1_image_4.jpg" alt="tab image" class="small_images_container_images small_images_container_images4" onclick="change_big_image(4)">
+                        <img src="./images/<?php echo $product_sub_p_s_image3; ?>" alt="tab image" class="small_images_container_images small_images_container_images4" onclick="change_big_image('<?php echo $product_sub_p_s_image3; ?>', 4)">
                     </div>
                 </div>
             </div>
             <div class="PIandC_cost_container">
                 <div class="PIandC_cost_container_name_and_review_container">
-                    <h2>Lorem Ipsum Dolor Sit Amet</h2>
+                    <h2><?php echo $products_details_p_title; ?></h2>
                     <span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
+                    <?php
+                        switch($products_details_p_rating) {
+                            case 1:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 2:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 3:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 4:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 5:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>';
+                            break;
+
+                        }
+    
+                        ?>
                     <p>No Reviews</p>
                 </span>
                 </div>
@@ -54,23 +155,43 @@ include './header.php';
                     <table>
                         <tr>
                             <th>AVAILABLE:</th>
-                            <td id="in_stock">In Stock <i class="fas fa-check-square"></i></td>
+                            <td id="in_stock"><?php echo $product_sub_p_avail; ?> <i class="fas fa-check-square"></i></td>
                         </tr>
                         <tr>
                             <th>CATEGOTIES:</th>
-                            <td><a href="#">New Arrivals</a>, <a href="#">Trending</a></td>
+                            <td>
+                                <?php 
+                                $j=0;
+                                $title_count = count($titles);
+                                while($title_count > $j) {
+                                    echo '<a href="#">'.$titles[$j].'</a>,';
+                                    $j++;
+                                }
+                                
+                                ?>
+                            
+                            
+                            ...</td>
                         </tr>
                         <tr>
                             <th>TAGS:</th>
-                            <td><a href="#">Hot Trend</a>, <a href="#">Samsung</a>, <a href="#">Redmi</a>, <a href="#">Apple</a></td>
+                            <td><a href="#"><?php echo $product_sub_p_tags1; ?></a>, <a href="#"><?php echo $product_sub_p_tags2; ?></a>, <a href="#"><?php echo $product_sub_p_tags3; ?></a></td>
                         </tr>
                     </table>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,...</p>
+                    <p>
+                    <?php
+                    if(strlen($product_sub_p_desc) > 150) {
+                        echo substr($product_sub_p_desc, 0, 175)." ...";
+                    } else {
+                        echo $product_sub_p_desc;
+                    }
+                    ?>
+                    </p>
                 </div>
               <div class="PIandC_cost_container_details_container_rupee_div">
                 <span>
-                    <span>&#8377;382.43</span>
-                    <del>&#8377;480.70</del>
+                    <span>&#8377;<?php echo $products_details_p_a_price; ?>.00</span>
+                    <del>&#8377;<?php echo $products_details_p_o_price; ?>.00</del>
               </span>
               </div>
               <div class="incre_decre_container">
@@ -104,7 +225,7 @@ include './header.php';
                 <h1>Product Description</h1>
             </div>
             <div class="content">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque sed nulla laboriosam, recusandae consequuntur molestias eius praesentium esse. Est eum necessitatibus, vero explicabo cumque totam blanditiis iusto quidem, unde quis eaque temporibus qui, esse quod provident voluptas? Odio explicabo cum hic reiciendis rem impedit sed dolorem, molestias non animi, tenetur accusamus. Tempora ipsa nesciunt consequatur, incidunt nulla necessitatibus laborum obcaecati! Illo praesentium similique amet quas. Neque qui culpa ab repellendus deleniti adipisci cumque, vero quasi fugit ex inventore magni suscipit laborum voluptatibus doloribus at explicabo fugiat soluta perferendis delectus! Deleniti rem architecto, assumenda amet laborum magni fugiat cumque quidem laboriosam?</p>
+                <p><?php   echo $product_sub_p_desc; ?></p>
             </div>
         </div>
     </center>

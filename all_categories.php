@@ -1,5 +1,5 @@
 <?php 
-include './action.php';
+include './db_con.php';
 ?>
 
 <!DOCTYPE html>
@@ -19,61 +19,27 @@ include './action.php';
             <h2><u>CATEGORIES</u></h2>
         </center>
         <center>
+
+        <?php
+
+        $all_categories_query = "SELECT * FROM category;";
+        $all_categories_result = mysqli_query($con, $all_categories_query);
+        while($row = mysqli_fetch_assoc($all_categories_result)) {
+            $all_categories_cat_image_name = $row['cat_image_name'];
+            $all_categories_cat_title = $row['cat_title'];
+        ?>
+
             <div class="all_categories_sub_container">
                 <center>
                  <a href="./product.php">
-                     <img src="./images/all_categories_mobiles.jpg" alt="mobiles">
+                     <img src="./images/<?php echo $all_categories_cat_image_name; ?>" alt="mobiles">
                 </a>
-                <a href="./product.php" class="product_link">Smartphone & Tablets</a>
+                <a href="./product.php" class="product_link"><?php echo $all_categories_cat_title; ?></a>
                 </center>
              </div>
 
-             <div class="all_categories_sub_container">
-                <center>
-                 <a href="#">
-                     <img src="./images/all_categories_sound.jpg" alt="speakers">
-                </a>
-                <a href="#" class="product_link">Audio & Sound Devices</a>
-                </center>
-             </div>
-
-             <div class="all_categories_sub_container">
-                <center>
-                 <a href="#">
-                     <img src="./images/all_categories_smart_watch.jpg" alt="smart watches">
-                </a>
-                <a href="#" class="product_link">Smartwatches</a>
-                </center>
-             </div>
-
-             <div class="all_categories_sub_container">
-                <center>
-                 <a href="#">
-                     <img src="./images/all_categories_gaming_console.jpg" alt="gaming consoles">
-                </a>
-                <a href="#" class="product_link">Gaming Gear</a>
-                </center>
-             </div>
-
-             <div class="all_categories_sub_container">
-                <center>
-                 <a href="#">
-                     <img src="./images/all_categories_securiy_cam.jpg" alt="security cameras">
-                </a>
-                <a href="#" class="product_link">Camera</a>
-                </center>
-             </div>
-
-             <div class="all_categories_sub_container">
-                <center>
-                 <a href="#">
-                     <img src="./images/all_categories_laptop.jpg" alt="laptop and computers">
-                </a>
-                <a href="#" class="product_link">Laptop & Computer</a>
-                </center>
-             </div>
-
-             
+             <?php } ?>
+            
         </center>
     </div>
     <!--all categories container end-->

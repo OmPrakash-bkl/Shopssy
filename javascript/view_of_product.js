@@ -1,8 +1,9 @@
 /* Image and Review Button Functions Start */
 
-function change_big_image(image_num) {
+function change_big_image(image_name, image_num) {
+  
 let big_image = document.getElementsByClassName("big_image_container_image")[0];
-big_image.src=`./images/product_mobile1_image_${image_num}.jpg`;
+big_image.src=`./images/${image_name}`;
 document.getElementsByClassName(`small_images_container_images`)[0].style.border = "1px solid gainsboro";
 document.getElementsByClassName(`small_images_container_images`)[1].style.border = "1px solid gainsboro";
 document.getElementsByClassName(`small_images_container_images`)[2].style.border = "1px solid gainsboro";

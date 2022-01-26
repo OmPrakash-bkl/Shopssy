@@ -91,12 +91,13 @@ include './header.php';
            $product_p_a_price = $row['p_a_price'];
            $product_p_o_price = $row['p_o_price'];
            $product_p_star_rat = $row['p_star_rat'];
-        
+           $product_p_id = $row['p_id'];
+           $product_subs_cat_identification_id = $row['subs_cat_identification_id'];
         ?>
 
             <div class="products_container_products_inner_divs">
                 <img src="./images/<?php echo $product_p_image; ?>" alt="products images">
-               <a href="./view_of_product.php">
+               <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>">
                 <div class="products_container_products_inner_text_divs">
                     <div>
                         <?php
