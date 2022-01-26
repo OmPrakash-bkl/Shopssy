@@ -327,6 +327,7 @@ float: right;
     z-index: 1;
     margin-top: 70px;
    margin-left: 300px;
+   display: flex;
 }
 .hamburger_container_dir_arrow {
     height: 30px;
@@ -359,14 +360,41 @@ float: right;
     margin-top: 300px;
     margin-left: 250px;
 }
-.hamburger_container_dir_arrow1, .hamburger_container_dir_arrow2, .hamburger_container_dir_arrow3, .hamburger_container_dir_arrow4, .hamburger_container_dir_arrow5 {
+.hamburger_container_dir_arrow6 {
+    margin-top: 360px;
+    margin-left: 250px;
+}
+.hamburger_container_dir_arrow7 {
+    margin-top: 420px;
+    margin-left: 250px;
+}
+.hamburger_container_dir_arrow8 {
+    margin-top: 480px;
+    margin-left: 250px;
+}
+.hamburger_container_dir_arrow9 {
+    margin-top: 540px;
+    margin-left: 250px;
+}
+.hamburger_container_dir_arrow10 {
+    margin-top: 600px;
+    margin-left: 250px;
+}
+.hamburger_container_dir_arrow11 {
+    margin-top: 660px;
+    margin-left: 250px;
+}
+.hamburger_container_dir_arrow12 {
+    margin-top: 720px;
+    margin-left: 250px;
+}
+.hamburger_container_dir_arrow1, .hamburger_container_dir_arrow2, .hamburger_container_dir_arrow3, .hamburger_container_dir_arrow4, .hamburger_container_dir_arrow5, .hamburger_container_dir_arrow6, .hamburger_container_dir_arrow7, .hamburger_container_dir_arrow8, .hamburger_container_dir_arrow9, .hamburger_container_dir_arrow10, .hamburger_container_dir_arrow11, .hamburger_container_dir_arrow12 {
     display: none;
 }
-.hamburger_sub_container table{
+.table_of_hamburger_sub_container {
 margin: 5px;
 border-spacing: 20px;
 text-align: left;
-
 }
 .hamburger_sub_container a {
     text-decoration: none;
@@ -381,18 +409,20 @@ text-align: left;
     color: #45b2ff;
 }
 
-.hamburger_sub_container td {
+.table_of_hamburger_sub_container td {
     border-bottom: 1px solid #CDBDCA;
     padding: 10px 0px;    
 }
 
-.hamburger_sub_container th {
+.table_of_hamburger_sub_container th {
    font-family:sans-serif;
 }
 
-.laptops_container_table, .electronic_container_table, .audio_container_table, .smartphone_container_table1, .smartphone_container_table2 {
+.table_of_hamburger_sub_container {
     display: none;
 }
+
+
 
 /*Navigation Table Container End */
 

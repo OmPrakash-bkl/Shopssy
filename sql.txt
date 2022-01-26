@@ -24,7 +24,7 @@ insert into category(cat_title, cat_image_name, cat_icon_name, cat_name_descript
 ('Games & Toys', 'all_categories_gaming_console.jpg', 'fas fa-gamepad', 'Xbox, Playstation, PSP ...'), 
 ('Cloths', 'all_categories_mobiles.jpg', 'fas fa-tshirt', 'Sarees, Blouse, Gowns ...'), 
 ('Footwears', 'all_categories_mobiles.jpg', 'fas fa-shoe-prints', 'Boots, Sneakers, Flats ...'), 
-('Watches', 'all_categories_mobiles.jpg', 'fa-solid fa-watch', 'Casio, Titan, Fossil ...'),
+('Watches', 'all_categories_mobiles.jpg', 'fa fa-clock-o', 'Casio, Titan, Fossil ...'),
 ('Bags & Accessories', 'all_categories_mobiles.jpg', 'fas fa-suitcase-rolling', 'HandBag, SchoolBag, LunchBag ...'),
 ('Home Furniture', 'all_categories_mobiles.jpg', 'fas fa-couch', 'Sofa, Beds, TV Units ...'),
 ('Books & Stationery Items', 'all_categories_mobiles.jpg', 'fas fa-book', 'Pens, Diaries, Calculators ...');

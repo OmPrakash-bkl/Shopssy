@@ -17,19 +17,22 @@ document.getElementById("hamburger_container_dir_arrow_tiger1").addEventListener
    
    if(e.clientX > 100) {
     document.getElementsByClassName("hamburger_container_dir_arrow1")[0].style.display="block";
-    document.getElementsByClassName("laptops_container_table")[0].style.display="block";
-           document.getElementsByClassName("laptops_container_table")[0].addEventListener("mouseleave", function() {
+    document.getElementsByClassName("hamburger_sub_container_tables1")[0].style.display="flex";
+    document.getElementsByClassName("hamburger_sub_container_tables1")[1].style.display="flex";
+           document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
             document.getElementsByClassName("hamburger_container_dir_arrow1")[0].style.display="none";
-            document.getElementsByClassName("laptops_container_table")[0].style.display="none";
+            document.getElementsByClassName("hamburger_sub_container_tables1")[0].style.display="none";
+            document.getElementsByClassName("hamburger_sub_container_tables1")[1].style.display="none";
         })
    } else {
     document.getElementsByClassName("hamburger_container_dir_arrow1")[0].style.display="none";
-    document.getElementsByClassName("laptops_container_table")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables1")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables1")[1].style.display="none";
    }
    if(e.clientY > 215 || e.clientY < 195) {
     document.getElementsByClassName("hamburger_container_dir_arrow1")[0].style.display="none";
-    document.getElementsByClassName("laptops_container_table")[0].style.display="none";
-    
+    document.getElementsByClassName("hamburger_sub_container_tables1")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables1")[1].style.display="none";
    }
 });
 
@@ -37,19 +40,22 @@ document.getElementById("hamburger_container_dir_arrow_tiger2").addEventListener
   
    if(e.clientX > 100) {
     document.getElementsByClassName("hamburger_container_dir_arrow2")[0].style.display="block";
-    document.getElementsByClassName("electronic_container_table")[0].style.display="block";
-           document.getElementsByClassName("electronic_container_table")[0].addEventListener("mouseleave", function() {
+    document.getElementsByClassName("hamburger_sub_container_tables2")[0].style.display="flex";
+    document.getElementsByClassName("hamburger_sub_container_tables2")[1].style.display="flex";
+           document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
             document.getElementsByClassName("hamburger_container_dir_arrow2")[0].style.display="none";
-            document.getElementsByClassName("electronic_container_table")[0].style.display="none";
+            document.getElementsByClassName("hamburger_sub_container_tables2")[0].style.display="none";
+            document.getElementsByClassName("hamburger_sub_container_tables2")[1].style.display="none";
         })
    } else {
     document.getElementsByClassName("hamburger_container_dir_arrow2")[0].style.display="none";
-    document.getElementsByClassName("electronic_container_table")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables2")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables2")[1].style.display="none";
    }
    if(e.clientY > 275 || e.clientY < 258) {
     document.getElementsByClassName("hamburger_container_dir_arrow2")[0].style.display="none";
-    document.getElementsByClassName("electronic_container_table")[0].style.display="none";
-  
+    document.getElementsByClassName("hamburger_sub_container_tables2")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables2")[1].style.display="none";
    }
 });
 
@@ -57,19 +63,22 @@ document.getElementById("hamburger_container_dir_arrow_tiger3").addEventListener
    
    if(e.clientX > 100) {
     document.getElementsByClassName("hamburger_container_dir_arrow3")[0].style.display="block";
-    document.getElementsByClassName("audio_container_table")[0].style.display="block";
-           document.getElementsByClassName("audio_container_table")[0].addEventListener("mouseleave", function() {
+    document.getElementsByClassName("hamburger_sub_container_tables3")[0].style.display="flex";
+    document.getElementsByClassName("hamburger_sub_container_tables3")[1].style.display="flex";
+           document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
             document.getElementsByClassName("hamburger_container_dir_arrow3")[0].style.display="none";
-            document.getElementsByClassName("audio_container_table")[0].style.display="none";
+            document.getElementsByClassName("hamburger_sub_container_tables3")[0].style.display="none";
+            document.getElementsByClassName("hamburger_sub_container_tables3")[1].style.display="none";
         })
    } else {
     document.getElementsByClassName("hamburger_container_dir_arrow3")[0].style.display="none";
-    document.getElementsByClassName("audio_container_table")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables3")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables3")[1].style.display="none";
    }
    if(e.clientY > 340 || e.clientY < 320) {
     document.getElementsByClassName("hamburger_container_dir_arrow3")[0].style.display="none";
-    document.getElementsByClassName("audio_container_table")[0].style.display="none";
- 
+    document.getElementsByClassName("hamburger_sub_container_tables3")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables3")[1].style.display="none";
    }
 });
 
@@ -77,41 +86,214 @@ document.getElementById("hamburger_container_dir_arrow_tiger4").addEventListener
   
    if(e.clientX > 100) {
     document.getElementsByClassName("hamburger_container_dir_arrow4")[0].style.display="block";
-    document.getElementsByClassName("smartphone_container_table1")[0].style.display="block";
+    document.getElementsByClassName("hamburger_sub_container_tables4")[0].style.display="flex";
+    document.getElementsByClassName("hamburger_sub_container_tables4")[1].style.display="flex";
            document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
             document.getElementsByClassName("hamburger_container_dir_arrow4")[0].style.display="none";
-            document.getElementsByClassName("smartphone_container_table1")[0].style.display="none";
+            document.getElementsByClassName("hamburger_sub_container_tables4")[0].style.display="none";
+            document.getElementsByClassName("hamburger_sub_container_tables4")[1].style.display="none";
         })
    } else {
     document.getElementsByClassName("hamburger_container_dir_arrow4")[0].style.display="none";
-    document.getElementsByClassName("smartphone_container_table1")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables4")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables4")[1].style.display="none";
    }
    if(e.clientY > 395 || e.clientY < 380) {
     document.getElementsByClassName("hamburger_container_dir_arrow4")[0].style.display="none";
-    document.getElementsByClassName("smartphone_container_table1")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables4")[0].style.display="none";
+    document.getElementsByClassName("hamburger_sub_container_tables4")[1].style.display="none";
     
    }
 });
 
-document.getElementById("hamburger_container_dir_arrow_tiger4").addEventListener("mousemove", function(e) {
-   
-   if(e.clientX > 100) {
-    document.getElementsByClassName("hamburger_container_dir_arrow4")[0].style.display="block";
-    document.getElementsByClassName("smartphone_container_table2")[0].style.display="block";
-           document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
-            document.getElementsByClassName("hamburger_container_dir_arrow4")[0].style.display="none";
-            document.getElementsByClassName("smartphone_container_table2")[0].style.display="none";
-        })
-   } else {
-    document.getElementsByClassName("hamburger_container_dir_arrow4")[0].style.display="none";
-    document.getElementsByClassName("smartphone_container_table2")[0].style.display="none";
-   }
-   if(e.clientY > 395 || e.clientY < 380) {
-    document.getElementsByClassName("hamburger_container_dir_arrow4")[0].style.display="none";
-    document.getElementsByClassName("smartphone_container_table2")[0].style.display="none";
-   
-   }
-});
+document.getElementById("hamburger_container_dir_arrow_tiger5").addEventListener("mousemove", function(e) {
+    if(e.clientX > 100) {
+     document.getElementsByClassName("hamburger_container_dir_arrow5")[0].style.display="block";
+     document.getElementsByClassName("hamburger_sub_container_tables5")[0].style.display="block";
+     document.getElementsByClassName("hamburger_sub_container_tables5")[1].style.display="block";
+            document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
+             document.getElementsByClassName("hamburger_container_dir_arrow5")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables5")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables5")[1].style.display="none";
+         })
+    } else {
+     document.getElementsByClassName("hamburger_container_dir_arrow5")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables5")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables5")[1].style.display="none";
+    }
+  
+    if(e.clientY > 440 || e.clientY < 450) {
+     document.getElementsByClassName("hamburger_container_dir_arrow5")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables5")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables5")[1].style.display="none";
+     
+    }
+ });
+ document.getElementById("hamburger_container_dir_arrow_tiger6").addEventListener("mousemove", function(e) {
+
+    if(e.clientX > 100) {
+     document.getElementsByClassName("hamburger_container_dir_arrow6")[0].style.display="block";
+     document.getElementsByClassName("hamburger_sub_container_tables6")[0].style.display="flex";
+     document.getElementsByClassName("hamburger_sub_container_tables6")[1].style.display="flex";
+            document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
+             document.getElementsByClassName("hamburger_container_dir_arrow6")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables6")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables6")[1].style.display="none";
+         })
+    } else {
+     document.getElementsByClassName("hamburger_container_dir_arrow6")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables6")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables6")[1].style.display="none";
+    }
+  
+    if(e.clientY > 440 || e.clientY < 450) {
+     document.getElementsByClassName("hamburger_container_dir_arrow6")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables6")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables6")[1].style.display="none";
+     
+    }
+ });
+ document.getElementById("hamburger_container_dir_arrow_tiger7").addEventListener("mousemove", function(e) {
+
+    if(e.clientX > 100) {
+     document.getElementsByClassName("hamburger_container_dir_arrow7")[0].style.display="block";
+     document.getElementsByClassName("hamburger_sub_container_tables7")[0].style.display="flex";
+     document.getElementsByClassName("hamburger_sub_container_tables7")[1].style.display="flex";
+            document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
+             document.getElementsByClassName("hamburger_container_dir_arrow7")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables7")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables7")[1].style.display="none";
+         })
+    } else {
+     document.getElementsByClassName("hamburger_container_dir_arrow7")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables7")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables7")[1].style.display="none";
+    }
+  
+    if(e.clientY > 440 || e.clientY < 450) {
+     document.getElementsByClassName("hamburger_container_dir_arrow7")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables7")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables7")[1].style.display="none";
+     
+    }
+ });
+
+ document.getElementById("hamburger_container_dir_arrow_tiger8").addEventListener("mousemove", function(e) {
+
+    if(e.clientX > 100) {
+     document.getElementsByClassName("hamburger_container_dir_arrow8")[0].style.display="block";
+     document.getElementsByClassName("hamburger_sub_container_tables8")[0].style.display="flex";
+     document.getElementsByClassName("hamburger_sub_container_tables8")[1].style.display="flex";
+            document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
+             document.getElementsByClassName("hamburger_container_dir_arrow8")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables8")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables8")[1].style.display="none";
+         })
+    } else {
+     document.getElementsByClassName("hamburger_container_dir_arrow8")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables8")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables8")[1].style.display="none";
+    }
+  
+    if(e.clientY > 440 || e.clientY < 450) {
+     document.getElementsByClassName("hamburger_container_dir_arrow8")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables8")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables8")[1].style.display="none";
+     
+    }
+ });
+
+ document.getElementById("hamburger_container_dir_arrow_tiger9").addEventListener("mousemove", function(e) {
+
+    if(e.clientX > 100) {
+     document.getElementsByClassName("hamburger_container_dir_arrow9")[0].style.display="block";
+     document.getElementsByClassName("hamburger_sub_container_tables9")[0].style.display="flex";
+            document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
+             document.getElementsByClassName("hamburger_container_dir_arrow9")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables9")[0].style.display="none";
+         })
+    } else {
+     document.getElementsByClassName("hamburger_container_dir_arrow9")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables9")[0].style.display="none";
+    }
+  
+    if(e.clientY > 440 || e.clientY < 450) {
+     document.getElementsByClassName("hamburger_container_dir_arrow9")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables9")[0].style.display="none";
+    }
+ });
+
+ document.getElementById("hamburger_container_dir_arrow_tiger10").addEventListener("mousemove", function(e) {
+
+    if(e.clientX > 100) {
+     document.getElementsByClassName("hamburger_container_dir_arrow10")[0].style.display="block";
+     document.getElementsByClassName("hamburger_sub_container_tables10")[0].style.display="flex";
+     document.getElementsByClassName("hamburger_sub_container_tables10")[1].style.display="flex";
+            document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
+             document.getElementsByClassName("hamburger_container_dir_arrow10")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables10")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables10")[1].style.display="none";
+         })
+    } else {
+     document.getElementsByClassName("hamburger_container_dir_arrow10")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables10")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables10")[1].style.display="none";
+    }
+  
+    if(e.clientY > 440 || e.clientY < 450) {
+     document.getElementsByClassName("hamburger_container_dir_arrow10")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables10")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables10")[1].style.display="none";
+     
+    }
+ });
+
+ document.getElementById("hamburger_container_dir_arrow_tiger11").addEventListener("mousemove", function(e) {
+
+    if(e.clientX > 100) {
+     document.getElementsByClassName("hamburger_container_dir_arrow11")[0].style.display="block";
+     document.getElementsByClassName("hamburger_sub_container_tables11")[0].style.display="flex";
+            document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
+             document.getElementsByClassName("hamburger_container_dir_arrow11")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables11")[0].style.display="none";
+         })
+    } else {
+     document.getElementsByClassName("hamburger_container_dir_arrow11")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables11")[0].style.display="none";
+    }
+  
+    if(e.clientY > 440 || e.clientY < 450) {
+     document.getElementsByClassName("hamburger_container_dir_arrow11")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables11")[0].style.display="none";
+    }
+ });
+
+ document.getElementById("hamburger_container_dir_arrow_tiger12").addEventListener("mousemove", function(e) {
+
+    if(e.clientX > 100) {
+     document.getElementsByClassName("hamburger_container_dir_arrow12")[0].style.display="block";
+     document.getElementsByClassName("hamburger_sub_container_tables12")[0].style.display="flex";
+     document.getElementsByClassName("hamburger_sub_container_tables12")[1].style.display="flex";
+            document.getElementsByClassName("hamburger_sub_container")[0].addEventListener("mouseleave", function() {
+             document.getElementsByClassName("hamburger_container_dir_arrow12")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables12")[0].style.display="none";
+             document.getElementsByClassName("hamburger_sub_container_tables12")[1].style.display="none";
+         })
+    } else {
+     document.getElementsByClassName("hamburger_container_dir_arrow12")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables12")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables12")[1].style.display="none";
+    }
+  
+    if(e.clientY > 440 || e.clientY < 450) {
+     document.getElementsByClassName("hamburger_container_dir_arrow12")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables12")[0].style.display="none";
+     document.getElementsByClassName("hamburger_sub_container_tables12")[1].style.display="none";
+     
+    }
+ });
+
+
 
 /* Main Navbar Functions End */
 

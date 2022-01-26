@@ -1,3 +1,6 @@
+<?php 
+include './db_con.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -286,49 +289,35 @@
             <!--hamburger container start-->
 
             <div class="hamburger_main_container_table" id="hamburger_navigation_container">
-                <table>
+
+                <table class="hamburger_main_container_tables_table">
+
+                <?php 
+
+                $category_query = "SELECT * FROM `category`;";
+                $category_result = mysqli_query($con, $category_query);
+               while($row = mysqli_fetch_assoc($category_result)) {
+                   $category_cat_id = $row['cat_id'];
+                   $category_cat_title = $row['cat_title'];
+                   $category_cat_icon_name = $row['cat_icon_name'];
+                   $category_cat_name_description = $row['cat_name_description'];
+              
+
+                ?>
+
                     <tr>
-                        <td rowspan="2"><i class="fas fa-laptop" style="color: #A1A1A1;font-size: 25px;"></i></td>
+                        <td class="hamburger_main_container_table_td_tag" rowspan="2"><i class="<?php echo $category_cat_icon_name; ?>" style="color: #A1A1A1;font-size: 25px;"></i></td>
                     </tr>
-                    <tr id="hamburger_container_dir_arrow_tiger1">
-                        <td><a href="#"><b>Laptops and Accessories</b></a> <br>
-                         <a href="#"><p>Dell, Hp, Macbook, Alienware, and etc.</p></a>
+                    <tr id="hamburger_container_dir_arrow_tiger<?php echo $category_cat_id; ?>">
+                        <td class="hamburger_main_container_table_td_tag"><a href="#"><b><?php echo $category_cat_title; ?></b></a> <br>
+                         <a href="#"><p class="hamburger_main_container_table_p_tag"><?php echo $category_cat_name_description; ?></p></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td rowspan="2"><i class="fa fa-microchip" style="color: #A1A1A1;font-size: 25px;"></i></td>
-                    </tr>
-                    <tr id="hamburger_container_dir_arrow_tiger2">
-                        <td><a href="#"><b>Electronics</b></a> <br>
-                         <a href="#"><p>Blender, iron, Vacuum Cleaner ...</p></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2"><i class="fas fa-headset" style="color: #A1A1A1;font-size: 25px;"></i></td>
-                    </tr>
-                    <tr id="hamburger_container_dir_arrow_tiger3">
-                        <td><a href="#"><b>Audio & Sound Devices</b></a> <br>
-                         <a href="#"><p>Speaker, Headphone, Soundcard ...</p></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2"><i class="fa fa-mobile" style="color: #A1A1A1;font-size: 25px;margin-left: 6px;"></i></td>
-                    </tr>
-                    <tr id="hamburger_container_dir_arrow_tiger4">
-                        <td><a href="#"><b>Smartphone & Tablets</b></a> <br>
-                         <a href="#"><p>Iphone, Oppo, Samsung, Sony ...</p></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2"><i class="fas fa-gamepad" style="color: #A1A1A1;font-size: 25px;"></i></td>
-                    </tr>
-                    <tr id="hamburger_container_dir_arrow_tiger5">
-                        <td><a href="#"><b>Gaming Gear</b></a> <br>
-                         <a href="#"><p>Mouse, Headphone, Console ...</p></a>
-                        </td>
-                    </tr>
-                   
+
+                    <?php } ?>
+                    
                 </table>
+
             </div>
 
             <!--hamburger container end-->
@@ -337,6 +326,14 @@
             <div class="hamburger_container_dir_arrow hamburger_container_dir_arrow3"></div>
             <div class="hamburger_container_dir_arrow hamburger_container_dir_arrow4"></div>
             <div class="hamburger_container_dir_arrow hamburger_container_dir_arrow5"></div>
+            <div class="hamburger_container_dir_arrow hamburger_container_dir_arrow6"></div>
+            <div class="hamburger_container_dir_arrow hamburger_container_dir_arrow7"></div>
+            <div class="hamburger_container_dir_arrow hamburger_container_dir_arrow8"></div>
+            <div class="hamburger_container_dir_arrow hamburger_container_dir_arrow9"></div>
+            <div class="hamburger_container_dir_arrow hamburger_container_dir_arrow10"></div>
+            <div class="hamburger_container_dir_arrow hamburger_container_dir_arrow11"></div>
+            <div class="hamburger_container_dir_arrow hamburger_container_dir_arrow12"></div>
+
          </div>
         </div>
 
@@ -465,156 +462,41 @@
             <!--hamburger sub container start-->
 
             <div class="hamburger_sub_container">
-                <!--laptops table start-->
+                <!--hamburger_sub_container_tables start-->
 
-                <table class="laptops_container_table">
+                <?php 
+
+                $sub_cat_query = "SELECT * FROM `sub_category`";
+                $sub_cat_result = mysqli_query($con, $sub_cat_query);
+               while($row1 = mysqli_fetch_assoc($sub_cat_result)) {
+                $subcategory_cats_id = $row1['cats_id'];
+                $subcategory_sub_cat_title = $row1['subs_cat_title'];
+                $subcategory_sub_cat_identification_id = $row1['sub_cat_identification_id'];
+               
+                ?>
+
+                <table class="table_of_hamburger_sub_container hamburger_sub_container_tables<?php echo $subcategory_cats_id; ?>">
                     <tr>
-                        <th>LAPTOPS</th>
+                        <th><?php echo $subcategory_sub_cat_title; ?></th>
                     </tr>
+
+                    <?php 
+                    $brand_and_item_list_query = " SELECT * FROM `brand_and_item_list` WHERE `subs_cat_identification_id` = $subcategory_sub_cat_identification_id;";
+                    $brand_and_item_list_result = mysqli_query($con, $brand_and_item_list_query);
+
+                    while($row2 = mysqli_fetch_assoc($brand_and_item_list_result)) {
+                        $brand_and_item_list_b_title = $row2['b_title'];
+                    ?>
+
                     <tr>
-                        <td><a href="#">Macbook Pro</a></td>
+                        <td><a href="#"><?php echo $brand_and_item_list_b_title; ?></a></td>
                     </tr>
-                    <tr>
-                        <td><a href="#">Laptop Thinkpad</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Elitebook</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Lenovo Yoga</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Trackpad</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Dell Percision</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Dell Alienware</a></td>
-                    </tr>
+                  <?php } ?>
                 </table>
+               <?php } ?>
+              
 
-                <!--laptops table end-->
-
-                <!--electronics table start-->
-
-                <table class="electronic_container_table">
-                    <tr>
-                        <th>HOUSEWARE</th>
-                        <th>KITCHEN EQUIPMENT</th>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Fridge</a></td>
-                        <td><a href="#">Cooker</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Airconditioning</a></td>
-                        <td><a href="#">Microwave</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Electronic Fan</a></td>
-                        <td><a href="#">Diswasher</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Spray Mist Fan</a></td>
-                        <td><a href="#">Dryer</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Vacuum Cleaner</a></td>
-                        <td><a href="#">Kitchen Infrared</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Washing Machine</a></td>
-                        <td><a href="#">Gas Stove</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Heater</a></td>
-                        <td><a href="#">Oven</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Television</a></td>
-                        <td><a href="#">Water Boiler</a></td>
-                    </tr>
-                </table>
-
-                <!--electronics table end-->
-
-                <!--audio container start-->
-
-                <table class="audio_container_table">
-                    <tr>
-                        <th>SPEAKERS</th>
-                        <th>HEADPHONES</th>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Lansing Products</a></td>
-                        <td><a href="#">Lansing Products</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">UFI Products</a></td>
-                        <td><a href="#">UFI Products</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Edifier Products</a></td>
-                        <td><a href="#">Edifier Products</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Mionix Products</a></td>
-                        <td><a href="#">Mionix Products</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Plantronics Products</a></td>
-                        <td><a href="#">Plantronics Products</a></td>
-                    </tr>
-                </table>
-
-                <!--audio container end-->
-
-                <!--smartphone container start-->
-
-                <table class="smartphone_container_table1">
-                    <tr>
-                        <th>IPHONE</th>
-                        <th>ANDROID PHONE</th>
-                    </tr>
-                    <tr>
-                        <td><a href="#">iPhone X</a></td>
-                        <td><a href="#">Samsung Galaxy</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">iPhone 7/7 Plus</a></td>
-                        <td><a href="#">Samsung</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">iPhone 6/6s Plue</a></td>
-                        <td><a href="#">OPPO</a></td>
-                    </tr>
-
-                    <tr>
-                        <td><a href="#">iPhone 5s</a></td>
-                        <td><a href="#">Sony</a></td>
-                    </tr>
-                </table>
-                <br>
-                <table class="smartphone_container_table2">
-                   <tr>
-                    <th>IPAD</th>
-                   </tr>
-                   <tr>
-                       <td><a href="#">Samsung</a></td>
-                   </tr>
-                   <tr>
-                       <td><a href="#">Lenovo</a></td>
-                   </tr>
-                   <tr>
-                       <td><a href="#">Asus</a></td>
-                   </tr>
-                   <tr>
-                       <td><a href="#">Huawei</a></td>
-                   </tr>
-                </table>
-
-                <!--smartphone container end-->
+                <!--hamburger_sub_container_tables end-->
 
 
             </div>
