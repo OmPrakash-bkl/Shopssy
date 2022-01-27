@@ -19,37 +19,19 @@ document.getElementsByClassName("rating_container")[0].addEventListener("click",
     }
     });
 
-    document.getElementsByClassName("colors_container")[0].addEventListener("click", function(){
-        if(document.getElementById("color_list_container").style.display == "none") {
-            document.getElementById("color_list_container").style.display = "block";
-            document.getElementById("arrow_of_product3").className = "fa fa-angle-up";
-        } else {
-            document.getElementById("color_list_container").style.display = "none";
-            document.getElementById("arrow_of_product3").className = "fa fa-angle-down";
-        }
-        });
-
-        document.getElementsByClassName("price_container")[0].addEventListener("click", function(){
-            if(document.getElementById("price_bar_container").style.display == "none") {
-                document.getElementById("price_bar_container").style.display = "block";
-                document.getElementById("arrow_of_product4").className = "fa fa-angle-up";
-            } else {
-                document.getElementById("price_bar_container").style.display = "none";
-                document.getElementById("arrow_of_product4").className = "fa fa-angle-down";
-            }
-            });
-
-            document.getElementsByClassName("size_container")[0].addEventListener("click", function(){
-                if(document.getElementById("size_list_container").style.display == "none") {
-                    document.getElementById("size_list_container").style.display = "block";
-                    document.getElementById("arrow_of_product6").className = "fa fa-angle-up";
-                } else {
-                    document.getElementById("size_list_container").style.display = "none";
-                    document.getElementById("arrow_of_product6").className = "fa fa-angle-down";
-                }
-                });
+   function show_and_hide(i) {
+    if(document.getElementById(`rating_list_container${i}`).style.display == "none") {
+        document.getElementById(`rating_list_container${i}`).style.display = "block";
+        document.getElementById(`arrow_of_product${i}`).className = "fa fa-angle-up";
+    } else {
+        document.getElementById(`rating_list_container${i}`).style.display = "none";
+        document.getElementById(`arrow_of_product${i}`).className = "fa fa-angle-down";
+    }
+   }
+         
 
             document.getElementsByClassName("select_container")[0].addEventListener("click", function(){
+               
                 if(document.getElementsByClassName("select_inner_container")[0].style.display=="none") {
                     document.getElementsByClassName("select_inner_container")[0].style.display="block";
                     document.getElementById("arrow_of_product5").className = "fa fa-angle-up";

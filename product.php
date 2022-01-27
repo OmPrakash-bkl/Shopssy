@@ -6,7 +6,7 @@ include './header.php';
 if(isset($_GET['sub_cat_identification_id'])) {
     $product_sub_cat_identification_id = $_GET['sub_cat_identification_id'];
     $product_sub_cat_title = $_GET['sub_cat_title'];
-  
+    $product_sub_cat_identification_id_two = $_GET['sub_cat_identification_id_two'];
 }
 
 ?>
@@ -208,9 +208,11 @@ if(isset($_GET['sub_cat_identification_id'])) {
             </div>
 
             <?php 
-   $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id+99.9;";
+
+
+   $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id_two;";
    $temp_result = mysqli_query($con, $temp_query);
-   
+   $dummy = 1;
    while($row = mysqli_fetch_assoc($temp_result)) {
        $temp_title = $row['filter_title'];
        $temp_id = $row['filter_id'];
@@ -218,15 +220,15 @@ if(isset($_GET['sub_cat_identification_id'])) {
 
             <div class="product_section_sub_container_customer_rating_container">
                 <div>
-                    <div class="rating_container">
+                    <div class="rating_container fil_container<?php echo $dummy; ?>" onclick="show_and_hide(<?php echo $dummy; ?>)">
                         <div class="text_div">
                             <span><?php echo $temp_title; ?></span>
                         </div>
                         <div>
-                            <i class="fa fa-angle-down" id="arrow_of_product2"></i>
+                            <i class="fa fa-angle-down" id="arrow_of_product<?php echo $dummy; ?>"></i>
                         </div>
                     </div>
-                    <div class="rating_list_container" id="rating_list_container">
+                    <div class="rating_list_container" id="rating_list_container<?php echo $dummy; ?>">
 
                     <?php 
            $temp_sub_query = "SELECT * FROM `filter_sub` WHERE `filters_id`=$temp_id;";
@@ -246,7 +248,10 @@ if(isset($_GET['sub_cat_identification_id'])) {
                 </div>
             </div>
 
-            <?php } ?>
+            
+            <?php
+        $dummy++;
+        } ?>
 
            </form>
         </div>
