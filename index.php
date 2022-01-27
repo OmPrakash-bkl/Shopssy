@@ -83,7 +83,7 @@ include './header.php';
 
         <?php
         
-        $products_query = "SELECT * FROM `products` WHERE `cats_id` = 3 ;";
+        $products_query = "SELECT * FROM `products` WHERE `cats_id` = 1 ;";
         $products_result = mysqli_query($con, $products_query);
        while($row = mysqli_fetch_assoc($products_result)) {
            $product_p_image = $row['p_image'];

@@ -27,14 +27,16 @@ include './db_con.php';
         while($row = mysqli_fetch_assoc($all_categories_result)) {
             $all_categories_sub_cat_image_name = $row['sub_cat_image_name'];
             $all_categories_cat_title = $row['subs_cat_title'];
+            $all_categories_sub_cat_identification_id = $row['sub_cat_identification_id'];
+            
         ?>
 
             <div class="all_categories_sub_container">
                 <center>
-                 <a href="./product.php">
+                 <a href="./product.php?sub_cat_identification_id=<?php echo $all_categories_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $all_categories_cat_title; ?>">
                      <img src="./images/<?php echo $all_categories_sub_cat_image_name; ?>" alt="<?php echo $all_categories_cat_title; ?>">
                 </a>
-                <a href="./product.php" class="product_link"><?php echo $all_categories_cat_title; ?></a>
+                <a href="./product.php?sub_cat_identification_id=<?php echo $all_categories_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $all_categories_cat_title; ?>" class="product_link"><?php echo $all_categories_cat_title; ?></a>
                 </center>
              </div>
 

@@ -1741,19 +1741,9 @@ margin-bottom: 20px;
     
 }
 .product_section_sub_container_brands_container .text_div, .product_section_sub_container_customer_rating_container .text_div, .product_section_sub_container_colors_container .text_div, .product_section_sub_container_price_container .text_div, .product_section_sub_container_size_container .text_div {
-    
-    padding-right: 175px;
     font-family: Arial, Helvetica, sans-serif;
 }
-.product_section_sub_container_customer_rating_container .text_div {
-    padding-right: 77px;
-}
-.product_section_sub_container_price_container .text_div {
-    padding-right: 195px;
-}
-.product_section_sub_container_size_container .text_div {
-    padding-right: 210px;
-}
+
 .product_section_sub_container_brands_container div > div, .product_section_sub_container_customer_rating_container div > div, .product_section_sub_container_colors_container div > div, .product_section_sub_container_price_container div > div, .product_section_sub_container_size_container div > div {
     padding: 5px 5px;
 }

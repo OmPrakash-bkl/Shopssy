@@ -2,6 +2,13 @@
 include './action.php';
 $title = "Mobiles - Shopssy";
 include './header.php';
+
+if(isset($_GET['sub_cat_identification_id'])) {
+    $product_sub_cat_identification_id = $_GET['sub_cat_identification_id'];
+    $product_sub_cat_title = $_GET['sub_cat_title'];
+  
+}
+
 ?>
 
     <!--filter for mobile container start-->
@@ -147,7 +154,7 @@ include './header.php';
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
         <span><a href="./all_categories.php">All Categories</a></span>
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
-        <span><a href="#">Mobiles</a></span>
+        <span><a href="#"><?php echo $product_sub_cat_title; ?></a></span>
     </div>
 </center>
     </div>
@@ -173,140 +180,73 @@ include './header.php';
                 <div>
                     <div class="brands_container">
                         <div class="text_div">
-                            <span>BRANDS</span>
+                            <span>BRANDS & ITEMS</span>
                         </div>
                         <div class="arrow_div">
                             <i class="fa fa-angle-down" id="arrow_of_product1"></i>
                         </div>
                     </div>
                     <div class="brand_list_container" id="brand_list_container">
+                        <?php
+                        
+                        $product_cat_query = "SELECT `b_title` FROM `brand_and_item_list` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
+                        $product_cat_result = mysqli_query($con, $product_cat_query);
+
+                        while($row = mysqli_fetch_assoc($product_cat_result)) {
+
+                            $pro_cat_titles = $row['b_title'];
+                        
+                        ?>
                         <div>
-                            <input type="checkbox" id="Samsung" onchange="document.getElementById('fliter_form').submit()"> <label for="Samsung">Samsung</label>
+                            <input type="checkbox" id="<?php echo $pro_cat_titles; ?>" onchange="document.getElementById('fliter_form').submit()"> <label for="<?php echo $pro_cat_titles; ?>"><?php echo $pro_cat_titles; ?></label>
                         </div>
-                        <div>
-                            <input type="checkbox" id="Realme" onchange="document.getElementById('fliter_form').submit()"> <label for="Realme">Realme</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="Poco" onchange="document.getElementById('fliter_form').submit()"> <label for="Poco">Poco</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="Redmi" onchange="document.getElementById('fliter_form').submit()"> <label for="Redmi">Redmi</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="Apple" onchange="document.getElementById('fliter_form').submit()"> <label for="Apple">Apple</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="Infinix" onchange="document.getElementById('fliter_form').submit()"> <label for="Infinix">Infinix</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="OnePlus" onchange="document.getElementById('fliter_form').submit()"> <label for="OnePlus">OnePlus</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="Oppo" onchange="document.getElementById('fliter_form').submit()"> <label for="Oppo">Oppo</label>
-                        </div>
+                       
+                      <?php } ?>
+                        
                     </div>
                 </div>
             </div>
+
+            <?php 
+   $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id+99.9;";
+   $temp_result = mysqli_query($con, $temp_query);
+   
+   while($row = mysqli_fetch_assoc($temp_result)) {
+       $temp_title = $row['filter_title'];
+       $temp_id = $row['filter_id'];
+   ?>
 
             <div class="product_section_sub_container_customer_rating_container">
                 <div>
                     <div class="rating_container">
                         <div class="text_div">
-                            <span>CUSTOMER RATINGS</span>
+                            <span><?php echo $temp_title; ?></span>
                         </div>
                         <div>
                             <i class="fa fa-angle-down" id="arrow_of_product2"></i>
                         </div>
                     </div>
                     <div class="rating_list_container" id="rating_list_container">
-                        <div>
-                            <input type="checkbox" id="4star" onchange="document.getElementById('fliter_form').submit()"> <label for="4star">4 Star & Above</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="3star" onchange="document.getElementById('fliter_form').submit()"> <label for="3star">3 Star & Above</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="2star" onchange="document.getElementById('fliter_form').submit()"> <label for="2star">2 Star & Above</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="1star" onchange="document.getElementById('fliter_form').submit()"> <label for="1star">1 Star & Above</label>
-                        </div>
-                      
+
+                    <?php 
+           $temp_sub_query = "SELECT * FROM `filter_sub` WHERE `filters_id`=$temp_id;";
+           $temp_sub_result = mysqli_query($con, $temp_sub_query);
+           while($row1 = mysqli_fetch_assoc($temp_sub_result)) {
+               $temp_sub_filter_datas = $row1['filter_datas'];
+          
+           ?>
+           
+         <div>
+           <input type="checkbox" id="<?php echo $temp_sub_filter_datas; ?>" onchange="document.getElementById('fliter_form').submit()"> <label for="<?php echo $temp_sub_filter_datas; ?>"><?php echo $temp_sub_filter_datas; ?></label>
+        </div>
+
+         <?php } ?>
+
                     </div>
                 </div>
             </div>
 
-            <div class="product_section_sub_container_colors_container">
-                <div>
-                    <div class="colors_container">
-                        <div class="text_div">
-                            <span>COLORS</span>
-                        </div>
-                        <div>
-                            <i class="fa fa-angle-down" id="arrow_of_product3"></i>
-                        </div>
-                    </div>
-                    <div class="color_list_container" id="color_list_container">
-                        <div>
-                            <input type="checkbox" id="Red" onchange="document.getElementById('fliter_form').submit()"> <label for="Red">Red</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="Green" onchange="document.getElementById('fliter_form').submit()"> <label for="Green">Green</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="Blue" onchange="document.getElementById('fliter_form').submit()"> <label for="Blue">Blue</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="Yellow" onchange="document.getElementById('fliter_form').submit()"> <label for="Yellow">Yellow</label>
-                        </div>
-                      
-                    </div>
-                </div>
-            </div>
-
-            <div class="product_section_sub_container_size_container">
-                <div>
-                    <div class="size_container">
-                        <div class="text_div">
-                            <span>SIZE</span>
-                        </div>
-                        <div>
-                            <i class="fa fa-angle-down" id="arrow_of_product6"></i>
-                        </div>
-                    </div>
-                    <div class="size_list_container" id="size_list_container">
-                        <div>
-                            <input type="checkbox" id="Small" onchange="document.getElementById('fliter_form').submit()"> <label for="Small">Small</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="Medium" onchange="document.getElementById('fliter_form').submit()"> <label for="Medium">Medium</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="Large" onchange="document.getElementById('fliter_form').submit()"> <label for="Large">Large</label>
-                        </div>
-                        
-                      
-                    </div>
-                </div>
-            </div>
-
-            <div class="product_section_sub_container_price_container">
-                <div>
-                    <div class="price_container">
-                        <div class="text_div">
-                            <span>PRICE</span>
-                        </div>
-                        <div>
-                            <i class="fa fa-angle-down" id="arrow_of_product4"></i>
-                        </div>
-                    </div>
-                    <div class="price_bar_container" id="price_bar_container">
-                        <label for="price_range">1</label>
-                        <input type="range" min="1" max="10000" id="price_range"  onchange="document.getElementById('fliter_form').submit()">
-                        <label for="price_range">10000</label>
-                    </div>
-                </div>
-            </div>
+            <?php } ?>
 
            </form>
         </div>
@@ -314,7 +254,7 @@ include './header.php';
         <div class="product_section_sub_container_2">
            <div class="product_section_inner_container">
                <div class="product_section_inner_container_1">
-                   <h1>Mobiles</h1>
+                   <h1><?php echo $product_sub_cat_title; ?></h1>
                </div>
                <div class="product_section_inner_container_2" id="product_section_inner_container_2">
                   <div class="select_container">
@@ -333,7 +273,7 @@ include './header.php';
 
            <?php 
            
-           $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=1.1;";
+           $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
            $category_products_result = mysqli_query($con, $category_products_query);
 
            while($row = mysqli_fetch_assoc($category_products_result)) {
@@ -433,35 +373,7 @@ include './header.php';
    </center>
    <!--products section container end-->
 
-   <?php 
-   $temp_query = "SELECT * FROM `filter`";
-   $temp_result = mysqli_query($con, $temp_query);
    
-   while($row = mysqli_fetch_assoc($temp_result)) {
-       $temp_title = $row['filter_title'];
-       $temp_id = $row['filter_id'];
-   ?>
-
-   <table>
-       <tr>
-           <th><?php echo $temp_title; ?></th>
-
-           <?php 
-           $temp_sub_query = "SELECT * FROM `filter_sub` WHERE `filters_id`=$temp_id;";
-           $temp_sub_result = mysqli_query($con, $temp_sub_query);
-           while($row1 = mysqli_fetch_assoc($temp_sub_result)) {
-               $temp_sub_filter_datas = $row1['filter_datas'];
-          
-           ?>
-           
-           <td><?php echo $temp_sub_filter_datas; ?></td>
-
-           <?php } ?>
-       </tr>
-   </table>
-
-   <?php } ?>
-
    <?php 
     include "./footer.php";
     ?>
