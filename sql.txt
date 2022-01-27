@@ -32,10 +32,31 @@ insert into category(cat_title, cat_image_name, cat_icon_name, cat_name_descript
 
 4. Sub_Category
 
- create table sub_category(sub_cat_id int(100) AUTO_INCREMENT, cats_id int(100), sub_cat_identification_id float(4), subs_cat_title varchar(200), primary key(sub_cat_id));
- insert into sub_category(cats_id, sub_cat_identification_id, subs_cat_title) values(1, 1.1, "Mobiles"),
-(1, 1.2, "Tablets"),(2, 2.1, "Laptops"),(2, 2.2, "Computers"),(2, 2.3, "Accessories"),(3, 3.1, "Housewares"),(3, 3.2, "Kitchan Equipment"),(4, 4.1, "Speakers"),(4, 4.2, "Headphones"),(5, 5.1, "Professionals"),(5, 5.2, "Security"),(6, 6.1, "Gaming Consoles"),(6, 6.2, "Play Kits"),(7, 7.1, "Top Wears"),(7, 7.2, "Bottom Wears"),(8, 8.1, "Men's Footwear"),(8, 8.2, "Women's Footwear"),(9, 9.1, "Watches"),(10, 10.1, "Bags"),(10, 10.2, "Accessories"),(11, 11.1, "Furniture"),(12, 12.1, "Books"),(12, 12.2, "Stationery Items");
+ create table sub_category(sub_cat_id int(100) AUTO_INCREMENT, cats_id int(100), sub_cat_identification_id float(4), subs_cat_title varchar(200), sub_cat_image_name varchar(200), primary key(sub_cat_id));
 
+ insert into sub_category(cats_id, sub_cat_identification_id, subs_cat_title, sub_cat_image_name) values(1, 1.1, "Mobiles", 'oneplus_mobiles1_image4.jpg'),
+(1, 1.2, "Tablets", 'apple_tablets1_image1.jpg'),
+(2, 2.1, "Laptops", 'lg_laptops4_image2.jpg'),
+(2, 2.2, "Computers", 'hp_computers1_image1.jpg'),
+(2, 2.3, "Accessories", 'pendrives2_image1.jpg'),
+(3, 3.1, "Housewares", 'coffeemakers3_image1.jpg'),
+(3, 3.2, "Kitchan Equipment", 'electriccookers1_image1.jpg'),
+(4, 4.1, "Speakers", 'sonyspeakers1_image1.jpg'),
+(4, 4.2, "Headphones", 'jabraheadphones4_image1.jpg'),
+(5, 5.1, "Professionals", 'canoncameras1_image1.jpg'),
+(5, 5.2, "Security", 'domecameras3_image1.jpg'),
+(6, 6.1, "Gaming Consoles", 'pspconsoles3_image2.jpg'),
+(6, 6.2, "Play Kits", 'footballs2_image1.jpg'),
+(7, 7.1, "Top Wears", 'formalshirts1_image1.jpg'),
+(7, 7.2, "Bottom Wears", 'leggings4_image1.jpg'),
+(8, 8.1, "Men's Footwear", 'sneakers3_image2.jpg'),
+(8, 8.2, "Women's Footwear", 'heels1_image1.jpg'),
+(9, 9.1, "Watches", 'fossilwatches1_image1.jpg'),
+(10, 10.1, "Bags", 'schoolbags1_image1.jpg'),
+(10, 10.2, "Accessories", 'wallets1_image1.jpg'),
+(11, 11.1, "Furniture", 'sofas1_image1.jpg'),
+(12, 12.1, "Books", 'nonfictionbooks3_image1.jpg'),
+(12, 12.2, "Stationery Items", 'deskorganizers2_image1.jpg');
 
 5. Brands and Item List 
 
@@ -459,22 +480,22 @@ insert into products(cats_id, subs_cat_identification_id, b_and_i_identification
 (3, 3.1, 105.7, 357.2, 'Panasonic 23L Convection Microwave Oven(NN-CT353BFDG,Black Mirror, 360° Heat Wrap)', 'microwaveovens2_image1.jpg', 3, 10999.00, 9999.00),
 (3, 3.1, 105.7, 357.3, 'IFB 30 L Convection Microwave Oven (30BRC2, Black, With Starter Kit)', 'microwaveovens3_image1.jpg', 5, 16499.00, 14799.00),
 (3, 3.1, 105.7, 357.4, 'AmazonBasics 23 L Convection Microwave (Black)', 'microwaveovens4_image1.jpg', 4, 9499.00, 8999.00),
-(3, 3.1, 105.8, 358.1, 'Elica 60 cm 880 m3/hr Chimney (Strip CF 60 NERO, 2 Cassette Filters, Black)', 'chimneys1_image1.jpg', 4, 5999.00, 4999.00),
-(3, 3.1, 105.8, 358.2, 'Inalsa 60 cm, 1050 m3/hr Kitchen Chimney Enya BKBF with Stainless Steel Baffle Filters, Push Button Control, (Black) (Cooker Hood Enya 60BKBF)', 'chimneys2_image1.jpg', 3, 6999.00, 5499.00),
-(3, 3.1, 105.8, 358.3, 'Faber 60 cm 1000 m³/HR Pyramid Kitchen Chimney (HOOD CLASS PLUS PB BK LTW 60, 2 Baffle Filters,Black)', 'chimneys3_image1.jpg', 5, 8999.00, 7699.00),
-(3, 3.1, 105.8, 358.4, 'Elica 90 cm 1200 m3/hr Filterless Auto Clean Chimney (WDFL 906 HAC MS NERO, Touch + Motion Sensor Control, Black)', 'chimneys4_image1.jpg', 4, 14999.00, 12999.00),
-(3, 3.1, 105.9, 359.1, 'Kent Sandwich Maker, (16024), 700W, Non-Toxic Ceramic Coating Plate, Make 4 Sandwiches, Black, Standard', 'sanwichmakers1_image1.jpg', 5, 1899.00, 1699.00),
-(2, 3.1, 105.9, 359.2, 'Prestige Sandwich Maker PGMFD 01', 'sanwichmakers2_image1.jpg', 3, 1999.00, 1299.00),
-(2, 3.1, 105.9, 359.3, 'KENT 16025 Sandwich Grill 700W | Non-Toxic Ceramic Coating | Automatic Temperature Cut-off with LED Indicator | Adjustable Height Control, Black, Standard', 'sanwichmakers3_image1.jpg', 4, 1999.00, 1699.00),
-(2, 3.1, 105.9, 359.4, 'Borosil Super Jumbo 2000-Watt Grill Sandwich Maker (Black)', 'sanwichmakers4_image1.jpg', 5, 5799.00, 4399.00),
-(3, 3.1, 105.01, 360.1, 'Prestige PRWO 1.8-2 700-Watts Delight Electric Rice Cooker with 2 Aluminium Cooking Pans - 1.8L, White', 'electriccookers1_image1.jpg', 4, 3499.00, 2449.00),
-(3, 3.1, 105.01, 360.2, 'VARNIRAJ IMPORT & EXPORT WITH V LOGO Electric 1.5 L Mini Electric Multi-Purpose Cooker- Multicolour', 'electriccookers2_image1.jpg', 3, 1099.00, 799.00),
-(3, 3.1, 105.01, 360.3, 'Pigeon Kessel Multipurpose Kettle (12173) 1.2 litres with Stainless Steel Body, used for boiling Water and milk, Tea, Coffee, Oats, Noodles, Soup etc. 600 Watt (Silver)', 'electriccookers3_image1.jpg', 4, 1099.00, 949.00),
-(3, 3.1, 105.01, 360.4, 'Wellspire Multi Cooking Pot Smart Electric Pressure Cooker (6 Litres) with Instant 12-1 Single-Touch Functions and 7 Free Accesories (Black)', 'electriccookers4_image1.jpg', 5, 10999.00, 8999.00),
-(3, 3.1, 105.11, 361.1, 'Morphy Richards New Europa 800-Watt Espresso and Cappuccino 4-Cup Coffee Maker (Black)', 'coffeemakers1_image1.jpg', 3, 5899.00, 4699.00),
-(3, 3.1, 105.11, 361.2, 'Morphy Richards Europa Drip 600-Watt 6-cup Drip Coffee Maker, Gloss Black, Regular (350012)', 'coffeemakers2_image1.jpg', 5, 1599.00, 1399.00),
-(3, 3.1, 105.11, 361.3, 'Pigeon by Stovekraft Brewster Coffee Maker. A Small Size Coffee Maker of Home Machine (Black)', 'coffeemakers3_image1.jpg', 4, 1999.00, 1699.00),
-(3, 3.1, 105.11, 361.4, 'Philips HD7431/20 760-Watt Coffee Maker (Black)', 'coffeemakers4_image1.jpg', 4, 4999.00, 3399.00),
+(3, 3.2, 105.8, 358.1, 'Elica 60 cm 880 m3/hr Chimney (Strip CF 60 NERO, 2 Cassette Filters, Black)', 'chimneys1_image1.jpg', 4, 5999.00, 4999.00),
+(3, 3.2, 105.8, 358.2, 'Inalsa 60 cm, 1050 m3/hr Kitchen Chimney Enya BKBF with Stainless Steel Baffle Filters, Push Button Control, (Black) (Cooker Hood Enya 60BKBF)', 'chimneys2_image1.jpg', 3, 6999.00, 5499.00),
+(3, 3.2, 105.8, 358.3, 'Faber 60 cm 1000 m³/HR Pyramid Kitchen Chimney (HOOD CLASS PLUS PB BK LTW 60, 2 Baffle Filters,Black)', 'chimneys3_image1.jpg', 5, 8999.00, 7699.00),
+(3, 3.2, 105.8, 358.4, 'Elica 90 cm 1200 m3/hr Filterless Auto Clean Chimney (WDFL 906 HAC MS NERO, Touch + Motion Sensor Control, Black)', 'chimneys4_image1.jpg', 4, 14999.00, 12999.00),
+(3, 3.2, 105.9, 359.1, 'Kent Sandwich Maker, (16024), 700W, Non-Toxic Ceramic Coating Plate, Make 4 Sandwiches, Black, Standard', 'sanwichmakers1_image1.jpg', 5, 1899.00, 1699.00),
+(2, 3.2, 105.9, 359.2, 'Prestige Sandwich Maker PGMFD 01', 'sanwichmakers2_image1.jpg', 3, 1999.00, 1299.00),
+(2, 3.2, 105.9, 359.3, 'KENT 16025 Sandwich Grill 700W | Non-Toxic Ceramic Coating | Automatic Temperature Cut-off with LED Indicator | Adjustable Height Control, Black, Standard', 'sanwichmakers3_image1.jpg', 4, 1999.00, 1699.00),
+(2, 3.2, 105.9, 359.4, 'Borosil Super Jumbo 2000-Watt Grill Sandwich Maker (Black)', 'sanwichmakers4_image1.jpg', 5, 5799.00, 4399.00),
+(3, 3.2, 105.01, 360.1, 'Prestige PRWO 1.8-2 700-Watts Delight Electric Rice Cooker with 2 Aluminium Cooking Pans - 1.8L, White', 'electriccookers1_image1.jpg', 4, 3499.00, 2449.00),
+(3, 3.2, 105.01, 360.2, 'VARNIRAJ IMPORT & EXPORT WITH V LOGO Electric 1.5 L Mini Electric Multi-Purpose Cooker- Multicolour', 'electriccookers2_image1.jpg', 3, 1099.00, 799.00),
+(3, 3.2, 105.01, 360.3, 'Pigeon Kessel Multipurpose Kettle (12173) 1.2 litres with Stainless Steel Body, used for boiling Water and milk, Tea, Coffee, Oats, Noodles, Soup etc. 600 Watt (Silver)', 'electriccookers3_image1.jpg', 4, 1099.00, 949.00),
+(3, 3.2, 105.01, 360.4, 'Wellspire Multi Cooking Pot Smart Electric Pressure Cooker (6 Litres) with Instant 12-1 Single-Touch Functions and 7 Free Accesories (Black)', 'electriccookers4_image1.jpg', 5, 10999.00, 8999.00),
+(3, 3.2, 105.11, 361.1, 'Morphy Richards New Europa 800-Watt Espresso and Cappuccino 4-Cup Coffee Maker (Black)', 'coffeemakers1_image1.jpg', 3, 5899.00, 4699.00),
+(3, 3.2, 105.11, 361.2, 'Morphy Richards Europa Drip 600-Watt 6-cup Drip Coffee Maker, Gloss Black, Regular (350012)', 'coffeemakers2_image1.jpg', 5, 1599.00, 1399.00),
+(3, 3.2, 105.11, 361.3, 'Pigeon by Stovekraft Brewster Coffee Maker. A Small Size Coffee Maker of Home Machine (Black)', 'coffeemakers3_image1.jpg', 4, 1999.00, 1699.00),
+(3, 3.2, 105.11, 361.4, 'Philips HD7431/20 760-Watt Coffee Maker (Black)', 'coffeemakers4_image1.jpg', 4, 4999.00, 3399.00),
 (4, 4.1, 106.1, 362.1, 'Sony SRS-XB13 Wireless Extra Bass Portable Compact Bluetooth Speaker with 16 Hours Battery Life', 'sonyspeakers1_image1.jpg', 3, 4699.00, 3699.00),
 (4, 4.1, 106.1, 362.2, 'Sony SRS-XB43 Wireless Extra Bass Bluetooth Speaker with 24 hrs Battery, Party Lights, Party Connect, Waterproof', 'sonyspeakers2_image1.jpg', 5, 17999.00, 16999.00),
 (4, 4.1, 106.1, 362.3, 'Marshall Emberton 20 Watt Wireless Bluetooth Portable Speaker (Black)', 'sonyspeakers3_image1.jpg', 3, 17499.00, 14999.00),
@@ -999,8 +1020,40 @@ insert into product_questions_and_answers(p_id, ques_person_name, p_ques, p_ans,
 (1, 'Aarthi', 'WiFi calling available in this phone?', 'Yes', 1, 1),
 (1, 'Keerthi', 'Popup Camera is available in this phone?', 'Yes', 1, 1);
 
+11. Filter Table
+
+create table filter(filter_id int(100) AUTO_INCREMENT, subs_cat_identification_id float(8),  filter_title varchar(200), primary key(filter_id));
+
+insert into filter(subs_cat_identification_id, filter_title) values
+(1.1, 'RAM'),
+(1.1, 'CUSTOMER RATINGS'),
+(1.1, 'INTERNAL STORAGE'),
+(1.1, 'BATTERY CAPACITY'),
+(1.1, 'OPERATING SYSTEM'),
+(1.1, 'NETWORK TYPE'),
+(1.1, 'SCREEN SIZE'),
+(1.1, 'SIM TYPE'),
+(1.1, 'PRIMARY CAMERA'),
+(1.1, 'SECONDARY CAMERA'),
+(1.1, 'PROCESSOR BRAND'),
+(1.1, 'OPERATING SYSTEM VERSION NAME'),
+(1.1, 'NUMBER OF CORES'),
+(1.1, 'BUDGET');
 
 
+12. Filter Sub
 
+create table filter_sub(filter_sub_id int(100) AUTO_INCREMENT, filters_id int(100), filter_datas varchar(200), primary key(filter_sub_id));
+
+insert into filter_sub(filters_id, filter_datas) values
+(1, '6 GB & Above'),
+(1, '4 GB'),
+(1, '3 GB'),
+(1, '2 GB'),
+(1, '1 GB'),
+(2, '4 & Above'),
+(2, '3 & Above'),
+(2, '2 & Above'),
+(2, '1 & Above');
 
 

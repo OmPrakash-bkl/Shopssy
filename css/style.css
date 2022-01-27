@@ -1853,7 +1853,7 @@ margin-bottom: 20px;
 /* Category Products Container Start */
 
 .category_products_container_products_inner_divs {
-    height: 300px;
+    height: 320px;
     width: 200px;
     border: 1px solid rgb(220, 220, 220, 0.4);
     display: inline-block;
@@ -1861,7 +1861,7 @@ margin-bottom: 20px;
     padding: 0px 10px;
 }
 .category_products_container_products_inner_divs:hover {
-    border: 0px;
+    border: 1px solid transparent;
     border-radius: 25px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
 }

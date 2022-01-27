@@ -22,17 +22,17 @@ include './db_con.php';
 
         <?php
 
-        $all_categories_query = "SELECT * FROM category;";
+        $all_categories_query = "SELECT * FROM `sub_category`;";
         $all_categories_result = mysqli_query($con, $all_categories_query);
         while($row = mysqli_fetch_assoc($all_categories_result)) {
-            $all_categories_cat_image_name = $row['cat_image_name'];
-            $all_categories_cat_title = $row['cat_title'];
+            $all_categories_sub_cat_image_name = $row['sub_cat_image_name'];
+            $all_categories_cat_title = $row['subs_cat_title'];
         ?>
 
             <div class="all_categories_sub_container">
                 <center>
                  <a href="./product.php">
-                     <img src="./images/<?php echo $all_categories_cat_image_name; ?>" alt="mobiles">
+                     <img src="./images/<?php echo $all_categories_sub_cat_image_name; ?>" alt="<?php echo $all_categories_cat_title; ?>">
                 </a>
                 <a href="./product.php" class="product_link"><?php echo $all_categories_cat_title; ?></a>
                 </center>
