@@ -1,4 +1,9 @@
 <?php 
+session_start();
+if(!isset($_SESSION['user_login_id'])) {
+header("Location: http://localhost:3000/login.php");
+echo $_SESSION['user_login_id'];
+}
 include './action.php';
 ?>
 

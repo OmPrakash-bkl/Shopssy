@@ -13,7 +13,7 @@ if(isset($_POST['submit'])) {
     $numberval = "/^[0-9]+$/";
     $f_name = stripcslashes($f_name);
     $l_name = stripcslashes($l_name);
-    $pass = stripcslashes($email);
+    $pass = stripcslashes($pass);
     $f_name = mysqli_real_escape_string($con, $f_name);
     $l_name = mysqli_real_escape_string($con, $l_name);
     $pass = mysqli_real_escape_string($con, $pass);

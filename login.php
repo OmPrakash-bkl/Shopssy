@@ -1,7 +1,29 @@
 <?php 
+session_start();
 include './action.php';
 $title = "Login - Shopssy";
 include './header.php';
+
+if(isset($_POST['submit1'])) {
+    $userName = stripcslashes($_POST['user_email']);
+    $userName = mysqli_real_escape_string($con, $userName);
+    $userPassword = stripcslashes($_POST['user_pass']);
+    $emailval = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$/";
+    if(preg_match($emailval, $userName)) {
+        $login_query = "SELECT `email`, `password` FROM `register` WHERE `email`='$userName';";
+        $login_result = mysqli_query($con, $login_query);
+        if(mysqli_num_rows($login_result) === 1) {
+            while($row = mysqli_fetch_assoc($login_result)) {
+                $db_u_pass_word = $row['password'];
+            }
+            if($userPassword === $db_u_pass_word) {
+                $_SESSION['user_login_id'] = $userName."Shopssy";
+            }
+        }
+    }
+}
+
+
 ?>
 
 
@@ -20,20 +42,20 @@ include './header.php';
     <!--login container start-->
     <div class="login_register_container">
     
-            <form action="">
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                 <div>
                     <label for="mail">Email</label> <br>
-                <input type="email" id="mail">
+                <input type="email" id="mail" name="user_email" required>
                 </div>
                 <div>
                     <label for="pass">Password</label> <br>
-                    <input type="password" id="pass">
+                    <input type="password" id="pass" name="user_pass" required>
                 </div>
             <center>
                 <span><a href="#">Forgot your password?</a></span>
                 <span><a href="#">Register?</a></span>
             </center>
-            <button type="submit">SIGN IN</button>
+            <button type="submit" name="submit1">SIGN IN</button>
         </form>
        
     </div>
