@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include './action.php';
 $title = "Your Shopping Cart - Shopssy";
 include './header.php';
@@ -29,36 +30,33 @@ include './header.php';
                     <th>Total</th>
                 </tr>
 
-                <tr>
-                    <td><img src="./images/mob_image_2.jpg" alt="mobile image" class="shopping_cart_images"></td>
-                    <td>
-                        <span class="product_name">Lorem, ipsum dolor</span> <br>
-                        <span class="product_size">Size: S</span> <br>
-                        <span class="product_color">Color: White</span> <br>
-                    </td>
-                    <td><button class="delete_btn_of_cart"><i class="fas fa-trash-alt"></i></button></td>
-                    <td class="price_of_cart">$120.00</td>
-                    <td>
-                        <div class="incre_decre_container_of_cart">
-                            <div>
-                                <button class="decre">-</button>
-                                <span class="counter">1</span>
-                                <button class="incre">+</button>
-                            </div>
-                          </div>
-                    </td>
-                    <td class="total_price_of_cart">$120.00</td>
-                </tr>
+                <?php 
+                
+              
+               $user_id = $_SESSION['user_id'];
+                $cart_page_query = "SELECT * FROM `cart_sub` WHERE `u_id`=$user_id;";
+                $cart_page_result = mysqli_query($con, $cart_page_query);
+                while($row = mysqli_fetch_assoc($cart_page_result)) {
+                    $pro_id = $row['product_id'];
+                    $big_cart_query = "SELECT * FROM `products` WHERE `p_id`=$pro_id;";
+                    $big_cart_result = mysqli_query($con, $big_cart_query);
+                    while($row1 = mysqli_fetch_assoc($big_cart_result)) {
+                        $big_cart_p_image = $row1['p_image'];
+                        $big_cart_p_title = $row1['p_title'];
+                        $big_cart_p_a_price = $row1['p_a_price'];
+
+                    }
+                ?>
 
                 <tr>
-                    <td><img src="./images/watch_image_1.jpg" alt="watch image" class="shopping_cart_images"></td>
+                    <td><img src="./images/<?php echo $big_cart_p_image; ?>" alt="mobile image" class="shopping_cart_images"></td>
                     <td>
-                        <span class="product_name">Lorem, ipsum dolor</span> <br>
+                        <span class="product_name"><?php echo $big_cart_p_title; ?></span> <br>
                         <span class="product_size">Size: S</span> <br>
                         <span class="product_color">Color: White</span> <br>
                     </td>
                     <td><button class="delete_btn_of_cart"><i class="fas fa-trash-alt"></i></button></td>
-                    <td class="price_of_cart">$432.00</td>
+                    <td class="price_of_cart">&#8377;<?php echo $big_cart_p_a_price; ?>.00</td>
                     <td>
                         <div class="incre_decre_container_of_cart">
                             <div>
@@ -68,8 +66,11 @@ include './header.php';
                             </div>
                           </div>
                     </td>
-                    <td class="total_price_of_cart">$432.00</td>
+                    <td class="total_price_of_cart">&#8377;120.00</td>
                 </tr>
+
+                <?php  } ?>
+
             </table>
 
            <div class="table_for_mobile_shopping_cart">

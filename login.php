@@ -18,6 +18,7 @@ if(isset($_POST['submit1'])) {
             }
             if($userPassword === $db_u_pass_word) {
                 $_SESSION['user_login_id'] = $userName."Shopssy";
+                $_SESSION['user_login_email'] = $userName;
             }
         }
     }

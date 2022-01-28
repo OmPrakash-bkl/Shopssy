@@ -1,7 +1,21 @@
 <?php 
+session_start();
 include './action.php';
 $title = "Shopssy | Online Shopping Site for Mobiles, Electronics and More.";
 include './header.php';
+
+if(isset($_POST['product_id'])) {
+    $user_email_id = $_SESSION['user_login_email'];
+    $cart_process_query = "SELECT `user_id` FROM `register` WHERE `email`='$user_email_id';";
+    $cart_process_result = mysqli_query($con, $cart_process_query);
+    $cart_process_user_id = mysqli_fetch_assoc($cart_process_result);
+    $cart_process_user_id = $cart_process_user_id['user_id'];
+    $cart_process_pro_id = $_POST['product_id'];
+    $cart_query = "INSERT INTO `cart_sub` (`u_id`, `product_id`) VALUES ($cart_process_user_id, $cart_process_pro_id)";
+    mysqli_query($con, $cart_query);
+    $_SESSION['user_id'] = $cart_process_user_id;
+}
+
 ?>
 
 
@@ -157,7 +171,9 @@ include './header.php';
                 </div>
                </a>
                 <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
+                    <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+                    <button title="Add To Cart" name="product_id" value="<?php echo $product_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
+                    </form>
                     <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
                     <button title="Quick View"><i class="fas fa-search"></i></button>
                 </div>
