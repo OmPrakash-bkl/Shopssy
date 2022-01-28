@@ -1,51 +1,14 @@
 <?php 
 include './action.php';
 
-if(isset($_GET['searchItem'])) {
+if(isset($_GET['s'])) {
 
-    $searchKeyword = $_GET['searchItem'];
-    if($searchKeyword) {
-        $search_retrieve_query = "SELECT * FROM `brand_and_item_list` WHERE `b_sub_title` LIKE '%$searchKeyword%';";
-        $search_retrieve_result = mysqli_query($con, $search_retrieve_query);
-        $search_result_count = mysqli_num_rows($search_retrieve_result);
-        while($row = mysqli_fetch_assoc($search_retrieve_result)) {
-        $search_b_and_i_identification_id =  $row['b_and_i_identification_id'];
-        $search_sub_cat_identification_id = $row['subs_cat_identification_id'];
-        $search_sub_cat_identification_id_two = $row['subs_cat_identification_id_two'];
-        $search_sub_b_title = $row['b_title'];
-         }
-
-      if($search_result_count < 3) {
-        header("Location: http://localhost:3000/product.php?b_title=$search_sub_b_title&sub_cat_identification_id_two=$search_sub_cat_identification_id_two&sub_cat_identification_id=$search_sub_cat_identification_id&b_and_i_identification_id=$search_b_and_i_identification_id");
-      } else {
-          $search_retrieve_query_2 = "SELECT `subs_cat_title` FROM `sub_category` WHERE `sub_cat_identification_id_two`=$search_sub_cat_identification_id_two;";
-          $search_retrieve_result_2 = mysqli_query($con, $search_retrieve_query_2);
-          $search_result_count2 = mysqli_num_rows($search_retrieve_result_2);
-          while($row = mysqli_fetch_assoc($search_retrieve_result_2)) {
-              $search_sub_cat_title = $row['subs_cat_title'];
-          }
-        header("Location: http://localhost:3000/product.php?sub_cat_title=$search_sub_cat_title&sub_cat_identification_id_two=$search_sub_cat_identification_id_two&sub_cat_identification_id=$search_sub_cat_identification_id");
-      }
-      if($search_result_count2 == 0) {
-        header("Location: http://localhost:3000/product2.php?s=$searchKeyword");
-      }
-
-    }
+    $searchKeyword = $_GET['s'];
+  
 }
 
-if(isset($_GET['sub_cat_identification_id'])) {
-    $product_sub_cat_identification_id = $_GET['sub_cat_identification_id'];
-    if(isset($_GET['sub_cat_title'])) {
-        $product_sub_cat_title = $_GET['sub_cat_title'];
-    }
-   
-    $product_sub_cat_identification_id_two = $_GET['sub_cat_identification_id_two'];
-}
-if(isset($_GET['b_title'])) {
-    $product_sub_cat_title = $_GET['b_title'];
-}
 
-$title = $product_sub_cat_title . " - Shopssy";
+$title = $searchKeyword . " - Shopssy";
 include './header.php';
 
 ?>
@@ -193,7 +156,7 @@ include './header.php';
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
         <span><a href="./all_categories.php">All Categories</a></span>
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
-        <span><a href="#"><?php echo $product_sub_cat_title; ?></a></span>
+        <span><a href="#"><?php echo $searchKeyword; ?></a></span>
     </div>
 </center>
     </div>
@@ -212,119 +175,19 @@ include './header.php';
    <!--products section container start-->
    <center>
     <div class="product_section_container">
-        <div class="product_section_sub_container_1" id="product_section_sub_container_1">
-            <h1>Filters</h1>
-           <form action="" id="fliter_form">
-            <div class="product_section_sub_container_brands_container">
-                <div>
-                    <div class="brands_container">
-                        <div class="text_div">
-                            <span>BRANDS & ITEMS</span>
-                        </div>
-                        <div class="arrow_div">
-                            <i class="fa fa-angle-down" id="arrow_of_product1"></i>
-                        </div>
-                    </div>
-                    <div class="brand_list_container" id="brand_list_container">
-                        <?php
-                        
-                        $product_cat_query = "SELECT `b_title` FROM `brand_and_item_list` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
-                        $product_cat_result = mysqli_query($con, $product_cat_query);
-
-                        while($row = mysqli_fetch_assoc($product_cat_result)) {
-
-                            $pro_cat_titles = $row['b_title'];
-                        
-                        ?>
-                        <div>
-                            <input type="checkbox" id="<?php echo $pro_cat_titles; ?>" onchange="document.getElementById('fliter_form').submit()"> <label for="<?php echo $pro_cat_titles; ?>"><?php echo $pro_cat_titles; ?></label>
-                        </div>
-                       
-                      <?php } ?>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <?php 
-
-
-   $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id_two;";
-   $temp_result = mysqli_query($con, $temp_query);
-   $dummy = 1;
-   while($row = mysqli_fetch_assoc($temp_result)) {
-       $temp_title = $row['filter_title'];
-       $temp_id = $row['filter_id'];
-   ?>
-
-            <div class="product_section_sub_container_customer_rating_container">
-                <div>
-                    <div class="rating_container fil_container<?php echo $dummy; ?>" onclick="show_and_hide(<?php echo $dummy; ?>)">
-                        <div class="text_div">
-                            <span><?php echo $temp_title; ?></span>
-                        </div>
-                        <div>
-                            <i class="fa fa-angle-down" id="arrow_of_product<?php echo $dummy; ?>"></i>
-                        </div>
-                    </div>
-                    <div class="rating_list_container" id="rating_list_container<?php echo $dummy; ?>">
-
-                    <?php 
-           $temp_sub_query = "SELECT * FROM `filter_sub` WHERE `filters_id`=$temp_id;";
-           $temp_sub_result = mysqli_query($con, $temp_sub_query);
-           while($row1 = mysqli_fetch_assoc($temp_sub_result)) {
-               $temp_sub_filter_datas = $row1['filter_datas'];
-          
-           ?>
-           
-         <div>
-           <input type="checkbox" id="<?php echo $temp_sub_filter_datas; ?>" onchange="document.getElementById('fliter_form').submit()"> <label for="<?php echo $temp_sub_filter_datas; ?>"><?php echo $temp_sub_filter_datas; ?></label>
-        </div>
-
-         <?php } ?>
-
-                    </div>
-                </div>
-            </div>
-
-            
-            <?php
-        $dummy++;
-        } ?>
-
-           </form>
-        </div>
 
         <div class="product_section_sub_container_2">
-           <div class="product_section_inner_container">
-               <div class="product_section_inner_container_1">
-                   <h1><?php echo $product_sub_cat_title; ?></h1>
-               </div>
-               <div class="product_section_inner_container_2" id="product_section_inner_container_2">
-                  <div class="select_container">
-                      <button>SORT BY <i class="fa fa-angle-down" id="arrow_of_product5"></i></button>
-                      <div class="select_inner_container">
-                          <span><a href="#">Alphabetically, A-Z</a></span> <br>
-                          <span><a href="#">Alphabetically, Z-A</a></span> <br>
-                          <span><a href="#">Price, low to high</a></span> <br>
-                          <span><a href="#">Price, high to low</a></span> <br>
-                      </div>
-                  </div>
-               </div>
-           </div>
+           
 
            <center>
 
            <?php 
            
-           $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
-
-           if(isset($_GET['b_and_i_identification_id'])) {
-               $product_b_and_i_identification_id = $_GET['b_and_i_identification_id'];
-               $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id`=$product_b_and_i_identification_id;";
-           }
+           $category_products_query = "SELECT * FROM `products` WHERE `p_title` LIKE '%$searchKeyword%';";
 
            $category_products_result = mysqli_query($con, $category_products_query);
+
+     
 
            while($row = mysqli_fetch_assoc($category_products_result)) {
                $category_products_p_image = $row['p_image'];

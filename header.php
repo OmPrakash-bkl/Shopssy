@@ -309,8 +309,8 @@ include './db_con.php';
                         <td rowspan="2"><i class="<?php echo $category_cat_icon_name; ?>" style="color: #A1A1A1;font-size: 25px;"></i></td>
                     </tr>
                     <tr class="hamburger_container_dir_arrow_tiger<?php echo $category_cat_id; ?>" id="hamburger_container_dir_arrow_tiger<?php echo $category_cat_id; ?>">
-                        <td><a href="#"><b><?php echo $category_cat_title; ?></b></a> <br>
-                         <a href="#"><p><?php echo $category_cat_name_description; ?></p></a>
+                        <td><a><b><?php echo $category_cat_title; ?></b></a> <br>
+                         <a><p><?php echo $category_cat_name_description; ?></p></a>
                         </td>
                     </tr>
 
@@ -337,10 +337,11 @@ include './db_con.php';
          </div>
         </div>
 
+        
       
             <div class="navbar_main_container_childs navbar_main_container_childs_two">
-                <form action="">
-                    <input type="search" placeholder="Search">
+                <form action="./product.php" method="GET">
+                    <input type="search" placeholder="Search" name="searchItem">
                     <button type="submit">
                         <i class="fas fa-search"></i>
                     </button>
@@ -472,12 +473,12 @@ include './db_con.php';
                 $subcategory_cats_id = $row1['cats_id'];
                 $subcategory_sub_cat_title = $row1['subs_cat_title'];
                 $subcategory_sub_cat_identification_id = $row1['sub_cat_identification_id'];
-               
+                $subcategory_sub_cat_identification_id_two = $row1['sub_cat_identification_id_two'];
                 ?>
 
                 <table class="table_of_hamburger_sub_container hamburger_sub_container_tables<?php echo $subcategory_cats_id; ?>">
                     <tr>
-                        <th><?php echo $subcategory_sub_cat_title; ?></th>
+                        <th><a href="./product.php?sub_cat_identification_id=<?php echo $subcategory_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $subcategory_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $subcategory_sub_cat_identification_id_two; ?>"><?php echo $subcategory_sub_cat_title; ?></a></th>
                     </tr>
 
                     <?php 
@@ -486,10 +487,13 @@ include './db_con.php';
 
                     while($row2 = mysqli_fetch_assoc($brand_and_item_list_result)) {
                         $brand_and_item_list_b_title = $row2['b_title'];
+                        $brand_b_and_i_identification_id = $row2['b_and_i_identification_id'];
                     ?>
 
                     <tr>
-                        <td><a href="#"><?php echo $brand_and_item_list_b_title; ?></a></td>
+                        <td><a href="./product.php?b_title=<?php echo $brand_and_item_list_b_title; ?>&sub_cat_identification_id_two=<?php echo $subcategory_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $subcategory_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $brand_b_and_i_identification_id; ?>"><?php 
+                         echo $brand_and_item_list_b_title
+                         ?></a></td>
                     </tr>
                   <?php } ?>
                 </table>

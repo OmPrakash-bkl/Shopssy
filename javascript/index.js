@@ -3,13 +3,20 @@
 document.getElementById("table_navbar_showing_container").addEventListener("click", function() {
     if(document.getElementsByClassName("hamburger_main_container_table")[0].style.display=="block") {
         document.getElementsByClassName("hamburger_main_container_table")[0].style.display="none";
+        document.getElementsByClassName("hamburger_sub_container")[0].style.display="none";
+        document.getElementsByClassName("hamburger_container_dir_arrow")[0].style.display="none";
+        document.getElementsByClassName("hamburger_container_dir_arrow")[1].style.display="none";
+        document.getElementsByClassName("hamburger_container_dir_arrow")[2].style.display="none";
+        document.getElementsByClassName("hamburger_container_dir_arrow")[3].style.display="none";
         document.getElementById("hamburger's_arrow_icon").classList = "fas fa-chevron-circle-down";
         
     } else {
         document.getElementsByClassName("hamburger_main_container_table")[0].style.display="block";
+        document.getElementsByClassName("hamburger_sub_container")[0].style.display="flex";
         document.getElementById("hamburger's_arrow_icon").classList = "fas fa-chevron-circle-up";
     }
 });
+
 
 
 

@@ -20,6 +20,14 @@ a:hover, a:active, a:visited, a:link, a:focus {
 a{
     -webkit-tap-highlight-color: transparent;
  }
+
+ /* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    box-shadow: 0 0 0 30px white inset !important;
+}
 /* Code Reset End*/
 
 /*Navbar Start*/
@@ -116,8 +124,9 @@ float: right;
     padding-left: 10px;
     outline: none;
     background-color: white;
-   
-    
+}
+.navbar_main_container_childs_two input:active {
+    background-color: transparent;
 }
 .navbar_main_container_childs_two button {
     float: right;
@@ -163,6 +172,7 @@ float: right;
    border-radius: 50%;
    padding: 3px;
 }
+
 
 /*Navbar End*/
 
@@ -316,9 +326,7 @@ float: right;
    font-family: Arial, Helvetica, sans-serif;
    transition: 0.2s;
 }
-.hamburger_main_container_table b:hover {
-    color: #45b2ff;
- }
+
 .hamburger_main_container_table_h3_tag {
     font-size: 15px;
     font-family: Arial, Helvetica, sans-serif;
@@ -432,7 +440,11 @@ text-align: left;
 
 .table_of_hamburger_sub_container th {
    font-family:sans-serif;
+  
 }
+.table_of_hamburger_sub_container th > a{
+   color: black;
+ }
 
 .table_of_hamburger_sub_container {
     display: none;
@@ -1713,6 +1725,7 @@ margin-bottom: 20px;
 .product_section_container {
     display: flex;
     max-width: 1200px;
+    margin-bottom: 20px;
 }
 .product_section_container div {
  
@@ -1843,12 +1856,12 @@ margin-bottom: 20px;
 /* Category Products Container Start */
 
 .category_products_container_products_inner_divs {
-    height: 320px;
+    height: 340px;
     width: 200px;
     border: 1px solid rgb(220, 220, 220, 0.4);
     display: inline-block;
     margin: 10px 5px;
-    padding: 0px 10px;
+    padding: 10px 10px;
 }
 .category_products_container_products_inner_divs:hover {
     border: 1px solid transparent;
