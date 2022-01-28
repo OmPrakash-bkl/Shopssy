@@ -1193,3 +1193,16 @@ create table register(user_id int(100) AUTO_INCREMENT, f_name varchar(200), l_na
 
 insert into register(f_name, l_name, email, password, full_name, address, city, zip, phone_number, country) values
 ('Om', 'Prakash', 'Prakash123@gmail.com', 'Prakash123@developer', 'Om Prakash', '13/A, Prasanna Colony, 3rd Street, Avaniyapuram, Madurai - 12.', 'Madurai', '625012', '8838067309', 'India');
+
+14. Cart 
+
+create table cart(cart_id int(100) AUTO_INCREMENT, user_id int(100), pro_id int(100), qty int(50), pro_price int(100), cart_user_desc varchar(300), primary key(cart_id));
+
+insert into cart(user_id, pro_id, qty, pro_price, cart_user_desc) values
+(1, 4, 2, 21990, 'i need to buy this product within a week');
+
+15. Cart Sub
+
+create table cart_sub(c_s_id int(100) AUTO_INCREMENT, u_id int(100), product_id int(100), primary key(c_s_id));
+
+insert into cart_sub(u_id, product_id) values(1, 4);
