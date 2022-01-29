@@ -33,7 +33,11 @@ if(isset($_POST['incre_quantity'])) {
    $qty = ++$qty;
    $cart_sub_update_query = "UPDATE `cart` SET `quantity` = $qty WHERE `product_id`=$cart_sub_pro_id;";
    $cart_sub_update_result = mysqli_query($con, $cart_sub_update_query);
- 
+   ?>
+   <script type="text/javascript">
+   window.location.href = 'http://localhost:3000/cart.php';
+   </script>
+   <?php
 }
 
 if(isset($_POST['decre_quantity'])) {
@@ -45,6 +49,12 @@ if(isset($_POST['decre_quantity'])) {
    }
     $cart_sub_update_query = "UPDATE `cart` SET `quantity` = $qty WHERE `product_id`=$cart_sub_pro_id;";
     $cart_sub_update_result = mysqli_query($con, $cart_sub_update_query);
+
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/cart.php';
+    </script>
+    <?php
 }
 if(isset($_POST['delete_btn'])) {
     $cart_sub_product_id = $_POST['product_id'];

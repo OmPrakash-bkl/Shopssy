@@ -3620,7 +3620,7 @@ width: 100%;
     color: gray;
 }
 .mini_cart_container .delete_btn_border a:hover {
-    color: #45B0E3;
+    color: orangered;
 }
 .mini_cart_products_container {
     height: 240px;

@@ -14,6 +14,11 @@ if(isset($_POST['product_id'])) {
     $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1, 0, '')";
     mysqli_query($con, $cart_query);
     $_SESSION['user_id'] = $cart_process_user_id;
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/index.php';
+    </script>
+    <?php
 }
 
 ?>
@@ -171,7 +176,7 @@ if(isset($_POST['product_id'])) {
                 </div>
                </a>
                 <div class="products_container_products_inner_btn_divs">
-                    <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+                    <form action="./index.php" method="POST">
                     <button title="Add To Cart" name="product_id" value="<?php echo $product_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
                     </form>
                     <button title="Add To Wishlist"><i class="far fa-heart"></i></button>

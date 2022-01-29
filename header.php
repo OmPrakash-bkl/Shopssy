@@ -1,5 +1,25 @@
 <?php 
 include './db_con.php';
+if(isset($_GET['delete_btn_of_mini_cart'])) {
+    $mini_cart_sub_product_id = $_GET['product_id'];
+    $mini_cart_sub_delete_query = "DELETE FROM `cart` WHERE `product_id` = $mini_cart_sub_product_id;";
+    mysqli_query($con, $mini_cart_sub_delete_query);
+    header("Location: http://localhost:3000/index.php");
+}
+
+
+if(isset($_POST['view_cart'])) {
+    header("Location: http://localhost:3000/cart.php");
+}
+if(isset($_POST['cart_update_and_checkout'])) {
+    $cart_update_u_id = $_POST['u_id'];
+    $cart_update_pro_tot_price = $_POST['pro_tot_price'];
+    $cart_update_cart_user_desc = $_POST['cart_user_desc'];
+$cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
+mysqli_query($con, $cart_update_query);
+header("Location: http://localhost:3000/information.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -387,61 +407,77 @@ include './db_con.php';
 
            <div class="mini_cart_products_container">
             <table>
-                <tr>
-                    <td rowspan="4" class="delete_btn_border"><img src="./images/drone_image_1.jpg" class="mini_cart_container_images" alt="drone"></td>
-                </tr>
-                <tr>
-                    <td class="product_title"><a href="#">Lorem ipsum dolor sit amet</a></td>
-                </tr>
-                <tr>
-                    <td class="product_prz"><b>&#8377; 120.00</b> X 1</td>
-                </tr>
-                <tr>
-                    <td class="delete_btn_border"><a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                </tr>
+
+            <?php 
+
+            $mini_user_id = $_SESSION['user_id'];
+           
+            $mini_pro_cart_user_desc="";
+             $mini_cart_page_query = "SELECT * FROM `cart` WHERE `u_id`=$mini_user_id;";
+             $mini_cart_page_result = mysqli_query($con, $mini_cart_page_query);
+             $mini_cart_products_total_price = 0;
+             while($row = mysqli_fetch_assoc($mini_cart_page_result)) {
+                $mini_pro_id = $row['product_id'];
+                $mini_pro_quantity = $row['quantity'];
+                $mini_pro_u_id = $row['u_id'];
+                $mini_pro_cart_user_desc = $row['cart_user_desc'];
+                $mini_big_cart_query = "SELECT * FROM `products` WHERE `p_id`=$mini_pro_id;";
+                $mini_big_cart_result = mysqli_query($con, $mini_big_cart_query);
+                while($row1 = mysqli_fetch_assoc($mini_big_cart_result)) {
+                    $mini_big_cart_p_image = $row1['p_image'];
+                    $mini_big_cart_p_title = $row1['p_title'];
+                    $mini_big_cart_p_a_price = $row1['p_a_price'];
+                    $mini_cart_update_prod_id = $row1['p_id'];
+                }
+            
+            ?>
 
                 <tr>
-                    <td rowspan="4" class="delete_btn_border"><img src="./images/mob_image_2.jpg" class="mini_cart_container_images" alt="mobile"></td>
+                    <td rowspan="4" class="delete_btn_border"><img src="./images/<?php echo $mini_big_cart_p_image; ?>" class="mini_cart_container_images" alt="<?php echo $mini_big_cart_p_image; ?>"></td>
                 </tr>
                 <tr>
-                    <td class="product_title"><a href="#">Lorem ipsum dolor sit amet</a></td>
+                    <td class="product_title"><a href="#"><?php
+                    if(strlen($mini_big_cart_p_title) > 30) {
+                            echo substr($mini_big_cart_p_title, 0, 35)." ...";
+                        } else {
+                            echo $mini_big_cart_p_title;
+                        } 
+                        ?></a></td>
                 </tr>
                 <tr>
-                    <td class="product_prz"><b>&#8377; 240.00</b> X 1</td>
+                    <td class="product_prz"><b>&#8377; <?php 
+                    $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_a_price;
+                    echo $mini_tot_price;
+                    $mini_cart_products_total_price =  $mini_cart_products_total_price+$mini_tot_price; ?></b> X <?php echo $mini_pro_quantity; ?></td>
                 </tr>
                 <tr>
-                    <td class="delete_btn_border"><a href="#"><i class="fas fa-trash-alt"></i></a></td>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
+                    <input type="hidden" name="product_id" value="<?php echo $mini_pro_id; ?>">
+                    <td class="delete_btn_border"><button class="delete_btn_of_cart" name="delete_btn_of_mini_cart" ><i class="fas fa-trash-alt"></i></button></td>
+                    </form>
                 </tr>
 
-                
-                <tr>
-                    <td rowspan="4" class="delete_btn_border"><img src="./images/mob_image_2.jpg" class="mini_cart_container_images" alt="mobile"></td>
-                </tr>
-                <tr>
-                    <td class="product_title"><a href="#">Lorem ipsum dolor sit amet</a></td>
-                </tr>
-                <tr>
-                    <td class="product_prz"><b>&#8377; 240.00</b> X 1</td>
-                </tr>
-                <tr>
-                    <td class="delete_btn_border"><a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                </tr>
+               <?php   } ?>
                
             </table>
            </div>
 
            <div class="mini_cart_form_container">
                <p>Add a note to your order</p>
-               <form action="">
-                   <textarea></textarea>
+               <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                   <textarea name="cart_user_desc"><?php echo $mini_pro_cart_user_desc; ?></textarea>
                    <div class="money_container">
                     <h2 id="h2_one">TOTAL: </h2>
-                    <h2 id="h2_two">&#8377; 240.00</h2>
+                    <h2 id="h2_two">&#8377;<?php 
+                    echo $mini_cart_products_total_price;
+                    ?>.00</h2>
                    </div>
                    <center>
                        <p>Shipping & taxes calculated at checkout</p>
-                       <button>VIEW CART</button>
-                       <button>CHECK OUT</button>
+                       <input type="hidden" name="u_id" value="<?php echo $mini_pro_u_id; ?>">
+                        <input type="hidden" name="pro_tot_price" value="<?php echo $mini_cart_products_total_price; ?>">
+                       <button name="view_cart">VIEW CART</button>
+                       <button name="cart_update_and_checkout">CHECK OUT</button>
                    </center>
                   
                </form>
@@ -454,7 +490,7 @@ include './db_con.php';
             
             <button type="submit" class="user_icon_of_homepage" id="user_btn" title="sign in"><a><i class="far fa-user" style="font-size: 25px;color: #45b2ff;"></i></a></button>
             <div id="cart_count_container">
-                <button type="submit" class="cart_icon_of_homepage" title="view cart"><a href="#"><i class="fas fa-cart-plus" style="font-size: 25px;color: #45b2ff;"></i></a></button>
+                <button type="submit" class="cart_icon_of_homepage" title="view cart"><a href="./cart.php"><i class="fas fa-cart-plus" style="font-size: 25px;color: #45b2ff;"></i></a></button>
                 <span>10</span>
                 </div>
            <button type="submit" title="wishlist" class="wishlist_btn"><a><i class="far fa-heart" style="font-size: 25px;color: #45b2ff;"></i></a></button>

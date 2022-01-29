@@ -1200,4 +1200,6 @@ create table cart(c_s_id int(100) AUTO_INCREMENT, u_id int(100), product_id int(
 
 insert into cart(u_id, product_id, quantity, pro_price, pro_tot_price, cart_user_desc) values(1, 4, 2, 18999, 37998, 'i need to buy this product within a week.');
 
+15. MyWishlist 
+
 
