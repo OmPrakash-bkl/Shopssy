@@ -21,6 +21,11 @@ if(isset($_POST['submit1'])) {
                 $_SESSION['user_login_id'] = $userName."Shopssy";
                 $_SESSION['user_login_email'] = $userName;
                 $_SESSION['user_id'] = $db_u_user_id;
+                ?>
+               <script type="text/javascript">
+               window.location.href = "http://localhost:3000/index.php";
+               </script>
+               <?php
             }
         }
     }

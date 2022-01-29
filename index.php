@@ -11,7 +11,7 @@ if(isset($_POST['product_id'])) {
     $cart_process_user_id = mysqli_fetch_assoc($cart_process_result);
     $cart_process_user_id = $cart_process_user_id['user_id'];
     $cart_process_pro_id = $_POST['product_id'];
-    $cart_query = "INSERT INTO `cart_sub` (`u_id`, `product_id`, `quantity`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1)";
+    $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1, 0, '')";
     mysqli_query($con, $cart_query);
     $_SESSION['user_id'] = $cart_process_user_id;
 }
