@@ -1,5 +1,4 @@
 <?php 
-session_start();
 include './action.php';
 $title = "Login - Shopssy";
 include './header.php';

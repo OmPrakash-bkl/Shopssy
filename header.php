@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include './db_con.php';
 if(isset($_GET['delete_btn_of_mini_cart'])) {
     $mini_cart_sub_product_id = $_GET['product_id'];
@@ -19,6 +20,51 @@ $cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_p
 mysqli_query($con, $cart_update_query);
 header("Location: http://localhost:3000/information.php");
 }
+
+if(isset($_POST['wish_del_id'])) {
+    $wish_delete_id = $_POST['wish_del_id'];
+    $wish_item_delete_query = "DELETE FROM `mywishlist` WHERE `prod_id` = $wish_delete_id;";
+    mysqli_query($con, $wish_item_delete_query);
+}
+
+if(isset($_POST['delete_all_from_wishlist'])) {
+    $users_id = $_SESSION['user_id'];
+    $wish_item_delete_query = "DELETE FROM `mywishlist` WHERE `user_id` = $users_id;";
+    mysqli_query($con, $wish_item_delete_query);
+    $empty = "emptied";
+}
+
+if(isset($_POST['add_to_cart_id'])) {
+    $produc_id = $_POST['add_to_cart_id'];
+    $users_id = $_SESSION['user_id'];
+    $cart_insert_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($users_id, $produc_id, 1, 0, '')";
+    mysqli_query($con, $cart_insert_query);
+
+}
+
+if(isset($_SESSION['user_id'])) {
+    $users_id = $_SESSION['user_id'];
+    $empty_msg_con_query = "SELECT * FROM `mywishlist` WHERE `user_id` = $users_id;";
+    $empty_msg_con_result = mysqli_query($con, $empty_msg_con_query);
+}
+
+if(isset($empty_msg_con_result)) {
+    if(mysqli_num_rows($empty_msg_con_result) === 0) {
+        $empty = "emptied";
+    } else {
+        $empty = "";
+    }
+}
+
+
+
+ if(isset($_POST['logout'])) {
+    unset($_SESSION['user_login_id']);
+    unset($_SESSION['user_login_email']);
+    unset($_SESSION['user_id']);
+    
+   //session_destroy();
+   }
 
 ?>
 <!DOCTYPE html>
@@ -47,8 +93,23 @@ header("Location: http://localhost:3000/information.php");
     <center>
         <div class="wishlist_container">
             <div class="user_id_and_cancel_btn_container">
-                <button class="user_id_and_cancel_btn_container_btn1"><i class="fas fa-user-check"></i> callmeprakashzz@gmail.com</button>
-                <button class="user_id_and_cancel_btn_container_btn2"><i class="fas fa-user-slash"></i> Guest Shopper</button>
+                <?php 
+                if(isset($_SESSION['user_login_id'])) {
+                   $user_identity_name = $_SESSION['user_login_email'];
+                   $user_identity_class = "user_id_and_cancel_btn_container_btn1";
+                   $user_identity_icon_class = "fas fa-user-check";
+                } else {
+                    $user_identity_name = "Guest Shopper";
+                    $user_identity_class = "user_id_and_cancel_btn_container_btn2";
+                    $user_identity_icon_class = "fas fa-user-slash";
+                }
+                 
+                ?>
+                <button class="<?php echo $user_identity_class; ?>"><i class="<?php echo $user_identity_icon_class; ?>"></i> <?php echo $user_identity_name; ?></button>
+
+                <script src="./javascript/logged.js"></script>
+                <script src="./javascript/unlogged.js"></script>
+                
                 <button class="close_btn_of_wishlist"><i class="far fa-window-close"></i></button>
             </div>
 
@@ -89,10 +150,12 @@ header("Location: http://localhost:3000/information.php");
                 <button class="savelist_close_btn_of_wishlist"><i class="far fa-window-close"></i></button>
                 <h2>Save Your List</h2>
                 <p>You are logged in as</p>
-                <b>callmeprakashzz@gmail.com</b> <br>
+                <b><?php echo $_SESSION['user_login_email']; ?></b> <br>
                 <center>
-                <button class="btn_1">CANCEL</button>
-                <button class="btn_2">LOG OUT</button>
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                <button type="button" class="btn_1 save_your_list_close_btn">CANCEL</button>
+               <button class="btn_2" name="logout">LOG OUT</button>
+               </form>
                 </center>
             </div>
             <!--save your list container end-->
@@ -104,7 +167,7 @@ header("Location: http://localhost:3000/information.php");
                 <p>You are currently shopping anonymously. Either log in or save your wishlist items by entering your email address.</p>
                <br>
                 <center>
-                <a href="./login.html"><button class="btn_1">LOG IN</button></a>
+                <a href="./login.php"><button class="btn_1">LOG IN</button></a>
                 <button class="btn_2 savelist_close_btn_of_wishlist1_savelist_btn">SAVE LIST</button>
                 </center>
             </div>
@@ -136,8 +199,10 @@ header("Location: http://localhost:3000/information.php");
               
                 <h2>Are you sure?</h2>
                 <p>Do you want to remove all products from My Wishlist?</p>
-                <button class="btn1">YES, REMOVE THE ITEM IN MY LIST</button> <br>
-                <button class="btn2">NO, I CHANGED MY MIND</button>
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                <button class="btn1" name="delete_all_from_wishlist" value="1" >YES, REMOVE THE ITEM IN MY LIST</button>
+                </form>
+                <button class="btn2 changed_my_mind">NO, I CHANGED MY MIND</button>
             </div>
             <!--clear list confirm container end-->
 
@@ -145,125 +210,71 @@ header("Location: http://localhost:3000/information.php");
 
 
                 <!--empty message container start-->
-                <div class="empty_message_container">
+                <?php 
+                if(isset($empty)) {
+                   
+                    if($empty == "emptied") {
+                        echo '<div class="empty_message_container">
                     <h2>Love It? Add To My Wishlist</h2>
-                    <p>My Wishlist allows you to keep track of all of your favorites and shopping activity whether you're on your computer, phone, or tablet. You won't have to waste time searching all over again for that item you loved on your phone the other day - it's all here in one place!</p>
-                    <a href="#"><button>Continue Shopping</button></a>
-                </div>
+                    <p>My Wishlist allows you to keep track of all of your favorites and shopping activity whether you are on your computer, phone, or tablet. You will not have to waste time searching all over again for that item you loved on your phone the other day - its all here in one place!</p>
+                    <a href="./index.php"><button>Continue Shopping</button></a>
+                </div>';
+                    }
+                }
+                ?>
                 <!--empty message container end-->
 
-                <div class="wishlist_product_inner_container">
-                    <div class="btn_div1">
-                        <button class="cross_btn"><i class="far fa-window-close"></i></button>
-                    </div>
-                    <div>
-                        <img src="./images/mob_image_2.jpg" alt="mobile">
-                    </div>
-                    <div>
-                        <h2>Lorem ipsum dolor sit amet</h2>
-                        <p>S / White</p>
-                        <h2 class="pricee">&#8377; 120.00</h2>
-                        <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
-                        <button class="add_to_cart_btn">ADD TO CART</button>
-                    </div>
-                </div>
+                <?php 
+                if(isset($_SESSION['user_id'])) {
+                    $users_id = $_SESSION['user_id'];
+                }
+               
 
-                <div class="wishlist_product_inner_container">
-                    <div class="btn_div1">
-                        <button class="cross_btn"><i class="far fa-window-close"></i></button>
-                    </div>
-                    <div>
-                        <img src="./images/mob_image_2.jpg" alt="mobile">
-                    </div>
-                    <div>
-                        <h2>Lorem ipsum dolor sit amet</h2>
-                        <p>S / White</p>
-                        <h2 class="pricee">&#8377; 120.00</h2>
-                        <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
-                        <button class="add_to_cart_btn">ADD TO CART</button>
-                    </div>
-                </div>
-
-                <div class="wishlist_product_inner_container">
-                    <div class="btn_div1">
-                        <button class="cross_btn"><i class="far fa-window-close"></i></button>
-                    </div>
-                    <div>
-                        <img src="./images/mob_image_2.jpg" alt="mobile">
-                    </div>
-                    <div>
-                        <h2>Lorem ipsum dolor sit amet</h2>
-                        <p>S / White</p>
-                        <h2 class="pricee">&#8377; 120.00</h2>
-                        <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
-                        <button class="add_to_cart_btn">ADD TO CART</button>
-                    </div>
-                </div>
+                $wish_section_query = "SELECT * FROM `mywishlist` WHERE `user_id` = $users_id;";
+                $wish_section_result = mysqli_query($con, $wish_section_query);
+                while($row = mysqli_fetch_assoc($wish_section_result)) {
+                    
+                    $wish_prod_id = $row['prod_id'];
+                    $empty = "";
+                    
+                $wish_sec_product_query = "SELECT * FROM `products` WHERE `p_id` = $wish_prod_id;";
+                $wish_sec_product_result = mysqli_query($con, $wish_sec_product_query);
+                while($row1 = mysqli_fetch_assoc($wish_sec_product_result)) {
+                    $wish_p_id = $row1['p_id'];
+                    $wish_p_title = $row1['p_title'];
+                    $wish_p_image = $row1['p_image'];
+                    $wish_p_a_price = $row1['p_a_price'];
                 
-                <div class="wishlist_product_inner_container">
-                    <div class="btn_div1">
-                        <button class="cross_btn"><i class="far fa-window-close"></i></button>
-                    </div>
-                    <div>
-                        <img src="./images/mob_image_2.jpg" alt="mobile">
-                    </div>
-                    <div>
-                        <h2>Lorem ipsum dolor sit amet</h2>
-                        <p>S / White</p>
-                        <h2 class="pricee">&#8377; 120.00</h2>
-                        <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
-                        <button class="add_to_cart_btn">ADD TO CART</button>
-                    </div>
-                </div>
+
+                ?>
 
                 <div class="wishlist_product_inner_container">
                     <div class="btn_div1">
-                        <button class="cross_btn"><i class="far fa-window-close"></i></button>
+                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                        <button class="cross_btn" name="wish_del_id" value="<?php echo $wish_p_id; ?>" ><i class="far fa-window-close"></i></button>
+                        </form>
                     </div>
                     <div>
-                        <img src="./images/mob_image_2.jpg" alt="mobile">
+                        <img src="./images/<?php echo $wish_p_image; ?>" alt="mobile">
                     </div>
                     <div>
-                        <h2>Lorem ipsum dolor sit amet</h2>
+                        <h2><?php 
+                        if(strlen($wish_p_title) > 25) {
+                            echo substr($wish_p_title, 0, 25)." ...";
+                        } else {
+                            echo $wish_p_title;
+                        }  
+                        ?></h2>
                         <p>S / White</p>
-                        <h2 class="pricee">&#8377; 120.00</h2>
+                        <h2 class="pricee">&#8377; <?php echo $wish_p_a_price; ?></h2>
                         <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
-                        <button class="add_to_cart_btn">ADD TO CART</button>
+                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                        <button class="add_to_cart_btn" name="add_to_cart_id" value="<?php echo $wish_p_id; ?>" >ADD TO CART</button>
+                        </form>
                     </div>
                 </div>
 
-                <div class="wishlist_product_inner_container">
-                    <div class="btn_div1">
-                        <button class="cross_btn"><i class="far fa-window-close"></i></button>
-                    </div>
-                    <div>
-                        <img src="./images/mob_image_2.jpg" alt="mobile">
-                    </div>
-                    <div>
-                        <h2>Lorem ipsum dolor sit amet</h2>
-                        <p>S / White</p>
-                        <h2 class="pricee">&#8377; 120.00</h2>
-                        <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
-                        <button class="add_to_cart_btn">ADD TO CART</button>
-                    </div>
-                </div>
-
-                <div class="wishlist_product_inner_container">
-                    <div class="btn_div1">
-                        <button class="cross_btn"><i class="far fa-window-close"></i></button>
-                    </div>
-                    <div>
-                        <img src="./images/mob_image_2.jpg" alt="mobile">
-                    </div>
-                    <div>
-                        <h2>Lorem ipsum dolor sit amet</h2>
-                        <p>S / White</p>
-                        <h2 class="pricee">&#8377; 120.00</h2>
-                        <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
-                        <button class="add_to_cart_btn">ADD TO CART</button>
-                    </div>
-                </div>
-                
+               <?php } } ?>
                
             </div>
            </div>

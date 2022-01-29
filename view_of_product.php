@@ -1,13 +1,12 @@
 <?php 
 include './action.php';
 
-$product_id = $_GET['p_id'];
-$product_sub_cat_id = $_GET['sub_cat_id'];
+if(isset($_GET['p_id'])) {
+    $product_id = $_GET['p_id'];
+    $product_sub_cat_id = $_GET['sub_cat_id'];
 
-
-
-$product_sub_query = "SELECT * FROM `products_sub` WHERE `p_id`=$product_id;";
-$product_sub_result = mysqli_query($con, $product_sub_query);
+    $product_sub_query = "SELECT * FROM `products_sub` WHERE `p_id`=$product_id;";
+    $product_sub_result = mysqli_query($con, $product_sub_query);
 
 while($row = mysqli_fetch_assoc($product_sub_result)) {
     $product_sub_p_image = $row['p_image'];
@@ -20,12 +19,9 @@ while($row = mysqli_fetch_assoc($product_sub_result)) {
     $product_sub_p_tags3 = $row['p_tags3'];
     $product_sub_p_desc = $row['p_desc'];
 }
-
-
 $product_sub_cat_id_query = "SELECT `subs_cat_title` FROM `sub_category` WHERE `cats_id`=round($product_sub_cat_id);";
 $product_sub_cat_id_result = mysqli_query($con, $product_sub_cat_id_query);
 $temp = round($product_sub_cat_id);
-
 
 $i = 0;
 while($row = mysqli_fetch_assoc($product_sub_cat_id_result)) {
@@ -51,6 +47,11 @@ $temp3 = (float)$temp3;
 if($product_sub_cat_id ==  $temp3) {
     $sub_navigation_title = $titles[2];
 }
+
+
+}
+
+
 
 $title = $sub_navigation_title . " - Shopssy";
 include './header.php';

@@ -1202,4 +1202,10 @@ insert into cart(u_id, product_id, quantity, pro_price, pro_tot_price, cart_user
 
 15. MyWishlist 
 
+create table mywishlist(wish_id int(100) AUTO_INCREMENT, user_id int(100), prod_id int(100), primary key(wish_id));
+
+insert into mywishlist(user_id, prod_id) values
+(1,1);
+
+
 

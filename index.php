@@ -1,5 +1,4 @@
 <?php 
-session_start();
 include './action.php';
 $title = "Shopssy | Online Shopping Site for Mobiles, Electronics and More.";
 include './header.php';
@@ -14,6 +13,18 @@ if(isset($_POST['product_id'])) {
     $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1, 0, '')";
     mysqli_query($con, $cart_query);
     $_SESSION['user_id'] = $cart_process_user_id;
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/index.php';
+    </script>
+    <?php
+}
+
+if(isset($_POST['wish_btn'])) {
+    $users_id = $_SESSION['user_id'];
+    $produc_id = $_POST['productt_id'];
+    $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`) VALUES ($users_id, $produc_id);";
+    mysqli_query($con, $wishlist_insert_query);
     ?>
     <script type="text/javascript">
     window.location.href = 'http://localhost:3000/index.php';
@@ -115,7 +126,9 @@ if(isset($_POST['product_id'])) {
         ?>
 
             <div class="products_container_products_inner_divs">
+            <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>">
                 <img src="./images/<?php echo $product_p_image; ?>" alt="products images">
+           </a>
                <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>">
                 <div class="products_container_products_inner_text_divs">
                     <div>
@@ -179,7 +192,10 @@ if(isset($_POST['product_id'])) {
                     <form action="./index.php" method="POST">
                     <button title="Add To Cart" name="product_id" value="<?php echo $product_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
                     </form>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <input type="hidden" name="productt_id" value="<?php echo $product_p_id; ?>">
+                    <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
+                    </form>
                     <button title="Quick View"><i class="fas fa-search"></i></button>
                 </div>
             </div>

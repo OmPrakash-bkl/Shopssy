@@ -1,5 +1,9 @@
 <?php 
 include './db_con.php';
+// session_start();
+// $_SESSION['user_login_id'] = "ram@gmail.comShopssy";
+// $_SESSION['user_login_email'] = "ram@gmail.com";
+//  $_SESSION['user_id'] = 4;
 
 // Email Validation Start
 if(isset($_POST['user_email'])) {

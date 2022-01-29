@@ -1,5 +1,4 @@
 <?php 
-session_start();
 include './action.php';
 if(isset($_POST['continue_shopping'])) {
     header("Location: http://localhost:3000/index.php");

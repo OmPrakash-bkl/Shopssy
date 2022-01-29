@@ -3241,7 +3241,6 @@ width: 100%;
 .empty_message_container {
     width: 60%;
     background-color: transparent;
-    display: none;
 }
 .empty_message_container h2 {
     font-size: 20px;
@@ -3260,6 +3259,7 @@ width: 100%;
     padding: 10px 20px;
     color: white;
     font-weight: bold;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 .empty_message_container button:hover {
@@ -3340,9 +3340,7 @@ width: 100%;
 .save_your_list_container1 {
     display: none;
 }
-.user_id_and_cancel_btn_container_btn2 {
-   display: none;
-}
+
 .enter_email_address_container {
     width:60%;
     background-color: white;
