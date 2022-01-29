@@ -3,6 +3,28 @@ session_start();
 include './action.php';
 $title = "Your Shopping Cart - Shopssy";
 include './header.php';
+if(isset($_POST['product_id'])) {
+    $cart_sub_pro_id = $_POST['product_id'];
+}
+if(isset($_POST['incre_quantity'])) {
+   $qty = $_POST['quantity'];
+   $qty = ++$qty;
+   $cart_sub_update_query = "UPDATE `cart_sub` SET `quantity` = $qty WHERE `product_id`=$cart_sub_pro_id;";
+   $cart_sub_update_result = mysqli_query($con, $cart_sub_update_query);
+ 
+}
+
+if(isset($_POST['decre_quantity'])) {
+    $qty = $_POST['quantity'];
+   if($qty > 1) {
+    $qty = --$qty;
+   } else {
+       $qty = 1;
+   }
+    $cart_sub_update_query = "UPDATE `cart_sub` SET `quantity` = $qty WHERE `product_id`=$cart_sub_pro_id;";
+    $cart_sub_update_result = mysqli_query($con, $cart_sub_update_query);
+}
+
 ?>    
     <!--sub navigation container start-->
     <div class="sub_navigation_container">
@@ -38,6 +60,7 @@ include './header.php';
                 $cart_page_result = mysqli_query($con, $cart_page_query);
                 while($row = mysqli_fetch_assoc($cart_page_result)) {
                     $pro_id = $row['product_id'];
+                    $pro_quantity = $row['quantity'];
                     $big_cart_query = "SELECT * FROM `products` WHERE `p_id`=$pro_id;";
                     $big_cart_result = mysqli_query($con, $big_cart_query);
                     while($row1 = mysqli_fetch_assoc($big_cart_result)) {
@@ -60,9 +83,13 @@ include './header.php';
                     <td>
                         <div class="incre_decre_container_of_cart">
                             <div>
-                                <button class="decre">-</button>
-                                <span class="counter">1</span>
-                                <button class="incre">+</button>
+                                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                                <button class="decre" name="decre_quantity" value="<?php echo $pro_quantity; ?>">-</button>
+                                <span class="counter"><?php echo $pro_quantity; ?></span> 
+                                <input type="hidden" name="quantity" value="<?php echo $pro_quantity; ?>">
+                                <input type="hidden" name="product_id" value=<?php echo $pro_id; ?>>
+                                <button class="incre" name="incre_quantity" value="<?php echo $pro_quantity++; ?>">+</button>
+                                </form>
                             </div>
                           </div>
                     </td>

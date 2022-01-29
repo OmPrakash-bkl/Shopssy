@@ -10,15 +10,17 @@ if(isset($_POST['submit1'])) {
     $userPassword = stripcslashes($_POST['user_pass']);
     $emailval = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$/";
     if(preg_match($emailval, $userName)) {
-        $login_query = "SELECT `email`, `password` FROM `register` WHERE `email`='$userName';";
+        $login_query = "SELECT `email`, `password`, `user_id` FROM `register` WHERE `email`='$userName';";
         $login_result = mysqli_query($con, $login_query);
         if(mysqli_num_rows($login_result) === 1) {
             while($row = mysqli_fetch_assoc($login_result)) {
                 $db_u_pass_word = $row['password'];
+                $db_u_user_id = $row['user_id'];
             }
             if($userPassword === $db_u_pass_word) {
                 $_SESSION['user_login_id'] = $userName."Shopssy";
                 $_SESSION['user_login_email'] = $userName;
+                $_SESSION['user_id'] = $db_u_user_id;
             }
         }
     }

@@ -1203,6 +1203,6 @@ insert into cart(user_id, pro_id, qty, pro_price, cart_user_desc) values
 
 15. Cart Sub
 
-create table cart_sub(c_s_id int(100) AUTO_INCREMENT, u_id int(100), product_id int(100), primary key(c_s_id));
+create table cart_sub(c_s_id int(100) AUTO_INCREMENT, u_id int(100), product_id int(100), quantity int(100) default 1, primary key(c_s_id));
 
-insert into cart_sub(u_id, product_id) values(1, 4);
+insert into cart_sub(u_id, product_id, quantity) values(1, 4, 1);
