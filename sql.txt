@@ -1207,5 +1207,9 @@ create table mywishlist(wish_id int(100) AUTO_INCREMENT, user_id int(100), prod_
 insert into mywishlist(user_id, prod_id) values
 (1,1);
 
+14. Account
 
+create table account(acc_id int(100) AUTO_INCREMENT, user_id int(100), f_name varchar(200) default NULL, l_name varchar(200) default NULL, my_name varchar(200) default NULL, address varchar(300) default NULL, city varchar(200) default NULL, state varchar(200) default NULL, zip varchar(200) default NULL, phone varchar(200) default NULL, country varchar(100) default NULL, status varchar(100) default NULL, primary key(acc_id));
 
+insert into account(user_id, f_name, l_name, my_name, address, city, state, zip, phone, country, status) values
+(4, 'Ram', 'Kumar', 'Ram Kumar', '13/A, Prasanna Colony, 3rd Street, Avaniyapuram, Madurai - 12.', 'Madurai', 'Tamil Nadu', '625012', '1234567890', 'India', 'default');

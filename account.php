@@ -2,6 +2,11 @@
 include './action.php';
 $title = "My Account - Shopssy";
 include './header.php';
+
+if(isset($_POST['log_out'])){
+    unset($_SESSION['user_login_id']);
+}
+
 ?>
 
     <!--sub navigation container start-->
@@ -21,60 +26,89 @@ include './header.php';
         <div class="my_account_container">
             <h2 class="heading1">MY ACCOUNT</h2>
             <div class="account_details_table_container">
+
+            <?php 
+             $user_identity =  $_SESSION['user_id'];
+            $account_query = "SELECT * FROM `account` WHERE `status` ='default' AND `user_id` = $user_identity;";
+            $account_result = mysqli_query($con, $account_query);
+            $accounts_my_name = "-- NIL --";
+                $accounts_address = "-- NIL --";
+                $accounts_city = "-- NIL --";
+                $accounts_zip = "-- NIL --";
+                $accounts_phone = "-- NIL --";
+                $accounts_country = "-- NIL --";
+                $accounts_state = "-- NIL --";
+            while($row = mysqli_fetch_assoc($account_result)) {
+                $accounts_my_name = $row['my_name'];
+                $accounts_address = $row['address'];
+                $accounts_city = $row['city'];
+                $accounts_zip = $row['zip'];
+                $accounts_phone = $row['phone'];
+                $accounts_country = $row['country'];
+                $accounts_state = $row['state'];
+            }
+            
+            ?>
+
+
+
                 <table>
                     <tr>
                         <th>My Name: </th>
-                        <td>om prakash</td>
+                        <td><?php echo $accounts_my_name; ?></td>
                         
                     </tr>
                     <tr>
                         <td colspan="2" class="bottom_border"></td>
                     </tr>
-                    <tr>
-                        <th>Company: </th>
-                        <td>Prakashz Solutionsz</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="bottom_border"></td>
-                    </tr>
+                
                     <tr>
                         <th>Address: </th>
-                        <td>13/A, Prasanna Colony, 3rd Street, Avaniyapuram, Madurai.</td>
+                        <td><?php echo $accounts_address; ?></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="bottom_border"></td>
                     </tr>
                     <tr>
                         <th>City: </th>
-                        <td>Madurai(South)</td>
+                        <td><?php echo $accounts_city; ?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="bottom_border"></td>
+                    </tr>
+                    <tr>
+                        <th>State: </th>
+                        <td><?php echo $accounts_state; ?></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="bottom_border"></td>
                     </tr>
                     <tr>
                         <th>Postal/Zip Code: </th>
-                        <td>625012</td>
+                        <td><?php echo $accounts_zip; ?></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="bottom_border"></td>
                     </tr>
                     <tr>
                         <th>Phone: </th>
-                        <td>1234567890</td>
+                        <td><?php echo $accounts_phone; ?></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="bottom_border"></td>
                     </tr>
                     <tr>
                         <th>Country: </th>
-                        <td>India</td>
+                        <td><?php echo $accounts_country; ?></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="bottom_border"></td>
                     </tr>
                 </table>
-                <a href="#"><button>VIEW ADDRESS (1)</button></a>
-                <a href="#"><button>LOG OUT</button></a>
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                <a href="./address.php"><button type="button" >VIEW ADDRESS (1)</button></a>
+                <a href="#"><button type="submit" name="log_out" >LOG OUT</button></a>
+                </form>
             </div>
             <h2 class="heading2">ORDER HISTORY</h2>
             <p>You haven't placed any orders yet.</p>

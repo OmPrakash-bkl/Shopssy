@@ -2,7 +2,6 @@
 include './action.php';
 $title = "Shopssy | Online Shopping Site for Mobiles, Electronics and More.";
 include './header.php';
-
 if(isset($_POST['product_id'])) {
     $user_email_id = $_SESSION['user_login_email'];
     $cart_process_query = "SELECT `user_id` FROM `register` WHERE `email`='$user_email_id';";

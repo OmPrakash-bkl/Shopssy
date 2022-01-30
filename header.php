@@ -46,22 +46,23 @@ if(isset($_SESSION['user_id'])) {
     $users_id = $_SESSION['user_id'];
     $empty_msg_con_query = "SELECT * FROM `mywishlist` WHERE `user_id` = $users_id;";
     $empty_msg_con_result = mysqli_query($con, $empty_msg_con_query);
-}
-
-if(isset($empty_msg_con_result)) {
+    if(isset($empty_msg_con_result)) {
     if(mysqli_num_rows($empty_msg_con_result) === 0) {
         $empty = "emptied";
     } else {
         $empty = "";
     }
 }
+}
+
+
 
 
 
  if(isset($_POST['logout'])) {
     unset($_SESSION['user_login_id']);
-    unset($_SESSION['user_login_email']);
-    unset($_SESSION['user_id']);
+    // unset($_SESSION['user_login_email']);
+    // unset($_SESSION['user_id']);
     
    //session_destroy();
    }
@@ -385,7 +386,7 @@ if(isset($empty_msg_con_result)) {
                <table>
                    <tr>
                        <td><button><i class="fa fa-user" aria-hidden="true"></i></button></td>
-                       <td><a href="./account.html"><button>My Account</button></a></td>
+                       <td><a href="./account.php"><button>My Account</button></a></td>
                    </tr>
                    <tr>
                        <td colspan="2">--------------------</td>
@@ -421,7 +422,10 @@ if(isset($empty_msg_con_result)) {
 
             <?php 
 
-            $mini_user_id = $_SESSION['user_id'];
+            if($_SESSION['user_id']) {
+                $mini_user_id = $_SESSION['user_id'];
+            }
+          
            
             $mini_pro_cart_user_desc="";
              $mini_cart_page_query = "SELECT * FROM `cart` WHERE `u_id`=$mini_user_id;";
@@ -539,7 +543,7 @@ if(isset($empty_msg_con_result)) {
 
                     <tr>
                         <td><a href="./product.php?b_title=<?php echo $brand_and_item_list_b_title; ?>&sub_cat_identification_id_two=<?php echo $subcategory_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $subcategory_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $brand_b_and_i_identification_id; ?>"><?php 
-                         echo $brand_and_item_list_b_title
+                         echo $brand_and_item_list_b_title;
                          ?></a></td>
                     </tr>
                   <?php } ?>
@@ -651,3 +655,11 @@ if(isset($empty_msg_con_result)) {
     </div>
 
     <!--Navbar Container End-->
+
+
+
+
+
+
+
+
