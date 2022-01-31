@@ -344,7 +344,7 @@ if(isset($_POST['new_add'])) {
                 <span><i class="fa fa-angle-right" style="color: #666666;font-size: 14px;"></i></span>
                 <span><a href="./shipping.php">Shipping</a></span>
                 <span><i class="fa fa-angle-right" style="color: #666666;font-size: 14px;"></i></span>
-                <span><a href="#">Payment</a></span>
+                <span><a href="./payment.php">Payment</a></span>
             </div>
 
             <h3>Contact information</h3>

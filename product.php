@@ -228,23 +228,31 @@ include './header.php';
                     <div class="brand_list_container" id="brand_list_container">
                         <?php
                         
-                        $product_cat_query = "SELECT `b_title` FROM `brand_and_item_list` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
+                        $product_cat_query = "SELECT * FROM `brand_and_item_list` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
                         $product_cat_result = mysqli_query($con, $product_cat_query);
 
                         while($row = mysqli_fetch_assoc($product_cat_result)) {
 
                             $pro_cat_titles = $row['b_title'];
+                            $pro_b_and_i_identification_id = $row['b_and_i_identification_id'];
+                            $pro_subs_cat_identification_id_two = $row['subs_cat_identification_id_two'];
+                            $pro_subs_cat_identification_id = $row['subs_cat_identification_id'];
                         
                         ?>
                         <div>
-                            <input type="checkbox" id="<?php echo $pro_cat_titles; ?>" onchange="document.getElementById('fliter_form').submit()"> <label for="<?php echo $pro_cat_titles; ?>"><?php echo $pro_cat_titles; ?></label>
+                         
+                            <input type="hidden" name="b_and_i_identification_id" value="<?php echo $pro_b_and_i_identification_id; ?>">
+                            <input type="checkbox" id="<?php echo $pro_cat_titles; ?>" onchange="document.getElementById('fliter_form').submit()" name="b_title" value="<?php echo $pro_cat_titles; ?>"> <label for="<?php echo $pro_cat_titles; ?>"><?php echo $pro_cat_titles; ?></label>
                         </div>
                        
                       <?php } ?>
-                        
+                      <input type="hidden" name="sub_cat_identification_id" value="<?php echo $pro_subs_cat_identification_id; ?>">
+                      <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $pro_subs_cat_identification_id_two; ?>">
                     </div>
                 </div>
             </div>
+
+            </form>
 
             <?php 
 
@@ -278,7 +286,7 @@ include './header.php';
            ?>
            
          <div>
-           <input type="checkbox" id="<?php echo $temp_sub_filter_datas; ?>" onchange="document.getElementById('fliter_form').submit()"> <label for="<?php echo $temp_sub_filter_datas; ?>"><?php echo $temp_sub_filter_datas; ?></label>
+           <input type="checkbox" id="<?php echo $temp_sub_filter_datas; ?>" onchange="document.getElementById('fliter_form1').submit()"> <label for="<?php echo $temp_sub_filter_datas; ?>"><?php echo $temp_sub_filter_datas; ?></label>
         </div>
 
          <?php } ?>
@@ -292,7 +300,7 @@ include './header.php';
         $dummy++;
         } ?>
 
-           </form>
+         
         </div>
 
         <div class="product_section_sub_container_2">

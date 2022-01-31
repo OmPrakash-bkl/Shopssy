@@ -1213,3 +1213,27 @@ create table account(acc_id int(100) AUTO_INCREMENT, user_id int(100), f_name va
 
 insert into account(user_id, f_name, l_name, my_name, address, city, state, zip, phone, country, status) values
 (4, 'Ram', 'Kumar', 'Ram Kumar', '13/A, Prasanna Colony, 3rd Street, Avaniyapuram, Madurai - 12.', 'Madurai', 'Tamil Nadu', '625012', '1234567890', 'India', 'default');
+
+15. Payment 
+
+create table payment(id int(100) AUTO_INCREMENT, user_id int(100), order_id int(100), card_type varchar(200), card_number varchar(300), exp_date varchar(200), CVV int(50), primary key(id));
+
+insert into payment(user_id, order_id, card_type, card_number, exp_date, CVV) values
+(4, 1, 'Classic', '4111 1111 4555 1142', '03/2030', 744);
+
+16. Order 
+
+create table orders_table(order_id int(100) AUTO_INCREMENT, user_id int(100), trx_id varchar(200), p_status varchar(100), pro_tot_amount int(150), primary key(order_id));
+
+insert into orders_table(user_id, trx_id, p_status, pro_tot_amount) values
+(4, 'trx0000', 'ordered', 40000);
+
+17. Orders Sub 
+
+create table orders_sub_table(o_s_id int(100) AUTO_INCREMENT, order_id int(100), product_id int(100), quantity int(50), primary key(o_s_id));
+
+insert into orders_sub_table(order_id, product_id, quantity) values
+(1, 4, 3),
+(1, 7, 2);
+
+

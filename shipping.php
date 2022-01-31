@@ -8,8 +8,10 @@ if(isset($_GET['p'])) {
     
 if($_GET['p'] == 1) {
     $status_of_add = "default";
+    $p_value = $_GET['p'];
 } else {
     $status_of_add = "secondary";
+    $p_value = $_GET['p'];
 }
 $add_retrieve_query = "SELECT * FROM `account` WHERE `user_id` = $user_id AND `status` = '$status_of_add';";
 $add_retrieve_result = mysqli_query($con, $add_retrieve_query);
@@ -20,9 +22,12 @@ while($row2 = mysqli_fetch_assoc($add_retrieve_result)) {
     $customer_add_details_country = $row2['country'];
     $shipping_address = $customer_add_details_address.", ".$customer_add_details_city.", ".$customer_add_details_state.", ".$customer_add_details_country.".";
 }
-} else {
+} 
+else {
     header("Location: http://localhost:3000/information.php");
 }
+
+
 
 ?>
 <!DOCTYPE html>
@@ -202,8 +207,11 @@ while($row2 = mysqli_fetch_assoc($add_retrieve_result)) {
                 </div>
 
         <div class="semi_final_btn_container">
-        <button type="submit" class="continue_btn">Continue to payment</button>
+       <form action="./payment.php" method="GET">
+       <button type="submit" name="p" value="<?php echo $p_value; ?>" class="continue_btn">Continue to payment</button>
+     
         <span class="return_link"><a href="./information.php"><i class="fa fa-angle-left"></i> Return to information</a></span>
+        </form>
         </div>
 
         </div>
@@ -299,7 +307,10 @@ while($row = mysqli_fetch_assoc($cart_details__result)) {
                    
                     </div>
                     <div class="information_inner_container2_divs_pricez1">
-                        &#8377; <?php echo $product_sub_total + 50; ?>.00
+                        &#8377; <?php echo $product_sub_total + 50; 
+                        $_SESSION['T_AMT'] = $product_sub_total + 50;
+                      
+                        ?>.00
                     </div>
                 </div>
     
