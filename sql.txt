@@ -1246,4 +1246,9 @@ insert into orders_sub_table(order_id, product_id, quantity) values
 (1, 4, 3),
 (1, 7, 2);
 
+17. Filter Details For Mobile
 
+create table filter_detail_for_mob (mob_id int(100) AUTO_INCREMENT, pro_id int(100), subs_cat_identification_id int(100), RAM varchar(150), CUSTOMER_RATINGS varchar(150), INTERNAL_STORAGE varchar(150), BATTERY_CAPACITY varchar(150), OPERATING_SYSTEM varchar(150), NETWORK_TYPE varchar(150), SCREEN_SIZE varchar(150), SIM_TYPE varchar(150), PRIMARY_CAMERA varchar(150), SECONDARY_CAMERA varchar(150), PROCESSOR_BRAND varchar(150), OPERATING_SYSTEM_VERSION varchar(150), NUMBER_OF_CORES varchar(150), BUDGET varchar(150), primary key(mob_id));
+
+insert into filter_detail_for_mob(pro_id, subs_cat_identification_id, RAM, CUSTOMER_RATINGS, INTERNAL_STORAGE, BATTERY_CAPACITY, OPERATING_SYSTEM, NETWORK_TYPE, SCREEN_SIZE, SIM_TYPE, PRIMARY_CAMERA, SECONDARY_CAMERA, PROCESSOR_BRAND, OPERATING_SYSTEM_VERSION, NUMBER_OF_CORES, BUDGET) values
+(1, 101, '6 GB & Above', '3 & Above', '128 - 255 GB', '5000 mAh & Above', 'Android', '5G', '6 inch & Above', 'Dual Sim', '48 MP & Above', '10 - 19 MP', 'Mediatek', 'Android Q', 'Octo Core', 'Rs. 15000 & Rs. 29999');
