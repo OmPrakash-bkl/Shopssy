@@ -1024,23 +1024,33 @@ insert into product_questions_and_answers(p_id, ques_person_name, p_ques, p_ans,
 
 11. Filter Table
 
-create table filter(filter_id int(100) AUTO_INCREMENT, subs_cat_identification_id int(100),  filter_title varchar(200), primary key(filter_id));
+create table filter(filter_id int(100) AUTO_INCREMENT, subs_cat_identification_id int(100),  filter_title varchar(200), filter_sub_title varchar(200), primary key(filter_id));
 
-insert into filter(subs_cat_identification_id, filter_title) values
-(101, 'RAM'),
-(101, 'CUSTOMER RATINGS'),
-(101, 'INTERNAL STORAGE'),
-(101, 'BATTERY CAPACITY'),
-(101, 'OPERATING SYSTEM'),
-(101, 'NETWORK TYPE'),
-(101, 'SCREEN SIZE'),
-(101, 'SIM TYPE'),
-(101, 'PRIMARY CAMERA'),
-(101, 'SECONDARY CAMERA'),
-(101, 'PROCESSOR BRAND'),
-(101, 'OPERATING SYSTEM VERSION'),
-(101, 'NUMBER OF CORES'),
-(101, 'BUDGET');
+insert into filter(subs_cat_identification_id, filter_title, filter_sub_title) values
+(101, 'RAM', 'RAM'),
+(101, 'CUSTOMER RATINGS', 'CUSTOMER_RATINGS'),
+(101, 'INTERNAL STORAGE', 'INTERNAL_STORAGE'),
+(101, 'BATTERY CAPACITY', 'BATTERY_CAPACITY'),
+(101, 'OPERATING SYSTEM', 'OPERATING_SYSTEM'),
+(101, 'NETWORK TYPE', 'NETWORK_TYPE'),
+(101, 'SCREEN SIZE', 'SCREEN_SIZE'),
+(101, 'SIM TYPE', 'SIM_TYPE'),
+(101, 'PRIMARY CAMERA', 'PRIMARY_CAMERA'),
+(101, 'SECONDARY CAMERA', 'SECONDARY_CAMERA'),
+(101, 'PROCESSOR BRAND', 'PROCESSOR_BRAND'),
+(101, 'OPERATING SYSTEM VERSION', 'OPERATING_SYSTEM_VERSION'),
+(101, 'NUMBER OF CORES', 'NUMBER_OF_CORES'),
+(101, 'BUDGET', 'BUDGET'),
+(102, 'DISPLAY SIZE', 'DISPLAY_SIZE'),
+(102, 'CONNECTIVITY', 'CONNECTIVITY'),
+(102, 'RAM', 'RAM'),
+(102, 'CUSTOMER RATINGS', 'CUSTOMER_RATINGS'),
+(102, 'INTERNAL STORAGE', 'INTERNAL_STORAGE'),
+(102, 'OPERATING SYSTEM', 'OPERATING_SYSTEM'),
+(102, 'DISPLAY', 'DISPLAY'),
+(102, 'PRIMARY CAMERA', 'PRIMARY_CAMERA'),
+(102, 'BATTERY CAPACITY', 'BATTERY_CAPACITY'),
+(102, 'BUDGET', 'BUDGET');
 
 
 12. Filter Sub

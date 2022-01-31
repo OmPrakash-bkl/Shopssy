@@ -1,6 +1,8 @@
 <?php 
 include './action.php';
 
+
+
 if(isset($_GET['searchItem'])) {
 
     $searchKeyword = $_GET['searchItem'];
@@ -214,7 +216,7 @@ include './header.php';
     <div class="product_section_container">
         <div class="product_section_sub_container_1" id="product_section_sub_container_1">
             <h1>Filters</h1>
-           <form action="" id="fliter_form">
+           
             <div class="product_section_sub_container_brands_container">
                 <div>
                     <div class="brands_container">
@@ -225,12 +227,15 @@ include './header.php';
                             <i class="fa fa-angle-down" id="arrow_of_product1"></i>
                         </div>
                     </div>
+
+                   
+
                     <div class="brand_list_container" id="brand_list_container">
                         <?php
                         
                         $product_cat_query = "SELECT * FROM `brand_and_item_list` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
                         $product_cat_result = mysqli_query($con, $product_cat_query);
-
+                        $temprory_value = 1;
                         while($row = mysqli_fetch_assoc($product_cat_result)) {
 
                             $pro_cat_titles = $row['b_title'];
@@ -239,20 +244,26 @@ include './header.php';
                             $pro_subs_cat_identification_id = $row['subs_cat_identification_id'];
                         
                         ?>
+
+                        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="fliter_form<?php echo $temprory_value; ?>" method="GET">
                         <div>
-                         
                             <input type="hidden" name="b_and_i_identification_id" value="<?php echo $pro_b_and_i_identification_id; ?>">
-                            <input type="checkbox" id="<?php echo $pro_cat_titles; ?>" onchange="document.getElementById('fliter_form').submit()" name="b_title" value="<?php echo $pro_cat_titles; ?>"> <label for="<?php echo $pro_cat_titles; ?>"><?php echo $pro_cat_titles; ?></label>
-                        </div>
-                       
-                      <?php } ?>
-                      <input type="hidden" name="sub_cat_identification_id" value="<?php echo $pro_subs_cat_identification_id; ?>">
+                            <input type="checkbox" id="<?php echo $pro_cat_titles; ?>" onchange="document.getElementById('fliter_form<?php echo $temprory_value; ?>').submit()" name="b_title" value="<?php echo $pro_cat_titles; ?>"  class="filter_brand_and_item_divvs"> <label for="<?php echo $pro_cat_titles; ?>"><?php echo $pro_cat_titles; ?></label>
+                            <input type="hidden" name="sub_cat_identification_id" value="<?php echo $pro_subs_cat_identification_id; ?>">
                       <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $pro_subs_cat_identification_id_two; ?>">
+                        </div>
+                        </form>
+                     
+                      <?php 
+                    $temprory_value++;
+                    } 
+                    ?>
+                      
                     </div>
+
+                   
                 </div>
             </div>
-
-            </form>
 
             <?php 
 
@@ -260,11 +271,15 @@ include './header.php';
    $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id_two;";
    $temp_result = mysqli_query($con, $temp_query);
    $dummy = 1;
+  
    while($row = mysqli_fetch_assoc($temp_result)) {
        $temp_title = $row['filter_title'];
+       $temp_sub_title = $row['filter_sub_title'];
        $temp_id = $row['filter_id'];
    ?>
 
+          <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="filter_form" method="GET">
+               
             <div class="product_section_sub_container_customer_rating_container">
                 <div>
                     <div class="rating_container fil_container<?php echo $dummy; ?>" onclick="show_and_hide(<?php echo $dummy; ?>)">
@@ -282,11 +297,15 @@ include './header.php';
            $temp_sub_result = mysqli_query($con, $temp_sub_query);
            while($row1 = mysqli_fetch_assoc($temp_sub_result)) {
                $temp_sub_filter_datas = $row1['filter_datas'];
-          
+            
            ?>
            
          <div>
-           <input type="checkbox" id="<?php echo $temp_sub_filter_datas; ?>" onchange="document.getElementById('fliter_form1').submit()"> <label for="<?php echo $temp_sub_filter_datas; ?>"><?php echo $temp_sub_filter_datas; ?></label>
+           <input type="checkbox" id="<?php echo $temp_sub_filter_datas; ?>" onchange="document.getElementById('filter_form').submit()" name="<?php echo $temp_sub_title; ?>" value="<?php echo $temp_sub_filter_datas; ?>"> <label for="<?php echo $temp_sub_filter_datas; ?>"><?php echo $temp_sub_filter_datas; ?></label>
+           <input type="hidden" name="sub_cat_identification_id" value="<?php echo $pro_subs_cat_identification_id; ?>">
+             <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $pro_subs_cat_identification_id_two; ?>">
+             <input type="hidden" name="b_title" value="<?php echo $pro_cat_titles; ?>">
+         
         </div>
 
          <?php } ?>
@@ -295,11 +314,19 @@ include './header.php';
                 </div>
             </div>
 
-            
+          
             <?php
         $dummy++;
+
+       if(isset($_GET[$temp_sub_title])) {
+        echo $_GET[$temp_sub_title];
+       }
+
         } ?>
 
+</form>
+            
+     
          
         </div>
 
@@ -414,6 +441,8 @@ include './header.php';
         </div>
         
         <?php } ?>
+
+        
      
 </center>
 
