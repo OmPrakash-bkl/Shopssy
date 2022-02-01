@@ -1252,3 +1252,25 @@ create table filter_detail_for_mob (mob_id int(100) AUTO_INCREMENT, pro_id int(1
 
 insert into filter_detail_for_mob(pro_id, subs_cat_identification_id, RAM, CUSTOMER_RATINGS, INTERNAL_STORAGE, BATTERY_CAPACITY, OPERATING_SYSTEM, NETWORK_TYPE, SCREEN_SIZE, SIM_TYPE, PRIMARY_CAMERA, SECONDARY_CAMERA, PROCESSOR_BRAND, OPERATING_SYSTEM_VERSION, NUMBER_OF_CORES, BUDGET) values
 (1, 101, '6 GB & Above', '3 & Above', '128 - 255 GB', '5000 mAh & Above', 'Android', '5G', '6 inch & Above', 'Dual Sim', '48 MP & Above', '10 - 19 MP', 'Mediatek', 'Android Q', 'Octo Core', 'Rs. 15000 & Rs. 29999');
+
+insert into filter_detail_for_mob(pro_id, subs_cat_identification_id, RAM, CUSTOMER_RATINGS, INTERNAL_STORAGE, BATTERY_CAPACITY, OPERATING_SYSTEM, NETWORK_TYPE, SCREEN_SIZE, SIM_TYPE, PRIMARY_CAMERA, SECONDARY_CAMERA, PROCESSOR_BRAND, OPERATING_SYSTEM_VERSION, NUMBER_OF_CORES, BUDGET) values
+(2, 101, '8 GB', '2 & Above', '128 - 255 GB', '5000 mAh & Above', 'Android', '4G', '6 inch & Above', 'Dual Sim', '48 MP & Above', '30 - 39 MP', 'Snapdragon', 'Android Q', 'Octo Core', 'Rs. 30000 & Above');
+
+
+insert into filter_detail_for_mob(pro_id, subs_cat_identification_id, RAM, CUSTOMER_RATINGS, INTERNAL_STORAGE, BATTERY_CAPACITY, OPERATING_SYSTEM, NETWORK_TYPE, SCREEN_SIZE, SIM_TYPE, PRIMARY_CAMERA, SECONDARY_CAMERA, PROCESSOR_BRAND, OPERATING_SYSTEM_VERSION, NUMBER_OF_CORES, BUDGET) values
+(5, 101, '3 GB', '3 & Above', '128 - 255 GB', '2000 - 2999 mAh', 'iOS', '4G', '6 inch & Above', 'Dual Sim', '10 - 19 MP', '1 - 9 MP', 'Apple', 'Pie', 'Quad Core', 'Rs. 30000 & Above');
+
+insert into filter_detail_for_mob(pro_id, subs_cat_identification_id, RAM, CUSTOMER_RATINGS, INTERNAL_STORAGE, BATTERY_CAPACITY, OPERATING_SYSTEM, NETWORK_TYPE, SCREEN_SIZE, SIM_TYPE, PRIMARY_CAMERA, SECONDARY_CAMERA, PROCESSOR_BRAND, OPERATING_SYSTEM_VERSION, NUMBER_OF_CORES, BUDGET) values
+(9, 101, '4 GB', '3 & Above', '64 - 127 GB', '5000 mAh & Above', 'Android', '4G VOLTE', '6 inch & Above', 'Dual Sim', '48 MP & Above', '1 - 9 MP', 'Mediatek', 'Android Q', 'Octo Core', 'Rs. 10000 & Rs. 14999');
+
+18. Filter Details For Tablets 
+
+
+create table filter_detail_for_tab (tab_id int(100) AUTO_INCREMENT, pro_id int(100), subs_cat_identification_id int(100), DISPLAY_SIZE varchar(150), CONNECTIVITY varchar(150), RAM varchar(150), CUSTOMER_RATINGS varchar(150), INTERNAL_STORAGE varchar(150), OPERATING_SYSTEM varchar(150), DISPLAY varchar(150), PRIMARY_CAMERA varchar(150), BATTERY_CAPACITY varchar(150), BUDGET varchar(150), primary key(tab_id));
+
+insert into filter_detail_for_tab(pro_id, subs_cat_identification_id, DISPLAY_SIZE, CONNECTIVITY, RAM, CUSTOMER_RATINGS, INTERNAL_STORAGE, OPERATING_SYSTEM, DISPLAY, PRIMARY_CAMERA, BATTERY_CAPACITY, BUDGET) values
+(53, 102, '10 - 12 inch', 'WiFi Only', '4 GB', '4 & Above', '64 - 127 GB', 'iOS', '2K', '10 - 12 MP', '5000 mAh & Above', 'Rs. 30000 & Above');
+
+insert into filter_detail_for_tab(pro_id, subs_cat_identification_id, DISPLAY_SIZE, CONNECTIVITY, RAM, CUSTOMER_RATINGS, INTERNAL_STORAGE, OPERATING_SYSTEM, DISPLAY, PRIMARY_CAMERA, BATTERY_CAPACITY, BUDGET) values
+(61, 102, '7 - 8 inch', 'WiFi Only', '3 GB', '3 & Above', '64 - 127 GB', 'Android', 'Full HD', '12 MP & Above', '5000 mAh & Above', 'Rs. 10000 & Rs. 14999');
+
