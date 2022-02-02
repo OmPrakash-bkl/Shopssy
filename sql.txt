@@ -1274,3 +1274,20 @@ insert into filter_detail_for_tab(pro_id, subs_cat_identification_id, DISPLAY_SI
 insert into filter_detail_for_tab(pro_id, subs_cat_identification_id, DISPLAY_SIZE, CONNECTIVITY, RAM, CUSTOMER_RATINGS, INTERNAL_STORAGE, OPERATING_SYSTEM, DISPLAY, PRIMARY_CAMERA, BATTERY_CAPACITY, BUDGET) values
 (61, 102, '7 - 8 inch', 'WiFi Only', '3 GB', '3 & Above', '64 - 127 GB', 'Android', 'Full HD', '12 MP & Above', '5000 mAh & Above', 'Rs. 10000 & Rs. 14999');
 
+19. Unnamed User Cart
+
+create table unnamed_user_cart(u_u_cart_id int(100) AUTO_INCREMENT, un_u_cart_token int(100) default 0, prod_id_of_cart int(100) default 0, qty int(100) default 0, cart_desc varchar(300) default NULL, primary key(u_u_cart_id));
+
+insert into unnamed_user_cart(un_u_cart_token, prod_id_of_cart, qty, cart_desc) values
+(0, 1, 2, 'need to buy');
+
+20. Unnamed User Wishlist
+
+create table unnamed_user_wishlist(u_u_wishlist_id int(100) AUTO_INCREMENT, un_u_wishlist_token int(100) default 0, prod_id_of_wishlist int(100) default 0, primary key(u_u_wishlist_id));
+
+
+insert into unnamed_user_wishlist(un_u_wishlist_token, prod_id_of_wishlist) values
+(1, 1);
+
+
+

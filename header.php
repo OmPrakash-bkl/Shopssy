@@ -2,15 +2,35 @@
 session_start();
 include './db_con.php';
 if(isset($_GET['delete_btn_of_mini_cart'])) {
-    $mini_cart_sub_product_id = $_GET['product_id'];
-    $mini_cart_sub_delete_query = "DELETE FROM `cart` WHERE `product_id` = $mini_cart_sub_product_id;";
-    mysqli_query($con, $mini_cart_sub_delete_query);
-    header("Location: http://localhost:3000/index.php");
+    if(isset($_SESSION['user_login_id'])) {
+        $mini_cart_sub_product_id = $_GET['product_id'];
+        $mini_cart_sub_delete_query = "DELETE FROM `cart` WHERE `product_id` = $mini_cart_sub_product_id;";
+        mysqli_query($con, $mini_cart_sub_delete_query);
+        ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/index.php';
+    </script>
+    <?php
+    } else {
+        $mini_cart_sub_product_id = $_GET['product_id'];
+        $mini_cart_sub_delete_query = "DELETE FROM `unnamed_user_cart` WHERE `prod_id_of_cart` = $mini_cart_sub_product_id;";
+        mysqli_query($con, $mini_cart_sub_delete_query);
+        ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/index.php';
+    </script>
+    <?php
+    }
+  
 }
 
 
 if(isset($_POST['view_cart'])) {
-    header("Location: http://localhost:3000/cart.php");
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/cart.php';
+    </script>
+    <?php
 }
 if(isset($_POST['cart_update_and_checkout'])) {
     $cart_update_u_id = $_POST['u_id'];
@@ -18,7 +38,11 @@ if(isset($_POST['cart_update_and_checkout'])) {
     $cart_update_cart_user_desc = $_POST['cart_user_desc'];
 $cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
 mysqli_query($con, $cart_update_query);
-header("Location: http://localhost:3000/information.php");
+?>
+<script type="text/javascript">
+window.location.href = 'http://localhost:3000/information.php';
+</script>
+<?php
 }
 
 if(isset($_POST['wish_del_id'])) {
@@ -61,7 +85,7 @@ if(isset($_SESSION['user_id'])) {
 
  if(isset($_POST['logout'])) {
     unset($_SESSION['user_login_id']);
-    // unset($_SESSION['user_login_email']);
+    //unset($_SESSION['user_login_email']);
     // unset($_SESSION['user_id']);
     
    //session_destroy();
@@ -151,9 +175,9 @@ if(isset($_SESSION['user_id'])) {
                 <button class="savelist_close_btn_of_wishlist"><i class="far fa-window-close"></i></button>
                 <h2>Save Your List</h2>
                 <p>You are logged in as</p>
-                <b><?php echo $_SESSION['user_login_email']; ?></b> <br>
+                <b><?php echo $_SESSION['user_login_email'];?></b> <br>
                 <center>
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
                 <button type="button" class="btn_1 save_your_list_close_btn">CANCEL</button>
                <button class="btn_2" name="logout">LOG OUT</button>
                </form>
@@ -245,10 +269,7 @@ if(isset($_SESSION['user_id'])) {
                     $wish_p_title = $row1['p_title'];
                     $wish_p_image = $row1['p_image'];
                     $wish_p_a_price = $row1['p_a_price'];
-                
-
                 ?>
-
                 <div class="wishlist_product_inner_container">
                     <div class="btn_div1">
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
@@ -267,10 +288,10 @@ if(isset($_SESSION['user_id'])) {
                         }  
                         ?></h2>
                         <p>S / White</p>
-                        <h2 class="pricee">&#8377; <?php echo $wish_p_a_price; ?></h2>
+                        <h2 class="pricee">&#8377;<?php echo $wish_p_a_price; ?></h2>
                         <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                        <button class="add_to_cart_btn" name="add_to_cart_id" value="<?php echo $wish_p_id; ?>" >ADD TO CART</button>
+                        <button class="add_to_cart_btn" name="add_to_cart_id" value="<?php echo $wish_p_id; ?>">ADD TO CART</button>
                         </form>
                     </div>
                 </div>
@@ -293,7 +314,7 @@ if(isset($_SESSION['user_id'])) {
     <center>
     <div class="header_main_container">
         <div class="header_container_childs header_container_left">
-            <h1><a href="#">Shopssy</a></h1>
+            <h1><a href="./index.php">Shopssy</a></h1>
         </div>
         <div class="header_container_childs header_container_right">
             <div>
@@ -422,57 +443,117 @@ if(isset($_SESSION['user_id'])) {
 
             <?php 
 
-            if($_SESSION['user_id']) {
-                $mini_user_id = $_SESSION['user_id'];
-            }
-          
-           
-            $mini_pro_cart_user_desc="";
-             $mini_cart_page_query = "SELECT * FROM `cart` WHERE `u_id`=$mini_user_id;";
-             $mini_cart_page_result = mysqli_query($con, $mini_cart_page_query);
-             $mini_cart_products_total_price = 0;
-             while($row = mysqli_fetch_assoc($mini_cart_page_result)) {
-                $mini_pro_id = $row['product_id'];
-                $mini_pro_quantity = $row['quantity'];
-                $mini_pro_u_id = $row['u_id'];
-                $mini_pro_cart_user_desc = $row['cart_user_desc'];
-                $mini_big_cart_query = "SELECT * FROM `products` WHERE `p_id`=$mini_pro_id;";
-                $mini_big_cart_result = mysqli_query($con, $mini_big_cart_query);
-                while($row1 = mysqli_fetch_assoc($mini_big_cart_result)) {
-                    $mini_big_cart_p_image = $row1['p_image'];
-                    $mini_big_cart_p_title = $row1['p_title'];
-                    $mini_big_cart_p_a_price = $row1['p_a_price'];
-                    $mini_cart_update_prod_id = $row1['p_id'];
+            if(isset($_SESSION['user_login_id'])) {
+                if(isset($_SESSION['user_id'])) {
+                    $mini_user_id = $_SESSION['user_id'];
                 }
-            
-            ?>
+                 
 
-                <tr>
-                    <td rowspan="4" class="delete_btn_border"><img src="./images/<?php echo $mini_big_cart_p_image; ?>" class="mini_cart_container_images" alt="<?php echo $mini_big_cart_p_image; ?>"></td>
-                </tr>
-                <tr>
-                    <td class="product_title"><a href="#"><?php
-                    if(strlen($mini_big_cart_p_title) > 30) {
-                            echo substr($mini_big_cart_p_title, 0, 35)." ...";
-                        } else {
-                            echo $mini_big_cart_p_title;
-                        } 
-                        ?></a></td>
-                </tr>
-                <tr>
-                    <td class="product_prz"><b>&#8377; <?php 
-                    $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_a_price;
-                    echo $mini_tot_price;
-                    $mini_cart_products_total_price =  $mini_cart_products_total_price+$mini_tot_price; ?></b> X <?php echo $mini_pro_quantity; ?></td>
-                </tr>
-                <tr>
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
-                    <input type="hidden" name="product_id" value="<?php echo $mini_pro_id; ?>">
-                    <td class="delete_btn_border"><button class="delete_btn_of_cart" name="delete_btn_of_mini_cart" ><i class="fas fa-trash-alt"></i></button></td>
-                    </form>
-                </tr>
+                ?>
 
-               <?php   } ?>
+                <?php 
+                
+            $mini_pro_cart_user_desc="";
+            $mini_cart_page_query = "SELECT * FROM `cart` WHERE `u_id`=$mini_user_id;";
+            $mini_cart_page_result = mysqli_query($con, $mini_cart_page_query);
+            $mini_cart_products_total_price = 0;
+            while($row = mysqli_fetch_assoc($mini_cart_page_result)) {
+               $mini_pro_id = $row['product_id'];
+               $mini_pro_quantity = $row['quantity'];
+               $mini_pro_u_id = $row['u_id'];
+               $mini_pro_cart_user_desc = $row['cart_user_desc'];
+               $mini_big_cart_query = "SELECT * FROM `products` WHERE `p_id`=$mini_pro_id;";
+               $mini_big_cart_result = mysqli_query($con, $mini_big_cart_query);
+               while($row1 = mysqli_fetch_assoc($mini_big_cart_result)) {
+                   $mini_big_cart_p_image = $row1['p_image'];
+                   $mini_big_cart_p_title = $row1['p_title'];
+                   $mini_big_cart_p_a_price = $row1['p_a_price'];
+                   $mini_cart_update_prod_id = $row1['p_id'];
+               }
+           
+           ?>
+
+               <tr>
+                   <td rowspan="4" class="delete_btn_border"><img src="./images/<?php echo $mini_big_cart_p_image; ?>" class="mini_cart_container_images" alt="<?php echo $mini_big_cart_p_image; ?>"></td>
+               </tr>
+               <tr>
+                   <td class="product_title"><a href="#"><?php
+                   if(strlen($mini_big_cart_p_title) > 30) {
+                           echo substr($mini_big_cart_p_title, 0, 35)." ...";
+                       } else {
+                           echo $mini_big_cart_p_title;
+                       } 
+                       ?></a></td>
+               </tr>
+               <tr>
+                   <td class="product_prz"><b>&#8377;<?php 
+                   $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_a_price;
+                   echo $mini_tot_price;
+                   $mini_cart_products_total_price =  $mini_cart_products_total_price+$mini_tot_price; ?></b> X <?php echo $mini_pro_quantity; ?></td>
+               </tr>
+               <tr>
+                   <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
+                   <input type="hidden" name="product_id" value="<?php echo $mini_pro_id; ?>">
+                   <td class="delete_btn_border"><button class="delete_btn_of_cart" name="delete_btn_of_mini_cart" ><i class="fas fa-trash-alt"></i></button></td>
+                   </form>
+               </tr>
+
+              <?php   } ?>
+              <?php 
+            } else {
+
+                $mini_user_id = $_COOKIE['T093NO5A86H'];
+                 
+            $mini_pro_cart_user_desc="";
+            $mini_cart_page_query = "SELECT * FROM `unnamed_user_cart` WHERE `un_u_cart_token`=$mini_user_id;";
+            $mini_cart_page_result = mysqli_query($con, $mini_cart_page_query);
+            $mini_cart_products_total_price = 0;
+            while($row = mysqli_fetch_assoc($mini_cart_page_result)) {
+               $mini_pro_id = $row['prod_id_of_cart'];
+               $mini_pro_quantity = $row['qty'];
+               $mini_pro_u_id = $row['un_u_cart_token'];
+               $mini_pro_cart_user_desc = $row['cart_desc'];
+               $mini_big_cart_query = "SELECT * FROM `products` WHERE `p_id`=$mini_pro_id;";
+               $mini_big_cart_result = mysqli_query($con, $mini_big_cart_query);
+               while($row1 = mysqli_fetch_assoc($mini_big_cart_result)) {
+                   $mini_big_cart_p_image = $row1['p_image'];
+                   $mini_big_cart_p_title = $row1['p_title'];
+                   $mini_big_cart_p_a_price = $row1['p_a_price'];
+                   $mini_cart_update_prod_id = $row1['p_id'];
+               }
+           
+           ?>
+
+               <tr>
+                   <td rowspan="4" class="delete_btn_border"><img src="./images/<?php echo $mini_big_cart_p_image; ?>" class="mini_cart_container_images" alt="<?php echo $mini_big_cart_p_image; ?>"></td>
+               </tr>
+               <tr>
+                   <td class="product_title"><a href="#"><?php
+                   if(strlen($mini_big_cart_p_title) > 30) {
+                           echo substr($mini_big_cart_p_title, 0, 35)." ...";
+                       } else {
+                           echo $mini_big_cart_p_title;
+                       } 
+                       ?></a></td>
+               </tr>
+               <tr>
+                   <td class="product_prz"><b>&#8377;<?php 
+                   $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_a_price;
+                   echo $mini_tot_price;
+                   $mini_cart_products_total_price =  $mini_cart_products_total_price+$mini_tot_price; ?></b> X <?php echo $mini_pro_quantity; ?></td>
+               </tr>
+               <tr>
+                   <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
+                   <input type="hidden" name="product_id" value="<?php echo $mini_pro_id; ?>">
+                   <td class="delete_btn_border"><button class="delete_btn_of_cart" name="delete_btn_of_mini_cart" ><i class="fas fa-trash-alt"></i></button></td>
+                   </form>
+               </tr>
+
+              <?php   }  } ?>
+              
+          
+         
+          
                
             </table>
            </div>

@@ -1,6 +1,15 @@
 <?php 
 session_start();
 include './action.php';
+
+if(!isset($_SESSION['user_login_id'])) {
+    ?>
+   <script type="text/javascript">
+   window.location.href = 'http://localhost:3000/login.php';
+   </script>
+   <?php
+}
+
 $cook_name = 'TRX_COUNTER';
 if(isset($_COOKIE['TRX_COUNTER'])) {
     $trx_counter = $_COOKIE[$cook_name];

@@ -2,6 +2,14 @@
 include './action.php';
 session_start();
 
+if(!isset($_SESSION['user_login_id'])) {
+    ?>
+   <script type="text/javascript">
+   window.location.href = 'http://localhost:3000/login.php';
+   </script>
+   <?php
+}
+
 $shipping_address = "";
 $user_id = $_SESSION['user_id'];
 if(isset($_GET['p'])) {

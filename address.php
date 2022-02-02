@@ -3,6 +3,14 @@ include './action.php';
 $title = "Addresses - Shopssy";
 include './header.php';
 
+if(!isset($_SESSION['user_login_id'])) {
+    ?>
+   <script type="text/javascript">
+   window.location.href = 'http://localhost:3000/login.php';
+   </script>
+   <?php
+}
+
 if(isset($_POST['add_address'])){
     $fir_name = $_POST['fir_name'];
     $las_name = $_POST['las_name'];

@@ -3,20 +3,53 @@ include './action.php';
 $title = "Shopssy | Online Shopping Site for Mobiles, Electronics and More.";
 include './header.php';
 if(isset($_POST['product_id'])) {
-    $user_email_id = $_SESSION['user_login_email'];
-    $cart_process_query = "SELECT `user_id` FROM `register` WHERE `email`='$user_email_id';";
-    $cart_process_result = mysqli_query($con, $cart_process_query);
-    $cart_process_user_id = mysqli_fetch_assoc($cart_process_result);
-    $cart_process_user_id = $cart_process_user_id['user_id'];
-    $cart_process_pro_id = $_POST['product_id'];
-    $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1, 0, '')";
-    mysqli_query($con, $cart_query);
-    $_SESSION['user_id'] = $cart_process_user_id;
-    ?>
-    <script type="text/javascript">
-    window.location.href = 'http://localhost:3000/index.php';
-    </script>
-    <?php
+    if(isset($_SESSION['user_login_id'])) {
+        $user_email_id = $_SESSION['user_login_email'];
+        $cart_process_query = "SELECT `user_id` FROM `register` WHERE `email`='$user_email_id';";
+        $cart_process_result = mysqli_query($con, $cart_process_query);
+        $cart_process_user_id = mysqli_fetch_assoc($cart_process_result);
+        $cart_process_user_id = $cart_process_user_id['user_id'];
+        $cart_process_pro_id = $_POST['product_id'];
+        $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1, 0, '')";
+        mysqli_query($con, $cart_query);
+        $_SESSION['user_id'] = $cart_process_user_id;
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/index.php';
+        </script>
+        <?php
+    } else {
+
+
+        $unnamed_user_cart_query = "SELECT `un_u_cart_token` FROM `unnamed_user_cart`;";
+        $unnamed_user_cart_result = mysqli_query($con, $unnamed_user_cart_query);
+        if(mysqli_num_rows($unnamed_user_cart_result) === 0) {
+            $token_for_un_u_cart_details = 1;
+        } else {
+            while($row_of_u_cart = mysqli_fetch_assoc($unnamed_user_cart_result)) {
+                $token_for_un_u_cart_details = $row_of_u_cart['un_u_cart_token'];
+            }
+            $prod_id_for_unnamed_cart_details = $_POST['product_id'];
+          if(isset($_COOKIE['T093NO5A86H'])) {
+            $token_of_auth = "T093NO5A86H";
+            $token_for_un_u_cart_details = $_COOKIE[$token_of_auth];
+          } else {
+            $token_for_un_u_cart_details = $token_for_un_u_cart_details + 1;
+            $token_of_auth = "T093NO5A86H";
+            setcookie($token_of_auth, $token_for_un_u_cart_details);
+          }
+            $unnamed_user_cart_details_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`) VALUES ($token_for_un_u_cart_details, $prod_id_for_unnamed_cart_details, 1);";
+            mysqli_query($con, $unnamed_user_cart_details_insert_query);
+            ?>
+           <script type="text/javascript">
+           window.location.href = 'http://localhost:3000/index.php';
+           </script>
+           <?php
+        }
+    
+     
+    }
+   
 }
 
 if(isset($_POST['wish_btn'])) {
