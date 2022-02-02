@@ -36,7 +36,14 @@ if(isset($_POST['cart_update_and_checkout'])) {
     $cart_update_u_id = $_POST['u_id'];
     $cart_update_pro_tot_price = $_POST['pro_tot_price'];
     $cart_update_cart_user_desc = $_POST['cart_user_desc'];
-$cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
+    $cart_update_produc_id = $_POST['produc_id'];
+    if(isset($_SESSION['user_login_id'])) {
+        $cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
+    } else 
+    {
+        $cart_update_query = "UPDATE `unnamed_user_cart` SET `cart_desc` = '$cart_update_cart_user_desc' WHERE `prod_id_of_cart` = $cart_update_produc_id;";
+    }
+
 mysqli_query($con, $cart_update_query);
 ?>
 <script type="text/javascript">
@@ -47,13 +54,23 @@ window.location.href = 'http://localhost:3000/information.php';
 
 if(isset($_POST['wish_del_id'])) {
     $wish_delete_id = $_POST['wish_del_id'];
-    $wish_item_delete_query = "DELETE FROM `mywishlist` WHERE `prod_id` = $wish_delete_id;";
+    if(isset($_SESSION['user_login_id'])) { 
+        $wish_item_delete_query = "DELETE FROM `mywishlist` WHERE `prod_id` = $wish_delete_id;";
+    } else {
+        $wish_item_delete_query = "DELETE FROM `unnamed_user_wishlist` WHERE `prod_id_of_wishlist` = $wish_delete_id;";
+    }
     mysqli_query($con, $wish_item_delete_query);
 }
 
 if(isset($_POST['delete_all_from_wishlist'])) {
-    $users_id = $_SESSION['user_id'];
-    $wish_item_delete_query = "DELETE FROM `mywishlist` WHERE `user_id` = $users_id;";
+    if(isset($_SESSION['user_login_id'])) {
+        $users_id = $_SESSION['user_id'];
+        $wish_item_delete_query = "DELETE FROM `mywishlist` WHERE `user_id` = $users_id;";
+    } else {
+        $token_of_wishlist = "W937LI25A856T0K3N";
+        $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
+        $wish_item_delete_query = "DELETE FROM `unnamed_user_wishlist` WHERE `un_u_wishlist_token` = $token_for_un_u_wishlist_details;";
+    }
     mysqli_query($con, $wish_item_delete_query);
     $empty = "emptied";
 }
@@ -61,26 +78,48 @@ if(isset($_POST['delete_all_from_wishlist'])) {
 if(isset($_POST['add_to_cart_id'])) {
     $produc_id = $_POST['add_to_cart_id'];
     $users_id = $_SESSION['user_id'];
-    $cart_insert_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($users_id, $produc_id, 1, 0, '')";
-    mysqli_query($con, $cart_insert_query);
-
-}
-
-if(isset($_SESSION['user_id'])) {
-    $users_id = $_SESSION['user_id'];
-    $empty_msg_con_query = "SELECT * FROM `mywishlist` WHERE `user_id` = $users_id;";
-    $empty_msg_con_result = mysqli_query($con, $empty_msg_con_query);
-    if(isset($empty_msg_con_result)) {
-    if(mysqli_num_rows($empty_msg_con_result) === 0) {
-        $empty = "emptied";
+    if(isset($_SESSION['user_login_id'])) {
+        $cart_insert_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($users_id, $produc_id, 1, 0, '')";
     } else {
-        $empty = "";
+        $cart_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`) VALUES ($users_id, $produc_id, 1, '');";
     }
+    mysqli_query($con, $cart_insert_query);
+    ?>
+<script type="text/javascript">
+window.location.href = 'http://localhost:3000/index.php';
+</script>
+<?php
 }
+
+if(isset($_SESSION['user_login_id'])) {
+    if(isset($_SESSION['user_id'])) {
+        $users_id = $_SESSION['user_id'];
+        $empty_msg_con_query = "SELECT * FROM `mywishlist` WHERE `user_id` = $users_id;";
+        $empty_msg_con_result = mysqli_query($con, $empty_msg_con_query);
+        if(isset($empty_msg_con_result)) {
+        if(mysqli_num_rows($empty_msg_con_result) === 0) {
+            $empty = "emptied";
+        } else {
+            $empty = "";
+        }
+    }
+    } 
+} else {
+    if(isset($_COOKIE['W937LI25A856T0K3N'])) {
+        $token_of_wishlist = "W937LI25A856T0K3N";
+        $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
+        $empty_msg_con_query = "SELECT * FROM `unnamed_user_wishlist` WHERE `un_u_wishlist_token` = $token_for_un_u_wishlist_details;";
+        $empty_msg_con_result = mysqli_query($con, $empty_msg_con_query);
+        if(isset($empty_msg_con_result)) {
+        if(mysqli_num_rows($empty_msg_con_result) === 0) {
+            $empty = "emptied";
+        } else {
+            $empty = "";
+        }
+    }
+    }
+  
 }
-
-
-
 
 
  if(isset($_POST['logout'])) {
@@ -201,7 +240,7 @@ if(isset($_SESSION['user_id'])) {
             <!--save your list container 3 start-->
             <div class="enter_email_address_container">
                 <button class="email_close_btn_of_wishlist email_close_btn_of_wishlist2"><i class="far fa-window-close"></i></button>
-                <h2 class="email_heading">Share List Via Email</h2>
+                <h2 class="email_heading">Save List Via Email</h2>
                 <p>Please enter your email address. You will be sent a validation link to click on.</p>
                 <form action="">
                     <label for="name_of_container">First Name</label> <br>
@@ -250,12 +289,17 @@ if(isset($_SESSION['user_id'])) {
                 <!--empty message container end-->
 
                 <?php 
-                if(isset($_SESSION['user_id'])) {
-                    $users_id = $_SESSION['user_id'];
-                }
-               
 
-                $wish_section_query = "SELECT * FROM `mywishlist` WHERE `user_id` = $users_id;";
+                if(isset($_SESSION['user_login_id'])) {
+
+                    if(isset($_SESSION['user_id'])) {
+                        $users_id = $_SESSION['user_id'];
+                    }
+                    ?>
+
+                    <?php
+
+                      $wish_section_query = "SELECT * FROM `mywishlist` WHERE `user_id` = $users_id;";
                 $wish_section_result = mysqli_query($con, $wish_section_query);
                 while($row = mysqli_fetch_assoc($wish_section_result)) {
                     
@@ -297,6 +341,56 @@ if(isset($_SESSION['user_id'])) {
                 </div>
 
                <?php } } ?>
+
+               <?php 
+                } else {
+
+                    $token_of_wishlist = "W937LI25A856T0K3N";
+                    $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
+
+                    $wish_section_query = "SELECT * FROM `unnamed_user_wishlist` WHERE `un_u_wishlist_token` = $token_for_un_u_wishlist_details;";
+                    $wish_section_result = mysqli_query($con, $wish_section_query);
+                    while($row = mysqli_fetch_assoc($wish_section_result)) {
+                        
+                        $wish_prod_id = $row['prod_id_of_wishlist'];
+                        $empty = "";
+                        
+                    $wish_sec_product_query = "SELECT * FROM `products` WHERE `p_id` = $wish_prod_id;";
+                    $wish_sec_product_result = mysqli_query($con, $wish_sec_product_query);
+                    while($row1 = mysqli_fetch_assoc($wish_sec_product_result)) {
+                        $wish_p_id = $row1['p_id'];
+                        $wish_p_title = $row1['p_title'];
+                        $wish_p_image = $row1['p_image'];
+                        $wish_p_a_price = $row1['p_a_price'];
+                    ?>
+                    <div class="wishlist_product_inner_container">
+                        <div class="btn_div1">
+                            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                            <button class="cross_btn" name="wish_del_id" value="<?php echo $wish_p_id; ?>" ><i class="far fa-window-close"></i></button>
+                            </form>
+                        </div>
+                        <div>
+                            <img src="./images/<?php echo $wish_p_image; ?>" alt="mobile">
+                        </div>
+                        <div>
+                            <h2><?php 
+                            if(strlen($wish_p_title) > 25) {
+                                echo substr($wish_p_title, 0, 25)." ...";
+                            } else {
+                                echo $wish_p_title;
+                            }  
+                            ?></h2>
+                            <p>S / White</p>
+                            <h2 class="pricee">&#8377;<?php echo $wish_p_a_price; ?></h2>
+                            <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
+                            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                            <button class="add_to_cart_btn" name="add_to_cart_id" value="<?php echo $wish_p_id; ?>">ADD TO CART</button>
+                            </form>
+                        </div>
+                    </div>
+    
+                   <?php } } } ?>
+
                
             </div>
            </div>
@@ -557,6 +651,7 @@ if(isset($_SESSION['user_id'])) {
                
             </table>
            </div>
+           
 
            <div class="mini_cart_form_container">
                <p>Add a note to your order</p>
@@ -572,12 +667,15 @@ if(isset($_SESSION['user_id'])) {
                        <p>Shipping & taxes calculated at checkout</p>
                        <input type="hidden" name="u_id" value="<?php echo $mini_pro_u_id; ?>">
                         <input type="hidden" name="pro_tot_price" value="<?php echo $mini_cart_products_total_price; ?>">
+                        <input type="hidden" name="produc_id" value="<?php echo $mini_pro_id; ?>">
                        <button name="view_cart">VIEW CART</button>
                        <button name="cart_update_and_checkout">CHECK OUT</button>
                    </center>
                   
                </form>
            </div>
+
+           
 
            </div>
            <!--mini cart container end-->

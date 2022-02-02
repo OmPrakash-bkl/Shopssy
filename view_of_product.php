@@ -1,8 +1,12 @@
 <?php 
-session_start();
-$_SESSION['user_login_id'] = "ram@gmail.comShopssy";
-$_SESSION['user_login_email'] = "ram@gmail.com";
-$_SESSION['user_id'] = 4;
+//  $token_of_auth = "T093NO5A86H";
+//  setcookie($token_of_auth, 0, time() + (86400 * -10));
+// $token_of_wishlist = "W937LI25A856T0K3N";
+// setcookie($token_of_wishlist, $token_for_un_u_wishlist_details, time() + (86400 * -40));
+// session_start();
+// $_SESSION['user_login_id'] = "ram@gmail.comShopssy";
+// $_SESSION['user_login_email'] = "ram@gmail.com";
+// $_SESSION['user_id'] = 4;
 
 include './action.php';
 

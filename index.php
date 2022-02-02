@@ -1,5 +1,27 @@
 <?php 
 include './action.php';
+if(!isset($_COOKIE['T093NO5A86H'])) {
+    $unnamed_user_cart_query = "SELECT `un_u_cart_token` FROM `unnamed_user_cart`;";
+$unnamed_user_cart_result = mysqli_query($con, $unnamed_user_cart_query);
+while($row_of_u_cart = mysqli_fetch_assoc($unnamed_user_cart_result)) {
+    $token_for_un_u_cart_details = $row_of_u_cart['un_u_cart_token'];
+}
+$token_for_un_u_cart_details = $token_for_un_u_cart_details + 1;
+$token_of_auth = "T093NO5A86H";
+setcookie($token_of_auth, $token_for_un_u_cart_details, time() + (86400 * 730));
+}
+
+if(!isset($_COOKIE['W937LI25A856T0K3N'])) {
+    $unnamed_user_wishlist_query = "SELECT `un_u_wishlist_token` FROM `unnamed_user_wishlist`;";
+$unnamed_user_wishlist_result = mysqli_query($con, $unnamed_user_wishlist_query);
+while($row_of_u_wishlist = mysqli_fetch_assoc($unnamed_user_wishlist_result)) {
+    $token_for_un_u_wishlist_details = $row_of_u_wishlist['un_u_wishlist_token'];
+}
+$token_for_un_u_wishlist_details = $token_for_un_u_wishlist_details + 1;
+$token_of_wishlist = "W937LI25A856T0K3N";
+setcookie($token_of_wishlist, $token_for_un_u_wishlist_details, time() + (86400 * 730));
+}
+
 $title = "Shopssy | Online Shopping Site for Mobiles, Electronics and More.";
 include './header.php';
 if(isset($_POST['product_id'])) {
@@ -33,10 +55,6 @@ if(isset($_POST['product_id'])) {
           if(isset($_COOKIE['T093NO5A86H'])) {
             $token_of_auth = "T093NO5A86H";
             $token_for_un_u_cart_details = $_COOKIE[$token_of_auth];
-          } else {
-            $token_for_un_u_cart_details = $token_for_un_u_cart_details + 1;
-            $token_of_auth = "T093NO5A86H";
-            setcookie($token_of_auth, $token_for_un_u_cart_details);
           }
             $unnamed_user_cart_details_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`) VALUES ($token_for_un_u_cart_details, $prod_id_for_unnamed_cart_details, 1);";
             mysqli_query($con, $unnamed_user_cart_details_insert_query);
@@ -55,7 +73,14 @@ if(isset($_POST['product_id'])) {
 if(isset($_POST['wish_btn'])) {
     $users_id = $_SESSION['user_id'];
     $produc_id = $_POST['productt_id'];
-    $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`) VALUES ($users_id, $produc_id);";
+    if(isset($_SESSION['user_login_id'])) {
+        $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`) VALUES ($users_id, $produc_id);";
+    } else {
+        $token_of_wishlist = "W937LI25A856T0K3N";
+        $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
+        $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`) VALUES ($token_for_un_u_wishlist_details, $produc_id);";
+    }
+  
     mysqli_query($con, $wishlist_insert_query);
     ?>
     <script type="text/javascript">

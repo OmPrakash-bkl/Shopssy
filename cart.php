@@ -7,14 +7,27 @@ if(isset($_POST['cart_update'])) {
     $cart_update_u_id = $_POST['u_id'];
     $cart_update_pro_tot_price = $_POST['pro_tot_price'];
     $cart_update_cart_user_desc = $_POST['cart_user_desc'];
-$cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
+    if(isset($_SESSION['user_login_id'])) {
+    $cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
+    } else {
+        $cart_update_produc_id = $_POST['produc_id'];
+    $cart_update_query = "UPDATE `unnamed_user_cart` SET `cart_desc` = '$cart_update_cart_user_desc' WHERE `prod_id_of_cart` = $cart_update_produc_id;";
+    }
+   
 mysqli_query($con, $cart_update_query);
 }
+
 if(isset($_POST['cart_update_and_checkout'])) {
     $cart_update_u_id = $_POST['u_id'];
     $cart_update_pro_tot_price = $_POST['pro_tot_price'];
     $cart_update_cart_user_desc = $_POST['cart_user_desc'];
-$cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
+    if(isset($_SESSION['user_login_id'])) {
+        $cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
+    } else {
+        $cart_update_produc_id = $_POST['produc_id'];
+        $cart_update_query = "UPDATE `unnamed_user_cart` SET `cart_desc` = '$cart_update_cart_user_desc' WHERE `prod_id_of_cart` = $cart_update_produc_id;";
+    }
+
 mysqli_query($con, $cart_update_query);
 header("Location: http://localhost:3000/information.php");
 }
@@ -28,9 +41,14 @@ if(isset($_POST['product_id'])) {
     $cart_sub_pro_id = $_POST['product_id'];
 }
 if(isset($_POST['incre_quantity'])) {
-   $qty = $_POST['quantity'];
-   $qty = ++$qty;
-   $cart_sub_update_query = "UPDATE `cart` SET `quantity` = $qty WHERE `product_id`=$cart_sub_pro_id;";
+    $qty = $_POST['quantity'];
+    $qty = ++$qty;
+if(isset($_SESSION['user_login_id'])) {
+    $cart_sub_update_query = "UPDATE `cart` SET `quantity` = $qty WHERE `product_id`=$cart_sub_pro_id;";
+} else {
+    $cart_sub_update_query = "UPDATE `unnamed_user_cart` SET `qty` = $qty WHERE `prod_id_of_cart`=$cart_sub_pro_id;";
+   
+}
    $cart_sub_update_result = mysqli_query($con, $cart_sub_update_query);
    ?>
    <script type="text/javascript">
@@ -41,14 +59,17 @@ if(isset($_POST['incre_quantity'])) {
 
 if(isset($_POST['decre_quantity'])) {
     $qty = $_POST['quantity'];
-   if($qty > 1) {
-    $qty = --$qty;
-   } else {
-       $qty = 1;
-   }
-    $cart_sub_update_query = "UPDATE `cart` SET `quantity` = $qty WHERE `product_id`=$cart_sub_pro_id;";
+    if($qty > 1) {
+     $qty = --$qty;
+    } else {
+        $qty = 1;
+    }
+    if(isset($_SESSION['user_login_id'])) {
+        $cart_sub_update_query = "UPDATE `cart` SET `quantity` = $qty WHERE `product_id`=$cart_sub_pro_id;";
+    } else {
+        $cart_sub_update_query = "UPDATE `unnamed_user_cart` SET `qty` = $qty WHERE `prod_id_of_cart`=$cart_sub_pro_id;";
+    }
     $cart_sub_update_result = mysqli_query($con, $cart_sub_update_query);
-
     ?>
     <script type="text/javascript">
     window.location.href = 'http://localhost:3000/cart.php';
@@ -56,8 +77,18 @@ if(isset($_POST['decre_quantity'])) {
     <?php
 }
 if(isset($_POST['delete_btn'])) {
-    $cart_sub_product_id = $_POST['product_id'];
-    $cart_sub_delete_query = "DELETE FROM `cart` WHERE `product_id` = $cart_sub_product_id;";
+    if(isset($_SESSION['user_login_id'])) {
+        $cart_sub_product_id = $_POST['product_id'];
+        $cart_sub_delete_query = "DELETE FROM `cart` WHERE `product_id` = $cart_sub_product_id;";
+    } else {
+        $cart_sub_product_id = $_POST['product_id'];
+        $cart_sub_delete_query = "DELETE FROM `unnamed_user_cart` WHERE `prod_id_of_cart` = $cart_sub_product_id;";
+        ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/cart.php';
+    </script>
+    <?php
+    }
     mysqli_query($con, $cart_sub_delete_query);
 }
 
@@ -91,9 +122,15 @@ if(isset($_POST['delete_btn'])) {
 
                 <?php 
                 
-              
-               $user_id = $_SESSION['user_id'];
-               $pro_cart_user_desc="";
+                if(isset($_SESSION['user_login_id'])) {
+                    if(isset($_SESSION['user_id'])) {
+                        $user_id = $_SESSION['user_id'];
+                    }
+                    ?>
+
+                    <?php
+
+                     $pro_cart_user_desc="";
                 $cart_page_query = "SELECT * FROM `cart` WHERE `u_id`=$user_id;";
                 $cart_page_result = mysqli_query($con, $cart_page_query);
                 $cart_products_total_price = 0;
@@ -148,7 +185,69 @@ if(isset($_POST['delete_btn'])) {
                 </tr>
 
                 <?php  } ?>
-
+                <?php 
+                } else {
+                    $user_id = $_COOKIE['T093NO5A86H'];
+                    $pro_cart_user_desc="";
+                    $cart_page_query = "SELECT * FROM `unnamed_user_cart` WHERE `un_u_cart_token`=$user_id;";
+                    $cart_page_result = mysqli_query($con, $cart_page_query);
+                    $cart_products_total_price = 0;
+                    while($row = mysqli_fetch_assoc($cart_page_result)) {
+                        $pro_id = $row['prod_id_of_cart'];
+                        $pro_quantity = $row['qty'];
+                        $pro_u_id = $row['un_u_cart_token'];
+                        $pro_cart_user_desc = $row['cart_desc'];
+                        $big_cart_query = "SELECT * FROM `products` WHERE `p_id`=$pro_id;";
+                        $big_cart_result = mysqli_query($con, $big_cart_query);
+                        while($row1 = mysqli_fetch_assoc($big_cart_result)) {
+                            $big_cart_p_image = $row1['p_image'];
+                            $big_cart_p_title = $row1['p_title'];
+                            $big_cart_p_a_price = $row1['p_a_price'];
+                            $cart_update_prod_id = $row1['p_id'];
+                        }
+                       
+                    ?>
+    
+                    <tr>
+                        <td><img src="./images/<?php echo $big_cart_p_image; ?>" alt="mobile image" class="shopping_cart_images"></td>
+                        <td>
+                            <span class="product_name"><?php echo $big_cart_p_title; ?></span> <br>
+                            <span class="product_size">Size: S</span> <br>
+                            <span class="product_color">Color: White</span> <br>
+                        </td>
+                        <td>
+                            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                            <input type="hidden" name="product_id" value="<?php echo $pro_id; ?>">
+                            <button class="delete_btn_of_cart" name="delete_btn" ><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                        </td>
+                        <td class="price_of_cart">&#8377;<?php echo $big_cart_p_a_price; ?>.00</td>
+                        <td>
+                            <div class="incre_decre_container_of_cart">
+                                <div>
+                                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                                    <button class="decre" name="decre_quantity" value="<?php echo $pro_quantity; ?>">-</button>
+                                    <span class="counter"><?php echo $pro_quantity; ?></span> 
+                                    <input type="hidden" name="quantity" value="<?php echo $pro_quantity; ?>">
+                                    <input type="hidden" name="product_id" value=<?php echo $pro_id; ?>>
+                                    <button class="incre" name="incre_quantity" value="<?php echo $pro_quantity++; ?>">+</button>
+                                    </form>
+                                </div>
+                              </div>
+                        </td>
+                        <td class="total_price_of_cart">&#8377;<?php 
+                        $tot_price = ($pro_quantity - 1 ) * $big_cart_p_a_price;
+                        echo $tot_price;
+                        $cart_products_total_price =  $cart_products_total_price+$tot_price;
+                        ?>.00</td>
+                    </tr>
+    
+                    <?php } } ?>
+    
+                
+              
+           
+             
             </table>
 
            <div class="table_for_mobile_shopping_cart">
@@ -309,6 +408,7 @@ if(isset($_POST['delete_btn'])) {
                  <button class="continue_shopping_btn" name="continue_shopping">CONTINUE SHOPPING</button>
                  <input type="hidden" name="u_id" value="<?php echo $pro_u_id; ?>">
                  <input type="hidden" name="pro_tot_price" value="<?php echo $cart_products_total_price; ?>">
+                 <input type="hidden" name="produc_id" value="<?php echo $pro_id; ?>">
                   <button name="cart_update">UPDATE</button>
                   <button name="cart_update_and_checkout">CHECK OUT</button>
                 
