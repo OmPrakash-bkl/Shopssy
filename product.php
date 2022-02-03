@@ -2,39 +2,6 @@
 include './action.php';
 
 
-
-if(isset($_GET['searchItem'])) {
-
-    $searchKeyword = $_GET['searchItem'];
-    if($searchKeyword) {
-        $search_retrieve_query = "SELECT * FROM `brand_and_item_list` WHERE `b_sub_title` LIKE '%$searchKeyword%';";
-        $search_retrieve_result = mysqli_query($con, $search_retrieve_query);
-        $search_result_count = mysqli_num_rows($search_retrieve_result);
-        while($row = mysqli_fetch_assoc($search_retrieve_result)) {
-        $search_b_and_i_identification_id =  $row['b_and_i_identification_id'];
-        $search_sub_cat_identification_id = $row['subs_cat_identification_id'];
-        $search_sub_cat_identification_id_two = $row['subs_cat_identification_id_two'];
-        $search_sub_b_title = $row['b_title'];
-         }
-
-      if($search_result_count < 3) {
-        header("Location: http://localhost:3000/product.php?b_title=$search_sub_b_title&sub_cat_identification_id_two=$search_sub_cat_identification_id_two&sub_cat_identification_id=$search_sub_cat_identification_id&b_and_i_identification_id=$search_b_and_i_identification_id");
-      } else {
-          $search_retrieve_query_2 = "SELECT `subs_cat_title` FROM `sub_category` WHERE `sub_cat_identification_id_two`=$search_sub_cat_identification_id_two;";
-          $search_retrieve_result_2 = mysqli_query($con, $search_retrieve_query_2);
-          $search_result_count2 = mysqli_num_rows($search_retrieve_result_2);
-          while($row = mysqli_fetch_assoc($search_retrieve_result_2)) {
-              $search_sub_cat_title = $row['subs_cat_title'];
-          }
-        header("Location: http://localhost:3000/product.php?sub_cat_title=$search_sub_cat_title&sub_cat_identification_id_two=$search_sub_cat_identification_id_two&sub_cat_identification_id=$search_sub_cat_identification_id");
-      }
-      if($search_result_count2 == 0) {
-        header("Location: http://localhost:3000/product2.php?s=$searchKeyword");
-      }
-
-    }
-}
-
 if(isset($_GET['sub_cat_identification_id'])) {
     $product_sub_cat_identification_id = $_GET['sub_cat_identification_id'];
     if(isset($_GET['sub_cat_title'])) {
@@ -49,6 +16,50 @@ if(isset($_GET['b_title'])) {
 
 $title = $product_sub_cat_title . " - Shopssy";
 include './header.php';
+
+if(isset($_GET['searchItem'])) {
+   
+    $searchKeyword = $_GET['searchItem'];
+    if($searchKeyword) {
+        $search_retrieve_query = "SELECT * FROM `brand_and_item_list` WHERE `b_sub_title` LIKE '%$searchKeyword%';";
+        $search_retrieve_result = mysqli_query($con, $search_retrieve_query);
+        $search_result_count = mysqli_num_rows($search_retrieve_result);
+      unset($_SESSION['temp_product_id']);
+      $l = 1;
+        while($row = mysqli_fetch_assoc($search_retrieve_result)) {
+        $search_b_and_i_identification_id =  $row['b_and_i_identification_id'];
+        $search_sub_cat_identification_id = $row['subs_cat_identification_id'];
+        $search_sub_cat_identification_id_two = $row['subs_cat_identification_id_two'];
+        $search_sub_b_title = $row['b_title'];
+            $_SESSION['temp_product_id'][$l] = $search_b_and_i_identification_id;
+            $l++;
+         }
+        
+      if($search_result_count == 1) {
+
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/product.php?b_title=<?php echo $search_sub_b_title; ?>&sub_cat_identification_id_two=<?php echo $search_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $search_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $search_b_and_i_identification_id; ?>';
+        </script>
+        <?php
+      } 
+    elseif($search_result_count > 1) {
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/product3.php?t=<?php echo $searchKeyword; ?>';
+        </script>
+        <?php
+      } else {
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/product2.php?s=<?php echo $searchKeyword; ?>';
+        </script>
+        <?php
+      }
+    
+
+    }
+}
 
 ?>
 

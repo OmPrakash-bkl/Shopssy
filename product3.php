@@ -1,12 +1,11 @@
 <?php 
 include './action.php';
 
-if(isset($_GET['s'])) {
+if(isset($_GET['t'])) {
 
-    $searchKeyword = $_GET['s'];
+    $searchKeyword = $_GET['t'];
   
 }
-
 
 $title = $searchKeyword . " - Shopssy";
 include './header.php';
@@ -182,8 +181,10 @@ include './header.php';
            <center>
 
            <?php 
+
+           foreach($_SESSION['temp_product_id'] as $value) {
            
-           $category_products_query = "SELECT * FROM `products` WHERE `p_title` LIKE '%$searchKeyword%';";
+           $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id` = $value;";
 
            $category_products_result = mysqli_query($con, $category_products_query);
 
@@ -269,7 +270,7 @@ include './header.php';
             </div>
         </div>
         
-        <?php } ?>
+        <?php }  } ?>
      
 </center>
 

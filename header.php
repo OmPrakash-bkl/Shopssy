@@ -490,7 +490,7 @@ if(isset($_SESSION['user_login_id'])) {
       
             <div class="navbar_main_container_childs navbar_main_container_childs_two">
                 <form action="./product.php" method="GET">
-                    <input type="search" placeholder="Search" name="searchItem">
+                    <input type="search" placeholder="Search" name="searchItem" required>
                     <button type="submit">
                         <i class="fas fa-search"></i>
                     </button>
