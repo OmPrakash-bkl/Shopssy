@@ -71,9 +71,9 @@ if(isset($_POST['product_id'])) {
 }
 
 if(isset($_POST['wish_btn'])) {
-    $users_id = $_SESSION['user_id'];
     $produc_id = $_POST['productt_id'];
     if(isset($_SESSION['user_login_id'])) {
+        $users_id = $_SESSION['user_id'];
         $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`) VALUES ($users_id, $produc_id);";
     } else {
         $token_of_wishlist = "W937LI25A856T0K3N";
@@ -170,7 +170,7 @@ if(isset($_POST['wish_btn'])) {
 
         <?php
         
-        $products_query = "SELECT * FROM `products` WHERE `cats_id` = 1 ;";
+        $products_query = "SELECT * FROM `products` ORDER BY RAND() LIMIT 20;";
         $products_result = mysqli_query($con, $products_query);
        while($row = mysqli_fetch_assoc($products_result)) {
            $product_p_image = $row['p_image'];
@@ -555,112 +555,60 @@ if(isset($_POST['wish_btn'])) {
                 <h2>TOP CATEGORIES</h2>
             </div>
             <div class="top_categories_container_product_nav_div">
-                <div class="top_categories_container_products">
+
+            <?php 
+            $top_category_retrieve_query = "SELECT `cat_id`, `cat_title`, `cat_image_name` FROM `category` ORDER BY RAND() LIMIT 6;";
+            $top_category_retrieve_result = mysqli_query($con, $top_category_retrieve_query);
+            $border_counter1 = 1;
+            while($row = mysqli_fetch_assoc($top_category_retrieve_result)) {
+                $top_category_cat_id = $row['cat_id'];
+                $top_category_cat_title = $row['cat_title'];
+                $top_category_cat_image_name = $row['cat_image_name'];
+               
+                
+            
+            ?>
+               
+                <div class="top_categories_container_products <?php if($border_counter1 == 3 OR $border_counter1 == 6) {
+                    echo "no_border";
+                    
+                } ?>">
                     <div class="top_categories_container_products_img_div">
-                        <img src="./images/smart_phone_2.jpg" alt="my web smart phone image">
+                        <img src="./images/<?php echo $top_category_cat_image_name; ?>" alt="my web smart phone image">
                     </div>
                     <div class="top_categories_container_products_navlink_div">
-                        <h4>Smartphone & Tablets</h4>
+                        <h4><?php echo $top_category_cat_title; ?></h4>
                         <ul>
-                            <li><a href="#">Apple</a></li>
-                            <li><a href="#">Samsung</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Chargers</a></li>
-                            <li><a href="#">Smartphone</a></li>
-                            <li><a href="#">Motorola</a></li>
-                            <li><a href="#" class="show_all">View all</a></li>
+                            <?php 
+
+                $top_sub_category_retrieve_query = "SELECT * FROM `brand_and_item_list` WHERE `cats_id` = $top_category_cat_id LIMIT 5;";
+                $top_sub_category_retrieve_result = mysqli_query($con, $top_sub_category_retrieve_query);
+                while($row1 = mysqli_fetch_assoc($top_sub_category_retrieve_result)) {
+                    $top_category_b_title = $row1['b_title'];
+                    $top_category_sub_cat_identification_id_two = $row1['subs_cat_identification_id_two'];
+                    $top_category_sub_cat_identification_id = $row1['subs_cat_identification_id'];
+                    $top_category_b_and_i_identification_id = $row1['b_and_i_identification_id'];
+                            ?>
+                           <li><a href="./product.php?b_title=<?php echo $top_category_b_title; ?>&sub_cat_identification_id_two=<?php echo $top_category_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $top_category_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $top_category_b_and_i_identification_id; ?>"><?php echo $top_category_b_title; ?></a></li>
+                            <?php } ?>
+                            <li><a href="./product.php?sub_cat_identification_id=<?php echo $top_category_sub_cat_identification_id; ?>&sub_cat_identification_id_two=<?php echo $top_category_sub_cat_identification_id_two; ?>&sub_cat_title=<?php echo $top_category_cat_title; ?>" class="show_all">View all</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="top_categories_container_products">
-                    <div class="top_categories_container_products_img_div">
-                        <img src="./images/bluetooth_image_1.jpg" alt="my web smart phone image">
-                    </div>
-                    <div class="top_categories_container_products_navlink_div">
-                        <h4>Audio & Sound Devices</h4>
-                        <ul>
-                            <li><a href="#">Logitech Products</a></li>
-                            <li><a href="#">Zebronics Products</a></li>
-                            <li><a href="#">Headphones</a></li>
-                            <li><a href="#">Audiophile</a></li>
-                            <li><a href="#">Home Theater</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#" class="show_all">View all</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="top_categories_container_products no_border">
-                    <div class="top_categories_container_products_img_div">
-                        <img src="./images/smart_image_1.jpg" alt="my web smart phone image">
-                    </div>
-                    <div class="top_categories_container_products_navlink_div">
-                        <h4>Smartwatches</h4>
-                        <ul>
-                            <li><a href="#">Apple Smartwatch</a></li>
-                            <li><a href="#">Garmin</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Leather Band</a></li>
-                            <li><a href="#">Steel Band</a></li>
-                            <li><a href="#">Xiaomi</a></li>
-                            <li><a href="#" class="show_all">View all</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="gray_border">
-                </div>
-                <div class="top_categories_container_products">
-                    <div class="top_categories_container_products_img_div">
-                        <img src="./images/power_image_1.jpg" alt="my web smart phone image">
-                    </div>
-                    <div class="top_categories_container_products_navlink_div">
-                        <h4>Gaming Gear</h4>
-                        <ul>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Action Games</a></li>
-                            <li><a href="#">Game Consoles</a></li>
-                            <li><a href="#">Racing Games</a></li>
-                            <li><a href="#">Station Consoles</a></li>
-                            <li><a href="#">Arcade Games</a></li>
-                            <li><a href="#" class="show_all">View all</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="top_categories_container_products">
-                    <div class="top_categories_container_products_img_div">
-                        <img src="./images/cam_image_1.jpg" alt="my web smart phone image">
-                    </div>
-                    <div class="top_categories_container_products_navlink_div">
-                        <h4>Camera</h4>
-                        <ul>
-                            <li><a href="#">Security Cameras</a></li>
-                            <li><a href="#">Canon DSLR</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Wireless Cam</a></li>
-                            <li><a href="#">Go Pro</a></li>
-                            <li><a href="#">Button Carera</a></li>
-                            <li><a href="#" class="show_all">View all</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="top_categories_container_products no_border">
-                    <div class="top_categories_container_products_img_div">
-                        <img src="./images/cpu_image_1.jpg" alt="my web smart phone image">
-                    </div>
-                    <div class="top_categories_container_products_navlink_div">
-                        <h4>Laptop & Computer</h4>
-                        <ul>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Keyboard</a></li>
-                            <li><a href="#">Mouse</a></li>
-                            <li><a href="#">Computer Monitors</a></li>
-                            <li><a href="#">Graphic Card</a></li>
-                            <li><a href="#">Desktop Computers</a></li>
-                            <li><a href="#" class="show_all">View all</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <?php 
+                if($border_counter1 == 3) {
+                    echo '<div class="gray_border">
+                    </div>';
+                }
+                ?>
+                
+                <?php
+                 $border_counter1++;
+                } 
+             ?>
 
             </div>
+
         </div>
     </center>
     <!--top categories container end-->
