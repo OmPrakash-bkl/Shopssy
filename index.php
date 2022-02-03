@@ -233,11 +233,12 @@ if(isset($_POST['wish_btn'])) {
                     </div>
                     <div>
                         <h4><?php
-                        if(strlen($product_p_title) > 30) {
-                            echo substr($product_p_title, 0, 35)." ...";
-                        } else {
-                            echo $product_p_title;
-                        }
+                       $string_of_title = $product_p_title;
+                       if(strlen($string_of_title) > 35) {
+                        $string_of_title = explode("\n", wordwrap($string_of_title, 35));
+                        $string_of_title = $string_of_title[0].' ...';
+                       }
+                       echo $string_of_title;
                          ?></h4>
                     </div>
                     <div>

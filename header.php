@@ -325,11 +325,12 @@ if(isset($_SESSION['user_login_id'])) {
                     </div>
                     <div>
                         <h2><?php 
-                        if(strlen($wish_p_title) > 25) {
-                            echo substr($wish_p_title, 0, 25)." ...";
-                        } else {
-                            echo $wish_p_title;
-                        }  
+                        $string_of_title = $wish_p_title;
+                        if(strlen($string_of_title) > 25) {
+                         $string_of_title = explode("\n", wordwrap($string_of_title, 25));
+                         $string_of_title = $string_of_title[0].' ...';
+                        }
+                        echo $string_of_title;
                         ?></h2>
                         <p>S / White</p>
                         <h2 class="pricee">&#8377;<?php echo $wish_p_a_price; ?></h2>
@@ -374,11 +375,12 @@ if(isset($_SESSION['user_login_id'])) {
                         </div>
                         <div>
                             <h2><?php 
-                            if(strlen($wish_p_title) > 25) {
-                                echo substr($wish_p_title, 0, 25)." ...";
-                            } else {
-                                echo $wish_p_title;
-                            }  
+                            $string_of_title = $wish_p_title;
+                            if(strlen($string_of_title) > 25) {
+                             $string_of_title = explode("\n", wordwrap($string_of_title, 25));
+                             $string_of_title = $string_of_title[0].' ...';
+                            }
+                            echo $string_of_title;
                             ?></h2>
                             <p>S / White</p>
                             <h2 class="pricee">&#8377;<?php echo $wish_p_a_price; ?></h2>
@@ -572,11 +574,12 @@ if(isset($_SESSION['user_login_id'])) {
                </tr>
                <tr>
                    <td class="product_title"><a href="#"><?php
-                   if(strlen($mini_big_cart_p_title) > 30) {
-                           echo substr($mini_big_cart_p_title, 0, 35)." ...";
-                       } else {
-                           echo $mini_big_cart_p_title;
-                       } 
+                       $string_of_title = $mini_big_cart_p_title;
+                       if(strlen($string_of_title) > 30) {
+                        $string_of_title = explode("\n", wordwrap($string_of_title, 35));
+                        $string_of_title = $string_of_title[0].' ...';
+                       }
+                       echo $string_of_title;
                        ?></a></td>
                </tr>
                <tr>
@@ -623,11 +626,12 @@ if(isset($_SESSION['user_login_id'])) {
                </tr>
                <tr>
                    <td class="product_title"><a href="#"><?php
-                   if(strlen($mini_big_cart_p_title) > 30) {
-                           echo substr($mini_big_cart_p_title, 0, 35)." ...";
-                       } else {
-                           echo $mini_big_cart_p_title;
-                       } 
+                       $string_of_title = $mini_big_cart_p_title;
+                       if(strlen($string_of_title) > 30) {
+                        $string_of_title = explode("\n", wordwrap($string_of_title, 35));
+                        $string_of_title = $string_of_title[0].' ...';
+                       }
+                       echo $string_of_title;
                        ?></a></td>
                </tr>
                <tr>
