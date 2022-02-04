@@ -25,18 +25,4 @@ if(review_form.style.display=="none") {
 });
 
 
-let counter1 = 1;
-document.getElementsByClassName("incre")[0].addEventListener("click", function() {
-counter1++;
-document.getElementsByClassName("counter")[0].innerHTML = counter1;
-});
-document.getElementsByClassName("decre")[0].addEventListener("click", function() {
-    if(counter1 > 1) {
-        counter1--;
-        document.getElementsByClassName("counter")[0].innerHTML = counter1;
-    } else {
-        document.getElementsByClassName("counter")[0].innerHTML = 1;
-    }
-    });
-
 /* Image and Review Button Functions End */

@@ -57,13 +57,116 @@ if($product_sub_cat_id ==  $temp3) {
     $sub_navigation_title = $titles[2];
 }
 
-
 }
-
 
 
 $title = $sub_navigation_title . " - Shopssy";
 include './header.php';
+
+if(isset($_GET['increment'])) {
+    $_SESSION['prod_qty'] = $_SESSION['prod_qty'] + 1;
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+    </script>
+    <?php
+} 
+if(isset($_GET['decrement'])) {
+    $_SESSION['prod_qty'] = $_SESSION['prod_qty'] - 1;
+    if($_SESSION['prod_qty'] < 1) {
+        $_SESSION['prod_qty'] = 1;
+    }
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+    </script>
+    <?php
+}
+
+if(isset($_GET['cart_adding_req'])) {
+    $product_id = $_GET['p_id'];
+    if(isset($_SESSION['user_login_id'])) {
+        $user_email_id = $_SESSION['user_login_email'];
+        $cart_adding_query = "SELECT `user_id` FROM `register` WHERE `email` = '$user_email_id';";
+        $cart_adding_result = mysqli_query($con, $cart_adding_query);
+        $cart_adding_result_user_id = mysqli_fetch_assoc($cart_adding_result);
+        $cart_adding_result_user_id = $cart_adding_result_user_id['user_id'];
+        $cart_inserting_qty = $_SESSION['prod_qty'];
+        $cart_inserting_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($cart_adding_result_user_id, $product_id, $cart_inserting_qty, 0, '')";
+        mysqli_query($con, $cart_inserting_query);
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+        </script>
+        <?php
+    } else {
+        if(isset($_COOKIE['T093NO5A86H'])) {
+            $unnamed_user_token = $_COOKIE['T093NO5A86H'];
+            $product_id = $_GET['p_id'];
+            $unnamed_cart_inserting_qty = $_SESSION['prod_qty'];
+            $unname_user_cart_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`) VALUES ($unnamed_user_token, $product_id,  $unnamed_cart_inserting_qty, '');";
+           mysqli_query($con, $unname_user_cart_query);
+           ?>
+           <script type="text/javascript">
+           window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+           </script>
+           <?php
+        }
+    }
+   
+}
+
+
+if(isset($_GET['product_buy_req'])) {
+    $product_id = $_GET['p_id'];
+    if(isset($_SESSION['user_login_id'])) {
+        $user_email_id = $_SESSION['user_login_email'];
+        $cart_adding_query = "SELECT `user_id` FROM `register` WHERE `email` = '$user_email_id';";
+        $cart_adding_result = mysqli_query($con, $cart_adding_query);
+        $cart_adding_result_user_id = mysqli_fetch_assoc($cart_adding_result);
+        $cart_adding_result_user_id = $cart_adding_result_user_id['user_id'];
+        $cart_inserting_qty = $_SESSION['prod_qty'];
+        $cart_inserting_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($cart_adding_result_user_id, $product_id, $cart_inserting_qty, 0, '')";
+        mysqli_query($con, $cart_inserting_query);
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/information.php';
+        </script>
+        <?php
+    } else {
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/login.php';
+        </script>
+        <?php
+    }
+   
+}
+
+if(isset($_GET['wishlist_adding_req'])) {
+    $prod_id = $_GET['p_id'];
+    if(isset($_SESSION['user_login_id'])) {
+        $users_id = $_SESSION['user_id'];
+        $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`) VALUES ($users_id, $prod_id);";
+        mysqli_query($con, $wishlist_insert_query);
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+        </script>
+        <?php
+    }else {
+        $prod_id = $_GET['p_id'];
+        $token_of_wishlist = "W937LI25A856T0K3N";
+        $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
+        $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`) VALUES ($token_for_un_u_wishlist_details, $prod_id);";
+        mysqli_query($con, $wishlist_insert_query);
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+        </script>
+        <?php
+    }
+} 
 
 $products_details_query = "SELECT * FROM `products` WHERE `p_id`=$product_id;";
 $products_details_result = mysqli_query($con, $products_details_query);
@@ -128,6 +231,7 @@ if(isset($_GET['p_q_and_a_id'])) {
 </center>
     </div>
     <!--sub navigation container end-->
+
 
     <!--product image and cost description container start-->
     <center>
@@ -245,15 +349,23 @@ if(isset($_GET['p_q_and_a_id'])) {
               <div class="incre_decre_container">
                 <h6>QUANTITY:</h6>
                 <div>
-                    <button class="decre">-</button>
-                    <span class="counter">1</span>
-                    <button class="incre">+</button>
+                    <form action="./view_of_product.php" method="GET">
+                    <input type="hidden" name="p_id" value="<?php echo $product_id; ?>">
+                    <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
+                    <button class="decre" name="decrement" value="1">-</button>
+                    <span class="counter"><?php echo $_SESSION['prod_qty']; ?></span>
+                    <button class="incre" name="increment" value="1">+</button>
+                    </form>
                 </div>
               </div>
              <div class="PIandC_cost_container_btn_div1">
-                <button class="btn1">ADD TO CART</button>
-                <a href="#"><button class="btn2">BUY IT NOW</button></a>
-                <button class="btn3"><i class="fas fa-heart"></i></button>
+                <form action="./view_of_product.php" method="GET">
+                <input type="hidden" name="p_id" value="<?php echo $product_id; ?>">
+                    <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
+                <button class="btn1" name="cart_adding_req" value="1">ADD TO CART</button>
+                <button class="btn2" name="product_buy_req" value="1">BUY IT NOW</button>
+                <button class="btn3" name="wishlist_adding_req" value="1"><i class="fas fa-heart"></i></button>
+                </form>
              </div>
              <div class="PIandC_cost_container_btn_div2">
                  <a href="#"><button class="btn1" title="Share on Facebook"><i class="fab fa-facebook-f"></i> SHARE</button></a>

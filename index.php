@@ -155,14 +155,14 @@ if(isset($_POST['wish_btn'])) {
    <center>
     <div class="products_container">
         <div class="products_container_button_div">
-            <div class="products_container_button_inner_div_1">
+            <div class="products_container_button_inner_div_1" id="products_container_button_div1">
             <button class="active">NEW ARRIVALS</button>
-            <button>BEST SELLERS</button>
-            <button>ON SALE</button>
             </div>
             <div class="products_container_button_inner_div_2">
-                <button><i class="fa fa-angle-left"></i></button>
+                <form action="./index.php#products_container_button_div1" method="POST">
+                    <button><i class="fa fa-angle-left"></i></button>
                 <button><i class="fa fa-angle-right"></i></button>
+                </form>
             </div>
         </div>
         
@@ -170,7 +170,7 @@ if(isset($_POST['wish_btn'])) {
 
         <?php
         
-        $products_query = "SELECT * FROM `products` ORDER BY RAND() LIMIT 20;";
+        $products_query = "SELECT * FROM `products` LIMIT 10;";
         $products_result = mysqli_query($con, $products_query);
        while($row = mysqli_fetch_assoc($products_result)) {
            $product_p_image = $row['p_image'];
@@ -231,7 +231,7 @@ if(isset($_POST['wish_btn'])) {
     
                         ?>
                     </div>
-                    <div>
+                    <div class="title_container_box">
                         <h4><?php
                        $string_of_title = $product_p_title;
                        if(strlen($string_of_title) > 35) {
@@ -243,6 +243,11 @@ if(isset($_POST['wish_btn'])) {
                     </div>
                     <div>
                         <h2>&#8377;<?php echo $product_p_a_price; ?> <del>&#8377;<?php echo $product_p_o_price; ?></del></h2>
+                        <h4 class="offer_value"><?php 
+                        $offer_value = ($product_p_o_price - $product_p_a_price) / $product_p_o_price;
+                        $offer_value = $offer_value * 100;
+                        echo intval($offer_value);
+                        ?>% off</h4>
                     </div>
                 </div>
                </a>
@@ -259,10 +264,227 @@ if(isset($_POST['wish_btn'])) {
             </div>
             
             <?php } ?>
-
-
-            
         </div>
+
+        <div class="products_container_button_div">
+            <div class="products_container_button_inner_div_1" id="products_container_button_div2">
+            <button class="active">BEST SELLERS</button>
+            </div>
+            <div class="products_container_button_inner_div_2">
+                <form action="./index.php#products_container_button_div2" method="POST">
+                <button><i class="fa fa-angle-left"></i></button>
+                <button><i class="fa fa-angle-right"></i></button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="products_container_products_div">
+
+        <?php
+        
+        $products_query = "SELECT * FROM `products` ORDER BY RAND() LIMIT 10;";
+        $products_result = mysqli_query($con, $products_query);
+       while($row = mysqli_fetch_assoc($products_result)) {
+           $product_p_image = $row['p_image'];
+           $product_p_title = $row['p_title'];
+           $product_p_a_price = $row['p_a_price'];
+           $product_p_o_price = $row['p_o_price'];
+           $product_p_star_rat = $row['p_star_rat'];
+           $product_p_id = $row['p_id'];
+           $product_subs_cat_identification_id = $row['subs_cat_identification_id'];
+        ?>
+
+            <div class="products_container_products_inner_divs best_sellers">
+            <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>">
+                <img src="./images/<?php echo $product_p_image; ?>" alt="products images">
+           </a>
+               <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>">
+                <div class="products_container_products_inner_text_divs">
+                    <div>
+                        <?php
+                        switch($product_p_star_rat) {
+                            case 1:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 2:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 3:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 4:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 5:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>';
+                            break;
+
+                        }
+    
+                        ?>
+                    </div>
+                    <div class="title_container_box">
+                        <h4><?php
+                       $string_of_title = $product_p_title;
+                       if(strlen($string_of_title) > 35) {
+                        $string_of_title = explode("\n", wordwrap($string_of_title, 35));
+                        $string_of_title = $string_of_title[0].' ...';
+                       }
+                       echo $string_of_title;
+                         ?></h4>
+                    </div>
+                    <div>
+                        <h2>&#8377;<?php echo $product_p_o_price; ?>.00</h2>
+                    </div>
+                </div>
+               </a>
+                <div class="products_container_products_inner_btn_divs">
+                    <form action="./index.php" method="POST">
+                    <button title="Add To Cart" name="product_id" value="<?php echo $product_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
+                    </form>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <input type="hidden" name="productt_id" value="<?php echo $product_p_id; ?>">
+                    <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
+                    </form>
+                    <button title="Quick View"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <?php } ?>
+        </div>
+
+        <div class="products_container_button_div">
+            <div class="products_container_button_inner_div_1" id="products_container_button_div3">
+            <button class="active">ON SALE</button>
+            </div>
+            <div class="products_container_button_inner_div_2">
+            <form action="./index.php#products_container_button_div3" method="POST">
+                <button><i class="fa fa-angle-left"></i></button>
+                <button><i class="fa fa-angle-right"></i></button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="products_container_products_div">
+
+        <?php
+        
+        $products_query = "SELECT * FROM `products` ORDER BY RAND() LIMIT 10;";
+        $products_result = mysqli_query($con, $products_query);
+       while($row = mysqli_fetch_assoc($products_result)) {
+           $product_p_image = $row['p_image'];
+           $product_p_title = $row['p_title'];
+           $product_p_a_price = $row['p_a_price'];
+           $product_p_o_price = $row['p_o_price'];
+           $product_p_star_rat = $row['p_star_rat'];
+           $product_p_id = $row['p_id'];
+           $product_subs_cat_identification_id = $row['subs_cat_identification_id'];
+        ?>
+
+            <div class="products_container_products_inner_divs">
+            <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>">
+                <img src="./images/<?php echo $product_p_image; ?>" alt="products images">
+           </a>
+               <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>">
+                <div class="products_container_products_inner_text_divs">
+                    <div>
+                        <?php
+                        switch($product_p_star_rat) {
+                            case 1:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 2:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 3:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 4:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 5:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>';
+                            break;
+
+                        }
+    
+                        ?>
+                    </div>
+                    <div class="title_container_box">
+                        <h4><?php
+                       $string_of_title = $product_p_title;
+                       if(strlen($string_of_title) > 35) {
+                        $string_of_title = explode("\n", wordwrap($string_of_title, 35));
+                        $string_of_title = $string_of_title[0].' ...';
+                       }
+                       echo $string_of_title;
+                         ?></h4>
+                    </div>
+                    <div>
+                        <h2>&#8377;<?php echo $product_p_a_price; ?> <del>&#8377;<?php echo $product_p_o_price; ?></del></h2>
+                        <h4 class="offer_value"><?php 
+                        $offer_value = ($product_p_o_price - $product_p_a_price) / $product_p_o_price;
+                        $offer_value = $offer_value * 100;
+                        echo intval($offer_value);
+                        ?>% off</h4>
+                    </div>
+                </div>
+               </a>
+                <div class="products_container_products_inner_btn_divs">
+                    <form action="./index.php" method="POST">
+                    <button title="Add To Cart" name="product_id" value="<?php echo $product_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
+                    </form>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <input type="hidden" name="productt_id" value="<?php echo $product_p_id; ?>">
+                    <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
+                    </form>
+                    <button title="Quick View"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <?php } ?>
+        </div>
+
     </div>
    </center>
     <!--products container end-->

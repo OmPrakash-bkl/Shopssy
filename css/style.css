@@ -611,7 +611,7 @@ text-align: left;
     max-width: 1200px;
 }
 .products_container_button_div {
-    padding: 5px 5px;
+    padding: 0.5% 6%;
 }
 .products_container_button_inner_div_1 {
     float: left;
@@ -663,14 +663,20 @@ text-align: left;
     max-width: 1200px;
 }
 
+
 .products_container_products_inner_divs {
-   height: 390px;
+   height: 410px;
     width: 200px;
     border: 1px solid rgb(220, 220, 220, 0.4);
     display: inline-block;
     margin: 10px 5px;
     padding: 10px 10px;
 }
+
+.products_container_products_div .best_sellers {
+height: 390px;
+}
+
 .products_container_products_inner_divs:hover {
     border: 1px solid transparent;
     border-radius: 25px;
@@ -707,6 +713,11 @@ text-align: left;
     font-size: 14px;
     color: rgb(85, 85, 85);
 }
+.products_container_products_inner_text_divs div .offer_value {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 5px 0px;
+    color: orangered;
+}
 .products_container_products_inner_text_divs div h2 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
@@ -734,6 +745,10 @@ text-align: left;
     content: "";
     clear: both;
     display: table;
+}
+.products_container_products_div .title_container_box {
+    height: 36px;
+    overflow: hidden;
 }
 
 /* Products Container End */
@@ -1329,6 +1344,7 @@ margin-bottom: 20px;
         font-weight: bold;
         color: #2D9AE8;
         border-radius: 5px;
+        cursor: pointer;
         margin: 5px 5px;
         transition: color 0.3s, background-color 0.3s;
 }
@@ -4002,7 +4018,7 @@ width: 100%;
     .products_container_button_inner_div_1 button {
         border: 1px solid #CDBDCA;
         width: auto;
-        padding: 8px;
+        padding: 8px 10px;
         border-radius: 30px;
         color: rgb(68, 68, 68);
     }
@@ -4034,7 +4050,10 @@ width: 100%;
        display: block;
     }
     .products_container_products_inner_divs {
-        height: 420px;
+        height: 430px;
+    }
+    .products_container_products_div .best_sellers {
+        height: 390px;
     }
     .all_categories_sub_container {
         width: 230px;
@@ -4219,14 +4238,15 @@ width: 100%;
     .three_ad_inner_containers img {
         width: 300px;
     }
-    .products_container_products_inner_btn_divs button {
-     display: none;
+    .products_container_button_div {
+        padding: 0.5% 3%;
     }
+    
     .products_container_products_inner_divs {
-        height: 300px;
+        height: 380px;
         width: 180px;
         margin: 10px 5px;
-        padding: 0px 10px;
+        padding: 10px 10px;
     }
     .products_container_products_inner_divs img {
         height: 160px;
@@ -4234,6 +4254,9 @@ width: 100%;
     }
     .products_container_products_inner_divs:hover {
         border-radius: 15px;
+    }
+    .products_container_products_div .best_sellers {
+        height: 340px;
     }
     .hot_deals_products_containers {
         width: 70%;
@@ -4353,11 +4376,11 @@ width: 100%;
         background-color: white;
     }
     .products_container_button_inner_div_1 {
-       margin: 0% 10%;
+       margin: 0% 1%;
     }
-    .products_container_button_inner_div_2 button {
+    /* .products_container_button_inner_div_2 button {
         display: none;
-     }
+     } */
     .products_container_button_inner_div_1 button:hover {
         color: white;
         border: 1px solid #2D9AE8;
@@ -4369,10 +4392,10 @@ width: 100%;
         background-color: #2D9AE8;
     }
     .products_container_products_inner_divs {
-        height: 230px;
+        height: 290px;
         width: 120px;
         margin: 10px 5px;
-        padding: 0px 5px;
+        padding: 10px 5px;
     }
     .products_container_products_inner_divs img {
         height: 100px;
@@ -4389,6 +4412,18 @@ width: 100%;
     }
     .products_container_products_inner_text_divs div .fa-star {
         font-size: 8px;
+    }
+    .products_container_products_div .title_container_box {
+        height: 32px;
+        border: none;
+        overflow: hidden;
+    }
+    .products_container_products_inner_btn_divs button {
+     height: 30px;
+     width: 30px;
+    }
+    .products_container_products_div .best_sellers {
+        height: 255px;
     }
     .hot_deals_products_containers img {
         width: 85%;
