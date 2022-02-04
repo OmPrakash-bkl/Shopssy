@@ -60,6 +60,11 @@ if(isset($_POST['wish_del_id'])) {
         $wish_item_delete_query = "DELETE FROM `unnamed_user_wishlist` WHERE `prod_id_of_wishlist` = $wish_delete_id;";
     }
     mysqli_query($con, $wish_item_delete_query);
+    ?>
+<script type="text/javascript">
+window.location.href = 'http://localhost:3000/index.php';
+</script>
+<?php
 }
 
 if(isset($_POST['delete_all_from_wishlist'])) {

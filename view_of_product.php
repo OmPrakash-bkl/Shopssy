@@ -28,13 +28,12 @@ while($row = mysqli_fetch_assoc($product_sub_result)) {
     $product_sub_p_tags3 = $row['p_tags3'];
     $product_sub_p_desc = $row['p_desc'];
 }
-$product_sub_cat_id_query = "SELECT `subs_cat_title` FROM `sub_category` WHERE `cats_id`=round($product_sub_cat_id);";
+$product_sub_cat_id_query = "SELECT * FROM `sub_category` WHERE `cats_id`=round($product_sub_cat_id);";
 $product_sub_cat_id_result = mysqli_query($con, $product_sub_cat_id_query);
 $temp = round($product_sub_cat_id);
 
 $i = 0;
 while($row = mysqli_fetch_assoc($product_sub_cat_id_result)) {
-
     $titles[$i] = $row['subs_cat_title'];
     $i++;
 }
@@ -300,7 +299,21 @@ if(isset($_GET['p_q_and_a_id'])) {
                         }
     
                         ?>
-                    <p>No Reviews</p>
+
+                        <?php
+                        $product_count_query = "SELECT COUNT(review_id) FROM `reviews` WHERE `p_id` = $product_id;";
+                        $product_count_result = mysqli_query($con, $product_count_query);
+                        $product_count_result = mysqli_fetch_assoc($product_count_result);
+                        $review_count = $product_count_result['COUNT(review_id)'];
+                        if($review_count > 0) {
+                            $review_count_val = $review_count;
+                        } else {
+                            $review_count_val = "No";
+                        }
+                        ?>
+
+
+                    <p><?php echo $review_count_val; ?> Reviews</p>
                 </span>
                 </div>
                 <div class="PIandC_cost_container_details_container">
@@ -312,11 +325,22 @@ if(isset($_GET['p_q_and_a_id'])) {
                         <tr>
                             <th>CATEGOTIES:</th>
                             <td>
+
+                            <?php
+                            $product_sub_cat_id = $_GET['sub_cat_id'];
+                            $products_navigation_query = "SELECT * FROM `sub_category` WHERE `sub_cat_identification_id` LIKE $product_sub_cat_id;";
+                            $products_navigation_result = mysqli_query($con, $products_navigation_query);
+                            while($row = mysqli_fetch_assoc($products_navigation_result)) {
+                                $navigation_sub_cat_identification_id_two = $row['sub_cat_identification_id_two'];
+                                $navigation_sub_cat_title = $row['subs_cat_title'];
+                            }
+                            ?>
+
                                 <?php 
                                 $j=0;
                                 $title_count = count($titles);
                                 while($title_count > $j) {
-                                    echo '<a href="#">'.$titles[$j].'</a>,';
+                                    echo '<a href="./product.php?sub_cat_identification_id='.$product_sub_cat_id.'&sub_cat_title='.$navigation_sub_cat_title.'&sub_cat_identification_id_two='.$navigation_sub_cat_identification_id_two.'">'.$titles[$j].'</a>,';
                                     $j++;
                                 }
                                 
@@ -327,7 +351,7 @@ if(isset($_GET['p_q_and_a_id'])) {
                         </tr>
                         <tr>
                             <th>TAGS:</th>
-                            <td><a href="#"><?php echo $product_sub_p_tags1; ?></a>, <a href="#"><?php echo $product_sub_p_tags2; ?></a>, <a href="#"><?php echo $product_sub_p_tags3; ?></a></td>
+                            <td><a href="./product.php?sub_cat_identification_id=<?php echo $product_sub_cat_id; ?>&sub_cat_title=<?php echo $navigation_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $navigation_sub_cat_identification_id_two; ?>"><?php echo $product_sub_p_tags1; ?></a>, <a  href="./product.php?sub_cat_identification_id=<?php echo $product_sub_cat_id; ?>&sub_cat_title=<?php echo $navigation_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $navigation_sub_cat_identification_id_two; ?>"><?php echo $product_sub_p_tags2; ?></a>, <a  href="./product.php?sub_cat_identification_id=<?php echo $product_sub_cat_id; ?>&sub_cat_title=<?php echo $navigation_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $navigation_sub_cat_identification_id_two; ?>"><?php echo $product_sub_p_tags3; ?></a></td>
                         </tr>
                     </table>
                     <p>
@@ -344,6 +368,11 @@ if(isset($_GET['p_q_and_a_id'])) {
                 <span>
                     <span>&#8377;<?php echo $products_details_p_a_price; ?>.00</span>
                     <del>&#8377;<?php echo $products_details_p_o_price; ?>.00</del>
+                    <h2 class="offer_value"><?php 
+                        $offer_value = ($products_details_p_o_price - $products_details_p_a_price) / $products_details_p_o_price;
+                        $offer_value = $offer_value * 100;
+                        echo intval($offer_value);
+                        ?>% off</h2>
               </span>
               </div>
               <div class="incre_decre_container">
@@ -368,9 +397,10 @@ if(isset($_GET['p_q_and_a_id'])) {
                 </form>
              </div>
              <div class="PIandC_cost_container_btn_div2">
-                 <a href="#"><button class="btn1" title="Share on Facebook"><i class="fab fa-facebook-f"></i> SHARE</button></a>
-                <a href="#"> <button class="btn2" title="Tweet on Tweeter"><i class="fab fa-twitter"></i> TWEET</button></a>
-                 <a href="#"><button class="btn3" title="Pin on Pinterest"><i class="fab fa-pinterest"></i> PIN IT</button></a>
+                 <a href="https://www.facebook.com/"><button class="btn1" title="Share on Facebook"><i class="fab fa-facebook-f"></i> SHARE</button></a>
+                <a href="https://www.twitter.com"> <button class="btn2" title="Tweet on Tweeter"><i class="fab fa-twitter"></i> TWEET</button></a>
+                 <a href="https://www.pinterest.com/"><button class="btn3" title="Pin on Pinterest"><i class="fab fa-pinterest"></i> PIN IT</button></a>
+                
              </div>
              <p style="width: 400px;visibility: hidden;" class="dammi_txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae earum minus nobis natus, accmollitia quibusdam doloremque, tempora aliquam deleniti ne, vitae offictaRepudiandae expedita nesciunt recusandae?</p>
             </div>
