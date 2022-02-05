@@ -305,14 +305,14 @@ $product_sub_total = 0;
 while($row = mysqli_fetch_assoc($cart_details__result)) {
     $cart_details_product_id = $row['product_id'];
     $cart_details_quantity = $row['quantity'];
+    $cart_details_pro_type = $row['pro_type'];
     $cart_details_product_query = "SELECT * FROM `products` WHERE `p_id` = $cart_details_product_id;";
     $cart_details_product_result = mysqli_query($con, $cart_details_product_query);
     while($row2 = mysqli_fetch_assoc($cart_details_product_result)) {
         $cart_details_product_p_title = $row2['p_title'];
         $cart_details_product_p_image = $row2['p_image'];
         $cart_details_product_p_a_price = $row2['p_a_price'];
-   
-
+        $cart_details_product_p_o_price = $row2['p_o_price'];
 ?>
 
     <div class="information_inner_container2_divs">
@@ -327,7 +327,11 @@ while($row = mysqli_fetch_assoc($cart_details__result)) {
         </div>
         <div class="information_inner_container2_divs_price">
             &#8377; <?php
-            $product_total_price = $cart_details_quantity * $cart_details_product_p_a_price; 
+            if($cart_details_pro_type == 'normal') {
+                $product_total_price = $cart_details_quantity * $cart_details_product_p_o_price; 
+            } else {
+                $product_total_price = $cart_details_quantity * $cart_details_product_p_a_price; 
+            }
             echo $product_total_price;
             $product_sub_total = $product_sub_total + $product_total_price;
             ?>.00
