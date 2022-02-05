@@ -382,6 +382,7 @@ if(isset($_SESSION['user_login_id'])) {
                         $wish_p_image = $row1['p_image'];
                         $wish_p_a_price = $row1['p_a_price'];
                         $wish_p_o_price = $row1['p_o_price'];
+                        $wish_subs_cat_identification_id =$row1['subs_cat_identification_id'];
                     ?>
                     <div class="wishlist_product_inner_container">
                         <div class="btn_div1">
@@ -409,7 +410,15 @@ if(isset($_SESSION['user_login_id'])) {
                             echo $wish_p_a_price;
                         }
                         ?></h2>
-                            <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
+                        <?php 
+                        $view_more_query = "SELECT `sub_cat_identification_id_two`, `subs_cat_title` FROM `sub_category` WHERE `sub_cat_identification_id` LIKE $wish_subs_cat_identification_id;";
+                        $view_more_result = mysqli_query($con, $view_more_query);
+                        while($row = mysqli_fetch_assoc($view_more_result)) {
+                            $view_more_sub_cat_identification_id_two = $row['sub_cat_identification_id_two'];
+                            $view_more_sub_cat_title = $row['subs_cat_title'];
+                        }
+                        ?>
+                            <a href="./product.php?sub_cat_identification_id=<?php echo $wish_subs_cat_identification_id; ?>&sub_cat_title=<?php echo $view_more_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $view_more_sub_cat_identification_id_two; ?>"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
                             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                             <button class="add_to_cart_btn" name="add_to_cart_id" value="<?php echo $wish_p_id; ?>">ADD TO CART</button>
                             </form>
