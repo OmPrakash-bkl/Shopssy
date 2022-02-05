@@ -32,7 +32,12 @@ if(isset($_POST['product_id'])) {
         $cart_process_user_id = mysqli_fetch_assoc($cart_process_result);
         $cart_process_user_id = $cart_process_user_id['user_id'];
         $cart_process_pro_id = $_POST['product_id'];
-        $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1, 0, '')";
+        if(isset($_POST['best_selling_pro'])) {
+            $pro_type = 'normal';
+        } else {
+            $pro_type = 'offer';
+        }
+        $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1, 0, '', '$pro_type')";
         mysqli_query($con, $cart_query);
         $_SESSION['user_id'] = $cart_process_user_id;
         ?>
@@ -56,7 +61,12 @@ if(isset($_POST['product_id'])) {
             $token_of_auth = "T093NO5A86H";
             $token_for_un_u_cart_details = $_COOKIE[$token_of_auth];
           }
-            $unnamed_user_cart_details_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`) VALUES ($token_for_un_u_cart_details, $prod_id_for_unnamed_cart_details, 1);";
+          if(isset($_POST['best_selling_pro'])) {
+            $pro_type = 'normal';
+        } else {
+            $pro_type = 'offer';
+        }
+            $unnamed_user_cart_details_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `pro_type`) VALUES ($token_for_un_u_cart_details, $prod_id_for_unnamed_cart_details, 1, '$pro_type');";
             mysqli_query($con, $unnamed_user_cart_details_insert_query);
             ?>
            <script type="text/javascript">
@@ -170,7 +180,7 @@ if(isset($_POST['wish_btn'])) {
 
         <?php
         
-        $products_query = "SELECT * FROM `products` LIMIT 10;";
+        $products_query = "SELECT * FROM `products` ORDER BY RAND() LIMIT 10;";
         $products_result = mysqli_query($con, $products_query);
        while($row = mysqli_fetch_assoc($products_result)) {
            $product_p_image = $row['p_image'];
@@ -282,7 +292,7 @@ if(isset($_POST['wish_btn'])) {
 
         <?php
         
-        $products_query = "SELECT * FROM `products` ORDER BY RAND() LIMIT 10;";
+        $products_query = "SELECT * FROM `products`LIMIT 10;";
         $products_result = mysqli_query($con, $products_query);
        while($row = mysqli_fetch_assoc($products_result)) {
            $product_p_image = $row['p_image'];
@@ -295,10 +305,10 @@ if(isset($_POST['wish_btn'])) {
         ?>
 
             <div class="products_container_products_inner_divs best_sellers">
-            <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>">
+            <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>&best_selling_pro=1">
                 <img src="./images/<?php echo $product_p_image; ?>" alt="products images">
            </a>
-               <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>">
+               <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>&best_selling_pro=1">
                 <div class="products_container_products_inner_text_divs">
                     <div>
                         <?php
@@ -360,9 +370,11 @@ if(isset($_POST['wish_btn'])) {
                </a>
                 <div class="products_container_products_inner_btn_divs">
                     <form action="./index.php" method="POST">
+                    <input type="hidden" name="best_selling_pro" value="<?php echo 1 ?>">
                     <button title="Add To Cart" name="product_id" value="<?php echo $product_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
                     </form>
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <input type="hidden" name="best_selling_pro" value="<?php echo 1 ?>">
                     <input type="hidden" name="productt_id" value="<?php echo $product_p_id; ?>">
                     <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
                     </form>

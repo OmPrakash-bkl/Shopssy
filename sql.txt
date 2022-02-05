@@ -1206,9 +1206,9 @@ insert into register(f_name, l_name, email, password, full_name, address, city, 
 
 14. Cart 
 
-create table cart(c_s_id int(100) AUTO_INCREMENT, u_id int(100), product_id int(100), quantity int(100) default 1, pro_price int(100) default 0, pro_tot_price float(8) default 0, cart_user_desc varchar(300) default NULL, primary key(c_s_id));
+create table cart(c_s_id int(100) AUTO_INCREMENT, u_id int(100), product_id int(100), quantity int(100) default 1, pro_price int(100) default 0, pro_tot_price float(8) default 0, cart_user_desc varchar(300) default NULL, pro_type varchar(150) default NULL, primary key(c_s_id));
 
-insert into cart(u_id, product_id, quantity, pro_price, pro_tot_price, cart_user_desc) values(1, 4, 2, 18999, 37998, 'i need to buy this product within a week.');
+insert into cart(u_id, product_id, quantity, pro_price, pro_tot_price, cart_user_desc, pro_type) values(1, 4, 2, 18999, 37998, 'i need to buy this product within a week.', 'normal');
 
 15. MyWishlist 
 
@@ -1276,10 +1276,10 @@ insert into filter_detail_for_tab(pro_id, subs_cat_identification_id, DISPLAY_SI
 
 19. Unnamed User Cart
 
-create table unnamed_user_cart(u_u_cart_id int(100) AUTO_INCREMENT, un_u_cart_token int(100) default 0, prod_id_of_cart int(100) default 0, qty int(100) default 0, cart_desc varchar(300) default NULL, primary key(u_u_cart_id));
+create table unnamed_user_cart(u_u_cart_id int(100) AUTO_INCREMENT, un_u_cart_token int(100) default 0, prod_id_of_cart int(100) default 0, qty int(100) default 0, cart_desc varchar(300) default NULL, pro_type varchar(150) default NULL, primary key(u_u_cart_id));
 
-insert into unnamed_user_cart(un_u_cart_token, prod_id_of_cart, qty, cart_desc) values
-(0, 1, 2, 'need to buy');
+insert into unnamed_user_cart(un_u_cart_token, prod_id_of_cart, qty, cart_desc, pro_type) values
+(0, 1, 2, 'need to buy', '');
 
 20. Unnamed User Wishlist
 

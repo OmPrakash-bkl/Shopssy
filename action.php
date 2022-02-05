@@ -1,6 +1,8 @@
 <?php 
+error_reporting(0);
+ini_set('display_errors', 0);
 include './db_con.php';
-// session_start();
+ session_start();
 // $_SESSION['user_login_id'] = "ram@gmail.comShopssy";
 // $_SESSION['user_login_email'] = "ram@gmail.com";
 //  $_SESSION['user_id'] = 4;
@@ -21,5 +23,52 @@ function test_input_data($data) {
     return $data;
 }
 // Email Validation End
+
+//Cart Add and Update start
+
+if(isset($_POST['continue_shopping'])) {
+  header("Location: http://localhost:3000/index.php");
+}
+
+if(isset($_POST['cart_update'])) {
+  $cart_update_u_id = $_POST['u_id'];
+  $cart_update_pro_tot_price = $_POST['pro_tot_price'];
+  $cart_update_cart_user_desc = $_POST['cart_user_desc'];
+  if(isset($_SESSION['user_login_id'])) {
+      $cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
+  } else {
+      $cart_update_produc_id = $_POST['produc_id'];
+  $cart_update_query = "UPDATE `unnamed_user_cart` SET `cart_desc` = '$cart_update_cart_user_desc' WHERE `prod_id_of_cart` = $cart_update_produc_id;";
+  }
+  mysqli_query($con, $cart_update_query);
+?>
+<script type="text/javascript">
+window.location.href = 'http://localhost:3000/cart.php';
+</script>
+<?php
+}
+
+
+if(isset($_POST['cart_update_and_checkout'])) {
+  $cart_update_u_id = $_POST['u_id'];
+  $cart_update_pro_tot_price = $_POST['pro_tot_price'];
+  $cart_update_cart_user_desc = $_POST['cart_user_desc'];
+  if(isset($_SESSION['user_login_id'])) {
+      $cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
+  } else {
+      $cart_update_produc_id = $_POST['produc_id'];
+      $cart_update_query = "UPDATE `unnamed_user_cart` SET `cart_desc` = '$cart_update_cart_user_desc' WHERE `prod_id_of_cart` = $cart_update_produc_id;";
+  }
+
+mysqli_query($con, $cart_update_query);
+?>
+<script type="text/javascript">
+window.location.href = 'http://localhost:3000/information.php';
+</script>
+<?php
+
+}
+
+//Cart Add and Update End
 
 ?>

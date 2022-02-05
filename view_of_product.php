@@ -62,24 +62,45 @@ if($product_sub_cat_id ==  $temp3) {
 $title = $sub_navigation_title . " - Shopssy";
 include './header.php';
 
+if(!isset($_SESSION['prod_qty'])) {
+    $_SESSION['prod_qty'] = 1;
+}
+
 if(isset($_GET['increment'])) {
     $_SESSION['prod_qty'] = $_SESSION['prod_qty'] + 1;
-    ?>
+    if(isset($_GET['best_selling_pro'])) {
+        ?>
     <script type="text/javascript">
-    window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+    window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
     </script>
     <?php
+    } else {
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+        </script>
+        <?php
+    }
+   
 } 
 if(isset($_GET['decrement'])) {
     $_SESSION['prod_qty'] = $_SESSION['prod_qty'] - 1;
     if($_SESSION['prod_qty'] < 1) {
         $_SESSION['prod_qty'] = 1;
+        if(isset($_GET['best_selling_pro'])) {
+            ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
+        </script>
+        <?php
+        } else {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+            </script>
+            <?php
+        }
     }
-    ?>
-    <script type="text/javascript">
-    window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
-    </script>
-    <?php
 }
 
 if(isset($_GET['cart_adding_req'])) {
@@ -91,25 +112,55 @@ if(isset($_GET['cart_adding_req'])) {
         $cart_adding_result_user_id = mysqli_fetch_assoc($cart_adding_result);
         $cart_adding_result_user_id = $cart_adding_result_user_id['user_id'];
         $cart_inserting_qty = $_SESSION['prod_qty'];
-        $cart_inserting_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($cart_adding_result_user_id, $product_id, $cart_inserting_qty, 0, '')";
+        if(isset($_GET['best_selling_pro'])) {
+            $pro_type = 'normal';
+        } else {
+            $pro_type = 'offer';
+        }
+        $cart_inserting_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_adding_result_user_id, $product_id, $cart_inserting_qty, 0, '', '$pro_type');";
         mysqli_query($con, $cart_inserting_query);
-        ?>
-        <script type="text/javascript">
-        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
-        </script>
-        <?php
+        if(isset($_GET['best_selling_pro'])) {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
+            </script>
+            <?php
+
+        } else {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+            </script>
+            <?php
+        }
+        
     } else {
         if(isset($_COOKIE['T093NO5A86H'])) {
             $unnamed_user_token = $_COOKIE['T093NO5A86H'];
             $product_id = $_GET['p_id'];
             $unnamed_cart_inserting_qty = $_SESSION['prod_qty'];
-            $unname_user_cart_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`) VALUES ($unnamed_user_token, $product_id,  $unnamed_cart_inserting_qty, '');";
+            if(isset($_GET['best_selling_pro'])) {
+                $pro_type = 'normal';
+            } else {
+                $pro_type = 'offer';
+            }
+            $unname_user_cart_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`, `pro_type`) VALUES ($unnamed_user_token, $product_id,  $unnamed_cart_inserting_qty, '', '$pro_type');";
            mysqli_query($con, $unname_user_cart_query);
-           ?>
-           <script type="text/javascript">
-           window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
-           </script>
-           <?php
+           if(isset($_GET['best_selling_pro'])) {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
+            </script>
+            <?php
+            
+
+        } else {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+            </script>
+            <?php
+        }
         }
     }
    
@@ -125,7 +176,12 @@ if(isset($_GET['product_buy_req'])) {
         $cart_adding_result_user_id = mysqli_fetch_assoc($cart_adding_result);
         $cart_adding_result_user_id = $cart_adding_result_user_id['user_id'];
         $cart_inserting_qty = $_SESSION['prod_qty'];
-        $cart_inserting_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($cart_adding_result_user_id, $product_id, $cart_inserting_qty, 0, '')";
+        if(isset($_GET['best_selling_pro'])) {
+            $pro_type = 'normal';
+        } else {
+            $pro_type = 'offer';
+        }
+        $cart_inserting_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_adding_result_user_id, $product_id, $cart_inserting_qty, 0, '', '$pro_type');";
         mysqli_query($con, $cart_inserting_query);
         ?>
         <script type="text/javascript">
@@ -365,6 +421,10 @@ if(isset($_GET['p_q_and_a_id'])) {
                     </p>
                 </div>
               <div class="PIandC_cost_container_details_container_rupee_div">
+                  <?php 
+                  if(!isset($_GET['best_selling_pro'])) {
+                      ?>
+
                 <span>
                     <span>&#8377;<?php echo $products_details_p_a_price; ?>.00</span>
                     <del>&#8377;<?php echo $products_details_p_o_price; ?>.00</del>
@@ -373,16 +433,44 @@ if(isset($_GET['p_q_and_a_id'])) {
                         $offer_value = $offer_value * 100;
                         echo intval($offer_value);
                         ?>% off</h2>
-              </span>
+                </span>
+
+                 <?php
+                  } else {
+                      ?>
+
+                   <span>
+                    <span>&#8377;<?php echo $products_details_p_o_price; ?>.00</span>
+                   </span>
+
+                      <?php
+                  }
+                  
+                  ?>
+               
+                  
               </div>
               <div class="incre_decre_container">
                 <h6>QUANTITY:</h6>
                 <div>
                     <form action="./view_of_product.php" method="GET">
+                        <?php 
+                        if(isset($_GET['best_selling_pro'])) {
+                            ?>
+                        <input type="hidden" name="best_selling_pro" value="<?php echo 1 ?>">
+                        <?php
+                        }
+                        ?>
                     <input type="hidden" name="p_id" value="<?php echo $product_id; ?>">
                     <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
                     <button class="decre" name="decrement" value="1">-</button>
-                    <span class="counter"><?php echo $_SESSION['prod_qty']; ?></span>
+                    <span class="counter">
+                        <?php if(isset($_SESSION['prod_qty'])) {
+                        echo $_SESSION['prod_qty'];
+                    } else {
+                        echo 1;
+                    }
+                    ?></span>
                     <button class="incre" name="increment" value="1">+</button>
                     </form>
                 </div>
@@ -391,6 +479,14 @@ if(isset($_GET['p_q_and_a_id'])) {
                 <form action="./view_of_product.php" method="GET">
                 <input type="hidden" name="p_id" value="<?php echo $product_id; ?>">
                     <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
+                    <?php 
+                    if(isset($_GET['best_selling_pro'])) {
+                        ?>
+                        <input type="hidden" name="best_selling_pro" value="<?php echo 1 ?>">
+                        <?php
+                    }
+                    
+                    ?>
                 <button class="btn1" name="cart_adding_req" value="1">ADD TO CART</button>
                 <button class="btn2" name="product_buy_req" value="1">BUY IT NOW</button>
                 <button class="btn3" name="wishlist_adding_req" value="1"><i class="fas fa-heart"></i></button>
@@ -691,6 +787,11 @@ if(isset($_GET['p_q_and_a_id'])) {
                     </div>
                     <div>
                         <h2>&#8377;<?php echo $related_products_p_a_price; ?> <del>&#8377;<?php echo $related_products_p_o_price; ?></del></h2>
+                        <h4 class="offer_value"><?php 
+                        $offer_value = ($related_products_p_o_price - $related_products_p_a_price) / $related_products_p_o_price;
+                        $offer_value = $offer_value * 100;
+                        echo intval($offer_value);
+                        ?>% off</h4>
                     </div>
                 </div>
                </a>

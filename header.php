@@ -563,6 +563,7 @@ if(isset($_SESSION['user_login_id'])) {
                $mini_pro_quantity = $row['quantity'];
                $mini_pro_u_id = $row['u_id'];
                $mini_pro_cart_user_desc = $row['cart_user_desc'];
+               $mini_pro_prod_type = $row['pro_type'];
                $mini_big_cart_query = "SELECT * FROM `products` WHERE `p_id`=$mini_pro_id;";
                $mini_big_cart_result = mysqli_query($con, $mini_big_cart_query);
                while($row1 = mysqli_fetch_assoc($mini_big_cart_result)) {
@@ -570,6 +571,7 @@ if(isset($_SESSION['user_login_id'])) {
                    $mini_big_cart_p_title = $row1['p_title'];
                    $mini_big_cart_p_a_price = $row1['p_a_price'];
                    $mini_cart_update_prod_id = $row1['p_id'];
+                   $mini_big_cart_p_o_price = $row1['p_o_price'];
                }
            
            ?>
@@ -589,7 +591,12 @@ if(isset($_SESSION['user_login_id'])) {
                </tr>
                <tr>
                    <td class="product_prz"><b>&#8377;<?php 
-                   $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_a_price;
+                   if($mini_pro_prod_type == 'normal') {
+                    $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_o_price;
+                   } else {
+                    $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_a_price;
+                   }
+                  
                    echo $mini_tot_price;
                    $mini_cart_products_total_price =  $mini_cart_products_total_price+$mini_tot_price; ?></b> X <?php echo $mini_pro_quantity; ?></td>
                </tr>
@@ -615,6 +622,7 @@ if(isset($_SESSION['user_login_id'])) {
                $mini_pro_quantity = $row['qty'];
                $mini_pro_u_id = $row['un_u_cart_token'];
                $mini_pro_cart_user_desc = $row['cart_desc'];
+               $mini_pro_prod_type = $row['pro_type'];
                $mini_big_cart_query = "SELECT * FROM `products` WHERE `p_id`=$mini_pro_id;";
                $mini_big_cart_result = mysqli_query($con, $mini_big_cart_query);
                while($row1 = mysqli_fetch_assoc($mini_big_cart_result)) {
@@ -622,6 +630,7 @@ if(isset($_SESSION['user_login_id'])) {
                    $mini_big_cart_p_title = $row1['p_title'];
                    $mini_big_cart_p_a_price = $row1['p_a_price'];
                    $mini_cart_update_prod_id = $row1['p_id'];
+                   $mini_big_cart_p_o_price = $row1['p_o_price'];
                }
            
            ?>
@@ -641,7 +650,12 @@ if(isset($_SESSION['user_login_id'])) {
                </tr>
                <tr>
                    <td class="product_prz"><b>&#8377;<?php 
-                   $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_a_price;
+                    if($mini_pro_prod_type == 'normal') {
+                        $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_o_price;
+                       } else {
+                        $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_a_price;
+                       }
+                  
                    echo $mini_tot_price;
                    $mini_cart_products_total_price =  $mini_cart_products_total_price+$mini_tot_price; ?></b> X <?php echo $mini_pro_quantity; ?></td>
                </tr>

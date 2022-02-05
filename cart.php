@@ -1,36 +1,5 @@
 <?php 
 include './action.php';
-if(isset($_POST['continue_shopping'])) {
-    header("Location: http://localhost:3000/index.php");
-}
-if(isset($_POST['cart_update'])) {
-    $cart_update_u_id = $_POST['u_id'];
-    $cart_update_pro_tot_price = $_POST['pro_tot_price'];
-    $cart_update_cart_user_desc = $_POST['cart_user_desc'];
-    if(isset($_SESSION['user_login_id'])) {
-    $cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
-    } else {
-        $cart_update_produc_id = $_POST['produc_id'];
-    $cart_update_query = "UPDATE `unnamed_user_cart` SET `cart_desc` = '$cart_update_cart_user_desc' WHERE `prod_id_of_cart` = $cart_update_produc_id;";
-    }
-   
-mysqli_query($con, $cart_update_query);
-}
-
-if(isset($_POST['cart_update_and_checkout'])) {
-    $cart_update_u_id = $_POST['u_id'];
-    $cart_update_pro_tot_price = $_POST['pro_tot_price'];
-    $cart_update_cart_user_desc = $_POST['cart_user_desc'];
-    if(isset($_SESSION['user_login_id'])) {
-        $cart_update_query = "UPDATE `cart` SET `pro_tot_price` = $cart_update_pro_tot_price, `cart_user_desc` = '$cart_update_cart_user_desc' WHERE `u_id` = $cart_update_u_id;";
-    } else {
-        $cart_update_produc_id = $_POST['produc_id'];
-        $cart_update_query = "UPDATE `unnamed_user_cart` SET `cart_desc` = '$cart_update_cart_user_desc' WHERE `prod_id_of_cart` = $cart_update_produc_id;";
-    }
-
-mysqli_query($con, $cart_update_query);
-header("Location: http://localhost:3000/information.php");
-}
 
 $title = "Your Shopping Cart - Shopssy";
 include './header.php';
@@ -139,12 +108,14 @@ if(isset($_POST['delete_btn'])) {
                     $pro_quantity = $row['quantity'];
                     $pro_u_id = $row['u_id'];
                     $pro_cart_user_desc = $row['cart_user_desc'];
+                    $pro_cart_pro_type = $row['pro_type'];
                     $big_cart_query = "SELECT * FROM `products` WHERE `p_id`=$pro_id;";
                     $big_cart_result = mysqli_query($con, $big_cart_query);
                     while($row1 = mysqli_fetch_assoc($big_cart_result)) {
                         $big_cart_p_image = $row1['p_image'];
                         $big_cart_p_title = $row1['p_title'];
                         $big_cart_p_a_price = $row1['p_a_price'];
+                        $big_cart_p_o_price = $row1['p_o_price'];
                         $cart_update_prod_id = $row1['p_id'];
                     }
                    
@@ -163,7 +134,13 @@ if(isset($_POST['delete_btn'])) {
                         <button class="delete_btn_of_cart" name="delete_btn" ><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
-                    <td class="price_of_cart">&#8377;<?php echo $big_cart_p_a_price; ?>.00</td>
+                    <td class="price_of_cart">&#8377;<?php 
+                    if($pro_cart_pro_type == 'normal') {
+                        echo $big_cart_p_o_price;
+                    } else {
+                        echo $big_cart_p_a_price;
+                    }
+                    ?>.00</td>
                     <td>
                         <div class="incre_decre_container_of_cart">
                             <div>
@@ -178,9 +155,15 @@ if(isset($_POST['delete_btn'])) {
                           </div>
                     </td>
                     <td class="total_price_of_cart">&#8377;<?php 
-                    $tot_price = ($pro_quantity - 1 ) * $big_cart_p_a_price;
-                    echo $tot_price;
-                    $cart_products_total_price =  $cart_products_total_price+$tot_price;
+                    if($pro_cart_pro_type == 'normal') {
+                        $tot_price = ($pro_quantity - 1 ) * $big_cart_p_o_price;
+                        echo $tot_price;
+                        $cart_products_total_price =  $cart_products_total_price+$tot_price;
+                    } else {
+                        $tot_price = ($pro_quantity - 1 ) * $big_cart_p_a_price;
+                        echo $tot_price;
+                        $cart_products_total_price =  $cart_products_total_price+$tot_price;
+                    }
                     ?>.00</td>
                 </tr>
 
@@ -197,12 +180,14 @@ if(isset($_POST['delete_btn'])) {
                         $pro_quantity = $row['qty'];
                         $pro_u_id = $row['un_u_cart_token'];
                         $pro_cart_user_desc = $row['cart_desc'];
+                        $pro_cart_pro_type = $row['pro_type'];
                         $big_cart_query = "SELECT * FROM `products` WHERE `p_id`=$pro_id;";
                         $big_cart_result = mysqli_query($con, $big_cart_query);
                         while($row1 = mysqli_fetch_assoc($big_cart_result)) {
                             $big_cart_p_image = $row1['p_image'];
                             $big_cart_p_title = $row1['p_title'];
                             $big_cart_p_a_price = $row1['p_a_price'];
+                            $big_cart_p_o_price = $row1['p_o_price'];
                             $cart_update_prod_id = $row1['p_id'];
                         }
                        
@@ -221,7 +206,13 @@ if(isset($_POST['delete_btn'])) {
                             <button class="delete_btn_of_cart" name="delete_btn" ><i class="fas fa-trash-alt"></i></button>
                             </form>
                         </td>
-                        <td class="price_of_cart">&#8377;<?php echo $big_cart_p_a_price; ?>.00</td>
+                        <td class="price_of_cart">&#8377;<?php
+                         if($pro_cart_pro_type == 'normal') {
+                            echo $big_cart_p_o_price;
+                        } else {
+                            echo $big_cart_p_a_price;
+                        }
+                        ?>.00</td>
                         <td>
                             <div class="incre_decre_container_of_cart">
                                 <div>
@@ -236,9 +227,15 @@ if(isset($_POST['delete_btn'])) {
                               </div>
                         </td>
                         <td class="total_price_of_cart">&#8377;<?php 
-                        $tot_price = ($pro_quantity - 1 ) * $big_cart_p_a_price;
-                        echo $tot_price;
-                        $cart_products_total_price =  $cart_products_total_price+$tot_price;
+                         if($pro_cart_pro_type == 'normal') {
+                            $tot_price = ($pro_quantity - 1 ) * $big_cart_p_o_price;
+                            echo $tot_price;
+                            $cart_products_total_price =  $cart_products_total_price+$tot_price;
+                        } else {
+                            $tot_price = ($pro_quantity - 1 ) * $big_cart_p_a_price;
+                            echo $tot_price;
+                            $cart_products_total_price =  $cart_products_total_price+$tot_price;
+                        }
                         ?>.00</td>
                     </tr>
     
@@ -396,7 +393,7 @@ if(isset($_POST['delete_btn'])) {
             </div>
 
 
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+        <form action="./action.php" method="POST">
           <div class="shopping_cart_note_and_btn_container">
               <div class="shopping_cart_note_and_btn_container_inner_div">
                   <textarea placeholder="Add a note to your order" class="note_input_box" name="cart_user_desc"><?php echo $pro_cart_user_desc; ?></textarea>
