@@ -24,6 +24,7 @@ setcookie($token_of_wishlist, $token_for_un_u_wishlist_details, time() + (86400 
 
 $title = "Shopssy | Online Shopping Site for Mobiles, Electronics and More.";
 include './header.php';
+
 if(isset($_POST['product_id'])) {
     if(isset($_SESSION['user_login_id'])) {
         $user_email_id = $_SESSION['user_login_email'];
@@ -107,6 +108,24 @@ if(isset($_POST['wish_btn'])) {
     window.location.href = 'http://localhost:3000/index.php';
     </script>
     <?php
+}
+
+
+if(isset($_POST['view_all_related'])) {
+if(isset($_POST['productt_id'])) {
+$view_all_subs_cat_identification_id = $_POST['sub_cat_identification_id'];
+$view_all_query = "SELECT `sub_cat_identification_id_two`, `subs_cat_title` FROM `sub_category` WHERE `sub_cat_identification_id` LIKE $view_all_subs_cat_identification_id;";
+$view_all_result = mysqli_query($con, $view_all_query);
+while($rows = mysqli_fetch_assoc($view_all_result)) {
+$view_all_sub_cat_identification_id_two = $rows['sub_cat_identification_id_two'];
+$view_all_subs_cat_title = $rows['subs_cat_title'];
+?>
+<script type="text/javascript">
+window.location.href = 'http://localhost:3000/product.php?sub_cat_identification_id=<?php echo $view_all_subs_cat_identification_id; ?>&sub_cat_title=<?php echo $view_all_subs_cat_title; ?>&sub_cat_identification_id_two=<?php echo $view_all_sub_cat_identification_id_two; ?>';
+</script>
+<?php
+    }
+  }
 }
 
 ?>
@@ -279,7 +298,12 @@ if(isset($_POST['wish_btn'])) {
                     <input type="hidden" name="productt_id" value="<?php echo $product_p_id; ?>">
                     <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
                     </form>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <input type="hidden" name="productt_id" value="<?php echo $product_p_id; ?>">
+                    <input type="hidden" name="sub_cat_identification_id" value="<?php echo $product_subs_cat_identification_id; ?>">
+                    <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
+                    </form>
+                    
                 </div>
             </div>
             
@@ -302,7 +326,7 @@ if(isset($_POST['wish_btn'])) {
 
         <?php
         
-        $products_query = "SELECT * FROM `products`LIMIT 10;";
+        $products_query = "SELECT * FROM `products` ORDER BY RAND() LIMIT 10;";
         $products_result = mysqli_query($con, $products_query);
        while($row = mysqli_fetch_assoc($products_result)) {
            $product_p_image = $row['p_image'];
@@ -388,7 +412,11 @@ if(isset($_POST['wish_btn'])) {
                     <input type="hidden" name="productt_id" value="<?php echo $product_p_id; ?>">
                     <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
                     </form>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <input type="hidden" name="productt_id" value="<?php echo $product_p_id; ?>">
+                    <input type="hidden" name="sub_cat_identification_id" value="<?php echo $product_subs_cat_identification_id; ?>">
+                    <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
+                    </form>
                 </div>
             </div>
             
@@ -500,7 +528,11 @@ if(isset($_POST['wish_btn'])) {
                     <input type="hidden" name="productt_id" value="<?php echo $product_p_id; ?>">
                     <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
                     </form>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <input type="hidden" name="productt_id" value="<?php echo $product_p_id; ?>">
+                    <input type="hidden" name="sub_cat_identification_id" value="<?php echo $product_subs_cat_identification_id; ?>">
+                    <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
+                    </form>
                 </div>
             </div>
             
