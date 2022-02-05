@@ -78,6 +78,11 @@ if(isset($_POST['delete_all_from_wishlist'])) {
     }
     mysqli_query($con, $wish_item_delete_query);
     $empty = "emptied";
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/index.php';
+    </script>
+    <?php
 }
 
 if(isset($_POST['add_to_cart_id'])) {
@@ -309,6 +314,7 @@ if(isset($_SESSION['user_login_id'])) {
                 while($row = mysqli_fetch_assoc($wish_section_result)) {
                     
                     $wish_prod_id = $row['prod_id'];
+                    $wish_prod_type = $row['pro_type'];
                     $empty = "";
                     
                 $wish_sec_product_query = "SELECT * FROM `products` WHERE `p_id` = $wish_prod_id;";
@@ -318,6 +324,7 @@ if(isset($_SESSION['user_login_id'])) {
                     $wish_p_title = $row1['p_title'];
                     $wish_p_image = $row1['p_image'];
                     $wish_p_a_price = $row1['p_a_price'];
+                    $wish_p_o_price = $row1['p_o_price'];
                 ?>
                 <div class="wishlist_product_inner_container">
                     <div class="btn_div1">
@@ -338,7 +345,13 @@ if(isset($_SESSION['user_login_id'])) {
                         echo $string_of_title;
                         ?></h2>
                         <p>S / White</p>
-                        <h2 class="pricee">&#8377;<?php echo $wish_p_a_price; ?></h2>
+                        <h2 class="pricee">&#8377;<?php 
+                        if($wish_prod_type == 'normal') {
+                            echo $wish_p_o_price;
+                        } else {
+                            echo $wish_p_a_price;
+                        }
+                        ?></h2>
                         <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                         <button class="add_to_cart_btn" name="add_to_cart_id" value="<?php echo $wish_p_id; ?>">ADD TO CART</button>
@@ -357,7 +370,7 @@ if(isset($_SESSION['user_login_id'])) {
                     $wish_section_query = "SELECT * FROM `unnamed_user_wishlist` WHERE `un_u_wishlist_token` = $token_for_un_u_wishlist_details;";
                     $wish_section_result = mysqli_query($con, $wish_section_query);
                     while($row = mysqli_fetch_assoc($wish_section_result)) {
-                        
+                        $wish_prod_type = $row['pro_type'];
                         $wish_prod_id = $row['prod_id_of_wishlist'];
                         $empty = "";
                         
@@ -368,6 +381,7 @@ if(isset($_SESSION['user_login_id'])) {
                         $wish_p_title = $row1['p_title'];
                         $wish_p_image = $row1['p_image'];
                         $wish_p_a_price = $row1['p_a_price'];
+                        $wish_p_o_price = $row1['p_o_price'];
                     ?>
                     <div class="wishlist_product_inner_container">
                         <div class="btn_div1">
@@ -388,7 +402,13 @@ if(isset($_SESSION['user_login_id'])) {
                             echo $string_of_title;
                             ?></h2>
                             <p>S / White</p>
-                            <h2 class="pricee">&#8377;<?php echo $wish_p_a_price; ?></h2>
+                            <h2 class="pricee">&#8377;<?php 
+                        if($wish_prod_type == 'normal') {
+                            echo $wish_p_o_price;
+                        } else {
+                            echo $wish_p_a_price;
+                        }
+                        ?></h2>
                             <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
                             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                             <button class="add_to_cart_btn" name="add_to_cart_id" value="<?php echo $wish_p_id; ?>">ADD TO CART</button>

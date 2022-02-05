@@ -84,11 +84,21 @@ if(isset($_POST['wish_btn'])) {
     $produc_id = $_POST['productt_id'];
     if(isset($_SESSION['user_login_id'])) {
         $users_id = $_SESSION['user_id'];
-        $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`) VALUES ($users_id, $produc_id);";
+        if(isset($_POST['best_selling_pro'])){
+            $pro_type = 'normal';
+        } else {
+            $pro_type = 'offer';
+        }
+        $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`, `pro_type`) VALUES ($users_id, $produc_id, '$pro_type');";
     } else {
         $token_of_wishlist = "W937LI25A856T0K3N";
         $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
-        $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`) VALUES ($token_for_un_u_wishlist_details, $produc_id);";
+        if(isset($_POST['best_selling_pro'])){
+            $pro_type = 'normal';
+        } else {
+            $pro_type = 'offer';
+        }
+        $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`, `pro_type`) VALUES ($token_for_un_u_wishlist_details, $produc_id, '$pro_type');";
     }
   
     mysqli_query($con, $wishlist_insert_query);

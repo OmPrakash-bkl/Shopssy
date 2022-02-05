@@ -1212,10 +1212,10 @@ insert into cart(u_id, product_id, quantity, pro_price, pro_tot_price, cart_user
 
 15. MyWishlist 
 
-create table mywishlist(wish_id int(100) AUTO_INCREMENT, user_id int(100), prod_id int(100), primary key(wish_id));
+create table mywishlist(wish_id int(100) AUTO_INCREMENT, user_id int(100), prod_id int(100), pro_type varchar(150) default NULL, primary key(wish_id));
 
-insert into mywishlist(user_id, prod_id) values
-(1,1);
+insert into mywishlist(user_id, prod_id, pro_type) values
+(1,1, '');
 
 14. Account
 
@@ -1283,11 +1283,10 @@ insert into unnamed_user_cart(un_u_cart_token, prod_id_of_cart, qty, cart_desc, 
 
 20. Unnamed User Wishlist
 
-create table unnamed_user_wishlist(u_u_wishlist_id int(100) AUTO_INCREMENT, un_u_wishlist_token int(100) default 0, prod_id_of_wishlist int(100) default 0, primary key(u_u_wishlist_id));
+create table unnamed_user_wishlist(u_u_wishlist_id int(100) AUTO_INCREMENT, un_u_wishlist_token int(100) default 0, prod_id_of_wishlist int(100) default 0, pro_type varchar(150) default NULL, primary key(u_u_wishlist_id));
 
 
-insert into unnamed_user_wishlist(un_u_wishlist_token, prod_id_of_wishlist) values
-(1, 1);
-
+insert into unnamed_user_wishlist(un_u_wishlist_token, prod_id_of_wishlist, pro_type) values
+(1, 1, '');
 
 
