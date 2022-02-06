@@ -44,11 +44,32 @@ if(isset($_GET['searchItem'])) {
         <?php
       } 
     elseif($search_result_count > 1) {
-        ?>
-        <script type="text/javascript">
-        window.location.href = 'http://localhost:3000/product3.php?t=<?php echo $searchKeyword; ?>';
-        </script>
-        <?php
+        $searchKeyword = $_GET['searchItem'];
+        $search_retrieve_query = "SELECT * FROM `brand_and_item_list` WHERE `b_sub_title_two` LIKE '%$searchKeyword%';";
+        $search_retrieve_result = mysqli_query($con, $search_retrieve_query);
+        $search_result_count = mysqli_num_rows($search_retrieve_result);
+        while($row = mysqli_fetch_assoc($search_retrieve_result)) {
+        $search_b_and_i_identification_id =  $row['b_and_i_identification_id'];
+        $search_sub_cat_identification_id = $row['subs_cat_identification_id'];
+        $search_sub_cat_identification_id_two = $row['subs_cat_identification_id_two'];
+        $search_sub_b_title = $row['b_title'];
+        $search_sub_cat_title = $row['b_sub_title_two'];
+         }
+        
+        if($search_result_count > 0) {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/product.php?sub_cat_identification_id_two=<?php echo $search_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $search_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $search_sub_cat_title; ?>';
+            </script>
+            <?php
+        } else {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/product3.php?t=<?php echo $searchKeyword; ?>';
+            </script>
+            <?php
+        }
+       
       } else {
         ?>
         <script type="text/javascript">
