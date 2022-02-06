@@ -15,10 +15,10 @@
                     </div>
                 </div>
                 <div class="news_letter_container_icons_div">
-                    <span><a href="#" title="Shopssy on facebook"><i class="fab fa-facebook-f"></i></a></span>
-                    <span><a href="#" title="Shopssy on twitter"><i class="fab fa-twitter"></i></a></span>
-                    <span><a href="#" title="Shopssy on instagram"><i class="fab fa-instagram"></i></a></span>
-                    <span><a href="#" title="Shopssy on youtube"><i class="fab fa-youtube"></i></a></span>
+                    <span><a href="https://www.facebook.com/" title="Shopssy on facebook"><i class="fab fa-facebook-f"></i></a></span>
+                    <span><a href="https://twitter.com/" title="Shopssy on twitter"><i class="fab fa-twitter"></i></a></span>
+                    <span><a href="https://www.instagram.com/" title="Shopssy on instagram"><i class="fab fa-instagram"></i></a></span>
+                    <span><a href="https://www.youtube.com/" title="Shopssy on youtube"><i class="fab fa-youtube"></i></a></span>
                 </div>
             </div>
         </div>
