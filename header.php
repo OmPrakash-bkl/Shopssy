@@ -737,7 +737,28 @@ if(isset($_SESSION['user_login_id'])) {
             <button type="submit" class="user_icon_of_homepage" id="user_btn" title="sign in"><a><i class="far fa-user" style="font-size: 25px;color: #45b2ff;"></i></a></button>
             <div id="cart_count_container">
                 <button type="submit" class="cart_icon_of_homepage" title="view cart"><a href="./cart.php"><i class="fas fa-cart-plus" style="font-size: 25px;color: #45b2ff;"></i></a></button>
-                <span>10</span>
+                <?php 
+                if(isset($_SESSION['user_login_id'])){
+                    $cart_count_user_id = $_SESSION['user_id'];
+                    $cart_count_query = "SELECT COUNT(u_id) AS `cart_item_count` FROM `cart` WHERE `u_id` = $cart_count_user_id;";
+                    $cart_count_result = mysqli_query($con, $cart_count_query);
+                    $cart_item_count = mysqli_fetch_assoc($cart_count_result);
+                } else {
+                    $cart_count_user_id = $_COOKIE['T093NO5A86H'];
+                    $cart_count_query = "SELECT COUNT(un_u_cart_token) AS `cart_item_count` FROM `unnamed_user_cart` WHERE `un_u_cart_token` = $cart_count_user_id;";
+                    $cart_count_result = mysqli_query($con, $cart_count_query);
+                    $cart_item_count = mysqli_fetch_assoc($cart_count_result);
+                }
+                ?>
+                <span><?php
+                if($cart_item_count['cart_item_count'] > 9) {
+                    $zero = "";
+                } else {
+                    $zero = 0;
+                }
+                echo $zero;
+                echo $cart_item_count['cart_item_count'];
+                ?></span>
                 </div>
            <button type="submit" title="wishlist" class="wishlist_btn"><a><i class="far fa-heart" style="font-size: 25px;color: #45b2ff;"></i></a></button>
         </div>
