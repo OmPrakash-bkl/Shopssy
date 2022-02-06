@@ -139,7 +139,7 @@ if(isset($_POST['delete_default_add'])) {
     <center>
         <div class="my_address_container">
             <h2 class="heading1">YOUR ADDRESSES</h2>
-            <span class="return_link"><a href="#"><i class="fa fa-angle-left"></i> Return to Account Details</a></span> <br>
+            <span class="return_link"><a href="./account.php"><i class="fa fa-angle-left"></i> Return to Account Details</a></span> <br>
             <button class="add_new_add_btn">ADD A NEW ADDRESS</button>
            
             <div class="address_details_table_container1">

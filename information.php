@@ -399,7 +399,7 @@ if(isset($_POST['new_add'])) {
                     <input type="text" placeholder="State" class="state" name="state" value="<?php echo $address_details_state; ?>" required>
                     <input type="text" placeholder="PIN code" name="zip" class="pin" value="<?php echo $address_details_zip; ?>" required> <br>
                     <button type="submit" name="continue_to_ship" class="continue_btn">Continue to shipping</button>
-                    <span class="return_link"><a href="#"><i class="fa fa-angle-left"></i> Return to cart</a></span>
+                    <span class="return_link"><a href="./cart.php"><i class="fa fa-angle-left"></i> Return to cart</a></span>
                     </form>
                 </div>
            

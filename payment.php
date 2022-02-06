@@ -13,10 +13,14 @@ if(!isset($_SESSION['user_login_id'])) {
 $cook_name = 'TRX_COUNTER';
 if(isset($_COOKIE['TRX_COUNTER'])) {
     $trx_counter = $_COOKIE[$cook_name];
-    $trx_counter = $trx_counter + 1;
-    setcookie($cook_name, $trx_counter);
 } else {
-    setcookie($cook_name, 1);
+    $cookie_count_query = "SELECT `trx_count` FROM `orders_table`";
+    $cookie_count_result = mysqli_query($con, $cookie_count_query);
+    while($rows = mysqli_fetch_assoc($cookie_count_result)){
+        $cookie_last_count = $rows['trx_count'];
+    }
+    $cookie_last_count = $cookie_last_count + 1;
+    setcookie($cook_name, $cookie_last_count);
 }
 
 if(isset($_POST['order_req'])) {
@@ -35,7 +39,7 @@ if(isset($_POST['order_req'])) {
     $orders_card_number = stripcslashes($orders_card_number);
     $orders_card_number = mysqli_real_escape_string($con, $orders_card_number);
 
-    $orders_query = "INSERT INTO `orders_table` (`user_id`, `trx_id`, `p_status`, `pro_tot_amount`) VALUES ($orders_user_id, '$orders_trx_id', '$orders_p_status', $orders_pro_tot_amt);";
+    $orders_query = "INSERT INTO `orders_table` (`user_id`, `trx_id`, `trx_count`, `p_status`, `pro_tot_amount`) VALUES ($orders_user_id, '$orders_trx_id',  $trx_counter, '$orders_p_status', $orders_pro_tot_amt);";
     mysqli_query($con, $orders_query);
    
     $order_id_retrieve_query = "SELECT `order_id` FROM `orders_table` WHERE `user_id` = $orders_user_id;";
