@@ -1,6 +1,26 @@
 <?php 
 include './action.php';
 
+if(!isset($_GET['page'])) {
+    unset($_SESSION['pagination']);
+    $_SESSION['count'] = 1;
+    $page_count = $_SESSION['count'];
+}
+else {
+   $page_count = $_GET['page'];
+}
+
+if(isset($_GET['b_title'])) {
+    $pagi_b_title = $_GET['b_title'];
+    $pagi_sub_cat_identification_id_two = $_GET['sub_cat_identification_id_two'];
+    $pagi_sub_cat_identification_id = $_GET['sub_cat_identification_id'];
+    $pagi_b_and_i_identification_id = $_GET['b_and_i_identification_id'];
+} else {
+    $pagi_sub_cat_identification_id = $_GET['sub_cat_identification_id'];
+    $pagi_sub_cat_title = $_GET['sub_cat_title'];
+    $pagi_sub_cat_identification_id_two = $_GET['sub_cat_identification_id_two'];
+
+}
 
 if(isset($_GET['sub_cat_identification_id'])) {
     $product_sub_cat_identification_id = $_GET['sub_cat_identification_id'];
@@ -39,7 +59,7 @@ if(isset($_GET['searchItem'])) {
 
         ?>
         <script type="text/javascript">
-        window.location.href = 'http://localhost:3000/product.php?b_title=<?php echo $search_sub_b_title; ?>&sub_cat_identification_id_two=<?php echo $search_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $search_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $search_b_and_i_identification_id; ?>';
+        window.location.href = 'http://localhost:3000/product.php?b_title=<?php echo $search_sub_b_title; ?>&sub_cat_identification_id_two=<?php echo $search_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $search_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $search_b_and_i_identification_id; ?>&page=1';
         </script>
         <?php
       } 
@@ -59,13 +79,13 @@ if(isset($_GET['searchItem'])) {
         if($search_result_count > 0) {
             ?>
             <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/product.php?sub_cat_identification_id_two=<?php echo $search_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $search_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $search_sub_cat_title; ?>';
+            window.location.href = 'http://localhost:3000/product.php?sub_cat_identification_id_two=<?php echo $search_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $search_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $search_sub_cat_title; ?>&page=1';
             </script>
             <?php
         } else {
             ?>
             <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/product3.php?t=<?php echo $searchKeyword; ?>';
+            window.location.href = 'http://localhost:3000/product3.php?t=<?php echo $searchKeyword; ?>&page=1';
             </script>
             <?php
         }
@@ -73,7 +93,7 @@ if(isset($_GET['searchItem'])) {
       } else {
         ?>
         <script type="text/javascript">
-        window.location.href = 'http://localhost:3000/product2.php?s=<?php echo $searchKeyword; ?>';
+        window.location.href = 'http://localhost:3000/product2.php?s=<?php echo $searchKeyword; ?>&page=1';
         </script>
         <?php
       }
@@ -338,6 +358,7 @@ if(isset($_GET['searchItem'])) {
            <input type="hidden" name="sub_cat_identification_id" value="<?php echo $pro_subs_cat_identification_id; ?>">
              <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $pro_subs_cat_identification_id_two; ?>">
              <input type="hidden" name="b_title" value="Filtered Items">
+           
          
         </div>
 
@@ -400,197 +421,415 @@ if(isset($_GET['searchItem'])) {
                $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id`=$product_b_and_i_identification_id;";
            }
 
+
            if(isset($row_of_filter)) {
-               foreach($row_of_filter_counter_array as $product_id_of_row_filter) {
-                $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter;";
-
-                ?>
-
-                <?php 
-
-                     $category_products_result = mysqli_query($con, $category_products_query);
-
-                  while($row = mysqli_fetch_assoc($category_products_result)) {
-                  $category_products_p_image = $row['p_image'];
-                   $category_products_p_star_rat = $row['p_star_rat'];
-                    $category_products_p_title = $row['p_title'];
-                    $category_products_p_a_price = $row['p_a_price'];
-                    $category_products_p_o_price = $row['p_o_price'];
-                    $category_products_p_id = $row['p_id'];
-                      $category_products_subs_cat_identification_id = $row['subs_cat_identification_id'];
-
-                      ?>
-                       <div class="category_products_container_products_inner_divs">
-            <img src="./images/<?php echo $category_products_p_image; ?>" alt="products images">
-           <a href="./view_of_product.php?p_id=<?php echo $category_products_p_id; ?>&sub_cat_id=<?php echo $category_products_subs_cat_identification_id; ?>">
-            <div class="category_products_container_products_inner_text_divs">
-                <div>
-                 <?php
-
-switch($category_products_p_star_rat) {
-    case 1:
-        echo '<span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>';
-    break;
-    case 2:
-        echo '<span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>';
-    break;
-    case 3:
-        echo '<span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span>';
-    break;
-    case 4:
-        echo '<span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>';
-    break;
-    case 5:
-        echo '<span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>';
-    break;
-
-}
-
-
-                ?>
-
-                
+               if(!isset($_GET['page'])) {
+                foreach($row_of_filter_counter_array as $product_id_of_row_filter) {
+                    $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter;";
+    
+                    ?>
+    
+                    <?php 
+    
+                         $category_products_result = mysqli_query($con, $category_products_query);
+    
+                      while($row = mysqli_fetch_assoc($category_products_result)) {
+                      $category_products_p_image = $row['p_image'];
+                       $category_products_p_star_rat = $row['p_star_rat'];
+                        $category_products_p_title = $row['p_title'];
+                        $category_products_p_a_price = $row['p_a_price'];
+                        $category_products_p_o_price = $row['p_o_price'];
+                        $category_products_p_id = $row['p_id'];
+                          $category_products_subs_cat_identification_id = $row['subs_cat_identification_id'];
+    
+    
+                          ?>
+                           <div class="category_products_container_products_inner_divs">
+                <img src="./images/<?php echo $category_products_p_image; ?>" alt="products images">
+               <a href="./view_of_product.php?p_id=<?php echo $category_products_p_id; ?>&sub_cat_id=<?php echo $category_products_subs_cat_identification_id; ?>">
+                <div class="category_products_container_products_inner_text_divs">
+                    <div>
+                     <?php
+    
+    switch($category_products_p_star_rat) {
+        case 1:
+            echo '<span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>';
+        break;
+        case 2:
+            echo '<span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>';
+        break;
+        case 3:
+            echo '<span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>';
+        break;
+        case 4:
+            echo '<span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>';
+        break;
+        case 5:
+            echo '<span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>';
+        break;
+    
+    }
+    
+    
+                    ?>
+    
+                    
+                    </div>
+                    <div>
+                        <h4><?php
+                            $string_of_title = $category_products_p_title;
+                            if(strlen($string_of_title) > 30) {
+                             $string_of_title = explode("\n", wordwrap($string_of_title, 35));
+                             $string_of_title = $string_of_title[0].' ...';
+                            }
+                            echo $string_of_title;
+                             ?></h4>
+                    </div>
+                    <div>
+                        <h2>&#8377;<?php echo $category_products_p_a_price; ?> <del>&#8377;<?php echo $category_products_p_o_price; ?></del></h2>
+                    </div>
                 </div>
-                <div>
-                    <h4><?php
-                        $string_of_title = $category_products_p_title;
-                        if(strlen($string_of_title) > 30) {
-                         $string_of_title = explode("\n", wordwrap($string_of_title, 35));
-                         $string_of_title = $string_of_title[0].' ...';
-                        }
-                        echo $string_of_title;
-                         ?></h4>
-                </div>
-                <div>
-                    <h2>&#8377;<?php echo $category_products_p_a_price; ?> <del>&#8377;<?php echo $category_products_p_o_price; ?></del></h2>
+               </a>
+                <div class="category_products_container_products_inner_btn_divs">
+                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
+                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
+                    <button title="Quick View"><i class="fas fa-search"></i></button>
                 </div>
             </div>
-           </a>
-            <div class="category_products_container_products_inner_btn_divs">
-                <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                <button title="Quick View"><i class="fas fa-search"></i></button>
+            
+            <?php } ?>
+    
+                    <?php
+    
+                   }
+               } else {
+
+                    $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter;";
+    
+                    ?>
+    
+                    <?php 
+    
+                $category_products_result = mysqli_query($con, $category_products_query);
+    
+                      while($row = mysqli_fetch_assoc($category_products_result)) {
+                      $category_products_p_image = $row['p_image'];
+                       $category_products_p_star_rat = $row['p_star_rat'];
+                        $category_products_p_title = $row['p_title'];
+                        $category_products_p_a_price = $row['p_a_price'];
+                        $category_products_p_o_price = $row['p_o_price'];
+                        $category_products_p_id = $row['p_id'];
+                          $category_products_subs_cat_identification_id = $row['subs_cat_identification_id'];
+    
+    
+                          ?>
+                           <div class="category_products_container_products_inner_divs">
+                <img src="./images/<?php echo $category_products_p_image; ?>" alt="products images">
+               <a href="./view_of_product.php?p_id=<?php echo $category_products_p_id; ?>&sub_cat_id=<?php echo $category_products_subs_cat_identification_id; ?>">
+                <div class="category_products_container_products_inner_text_divs">
+                    <div>
+                     <?php
+    
+    switch($category_products_p_star_rat) {
+        case 1:
+            echo '<span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>';
+        break;
+        case 2:
+            echo '<span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>';
+        break;
+        case 3:
+            echo '<span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>';
+        break;
+        case 4:
+            echo '<span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>';
+        break;
+        case 5:
+            echo '<span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>';
+        break;
+    
+    }
+    
+    
+                    ?>
+    
+                    
+                    </div>
+                    <div>
+                        <h4><?php
+                            $string_of_title = $category_products_p_title;
+                            if(strlen($string_of_title) > 30) {
+                             $string_of_title = explode("\n", wordwrap($string_of_title, 35));
+                             $string_of_title = $string_of_title[0].' ...';
+                            }
+                            echo $string_of_title;
+                             ?></h4>
+                    </div>
+                    <div>
+                        <h2>&#8377;<?php echo $category_products_p_a_price; ?> <del>&#8377;<?php echo $category_products_p_o_price; ?></del></h2>
+                    </div>
+                </div>
+               </a>
+                <div class="category_products_container_products_inner_btn_divs">
+                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
+                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
+                    <button title="Quick View"><i class="fas fa-search"></i></button>
+                </div>
             </div>
-        </div>
-        
-        <?php } ?>
-
-                <?php
-
+            
+            <?php } ?>
+    
+                    <?php
+    
+                  
                }
+              
             
            } else {
           
+            if(!isset($_GET['page'])) {
 
+                $category_products_result = mysqli_query($con, $category_products_query);
+
+                if(!isset($_GET['page'])) {
+                  $t = 1;
+                }
+               while($row = mysqli_fetch_assoc($category_products_result)) {
+               $category_products_p_image = $row['p_image'];
+                $category_products_p_star_rat = $row['p_star_rat'];
+                 $category_products_p_title = $row['p_title'];
+                 $category_products_p_a_price = $row['p_a_price'];
+                 $category_products_p_o_price = $row['p_o_price'];
+                 $category_products_p_id = $row['p_id'];
+                   $category_products_subs_cat_identification_id = $row['subs_cat_identification_id'];
+                  
+                   if(!isset($_GET['page'])) {
+                      $_SESSION['pagination'][$t] = $category_products_p_id;
+                      $t++;
+                      if($t > 13) {
+                          continue;
+                      }
+                   }
+                  
+      
+                   ?>
+                    <div class="category_products_container_products_inner_divs">
+         <img src="./images/<?php echo $category_products_p_image; ?>" alt="products images">
+        <a href="./view_of_product.php?p_id=<?php echo $category_products_p_id; ?>&sub_cat_id=<?php echo $category_products_subs_cat_identification_id; ?>">
+         <div class="category_products_container_products_inner_text_divs">
+             <div>
+              <?php
+      
+      switch($category_products_p_star_rat) {
+      case 1:
+      echo '<span class="fa fa-star checked"></span>
+           <span class="fa fa-star"></span>
+           <span class="fa fa-star"></span>
+           <span class="fa fa-star"></span>
+           <span class="fa fa-star"></span>';
+      break;
+      case 2:
+      echo '<span class="fa fa-star checked"></span>
+           <span class="fa fa-star checked"></span>
+           <span class="fa fa-star"></span>
+           <span class="fa fa-star"></span>
+           <span class="fa fa-star"></span>';
+      break;
+      case 3:
+      echo '<span class="fa fa-star checked"></span>
+           <span class="fa fa-star checked"></span>
+           <span class="fa fa-star checked"></span>
+           <span class="fa fa-star"></span>
+           <span class="fa fa-star"></span>';
+      break;
+      case 4:
+      echo '<span class="fa fa-star checked"></span>
+           <span class="fa fa-star checked"></span>
+           <span class="fa fa-star checked"></span>
+           <span class="fa fa-star checked"></span>
+           <span class="fa fa-star"></span>';
+      break;
+      case 5:
+      echo '<span class="fa fa-star checked"></span>
+           <span class="fa fa-star checked"></span>
+           <span class="fa fa-star checked"></span>
+           <span class="fa fa-star checked"></span>
+           <span class="fa fa-star checked"></span>';
+      break;
+      
+      }
+      
+      
+             ?>
+      
+             
+             </div>
+             <div>
+                 <h4><?php
+                     if(strlen($category_products_p_title) > 30) {
+                         echo substr($category_products_p_title, 0, 35)." ...";
+                     } else {
+                         echo $category_products_p_title;
+                     }
+                      ?></h4>
+             </div>
+             <div>
+                 <h2>&#8377;<?php echo $category_products_p_a_price; ?> <del>&#8377;<?php echo $category_products_p_o_price; ?></del></h2>
+             </div>
+         </div>
+        </a>
+         <div class="category_products_container_products_inner_btn_divs">
+             <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
+             <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
+             <button title="Quick View"><i class="fas fa-search"></i></button>
+         </div>
+      </div>
+      
+      <?php } ?>
+
+      <?php
+
+            } else {
+
+                $category_products_query = "SELECT * FROM `products` WHERE `p_id` BETWEEN 0 AND 10;";
+                
             $category_products_result = mysqli_query($con, $category_products_query);
 
-         while($row = mysqli_fetch_assoc($category_products_result)) {
-         $category_products_p_image = $row['p_image'];
-          $category_products_p_star_rat = $row['p_star_rat'];
-           $category_products_p_title = $row['p_title'];
-           $category_products_p_a_price = $row['p_a_price'];
-           $category_products_p_o_price = $row['p_o_price'];
-           $category_products_p_id = $row['p_id'];
-             $category_products_subs_cat_identification_id = $row['subs_cat_identification_id'];
+           
+           while($row = mysqli_fetch_assoc($category_products_result)) {
+           $category_products_p_image = $row['p_image'];
+            $category_products_p_star_rat = $row['p_star_rat'];
+             $category_products_p_title = $row['p_title'];
+             $category_products_p_a_price = $row['p_a_price'];
+             $category_products_p_o_price = $row['p_o_price'];
+             $category_products_p_id = $row['p_id'];
+               $category_products_subs_cat_identification_id = $row['subs_cat_identification_id'];
+              
+  
+               ?>
+                <div class="category_products_container_products_inner_divs">
+     <img src="./images/<?php echo $category_products_p_image; ?>" alt="products images">
+    <a href="./view_of_product.php?p_id=<?php echo $category_products_p_id; ?>&sub_cat_id=<?php echo $category_products_subs_cat_identification_id; ?>">
+     <div class="category_products_container_products_inner_text_divs">
+         <div>
+          <?php
+  
+  switch($category_products_p_star_rat) {
+  case 1:
+  echo '<span class="fa fa-star checked"></span>
+       <span class="fa fa-star"></span>
+       <span class="fa fa-star"></span>
+       <span class="fa fa-star"></span>
+       <span class="fa fa-star"></span>';
+  break;
+  case 2:
+  echo '<span class="fa fa-star checked"></span>
+       <span class="fa fa-star checked"></span>
+       <span class="fa fa-star"></span>
+       <span class="fa fa-star"></span>
+       <span class="fa fa-star"></span>';
+  break;
+  case 3:
+  echo '<span class="fa fa-star checked"></span>
+       <span class="fa fa-star checked"></span>
+       <span class="fa fa-star checked"></span>
+       <span class="fa fa-star"></span>
+       <span class="fa fa-star"></span>';
+  break;
+  case 4:
+  echo '<span class="fa fa-star checked"></span>
+       <span class="fa fa-star checked"></span>
+       <span class="fa fa-star checked"></span>
+       <span class="fa fa-star checked"></span>
+       <span class="fa fa-star"></span>';
+  break;
+  case 5:
+  echo '<span class="fa fa-star checked"></span>
+       <span class="fa fa-star checked"></span>
+       <span class="fa fa-star checked"></span>
+       <span class="fa fa-star checked"></span>
+       <span class="fa fa-star checked"></span>';
+  break;
+  
+  }
+  
+  
+         ?>
+  
+         
+         </div>
+         <div>
+             <h4><?php
+                 if(strlen($category_products_p_title) > 30) {
+                     echo substr($category_products_p_title, 0, 35)." ...";
+                 } else {
+                     echo $category_products_p_title;
+                 }
+                  ?></h4>
+         </div>
+         <div>
+             <h2>&#8377;<?php echo $category_products_p_a_price; ?> <del>&#8377;<?php echo $category_products_p_o_price; ?></del></h2>
+         </div>
+     </div>
+    </a>
+     <div class="category_products_container_products_inner_btn_divs">
+         <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
+         <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
+         <button title="Quick View"><i class="fas fa-search"></i></button>
+     </div>
+  </div>
+  
+  <?php } ?>
 
-             ?>
-              <div class="category_products_container_products_inner_divs">
-   <img src="./images/<?php echo $category_products_p_image; ?>" alt="products images">
-  <a href="./view_of_product.php?p_id=<?php echo $category_products_p_id; ?>&sub_cat_id=<?php echo $category_products_subs_cat_identification_id; ?>">
-   <div class="category_products_container_products_inner_text_divs">
-       <div>
-        <?php
+  <?php
+            }
 
-switch($category_products_p_star_rat) {
-case 1:
-echo '<span class="fa fa-star checked"></span>
-     <span class="fa fa-star"></span>
-     <span class="fa fa-star"></span>
-     <span class="fa fa-star"></span>
-     <span class="fa fa-star"></span>';
-break;
-case 2:
-echo '<span class="fa fa-star checked"></span>
-     <span class="fa fa-star checked"></span>
-     <span class="fa fa-star"></span>
-     <span class="fa fa-star"></span>
-     <span class="fa fa-star"></span>';
-break;
-case 3:
-echo '<span class="fa fa-star checked"></span>
-     <span class="fa fa-star checked"></span>
-     <span class="fa fa-star checked"></span>
-     <span class="fa fa-star"></span>
-     <span class="fa fa-star"></span>';
-break;
-case 4:
-echo '<span class="fa fa-star checked"></span>
-     <span class="fa fa-star checked"></span>
-     <span class="fa fa-star checked"></span>
-     <span class="fa fa-star checked"></span>
-     <span class="fa fa-star"></span>';
-break;
-case 5:
-echo '<span class="fa fa-star checked"></span>
-     <span class="fa fa-star checked"></span>
-     <span class="fa fa-star checked"></span>
-     <span class="fa fa-star checked"></span>
-     <span class="fa fa-star checked"></span>';
-break;
-
-}
-
-
-       ?>
-
-       
-       </div>
-       <div>
-           <h4><?php
-               if(strlen($category_products_p_title) > 30) {
-                   echo substr($category_products_p_title, 0, 35)." ...";
-               } else {
-                   echo $category_products_p_title;
-               }
-                ?></h4>
-       </div>
-       <div>
-           <h2>&#8377;<?php echo $category_products_p_a_price; ?> <del>&#8377;<?php echo $category_products_p_o_price; ?></del></h2>
-       </div>
-   </div>
-  </a>
-   <div class="category_products_container_products_inner_btn_divs">
-       <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-       <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-       <button title="Quick View"><i class="fas fa-search"></i></button>
-   </div>
-</div>
-
-<?php } ?>
+  ?>
 
        <?php
 
            }
+
+           print_r($_SESSION['pagination']);
 
 ?>
         
@@ -599,10 +838,77 @@ break;
 
 <div class="next_page_container">
     <center>
-        <a href="#"><button>Previous</button></a>
-        <a href="#"><button class="for_round_btn active">1</button></a>
-        <a href="#"><button class="for_round_btn">2</button></a>
-        <a href="#"><button>Next</button></a>
+        <?php 
+        if(isset($_GET['sub_cat_title'])) {
+            ?>
+        <a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&page=<?php
+         if($page_count == 1) {
+            echo $page_count; 
+        }else {
+            echo $page_count - 1; 
+        }
+         ?>&dec"><button>Previous</button></a>
+
+        <button class="for_round_btn <?php 
+        if($_GET['page'] == 1) { echo "active"; } 
+        if(!isset($_GET['page'])) { echo "active"; }
+        ?>"><?php 
+         if($page_count == 1) {
+            echo $page_count; 
+        }else {
+            echo $page_count - 1; 
+        }
+        ?></button>
+
+          <?php 
+          if(isset($_GET['page']) and $_GET['page'] > 1) {
+              ?>
+            <button class="for_round_btn <?php if($_GET['page'] > 1) { echo "active"; } ?>"><?php echo $_GET['page'] ?></button>
+            <?php
+          }
+          ?>
+
+        <button class="for_round_btn"><?php echo $page_count + 1; ?></button>
+
+        <a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&page=<?php echo $page_count + 1; ?>&inc"><button>Next</button></a>
+            <?php
+        } else {
+            ?>
+        <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&page=<?php
+       if($page_count == 1) {
+        echo $page_count; 
+    }else {
+        echo $page_count - 1; 
+    }
+         ?>&dec"><button>Previous</button></a>
+
+        <button class="for_round_btn <?php 
+        if($_GET['page'] == 1) { echo "active"; } 
+        if(!isset($_GET['page'])) { echo "active"; }
+        ?>"><?php 
+         if($page_count == 1) {
+            echo $page_count; 
+        }else {
+            echo $page_count - 1; 
+        }
+        ?></button>
+
+         <?php 
+          if(isset($_GET['page']) and $_GET['page'] > 1) {
+              ?>
+            <button class="for_round_btn <?php if($_GET['page'] > 1) { echo "active"; } ?>"><?php echo $_GET['page'] ?></button>
+            <?php
+          }
+          ?>
+
+        <button class="for_round_btn"><?php echo $page_count + 1; ?></button>
+
+        <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&page=<?php echo $page_count + 1; ?>&inc"><button>Next</button></a>
+
+            <?php
+        }
+        
+        ?>
     </center>
 </div>
 

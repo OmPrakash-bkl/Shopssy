@@ -1,5 +1,6 @@
 <?php 
 include './action.php';
+
 if(!isset($_COOKIE['T093NO5A86H'])) {
     $unnamed_user_cart_query = "SELECT `un_u_cart_token` FROM `unnamed_user_cart`;";
 $unnamed_user_cart_result = mysqli_query($con, $unnamed_user_cart_query);
