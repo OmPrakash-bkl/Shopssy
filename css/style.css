@@ -1964,12 +1964,14 @@ margin-bottom: 20px;
     border: 1px solid #959595;
     border-radius: 20px;
     margin: 10px 0px;
+    cursor: pointer;
 }
-.next_page_container button:hover {
+.next_page_container .for_box_button:hover {
     background-color: #2D9AE8;
     color: white;
     border: 1px solid #2D9AE8;
 }
+
 .next_page_container .for_round_btn {
     height: 35px;
     width: 35px;
@@ -1978,6 +1980,7 @@ margin-bottom: 20px;
     color: white;
     background-color: #b3b3b3;
     border: 1px solid #b3b3b3;
+    cursor: context-menu;
 }
 .next_page_container .active {
     background-color: #2D9AE8;

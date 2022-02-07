@@ -276,10 +276,10 @@ include './header.php';
 
 <div class="next_page_container">
     <center>
-        <a href="#"><button>Previous</button></a>
+        <a href="#"><button class="for_box_button">Previous</button></a>
         <a href="#"><button class="for_round_btn active">1</button></a>
         <a href="#"><button class="for_round_btn">2</button></a>
-        <a href="#"><button>Next</button></a>
+        <a href="#"><button class="for_box_button">Next</button></a>
     </center>
 </div>
 

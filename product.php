@@ -1,6 +1,8 @@
 <?php 
 include './action.php';
 
+$start = 1;
+
 if(!isset($_GET['page'])) {
     unset($_SESSION['pagination']);
     $_SESSION['count'] = 1;
@@ -59,7 +61,7 @@ if(isset($_GET['searchItem'])) {
 
         ?>
         <script type="text/javascript">
-        window.location.href = 'http://localhost:3000/product.php?b_title=<?php echo $search_sub_b_title; ?>&sub_cat_identification_id_two=<?php echo $search_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $search_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $search_b_and_i_identification_id; ?>&page=1';
+        window.location.href = 'http://localhost:3000/product.php?b_title=<?php echo $search_sub_b_title; ?>&sub_cat_identification_id_two=<?php echo $search_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $search_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $search_b_and_i_identification_id; ?>';
         </script>
         <?php
       } 
@@ -79,13 +81,13 @@ if(isset($_GET['searchItem'])) {
         if($search_result_count > 0) {
             ?>
             <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/product.php?sub_cat_identification_id_two=<?php echo $search_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $search_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $search_sub_cat_title; ?>&page=1';
+            window.location.href = 'http://localhost:3000/product.php?sub_cat_identification_id_two=<?php echo $search_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $search_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $search_sub_cat_title; ?>';
             </script>
             <?php
         } else {
             ?>
             <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/product3.php?t=<?php echo $searchKeyword; ?>&page=1';
+            window.location.href = 'http://localhost:3000/product3.php?t=<?php echo $searchKeyword; ?>';
             </script>
             <?php
         }
@@ -93,7 +95,7 @@ if(isset($_GET['searchItem'])) {
       } else {
         ?>
         <script type="text/javascript">
-        window.location.href = 'http://localhost:3000/product2.php?s=<?php echo $searchKeyword; ?>&page=1';
+        window.location.href = 'http://localhost:3000/product2.php?s=<?php echo $searchKeyword; ?>';
         </script>
         <?php
       }
@@ -730,7 +732,23 @@ if(isset($_GET['searchItem'])) {
 
             } else {
 
-                $category_products_query = "SELECT * FROM `products` WHERE `p_id` BETWEEN 0 AND 10;";
+                $start = 1;
+                $end = 12;
+                $no_of_product = count($_SESSION['pagination']);
+                $no_of_product_per_page = 12;
+                $no_of_pages = ceil($no_of_product / 12);
+               if($_GET['page']) {
+                   $page_no = $_GET['page'];
+                   $end = $no_of_product_per_page * $page_no;
+                   $start = $end - 11;
+               }
+
+              
+               foreach(array_slice($_SESSION['pagination'], $start-1, 12) as $pro_value) {
+                   ?>
+                   <?php
+
+                     $category_products_query = "SELECT * FROM `products` WHERE `p_id` = $pro_value;";
                 
             $category_products_result = mysqli_query($con, $category_products_query);
 
@@ -820,6 +838,9 @@ if(isset($_GET['searchItem'])) {
   
   <?php } ?>
 
+  
+               
+      
   <?php
             }
 
@@ -829,7 +850,7 @@ if(isset($_GET['searchItem'])) {
 
            }
 
-           print_r($_SESSION['pagination']);
+        }
 
 ?>
         
@@ -840,14 +861,23 @@ if(isset($_GET['searchItem'])) {
     <center>
         <?php 
         if(isset($_GET['sub_cat_title'])) {
-            ?>
-        <a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&page=<?php
-         if($page_count == 1) {
-            echo $page_count; 
-        }else {
-            echo $page_count - 1; 
-        }
-         ?>&dec"><button>Previous</button></a>
+            if($start == 1) {
+                ?>
+                <button class="for_box_button">Previous</button>
+                <?php
+            } else {
+                ?>
+                <a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&page=<?php
+                if($page_count == 1) {
+                   echo $page_count; 
+               }else {
+                   echo $page_count - 1; 
+               }
+                ?>&dec"><button class="for_box_button">Previous</button></a>
+                <?php
+            }
+        ?>
+        
 
         <button class="for_round_btn <?php 
         if($_GET['page'] == 1) { echo "active"; } 
@@ -869,19 +899,57 @@ if(isset($_GET['searchItem'])) {
           ?>
 
         <button class="for_round_btn"><?php echo $page_count + 1; ?></button>
+        <?php
 
-        <a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&page=<?php echo $page_count + 1; ?>&inc"><button>Next</button></a>
+        if(end($_SESSION['pagination']) == $pro_value) {
+           ?>
+         <button class="for_box_button">Next</button>
+           <?php
+       } else {
+        if(count($_SESSION['pagination']) > 12) {
+            ?>
+            <a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&page=<?php echo $page_count + 1; ?>&inc"><button class="for_box_button">Next</button></a>
+             <?php
+           } else {
+            ?>
+            <button class="for_box_button">Next</button>
+              <?php
+           }
+          
+       }
+
+       ?>
+
             <?php
         } else {
-            ?>
-        <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&page=<?php
-       if($page_count == 1) {
-        echo $page_count; 
-    }else {
-        echo $page_count - 1; 
-    }
-         ?>&dec"><button>Previous</button></a>
 
+            if($start == 1) {
+                ?>
+                <button class="for_box_button">Previous</button>
+                <?php
+            } else {
+                if(count($_SESSION['pagination']) < 12 and $start == 1) {
+                    ?>
+                    <button class="for_box_button">Previous</button>
+                    <?php
+                } else {
+                    ?>
+                    <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&page=<?php
+                   if($page_count == 1) {
+                    echo $page_count; 
+                }else {
+                    echo $page_count - 1; 
+                }
+                     ?>&dec"><button class="for_box_button">Previous</button></a>
+            
+                     <?php
+                }
+                
+            }
+
+            ?>
+            
+            
         <button class="for_round_btn <?php 
         if($_GET['page'] == 1) { echo "active"; } 
         if(!isset($_GET['page'])) { echo "active"; }
@@ -903,7 +971,26 @@ if(isset($_GET['searchItem'])) {
 
         <button class="for_round_btn"><?php echo $page_count + 1; ?></button>
 
-        <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&page=<?php echo $page_count + 1; ?>&inc"><button>Next</button></a>
+       <?php
+
+      
+       if(end($_SESSION['pagination']) == $pro_value) {
+           ?>
+         <button class="for_box_button">Next</button>
+           <?php
+       } else {
+           if(count($_SESSION['pagination']) > 12) {
+            ?>
+            <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&page=<?php echo $page_count + 1; ?>&inc"><button class="for_box_button">Next</button></a>
+             <?php
+           } else {
+            ?>
+            <button class="for_box_button">Next</button>
+              <?php
+           }
+          
+       }
+       ?>
 
             <?php
         }
