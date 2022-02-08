@@ -88,10 +88,11 @@ if(isset($_POST['delete_all_from_wishlist'])) {
 if(isset($_POST['add_to_cart_id'])) {
     $produc_id = $_POST['add_to_cart_id'];
     $users_id = $_SESSION['user_id'];
+    $produc_type = $_POST['prod_type'];
     if(isset($_SESSION['user_login_id'])) {
-        $cart_insert_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`) VALUES ($users_id, $produc_id, 1, 0, '')";
+        $cart_insert_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($users_id, $produc_id, 1, 0, '', '$produc_type');";
     } else {
-        $cart_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`) VALUES ($users_id, $produc_id, 1, '');";
+        $cart_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`, `pro_type`) VALUES ($users_id, $produc_id, 1, '', '$produc_type');";
     }
     mysqli_query($con, $cart_insert_query);
     ?>
@@ -348,12 +349,15 @@ if(isset($_SESSION['user_login_id'])) {
                         <h2 class="pricee">&#8377;<?php 
                         if($wish_prod_type == 'normal') {
                             echo $wish_p_o_price;
+                        } elseif($wish_prod_type == 'hot') {
+                            echo floor($wish_p_o_price/2);
                         } else {
                             echo $wish_p_a_price;
                         }
                         ?></h2>
                         <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                        <input type="hidden" name="prod_type" value="<?php echo $wish_prod_type; ?>">
                         <button class="add_to_cart_btn" name="add_to_cart_id" value="<?php echo $wish_p_id; ?>">ADD TO CART</button>
                         </form>
                     </div>
@@ -406,7 +410,9 @@ if(isset($_SESSION['user_login_id'])) {
                             <h2 class="pricee">&#8377;<?php 
                         if($wish_prod_type == 'normal') {
                             echo $wish_p_o_price;
-                        } else {
+                        } elseif($wish_prod_type == 'hot') {
+                            echo floor($wish_p_o_price/2);
+                        }  else {
                             echo $wish_p_a_price;
                         }
                         ?></h2>
@@ -420,6 +426,7 @@ if(isset($_SESSION['user_login_id'])) {
                         ?>
                             <a href="./product.php?sub_cat_identification_id=<?php echo $wish_subs_cat_identification_id; ?>&sub_cat_title=<?php echo $view_more_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $view_more_sub_cat_identification_id_two; ?>"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
                             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                            <input type="hidden" name="prod_type" value="<?php echo $wish_prod_type; ?>">
                             <button class="add_to_cart_btn" name="add_to_cart_id" value="<?php echo $wish_p_id; ?>">ADD TO CART</button>
                             </form>
                         </div>
