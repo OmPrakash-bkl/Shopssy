@@ -2,11 +2,27 @@
 include './action.php';
 
 if(isset($_GET['s'])) {
-
     $searchKeyword = $_GET['s'];
-  
+}
+if(!isset($_GET['page'])) {
+    unset($_SESSION['pagination_of_product2']);
+    $page_count = 1;
+} else {
+    $page_count = $_GET['page'];
+    if($page_count < 1) {
+        $page_count = 1;
+    }
 }
 
+$category_products_query = "SELECT * FROM `products` WHERE `p_title` LIKE '%$searchKeyword%';";
+
+$category_products_result = mysqli_query($con, $category_products_query);
+$p2 = 1;
+while($row = mysqli_fetch_assoc($category_products_result)) {
+    $category_products_p_id = $row['p_id'];
+    $_SESSION['pagination_of_product2'][$p2] = $category_products_p_id;
+    $p2++;
+}
 
 $title = $searchKeyword . " - Shopssy";
 include './header.php';
@@ -182,8 +198,21 @@ include './header.php';
            <center>
 
            <?php 
+
+                $start = 1;
+                $end = 10;
+                $no_of_product_per_page = 10;
+               if(isset($_GET['page'])) {
+                   $page_no = $_GET['page'];
+                   $end = $no_of_product_per_page * $page_no;
+                   $start = $end - 10;
+               }
+
+               if(isset($_SESSION['pagination_of_product2'])) {
+
+           foreach(array_slice($_SESSION['pagination_of_product2'], $start-1, 10) as $pro2_value) {
            
-           $category_products_query = "SELECT * FROM `products` WHERE `p_title` LIKE '%$searchKeyword%';";
+           $category_products_query = "SELECT * FROM `products` WHERE `p_id`= $pro2_value;";
 
            $category_products_result = mysqli_query($con, $category_products_query);
 
@@ -269,17 +298,61 @@ include './header.php';
             </div>
         </div>
         
-        <?php } ?>
+        <?php } } } ?>
      
 </center>
 
 <div class="next_page_container">
-    <center>
-        <a href="#"><button class="for_box_button">Previous</button></a>
-        <a href="#"><button class="for_round_btn active">1</button></a>
-        <a href="#"><button class="for_round_btn">2</button></a>
-        <a href="#"><button class="for_box_button">Next</button></a>
+    <?php
+    if(isset($_GET['page']) or isset($_SESSION['pagination_of_product2'])) {
+        ?>
+ <center>
+    <?php
+        if($_GET['page'] == 1 or !isset($_GET['page'])) {
+            ?>
+            <button class="for_box_button">Previous</button>
+            <?php 
+        } else {
+            ?>
+            <a href="./product2.php?s=<?php echo $searchKeyword; ?>&page=<?php echo $page_count-1; ?>"><button class="for_box_button">Previous</button></a>
+            <?php
+        }
+
+        ?>
+         <button class="for_round_btn active">
+            <?php
+            if(!isset($_GET['page'])) {
+                echo 1;
+            } else {
+                echo $_GET['page'];
+            }
+           ?>
+        </button>
+        <button class="for_round_btn">
+        <?php
+            if(!isset($_GET['page'])) {
+                echo 2;
+            } else {
+                echo $_GET['page']+1;
+            }
+           ?>
+        </button>
+        <?php
+        if(end($_SESSION['pagination_of_product2']) == $pro2_value) {
+            ?>
+            <button class="for_box_button">Next</button>
+            <?php
+        } else {
+            ?>
+            <a href="./product2.php?s=<?php echo $searchKeyword; ?>&page=<?php echo $page_count+1; ?>"><button class="for_box_button">Next</button></a>
+            <?php
+        }
+        ?>
     </center>
+        <?php
+    }
+    ?>
+   
 </div>
 
      </div>
@@ -287,7 +360,6 @@ include './header.php';
    </center>
    <!--products section container end-->
 
-   
    <?php 
     include "./footer.php";
     ?>
