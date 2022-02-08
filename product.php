@@ -403,10 +403,24 @@ if(isset($_GET['searchItem'])) {
                   <div class="select_container">
                       <button>SORT BY <i class="fa fa-angle-down" id="arrow_of_product5"></i></button>
                       <div class="select_inner_container">
-                          <span><a href="#">Alphabetically, A-Z</a></span> <br>
-                          <span><a href="#">Alphabetically, Z-A</a></span> <br>
-                          <span><a href="#">Price, low to high</a></span> <br>
-                          <span><a href="#">Price, high to low</a></span> <br>
+                          <?php 
+                          if(isset($_GET['b_title'])) {
+                              ?>
+                          <span><a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&sort=1">Alphabetically, A-Z</a></span> <br>
+                          <span><a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&sort=2">Alphabetically, Z-A</a></span> <br>
+                          <span><a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&sort=3">Price, low to high</a></span> <br>
+                          <span><a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&sort=4">Price, high to low</a></span> <br>
+                            <?php  
+                            } else {    
+                            ?>
+                          <span><a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sort=1">Alphabetically, A-Z</a></span> <br>
+                          <span><a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sort=2">Alphabetically, Z-A</a></span> <br>
+                          <span><a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sort=3">Price, low to high</a></span> <br>
+                          <span><a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sort=4">Price, high to low</a></span> <br>
+                            <?php  
+                          }
+                          ?>
+                          
                       </div>
                   </div>
                </div>
@@ -417,10 +431,42 @@ if(isset($_GET['searchItem'])) {
            <?php 
            
            $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
+           $sort_val = $_GET['sort'];
+           switch($sort_val) {
+               case 1:
+                $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id ORDER BY `p_title`;";
+                break;
+                case 2:
+                    $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id ORDER BY `p_title` DESC;";
+                break;
+                case 3:
+                    $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id ORDER BY `p_a_price`;";
+                break;
+                case 4:
+                    $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id ORDER BY `p_a_price` DESC;";
+                break;
+           }
 
            if(isset($_GET['b_and_i_identification_id'])) {
                $product_b_and_i_identification_id = $_GET['b_and_i_identification_id'];
                $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id`=$product_b_and_i_identification_id;";
+
+               $sort_val = $_GET['sort'];
+           switch($sort_val) {
+               case 1:
+                $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id`=$product_b_and_i_identification_id ORDER BY `p_title`;";
+                break;
+                case 2:
+                    $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id`=$product_b_and_i_identification_id ORDER BY `p_title` DESC;";
+                break;
+                case 3:
+                    $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id`=$product_b_and_i_identification_id ORDER BY `p_a_price`;";
+                break;
+                case 4:
+                    $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id`=$product_b_and_i_identification_id ORDER BY `p_a_price` DESC;";
+                break;
+           }
+
            }
 
 
@@ -428,6 +474,22 @@ if(isset($_GET['searchItem'])) {
                if(!isset($_GET['page'])) {
                 foreach($row_of_filter_counter_array as $product_id_of_row_filter) {
                     $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter;";
+
+                    $sort_val = $_GET['sort'];
+                    switch($sort_val) {
+                        case 1:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter ORDER BY `p_title`;";
+                         break;
+                         case 2:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter ORDER BY `p_title` DESC;";
+                         break;
+                         case 3:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter ORDER BY `p_a_price`;";
+                         break;
+                         case 4:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter ORDER BY `p_a_price` DESC;";
+                         break;
+                    }
     
                     ?>
     
@@ -527,6 +589,22 @@ if(isset($_GET['searchItem'])) {
                } else {
 
                     $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter;";
+
+                    $sort_val = $_GET['sort'];
+                    switch($sort_val) {
+                        case 1:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter ORDER BY `p_title`;";
+                         break;
+                         case 2:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter ORDER BY `p_title` DESC;";
+                         break;
+                         case 3:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter ORDER BY `p_a_price`;";
+                         break;
+                         case 4:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter ORDER BY `p_a_price` DESC;";
+                         break;
+                    }
     
                     ?>
     
@@ -747,6 +825,22 @@ if(isset($_GET['searchItem'])) {
                    <?php
 
                      $category_products_query = "SELECT * FROM `products` WHERE `p_id` = $pro_value;";
+
+                     $sort_val = $_GET['sort'];
+                     switch($sort_val) {
+                         case 1:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id` = $pro_value ORDER BY `p_title`;";
+                          break;
+                          case 2:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id` = $pro_value ORDER BY `p_title` DESC;";
+                          break;
+                          case 3:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id` = $pro_value ORDER BY `p_a_price`;";
+                          break;
+                          case 4:
+                            $category_products_query = "SELECT * FROM `products` WHERE `p_id` = $pro_value ORDER BY `p_a_price` DESC;";
+                          break;
+                     }
                 
             $category_products_result = mysqli_query($con, $category_products_query);
 

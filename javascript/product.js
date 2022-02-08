@@ -9,15 +9,15 @@ if(document.getElementById("brand_list_container").style.display == "none") {
 }
 });
 
-document.getElementsByClassName("rating_container")[0].addEventListener("click", function(){
-    if(document.getElementById("rating_list_container").style.display == "none") {
-        document.getElementById("rating_list_container").style.display = "block";
-        document.getElementById("arrow_of_product2").className = "fa fa-angle-up";
-    } else {
-        document.getElementById("rating_list_container").style.display = "none";
-        document.getElementById("arrow_of_product2").className = "fa fa-angle-down";
-    }
-    });
+// document.getElementsByClassName("rating_container")[0].addEventListener("click", function(){
+//     if(document.getElementById("rating_list_container").style.display == "none") {
+//         document.getElementById("rating_list_container").style.display = "block";
+//         document.getElementById("arrow_of_product2").className = "fa fa-angle-up";
+//     } else {
+//         document.getElementById("rating_list_container").style.display = "none";
+//         document.getElementById("arrow_of_product2").className = "fa fa-angle-down";
+//     }
+//     });
 
    function show_and_hide(i) {
     if(document.getElementById(`rating_list_container${i}`).style.display == "none") {
