@@ -28,6 +28,15 @@ while($row = mysqli_fetch_assoc($product_sub_result)) {
     $product_sub_p_tags3 = $row['p_tags3'];
     $product_sub_p_desc = $row['p_desc'];
 }
+
+$nav_link_query = "SELECT * FROM `sub_category` WHERE `sub_cat_identification_id` LIKE $product_sub_cat_id;";
+$nav_link_result = mysqli_query($con, $nav_link_query);
+while($rows = mysqli_fetch_assoc($nav_link_result)) {
+    $nav_subs_cat_title = $rows['subs_cat_title'];
+    $nav_sub_cat_identification_id_two = $rows['sub_cat_identification_id_two'];
+
+}
+
 $product_sub_cat_id_query = "SELECT * FROM `sub_category` WHERE `cats_id`=round($product_sub_cat_id);";
 $product_sub_cat_id_result = mysqli_query($con, $product_sub_cat_id_query);
 $temp = round($product_sub_cat_id);
@@ -309,9 +318,12 @@ if(isset($_GET['p_q_and_a_id'])) {
     <div class="sub_navigation_container">
 <center>
     <div class="sub_navigation_inner_container">
+        <?php
+          $product_sub_cat_id = $_GET['sub_cat_id'];
+        ?>
         <span><a href="./index.php">Home</a></span>
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
-        <span><a href="#"><?php echo $sub_navigation_title; ?></a></span>
+        <span><a href="./product.php?sub_cat_identification_id=<?php echo $product_sub_cat_id; ?>&sub_cat_title=<?php echo $nav_subs_cat_title; ?>&sub_cat_identification_id_two=<?php echo $nav_sub_cat_identification_id_two; ?>"><?php echo $sub_navigation_title; ?></a></span>
     </div>
 </center>
     </div>

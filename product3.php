@@ -179,7 +179,7 @@ include './header.php';
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
         <span><a href="./all_categories.php">All Categories</a></span>
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
-        <span><a href="#"><?php echo $searchKeyword; ?></a></span>
+        <span><a href="<?php echo $_SERVER['REQUEST_URI']; ?>"><?php echo $searchKeyword; ?></a></span>
     </div>
 </center>
     </div>

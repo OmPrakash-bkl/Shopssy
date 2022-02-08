@@ -249,7 +249,7 @@ if(isset($_GET['searchItem'])) {
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
         <span><a href="./all_categories.php">All Categories</a></span>
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
-        <span><a href="#"><?php echo $product_sub_cat_title; ?></a></span>
+        <span><a href="<?php echo $_SERVER['REQUEST_URI']; ?>"><?php echo $product_sub_cat_title; ?></a></span>
     </div>
 </center>
     </div>

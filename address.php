@@ -129,7 +129,7 @@ if(isset($_POST['delete_default_add'])) {
     <div class="sub_navigation_inner_container">
         <span><a href="./index.php">Home</a></span>
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
-        <span><a href="./account.php">My Account</a></span>
+        <span><a href="./address.php">My Address</a></span>
     </div>
 </center>
     </div>
