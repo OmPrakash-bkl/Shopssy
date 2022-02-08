@@ -445,6 +445,9 @@ if(isset($_POST['new_add'])) {
                         &#8377; <?php
                         if($cart_details_pro_type == 'normal') {
                             $product_total_price = $cart_details_quantity * $cart_details_product_p_o_price; 
+                        } elseif($cart_details_pro_type == 'hot') {
+                            $temp_price = floor($cart_details_product_p_o_price/2);
+                            $product_total_price = $cart_details_quantity * $temp_price;
                         } else {
                             $product_total_price = $cart_details_quantity * $cart_details_product_p_a_price; 
                         }

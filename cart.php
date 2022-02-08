@@ -137,6 +137,8 @@ if(isset($_POST['delete_btn'])) {
                     <td class="price_of_cart">&#8377;<?php 
                     if($pro_cart_pro_type == 'normal') {
                         echo $big_cart_p_o_price;
+                    } elseif($pro_cart_pro_type == 'hot') {
+                        echo floor($big_cart_p_o_price/2);
                     } else {
                         echo $big_cart_p_a_price;
                     }
@@ -157,6 +159,11 @@ if(isset($_POST['delete_btn'])) {
                     <td class="total_price_of_cart">&#8377;<?php 
                     if($pro_cart_pro_type == 'normal') {
                         $tot_price = ($pro_quantity - 1 ) * $big_cart_p_o_price;
+                        echo $tot_price;
+                        $cart_products_total_price =  $cart_products_total_price+$tot_price;
+                    } elseif($pro_cart_pro_type == 'hot') {
+                        $temp_price = floor($big_cart_p_o_price/2);
+                        $tot_price = ($pro_quantity - 1 ) * $temp_price;
                         echo $tot_price;
                         $cart_products_total_price =  $cart_products_total_price+$tot_price;
                     } else {
@@ -209,6 +216,8 @@ if(isset($_POST['delete_btn'])) {
                         <td class="price_of_cart">&#8377;<?php
                          if($pro_cart_pro_type == 'normal') {
                             echo $big_cart_p_o_price;
+                        } elseif($pro_cart_pro_type == 'hot') {
+                            echo floor($big_cart_p_o_price/2);
                         } else {
                             echo $big_cart_p_a_price;
                         }
@@ -229,6 +238,11 @@ if(isset($_POST['delete_btn'])) {
                         <td class="total_price_of_cart">&#8377;<?php 
                          if($pro_cart_pro_type == 'normal') {
                             $tot_price = ($pro_quantity - 1 ) * $big_cart_p_o_price;
+                            echo $tot_price;
+                            $cart_products_total_price =  $cart_products_total_price+$tot_price;
+                        } elseif($pro_cart_pro_type == 'hot') {
+                            $temp_price = floor($big_cart_p_o_price/2);
+                            $tot_price = ($pro_quantity - 1 ) * $temp_price;
                             echo $tot_price;
                             $cart_products_total_price =  $cart_products_total_price+$tot_price;
                         } else {

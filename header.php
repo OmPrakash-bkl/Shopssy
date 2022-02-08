@@ -622,6 +622,9 @@ if(isset($_SESSION['user_login_id'])) {
                    <td class="product_prz"><b>&#8377;<?php 
                    if($mini_pro_prod_type == 'normal') {
                     $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_o_price;
+                   } elseif($mini_pro_prod_type == 'hot') {
+                       $temp_price = floor($mini_big_cart_p_o_price/2);
+                    $mini_tot_price = $mini_pro_quantity * $temp_price;
                    } else {
                     $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_a_price;
                    }
@@ -681,6 +684,9 @@ if(isset($_SESSION['user_login_id'])) {
                    <td class="product_prz"><b>&#8377;<?php 
                     if($mini_pro_prod_type == 'normal') {
                         $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_o_price;
+                       } elseif($mini_pro_prod_type == 'hot') {
+                           $temp_price = floor($mini_big_cart_p_o_price/2);
+                           $mini_tot_price = $mini_pro_quantity * $temp_price;
                        } else {
                         $mini_tot_price = $mini_pro_quantity * $mini_big_cart_p_a_price;
                        }
