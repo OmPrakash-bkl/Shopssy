@@ -1,6 +1,8 @@
 <?php 
 include './action.php';
 
+$_SESSION['prod_qty'] = 1;
+
 if(!isset($_COOKIE['T093NO5A86H'])) {
     $unnamed_user_cart_query = "SELECT `un_u_cart_token` FROM `unnamed_user_cart`;";
 $unnamed_user_cart_result = mysqli_query($con, $unnamed_user_cart_query);
@@ -610,7 +612,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                     </div>
 
                     <div class="hot_deals_products_text_container">
-                        <h4><a href="#"><?php
+                        <h4><a class="price_text" href="./view_of_product.php?p_id=<?php echo $hot_deal_p_id; ?>&sub_cat_id=<?php echo $hot_deal_subs_cat_identification_id; ?>&hot_deal_pro=1"><?php
                        $string_of_title = $hot_deal_p_title;
                        if(strlen($string_of_title) > 25) {
                         $string_of_title = explode("\n", wordwrap($string_of_title, 40));
@@ -618,7 +620,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                        }
                        echo $string_of_title;
                          ?></a></h4>
-                        <a href="#">
+                        <a href="./view_of_product.php?p_id=<?php echo $hot_deal_p_id; ?>&sub_cat_id=<?php echo $hot_deal_subs_cat_identification_id; ?>&hot_deal_pro=1">
                             <div>
                             <?php
                         switch($hot_deal_p_star_rat) {
@@ -663,7 +665,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                         ?>
                             </div>
                         </a>
-                        <a href="#">
+                        <a href="./view_of_product.php?p_id=<?php echo $hot_deal_p_id; ?>&sub_cat_id=<?php echo $hot_deal_subs_cat_identification_id; ?>&hot_deal_pro=1">
                             <div>
                                 <h2>&#8377;<?php echo floor($hot_deal_p_o_price/2); ?> <del>&#8377;<?php echo $hot_deal_p_o_price; ?></del></h2>
                             </div>

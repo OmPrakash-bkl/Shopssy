@@ -860,7 +860,7 @@ height: 390px;
     color: rgb(0, 0, 0, 0.9);
     transition: color 0.3s;
 }
-.hot_deals_products_text_container a:hover {
+.hot_deals_products_text_container .price_text:hover {
     color: #2D9AE8;
 }
 .hot_deals_products_text_container h4 {
@@ -874,6 +874,7 @@ height: 390px;
 .hot_deals_products_text_container .checked {
     color: orange;
 }
+
 .hot_deals_products_text_container h2 {
     margin: 5px 0px;
     font-size: 20px;

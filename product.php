@@ -1,6 +1,6 @@
 <?php 
 include './action.php';
-
+$_SESSION['prod_qty'] = 1;
 $start = 1;
 
 if(!isset($_GET['page'])) {

@@ -83,6 +83,12 @@ if(isset($_GET['increment'])) {
     window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
     </script>
     <?php
+    } elseif(isset($_GET['hot_deal_pro'])) {
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
+        </script>
+        <?php
     } else {
         ?>
         <script type="text/javascript">
@@ -102,7 +108,13 @@ if(isset($_GET['decrement'])) {
         window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
         </script>
         <?php
-        } else {
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
+            </script>
+            <?php
+        }  else {
             ?>
             <script type="text/javascript">
             window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
@@ -123,6 +135,8 @@ if(isset($_GET['cart_adding_req'])) {
         $cart_inserting_qty = $_SESSION['prod_qty'];
         if(isset($_GET['best_selling_pro'])) {
             $pro_type = 'normal';
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            $pro_type = 'hot';
         } else {
             $pro_type = 'offer';
         }
@@ -135,6 +149,12 @@ if(isset($_GET['cart_adding_req'])) {
             </script>
             <?php
 
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
+            </script>
+            <?php
         } else {
             ?>
             <script type="text/javascript">
@@ -150,6 +170,8 @@ if(isset($_GET['cart_adding_req'])) {
             $unnamed_cart_inserting_qty = $_SESSION['prod_qty'];
             if(isset($_GET['best_selling_pro'])) {
                 $pro_type = 'normal';
+            } elseif(isset($_GET['hot_deal_pro'])) {
+                $pro_type = 'hot';
             } else {
                 $pro_type = 'offer';
             }
@@ -161,8 +183,12 @@ if(isset($_GET['cart_adding_req'])) {
             window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
             </script>
             <?php
-            
-
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
+            </script>
+            <?php
         } else {
             ?>
             <script type="text/javascript">
@@ -187,6 +213,8 @@ if(isset($_GET['product_buy_req'])) {
         $cart_inserting_qty = $_SESSION['prod_qty'];
         if(isset($_GET['best_selling_pro'])) {
             $pro_type = 'normal';
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            $pro_type = 'hot';
         } else {
             $pro_type = 'offer';
         }
@@ -213,7 +241,9 @@ if(isset($_GET['wishlist_adding_req'])) {
         $users_id = $_SESSION['user_id'];
         if(isset($_GET['best_selling_pro'])) {
             $pro_type = 'normal';
-        } else {
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            $pro_type = 'hot';
+        }  else {
             $pro_type = 'offer';
         }
         $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`, `pro_type`) VALUES ($users_id, $prod_id, '$pro_type');";
@@ -224,8 +254,12 @@ if(isset($_GET['wishlist_adding_req'])) {
             window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
             </script>
             <?php
-            
-
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
+            </script>
+            <?php
         } else {
             ?>
             <script type="text/javascript">
@@ -239,6 +273,8 @@ if(isset($_GET['wishlist_adding_req'])) {
         $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
         if(isset($_GET['best_selling_pro'])) {
             $pro_type = 'normal';
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            $pro_type = 'hot';
         } else {
             $pro_type = 'offer';
         }
@@ -250,8 +286,12 @@ if(isset($_GET['wishlist_adding_req'])) {
             window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
             </script>
             <?php
-            
-
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
+            </script>
+            <?php
         } else {
             ?>
             <script type="text/javascript">
@@ -464,28 +504,42 @@ if(isset($_GET['p_q_and_a_id'])) {
                 </div>
               <div class="PIandC_cost_container_details_container_rupee_div">
                   <?php 
-                  if(!isset($_GET['best_selling_pro'])) {
-                      ?>
+                  if(isset($_GET['best_selling_pro'])) {
 
-                <span>
-                    <span>&#8377;<?php echo $products_details_p_a_price; ?>.00</span>
-                    <del>&#8377;<?php echo $products_details_p_o_price; ?>.00</del>
-                    <h2 class="offer_value"><?php 
-                        $offer_value = ($products_details_p_o_price - $products_details_p_a_price) / $products_details_p_o_price;
-                        $offer_value = $offer_value * 100;
-                        echo intval($offer_value);
-                        ?>% off</h2>
-                </span>
-
-                 <?php
-                  } else {
-                      ?>
+                    ?>
 
                    <span>
                     <span>&#8377;<?php echo $products_details_p_o_price; ?>.00</span>
                    </span>
 
                       <?php
+                      
+                  } elseif(isset($_GET['hot_deal_pro'])) {
+                    ?>
+
+                    <span>
+                        <span>&#8377;<?php echo floor($products_details_p_o_price/2); ?>.00</span>
+                        <del>&#8377;<?php echo $products_details_p_o_price; ?>.00</del>
+                        <h2 class="offer_value"><?php 
+                            echo 50;
+                            ?>% off</h2>
+                    </span>
+    
+                     <?php
+                  } else {
+                    ?>
+
+                    <span>
+                        <span>&#8377;<?php echo $products_details_p_a_price; ?>.00</span>
+                        <del>&#8377;<?php echo $products_details_p_o_price; ?>.00</del>
+                        <h2 class="offer_value"><?php 
+                            $offer_value = ($products_details_p_o_price - $products_details_p_a_price) / $products_details_p_o_price;
+                            $offer_value = $offer_value * 100;
+                            echo intval($offer_value);
+                            ?>% off</h2>
+                    </span>
+    
+                     <?php
                   }
                   
                   ?>
@@ -500,6 +554,13 @@ if(isset($_GET['p_q_and_a_id'])) {
                         if(isset($_GET['best_selling_pro'])) {
                             ?>
                         <input type="hidden" name="best_selling_pro" value="<?php echo 1 ?>">
+                        <?php
+                        }
+                        ?>
+                        <?php 
+                        if(isset($_GET['hot_deal_pro'])) {
+                            ?>
+                        <input type="hidden" name="hot_deal_pro" value="<?php echo 1 ?>">
                         <?php
                         }
                         ?>
@@ -525,6 +586,11 @@ if(isset($_GET['p_q_and_a_id'])) {
                     if(isset($_GET['best_selling_pro'])) {
                         ?>
                         <input type="hidden" name="best_selling_pro" value="<?php echo 1 ?>">
+                        <?php
+                    }
+                    if(isset($_GET['hot_deal_pro'])) {
+                        ?>
+                        <input type="hidden" name="hot_deal_pro" value="<?php echo 1 ?>">
                         <?php
                     }
                     

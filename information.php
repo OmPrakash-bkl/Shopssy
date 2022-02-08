@@ -1,5 +1,8 @@
 <?php 
 session_start();
+
+$_SESSION['prod_qty'] = 1;
+
 include './action.php';
 if(!isset($_SESSION['user_login_id'])) {
 header("Location: http://localhost:3000/login.php");
