@@ -1097,6 +1097,7 @@ if(isset($_GET['searchItem'])) {
    <!--products section container end-->
 
    
+   
    <?php 
     include "./footer.php";
     ?>

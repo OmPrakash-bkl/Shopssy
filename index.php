@@ -36,6 +36,8 @@ if(isset($_POST['product_id'])) {
         $cart_process_pro_id = $_POST['product_id'];
         if(isset($_POST['best_selling_pro'])) {
             $pro_type = 'normal';
+        } elseif(isset($_POST['hot_deal_pro'])) {
+            $pro_type = 'hot';
         } else {
             $pro_type = 'offer';
         }
@@ -65,6 +67,8 @@ if(isset($_POST['product_id'])) {
           }
           if(isset($_POST['best_selling_pro'])) {
             $pro_type = 'normal';
+        } elseif(isset($_POST['hot_deal_pro'])) {
+            $pro_type = 'hot';
         } else {
             $pro_type = 'offer';
         }
@@ -88,6 +92,8 @@ if(isset($_POST['wish_btn'])) {
         $users_id = $_SESSION['user_id'];
         if(isset($_POST['best_selling_pro'])){
             $pro_type = 'normal';
+        } elseif(isset($_POST['hot_deal_pro'])) {
+            $pro_type = 'hot';
         } else {
             $pro_type = 'offer';
         }
@@ -97,6 +103,8 @@ if(isset($_POST['wish_btn'])) {
         $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
         if(isset($_POST['best_selling_pro'])){
             $pro_type = 'normal';
+        } elseif(isset($_POST['hot_deal_pro'])) {
+            $pro_type = 'hot';
         } else {
             $pro_type = 'offer';
         }
@@ -557,260 +565,114 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                </div>
             </div>
             <div class="hot_deals_product_outer_container">
+
+            <?php 
+
+            $hot_deal_query = "SELECT * FROM `products` WHERE `hot_deal_type` = 'yes';";
+            $hot_deal_result = mysqli_query($con, $hot_deal_query);
+            while($row = mysqli_fetch_assoc($hot_deal_result)) {
+                $hot_deal_p_image = $row['p_image'];
+                $hot_deal_p_title = $row['p_title'];
+                $hot_deal_p_a_price = $row['p_a_price'];
+                $hot_deal_p_o_price = $row['p_o_price'];
+                $hot_deal_p_star_rat = $row['p_star_rat'];
+                $hot_deal_p_id = $row['p_id'];
+                $hot_deal_subs_cat_identification_id = $row['subs_cat_identification_id'];
+           
+
+            ?>
+
                 <div class="hot_deals_products_containers">
-                    <img src="./images/smart_phone_1.jpg" alt="shopssy hot deals images">
+                    <img src="./images/<?php echo $hot_deal_p_image; ?>" alt="shopssy hot deals images">
                     <div class="hot_deals_products_time_container">
-                        <div class="div1">
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Days</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Hours</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Mins</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Secs</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
+                        <div class="div1 mega_sale_container">
+                            <h2>MEGA SALE</h2>
+                            <h3>50% off</h3>
                         </div>
                         <div class="div2">
-                            <div class="hot_deals_products_button_container">
-                                <button title="Select Options"><i class="fa fa-check" ></i></button>
-                                <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                                <button title="Quick View"><i class="fas fa-search"></i></button>
-                            </div>
+                    <div class="hot_deals_products_button_container">
+                    <form action="./index.php" method="POST">
+                    <input type="hidden" name="hot_deal_pro" value="<?php echo 1 ?>">
+                    <button title="Add To Cart" name="product_id" value="<?php echo $hot_deal_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
+                    </form>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <input type="hidden" name="hot_deal_pro" value="<?php echo 1 ?>">
+                    <input type="hidden" name="productt_id" value="<?php echo $hot_deal_p_id; ?>">
+                    <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
+                    </form>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <input type="hidden" name="productt_id" value="<?php echo $hot_deal_p_id; ?>">
+                    <input type="hidden" name="sub_cat_identification_id" value="<?php echo  $hot_deal_subs_cat_identification_id; ?>">
+                    <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
+                    </form>
+                    </div>
                         </div>
                     </div>
 
                     <div class="hot_deals_products_text_container">
-                        <h4><a href="#">Lorem ipsum dolor sit.</a></h4>
+                        <h4><a href="#"><?php
+                       $string_of_title = $hot_deal_p_title;
+                       if(strlen($string_of_title) > 25) {
+                        $string_of_title = explode("\n", wordwrap($string_of_title, 40));
+                        $string_of_title = $string_of_title[0].' ...';
+                       }
+                       echo $string_of_title;
+                         ?></a></h4>
                         <a href="#">
                             <div>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
+                            <?php
+                        switch($hot_deal_p_star_rat) {
+                            case 1:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 2:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 3:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 4:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 5:
+                                echo '<span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>
+                                      <span class="fa fa-star checked"></span>';
+                            break;
+
+                        }
+    
+                        ?>
                             </div>
                         </a>
                         <a href="#">
                             <div>
-                                <h2>$450.50 <del>$600.50</del></h2>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="hot_deals_products_containers">
-                    <img src="./images/roll_chair_image_1.jpg" alt="shopssy hot deals images">
-                    <div class="hot_deals_products_time_container">
-                        <div class="div1">
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Days</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Hours</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Mins</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Secs</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                        </div>
-                        <div class="div2">
-                            <div class="hot_deals_products_button_container">
-                                <button title="Select Options"><i class="fa fa-check" ></i></button>
-                                <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                                <button title="Quick View"><i class="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hot_deals_products_text_container">
-                        <h4><a href="#">Lorem ipsum dolor sit.</a></h4>
-                        <a href="#">
-                            <div>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div>
-                                <h2>$450.50 <del>$600.50</del></h2>
+                                <h2>&#8377;<?php echo floor($hot_deal_p_o_price/2); ?> <del>&#8377;<?php echo $hot_deal_p_o_price; ?></del></h2>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="hot_deals_products_containers">
-                    <img src="./images/smart_watch_image_1.jpg" alt="shopssy hot deals images">
-                    <div class="hot_deals_products_time_container">
-                        <div class="div1">
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Days</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Hours</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Mins</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Secs</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                        </div>
-                        <div class="div2">
-                            <div class="hot_deals_products_button_container">
-                                <button title="Select Options"><i class="fa fa-check" ></i></button>
-                                <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                                <button title="Quick View"><i class="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hot_deals_products_text_container">
-                        <h4><a href="#">Lorem ipsum dolor sit.</a></h4>
-                        <a href="#">
-                            <div>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div>
-                                <h2>$450.50 <del>$600.50</del></h2>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="hot_deals_products_containers">
-                    <img src="./images/iphone_image_1.jpg" alt="shopssy hot deals images">
-                    <div class="hot_deals_products_time_container">
-                        <div class="div1">
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Days</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Hours</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Mins</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                            <div class="hot_deals_products_time_container_inner_divs">
-                                <div>
-                                    <h6>Secs</h6>
-                                </div>
-                                <div class="times">
-                                    05
-                                </div>
-                            </div>
-                        </div>
-                        <div class="div2">
-                            <div class="hot_deals_products_button_container">
-                                <button title="Select Options"><i class="fa fa-check" ></i></button>
-                                <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                                <button title="Quick View"><i class="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="hot_deals_products_text_container">
-                        <h4><a href="#">Lorem ipsum dolor sit.</a></h4>
-                        <a href="#">
-                            <div>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div>
-                                <h2>$450.50 <del>$600.50</del></h2>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+               
+                <?php } ?>
+               
             </div>
         </div>
     </center>

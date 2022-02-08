@@ -790,9 +790,10 @@ height: 390px;
 }
 
 .hot_deals_products_containers {
-    height: 420px;
+    height: 440px;
     width: 280px;
     margin: 10px 5px;
+    padding: 5px 0px;
     border: 3px solid #FFCD35;
     display: inline-block;
     border-radius: 10px;
@@ -809,23 +810,16 @@ height: 390px;
     transition: display 0.3s;
     
 }
-.hot_deals_products_time_container_inner_divs {
-    display: inline-block;
-    margin: 0px 3px;
+.mega_sale_container h2, .mega_sale_container h3 {
     font-family: Arial, Helvetica, sans-serif;
-    color: rgb(112, 112, 112);
 }
-.hot_deals_products_time_container_inner_divs .times{
-    background-color: rgb(255, 102, 0);
-    height: 25px;
-    width: 25px;
-    margin: 5px 0px;
-    color: white;
-    padding: 5px 5px;
-    border: 0px;
-    border-radius: 50%;
-    font-size: 13px;
+.mega_sale_container h2 {
+    color: green;
 }
+.mega_sale_container h3 {
+    color: orangered;
+}
+
 .hot_deals_products_button_container {
     display: none;
     transition: display 0.3s;
@@ -857,7 +851,9 @@ height: 390px;
 .hot_deals_products_containers:hover > .hot_deals_products_time_container .div2 .hot_deals_products_button_container {
     display: block;
  }
-
+ .hot_deals_products_text_container {
+     height: 40px;
+ }
 .hot_deals_products_text_container a {
     font-family: Arial, Helvetica, sans-serif;
     text-decoration: none;
@@ -888,14 +884,18 @@ height: 390px;
 .hot_deals_products_text_container h2 del {
     color: #CDBDCA;
 }
-.iphone_ad_banner_container {
-    max-width: 1200px;
+.hot_deals_products_button_container form {
+    display: inline-block;
 }
+
 
 /* Hot Deals Container End */
 
 /* IPhone Image Container Start */
 
+.iphone_ad_banner_container {
+    max-width: 1200px;
+}
 .iphone_ad_banner_container img {
     width: 95%;
     border: 0px;
@@ -4432,6 +4432,9 @@ width: 100%;
     }
     .products_container_products_div .best_sellers {
         height: 255px;
+    }
+    .hot_deals_products_containers {
+        height: 470px;
     }
     .hot_deals_products_containers img {
         width: 85%;
