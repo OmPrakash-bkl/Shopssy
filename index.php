@@ -3,6 +3,15 @@ include './action.php';
 
 $_SESSION['prod_qty'] = 1;
 
+if(isset($_GET['page'])) {
+    $no_of_page = $_GET['page'];
+    if($no_of_page < 2) {
+        $no_of_page = 1;
+    }
+} else {
+    $no_of_page = 1;
+}
+
 if(!isset($_COOKIE['T093NO5A86H'])) {
     $unnamed_user_cart_query = "SELECT `un_u_cart_token` FROM `unnamed_user_cart`;";
 $unnamed_user_cart_result = mysqli_query($con, $unnamed_user_cart_query);
@@ -556,21 +565,71 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
 
     <!--hot deals product container start-->
     <center>
-        <div class="hot_deals_product_container">
+        <div class="hot_deals_product_container" id="hot_deals_product_container">
             <div class="hot_deals_text_container">
                <div class="hot_deals_text_container_div1">
                 <h2>HOT DEALS</h2>
                </div>
                <div class="hot_deals_text_container_div2">
-                <button><i class="fa fa-angle-left"></i></button>
-                <button><i class="fa fa-angle-right"></i></button>
+                <form action="./index.php#hot_deals_product_container" method="GET">
+                    <?php
+                    if($no_of_page < 2) {
+                        ?>
+                        <button type="button"><i class="fa fa-angle-left"></i></button>
+                        <?php
+                    } else {
+                        ?>
+                         <button name="page" value="<?php echo $no_of_page - 1; ?>"><i class="fa fa-angle-left"></i></button>
+                        <?php
+                    }
+                    ?>
+
+                    <?php
+                   
+                    if($_SESSION['no_of_page'] == $no_of_page) {
+                        ?>
+                        <button type="button"><i class="fa fa-angle-right"></i></button>
+                        <?php
+                    } else {
+                        ?>
+                        <button name="page" value="<?php echo $no_of_page + 1; ?>"><i class="fa fa-angle-right"></i></button>
+                        <?php
+                    }
+
+                    ?>
+                </form>
                </div>
             </div>
             <div class="hot_deals_product_outer_container">
 
             <?php 
 
-            $hot_deal_query = "SELECT * FROM `products` WHERE `hot_deal_type` = 'yes';";
+            $h = 1;
+             $hot_deal_query = "SELECT * FROM `products` WHERE `hot_deal_type` = 'yes';";
+            $hot_deal_result = mysqli_query($con, $hot_deal_query);
+            while($row = mysqli_fetch_assoc($hot_deal_result)) {
+                $hot_deal_p_id = $row['p_id'];
+                $_SESSION['hot_product_id'][$h] = $hot_deal_p_id;
+                $h++;
+            }
+
+            $start = 1;
+            $end = 4;
+            $no_of_product_per_page = 4;
+           if($_GET['page']) {
+               $page_no = $_GET['page'];
+               $hot_deal_product_count = count($_SESSION['hot_product_id']);
+               $no_of_pageses = $hot_deal_product_count / $no_of_product_per_page;
+               $_SESSION['no_of_page'] = $no_of_pageses;
+               $end = $no_of_product_per_page * $page_no;
+               $start = $end - 3;
+           }
+
+          
+
+          
+            foreach(array_slice($_SESSION['hot_product_id'], $start-1, 4) as $hot_val) {
+            $hot_deal_query = "SELECT * FROM `products` WHERE `p_id` = $hot_val;";
             $hot_deal_result = mysqli_query($con, $hot_deal_query);
             while($row = mysqli_fetch_assoc($hot_deal_result)) {
                 $hot_deal_p_image = $row['p_image'];
@@ -673,7 +732,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                     </div>
                 </div>
                
-                <?php } ?>
+                <?php } } ?>
                
             </div>
         </div>
