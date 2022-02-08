@@ -7,6 +7,30 @@ if(isset($_GET['t'])) {
   
 }
 
+if(!isset($_GET['page'])) {
+    unset($_SESSION['pagination_of_product3']);
+    $page_count = 1;
+} else {
+    $page_count = $_GET['page'];
+    if($page_count < 1) {
+        $page_count = 1;
+    }
+}
+$p = 1;
+foreach($_SESSION['temp_product_id'] as $value) {
+
+$category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id` = $value;";
+
+$category_products_result = mysqli_query($con, $category_products_query);
+
+
+while($row = mysqli_fetch_assoc($category_products_result)) {
+ $category_products_p_id = $row['p_id'];
+ $_SESSION['pagination_of_product3'][$p] = $category_products_p_id;
+ $p++;
+}
+}
+
 $title = $searchKeyword . " - Shopssy";
 include './header.php';
 
@@ -182,12 +206,20 @@ include './header.php';
 
            <?php 
 
-           foreach($_SESSION['temp_product_id'] as $value) {
+                $start = 1;
+                $end = 10;
+                $no_of_product_per_page = 10;
+               if(isset($_GET['page'])) {
+                   $page_no = $_GET['page'];
+                   $end = $no_of_product_per_page * $page_no;
+                   $start = $end - 10;
+               }
+
+           foreach(array_slice($_SESSION['pagination_of_product3'], $start, 10) as $value) {
            
-           $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id` = $value;";
+           $category_products_query = "SELECT * FROM `products` WHERE `p_id` = $value;";
 
            $category_products_result = mysqli_query($con, $category_products_query);
-
      
 
            while($row = mysqli_fetch_assoc($category_products_result)) {
@@ -276,11 +308,50 @@ include './header.php';
 
 <div class="next_page_container">
     <center>
-        <a href="#"><button class="for_box_button">Previous</button></a>
-        <a href="#"><button class="for_round_btn active">1</button></a>
-        <a href="#"><button class="for_round_btn">2</button></a>
-        <a href="#"><button class="for_box_button">Next</button></a>
+        <?php
+        if($_GET['page'] == 1 or !isset($_GET['page'])) {
+            ?>
+            <button class="for_box_button">Previous</button>
+            <?php 
+        } else {
+            ?>
+            <a href="./product3.php?t=<?php echo $searchKeyword; ?>&page=<?php echo $page_count-1; ?>"><button class="for_box_button">Previous</button></a>
+            <?php
+        }
+
+        ?>
+        <button class="for_round_btn active">
+            <?php
+            if(!isset($_GET['page'])) {
+                echo 1;
+            } else {
+                echo $_GET['page'];
+            }
+           ?>
+        </button>
+        <button class="for_round_btn">
+        <?php
+            if(!isset($_GET['page'])) {
+                echo 2;
+            } else {
+                echo $_GET['page']+1;
+            }
+           ?>
+        </button>
+        <?php
+        if(end($_SESSION['pagination_of_product3']) == $value) {
+            ?>
+            <button class="for_box_button">Next</button>
+            <?php
+        } else {
+            ?>
+            <a href="./product3.php?t=<?php echo $searchKeyword; ?>&page=<?php echo $page_count+1; ?>"><button class="for_box_button">Next</button></a>
+            <?php
+        }
+        ?>
+        
     </center>
+   
 </div>
 
      </div>

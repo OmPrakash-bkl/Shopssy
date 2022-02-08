@@ -734,9 +734,7 @@ if(isset($_GET['searchItem'])) {
 
                 $start = 1;
                 $end = 12;
-                $no_of_product = count($_SESSION['pagination']);
                 $no_of_product_per_page = 12;
-                $no_of_pages = ceil($no_of_product / 12);
                if($_GET['page']) {
                    $page_no = $_GET['page'];
                    $end = $no_of_product_per_page * $page_no;
