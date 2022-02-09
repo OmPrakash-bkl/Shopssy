@@ -63,7 +63,13 @@ if(isset($_POST['order_req'])) {
         $orders_sub_table_query = "INSERT INTO `orders_sub_table` (`order_id`, `product_id`, `quantity`) VALUES ($orders_order_id, $cart_details_product_id, $cart_details_quantity);";mysqli_query($con, $orders_sub_table_query);
         
         } 
-         
+        $delete_cart_after_booking = "DELETE FROM `cart` WHERE `u_id` = $user_id;";
+        mysqli_query($con, $delete_cart_after_booking);
+        ?>
+   <script type="text/javascript">
+   window.location.href = 'http://localhost:3000/index.php';
+   </script>
+   <?php
     }
 
   
@@ -92,7 +98,11 @@ while($row2 = mysqli_fetch_assoc($add_retrieve_result)) {
 } 
 else 
 {
-    header("Location: http://localhost:3000/information.php");
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/information.php';
+    </script>
+    <?php
 }
 
 

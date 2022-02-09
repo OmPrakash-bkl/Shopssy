@@ -23,7 +23,7 @@ if(isset($_POST['reset'])) {
 
             ?>
             <script>
-                window.location.replace("index.php");
+                window.location.replace("login.php");
                 alert("<?php echo "Your Password Has Been Reseted Successfully."?>");
             </script>
             <?php
