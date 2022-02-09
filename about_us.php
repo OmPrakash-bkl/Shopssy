@@ -2,6 +2,7 @@
 include './action.php';
 $title = "About Us - Shopssy";
 include './header.php';
+
 ?>
 
     

@@ -33,14 +33,22 @@ $color_for_two = "rgb(167, 167, 167)";
 $color_for_three = "rgb(167, 167, 167)";
 $status_code = "default";
 
+if(isset($_POST['subscription_box'])){
+    $user_email_id = $_SESSION['user_login_email'];
+    $check_query = "SELECT * FROM `email_subscription` WHERE `user_email` = '$user_email_id';";
+$check_result = mysqli_query($con, $check_query);
+$check_no_of_rows = mysqli_num_rows($check_result);
+if($check_no_of_rows >= 1) {
+  echo "";
+} else {
+$subscription_query = "INSERT INTO `email_subscription` (`user_email`) VALUES ('$user_email_id');";
+mysqli_query($con, $subscription_query);
+}
+}
+
 if(isset($_POST['old_add'])) {
     $color_for_one = "#4285F4";
     $status_code = "default";
-    if(isset($_POST['subscription_box'])){
-        $user_email_id = $_SESSION['user_login_email'];
-       $subscription_query = "INSERT INTO `email_subscription` (`user_email`) VALUES ('$user_email_id');";
-       mysqli_query($con, $subscription_query);
-    }
 }
 
 if(isset($_POST['new_add'])) {
@@ -48,11 +56,7 @@ if(isset($_POST['new_add'])) {
     $color_for_one = "rgb(167, 167, 167)";
     $color_for_three = "rgb(167, 167, 167)";
     $address_type = "new";
-    if(isset($_POST['subscription_box'])){
-        $user_email_id = $_SESSION['user_login_email'];
-       $subscription_query = "INSERT INTO `email_subscription` (`user_email`) VALUES ('$user_email_id');";
-       mysqli_query($con, $subscription_query);
-    }
+
     $address_details_country = "";
     $address_details_f_name = "";
     $address_details_l_name = "";
@@ -69,11 +73,7 @@ if(isset($_POST['secon_add'])) {
     $color_for_two = "rgb(167, 167, 167)";
     $status_code = "secondary";
     $address_type = "secondary";
-    if(isset($_POST['subscription_box'])){
-        $user_email_id = $_SESSION['user_login_email'];
-       $subscription_query = "INSERT INTO `email_subscription` (`user_email`) VALUES ('$user_email_id');";
-       mysqli_query($con, $subscription_query);
-    }
+    
 }
 
 $users_id_value = $_SESSION['user_id'];
@@ -187,11 +187,7 @@ if(isset($_POST['continue_to_ship'])) {
 if(isset($_POST['new_add'])) {
     $color_for_two = "#4285F4";
     $color_for_one = "rgb(167, 167, 167)";
-    if(isset($_POST['subscription_box'])){
-        $user_email_id = $_SESSION['user_login_email'];
-       $subscription_query = "INSERT INTO `email_subscription` (`user_email`) VALUES ('$user_email_id');";
-       mysqli_query($con, $subscription_query);
-    }
+   
     $address_details_country = "";
     $address_details_f_name = "";
     $address_details_l_name = "";
@@ -376,7 +372,7 @@ if(isset($_POST['new_add'])) {
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="subscription_form" method="POST">
 
                 <div class="checkbox_container">
-                    <input type="checkbox" id="email_for_news" name="subscription_box" value="subs"> <label for="email_for_news" id="email_of_news_and_offer">Email me with news and offers</label>
+                    <input type="checkbox" id="email_for_news" name="subscription_box" value="subs" onchange="document.getElementById('subscription_form').submit()"> <label for="email_for_news" id="email_of_news_and_offer">Email me with news and offers</label>
                 </div>
 
                 <h3>Shipping address</h3>

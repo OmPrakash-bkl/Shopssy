@@ -2,6 +2,7 @@
 include './action.php';
 
 $_SESSION['prod_qty'] = 1;
+unset($_SESSION['store_count']);
 
 if(isset($_GET['page'])) {
     $no_of_page = $_GET['page'];

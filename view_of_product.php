@@ -10,6 +10,8 @@
 
 include './action.php';
 
+
+
 if(isset($_GET['p_id'])) {
     $product_id = $_GET['p_id'];
     $product_sub_cat_id = $_GET['sub_cat_id'];
@@ -140,8 +142,16 @@ if(isset($_GET['cart_adding_req'])) {
         } else {
             $pro_type = 'offer';
         }
-        $cart_inserting_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_adding_result_user_id, $product_id, $cart_inserting_qty, 0, '', '$pro_type');";
-        mysqli_query($con, $cart_inserting_query);
+        $check_query = "SELECT * FROM `cart` WHERE (`u_id` = $cart_adding_result_user_id AND `product_id` = $product_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $cart_inserting_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_adding_result_user_id, $product_id, $cart_inserting_qty, 0, '', '$pro_type');";
+            mysqli_query($con, $cart_inserting_query);
+        }
+       
         if(isset($_GET['best_selling_pro'])) {
             ?>
             <script type="text/javascript">
@@ -175,8 +185,16 @@ if(isset($_GET['cart_adding_req'])) {
             } else {
                 $pro_type = 'offer';
             }
-            $unname_user_cart_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`, `pro_type`) VALUES ($unnamed_user_token, $product_id,  $unnamed_cart_inserting_qty, '', '$pro_type');";
-           mysqli_query($con, $unname_user_cart_query);
+            $check_query = "SELECT * FROM `unnamed_user_cart` WHERE (`un_u_cart_token` = $unnamed_user_token AND `prod_id_of_cart` = $product_id);";
+            $check_result = mysqli_query($con, $check_query);
+            $check_rows = mysqli_num_rows($check_result);
+            if($check_rows >= 1) {
+                echo "";
+            } else {
+                $unname_user_cart_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`, `pro_type`) VALUES ($unnamed_user_token, $product_id,  $unnamed_cart_inserting_qty, '', '$pro_type');";
+                mysqli_query($con, $unname_user_cart_query);
+            }
+           
            if(isset($_GET['best_selling_pro'])) {
             ?>
             <script type="text/javascript">
@@ -218,8 +236,16 @@ if(isset($_GET['product_buy_req'])) {
         } else {
             $pro_type = 'offer';
         }
-        $cart_inserting_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_adding_result_user_id, $product_id, $cart_inserting_qty, 0, '', '$pro_type');";
-        mysqli_query($con, $cart_inserting_query);
+        $check_query = "SELECT * FROM `cart` WHERE (`u_id` = $cart_adding_result_user_id AND `product_id` = $product_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $cart_inserting_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_adding_result_user_id, $product_id, $cart_inserting_qty, 0, '', '$pro_type');";
+            mysqli_query($con, $cart_inserting_query);
+        }
+      
         ?>
         <script type="text/javascript">
         window.location.href = 'http://localhost:3000/information.php';
@@ -246,8 +272,16 @@ if(isset($_GET['wishlist_adding_req'])) {
         }  else {
             $pro_type = 'offer';
         }
-        $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`, `pro_type`) VALUES ($users_id, $prod_id, '$pro_type');";
-        mysqli_query($con, $wishlist_insert_query);
+        $check_query = "SELECT * FROM `mywishlist` WHERE (`user_id` = $users_id AND `prod_id` = $prod_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`, `pro_type`) VALUES ($users_id, $prod_id, '$pro_type');";
+            mysqli_query($con, $wishlist_insert_query);
+        }
+       
            if(isset($_GET['best_selling_pro'])) {
             ?>
             <script type="text/javascript">
@@ -278,8 +312,16 @@ if(isset($_GET['wishlist_adding_req'])) {
         } else {
             $pro_type = 'offer';
         }
-        $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`, `pro_type`) VALUES ($token_for_un_u_wishlist_details, $prod_id, '$pro_type');";
-        mysqli_query($con, $wishlist_insert_query);
+        $check_query = "SELECT * FROM `unnamed_user_wishlist` WHERE (`un_u_wishlist_token` = $token_for_un_u_wishlist_details AND `prod_id_of_wishlist` = $prod_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`, `pro_type`) VALUES ($token_for_un_u_wishlist_details, $prod_id, '$pro_type');";
+            mysqli_query($con, $wishlist_insert_query);
+        }
+       
            if(isset($_GET['best_selling_pro'])) {
             ?>
             <script type="text/javascript">
@@ -319,11 +361,20 @@ if(isset($_GET['review_sub_btn'])) {
     $p_cus_rating = $_GET['p_rating'];
     $p_cus_description = $_GET['p_desc'];
     $nameval = "/^[a-zA-Z ]+$/";
+
+    $known_user_id = 0;
+    $unknown_user_id = 0;
+    if(isset($_SESSION['user_login_id'])) {
+        $known_user_id = $_SESSION['user_id'];
+    } else {
+        $unknown_user_id = $_COOKIE['T093NO5A86H'];
+    }
     
     if(preg_match($nameval, $p_cus_name)) {
-        $pro_review_query = "INSERT INTO `reviews` (`p_id`, `p_customer_name`, `p_rating`, `p_desc`) VALUES ('$pro_id', '$p_cus_name', '$p_cus_rating', '$p_cus_description');";
+        $pro_review_query = "INSERT INTO `reviews` (`known_user_id`, `unknown_user_id`, `p_id`, `p_customer_name`, `p_rating`, `p_desc`) VALUES ($known_user_id, $unknown_user_id, '$pro_id', '$p_cus_name', '$p_cus_rating', '$p_cus_description');";
         mysqli_query($con, $pro_review_query);
     }
+    
 }
 
 if(isset($_GET['review_id'])) {

@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include './db_con.php';
+
 if(isset($_GET['delete_btn_of_mini_cart'])) {
     if(isset($_SESSION['user_login_id'])) {
         $mini_cart_sub_product_id = $_GET['product_id'];
