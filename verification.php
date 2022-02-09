@@ -37,7 +37,7 @@ if(isset($_POST['verify'])) {
     <div class="sub_navigation_inner_container">
         <span><a href="./index.php">Home</a></span>
         <span><i class="fas fa-arrow-right" style="color: #666666;font-size: 12px;"></i></span>
-        <span><a href="/verification.php">Verification Account</a></span>
+        <span><a href="./verification.php">Verification Account</a></span>
     </div>
 </center>
     </div>

@@ -64,8 +64,8 @@ if(isset($_POST['submit1'])) {
                     <input type="password" id="pass" name="user_pass" required>
                 </div>
             <center>
-                <span><a href="#">Forgot your password?</a></span>
-                <span><a href="#">Register?</a></span>
+                <span><a href="./recover.php">Forgot your password?</a></span>
+                <span><a href="./register.php">Register?</a></span>
             </center>
             <button type="submit" name="submit1">SIGN IN</button>
         </form>
