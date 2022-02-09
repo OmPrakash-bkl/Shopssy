@@ -54,8 +54,15 @@ if(isset($_POST['product_id'])) {
         } else {
             $pro_type = 'offer';
         }
-        $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1, 0, '', '$pro_type')";
-        mysqli_query($con, $cart_query);
+        $check_query = "SELECT * FROM `cart` WHERE (`u_id` = $cart_process_user_id AND `product_id` = $cart_process_pro_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1, 0, '', '$pro_type')";
+            mysqli_query($con, $cart_query);
+        }
         $_SESSION['user_id'] = $cart_process_user_id;
         ?>
         <script type="text/javascript">
@@ -76,8 +83,15 @@ if(isset($_POST['product_id'])) {
         } else {
             $pro_type = 'offer';
         }
+        $check_query = "SELECT * FROM `unnamed_user_cart` WHERE (`un_u_cart_token` = $token_for_un_u_cart_details AND `prod_id_of_cart` = $prod_id_for_unnamed_cart_details);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
             $unnamed_user_cart_details_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `pro_type`) VALUES ($token_for_un_u_cart_details, $prod_id_for_unnamed_cart_details, 1, '$pro_type');";
             mysqli_query($con, $unnamed_user_cart_details_insert_query);
+        }
             ?>
            <script type="text/javascript">
            window.location.href = 'http://localhost:3000/index.php';
@@ -99,7 +113,16 @@ if(isset($_POST['wish_btn'])) {
         } else {
             $pro_type = 'offer';
         }
-        $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`, `pro_type`) VALUES ($users_id, $produc_id, '$pro_type');";
+        $check_query = "SELECT * FROM `mywishlist` WHERE (`user_id` = $users_id AND `prod_id` = $produc_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`, `pro_type`) VALUES ($users_id, $produc_id, '$pro_type');";
+            mysqli_query($con, $wishlist_insert_query);
+        }
+       
     } else {
         $token_of_wishlist = "W937LI25A856T0K3N";
         $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
@@ -110,10 +133,19 @@ if(isset($_POST['wish_btn'])) {
         } else {
             $pro_type = 'offer';
         }
-        $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`, `pro_type`) VALUES ($token_for_un_u_wishlist_details, $produc_id, '$pro_type');";
+        $check_query = "SELECT * FROM `unnamed_user_wishlist` WHERE (`un_u_wishlist_token` = $token_for_un_u_wishlist_details AND `prod_id_of_wishlist` = $produc_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else { 
+            $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`, `pro_type`) VALUES ($token_for_un_u_wishlist_details, $produc_id, '$pro_type');";
+            mysqli_query($con, $wishlist_insert_query);
+        }
+       
     }
   
-    mysqli_query($con, $wishlist_insert_query);
+    
     ?>
     <script type="text/javascript">
     window.location.href = 'http://localhost:3000/index.php';
