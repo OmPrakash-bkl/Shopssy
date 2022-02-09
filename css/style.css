@@ -2200,6 +2200,14 @@ text-align: left;
 
  /* Login and Register Container End */
 
+/* Verification Account Container Start */
+
+.acc_verification_container button {
+    font-size: 14px;
+ }
+
+/* Verification Account Container End */
+
 /* Contact Us Container Start */
 
 .contactus_container {

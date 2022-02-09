@@ -19,8 +19,60 @@ if(isset($_POST['submit'])) {
     $pass = mysqli_real_escape_string($con, $pass);
 
     if(preg_match($nameval, $f_name) and preg_match($nameval, $l_name) and preg_match($emailval, $email)) {
-       $register_query = "INSERT INTO `register` (`f_name`, `l_name`, `email`, `password`, `full_name`, `address`, `city`, `zip`, `phone_number`, `country`) VALUES ('$f_name', '$l_name', '$email', '$pass', '', '', '', '', '', '');";
-       mysqli_query($con, $register_query);
+        $check_query = "SELECT * FROM `register` WHERE `email` = '$email';";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+
+        if(!empty($email) && !empty($pass)) {
+            if($check_rows > 0) {
+                echo "User with email is already exist!";
+            } else {
+                $password_hash = password_hash($pass, PASSWORD_BCRYPT);
+                $register_query = "INSERT INTO `register` (`f_name`, `l_name`, `email`, `password`, `full_name`, `address`, `city`, `zip`, `phone_number`, `country`, `status`) VALUES ('$f_name', '$l_name', '$email', '$password_hash', '', '', '', '', '', '', 0);";
+               $register_result = mysqli_query($con, $register_query);
+
+               if($register_result) {
+                   $otp = rand(100000, 999999);
+                   $_SESSION['OTP'] = $otp;
+                   $_SESSION['EMAIL'] = $email;
+                   require "./Mail/phpmailer/PHPMailerAutoload.php";
+                   $mail = new PHPMailer;
+                   $mail -> isSMTP();
+                   $mail -> Host = 'smtp.gmail.com';
+                   $mail -> Port = 587;
+                   $mail -> SMTPAuth = true;
+                   $mail -> SMTPSecure = 'tls';
+
+                   $mail -> Username = 'shopssy.shoppingsite@gmail.com';
+                   $mail -> Password = 'Shopssy$#@123';
+
+                   $mail -> setFrom('shopssy.shoppingsite@gmail.com', 'OTP Verification');
+                   $mail -> addAddress($_POST['email']);
+
+                   $mail -> isHTML(true);
+                   $mail -> Subject = 'Your Verify Code';
+                   $mail -> Body = "<p>Dear User, </p><h3>Your Verify OTP Code is $otp <br></h3>
+                   <br><br>
+                   <p>With regards,</p>
+                   <b>Shopssy - The Online Shopping Site.</b>";
+
+                   if(!$mail -> send()) {
+                       echo "Registration Failed, Invalid Email";
+                   } else {
+                       ?>
+                       <script>
+                           alert("<?php echo "Register Successfully, OTP Sent to $email " ?>");
+                           window.location.href = 'http://localhost:3000/verification.php';
+                       </script>
+                       <?php
+                   }
+
+               }
+
+            }
+        }
+
+
 
     }
 }
