@@ -90,11 +90,30 @@ if(isset($_POST['add_to_cart_id'])) {
     $users_id = $_SESSION['user_id'];
     $produc_type = $_POST['prod_type'];
     if(isset($_SESSION['user_login_id'])) {
-        $cart_insert_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($users_id, $produc_id, 1, 0, '', '$produc_type');";
+        $check_query = "SELECT * FROM `cart` WHERE (`u_id` = $users_id AND `product_id` = $produc_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $cart_insert_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($users_id, $produc_id, 1, 0, '', '$produc_type');";
+            mysqli_query($con, $cart_insert_query);
+        }
+       
     } else {
-        $cart_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`, `pro_type`) VALUES ($users_id, $produc_id, 1, '', '$produc_type');";
+        $users_id = $_COOKIE['T093NO5A86H'];
+        $check_query = "SELECT * FROM `unnamed_user_cart` WHERE (`un_u_cart_token` = $users_id AND `prod_id_of_cart` = $produc_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $cart_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`, `pro_type`) VALUES ($users_id, $produc_id, 1, '', '$produc_type');";
+            mysqli_query($con, $cart_insert_query);
+        }
+       
     }
-    mysqli_query($con, $cart_insert_query);
+   
     ?>
 <script type="text/javascript">
 window.location.href = 'http://localhost:3000/index.php';

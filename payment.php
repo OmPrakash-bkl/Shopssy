@@ -16,6 +16,7 @@ if(isset($_COOKIE['TRX_COUNTER'])) {
 } else {
     $cookie_count_query = "SELECT `trx_count` FROM `orders_table`";
     $cookie_count_result = mysqli_query($con, $cookie_count_query);
+    $cookie_last_count = 0;
     while($rows = mysqli_fetch_assoc($cookie_count_result)){
         $cookie_last_count = $rows['trx_count'];
     }

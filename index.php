@@ -15,6 +15,7 @@ if(isset($_GET['page'])) {
 if(!isset($_COOKIE['T093NO5A86H'])) {
     $unnamed_user_cart_query = "SELECT `un_u_cart_token` FROM `unnamed_user_cart`;";
 $unnamed_user_cart_result = mysqli_query($con, $unnamed_user_cart_query);
+$token_for_un_u_cart_details = 0;
 while($row_of_u_cart = mysqli_fetch_assoc($unnamed_user_cart_result)) {
     $token_for_un_u_cart_details = $row_of_u_cart['un_u_cart_token'];
 }
@@ -26,6 +27,7 @@ setcookie($token_of_auth, $token_for_un_u_cart_details, time() + (86400 * 730));
 if(!isset($_COOKIE['W937LI25A856T0K3N'])) {
     $unnamed_user_wishlist_query = "SELECT `un_u_wishlist_token` FROM `unnamed_user_wishlist`;";
 $unnamed_user_wishlist_result = mysqli_query($con, $unnamed_user_wishlist_query);
+$token_for_un_u_wishlist_details = 0;
 while($row_of_u_wishlist = mysqli_fetch_assoc($unnamed_user_wishlist_result)) {
     $token_for_un_u_wishlist_details = $row_of_u_wishlist['un_u_wishlist_token'];
 }
@@ -62,16 +64,7 @@ if(isset($_POST['product_id'])) {
         <?php
     } else {
 
-
-        $unnamed_user_cart_query = "SELECT `un_u_cart_token` FROM `unnamed_user_cart`;";
-        $unnamed_user_cart_result = mysqli_query($con, $unnamed_user_cart_query);
-        if(mysqli_num_rows($unnamed_user_cart_result) === 0) {
-            $token_for_un_u_cart_details = 1;
-        } else {
-            while($row_of_u_cart = mysqli_fetch_assoc($unnamed_user_cart_result)) {
-                $token_for_un_u_cart_details = $row_of_u_cart['un_u_cart_token'];
-            }
-            $prod_id_for_unnamed_cart_details = $_POST['product_id'];
+        $prod_id_for_unnamed_cart_details = $_POST['product_id'];
           if(isset($_COOKIE['T093NO5A86H'])) {
             $token_of_auth = "T093NO5A86H";
             $token_for_un_u_cart_details = $_COOKIE[$token_of_auth];
@@ -90,9 +83,7 @@ if(isset($_POST['product_id'])) {
            window.location.href = 'http://localhost:3000/index.php';
            </script>
            <?php
-        }
-    
-     
+        
     }
    
 }

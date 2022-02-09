@@ -10,11 +10,27 @@ include './db_con.php';
 // Email Validation Start
 if(isset($_POST['user_email'])) {
   $email = test_input_data($_POST['user_email']);
-  if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  $check_query = "SELECT * FROM `email_subscription` WHERE `user_email` = '$email';";
+  $check_result = mysqli_query($con, $check_query);
+  $check_no_of_rows = mysqli_num_rows($check_result);
+  if($check_no_of_rows >= 1) {
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/index.php';
+    </script>
+    <?php
+  } else {
+    if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $sql = "INSERT INTO `email_subscription` (`user_email`) VALUES('$email');";
      mysqli_query($con, $sql);
-     
   }
+  ?>
+<script type="text/javascript">
+window.location.href = 'http://localhost:3000/index.php';
+</script>
+<?php
+  }
+ 
 }
 function test_input_data($data) {
     $data = trim($data);
