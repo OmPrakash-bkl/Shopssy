@@ -43,10 +43,10 @@ if(isset($_POST['submit'])) {
                    $mail -> SMTPAuth = true;
                    $mail -> SMTPSecure = 'tls';
 
-                   $mail -> Username = 'shopssy.shoppingsite@gmail.com';
+                   $mail -> Username = 'shopssyz@gmail.com';
                    $mail -> Password = 'Shopssy$#@123';
 
-                   $mail -> setFrom('shopssy.shoppingsite@gmail.com', 'OTP Verification');
+                   $mail -> setFrom('shopssyz@gmail.com', 'OTP Verification');
                    $mail -> addAddress($_POST['email']);
 
                    $mail -> isHTML(true);

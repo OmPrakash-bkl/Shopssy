@@ -1009,7 +1009,7 @@ Handset, Adaptor (15W), Charging Cable, Sim Ejector Pin, User Manual'),
 create table reviews(review_id int(100) AUTO_INCREMENT, known_user_id int(100) default NULL, p_id int(100), p_customer_name varchar(200), p_rating int(50), p_desc varchar(400), p_like int(100) default 0, p_dislike int(100) default 0, primary key(review_id));
 
 insert into reviews(known_user_id, p_id, p_customer_name, p_rating, p_desc, p_like, p_dislike) values
-( 0, 1, 'Prakash', '4', 'very good product. all youtuber and negative opinion are fake. this is really a good product.', 5, 2);
+( 0, 1, 'Prakash', '4', 'very good product. all youtuber and negative opinion are fake. this is really a good product.', 0, 0);
 
 10. Product_Questions_and_Answers
 

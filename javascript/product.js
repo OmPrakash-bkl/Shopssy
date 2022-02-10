@@ -32,12 +32,12 @@ if(document.getElementById("brand_list_container").style.display == "none") {
 
             document.getElementsByClassName("select_container")[0].addEventListener("click", function(){
                
-                if(document.getElementsByClassName("select_inner_container")[0].style.display=="none") {
-                    document.getElementsByClassName("select_inner_container")[0].style.display="block";
-                    document.getElementById("arrow_of_product5").className = "fa fa-angle-up";
-                } else {
+                if(document.getElementsByClassName("select_inner_container")[0].style.display=="block") {
                     document.getElementsByClassName("select_inner_container")[0].style.display="none";
-                    document.getElementById("arrow_of_product5").className = "fa fa-angle-down";
+                    document.getElementsByClassName("arrow_of_product5")[0].className = "fa fa-angle-down arrow_of_product5";
+                } else {
+                    document.getElementsByClassName("select_inner_container")[0].style.display="block";
+                    document.getElementsByClassName("arrow_of_product5")[0].className = "fa fa-angle-up arrow_of_product5";
                 }
             });
 

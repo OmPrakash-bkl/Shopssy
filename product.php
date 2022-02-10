@@ -401,7 +401,7 @@ if(isset($_GET['searchItem'])) {
                </div>
                <div class="product_section_inner_container_2" id="product_section_inner_container_2">
                   <div class="select_container">
-                      <button>SORT BY <i class="fa fa-angle-down" id="arrow_of_product5"></i></button>
+                      <button>SORT BY <i class="fa fa-angle-down arrow_of_product5"></i></button>
                       <div class="select_inner_container">
                           <?php 
                           if(isset($_GET['b_title'])) {

@@ -1590,7 +1590,9 @@ margin-bottom: 20px;
  .customer_review_container_thumbs button:hover {
     color: #45B0E3;
  }
-
+.customer_review_container_thumbs_add_color button {
+    color: #45B0E3;
+}
 
  /* Review Container End */
 

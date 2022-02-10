@@ -28,11 +28,11 @@ if($no_of_rows <= 0){
     $mail->SMTPSecure='tls';
 
    
-    $mail->Username='shopssy.shoppingsite@gmail.com';
+    $mail->Username='shopssyz@gmail.com';
     $mail->Password='Shopssy$#@123';
 
     
-    $mail->setFrom('shopssy.shoppingsite@gmail.com', 'Password Reset');
+    $mail->setFrom('shopssyz@gmail.com', 'Password Reset');
     
     $mail->addAddress($_POST["mail_add"]);
     
