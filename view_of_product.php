@@ -364,17 +364,36 @@ if(isset($_GET['review_sub_btn'])) {
     $nameval = "/^[a-zA-Z ]+$/";
 
     $known_user_id = 0;
-    $unknown_user_id = 0;
     if(isset($_SESSION['user_login_id'])) {
         $known_user_id = $_SESSION['user_id'];
+    }
+    $check_query = "SELECT `order_id` FROM `orders_table` WHERE `user_id` = $known_user_id;";
+    $check_result = mysqli_query($con, $check_query);
+    while($row = mysqli_fetch_assoc($check_result)) {
+        $order_id = $row['order_id'];
+        $check_query_2 = "SELECT `product_id` FROM `orders_sub_table` WHERE (`order_id` = $order_id AND `product_id` = $pro_id);";
+        $check_result_2 = mysqli_query($con, $check_query_2);
+        $fetch_rows = mysqli_num_rows($check_result_2);
+    }
+   
+    if($fetch_rows >= 1) {
+        $check_query = "SELECT * FROM `reviews` WHERE (`known_user_id` = $known_user_id AND `p_id` = $pro_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $checking_no_of_rows = mysqli_num_rows($check_result);
+        if($checking_no_of_rows == 0) {
+            if(preg_match($nameval, $p_cus_name)) {
+                $pro_review_query = "INSERT INTO `reviews` (`known_user_id`, `p_id`, `p_customer_name`, `p_rating`, `p_desc`) VALUES ($known_user_id, '$pro_id', '$p_cus_name', '$p_cus_rating', '$p_cus_description');";
+                mysqli_query($con, $pro_review_query);
+            }
+        } else {
+            echo "";
+        }
+        
     } else {
-        $unknown_user_id = $_COOKIE['T093NO5A86H'];
+        echo "<h1>Haven't purchased this product?</h1><h4>Sorry! You are not allowed to review this product since you haven't bought it on Flipkart.</h4>";
     }
     
-    if(preg_match($nameval, $p_cus_name)) {
-        $pro_review_query = "INSERT INTO `reviews` (`known_user_id`, `unknown_user_id`, `p_id`, `p_customer_name`, `p_rating`, `p_desc`) VALUES ($known_user_id, $unknown_user_id, '$pro_id', '$p_cus_name', '$p_cus_rating', '$p_cus_description');";
-        mysqli_query($con, $pro_review_query);
-    }
+
     if(isset($_GET['hot_deal_pro'])) {
         ?>
         <script type="text/javascript">
@@ -401,6 +420,8 @@ if(isset($_GET['review_id'])) {
     $p_review_id = $_GET['review_id'];
     if(isset($_GET['p_like'])) {
         $p_like_count = $_GET['p_like'];
+        $p_known_user_id = $_GET['known_user_id'];
+        $p_prod_id = $_GET['prod_id'];
         $review_like_and_dislike_alter_query = "UPDATE `reviews` SET `p_like` = $p_like_count WHERE `review_id` = $p_review_id;";
         mysqli_query($con, $review_like_and_dislike_alter_query);
     } else {
@@ -780,6 +801,8 @@ if(isset($_GET['p_q_and_a_id'])) {
                 $review_p_like = $row['p_like'];
                 $review_p_dislike = $row['p_dislike'];
                 $review_review_id = $row['review_id'];
+                $review_known_user_id = $row['known_user_id'];
+                $review_p_id = $row['p_id'];
 
             ?>
 
@@ -830,6 +853,8 @@ if(isset($_GET['p_q_and_a_id'])) {
                     <input type="hidden" name="p_id" value="<?php echo $product_id;?>">
                     <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
                     <input type="hidden" name="review_id" value="<?php echo $review_review_id; ?>">
+                    <input type="hidden" name="known_user_id" value="<?php echo $review_known_user_id; ?>">
+                    <input type="hidden" name="prod_id" value="<?php echo $review_p_id; ?>">
                     <span class="customer_review_container_thumbs"><button name="p_like" value="<?php echo $review_p_like+1; ?>"><i class="fas fa-thumbs-up"></i></button> <?php echo $review_p_like; ?></span>
                     <span class="customer_review_container_thumbs"><button name="p_dislike" value="<?php echo $review_p_dislike+1; ?>"><i class="fas fa-thumbs-down"></i></button> <?php echo $review_p_dislike; ?></span>
                     </form>
