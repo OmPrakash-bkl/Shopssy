@@ -357,6 +357,7 @@ $products_details_p_a_price = $row['p_a_price'];
 if(isset($_GET['review_sub_btn'])) {
 
     $pro_id = $_GET['p_id'];
+    $pro_sub_cat_id = $_GET['sub_cat_id'];
     $p_cus_name = $_GET['p_customer_name'];
     $p_cus_rating = $_GET['p_rating'];
     $p_cus_description = $_GET['p_desc'];
@@ -373,6 +374,25 @@ if(isset($_GET['review_sub_btn'])) {
     if(preg_match($nameval, $p_cus_name)) {
         $pro_review_query = "INSERT INTO `reviews` (`known_user_id`, `unknown_user_id`, `p_id`, `p_customer_name`, `p_rating`, `p_desc`) VALUES ($known_user_id, $unknown_user_id, '$pro_id', '$p_cus_name', '$p_cus_rating', '$p_cus_description');";
         mysqli_query($con, $pro_review_query);
+    }
+    if(isset($_GET['hot_deal_pro'])) {
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>&hot_deal_pro=1';
+        </script>
+        <?php
+    } else if(isset($_GET['best_selling_pro'])) {
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>&best_selling_pro=1';
+        </script>
+        <?php
+    } else {
+        ?>
+        <script type="text/javascript">
+        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>';
+        </script>
+        <?php
     }
     
 }
@@ -720,6 +740,18 @@ if(isset($_GET['p_q_and_a_id'])) {
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
                     <input type="hidden" name="p_id" value="<?php echo $product_id;?>">
                     <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
+                    <?php
+                    if(isset($_GET['hot_deal_pro'])) {
+                        ?>
+                        <input type="hidden" name="hot_deal_pro" value="<?php echo 1; ?>">
+                        <?php 
+                    }
+                    if(isset($_GET['best_selling_pro'])) {
+                        ?>
+                        <input type="hidden" name="best_selling_pro" value="<?php echo 1; ?>">
+                        <?php
+                    }
+                    ?>
                     <label for="cus_name">Name</label> <br>
                     <input type="text" placeholder="Enter your name" id="cus_name" name="p_customer_name" class="inp1" required> <br>
                     <label for="cus_rat">Rating</label> <br>
