@@ -13,6 +13,11 @@ if(!isset($_SESSION['user_login_id'])) {
 
 if(isset($_POST['log_out'])){
     unset($_SESSION['user_login_id']);
+    ?>
+   <script type="text/javascript">
+   window.location.href = 'http://localhost:3000/account.php';
+   </script>
+   <?php
 }
 
 ?>

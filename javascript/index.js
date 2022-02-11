@@ -180,11 +180,11 @@ document.getElementsByClassName("close_btn_of_wishlist")[0].addEventListener("cl
 });
 
 document.getElementsByClassName("three_dot_btn")[0].addEventListener("click", function() {
-    if(document.getElementsByClassName("share_and_clear_container")[0].style.display=="none") {
-        document.getElementsByClassName("share_and_clear_container")[0].style.display="block";
+    if(document.getElementsByClassName("share_and_clear_container")[0].style.display=="block") {
+        document.getElementsByClassName("share_and_clear_container")[0].style.display="none";
        document.getElementsByClassName("wishlist_heading_and_product_parent_container")[0].style.overflowY = "hidden";
     } else {
-        document.getElementsByClassName("share_and_clear_container")[0].style.display="none";
+        document.getElementsByClassName("share_and_clear_container")[0].style.display="block";
         document.getElementsByClassName("wishlist_heading_and_product_parent_container")[0].style.overflowY = "scroll";
     }
 })
@@ -241,10 +241,10 @@ document.getElementsByClassName("save_your_list_close_btn")[0].addEventListener(
 
 
 document.getElementsByClassName("user_icon_of_homepage")[0].addEventListener("click", function() {
-    if(document.getElementsByClassName("shortcut_link_for_user_container")[0].style.display=="none") {
-        document.getElementsByClassName("shortcut_link_for_user_container")[0].style.display="block";
-    } else {
+    if(document.getElementsByClassName("shortcut_link_for_user_container")[0].style.display=="block") {
         document.getElementsByClassName("shortcut_link_for_user_container")[0].style.display="none";
+    } else {
+        document.getElementsByClassName("shortcut_link_for_user_container")[0].style.display="block";
     }
 })
 
