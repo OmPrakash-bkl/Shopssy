@@ -26,3 +26,21 @@ if(review_form.style.display=="none") {
 
 
 /* Image and Review Button Functions End */
+
+/* Question Getting Container Function Start */
+
+document.getElementsByClassName("zero_question_button")[0].addEventListener("click", function() {
+    if(document.getElementsByClassName("post_question_container")[0].style.display=="block") {
+        document.getElementsByClassName("post_question_container")[0].style.display="none";
+    } else {
+        document.getElementsByClassName("post_question_container")[0].style.display="block";
+    }
+    });
+
+    document.getElementsByClassName("post_question_close_btn")[0].addEventListener("click", function() {
+        document.getElementsByClassName("post_question_container")[0].style.display="none";
+    });
+    
+    /* Question Getting Container Function End */
+
+    

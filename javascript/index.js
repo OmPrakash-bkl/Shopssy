@@ -279,3 +279,4 @@ document.getElementsByClassName("mini_cart_container")[0].addEventListener("mous
 });
 
 /* Mini Shopping Cart of Homepage Functions End */
+

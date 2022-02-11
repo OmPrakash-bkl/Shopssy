@@ -10,6 +10,21 @@
 
 include './action.php';
 
+if(isset($_GET['new_ques'])) {
+    $users_id = $_SESSION['user_id'];
+    $retrieve_name_query = "SELECT `f_name`, `l_name` FROM `register` WHERE `user_id` = $users_id;";
+    $retrieve_name_result = mysqli_query($con, $retrieve_name_query);
+    $fetch_name = mysqli_fetch_assoc($retrieve_name_result);
+    $full_name = $fetch_name['f_name']." ".$fetch_name['l_name'];
+   $product_id = $_GET['p_id'];
+   $new_ques = $_GET['new_ques'];
+   $new_ques = stripcslashes($new_ques);
+   $new_ques = mysqli_real_escape_string($con, $new_ques);
+   $new_ques_insert_query = "INSERT INTO `product_questions_and_answers` (`p_id`, `user_id`, `ques_person_name`, `p_ques`, `p_ans`, `status`) VALUES ($product_id, $users_id, '$full_name', '$new_ques', '', 'waiting');";
+   mysqli_query($con, $new_ques_insert_query);
+   refresh();
+}
+
 function refresh() {
     $pro_id = $_GET['p_id'];
     $pro_sub_cat_id = $_GET['sub_cat_id'];
@@ -997,13 +1012,26 @@ if(isset($_GET['p_q_and_a_id'])) {
 
 <!--questions and answers container start-->
 <center>
-    <div class="ques_and_ans_container">
+    <div class="ques_and_ans_container" id="ques_and_ans_container_for_nav">
         <div class="heading">
             <h1>Questions and Answers</h1>
             <div class="search_container">
-                <form action="">
-                <input type="search" placeholder="Have a Question? Search for Answers">
-                <button type="submit"><i class="fas fa-search"></i></button>
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>#ques_and_ans_container_for_nav" method="GET">
+                <?php
+                    if(isset($_GET['best_selling_pro'])) {
+                    ?>
+                    <input type="hidden" name="best_selling_pro" value="<?php echo 1; ?>">
+                    <?php
+                    } else {
+                    ?>
+                    <input type="hidden" name="hot_deal_pro" value="<?php echo 1; ?>">
+                    <?php
+                    }
+                    ?>
+                    <input type="hidden" name="p_id" value="<?php echo $product_id;?>">
+                    <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
+                <input type="search" name="ques" placeholder="Have a Question? Search for Answers" required>
+                <button type="submit" ><i class="fas fa-search"></i></button>
                 </form>
             </div>
         </div>
@@ -1011,8 +1039,15 @@ if(isset($_GET['p_q_and_a_id'])) {
 
         <?php 
 
-        $products_q_and_a_query = "SELECT * FROM `product_questions_and_answers` WHERE `p_id`=$product_id;";
+        $products_q_and_a_query = "SELECT * FROM `product_questions_and_answers` WHERE `p_id`=$product_id AND `status` = 'approved';";
+
+        if(isset($_GET['ques'])) {
+            $question = $_GET['ques'];
+            $products_q_and_a_query = "SELECT * FROM `product_questions_and_answers` WHERE `p_ques` LIKE '%$question%' AND `status` = 'approved';";
+        }
+
         $products_q_and_a_result = mysqli_query($con, $products_q_and_a_query);
+        $products_q_and_a_result_row_count = mysqli_num_rows($products_q_and_a_result);
 
         while($row = mysqli_fetch_assoc($products_q_and_a_result)) {
             $product_p_q_and_a_id = $row['p_q_and_a_id'];
@@ -1061,6 +1096,46 @@ if(isset($_GET['p_q_and_a_id'])) {
            <?php  } ?>
             
         </div>
+        <?php
+        if($products_q_and_a_result_row_count == 0) {
+            ?>
+            <div class="zero_question_container" >
+            <p class="zero_question_text">Didn't get the right answer you were looking for?</p>
+            <button class="zero_question_button">Post Your Question</button>
+            </div>
+           
+            <div class="post_question_container">
+               <div class="post_question_close_btn_container">
+               <button class="post_question_close_btn"><i class="far fa-window-close"></i></button>
+               </div>
+                <h2 class="question_input_heading">POST YOUR QUESTION</h2>
+                <div class="post_question_inner_container">
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
+                    <?php
+                    if(isset($_GET['best_selling_pro'])) {
+                    ?>
+                    <input type="hidden" name="best_selling_pro" value="<?php echo 1; ?>">
+                    <?php
+                    } else {
+                    ?>
+                    <input type="hidden" name="hot_deal_pro" value="<?php echo 1; ?>">
+                    <?php
+                    }
+                    ?>
+                   <input type="hidden" name="p_id" value="<?php echo $product_id;?>">
+                    <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
+                        <textarea name="new_ques" placeholder="Post Your Question"></textarea> <br>
+                       <center>
+                       <button type="submit" class="question_ask_btn">SUBMIT</button>
+                       </center>
+                    </form>
+                </div>
+
+            </div>
+            
+            <?php
+        }
+        ?>
     </div>
 </center>
 <!--questions and answers container end-->

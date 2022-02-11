@@ -1671,6 +1671,74 @@ margin-bottom: 20px;
    color: #45B0E3;
   }
 
+.zero_question_text {
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    margin: 10px 20px 10px 0px;
+}
+.zero_question_button {
+  float: right;
+  padding: 10px 10px;
+border: none;
+margin: 0px 0px 20px 0px;
+cursor: pointer;
+background-color: #2D9AE8;
+color: white;
+font-size: 16px;
+font-family: Arial, Helvetica, sans-serif;
+font-weight: bold;
+}
+.zero_question_container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.post_question_container {
+    background-color: white;
+    position: absolute;
+   width: 800px;
+   margin: 0% 13%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 2;
+    padding: 10px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: none;
+}
+.post_question_inner_container textarea {
+    width: 100%;
+    padding: 10px;
+    height: 160px;
+    margin: 10px 0px;
+    border: 1px solid #cecece;
+}
+.post_question_close_btn {
+    float: right;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    font-size: 20px;
+}
+.post_question_close_btn_container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.question_ask_btn {
+padding: 10px 20px;
+background-color: rgb(0, 155, 0);
+border: 0px;
+border-radius: 5px;
+color: white;
+transition: background-color 0.3s;
+cursor: pointer;
+font-weight: bold;
+}
+
+.question_ask_btn:hover {
+    background-color: green;
+    }
+
   /* Questions and Answers Container End */
 
   /* Related Products Container Start */
@@ -3768,7 +3836,13 @@ width: 100%;
     .shortcut_link_for_user_container {
         left: 83%;
     }
-   
+    .post_question_container {
+       width: 600px;
+       margin: 0% 21%;
+    }
+    .post_question_inner_container textarea {
+        height: 140px;
+    }
 }
 
 @media only screen and (max-width: 1150px) {
@@ -4007,6 +4081,13 @@ width: 100%;
     .mini_cart_container {
         left: 45%;
     }
+    .post_question_container {
+        width: 400px;
+        margin: 0% 26%;
+     }
+     .post_question_inner_container textarea {
+         height: 100px;
+     }
 }
 @media only screen and (min-width: 800px) {
     .nav_hamburger_division, .nav_hamburger_content_division  {
@@ -4209,7 +4290,16 @@ width: 100%;
     .address_details_table_container2 table {
         width: 100%;
     }
-    
+    .post_question_container {
+        width: 60%;
+        margin: 0% 20%;
+     }
+     .post_question_inner_container textarea {
+         height: 100px;
+     }
+     .question_input_heading {
+         font-size: 16px;
+     }
 }
 
 @media only screen and (max-width: 600px) {
@@ -4556,6 +4646,21 @@ width: 100%;
     .user_id_and_cancel_btn_container_btn1 {
         display: none;
     }
+    .zero_question_button {
+        float: none;
+        display: block;
+      margin: 5px auto;
+    }
+    .post_question_container {
+        width: 80%;
+        margin: 0% 8%;
+     }
+     .post_question_inner_container textarea {
+         height: 70px;
+     }
+     .question_input_heading {
+         font-size: 16px;
+     }
 }
 
 @media only screen and (max-width: 300px) {
