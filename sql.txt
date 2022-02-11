@@ -1013,13 +1013,13 @@ insert into reviews(known_user_id, p_id, p_customer_name, p_rating, p_desc) valu
 
 10. Product_Questions_and_Answers
 
-create table product_questions_and_answers(p_q_and_a_id int(100) AUTO_INCREMENT, p_id int(100), ques_person_name varchar(200), p_ques varchar(200), p_ans varchar(300), p_q_like int(100) default 0, p_q_dislike int(100) default 0, primary key(p_q_and_a_id));
+create table product_questions_and_answers(p_q_and_a_id int(100) AUTO_INCREMENT, p_id int(100), user_id int(100), ques_person_name varchar(200), p_ques varchar(200), p_ans varchar(300), primary key(p_q_and_a_id));
 
-insert into product_questions_and_answers(p_id, ques_person_name, p_ques, p_ans, p_q_like, p_q_dislike) values
-(1, 'Prakash', 'Which type Charging Pin Type C ya normal?', 'Type C', 1, 1),
-(1, 'Aathi', 'What is the nice colour blue or oxygen green?', 'Blue', 1, 1),
-(1, 'Aarthi', 'WiFi calling available in this phone?', 'Yes', 1, 1),
-(1, 'Keerthi', 'Popup Camera is available in this phone?', 'Yes', 1, 1);
+insert into product_questions_and_answers(p_id, user_id, ques_person_name, p_ques, p_ans) values
+(1, 13, 'Prakash', 'Which type Charging Pin Type C ya normal?', 'Type C'),
+(1, 31, 'Aathi', 'What is the nice colour blue or oxygen green?', 'Blue'),
+(1, 13, 'Aarthi', 'WiFi calling available in this phone?', 'Yes'),
+(1, 31, 'Keerthi', 'Popup Camera is available in this phone?', 'Yes');
 
 11. Filter Table
 
@@ -1293,3 +1293,13 @@ create table sub_reviews(like_and_unlike_id int(100) AUTO_INCREMENT, review_id i
 
 insert into sub_reviews(review_id, user_id, is_like, is_dislike) values
 (1, 13, 0, 0);
+
+22. Sub Questions And Answers
+
+create table sub_question_and_answers(ques_and_ans_id int(100) AUTO_INCREMENT, ques_id int(100), user_id int(100), is_like int(100), is_dislike int(100), primary key(ques_and_ans_id));
+
+insert into sub_question_and_answers(ques_id, user_id, is_like, is_dislike) values
+(1, 13, 1, 0),
+(2, 31, 1, 0),
+(3, 13, 0, 1),
+(4, 31, 0, 1);
