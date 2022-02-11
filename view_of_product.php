@@ -35,95 +35,6 @@ function refresh() {
     }
 }
 
-if(!isset($_COOKIE['P934L4C'])) {
-    $token_of_like = "P934L4C";
-    $value = 1;
-    setcookie($token_of_like, $value, time() + (86400 * 730));
-}
-
-if(!isset($_COOKIE['P934D4C'])) {
-    $token_of_like = "P934D4C";
-    $value = 1;
-    setcookie($token_of_like, $value, time() + (86400 * 730));
-}
-
-if(isset($_GET['review_id'])) {
-    $p_review_id = $_GET['review_id'];
-    if(isset($_GET['p_like'])) {
-        $p_like_count = $_GET['p_like'];
-        $p_known_user_id = $_GET['known_user_id'];
-        $p_prod_id = $_GET['prod_id'];
-        if($_COOKIE['P934L4C'] == 1) {
-            $token_of_like = "P934L4C";
-            $value = 2;
-            setcookie($token_of_like, $value, time() + (86400 * 730));
-            $review_like_and_dislike_alter_query = "UPDATE `reviews` SET `p_like` = $p_like_count WHERE `review_id` = $p_review_id;";
-            mysqli_query($con, $review_like_and_dislike_alter_query);
-            if($_COOKIE['P934D4C'] == 2) {
-                $dis_count = $_GET['checking_dislike'];
-                $dis_count = $dis_count - 1;
-                if($_GET['checking_dislike'] <= 0) {
-                    $dis_count = 0;
-                }
-                $token_of_like = "P934D4C";
-                $value = 1;
-                setcookie($token_of_like, $value, time() + (86400 * 730));
-                $review_like_and_dislike_alter_query = "UPDATE `reviews` SET `p_dislike` = $dis_count WHERE `review_id` = $p_review_id;";
-                mysqli_query($con, $review_like_and_dislike_alter_query);
-            }
-            
-        } else {
-            $p_like_count = $p_like_count - 2;
-            if($_GET['p_like'] <= 1) {
-                $p_like_count = 0;
-            }
-            $review_like_and_dislike_alter_query = "UPDATE `reviews` SET `p_like` = $p_like_count WHERE `review_id` = $p_review_id;";
-            mysqli_query($con, $review_like_and_dislike_alter_query);
-            $token_of_like = "P934L4C";
-            $value = 1;
-            setcookie($token_of_like, $value, time() + (86400 * 730));
-        }
-        refresh();
-       
-    } else {
-        if($_COOKIE['P934D4C'] == 1) {
-            $token_of_like = "P934D4C";
-            $value = 2;
-            setcookie($token_of_like, $value, time() + (86400 * 730));
-            $p_dislike_count = $_GET['p_dislike'];
-            $review_like_and_dislike_alter_query = "UPDATE `reviews` SET `p_dislike` = $p_dislike_count WHERE `review_id` = $p_review_id;";
-            mysqli_query($con, $review_like_and_dislike_alter_query);
-            if($_COOKIE['P934L4C'] == 2) {
-                $dis_count = $_GET['checking_like'];
-                $dis_count = $dis_count - 1;
-                if($_GET['checking_like'] <= 0) {
-                    $dis_count = 0;
-                }
-                $token_of_like = "P934L4C";
-                $value = 1;
-                setcookie($token_of_like, $value, time() + (86400 * 730));
-                $review_like_and_dislike_alter_query = "UPDATE `reviews` SET `p_like` = $dis_count WHERE `review_id` = $p_review_id;";
-                mysqli_query($con, $review_like_and_dislike_alter_query);
-            }
-
-        } else {
-            $p_dislike_count = $_GET['p_dislike'];
-            $p_dislike_count = $p_dislike_count - 2;
-            if($_GET['p_dislike'] <= 1) {
-                $p_dislike_count = 0;
-            }
-            $review_like_and_dislike_alter_query = "UPDATE `reviews` SET `p_dislike` = $p_dislike_count WHERE `review_id` = $p_review_id;";
-            mysqli_query($con, $review_like_and_dislike_alter_query);
-            $token_of_like = "P934D4C";
-            $value = 1;
-            setcookie($token_of_like, $value, time() + (86400 * 730));
-        }
-        refresh();
-       
-    }
-    
-}
-
 if(isset($_GET['p_id'])) {
     $product_id = $_GET['p_id'];
     $product_sub_cat_id = $_GET['sub_cat_id'];
@@ -528,7 +439,63 @@ if(isset($_GET['review_sub_btn'])) {
     
 }
 
-
+if(isset($_GET['review_id'])) {
+    $p_review_id = $_GET['review_id'];
+    if(isset($_GET['p_like'])) {
+        $p_known_user_id = $_SESSION['user_id'];
+        $check_query = "SELECT `review_id`, `like_and_unlike_id` FROM `sub_reviews` WHERE `user_id` = $p_known_user_id AND `is_like` = 1 AND `review_id` = $p_review_id;";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        $fetch_l_u_id = mysqli_fetch_assoc($check_result);
+        $like_and_unlike_id = $fetch_l_u_id['like_and_unlike_id'];
+        if($check_rows > 0) {
+            $review_like_and_dislike_delete_query = "DELETE FROM `sub_reviews` WHERE `like_and_unlike_id` = $like_and_unlike_id;";
+            mysqli_query($con, $review_like_and_dislike_delete_query);
+        } else {
+            $p_known_user_id = $_SESSION['user_id'];
+            $check_query = "SELECT `review_id`, `like_and_unlike_id` FROM `sub_reviews` WHERE `user_id` = $p_known_user_id AND `is_dislike` = 1 AND `review_id` = $p_review_id;";
+            $check_result = mysqli_query($con, $check_query);
+            $check_rows = mysqli_num_rows($check_result);
+            $fetch_l_u_id = mysqli_fetch_assoc($check_result);
+            $like_and_unlike_id = $fetch_l_u_id['like_and_unlike_id'];
+            if($check_rows > 0) {
+                $review_like_and_dislike_delete_query = "DELETE FROM `sub_reviews` WHERE `like_and_unlike_id` = $like_and_unlike_id;";
+                mysqli_query($con, $review_like_and_dislike_delete_query);
+            }
+            $review_like_and_dislike_alter_query = "INSERT INTO `sub_reviews` (`review_id`, `user_id`, `is_like`, `is_dislike`) VALUES ($p_review_id, $p_known_user_id, 1, 0);";
+            mysqli_query($con, $review_like_and_dislike_alter_query);
+        }
+       
+        refresh();
+    } 
+    else {
+        $p_known_user_id = $_SESSION['user_id'];
+        $check_query = "SELECT `review_id`, `like_and_unlike_id` FROM `sub_reviews` WHERE `user_id` = $p_known_user_id AND `is_dislike` = 1 AND `review_id` = $p_review_id;";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        $fetch_l_u_id = mysqli_fetch_assoc($check_result);
+        $like_and_unlike_id = $fetch_l_u_id['like_and_unlike_id'];
+        if($check_rows > 0) {
+            $review_like_and_dislike_delete_query = "DELETE FROM `sub_reviews` WHERE `like_and_unlike_id` = $like_and_unlike_id;";
+            mysqli_query($con, $review_like_and_dislike_delete_query);
+        } else {
+            $p_known_user_id = $_SESSION['user_id'];
+            $check_query = "SELECT `review_id`, `like_and_unlike_id` FROM `sub_reviews` WHERE `user_id` = $p_known_user_id AND `is_like` = 1 AND `review_id` = $p_review_id;";
+            $check_result = mysqli_query($con, $check_query);
+            $check_rows = mysqli_num_rows($check_result);
+            $fetch_l_u_id = mysqli_fetch_assoc($check_result);
+            $like_and_unlike_id = $fetch_l_u_id['like_and_unlike_id'];
+            if($check_rows > 0) {
+                $review_like_and_dislike_delete_query = "DELETE FROM `sub_reviews` WHERE `like_and_unlike_id` = $like_and_unlike_id;";
+                mysqli_query($con, $review_like_and_dislike_delete_query);
+            }
+            $review_like_and_dislike_alter_query = "INSERT INTO `sub_reviews` (`review_id`, `user_id`, `is_like`, `is_dislike`) VALUES ($p_review_id, $p_known_user_id, 0, 1);";
+            mysqli_query($con, $review_like_and_dislike_alter_query);
+        }
+        refresh();
+    }
+    
+}
 if(isset($_GET['p_q_and_a_id'])) {
     $p_p_q_and_a_id = $_GET['p_q_and_a_id'];
     if(isset($_GET['p_q_like'])) {
@@ -896,11 +863,22 @@ if(isset($_GET['p_q_and_a_id'])) {
                 $review_cus_name = $row['p_customer_name'];
                 $reviews_rating_count = $row['p_rating'];
                 $review_product_description = $row['p_desc'];
-                $review_p_like = $row['p_like'];
-                $review_p_dislike = $row['p_dislike'];
                 $review_review_id = $row['review_id'];
                 $review_known_user_id = $row['known_user_id'];
                 $review_p_id = $row['p_id'];
+
+                $product_like_count_query = "SELECT COUNT(is_like) AS `is_like` FROM `sub_reviews` WHERE `review_id` = $review_review_id AND `is_like` = 1;";
+                $product_like_count_result = mysqli_query($con, $product_like_count_query);
+                
+                while($fetch_like_count = mysqli_fetch_assoc($product_like_count_result)) {
+                    $like_count = $fetch_like_count['is_like'];
+                }
+
+                $product_dislike_count_query = "SELECT COUNT(is_dislike) AS `is_dislike` FROM `sub_reviews` WHERE `review_id` = $review_review_id AND `is_dislike` = 1;";
+                $product_dislike_count_result = mysqli_query($con, $product_dislike_count_query);
+                while($fetch_dislike_count = mysqli_fetch_assoc($product_dislike_count_result)) {
+                    $dislike_count = $fetch_dislike_count['is_dislike'];
+                }
 
             ?>
 
@@ -951,14 +929,19 @@ if(isset($_GET['p_q_and_a_id'])) {
                     <input type="hidden" name="p_id" value="<?php echo $product_id;?>">
                     <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
                     <input type="hidden" name="review_id" value="<?php echo $review_review_id; ?>">
-                    <input type="hidden" name="checking_like" value="<?php echo $review_p_like; ?>">
-                    <input type="hidden" name="checking_dislike" value="<?php echo $review_p_dislike; ?>">
-                    <input type="hidden" name="known_user_id" value="<?php echo $review_known_user_id; ?>">
-                    <input type="hidden" name="prod_id" value="<?php echo $review_p_id; ?>">
-                    <span class="customer_review_container_thumbs"><button name="p_like" value="<?php echo $review_p_like+1; ?>"><i class="fas fa-thumbs-up"></i></button> <?php echo $review_p_like; ?></span>
-
-                    <span class="customer_review_container_thumbs"><button name="p_dislike" value="<?php echo $review_p_dislike+1; ?>"><i class="fas fa-thumbs-down"></i></button> <?php echo $review_p_dislike; ?></span>
-
+                    <?php
+                    if(isset($_GET['best_selling_pro'])) {
+                    ?>
+                    <input type="hidden" name="best_selling_pro" value="<?php echo 1; ?>">
+                    <?php
+                    } else {
+                    ?>
+                    <input type="hidden" name="hot_deal_pro" value="<?php echo 1; ?>">
+                    <?php
+                    }
+                    ?>
+                    <span class="customer_review_container_thumbs"><button name="p_like" value="<?php echo 1; ?>"><i class="fas fa-thumbs-up"></i></button> <?php echo $like_count; ?></span>
+                    <span class="customer_review_container_thumbs"><button name="p_dislike" value="<?php echo 1; ?>"><i class="fas fa-thumbs-down"></i></button> <?php echo $dislike_count; ?></span>
                     </form>
                 </div>
                 

@@ -1006,10 +1006,10 @@ Handset, Adaptor (15W), Charging Cable, Sim Ejector Pin, User Manual'),
 
 9. Reviews 
 
-create table reviews(review_id int(100) AUTO_INCREMENT, known_user_id int(100) default NULL, p_id int(100), p_customer_name varchar(200), p_rating int(50), p_desc varchar(400), p_like int(100) default 0, p_dislike int(100) default 0, primary key(review_id));
+create table reviews(review_id int(100) AUTO_INCREMENT, known_user_id int(100) default NULL, p_id int(100), p_customer_name varchar(200), p_rating int(50), p_desc varchar(400), primary key(review_id));
 
-insert into reviews(known_user_id, p_id, p_customer_name, p_rating, p_desc, p_like, p_dislike) values
-( 0, 1, 'Prakash', '4', 'very good product. all youtuber and negative opinion are fake. this is really a good product.', 0, 0);
+insert into reviews(known_user_id, p_id, p_customer_name, p_rating, p_desc) values
+( 0, 1, 'Prakash', '4', 'very good product. all youtuber and negative opinion are fake. this is really a good product.');
 
 10. Product_Questions_and_Answers
 
@@ -1287,3 +1287,9 @@ create table unnamed_user_wishlist(u_u_wishlist_id int(100) AUTO_INCREMENT, un_u
 insert into unnamed_user_wishlist(un_u_wishlist_token, prod_id_of_wishlist, pro_type) values
 (1, 1, '');
 
+21. Sub Reviews 
+
+create table sub_reviews(like_and_unlike_id int(100) AUTO_INCREMENT, review_id int(100), user_id int(100), is_like int(100), is_dislike int(100), primary key(like_and_unlike_id));
+
+insert into sub_reviews(review_id, user_id, is_like, is_dislike) values
+(1, 13, 0, 0);

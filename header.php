@@ -159,6 +159,11 @@ if(isset($_SESSION['user_login_id'])) {
     // unset($_SESSION['user_id']);
     
    //session_destroy();
+?>
+<script type="text/javascript">
+window.location.href = 'http://localhost:3000/index.php';
+</script>
+<?php
    }
 
 ?>
