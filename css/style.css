@@ -1670,6 +1670,9 @@ margin-bottom: 20px;
 .ques_and_ans_container .content .thumbs button:hover {
    color: #45B0E3;
   }
+.checked_like {
+    color: #45B0E3;
+}
 
 .zero_question_text {
     font-family: Arial, Helvetica, sans-serif;

@@ -515,6 +515,13 @@ if(isset($_GET['p_q_and_a_id'])) {
     $p_p_q_and_a_id = $_GET['p_q_and_a_id'];
     if(isset($_GET['p_q_like'])) {
         $p_known_user_id = $_SESSION['user_id'];
+        if(!isset($_SESSION['user_id'])) {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/login.php';
+            </script>
+            <?php
+        }
         $check_query = "SELECT `ques_id`, `ques_and_ans_id` FROM `sub_question_and_answers` WHERE `user_id` = $p_known_user_id AND `is_like` = 1 AND `ques_id` = $p_p_q_and_a_id;";
         $check_result = mysqli_query($con, $check_query);
         $check_rows = mysqli_num_rows($check_result);
@@ -924,6 +931,21 @@ if(isset($_GET['p_q_and_a_id'])) {
                 $review_review_id = $row['review_id'];
                 $review_known_user_id = $row['known_user_id'];
                 $review_p_id = $row['p_id'];
+                $p_known_user_id = $_SESSION['user_id'];
+
+            $give_color_to_like_query = "SELECT * FROM `sub_reviews` WHERE `review_id` = $review_review_id AND `user_id` = $p_known_user_id;";
+            $give_color_to_like_result = mysqli_query($con, $give_color_to_like_query);
+            $give_color_to_like_fetch = mysqli_fetch_assoc($give_color_to_like_result);
+            
+            $like_class = "";
+            if($give_color_to_like_fetch['is_like'] == 1) {
+                $like_class = "checked_like";
+            }
+            
+            $dislike_class = "";
+            if($give_color_to_like_fetch['is_dislike'] == 1) {
+                $dislike_class = "checked_like";
+            }
 
                 $product_like_count_query = "SELECT COUNT(is_like) AS `is_like` FROM `sub_reviews` WHERE `review_id` = $review_review_id AND `is_like` = 1;";
                 $product_like_count_result = mysqli_query($con, $product_like_count_query);
@@ -998,8 +1020,8 @@ if(isset($_GET['p_q_and_a_id'])) {
                     <?php
                     }
                     ?>
-                    <span class="customer_review_container_thumbs"><button name="p_like" value="<?php echo 1; ?>"><i class="fas fa-thumbs-up"></i></button> <?php echo $like_count; ?></span>
-                    <span class="customer_review_container_thumbs"><button name="p_dislike" value="<?php echo 1; ?>"><i class="fas fa-thumbs-down"></i></button> <?php echo $dislike_count; ?></span>
+                    <span class="customer_review_container_thumbs"><button name="p_like" value="<?php echo 1; ?>"><i class="fas fa-thumbs-up <?php echo $like_class; ?>"></i></button> <?php echo $like_count; ?></span>
+                    <span class="customer_review_container_thumbs"><button name="p_dislike" value="<?php echo 1; ?>"><i class="fas fa-thumbs-down <?php echo $dislike_class; ?>"></i></button> <?php echo $dislike_count; ?></span>
                     </form>
                 </div>
                 
@@ -1054,6 +1076,21 @@ if(isset($_GET['p_q_and_a_id'])) {
             $product_ques_person_name = $row['ques_person_name'];
             $product_p_ques = $row['p_ques'];
             $product_p_ans = $row['p_ans'];
+            $p_known_user_id = $_SESSION['user_id'];
+
+            $give_color_to_like_query = "SELECT * FROM `sub_question_and_answers` WHERE `ques_id` = $product_p_q_and_a_id AND `user_id` = $p_known_user_id;";
+            $give_color_to_like_result = mysqli_query($con, $give_color_to_like_query);
+            $give_color_to_like_fetch = mysqli_fetch_assoc($give_color_to_like_result);
+            
+            $like_class = "";
+            if($give_color_to_like_fetch['is_like'] == 1) {
+                $like_class = "checked_like";
+            }
+            
+            $dislike_class = "";
+            if($give_color_to_like_fetch['is_dislike'] == 1) {
+                $dislike_class = "checked_like";
+            }
 
             $question_like_count_query = "SELECT COUNT(is_like) AS `is_like` FROM `sub_question_and_answers` WHERE `ques_id` = $product_p_q_and_a_id AND `is_like` = 1;";
                 $question_like_count_result = mysqli_query($con, $question_like_count_query);
@@ -1088,8 +1125,8 @@ if(isset($_GET['p_q_and_a_id'])) {
                     }
                     ?>
                 <input type="hidden" name="p_q_and_a_id" value="<?php echo $product_p_q_and_a_id; ?>">
-                <span class="thumbs"><button name="p_q_like" value="<?php echo 1; ?>"><i class="fas fa-thumbs-up"></i></button> <?php echo $like_count; ?></span>
-                <span class="thumbs"><button name="p_q_dislike" value="<?php echo 1; ?>" ><i class="fas fa-thumbs-down"></i></button> <?php echo $dislike_count; ?></span>
+                <span class="thumbs"><button name="p_q_like" value="<?php echo 1; ?>"><i class="fas fa-thumbs-up <?php echo $like_class; ?>"></i></button> <?php echo $like_count; ?></span>
+                <span class="thumbs"><button name="p_q_dislike" value="<?php echo 1; ?>" ><i class="fas fa-thumbs-down <?php echo $dislike_class; ?>"></i></button> <?php echo $dislike_count; ?></span>
                 </form>
             </div>
            
