@@ -342,7 +342,7 @@ if(isset($_GET['searchItem'])) {
                             <span><?php echo $temp_title; ?></span>
                         </div>
                         <div>
-                            <i class="fa fa-angle-down" id="arrow_of_product<?php echo $dummy; ?>"></i>
+                            <i class="fa fa-angle-down arrow_of_product" id="arrow_of_product<?php echo $dummy; ?>"></i>
                         </div>
                     </div>
                     <div class="rating_list_container" id="rating_list_container<?php echo $dummy; ?>">
@@ -373,6 +373,8 @@ if(isset($_GET['searchItem'])) {
           
             <?php
         $dummy++;
+
+       
 
        if(isset($_GET[$temp_sub_title])) {
            $temp_sub_title_data = $_GET[$temp_sub_title];
@@ -431,7 +433,11 @@ if(isset($_GET['searchItem'])) {
            <?php 
            
            $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
-           $sort_val = $_GET['sort'];
+           $sort_val = 0;
+           if(isset($_GET['sort'])) {
+            $sort_val = $_GET['sort'];
+           }
+         
            switch($sort_val) {
                case 1:
                 $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id ORDER BY `p_title`;";
@@ -475,7 +481,11 @@ if(isset($_GET['searchItem'])) {
                 foreach($row_of_filter_counter_array as $product_id_of_row_filter) {
                     $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter;";
 
+                    $sort_val = 0;
+                    if(isset($_GET['sort'])) {
                     $sort_val = $_GET['sort'];
+                    }
+                  
                     switch($sort_val) {
                         case 1:
                             $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter ORDER BY `p_title`;";
@@ -949,6 +959,10 @@ if(isset($_GET['searchItem'])) {
      
 </center>
 
+<?php if(isset($_SESSION['pagination'])) {
+
+?>
+
 <div class="next_page_container">
     <center>
         <?php 
@@ -1065,23 +1079,29 @@ if(isset($_GET['searchItem'])) {
 
        <?php
 
-      
-       if(end($_SESSION['pagination']) == $pro_value) {
-           ?>
-         <button class="for_box_button">Next</button>
-           <?php
-       } else {
-           if(count($_SESSION['pagination']) > 12) {
+      if(isset($_SESSION['pagination'])) {
+        if(end($_SESSION['pagination']) == $pro_value) {
             ?>
-            <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&page=<?php echo $page_count + 1; ?>&inc"><button class="for_box_button">Next</button></a>
-             <?php
-           } else {
-            ?>
-            <button class="for_box_button">Next</button>
+          <button class="for_box_button">Next</button>
+            <?php
+        } else {
+            if(count($_SESSION['pagination']) > 12) {
+             ?>
+             <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&page=<?php echo $page_count + 1; ?>&inc"><button class="for_box_button">Next</button></a>
               <?php
-           }
-          
-       }
+            } else {
+             ?>
+             <button class="for_box_button">Next</button>
+               <?php
+            }
+           
+        }
+      } else {
+          echo "";
+      }
+      
+
+
        ?>
 
             <?php
@@ -1090,6 +1110,8 @@ if(isset($_GET['searchItem'])) {
         ?>
     </center>
 </div>
+
+<?php } else { echo "<hr>"; } ?>
 
      </div>
     </div>
@@ -1100,9 +1122,38 @@ if(isset($_GET['searchItem'])) {
    
    <?php 
     include "./footer.php";
+    
     ?>
 
     <script src="./javascript/index.js"></script>
     <script src="./javascript/product.js"></script>
+
+<?php
+if(isset($_GET['sub_cat_title'])) {
+    $end_value = 2;
+} else {
+    $end_value = 1;
+    ?>
+    <script>
+        document.getElementById("brand_list_container").style.display = "none";
+    </script>
+    <?php
+}
+?>
+<script>
+    let end_value = <?php echo $end_value; ?>
+</script>
+<?php
+while($dummy > $end_value) {
+?>
+<script>
+    hide_extra_filter_box(end_value++);
+</script>
+<?php
+echo "hi";
+$end_value++;
+}
+?>
+
 </body>
 </html>

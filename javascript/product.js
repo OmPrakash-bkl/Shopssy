@@ -64,4 +64,11 @@ if(document.getElementById("brand_list_container").style.display == "none") {
                 document.getElementsByClassName("sort_for_mobile_container")[0].style.display="none";
             });
 
+           function hide_extra_filter_box(total_count) {
+          
+                document.getElementsByClassName(`rating_list_container`)[total_count].style.display = "none";
+            
            
+           }
+
+
