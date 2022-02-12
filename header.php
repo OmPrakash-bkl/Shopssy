@@ -155,8 +155,8 @@ if(isset($_SESSION['user_login_id'])) {
 
  if(isset($_POST['logout'])) {
     unset($_SESSION['user_login_id']);
-    //unset($_SESSION['user_login_email']);
-    // unset($_SESSION['user_id']);
+    unset($_SESSION['user_login_email']);
+    unset($_SESSION['user_id']);
     
    //session_destroy();
 ?>

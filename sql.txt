@@ -1231,10 +1231,11 @@ insert into payment(user_id, order_id, card_type, card_number, exp_date, CVV) va
 
 16. Order 
 
-create table orders_table(order_id int(100) AUTO_INCREMENT, user_id int(100), trx_id varchar(200), trx_count int(100), p_status varchar(100), pro_tot_amount int(150), primary key(order_id));
+create table orders_table(order_id int(100) AUTO_INCREMENT, user_id int(100), trx_id varchar(200), trx_count int(100), p_status varchar(100), pro_tot_amount int(150), order_date varchar(100), primary key(order_id));
 
-insert into orders_table(user_id, trx_id, trx_count, p_status, pro_tot_amount) values
-(4, 'trx0000', 1, 'ordered', 40000);
+insert into orders_table(user_id, trx_id, trx_count, p_status, pro_tot_amount, order_date) values
+(4, 'trx0000', 1, 'ordered', 40000, '12-02-22');
+
 
 17. Orders Sub 
 

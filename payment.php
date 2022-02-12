@@ -20,7 +20,7 @@ if(isset($_COOKIE['TRX_COUNTER'])) {
     while($rows = mysqli_fetch_assoc($cookie_count_result)){
         $cookie_last_count = $rows['trx_count'];
     }
-    $cookie_last_count = $cookie_last_count + 1;
+    $cookie_last_count = $cookie_last_count;
     setcookie($cook_name, $cookie_last_count);
 }
 
@@ -34,13 +34,16 @@ if(isset($_POST['order_req'])) {
     $orders_pro_tot_amt = $_POST['pro_tot_amt'];
     $orders_trx_id = $_POST['trx_id'];
     $trx_counter = $_COOKIE[$cook_name];
-    $orders_trx_id = $orders_trx_id."".$trx_counter;
+    $orders_trx_id = $orders_trx_id."".($trx_counter + 1);
     $orders_cart_type = stripcslashes($orders_cart_type);
     $orders_cart_type = mysqli_real_escape_string($con, $orders_cart_type);
     $orders_card_number = stripcslashes($orders_card_number);
     $orders_card_number = mysqli_real_escape_string($con, $orders_card_number);
+    
+    $date = new DateTime('', new DateTimezone("Asia/Kolkata"));
+    $orders_date = $date->format('d/m/y');
 
-    $orders_query = "INSERT INTO `orders_table` (`user_id`, `trx_id`, `trx_count`, `p_status`, `pro_tot_amount`) VALUES ($orders_user_id, '$orders_trx_id',  $trx_counter, '$orders_p_status', $orders_pro_tot_amt);";
+    $orders_query = "INSERT INTO `orders_table` (`user_id`, `trx_id`, `trx_count`, `p_status`, `pro_tot_amount`, `order_date`) VALUES ($orders_user_id, '$orders_trx_id',  $trx_counter, '$orders_p_status', $orders_pro_tot_amt, '$orders_date');";
     mysqli_query($con, $orders_query);
    
     $order_id_retrieve_query = "SELECT `order_id` FROM `orders_table` WHERE `user_id` = $orders_user_id;";
@@ -64,15 +67,195 @@ if(isset($_POST['order_req'])) {
         $orders_sub_table_query = "INSERT INTO `orders_sub_table` (`order_id`, `product_id`, `quantity`) VALUES ($orders_order_id, $cart_details_product_id, $cart_details_quantity);";mysqli_query($con, $orders_sub_table_query);
         
         } 
-        $delete_cart_after_booking = "DELETE FROM `cart` WHERE `u_id` = $user_id;";
-        mysqli_query($con, $delete_cart_after_booking);
-        ?>
-   <script type="text/javascript">
-   window.location.href = 'http://localhost:3000/index.php';
-   </script>
-   <?php
     }
 
+    $user_detail_retrieve_query = "SELECT * FROM `account` WHERE `user_id` =  $orders_user_id;";
+    $user_detail_retrieve_result = mysqli_query($con, $user_detail_retrieve_query);
+    while($row = mysqli_fetch_assoc($user_detail_retrieve_result)) {
+        $user_full_name = $row['my_name'];
+        $user_full_address = $row['address'];
+        $user_full_address = $user_full_address.', '.$row['country'];
+        $user_full_address = $user_full_address.', '.$row['state'];
+        $user_full_address = $user_full_address.', '.$row['city'];
+        $user_full_address = $user_full_address.', '.$row['zip'].'.';
+    }
+
+    $order_detail_retrieve_query = "SELECT `trx_id`, `pro_tot_amount`, `order_date` FROM `orders_table` WHERE `order_id` = $orders_order_id";
+    $order_detail_retrieve_result = mysqli_query($con, $order_detail_retrieve_query);
+    while($row = mysqli_fetch_assoc($order_detail_retrieve_result)) {
+        $user_trx_id = $row['trx_id'];
+        $user_pro_tot_amount = $row['pro_tot_amount'];
+        $user_order_date = $row['order_date'];
+    }
+
+   
+    $user_id = $_SESSION['user_id'];
+
+    $cart_detail_retrieve_query = "SELECT * FROM `cart` WHERE `u_id` = $user_id;";
+    $cart_detail_retrieve_result = mysqli_query($con, $cart_detail_retrieve_query);
+    $table_product_part = "";
+    while($row = mysqli_fetch_assoc($cart_detail_retrieve_result)) {
+        $quantity = $row['quantity'];
+        $pro_type = $row['pro_type'];
+        $product_id = $row['product_id'];
+        $pro_tot_price = $row['pro_tot_price'];
+        $pro_final_tot_price = $pro_tot_price + 50;
+        $product_detail_query = "SELECT * FROM `products` WHERE `p_id` = $product_id";
+        $product_detail_result = mysqli_query($con, $product_detail_query);
+        while($rows = mysqli_fetch_assoc($product_detail_result)) {
+        $product_name = $rows['p_title'];
+        $product_p_o_price = $rows['p_o_price'];
+        $product_p_a_price = $rows['p_a_price'];
+      
+       if($pro_type == 'normal') {
+           $price_money = $quantity * $product_p_o_price;
+       } else if($pro_type == 'offer') {
+        $price_money = $quantity * $product_p_a_price;
+       } else {
+        $price_money = floor($quantity * ($product_p_o_price/2));
+       }
+
+       $table_product_part = $table_product_part . 
+            "<tr>
+               <td>$product_name</td>
+               <td>$quantity</td>
+               <td>&#8377;$price_money</td>
+           </tr>";
+     } }
+    
+
+    require "./Mail/phpmailer/PHPMailerAutoload.php";
+    $user_mail_id = "";
+    $mail = new PHPMailer;
+    $mail -> isSMTP();
+    $mail -> Host = 'smtp.gmail.com';
+    $mail -> Port = 587;
+    $mail -> SMTPAuth = true;
+    $mail -> SMTPSecure = 'tls';
+
+    $mail -> Username = 'shopssyz@gmail.com';
+    $mail -> Password = 'Shopssy$#@123';
+
+    $mail -> setFrom('shopssyz@gmail.com', 'Order Confirmation');
+    $mail -> addAddress($_SESSION['user_login_email']);
+
+    $mail -> isHTML(true);
+    $mail -> Subject = 'Order Confirmation - Shopssy';
+    $mail -> Body = "
+    <!DOCTYPE html>
+    <html lang='en'>
+    <head>
+        <style>
+            * {
+                margin: 0px;
+                padding: 0px;
+                box-sizing: border-box;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            body {
+                padding: 0px 5px;
+            }
+            .site_name {
+                color: #1792E9;
+                font-size: 35px;
+            }
+            .thank_text {
+                margin: 10px 0px;
+            }
+            .name_text {
+                margin-bottom: 10px;
+            }
+            .table_heading {
+                margin: 10px 0px 5px 0px;
+            }
+            .table, .table td, .table th  {
+                border: 1px solid gainsboro;
+               border-collapse: collapse;
+                padding: 5px 10px;
+                margin: 10px 0px;
+                text-align: left;
+            }
+            .help_para {
+                margin: 20px 0px;
+            }
+    
+            .help_para a {
+                text-decoration: none;
+                color: #1792E9;
+            }
+           
+        </style>
+    </head>
+    <body>
+        <center>
+        <h1 class='site_name'>Shopssy</h1>
+        </center>
+        <h2 class='thank_text'>Thanks for your order!</h2>
+        <h4 class='name_text'>Hi $user_full_name,</h4>
+        <p>We are delighted that you have found something you like!</p>
+        <p>As soon as your package is on it's way, you will receive a delivery confirmation from us by email.</p>
+    
+        <h2 class='table_heading'>Product Details</h2>
+        <table class='table'>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+                $table_product_part
+            <tr>
+                <th colspan='2'>Sub-Total</th>
+                <td>&#8377;$pro_tot_price</td>
+            </tr>
+            <tr>
+                <th colspan='2'>Shipping</th>
+                <td>&#8377;50.00</td>
+            </tr>
+            <tr>
+                <th colspan='2'>Total</th>
+                <td>&#8377;$pro_final_tot_price.00</td>
+            </tr>
+        </table>
+        <hr>
+    
+        <h2 class='table_heading'>Customer Details</h2>
+        <table class='table'>
+            <tr>
+                <th>Order-Id</th>
+                <td>#$orders_order_id</td>
+            </tr>
+            <tr>
+                <th>Order-Date</th>
+                <td>$user_order_date</td>
+            </tr>
+            <tr>
+                <th>Transaction-Id</th>
+                <td>$user_trx_id</td>
+            </tr>
+            <tr>
+                <th>Delivery address</th>
+                <td>$user_full_address</td>
+            </tr>
+        </table>
+        <hr>
+        <p class='help_para'>If you have any questions, contact shopssy at <a href='http://localhost:3000/contactus.php'>http://localhost:3000/contactus.php</a> or call at <a href='tel: 1234567890'>+91 1234567890</a>.</p>
+    </body>
+    </html>
+    ";
+
+    $delete_cart_after_booking = "DELETE FROM `cart` WHERE `u_id` = $user_id;";
+    mysqli_query($con, $delete_cart_after_booking);
+
+    if(!$mail -> send()) {
+        echo "Sending Mail is Failed, Invalid Email";
+    } else {
+        ?>
+        <script>
+            alert("<?php echo "Mail Sent!" ?>");
+            window.location.href = 'http://localhost:3000/index.php';
+        </script>
+        <?php
+    }
   
 }
 
