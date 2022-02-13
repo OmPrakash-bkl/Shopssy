@@ -1224,10 +1224,10 @@ insert into account(user_id, f_name, l_name, my_name, address, city, state, zip,
 
 15. Payment 
 
-create table payment(id int(100) AUTO_INCREMENT, user_id int(100), order_id int(100), card_type varchar(200), card_number varchar(300), exp_date varchar(200), CVV int(50), primary key(id));
+create table payment(id int(100) AUTO_INCREMENT, user_id int(100), order_id int(100), card_type varchar(200), card_number varchar(300), exp_date varchar(200), CVV varchar(100), primary key(id));
 
 insert into payment(user_id, order_id, card_type, card_number, exp_date, CVV) values
-(4, 1, 'Classic', '4111 1111 4555 1142', '03/2030', 744);
+(4, 1, 'Classic', '4111 1111 4555 1142', '03/2030', '744');
 
 16. Order 
 

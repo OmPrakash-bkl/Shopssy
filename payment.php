@@ -10,18 +10,15 @@ if(!isset($_SESSION['user_login_id'])) {
    <?php
 }
 
-$cook_name = 'TRX_COUNTER';
-if(!isset($_COOKIE['TRX_COUNTER'])) {
-    setcookie($cook_name, 0, 0, '/');
-} else {
-    $cookie_count_query = "SELECT `trx_count` FROM `orders_table`";
-    $cookie_count_result = mysqli_query($con, $cookie_count_query);
-    $cookie_last_count = 0;
-    while($rows = mysqli_fetch_assoc($cookie_count_result)){
-        $cookie_last_count = $rows['trx_count'];
-    }
-    setcookie($cook_name, $cookie_last_count, 0, '/');
+function encryption($input_data) {
+$ciphering = "AES-128-CTR";
+$options = 0;
+$encryption_iv = '1234567891011121';
+$encryption_key = "Shopssy_Data_Encryption_By_Admin";
+$encryption_data = openssl_encrypt($input_data, $ciphering, $encryption_key, $options, $encryption_iv);
+return $encryption_data;
 }
+
 
 if(isset($_POST['order_req'])) {
     $orders_cart_type = $_POST['card_type'];
@@ -31,6 +28,18 @@ if(isset($_POST['order_req'])) {
     $orders_user_id = $_POST['user_id'];
     $orders_p_status = $_POST['p_status'];
     $orders_pro_tot_amt = $_POST['pro_tot_amt'];
+    $cook_name = 'TRX_COUNTER';
+    if(!isset($_COOKIE['TRX_COUNTER'])) {
+    setcookie($cook_name, 0, 0, '/');
+    } else {
+    $cookie_count_query = "SELECT `trx_count` FROM `orders_table`";
+    $cookie_count_result = mysqli_query($con, $cookie_count_query);
+    $cookie_last_count = 0;
+    while($rows = mysqli_fetch_assoc($cookie_count_result)){
+        $cookie_last_count = $rows['trx_count'];
+    }
+    setcookie($cook_name, $cookie_last_count, 0, '/');
+}
     $orders_trx_id = $_POST['trx_id'];
     $trx_counter = $_COOKIE[$cook_name];
     $trx_counter = $trx_counter + 1;
@@ -47,6 +56,10 @@ if(isset($_POST['order_req'])) {
     $numberval = "/^[0-9]+$/";
 
     if(preg_match($nameval, $orders_cart_type) and preg_match($numberval, $orders_card_number) and preg_match($numberval, $orders_card_cvv_num)) {
+
+        $orders_card_number = encryption($orders_card_number);
+        $orders_card_e_date = encryption($orders_card_e_date);
+        $orders_card_cvv_num = encryption($orders_card_cvv_num);
     
     $orders_query = "INSERT INTO `orders_table` (`user_id`, `trx_id`, `trx_count`, `p_status`, `pro_tot_amount`, `order_date`) VALUES ($orders_user_id, '$orders_trx_id',  $trx_counter, '$orders_p_status', $orders_pro_tot_amt, '$orders_date');";
     mysqli_query($con, $orders_query);
@@ -57,7 +70,7 @@ if(isset($_POST['order_req'])) {
         $orders_order_id = $row['order_id'];
     }
 
-    $payment_query = "INSERT INTO `payment` (`user_id`, `order_id`, `card_type`, `card_number`, `exp_date`, `CVV`) VALUES ($orders_user_id, $orders_order_id, '$orders_cart_type', '$orders_card_number', '$orders_card_e_date', $orders_card_cvv_num);";
+    $payment_query = "INSERT INTO `payment` (`user_id`, `order_id`, `card_type`, `card_number`, `exp_date`, `CVV`) VALUES ($orders_user_id, $orders_order_id, '$orders_cart_type', '$orders_card_number', '$orders_card_e_date', '$orders_card_cvv_num');";
     mysqli_query($con, $payment_query);
 
     if(isset($orders_order_id)) {
