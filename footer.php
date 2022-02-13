@@ -10,7 +10,7 @@
                     <div class="news_letter_container_email_inner_div">
                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                         <input type="email" placeholder="Enter Your Email" name="user_email" value="" required>
-                        <button type="submit">SUBSCRIBE</button>
+                        <button type="submit" name="subscribe">SUBSCRIBE</button>
                        </form>
                     </div>
                 </div>

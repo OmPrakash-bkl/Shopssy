@@ -8,7 +8,7 @@ include './db_con.php';
 //  $_SESSION['user_id'] = 4;
 
 // Email Validation Start
-if(isset($_POST['user_email'])) {
+if(isset($_POST['subscribe'])) {
   $email = test_input_data($_POST['user_email']);
   $check_query = "SELECT * FROM `email_subscription` WHERE `user_email` = '$email';";
   $check_result = mysqli_query($con, $check_query);
@@ -32,6 +32,8 @@ window.location.href = 'http://localhost:3000/index.php';
   }
  
 }
+
+
 function test_input_data($data) {
     $data = trim($data);
     $data = stripslashes($data);

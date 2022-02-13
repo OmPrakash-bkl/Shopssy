@@ -11,8 +11,8 @@ if(!isset($_SESSION['user_login_id'])) {
 }
 
 $cook_name = 'TRX_COUNTER';
-if(isset($_COOKIE['TRX_COUNTER'])) {
-    $trx_counter = $_COOKIE[$cook_name];
+if(!isset($_COOKIE['TRX_COUNTER'])) {
+    setcookie($cook_name, 0, 0, '/');
 } else {
     $cookie_count_query = "SELECT `trx_count` FROM `orders_table`";
     $cookie_count_result = mysqli_query($con, $cookie_count_query);
@@ -20,8 +20,7 @@ if(isset($_COOKIE['TRX_COUNTER'])) {
     while($rows = mysqli_fetch_assoc($cookie_count_result)){
         $cookie_last_count = $rows['trx_count'];
     }
-    $cookie_last_count = $cookie_last_count;
-    setcookie($cook_name, $cookie_last_count);
+    setcookie($cook_name, $cookie_last_count, 0, '/');
 }
 
 if(isset($_POST['order_req'])) {
@@ -34,7 +33,8 @@ if(isset($_POST['order_req'])) {
     $orders_pro_tot_amt = $_POST['pro_tot_amt'];
     $orders_trx_id = $_POST['trx_id'];
     $trx_counter = $_COOKIE[$cook_name];
-    $orders_trx_id = $orders_trx_id."".($trx_counter + 1);
+    $trx_counter = $trx_counter + 1;
+    $orders_trx_id = $orders_trx_id."".$trx_counter;
     $orders_cart_type = stripcslashes($orders_cart_type);
     $orders_cart_type = mysqli_real_escape_string($con, $orders_cart_type);
     $orders_card_number = stripcslashes($orders_card_number);
@@ -43,6 +43,11 @@ if(isset($_POST['order_req'])) {
     $date = new DateTime('', new DateTimezone("Asia/Kolkata"));
     $orders_date = $date->format('d/m/y');
 
+    $nameval = "/^[a-zA-Z ]+$/";
+    $numberval = "/^[0-9]+$/";
+
+    if(preg_match($nameval, $orders_cart_type) and preg_match($numberval, $orders_card_number) and preg_match($numberval, $orders_card_cvv_num)) {
+    
     $orders_query = "INSERT INTO `orders_table` (`user_id`, `trx_id`, `trx_count`, `p_status`, `pro_tot_amount`, `order_date`) VALUES ($orders_user_id, '$orders_trx_id',  $trx_counter, '$orders_p_status', $orders_pro_tot_amt, '$orders_date');";
     mysqli_query($con, $orders_query);
    
@@ -161,12 +166,18 @@ if(isset($_POST['order_req'])) {
             }
             .thank_text {
                 margin: 10px 0px;
+                color: black;
             }
             .name_text {
                 margin-bottom: 10px;
+                color: black;
+            }
+            .info_text {
+                color: black;
             }
             .table_heading {
                 margin: 10px 0px 5px 0px;
+                color: black;
             }
             .table, .table td, .table th  {
                 border: 1px solid gainsboro;
@@ -174,9 +185,11 @@ if(isset($_POST['order_req'])) {
                 padding: 5px 10px;
                 margin: 10px 0px;
                 text-align: left;
+                color: black;
             }
             .help_para {
                 margin: 20px 0px;
+                color: black;
             }
     
             .help_para a {
@@ -192,8 +205,8 @@ if(isset($_POST['order_req'])) {
         </center>
         <h2 class='thank_text'>Thanks for your order!</h2>
         <h4 class='name_text'>Hi $user_full_name,</h4>
-        <p>We are delighted that you have found something you like!</p>
-        <p>As soon as your package is on it's way, you will receive a delivery confirmation from us by email.</p>
+        <p class='info_text'>We are delighted that you have found something you like!</p>
+        <p class='info_text'>As soon as your package is on it's way, you will receive a delivery confirmation from us by email.</p>
     
         <h2 class='table_heading'>Product Details</h2>
         <table class='table'>
@@ -256,6 +269,12 @@ if(isset($_POST['order_req'])) {
         </script>
         <?php
     }
+
+} else {
+    echo "error";
+}
+
+  
   
 }
 
