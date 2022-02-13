@@ -3926,6 +3926,64 @@ width: 100%;
 
 /* Order Tracker Container End */
 
+/* Notification Page Container Start */
+.notification_page_master_container {
+    margin: 0px 0px 10px 0px;
+}
+.notifi_link {
+    text-decoration: none;
+}
+
+.notification_page_parent_container {
+display: flex;
+max-width: 1200px;
+border: 1px solid black;
+text-decoration: none;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.hr_line {
+    color: gainsboro;
+}
+
+.notification_page_child_1 {
+    flex: 10%;
+    background-color: #1792E9;
+}
+.notification_page_child_1 h1 {
+    font-size: 85px;
+    color: white;
+    margin: 0% 5%;
+}
+
+.notification_page_child_2 {
+    flex: 90%;
+    text-align: left;
+    padding: 5px;
+    color: black;
+}
+.notification_page_child_2 h2 {
+    color: #8E8E99;
+    margin: 0px 0px 5px 0px;
+}
+.notification_page_child_2 p {
+    display: inline-block;
+    color: #8E8E99;
+    margin: 0px 0px 5px 0px;
+}
+.notification_page_child_2 h4 {
+    float: right;
+    margin: 5px 0px 0px 0px;
+    color: #2C2C2F;
+}
+
+.notification_page_child_2::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+/* Notification Page Container End */
 
 /*Keyframes Start*/
 
@@ -4609,6 +4667,15 @@ width: 100%;
             text-align: left;
             margin-left: 5px;
         }
+        .notification_page_child_1 {
+            flex: 15%;
+        }
+        .notification_page_child_2 {
+            flex: 85%;
+        }
+        .notification_page_child_1 h1 {
+            margin: 8% 5%;
+        }
 }
 @media only screen and (max-width: 400px) {
     #img_slider_image_container_3 h1 {
@@ -4841,6 +4908,18 @@ width: 100%;
     .text_containers p,  .text_containers em {
         font-size: 14px;
     }
+    .notification_page_child_1 {
+        flex: 20%;
+        padding: 20px 0px;
+    }
+    .notification_page_child_2 {
+        flex: 80%;
+    }
+    .notification_page_child_1 h1 {
+        margin: 24% 5%;
+        font-size: 60px;
+    }
+   
 }
 
 @media only screen and (max-width: 300px) {
@@ -4859,6 +4938,7 @@ width: 100%;
         height: 260px;
         width: 240px;
        }
+      
 }
 
 /*Keyframes End*/
