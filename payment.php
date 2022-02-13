@@ -277,8 +277,7 @@ if(isset($_POST['order_req'])) {
     } else {
         ?>
         <script>
-            alert("<?php echo "Mail Sent!" ?>");
-            window.location.href = 'http://localhost:3000/index.php';
+            window.location.href = 'http://localhost:3000/success.php';
         </script>
         <?php
     }
