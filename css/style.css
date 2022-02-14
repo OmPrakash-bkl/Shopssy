@@ -500,6 +500,9 @@ text-align: left;
     outline: none;
     padding: 0px 20px;
 }
+.mob_navbar_search_container input::-webkit-search-cancel-button {
+    -webkit-appearance:none;
+}
 
 .mob_navbar_search_container button {
     height: 34px;

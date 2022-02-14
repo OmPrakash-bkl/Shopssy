@@ -513,7 +513,7 @@ if(isset($_SESSION['user_login_id'])) {
         <div class="navbar_container_for_desktop">
     <!--Header Start-->
     <center>
-    <div class="header_main_container">
+    <div class="header_main_container" id="header_main_container">
         <div class="header_container_childs header_container_left">
             <h1><a href="./index.php">Shopssy</a></h1>
         </div>
@@ -900,16 +900,16 @@ if(isset($_SESSION['user_login_id'])) {
    <div class="nav_hamburger_content_division">
     <div id="hamburger_btn_login_signup_btn_div">
             <a href="#"><button id="hamburger_btn_user_icon"><i class="far fa-user" style="font-size: 25px;color: #45b2ff;"></i></button></a>
-            <a href="./login.html"><button id="hamburger_btn_login_btn">LOGIN</button></a> <a href="./register.html"><button id="hamburger_btn_signup_btn">SIGNUP</button></a>
+            <a href="./login.php"><button id="hamburger_btn_login_btn">LOGIN</button></a> <a href="./register.php"><button id="hamburger_btn_signup_btn">SIGNUP</button></a>
       </div>
 <table>
     
         <tr>
-            <td><a href="#"><button><i class="fas fa-list-alt" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="./all_categories.html"><button>All Categories</button></a></td>
+            <td><a href="./all_categories.php"><button><i class="fas fa-list-alt" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a href="./all_categories.php"><button>All Categories</button></a></td>
         </tr>
         <tr>
-            <td><a href="#"><button><i class="fa fa-gift" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a href="./index.php?close_hamburger#hot_deals_product_container"><button><i class="fa fa-gift" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
             <td><a href="./index.php?close_hamburger#hot_deals_product_container"><button>Offer Zone</button></a></td>
         </tr>
         <!-- <tr>
@@ -917,37 +917,37 @@ if(isset($_SESSION['user_login_id'])) {
             <td><a href="#"><button>Sell On Shopssy</button></a></td>
         </tr> -->
         <tr>
-            <td><a href="#"><button><i class="fa fa-truck" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="#"><button>My Orders</button></a></td>
+            <td><a href="./order_tracker.php"><button><i class="fa fa-truck" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a href="./order_tracker.php"><button>My Orders</button></a></td>
         </tr>
         <tr>
-            <td><a href="#"><button><i class="fas fa-shopping-cart" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="./cart.html"><button>My Cart</button></a></td>
+            <td><a href="./cart.php"><button><i class="fas fa-shopping-cart" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a href="./cart.php"><button>My Cart</button></a></td>
         </tr>
         <tr>
-            <td><a href="#"><button><i class="far fa-heart" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="#"><button>My Wishlist</button></a></td>
+            <td><a><button onclick="open_wishlist()"><i class="far fa-heart" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a><button onclick="open_wishlist()">My Wishlist</button></a></td>
         </tr>
         <tr>
-            <td><a href="#"><button><i class="far fa-user" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="#"><button>My Account</button></a></td>
+            <td><a href="./account.php"><button><i class="far fa-user" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a href="./account.php"><button>My Account</button></a></td>
         </tr>
         <tr>
-            <td><a href="#"><button><i class="fas fa-bell" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="#"><button>My Notifications</button></a></td>
+            <td><a href="./notification_page.php"><button><i class="fas fa-bell" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a href="./notification_page.php"><button>My Notifications</button></a></td>
         </tr>
         <tr>
-            <td><a href="#"><button><i class="fas fa-comments" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="#"><button>Feedback</button></a></td>
+            <td><a href="./contactus.php"><button><i class="fas fa-comments" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a href="./contactus.php"><button>Feedback</button></a></td>
         </tr>
         <tr>
-            <td><a href="#"><button><i class="far fa-address-book" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="./contactus.html"><button>Contact Us</button></a></td>
+            <td><a href="./contactus.php"><button><i class="far fa-address-book" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a href="./contactus.php"><button>Contact Us</button></a></td>
         </tr>
     
         <tr>
-            <td><a href="#"><button><i class="fa fa-question-circle" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="#"><button>Help Centre</button></a></td>
+            <td><a href="./contactus.php"><button><i class="fa fa-question-circle" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a href="./contactus.php"><button>Help Centre</button></a></td>
         </tr>
 
        
@@ -968,11 +968,11 @@ if(isset($_SESSION['user_login_id'])) {
    <div class="navbar_container_for_mobile">
 <div class="mob_navbar_container">
      <button class="mob_hamburger_btn"><i class="fas fa-bars" style="color: black;font-size: 30px;"></i></button>
-     <h2 class="mob_navbar_title"><a href="#">Shopssy</a></h2>
-     <a href="#" class="mob_navbar_shop_icon"><i class="fas fa-cart-plus" style="font-size: 30px;color: black;"></i></a>
+     <h2 class="mob_navbar_title"><a href="./index.php">Shopssy</a></h2>
+     <a href="./cart.php" class="mob_navbar_shop_icon"><i class="fas fa-cart-plus" style="font-size: 30px;color: black;"></i></a>
      <div class="mob_navbar_search_container">
-        <form action="">
-            <input type="search" placeholder="Search">
+        <form action="./product.php" method="GET">
+            <input type="search" placeholder="Search" name="searchItem" required>
             <button type="submit">
                 <i class="fas fa-search"></i>
             </button>

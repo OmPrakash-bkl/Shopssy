@@ -182,13 +182,16 @@ document.getElementsByClassName("close_btn_of_wishlist")[0].addEventListener("cl
 document.getElementsByClassName("three_dot_btn")[0].addEventListener("click", function() {
     if(document.getElementsByClassName("share_and_clear_container")[0].style.display=="block") {
         document.getElementsByClassName("share_and_clear_container")[0].style.display="none";
-       document.getElementsByClassName("wishlist_heading_and_product_parent_container")[0].style.overflowY = "hidden";
+       document.getElementsByClassName("wishlist_heading_and_product_parent_container")[0].style.overflowY = "scroll";
     } else {
         document.getElementsByClassName("share_and_clear_container")[0].style.display="block";
-        document.getElementsByClassName("wishlist_heading_and_product_parent_container")[0].style.overflowY = "scroll";
+        document.getElementsByClassName("wishlist_heading_and_product_parent_container")[0].style.overflowY = "hidden";
     }
 })
 
+function open_wishlist() {
+    document.getElementsByClassName("wishlist_container")[0].style.display="block";
+}
 
 document.getElementsByClassName("share_email_button")[0].addEventListener("click", function() {
     document.getElementsByClassName("share_email_container")[0].style.display="block";
@@ -279,4 +282,5 @@ document.getElementsByClassName("mini_cart_container")[0].addEventListener("mous
 });
 
 /* Mini Shopping Cart of Homepage Functions End */
+
 

@@ -107,10 +107,10 @@
                 <ul>
                     <li><a href="#">Sitemap</a></li>
                     <li><a href="#">Feedback</a></li>
-                    <li><a href="#">My Account</a></li>
-                    <li><a href="#">Advanced Search</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">My Wishlist</a></li>
+                    <li><a href="./account.php">My Account</a></li>
+                    <li><a href="./index.php#header_main_container">Advanced Search</a></li>
+                    <li><a href="./contactus.php">Contact Us</a></li>
+                    <li><a href="./index.php">My Wishlist</a></li>
                 </ul>
             </div>
 
@@ -118,7 +118,7 @@
          <div class="footer_inner_container_sections footer_inner_container_sections2">
             <h4>NEED HELP</h4>
             <ul>
-                <li><a href="#">Order Tracking</a></li>
+                <li><a href="./order_tracker.php">Order Tracking</a></li>
                 <li><a href="#">Make Report</a></li>
                 <li><a href="#">Payments & Returns</a></li>
                 <li><a href="#">Size Guide</a></li>

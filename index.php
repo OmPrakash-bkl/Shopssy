@@ -185,7 +185,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                 <div class="image_slider_words_container">
                     <p id="image_slider_words_container_one_text1">BEST COMPUTER 2018</p>
                     <h1 id="image_slider_words_container_one_text2">iMac PRO</h1>
-                    <a href="#" id="image_slider_words_container_one_text3">BUY NOW <i class="fa fa-angle-right"></i></a>
+                    <a href="./product.php?sub_cat_identification_id=2.2&sub_cat_title=Computers&sub_cat_identification_id_two=104" id="image_slider_words_container_one_text3">BUY NOW <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
             <div class="img_slider_image_container" id="img_slider_image_container_2">
@@ -201,7 +201,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                     <p id="image_slider_words_container_three_text1">SERIES 3</p>
                     <h1 id="image_slider_words_container_three_text2">SMART WATCH</h1>
                    <p id="image_slider_words_container_three_text3">Now Available on Shopssy</p>
-                    <a href="#" id="image_slider_words_container_three_text4">BUY NOW <i class="fa fa-angle-right"></i></a>
+                    <a href="./product.php?sub_cat_identification_id=9.1&sub_cat_title=Watches&sub_cat_identification_id_two=118" id="image_slider_words_container_three_text4">BUY NOW <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
             
@@ -222,13 +222,13 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
     <center>
         <div class="three_ad_container">
             <div class="three_ad_inner_containers">
-                <a href="#"><img src="./images/ad_banner_1.png" alt="ad of my web pages"></a>
+                <a href="./product.php?sub_cat_identification_id=2.2&sub_cat_title=Computers&sub_cat_identification_id_two=104"><img src="./images/ad_banner_1.png" alt="ad of my web pages"></a>
             </div>
             <div class="three_ad_inner_containers">
-                <a href="#"><img src="./images/ad_banner_2.png" alt="ad of my web pages"></a>
+                <a href="./product.php?sub_cat_identification_id=4.1&sub_cat_title=Speakers&sub_cat_identification_id_two=108"><img src="./images/ad_banner_2.png" alt="ad of my web pages"></a>
             </div>
             <div class="three_ad_inner_containers">
-                <a href="#"><img src="./images/ad_banner_3.png" alt="ad of my web pages"></a>
+                <a href="./product.php?sub_cat_identification_id=3.1&sub_cat_title=Housewares&sub_cat_identification_id_two=106"><img src="./images/ad_banner_3.png" alt="ad of my web pages"></a>
             </div>
         </div>
     </center>
@@ -766,7 +766,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
     <!--iphone ad banner container start-->
     <center>
         <div class="iphone_ad_banner_container">
-            <a href="#">
+            <a href="./product.php?b_and_i_identification_id=100.2&b_title=Apple&sub_cat_identification_id=1.1&sub_cat_identification_id_two=101">
                 <img src="./images/iphone_x_banner.png" alt="my website iphone ad">
             </a>
         </div>
