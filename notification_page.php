@@ -31,6 +31,7 @@ include './header.php';
             $notification_content = $row['n_content'];
             $notification_time = $row['n_time'];
             
+            if($notification_time != "") {
         ?>
     <a href="<?php echo $notification_link; ?>" class="notifi_link">
         <div class="notification_page_parent_container">
@@ -48,7 +49,7 @@ include './header.php';
         </div>
     </a>
 
-    <?php } ?>
+    <?php } } ?>
   
     </div>
     </center>

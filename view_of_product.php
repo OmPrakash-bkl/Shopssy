@@ -574,6 +574,59 @@ if(isset($_GET['p_q_and_a_id'])) {
     }
 }
 
+if(isset($_GET['notify_me_req'])) {
+    $pro_id = $_GET['p_id'];
+    $pro_sub_cat_id = $_GET['sub_cat_id'];
+    $p_known_user_id = $_SESSION['user_id'];
+    $check_query = "SELECT `n_id` FROM `notification` WHERE `noti_for_who` = $p_known_user_id AND `pro_id` = $pro_id;";
+    $check_result = mysqli_query($con, $check_query);
+    $notify_row = mysqli_num_rows($check_result);
+    if($notify_row == 0) {
+        $link_of_notify = "";
+        if(isset($_GET['hot_deal_pro'])) {
+            $link_of_notify = "http://localhost:3000/view_of_product.php?p_id=$pro_id&sub_cat_id=$pro_sub_cat_id&hot_deal_pro=1";
+        } else if(isset($_GET['best_selling_pro'])) {
+            $link_of_notify = "http://localhost:3000/view_of_product.php?p_id=$pro_id&sub_cat_id=$pro_sub_cat_id&best_selling_pro=1";
+        } else {
+            $link_of_notify = "http://localhost:3000/view_of_product.php?p_id=$pro_id&sub_cat_id=$pro_sub_cat_id";
+        }
+        
+        $fetch_product_title_query = "SELECT `p_title` FROM `products` WHERE `p_id` = $pro_id;";
+        $fetch_product_title_result = mysqli_query($con, $fetch_product_title_query);
+        $fetch_content = mysqli_fetch_assoc($fetch_product_title_result);
+        $fetch_content = $fetch_content['p_title'];
+        $title_of_notify = "Back In Stock";
+        $notify_content = "The $fetch_content - you were looking for is back in stock! Grab it NOW!";
+        $notify_insert_query = "insert into notification(`n_title`, `n_content`, `n_time`, `noti_for_who`, `link`, `pro_id`) values
+        ('$title_of_notify', '$notify_content', '',  $p_known_user_id, '$link_of_notify', $pro_id);";
+        mysqli_query($con, $notify_insert_query);
+        
+    
+        if(isset($_GET['hot_deal_pro'])) {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>&hot_deal_pro=1';
+            </script>
+            <?php
+        } else if(isset($_GET['best_selling_pro'])) {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>&best_selling_pro=1';
+            </script>
+            <?php
+        } else {
+            ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>';
+            </script>
+            <?php
+        }
+    } else {
+        echo "";
+    }
+    
+}
+
 ?>
 
     <!--sub navigation container start-->
@@ -680,7 +733,15 @@ if(isset($_GET['p_q_and_a_id'])) {
                     <table>
                         <tr>
                             <th>AVAILABLE:</th>
-                            <td id="in_stock"><?php echo $product_sub_p_avail; ?> <i class="fas fa-check-square"></i></td>
+                            <td id="in_stock" <?php if($product_sub_p_avail == "Out Of Stock") {
+                                ?>
+                                 style="color: red;"
+                                <?php
+                            } ?>><?php echo $product_sub_p_avail; ?> <?php if($product_sub_p_avail == "In Stock") {
+                                echo "<i class='fas fa-check-square'></i>";
+                            } else {
+                                echo "<i class='fas fa-exclamation-triangle'></i>";
+                            } ?></td>
                         </tr>
                         <tr>
                             <th>CATEGOTIES:</th>
@@ -768,6 +829,10 @@ if(isset($_GET['p_q_and_a_id'])) {
                
                   
               </div>
+
+              <?php 
+              if($product_sub_p_avail == "In Stock") {
+                  ?>
               <div class="incre_decre_container">
                 <h6>QUANTITY:</h6>
                 <div>
@@ -822,6 +887,39 @@ if(isset($_GET['p_q_and_a_id'])) {
                 <button class="btn3" name="wishlist_adding_req" value="1"><i class="fas fa-heart"></i></button>
                 </form>
              </div>
+                  <?php
+              } else {
+                  ?>
+                  <form action="./view_of_product.php" method="GET">
+                  <?php 
+                        if(isset($_GET['best_selling_pro'])) {
+                            ?>
+                        <input type="hidden" name="best_selling_pro" value="<?php echo 1 ?>">
+                        <?php
+                        }
+                        ?>
+                        <?php 
+                        if(isset($_GET['hot_deal_pro'])) {
+                            ?>
+                        <input type="hidden" name="hot_deal_pro" value="<?php echo 1 ?>">
+                        <?php
+                        }
+                        ?>
+                    <input type="hidden" name="p_id" value="<?php echo $product_id; ?>">
+                    <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
+                    <div class="notify_me_container">
+                    <button class="notify_me_btn" name="notify_me_req" value="1">Notify Me</button>
+                    </div>
+
+                  </form>
+                  <?php
+              }
+
+              ?>
+
+              
+
+
              <div class="PIandC_cost_container_btn_div2">
                  <a href="https://www.facebook.com/"><button class="btn1" title="Share on Facebook"><i class="fab fa-facebook-f"></i> SHARE</button></a>
                 <a href="https://www.twitter.com"> <button class="btn2" title="Tweet on Tweeter"><i class="fab fa-twitter"></i> TWEET</button></a>
