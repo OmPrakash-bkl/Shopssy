@@ -2,6 +2,17 @@
 session_start();
 include './db_con.php';
 
+if(isset($_GET['close_hamburger'])) {
+    ?>
+    <script>
+        document.getElementsByClassName("nav_hamburger_content_division")[0].style.left="-200px";
+        document.getElementsByClassName("nav_hamburger_division")[0].style.display="none";
+        document.getElementsByClassName("mob_hamburger_btn")[0].style.transition = "transform 0.5s";
+        document.getElementsByClassName("mob_hamburger_btn")[0].style.transform = "rotate(0deg)";
+    </script>
+    <?php
+}
+
 if(isset($_GET['delete_btn_of_mini_cart'])) {
     if(isset($_SESSION['user_login_id'])) {
         $mini_cart_sub_product_id = $_GET['product_id'];
@@ -871,12 +882,12 @@ if(isset($_SESSION['user_login_id'])) {
         </tr>
         <tr>
             <td><a href="#"><button><i class="fa fa-gift" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="#"><button>Offer Zone</button></a></td>
+            <td><a href="./index.php?close_hamburger#hot_deals_product_container"><button>Offer Zone</button></a></td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td><a href="#"><button><i class="fas fa-box" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
             <td><a href="#"><button>Sell On Shopssy</button></a></td>
-        </tr>
+        </tr> -->
         <tr>
             <td><a href="#"><button><i class="fa fa-truck" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
             <td><a href="#"><button>My Orders</button></a></td>
@@ -902,15 +913,6 @@ if(isset($_SESSION['user_login_id'])) {
             <td><a href="#"><button>Feedback</button></a></td>
         </tr>
         <tr>
-            <td><a href="#"><button><i class="fa fa-wpforms" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="#"><button>Privacy Policy</button></a></td>
-        </tr>
-        <tr>
-            <td><a href="#"><button><i class="fas fa-sticky-note" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
-            <td><a href="#"><button>Terms & Conditions</button></a></td>
-        </tr>
-
-        <tr>
             <td><a href="#"><button><i class="far fa-address-book" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
             <td><a href="./contactus.html"><button>Contact Us</button></a></td>
         </tr>
@@ -918,6 +920,16 @@ if(isset($_SESSION['user_login_id'])) {
         <tr>
             <td><a href="#"><button><i class="fa fa-question-circle" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
             <td><a href="#"><button>Help Centre</button></a></td>
+        </tr>
+
+       
+        <tr>
+            <td><a href="#"><button><i class="fa fa-wpforms" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a href="#"><button>Privacy Policy</button></a></td>
+        </tr>
+        <tr>
+            <td><a href="#"><button><i class="fas fa-sticky-note" style="font-size: 25px;color: #bbbbbb;"></i></button></a></td>
+            <td><a href="#"><button>Terms & Conditions</button></a></td>
         </tr>
 
 </table>
