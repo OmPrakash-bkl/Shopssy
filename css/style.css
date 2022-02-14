@@ -3689,6 +3689,18 @@ width: 100%;
       display: none;
   }
 
+.order_history_table {
+    border: 1px solid rgb(175, 175, 175);
+    padding: 2px;
+    border-collapse: collapse;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.order_history_table td, .order_history_table th {
+    border: 1px solid rgb(175, 175, 175);
+    padding: 5px 3px;
+}
+
   /* My Account Container End */
 
   /* Shortcut Link Container Start */
@@ -4306,6 +4318,7 @@ font-family: Arial, Helvetica, sans-serif;
      .product_display_container1 h2 {
         font-size: 20px;
     }
+   
     
 }
 @media only screen and (min-width: 800px) {
@@ -4706,6 +4719,9 @@ font-family: Arial, Helvetica, sans-serif;
         }
         .notification_page_child_1 h1 {
             margin: 8% 5%;
+        } 
+        .order_history_table {
+            font-size: 14px;
         }
 }
 @media only screen and (max-width: 400px) {
@@ -4956,6 +4972,9 @@ font-family: Arial, Helvetica, sans-serif;
     }
     .notification_page_child_2 h4 {
         margin: 15px 0px 0px 0px;
+    }
+    .order_history_table {
+        font-size: 11px;
     }
    
 }

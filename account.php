@@ -124,7 +124,56 @@ if(isset($_POST['log_out'])){
                 </form>
             </div>
             <h2 class="heading2">ORDER HISTORY</h2>
-            <p>You haven't placed any orders yet.</p>
+            <!-- order history table start -->
+
+           
+            <table class="order_history_table">
+                <tr>
+                    <th>S.No</th>
+                    <th>Order Id</th>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Status</th>
+                </tr>
+
+                <?php
+                $user_identity =  $_SESSION['user_id'];
+                $order_history_query = "SELECT `order_id`, `p_status` FROM `orders_table` WHERE `user_id` = $user_identity;";
+                $s_no = 1;
+                $order_history_result = mysqli_query($con, $order_history_query);
+                if(mysqli_num_rows($order_history_result) > 0) {
+
+
+                while($row = mysqli_fetch_assoc($order_history_result)) {
+                    $order_id = $row['order_id'];
+                    $status = $row['p_status'];
+
+                    $order_history_sub_query = "SELECT * FROM `orders_sub_table` WHERE `order_id` = $order_id;";
+                    $order_history_sub_result = mysqli_query($con, $order_history_sub_query);
+                    while($row_two = mysqli_fetch_assoc($order_history_sub_result)) {
+                        $quantity = $row_two['quantity'];
+                        $prod_id = $row_two['product_id'];
+
+                        $order_history_sub_query_two = "SELECT `p_title` FROM `products` WHERE `p_id` = $prod_id;";
+                        $order_history_sub_result_two = mysqli_query($con, $order_history_sub_query_two);
+                        while($rwo_three = mysqli_fetch_assoc($order_history_sub_result_two)) {
+                            $prod_name = $rwo_three['p_title'];
+                ?>
+                <tr>
+                    <td><?php echo $s_no ?>.</td>
+                    <td>#<?php echo $order_id; ?></td>
+                    <td><?php echo $prod_name; ?></td>
+                    <td><?php echo $quantity; ?></td>
+                    <td><?php echo $status; ?></td>
+                </tr>
+                <?php $s_no++;  } } } } else {
+                    echo "<p>You haven't placed any orders yet.</p>";
+                } ?>
+            </table>
+           
+
+            <!-- order history table end -->
+            
         </div>
     </center>
     <!--my account container end-->
