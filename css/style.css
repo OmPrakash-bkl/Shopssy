@@ -1783,7 +1783,7 @@ font-weight: bold;
 .all_categories_sub_container {
     border: 1px solid #cecece;
     display: inline-block;
-    width: 48%;
+    width: 20%;
     margin: 10px 5px;
     padding: 5px 0px;
 }
@@ -4976,7 +4976,14 @@ font-family: Arial, Helvetica, sans-serif;
     .order_history_table {
         font-size: 11px;
     }
-   
+    .all_categories_sub_container {
+        width: 140px;
+        padding: 5px 5px;
+    }
+    .all_categories_sub_container img {
+        height: 150px;
+        width: 100px;
+    }
 }
 
 @media only screen and (max-width: 300px) {
