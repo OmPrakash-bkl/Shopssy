@@ -1311,3 +1311,14 @@ create table order_tracker(ot_id int(100) AUTO_INCREMENT, order_id int(100), pro
 
 insert into order_tracker(order_id, prod_name, prod_img_name, prod_price, offer_percentage_val, order_date) values
 (1, 'samsung mobile', 'samsung.jpg', 10999, 0, '12/02/22');
+
+24. Notification 
+
+create table notification(n_id int(100) AUTO_INCREMENT, n_title varchar(200), n_content varchar(300), n_time varchar(200), noti_for_who int(100), link varchar(200), primary key(n_id));
+
+insert into notification(n_title, n_content, n_time, noti_for_who, link) values
+('Back In Stock!', 'The blue dress you were looking for is back in stock! Grab it NOW!', '14/02/22 18:44 PM', 0, 'http://localhost:3000/product.php?b_and_i_identification_id=113.3&b_title=Casual+Shirts&sub_cat_identification_id=7.1&sub_cat_identification_id_two=114');
+
+insert into notification(n_title, n_content, n_time, noti_for_who, link) values
+('Free shipping for a month!', 'Hi, this week only we are offering free shipping on all products for a whole month when you sign-up.', '12/02/22 18:00 AM', 0, 'http://localhost:3000/index.php');
+

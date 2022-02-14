@@ -21,47 +21,35 @@ include './header.php';
     <!--notification container start-->
     <center>
     <div class="notification_page_master_container">
-    <a href="#" class="notifi_link">
+        <?php 
+         $user_id =  $_SESSION['user_id'];
+        $notification_retrieve_query = "SELECT * FROM `notification` WHERE `noti_for_who` = 0 OR `noti_for_who` = $user_id;";
+        $notification_retrieve_result = mysqli_query($con, $notification_retrieve_query);
+        while($row = mysqli_fetch_assoc($notification_retrieve_result)) {
+            $notification_link = $row['link'];
+            $notification_title = $row['n_title'];
+            $notification_content = $row['n_content'];
+            $notification_time = $row['n_time'];
+            
+        ?>
+    <a href="<?php echo $notification_link; ?>" class="notifi_link">
         <div class="notification_page_parent_container">
             <div class="notification_page_child_1">
                 <h1>S</h1>
             </div>
             <div class="notification_page_child_2">
-                <h2>Back In Stock!</h2>
-                <p>The yellow dress you were looking for is back in stock! Grab it NOW!</p>
+                <div class="notification_page_child_2_content_div">
+                <h2><?php echo $notification_title; ?></h2>
+                <p><?php echo $notification_content; ?></p>
+                </div>
                 <hr class="hr_line">
-                <h4>14/02/22 12:00AM</h4>
+                <h4><?php echo $notification_time; ?></h4>
             </div>
         </div>
     </a>
 
-    <a href="#" class="notifi_link">
-        <div class="notification_page_parent_container">
-            <div class="notification_page_child_1">
-                <h1>S</h1>
-            </div>
-            <div class="notification_page_child_2">
-                <h2>Back In Stock!</h2>
-                <p>The yellow dress you were looking for is back in stock! Grab it NOW!</p>
-                <hr class="hr_line">
-                <h4>14/02/22 12:00AM</h4>
-            </div>
-        </div>
-    </a>
-
-    <a href="#" class="notifi_link">
-        <div class="notification_page_parent_container">
-            <div class="notification_page_child_1">
-                <h1>S</h1>
-            </div>
-            <div class="notification_page_child_2">
-                <h2>Back In Stock!</h2>
-                <p>The yellow dress you were looking for is back in stock! Grab it NOW!</p>
-                <hr class="hr_line">
-                <h4>14/02/22 12:00AM</h4>
-            </div>
-        </div>
-    </a>
+    <?php } ?>
+  
     </div>
     </center>
     <!--notification container end-->
