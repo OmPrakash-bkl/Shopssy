@@ -1304,3 +1304,10 @@ insert into sub_question_and_answers(ques_id, user_id, is_like, is_dislike) valu
 (2, 31, 1, 0),
 (3, 13, 0, 1),
 (4, 31, 0, 1);
+
+23. Order Tracker 
+
+create table order_tracker(ot_id int(100) AUTO_INCREMENT, order_id int(100), prod_name varchar(200), prod_img_name varchar(200), prod_price int(150), offer_percentage_val int(100), order_date varchar(100), primary key(ot_id));
+
+insert into order_tracker(order_id, prod_name, prod_img_name, prod_price, offer_percentage_val, order_date) values
+(1, 'samsung mobile', 'samsung.jpg', 10999, 0, '12/02/22');

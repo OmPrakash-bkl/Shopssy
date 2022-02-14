@@ -30,7 +30,13 @@ if(isset($_POST['order_req'])) {
     $orders_pro_tot_amt = $_POST['pro_tot_amt'];
     $cook_name = 'TRX_COUNTER';
     if(!isset($_COOKIE['TRX_COUNTER'])) {
-    setcookie($cook_name, 0, 0, '/');
+        $cookie_count_query = "SELECT `trx_count` FROM `orders_table`";
+        $cookie_count_result = mysqli_query($con, $cookie_count_query);
+        $cookie_last_count = 0;
+        while($rows = mysqli_fetch_assoc($cookie_count_result)){
+            $cookie_last_count = $rows['trx_count'];
+        }
+        setcookie($cook_name, $cookie_last_count, time() + (86400 * 730), '/');
     } else {
     $cookie_count_query = "SELECT `trx_count` FROM `orders_table`";
     $cookie_count_result = mysqli_query($con, $cookie_count_query);
@@ -38,10 +44,10 @@ if(isset($_POST['order_req'])) {
     while($rows = mysqli_fetch_assoc($cookie_count_result)){
         $cookie_last_count = $rows['trx_count'];
     }
-    setcookie($cook_name, $cookie_last_count, 0, '/');
+    setcookie($cook_name, $cookie_last_count, time() + (86400 * 730), '/');
 }
     $orders_trx_id = $_POST['trx_id'];
-    $trx_counter = $_COOKIE[$cook_name];
+    $trx_counter = $cookie_last_count;
     $trx_counter = $trx_counter + 1;
     $orders_trx_id = $orders_trx_id."".$trx_counter;
     $orders_cart_type = stripcslashes($orders_cart_type);
@@ -81,10 +87,39 @@ if(isset($_POST['order_req'])) {
         while($row = mysqli_fetch_assoc($cart_details__result)) {
             $cart_details_product_id = $row['product_id'];
             $cart_details_quantity = $row['quantity'];
-           
+            $cart_details_pro_type = $row['pro_type'];
+
         $orders_sub_table_query = "INSERT INTO `orders_sub_table` (`order_id`, `product_id`, `quantity`) VALUES ($orders_order_id, $cart_details_product_id, $cart_details_quantity);";mysqli_query($con, $orders_sub_table_query);
+
+        $select_name_of_product_details_query = "SELECT * FROM `products` WHERE `p_id` = $cart_details_product_id;";
+        $select_name_of_product_details_result = mysqli_query($con, $select_name_of_product_details_query);
+        while($prod_det_row = mysqli_fetch_assoc($select_name_of_product_details_result)) {
+            $prod_name = $prod_det_row['p_title'];
+            $prod_img_name = $prod_det_row['p_image'];
+            $prod_p_o_price = $prod_det_row['p_o_price'];
+            $prod_p_a_price = $prod_det_row['p_a_price'];
         
-        } 
+
+        $get_prod_price = 0;
+        $prod_offer_percentage = 0;
+
+        if($cart_details_pro_type == 'normal') {
+            $get_prod_price = $prod_p_o_price;
+            $prod_offer_percentage = 0;
+        } elseif($cart_details_pro_type == 'offer') {
+            $get_prod_price = $prod_p_a_price;
+            $prod_offer_percentage = ($prod_p_o_price - $prod_p_a_price) / $prod_p_o_price;
+            $prod_offer_percentage = $prod_offer_percentage * 100;
+        } else {
+            $get_prod_price = floor($prod_p_o_price / 2);
+            $prod_offer_percentage = 50;
+        }
+
+        $order_tracker_query = "INSERT INTO `order_tracker` (`order_id`, `prod_name`, `prod_img_name`, `prod_price`, `offer_percentage_val`, `order_date`) VALUES ($orders_order_id, '$prod_name', '$prod_img_name', $get_prod_price, $prod_offer_percentage, '$orders_date');";
+        mysqli_query($con, $order_tracker_query);
+        }
+
+        }
     }
 
     $user_detail_retrieve_query = "SELECT * FROM `account` WHERE `user_id` =  $orders_user_id;";
@@ -209,7 +244,23 @@ if(isset($_POST['order_req'])) {
                 text-decoration: none;
                 color: #1792E9;
             }
-           
+            .order_tracker_btn_of_order_page button {
+                padding: 10px 20px;
+                border: 0px;
+                border-radius: 5px;
+                background-color: #22A1FD;
+                color: white;
+                font-weight: bold;
+                font-size: 18px;
+                cursor: pointer;
+                margin: 10px 0px;
+                transition: background-color 0.2s;
+            }
+            
+            .order_tracker_btn_of_order_page button:hover {
+                background-color: #7A7CEE;
+            }
+
         </style>
     </head>
     <body>
@@ -264,7 +315,15 @@ if(isset($_POST['order_req'])) {
             </tr>
         </table>
         <hr>
+        
+        <center>
+        <div class='order_tracker_btn_of_order_page'>
+        <a href='http://localhost:3000/order_tracker.php?ordered_id=$orders_order_id'><button>Track Order</button></a>
+        </div>
+        </center>
+        
         <p class='help_para'>If you have any questions, contact shopssy at <a href='http://localhost:3000/contactus.php'>http://localhost:3000/contactus.php</a> or call at <a href='tel: 1234567890'>+91 1234567890</a>.</p>
+        
     </body>
     </html>
     ";

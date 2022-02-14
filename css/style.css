@@ -3814,6 +3814,8 @@ width: 100%;
 
 .product_display_parent_container {
     display: flex;
+    border-left: 1px solid gainsboro;
+    border-right: 1px solid gainsboro;
 }
 
 .product_display_container1 {
