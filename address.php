@@ -37,7 +37,7 @@ if(isset($_POST['add_address'])){
    $country = mysqli_real_escape_string($con, $country);
    $state = mysqli_real_escape_string($con, $state);
 
-   if(preg_match($nameval, $fir_name) and preg_match($nameval, $las_name) and preg_match($nameval, $city) and preg_match($nameval, $country) and preg_match($nameval, $state) and preg_match($numberval, $zip) and preg_match($numberval, $phone)) {
+   if(preg_match($nameval, $city) and preg_match($nameval, $country) and preg_match($nameval, $state) and preg_match($numberval, $zip) and preg_match($numberval, $phone)) {
     if(isset($_POST['checkbox'])) {
         $checkbox = "default";
     } else {
@@ -103,7 +103,7 @@ if(isset($_POST['update_acc_details'])) {
    $country1 = mysqli_real_escape_string($con, $country1);
    $state1 = mysqli_real_escape_string($con, $state1);
 
-   if(preg_match($nameval, $fir_name1) and preg_match($nameval, $las_name1) and preg_match($nameval, $city1) and preg_match($nameval, $country1) and preg_match($nameval, $state1) and preg_match($numberval, $zip1) and preg_match($numberval, $phone1)) {
+   if(preg_match($nameval, $city1) and preg_match($nameval, $country1) and preg_match($nameval, $state1) and preg_match($numberval, $zip1) and preg_match($numberval, $phone1)) {
     if(isset($_POST['checkbox1'])) {
         $checkbox1 = "default";
     } else {
