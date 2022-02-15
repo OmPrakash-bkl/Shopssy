@@ -1325,3 +1325,43 @@ insert into notification(n_title, n_content, n_time, noti_for_who, link, pro_id)
 insert into notification(n_title, n_content, n_time, noti_for_who, link, pro_id) values
 ('Free shipping for a month!', 'Hi, this week only we are offering free shipping on all products for a whole month when you sign-up.', '12/02/22 18:00 AM', 33, 'http://localhost:3000/index.php', 0);
 
+
+25. NewsLetter 
+
+create table newsletter(s_id int(100) AUTO_INCREMENT, html_data text, title varchar(200), subject varchar(250), primary key(s_id));
+
+insert into newsletter(html_data, title, subject) values
+("<!DOCTYPE html>
+<html lang='en'>
+<head>
+   <style>
+       * {
+           margin: 0px;
+           padding: 0px;
+           box-sizing: border-box;
+       }
+       .poster_images {
+           width: 80%;
+           margin: 10px 5px;
+       }
+       
+   </style>
+</head>
+<body>
+    <center>
+        <a href='http://localhost:3000/product.php?b_and_i_identification_id=117.4&b_title=Fossil&sub_cat_identification_id=9.1&sub_cat_identification_id_two=118'>
+            <img src='./images/newsletter_img1.jpg' class='poster_images' alt='Fossil Watches'>
+        </a>
+        <a href='http://localhost:3000/product.php?b_and_i_identification_id=117.4&b_title=Fossil&sub_cat_identification_id=9.1&sub_cat_identification_id_two=118'>
+            <img src='./images/newsletter_img2.jpg' class='poster_images' alt='Fossil Watches'>
+        </a>
+        <a href='http://localhost:3000/product.php?b_and_i_identification_id=117.4&b_title=Fossil&sub_cat_identification_id=9.1&sub_cat_identification_id_two=118'>
+            <img src='./images/newsletter_img3.jpg' class='poster_images' alt='Fossil Watches'>
+        </a>
+        <a href='http://localhost:3000/product.php?b_and_i_identification_id=117.4&b_title=Fossil&sub_cat_identification_id=9.1&sub_cat_identification_id_two=118'>
+            <img src='./images/newsletter_img4.jpg' class='poster_images' alt='Fossil Watches'>
+        </a>
+    </center>
+</body>
+</html>", "NewsLetter", "Fossil Smartwatch At Rs.7999.00 Only!");
+
