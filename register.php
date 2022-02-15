@@ -8,9 +8,7 @@ if(isset($_POST['submit'])) {
     $l_name = $_POST['l_name'];
     $email = $_POST['email'];
     $pass = $_POST['password'];
-    $nameval = "/^[a-zA-Z ]+$/";
     $emailval = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$/";
-    $numberval = "/^[0-9]+$/";
     $f_name = stripcslashes($f_name);
     $l_name = stripcslashes($l_name);
     $pass = stripcslashes($pass);
@@ -18,7 +16,7 @@ if(isset($_POST['submit'])) {
     $l_name = mysqli_real_escape_string($con, $l_name);
     $pass = mysqli_real_escape_string($con, $pass);
 
-    if(preg_match($nameval, $f_name) and preg_match($nameval, $l_name) and preg_match($emailval, $email)) {
+    if(preg_match($emailval, $email)) {
         $check_query = "SELECT * FROM `register` WHERE `email` = '$email';";
         $check_result = mysqli_query($con, $check_query);
         $check_rows = mysqli_num_rows($check_result);

@@ -1986,7 +1986,7 @@ font-weight: bold;
 /* Category Products Container Start */
 
 .category_products_container_products_inner_divs {
-    height: 340px;
+    height: 360px;
     width: 200px;
     border: 1px solid rgb(220, 220, 220, 0.4);
     display: inline-block;
@@ -2011,6 +2011,7 @@ font-weight: bold;
 .category_products_container_products_inner_divs a {
     text-decoration: none;
     color: none;
+    text-align: left;
 }
 .category_products_container_products_inner_text_divs div .fa-star {
     color: #CDBDCA;
@@ -2027,6 +2028,7 @@ font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: rgb(85, 85, 85);
+    text-align: left;
 }
 .category_products_container_products_inner_text_divs div h2 {
     font-family: Arial, Helvetica, sans-serif;
@@ -2055,6 +2057,14 @@ font-weight: bold;
     content: "";
     clear: both;
     display: table;
+}
+.category_products_container_products_inner_btn_divs form {
+    display: inline-block;
+}
+.category_products_container_products_inner_text_divs .offer_value {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 5px 0px;
+    color: orangered;
 }
 
 /* Category Products Container End */

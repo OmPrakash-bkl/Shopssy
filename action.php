@@ -1,6 +1,6 @@
 <?php 
-error_reporting(0);
-ini_set('display_errors', 0);
+// error_reporting(0);
+// ini_set('display_errors', 0);
 include './db_con.php';
  session_start();
 // $_SESSION['user_login_id'] = "ram@gmail.comShopssy";

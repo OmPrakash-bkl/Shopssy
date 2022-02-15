@@ -1,6 +1,9 @@
 <?php 
 include './action.php';
 
+if(isset($_SESSION['user_login_email'])) {
+
+
 $user_mail_id = $_SESSION['user_login_email'];
 
 $check_email_sub_query = "SELECT * FROM `email_subscription` WHERE `user_email` = '$user_mail_id';";
@@ -53,6 +56,7 @@ if($_COOKIE['N32SL33673R'] != $newsletter_s_id) {
     }
 }
 
+}
 }
 
 $_SESSION['prod_qty'] = 1;
