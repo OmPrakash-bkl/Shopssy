@@ -129,7 +129,7 @@ if(isset($_POST['continue_to_ship'])) {
    $country = mysqli_real_escape_string($con, $country);
    $state = mysqli_real_escape_string($con, $state);
 
-   if(preg_match($nameval, $fir_name) and preg_match($nameval, $las_name) and preg_match($nameval, $city) and preg_match($nameval, $country) and preg_match($nameval, $state) and preg_match($numberval, $zip) and preg_match($numberval, $phone)) {
+   if(preg_match($nameval, $city) and preg_match($nameval, $country) and preg_match($nameval, $state) and preg_match($numberval, $zip) and preg_match($numberval, $phone)) {
 
    if($address_upload_type == "default") {
    
@@ -224,117 +224,10 @@ if(isset($_POST['new_add'])) {
 
             <h2 class="heading_of_info_div"><a href="#">Shopssy</a></h2>
 
-            <div class="information_inner_container_for_mobile">
-                <button class="show_summary_btn"><i class="fas fa-shopping-cart"></i> show order summary <i class="fa fa-angle-down"></i></button>
-                <span> &#8377; 1,004.00</span>
-
-                <div class="information_inner_container2 information_inner_container2_of_mobile">
-                    <div class="information_inner_container2_1st">
-                        <div class="information_inner_container2_divs">
-                            <div class="information_inner_container2_divs_image">
-                                <img src="./images/mob_image_2.jpg" alt="mobile image">
-                            </div>
-                            <div class="information_inner_container2_divs_title information_inner_container2_divs_title1">
-                             <h5>Lorem ipsum dolor</h5>
-                             <p>Lorem ipsum</p>
-                            </div>
-                            <div class="information_inner_container2_divs_qty information_inner_container2_divs_qty1">
-                            X 1
-                            </div>
-                            <div class="information_inner_container2_divs_price">
-                                &#8377; 120.00
-                            </div>
-                        </div>
-            
-                        <div class="information_inner_container2_divs">
-                            <div class="information_inner_container2_divs_image">
-                                <img src="./images/smart_watch_image_1.jpg" alt="mobile image">
-                            </div>
-                            <div class="information_inner_container2_divs_title information_inner_container2_divs_title1">
-                             <h5>Lorem ipsum dolor</h5>
-                             <p>Lorem ipsum</p>
-                            </div>
-                            <div class="information_inner_container2_divs_qty information_inner_container2_divs_qty1">
-                            X 2
-                            </div>
-                            <div class="information_inner_container2_divs_price">
-                                &#8377; 240.00
-                            </div>
-                        </div>
-            
-                        <div class="information_inner_container2_divs">
-                            <div class="information_inner_container2_divs_image">
-                                <img src="./images/speaker1_image_1.jpg" alt="mobile image">
-                            </div>
-                            <div class="information_inner_container2_divs_title information_inner_container2_divs_title1">
-                             <h5>Lorem ipsum dolor</h5>
-                             <p>Lorem ipsum</p>
-                            </div>
-                            <div class="information_inner_container2_divs_qty information_inner_container2_divs_qty1">
-                            X 1
-                            </div>
-                            <div class="information_inner_container2_divs_price">
-                                &#8377; 120.00
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="information_inner_container2_1st">
-                        <div class="information_inner_container2_divs1">
-                            <div class="information_inner_container2_divs_txt">
-                                <p>subtotal</p>
-                            </div>
-                            <div class="information_inner_container2_divs_title">
-                             
-                            </div>
-                            <div class="information_inner_container2_divs_qty">
-                           
-                            </div>
-                            <div class="information_inner_container2_divs_pricez">
-                                &#8377; 120.00
-                            </div>
-                        </div>
-            
-                        <div class="information_inner_container2_divs1">
-                            <div class="information_inner_container2_divs_txt">
-                                <p>shipping</p>
-                            </div>
-                            <div class="information_inner_container2_divs_title">
-                             
-                            </div>
-                            <div class="information_inner_container2_divs_qty">
-                           
-                            </div>
-                            <div class="information_inner_container2_divs_pricez">
-                                &#8377; 20.00
-                            </div>
-                        </div>
-                        
-                    </div>
-        
-                    <div class="information_inner_container2_1st">
-                        <div class="information_inner_container2_divs1">
-                            <div class="information_inner_container2_divs_txt1">
-                                <p>Total</p>
-                            </div>
-                            <div class="information_inner_container2_divs_title">
-                             
-                            </div>
-                            <div class="information_inner_container2_divs_qty">
-                           
-                            </div>
-                            <div class="information_inner_container2_divs_pricez1">
-                                &#8377; 1,004.00
-                            </div>
-                        </div>
-            
-                        
-                    </div>
-        
-        
-                </div>
-
-            </div>
+           
+           <?php
+           include './cart_detail_of_mobile.php';
+           ?>
 
             <div class="sub_navigation_of_info_div_inner_container">
                 <span><a href="./cart.php">Cart</a></span>
@@ -409,7 +302,6 @@ if(isset($_POST['new_add'])) {
             <div class="information_inner_container2_1st">
 
             <?php 
-            
          
             $user_id = $_SESSION['user_id'];
             $cart_details_query = "SELECT * FROM `cart` WHERE `u_id` = $user_id;";
