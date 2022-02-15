@@ -606,7 +606,11 @@ if(isset($_SESSION['user_login_id'])) {
            <!--shortcut link for user container start-->
            <div class="shortcut_link_for_user_container">
                <table>
-                   <tr>
+
+               <?php
+               if(isset( $_SESSION['user_id'])) {
+                   ?>
+                  <tr>
                        <td><button><i class="fa fa-user" aria-hidden="true"></i></button></td>
                        <td><a href="./account.php"><button>My Account</button></a></td>
                    </tr>
@@ -614,15 +618,41 @@ if(isset($_SESSION['user_login_id'])) {
                        <td colspan="2">--------------------</td>
                    </tr>
                    <tr>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                     <td><button><i class="fa fa-sign-out" aria-hidden="true"></i></button></td>
-                    <td><a href="#"><button>Log Out</button></a></td>
-                </tr>
+                    <td><a href="#"><button name="logout">Log Out</button></a></td>
+                    </form>
+                   </tr>
+
+                   <?php
+               } else {
+                   ?>
+                   <tr>
+                       <td><button><i class="fas fa-sign-in-alt"></i></button></td>
+                       <td><a href="./login.php"><button>Log in</button></a></td>
+                   </tr>
+                   <tr>
+                       <td colspan="2">--------------------</td>
+                   </tr>
+                   <tr>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <td><button><i class="fas fa-user-plus"></i></button></td>
+                    <td><a href="./register.php"><button>Register</button></a></td>
+                    </form>
+                   </tr>
+
+                   <?php
+               }
+               ?>
+
+                  
+
                 <tr>
                     <td colspan="2">--------------------</td>
                 </tr>
                 <tr>
                     <td><button><i class="fas fa-check-circle"></i></button></td>
-                    <td><a href="./payment.html"><button>Checkout</button></a></td>
+                    <td><a href="./information.php"><button>Checkout</button></a></td>
                 </tr>
                 <tr>
                     <td colspan="2">--------------------</td>
@@ -899,8 +929,39 @@ if(isset($_SESSION['user_login_id'])) {
    </div>
    <div class="nav_hamburger_content_division">
     <div id="hamburger_btn_login_signup_btn_div">
+            
+            <?php
+            if(!isset( $_SESSION['user_id'])) {
+                ?>
             <a href="#"><button id="hamburger_btn_user_icon"><i class="far fa-user" style="font-size: 25px;color: #45b2ff;"></i></button></a>
-            <a href="./login.php"><button id="hamburger_btn_login_btn">LOGIN</button></a> <a href="./register.php"><button id="hamburger_btn_signup_btn">SIGNUP</button></a>
+            <a href="./login.php"><button id="hamburger_btn_login_btn">LOGIN</button></a>
+            <a href="./register.php"><button id="hamburger_btn_signup_btn">SIGNUP</button></a>
+                <?php
+            } else {
+                $user_id = $_SESSION['user_id'];
+                $select_user_name_query = "SELECT `my_name` FROM `account` WHERE `user_id` = $user_id";
+                $select_user_name_result = mysqli_query($con, $select_user_name_query);
+                while($row = mysqli_fetch_assoc($select_user_name_result)) {
+                    $full_name = $row['my_name'];
+                }
+                if($full_name == "" OR $full_name == "   ") {
+                    $select_user_name_query = "SELECT `f_name`, `l_name` FROM `register` WHERE `user_id` = $user_id";
+                    $select_user_name_result = mysqli_query($con, $select_user_name_query);
+                    while($row = mysqli_fetch_assoc($select_user_name_result)) {
+                        $f_name = $row['f_name'];
+                        $l_name = $row['l_name'];
+                    }
+                    $full_name = $f_name." ".$l_name;
+                }
+                ?>
+                <h3 class="register_person_name"><?php echo $full_name; ?></h3>
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                <button id="hamburger_btn_signup_btn"  name="logout">Log Out</button>
+                </form>
+                <?php
+            }
+            ?>
+            
       </div>
 <table>
     

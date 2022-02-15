@@ -586,6 +586,12 @@ text-align: left;
     color: black;
 }
 
+.register_person_name {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    margin: 0px 0px 5px 0px;
+}
+
 /* Navigation Container For Mobile End */
 
 /* Three Image Ad Container Start */
