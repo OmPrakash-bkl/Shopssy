@@ -26,76 +26,7 @@ if(isset($_GET['b_title'])) {
 }
 
 
-function redirect() {
-    if(isset($_GET['b_title'])) {
-        $b_title = $_GET['b_title'];
-        ?>
-        <input type="hidden" name="b_title" value="<?php echo $b_title; ?>">
-        <?php
-    }
-    if(isset($_GET['b_and_i_identification_id'])) {
-        $b_and_i_identification_id = $_GET['b_and_i_identification_id'];
-        ?>
-        <input type="hidden" name="b_and_i_identification_id" value="<?php echo $b_and_i_identification_id; ?>">
-        <?php
-    }
-    if(isset($_GET['sub_cat_identification_id'])) {
-        $sub_cat_identification_id = $_GET['sub_cat_identification_id'];
-        ?>
-        <input type="hidden" name="sub_cat_identification_id" value="<?php echo $sub_cat_identification_id; ?>">
-        <?php
-    }
-    if(isset($_GET['sub_cat_identification_id_two'])) {
-        $sub_cat_identification_id_two = $_GET['sub_cat_identification_id_two'];
-        ?>
-        <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $sub_cat_identification_id_two; ?>">
-        <?php
-    }
-   
-    if(isset($_GET['sub_cat_title'])) {
-        $sub_cat_title = $_GET['sub_cat_title'];
-        ?>
-        <input type="hidden" name="sub_cat_title" value="<?php echo $sub_cat_title; ?>">
-        <?php
-    }
-    if(isset($_GET['s'])) {
-        $s = $_GET['s'];
-        ?>
-        <input type="hidden" name="s" value="<?php echo $s; ?>">
-        <?php
-    }
-    if(isset($_GET['t'])) {
-        $t = $_GET['t'];
-        ?>
-        <input type="hidden" name="t" value="<?php echo $t; ?>">
-        <?php
-    }
-    if(isset($_GET['sort'])) {
-        $sort = $_GET['sort'];
-        ?>
-        <input type="hidden" name="sort" value="<?php echo $sort; ?>">
-        <?php
-    }
-    if(isset($_GET['page'])) {
-        $page = $_GET['page'];
-        ?>
-        <input type="hidden" name="page" value="<?php echo $page; ?>">
-        <?php
-    }
-    if(isset($_GET['inc'])) {
-        $inc = $_GET['inc'];
-        ?>
-        <input type="hidden" name="inc" value="<?php echo $inc; ?>">
-        <?php
-    }
-    if(isset($_GET['dec'])) {
-        $dec = $_GET['dec'];
-        ?>
-        <input type="hidden" name="dec" value="<?php echo $dec; ?>">
-        <?php
-    }
-   
-}
+include './redirect_fun.php';
 
 if(isset($_GET['sub_cat_identification_id'])) {
     $product_sub_cat_identification_id = $_GET['sub_cat_identification_id'];
@@ -158,11 +89,58 @@ if(isset($_GET['product_id'])) {
        if(!window.location.hash) {
         window.location = window.location + '#loaded';
         window.location.reload();
-       }
-}
+              }
+          }
         </script>
         <?php
 }
+
+
+if(isset($_GET['wish_btn'])) {
+    $produc_id = $_GET['productt_id'];
+    if(isset($_SESSION['user_login_id'])) {
+        $users_id = $_SESSION['user_id'];
+        $pro_type = 'offer';
+        $check_query = "SELECT * FROM `mywishlist` WHERE (`user_id` = $users_id AND `prod_id` = $produc_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`, `pro_type`) VALUES ($users_id, $produc_id, '$pro_type');";
+            mysqli_query($con, $wishlist_insert_query);
+        }
+       
+    } else {
+        $token_of_wishlist = "W937LI25A856T0K3N";
+        $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
+        $pro_type = 'offer';
+        $check_query = "SELECT * FROM `unnamed_user_wishlist` WHERE (`un_u_wishlist_token` = $token_for_un_u_wishlist_details AND `prod_id_of_wishlist` = $produc_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else { 
+            $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`, `pro_type`) VALUES ($token_for_un_u_wishlist_details, $produc_id, '$pro_type');";
+            mysqli_query($con, $wishlist_insert_query);
+        }
+       
+    }
+  
+    
+    ?>
+    <script type="text/javascript">
+   window.onload = function() {
+   if(!window.location.hash) {
+    window.location = window.location + '#loaded';
+    window.location.reload();
+          }
+      }
+    </script>
+    <?php
+}
+
+
 
 if(isset($_GET['searchItem'])) {
    
@@ -726,12 +704,15 @@ if(isset($_GET['searchItem'])) {
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
                     <input type="hidden" name="productt_id" value="<?php echo $category_products_p_id; ?>">
                     <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
+                    <?php 
+                    redirect();
+                    ?>
                     </form>
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
-                    <input type="hidden" name="productt_id" value="<?php echo $category_products_p_id; ?>">
-                    <input type="hidden" name="sub_cat_identification_id" value="<?php echo $product_subs_cat_identification_id; ?>">
-                    <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
-                    </form>
+                    <form action="./view_of_product.php" method="GET">
+                     <input type="hidden" name="p_id" value="<?php echo $category_products_p_id; ?>">
+                     <input type="hidden" name="sub_cat_id" value="<?php echo $category_products_subs_cat_identification_id; ?>">
+                     <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
+                     </form>
                 </div>
             </div>
             
@@ -850,20 +831,23 @@ if(isset($_GET['searchItem'])) {
                </a>
                 <div class="category_products_container_products_inner_btn_divs">
                 <form action="./product.php" method="GET">
-                <?php 
+                    <button title="Add To Cart" name="product_id" value="<?php echo $category_products_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
+                    <?php 
                     redirect();
                     ?>
-                    <button title="Add To Cart" name="product_id" value="<?php echo $category_products_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
                     </form>
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
                     <input type="hidden" name="productt_id" value="<?php echo $category_products_p_id; ?>">
                     <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
+                    <?php 
+                    redirect();
+                    ?>
                     </form>
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
-                    <input type="hidden" name="productt_id" value="<?php echo $category_products_p_id; ?>">
-                    <input type="hidden" name="sub_cat_identification_id" value="<?php echo $product_subs_cat_identification_id; ?>">
-                    <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
-                    </form>
+                    <form action="./view_of_product.php" method="GET">
+                    <input type="hidden" name="p_id" value="<?php echo $category_products_p_id; ?>">
+                     <input type="hidden" name="sub_cat_id" value="<?php echo $category_products_subs_cat_identification_id; ?>">
+                     <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
+                     </form>
                 </div>
             </div>
             
@@ -975,20 +959,23 @@ if(isset($_GET['searchItem'])) {
         </a>
          <div class="category_products_container_products_inner_btn_divs">
          <form action="./product.php" method="GET">
-         <?php 
-          redirect();
-        ?>
         <button title="Add To Cart" name="product_id" value="<?php echo $category_products_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
+        <?php 
+        redirect();
+        ?>
         </form>
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
         <input type="hidden" name="productt_id" value="<?php echo $category_products_p_id; ?>">
         <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
+        <?php 
+        redirect();
+        ?>
         </form>
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
-        <input type="hidden" name="productt_id" value="<?php echo $category_products_p_id; ?>">
-        <input type="hidden" name="sub_cat_identification_id" value="<?php echo $product_subs_cat_identification_id; ?>">
-        <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
-        </form>
+        <form action="./view_of_product.php" method="GET">
+    <input type="hidden" name="p_id" value="<?php echo $category_products_p_id; ?>">
+    <input type="hidden" name="sub_cat_id" value="<?php echo $category_products_subs_cat_identification_id; ?>">
+    <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
+    </form>
          </div>
       </div>
       
@@ -1117,18 +1104,21 @@ if(isset($_GET['searchItem'])) {
     </a>
      <div class="category_products_container_products_inner_btn_divs">
      <form action="./product.php" method="GET">
-     <?php 
-       redirect();
-       ?>
     <button title="Add To Cart" name="product_id" value="<?php echo $category_products_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
+    <?php 
+    redirect();
+    ?>
     </form>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
     <input type="hidden" name="productt_id" value="<?php echo $category_products_p_id; ?>">
     <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
+    <?php 
+    redirect();
+    ?>
     </form>
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
-    <input type="hidden" name="productt_id" value="<?php echo $category_products_p_id; ?>">
-    <input type="hidden" name="sub_cat_identification_id" value="<?php echo $product_subs_cat_identification_id; ?>">
+    <form action="./view_of_product.php" method="GET">
+    <input type="hidden" name="p_id" value="<?php echo $category_products_p_id; ?>">
+    <input type="hidden" name="sub_cat_id" value="<?php echo $category_products_subs_cat_identification_id; ?>">
     <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
     </form>
      </div>

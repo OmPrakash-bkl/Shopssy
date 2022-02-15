@@ -31,8 +31,106 @@ while($row = mysqli_fetch_assoc($category_products_result)) {
 }
 }
 
+include './redirect_fun.php';
+
 $title = $searchKeyword . " - Shopssy";
 include './header.php';
+
+if(isset($_GET['product_id'])) {
+    if(isset($_SESSION['user_login_id'])) {
+        $user_id = $_SESSION['user_id'];
+        $product_id = $_GET['product_id'];
+        
+        $pro_type = 'offer';
+        $check_query = "SELECT * FROM `cart` WHERE (`u_id` = $user_id AND `product_id` = $product_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_no_of_row = mysqli_num_rows($check_result);
+        if($check_no_of_row >= 1) {
+            echo "";
+        } else {
+            $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($user_id, $product_id, 1, 0, '', '$pro_type')";
+            mysqli_query($con, $cart_query);
+        }
+
+
+    } else {
+
+        $prod_id_for_unnamed_cart_details = $_GET['product_id'];
+          if(isset($_COOKIE['T093NO5A86H'])) {
+            $token_of_auth = "T093NO5A86H";
+            $token_for_un_u_cart_details = $_COOKIE[$token_of_auth];
+          }
+         
+        $pro_type = 'offer';
+        $check_query = "SELECT * FROM `unnamed_user_cart` WHERE (`un_u_cart_token` = $token_for_un_u_cart_details AND `prod_id_of_cart` = $prod_id_for_unnamed_cart_details);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $unnamed_user_cart_details_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `pro_type`) VALUES ($token_for_un_u_cart_details, $prod_id_for_unnamed_cart_details, 1, '$pro_type');";
+            mysqli_query($con, $unnamed_user_cart_details_insert_query);
+        }
+
+       
+    }
+        ?>
+        <script type="text/javascript">
+       window.onload = function() {
+       if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+              }
+          }
+        </script>
+        <?php
+}
+
+
+if(isset($_GET['wish_btn'])) {
+    $produc_id = $_GET['productt_id'];
+    if(isset($_SESSION['user_login_id'])) {
+        $users_id = $_SESSION['user_id'];
+        $pro_type = 'offer';
+        $check_query = "SELECT * FROM `mywishlist` WHERE (`user_id` = $users_id AND `prod_id` = $produc_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`, `pro_type`) VALUES ($users_id, $produc_id, '$pro_type');";
+            mysqli_query($con, $wishlist_insert_query);
+        }
+       
+    } else {
+        $token_of_wishlist = "W937LI25A856T0K3N";
+        $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
+        $pro_type = 'offer';
+        $check_query = "SELECT * FROM `unnamed_user_wishlist` WHERE (`un_u_wishlist_token` = $token_for_un_u_wishlist_details AND `prod_id_of_wishlist` = $produc_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else { 
+            $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`, `pro_type`) VALUES ($token_for_un_u_wishlist_details, $produc_id, '$pro_type');";
+            mysqli_query($con, $wishlist_insert_query);
+        }
+       
+    }
+  
+    
+    ?>
+    <script type="text/javascript">
+   window.onload = function() {
+   if(!window.location.hash) {
+    window.location = window.location + '#loaded';
+    window.location.reload();
+          }
+      }
+    </script>
+    <?php
+}
+
 
 ?>
 
@@ -283,7 +381,7 @@ include './header.php';
                 <div>
                     <h4><?php
                         $string_of_title = $category_products_p_title;
-                        if(strlen($string_of_title) > 30) {
+                        if(strlen($string_of_title) > 35) {
                          $string_of_title = explode("\n", wordwrap($string_of_title, 35));
                          $string_of_title = $string_of_title[0].' ...';
                         }
@@ -292,13 +390,33 @@ include './header.php';
                 </div>
                 <div>
                     <h2>&#8377;<?php echo $category_products_p_a_price; ?> <del>&#8377;<?php echo $category_products_p_o_price; ?></del></h2>
+                    <h4 class="offer_value"><?php 
+                    $offer_value = ($category_products_p_o_price - $category_products_p_a_price) / $category_products_p_o_price;
+                    $offer_value = $offer_value * 100;
+                    echo intval($offer_value);
+                    ?>% off</h4>
                 </div>
             </div>
            </a>
             <div class="category_products_container_products_inner_btn_divs">
-                <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                <button title="Quick View"><i class="fas fa-search"></i></button>
+                   <form action="./product3.php" method="GET">
+                    <button title="Add To Cart" name="product_id" value="<?php echo $category_products_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
+                    <?php 
+                    redirect();
+                    ?>
+                    </form>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
+                    <input type="hidden" name="productt_id" value="<?php echo $category_products_p_id; ?>">
+                    <button title="Add To Wishlist" name="wish_btn" ><i class="far fa-heart"></i></button>
+                    <?php 
+                    redirect();
+                    ?>
+                    </form>
+                    <form action="./view_of_product.php" method="GET">
+                     <input type="hidden" name="p_id" value="<?php echo $category_products_p_id; ?>">
+                     <input type="hidden" name="sub_cat_id" value="<?php echo $category_products_subs_cat_identification_id; ?>">
+                     <button title="Quick View" name="view_all_related"><i class="fas fa-search"></i></button>
+                     </form>
             </div>
         </div>
         
