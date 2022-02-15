@@ -533,7 +533,7 @@ if(isset($_GET['searchItem'])) {
                </div>
            </div>
 
-       
+       <center>
            <?php 
            
            $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
@@ -622,7 +622,7 @@ if(isset($_GET['searchItem'])) {
     
     
                           ?>
-                           <div class="category_products_container_products_inner_divs">
+                <div class="category_products_container_products_inner_divs">
                 <img src="./images/<?php echo $category_products_p_image; ?>" alt="products images">
                <a href="./view_of_product.php?p_id=<?php echo $category_products_p_id; ?>&sub_cat_id=<?php echo $category_products_subs_cat_identification_id; ?>">
                 <div class="category_products_container_products_inner_text_divs">
@@ -758,7 +758,8 @@ if(isset($_GET['searchItem'])) {
     
     
                           ?>
-                           <div class="category_products_container_products_inner_divs">
+                          
+                <div class="category_products_container_products_inner_divs">
                 <img src="./images/<?php echo $category_products_p_image; ?>" alt="products images">
                <a href="./view_of_product.php?p_id=<?php echo $category_products_p_id; ?>&sub_cat_id=<?php echo $category_products_subs_cat_identification_id; ?>">
                 <div class="category_products_container_products_inner_text_divs">
@@ -1141,7 +1142,7 @@ if(isset($_GET['searchItem'])) {
         }
 
 ?>
-        
+        </center>
 
 
 <?php if(isset($_SESSION['pagination'])) {
