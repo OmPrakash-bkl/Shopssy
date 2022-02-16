@@ -219,61 +219,128 @@ if(isset($_GET['searchItem'])) {
         </div>
 
         <div class="filter_for_mobile_container_body_container">
-            <center>
+            
                 <div class="filter_for_mobile_container_body_container_inner_container1">
                     <button onclick="show_checkboxes(1)">BRANDS <i class="fa fa-angle-right"></i></button>
-                    <button onclick="show_checkboxes(2)">CUSTOMER RATINGS <i class="fa fa-angle-right"></i></button>
-                    <button onclick="show_checkboxes(3)">COLORS <i class="fa fa-angle-right"></i></button>
+
+               <?php
+
+               $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id_two;";
+                $temp_result = mysqli_query($con, $temp_query);
+                 $dummy1 = 2;
+  
+                 while($row = mysqli_fetch_assoc($temp_result)) {
+                $temp_title = $row['filter_title'];
+                $temp_sub_title = $row['filter_sub_title'];
+                $temp_id = $row['filter_id'];
+                $temp_filter_details_category = $row['filter_details_category'];
+               ?>
+
+                <button onclick="show_checkboxes(<?php echo $dummy1; ?>)"><?php echo $temp_title; ?> <i class="fa fa-angle-right"></i></button>
+
+            <?php $dummy1++; } ?>
+
+
+                    <!-- <button onclick="show_checkboxes(3)">COLORS <i class="fa fa-angle-right"></i></button>
                     <button onclick="show_checkboxes(4)">SIZE <i class="fa fa-angle-right"></i></button>
-                    <button onclick="show_checkboxes(5)">PRICE <i class="fa fa-angle-right"></i></button>
+                    <button onclick="show_checkboxes(5)">PRICE <i class="fa fa-angle-right"></i></button> -->
+
+
+
                 </div>
     
                 <div class="filter_for_mobile_container_body_container_inner_container2">
-                    <form action="" id="filter_for_mobile_form"></form>
+                    
                     <div class="brand_list_container filter_for_mobile_container_body_container_inner_container2_div1">
                             <h3><u>BRANDS</u></h3>
+                    <?php
+
+                     $product_cat_query = "SELECT * FROM `brand_and_item_list` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
+                        $product_cat_result = mysqli_query($con, $product_cat_query);
+                        $temprory_value = 1;
+                        while($row = mysqli_fetch_assoc($product_cat_result)) {
+
+                            $pro_cat_titles = $row['b_title'];
+                            $pro_b_and_i_identification_id = $row['b_and_i_identification_id'];
+                            $pro_subs_cat_identification_id_two = $row['subs_cat_identification_id_two'];
+                            $pro_subs_cat_identification_id = $row['subs_cat_identification_id'];
+
+                        
+                    ?>
+                           
                             <div>
-                                <input type="checkbox" id="Samsung"> <label for="Samsung">Samsung</label>
+                            <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="fliter_form<?php echo $temprory_value; ?>" method="GET">
+                            <input type="hidden" name="b_and_i_identification_id" value="<?php echo $pro_b_and_i_identification_id; ?>">
+                            <input type="checkbox" id="<?php echo $pro_cat_titles; ?>" onchange="document.getElementById('fliter_form<?php echo $temprory_value; ?>').submit()" name="b_title" value="<?php echo $pro_cat_titles; ?>"  class="filter_brand_and_item_divvs"> <label for="<?php echo $pro_cat_titles; ?>"><?php echo $pro_cat_titles; ?></label>
+                            <input type="hidden" name="sub_cat_identification_id" value="<?php echo $pro_subs_cat_identification_id; ?>">
+                             <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $pro_subs_cat_identification_id_two; ?>">
+                             </form>
                             </div>
-                            <div>
-                                <input type="checkbox" id="Realme"> <label for="Realme">Realme</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Poco"> <label for="Poco">Poco</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Redmi"> <label for="Redmi">Redmi</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Apple"> <label for="Apple">Apple</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Infinix"> <label for="Infinix">Infinix</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="OnePlus"> <label for="OnePlus">OnePlus</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Oppo"> <label for="Oppo">Oppo</label>
-                            </div>
+                            
+                            
+                            <?php  $temprory_value++; } ?>
+                           
                         </div>
+
+
     
-                        <div class="rating_list_container filter_for_mobile_container_body_container_inner_container2_div2">
-                            <h3><u>CUSTOMER RATINGS</u></h3>
+
+                        <?php
+
+
+                        $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id_two;";
+                        $temp_result = mysqli_query($con, $temp_query);
+                        $dummy2 = 2;
+  
+                        while($row = mysqli_fetch_assoc($temp_result)) {
+                        $temp_title = $row['filter_title'];
+                       $temp_sub_title = $row['filter_sub_title'];
+                        $temp_id = $row['filter_id'];
+                        $temp_filter_details_category = $row['filter_details_category'];
+                   
+                        ?>
+                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="filter_formm" method="GET">
+                        <div class="rating_list_container filter_for_mobile_container_body_container_inner_container2_div<?php echo $dummy2; ?>">
+                            <h3><u><?php echo $temp_title; ?></u></h3>
+
+                            <?php
+
+                        $temp_sub_query = "SELECT * FROM `filter_sub` WHERE `filters_id`=$temp_id;";
+                        $temp_sub_result = mysqli_query($con, $temp_sub_query);
+                        while($row1 = mysqli_fetch_assoc($temp_sub_result)) {
+                         $temp_sub_filter_datas = $row1['filter_datas'];
+
+                            ?>
+
                             <div>
-                                <input type="checkbox" id="4star"> <label for="4star">4 Star & Above</label>
+                            <input type="checkbox" id="<?php echo $temp_sub_filter_datas; ?>" onchange="document.getElementById('filter_formm').submit()" name="<?php echo $temp_sub_title; ?>" value="<?php echo $temp_sub_filter_datas; ?>"> <label for="<?php echo $temp_sub_filter_datas; ?>"><?php echo $temp_sub_filter_datas; ?></label>
+                            <input type="hidden" name="sub_cat_identification_id" value="<?php echo $pro_subs_cat_identification_id; ?>">
+                            <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $pro_subs_cat_identification_id_two; ?>">
+                            <input type="hidden" name="b_title" value="Filtered Items">
                             </div>
-                            <div>
-                                <input type="checkbox" id="3star"> <label for="3star">3 Star & Above</label>
+                            
+                            <?php } ?>
+                           
                             </div>
-                            <div>
-                                <input type="checkbox" id="2star"> <label for="2star">2 Star & Above</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="1star"> <label for="1star">1 Star & Above</label>
-                            </div>
-                        </div>
-                        <div class="color_list_container filter_for_mobile_container_body_container_inner_container2_div3">
+                            </form>
+
+                             <?php
+                             
+                             if(isset($_GET[$temp_sub_title])) {
+                                $temp_sub_title_data = $_GET[$temp_sub_title];
+                            $filters_retrieving_query = "SELECT `pro_id` FROM `$temp_filter_details_category` WHERE `$temp_sub_title` = '$temp_sub_title_data';";
+                            $filters_retrieving_result = mysqli_query($con, $filters_retrieving_query);
+                            $row_of_filter_counter = 0;
+                            while($row_of_fil = mysqli_fetch_assoc($filters_retrieving_result)) {
+                                $row_of_filter =  $row_of_fil['pro_id'];
+                                $row_of_filter_counter_array[$row_of_filter_counter] = $row_of_filter;
+                                $row_of_filter_counter++;
+                            }
+                            }
+
+                             $dummy2++; } ?>
+
+                        <!-- <div class="color_list_container filter_for_mobile_container_body_container_inner_container2_div3">
                             <h3><u>COLORS</u></h3>
                             <div>
                                 <input type="checkbox" id="Red"> <label for="Red">Red</label>
@@ -317,18 +384,14 @@ if(isset($_GET['searchItem'])) {
                             <div>
                                 <input type="checkbox" id="Nlakh"> <label for="Nlakh">Above 100000</label>
                             </div>
-                        </div>
+                        </div> -->
     
-                        </form>
+                       
                 </div>
-            </center>
+           
         </div>
         
-       <center>
-        <div class="apply_btn_container">
-            <button onclick="document.getElementById('filter_for_mobile_form').submit()">Apply</button>
-        </div>
-       </center>
+      
     </div>
 
     <!--filter for mobile container end-->
