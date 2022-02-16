@@ -339,10 +339,24 @@ if(isset($_GET['searchItem'])) {
        <div class="close_icon_container">
         <span  class="close_icon"><i class="far fa-window-close"></i></span>
        </div>
-        <a href="#"><button><i class="fa fa-dot-circle-o"></i> Alphabetically, A-Z</button></a>
-        <a href="#"><button><i class="fa fa-dot-circle-o"></i> Alphabetically, Z-A</button></a>
-        <a href="#"><button><i class="fa fa-dot-circle-o"></i> Price, low to high</button></a>
-        <a href="#"><button><i class="fa fa-dot-circle-o"></i> Price, high to low</button></a>
+       <?php
+       if(isset($_GET['b_title'])) {
+           ?>
+        <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&sort=1"><button><i class="fa fa-dot-circle-o"></i> Alphabetically, A-Z</button></a>
+        <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&sort=2"><button><i class="fa fa-dot-circle-o"></i> Alphabetically, Z-A</button></a>
+        <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&sort=3"><button><i class="fa fa-dot-circle-o"></i> Price, low to high</button></a>
+        <a href="./product.php?b_title=<?php echo $pagi_b_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&b_and_i_identification_id=<?php echo $pagi_b_and_i_identification_id; ?>&sort=4"><button><i class="fa fa-dot-circle-o"></i> Price, high to low</button></a>
+           <?php
+       } else {
+           ?>
+        <a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sort=1"><button><i class="fa fa-dot-circle-o"></i> Alphabetically, A-Z</button></a>
+        <a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sort=2"><button><i class="fa fa-dot-circle-o"></i> Alphabetically, Z-A</button></a>
+        <a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sort=3"><button><i class="fa fa-dot-circle-o"></i> Price, low to high</button></a>
+        <a href="./product.php?sub_cat_identification_id=<?php echo $pagi_sub_cat_identification_id; ?>&sub_cat_title=<?php echo $pagi_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $pagi_sub_cat_identification_id_two; ?>&sort=4"><button><i class="fa fa-dot-circle-o"></i> Price, high to low</button></a>
+           <?php
+       }
+       ?>
+       
     </div>
     <!--sort for mobile container end-->
 

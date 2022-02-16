@@ -58,10 +58,12 @@ if(document.getElementById("brand_list_container").style.display == "none") {
 
             document.getElementsByClassName("sort_btn")[0].addEventListener("click", function(){
                 document.getElementsByClassName("sort_for_mobile_container")[0].style.display="block";
+                document.body.style.overflow = "hidden";
             });
 
             document.getElementsByClassName("close_icon_container")[0].addEventListener("click", function(){
                 document.getElementsByClassName("sort_for_mobile_container")[0].style.display="none";
+                document.body.style.overflow = "";
             });
 
            function hide_extra_filter_box(total_count) {
