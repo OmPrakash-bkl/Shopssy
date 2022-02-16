@@ -43,9 +43,11 @@ document.getElementsByClassName("brands_container")[0].addEventListener("click",
     
                 document.getElementsByClassName("filter_mobile_arrow")[0].addEventListener("click", function() {
                     document.getElementsByClassName("filter_for_mobile_container")[0].style.display="none";
+                    document.body.style.overflow = "";
                 })
                 document.getElementsByClassName("filter_btn")[0].addEventListener("click", function(){
                     document.getElementsByClassName("filter_for_mobile_container")[0].style.display="block";
+                    document.body.style.overflow = "hidden";
                 });
     
                 let temp = 1;
@@ -68,7 +70,7 @@ document.getElementsByClassName("brands_container")[0].addEventListener("click",
     
                function hide_extra_filter_box(total_count) {
               
-                    document.getElementsByClassName(`rating_list_container`)[total_count].style.display = "none";
+                    document.getElementById(`rating_list_container${total_count}`).style.display = "none";
                 
                
                }

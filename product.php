@@ -242,11 +242,6 @@ if(isset($_GET['searchItem'])) {
                     <?php $dummy++; } ?>
 
 
-                    <!-- <button onclick="show_checkboxes(3)">COLORS <i class="fa fa-angle-right"></i></button>
-                    <button onclick="show_checkboxes(4)">SIZE <i class="fa fa-angle-right"></i></button>
-                    <button onclick="show_checkboxes(5)">PRICE <i class="fa fa-angle-right"></i></button> -->
-
-
                 </div>
     
                 <div class="filter_for_mobile_container_body_container_inner_container2">
@@ -345,58 +340,7 @@ if(isset($_GET['searchItem'])) {
                     } ?>
 
 </form>
-
-
-
-                        
-
-                        <!-- <div class="color_list_container filter_for_mobile_container_body_container_inner_container2_div3">
-                            <h3><u>COLORS</u></h3>
-                            <div>
-                                <input type="checkbox" id="Red"> <label for="Red">Red</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Green"> <label for="Green">Green</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Blue"> <label for="Blue">Blue</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Yellow"> <label for="Yellow">Yellow</label>
-                            </div>
-                        </div>
-                        <div class="size_list_container filter_for_mobile_container_body_container_inner_container2_div4">
-                            <h3><u>SIZE</u></h3>
-                            <div>
-                                <input type="checkbox" id="Small"> <label for="Small">Small</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Medium"> <label for="Medium">Medium</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Large"> <label for="Large">Large</label>
-                            </div>
-                        </div>
-                        <div class="price_bar_container price_bar_container1 filter_for_mobile_container_body_container_inner_container2_div5">
-                            <h3><u>PRICE</u></h3>
-                            <div>
-                                <input type="checkbox" id="Hundred"> <label for="Hundred">5 to 100</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Thousand"> <label for="Thousand">100 to 1000</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Tenthousand"> <label for="Tenthousand">1000 to 10000</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="lakh"> <label for="lakh">10000 to 100000</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="Nlakh"> <label for="Nlakh">Above 100000</label>
-                            </div>
-                        </div> -->
-    
-                        
+         
                 </div>
            
         </div>

@@ -1898,9 +1898,10 @@ font-weight: bold;
 .brands_container, .rating_container, .colors_container, .price_container, .size_container {
     border-bottom: none;
 }
-.brand_list_container, .rating_list_container, .color_list_container, .price_bar_container, .size_list_container  {
+.brand_list_container, .rating_list_container  {
     width: 100%;
     border-bottom: none;
+    display: none;
   
 }
 .brand_list_container div, .rating_list_container div, .color_list_container div, .price_bar_container div, .size_list_container div {
@@ -2200,7 +2201,7 @@ font-weight: bold;
     position: absolute;
     z-index: 2;
     display: none;
-    top: 60%;
+    bottom: 0%;
 }
 .sort_for_mobile_container button {
     display: block;
