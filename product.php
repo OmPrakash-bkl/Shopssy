@@ -223,28 +223,28 @@ if(isset($_GET['searchItem'])) {
                 <div class="filter_for_mobile_container_body_container_inner_container1">
                     <button onclick="show_checkboxes(1)">BRANDS <i class="fa fa-angle-right"></i></button>
 
-               <?php
+                   <?php 
+                   $filter_content_retrieve_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id` = $product_sub_cat_identification_id_two;";
+                   $filter_content_retrieve_result = mysqli_query($con, $filter_content_retrieve_query);
+                   $dummy = 2;
+                   while($row = mysqli_fetch_assoc($filter_content_retrieve_result)) {
+                       $fil_title = $row['filter_title'];
+                       $fil_sub_title = $row['filter_sub_title'];
+                       $fil_id = $row['filter_id'];
+                       $fil_details_category = $row['filter_details_category'];
+                  
 
-               $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id_two;";
-                $temp_result = mysqli_query($con, $temp_query);
-                 $dummy1 = 2;
-  
-                 while($row = mysqli_fetch_assoc($temp_result)) {
-                $temp_title = $row['filter_title'];
-                $temp_sub_title = $row['filter_sub_title'];
-                $temp_id = $row['filter_id'];
-                $temp_filter_details_category = $row['filter_details_category'];
-               ?>
+                   ?>
 
-                <button onclick="show_checkboxes(<?php echo $dummy1; ?>)"><?php echo $temp_title; ?> <i class="fa fa-angle-right"></i></button>
 
-            <?php $dummy1++; } ?>
+                    <button onclick="show_checkboxes(<?php echo $dummy; ?>)"><?php echo $fil_title; ?> <i class="fa fa-angle-right"></i></button>
+
+                    <?php $dummy++; } ?>
 
 
                     <!-- <button onclick="show_checkboxes(3)">COLORS <i class="fa fa-angle-right"></i></button>
                     <button onclick="show_checkboxes(4)">SIZE <i class="fa fa-angle-right"></i></button>
                     <button onclick="show_checkboxes(5)">PRICE <i class="fa fa-angle-right"></i></button> -->
-
 
 
                 </div>
@@ -253,92 +253,102 @@ if(isset($_GET['searchItem'])) {
                     
                     <div class="brand_list_container filter_for_mobile_container_body_container_inner_container2_div1">
                             <h3><u>BRANDS</u></h3>
+
+
                     <?php
 
-                     $product_cat_query = "SELECT * FROM `brand_and_item_list` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
-                        $product_cat_result = mysqli_query($con, $product_cat_query);
-                        $temprory_value = 1;
-                        while($row = mysqli_fetch_assoc($product_cat_result)) {
+                   $category_title_retrieve_query = "SELECT * FROM `brand_and_item_list` WHERE `subs_cat_identification_id` = $product_sub_cat_identification_id;";
+                    $category_title_retrieve_result = mysqli_query($con, $category_title_retrieve_query);
+                    $temp_variable = 1;
+                    while($row = mysqli_fetch_assoc($category_title_retrieve_result)) {
+                    $cat_cat_title = $row['b_title'];
+                     $cat_subs_cat_identification_id = $row['subs_cat_identification_id'];
+                     $cat_subs_cat_identification_id_two = $row['subs_cat_identification_id_two'];
+                     $cat_b_and_i_identification_id = $row['b_and_i_identification_id'];
+                    
 
-                            $pro_cat_titles = $row['b_title'];
-                            $pro_b_and_i_identification_id = $row['b_and_i_identification_id'];
-                            $pro_subs_cat_identification_id_two = $row['subs_cat_identification_id_two'];
-                            $pro_subs_cat_identification_id = $row['subs_cat_identification_id'];
-
-                        
                     ?>
+
+                    <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="fliter_formm<?php echo $temp_variable; ?>" method="GET">
+                    <div>
+                    <input type="hidden" name="b_and_i_identification_id" value="<?php echo $cat_b_and_i_identification_id; ?>">
+                    <input type="checkbox" id="<?php echo $cat_cat_title; ?>" onchange="document.getElementById('fliter_formm<?php echo $temp_variable; ?>').submit()" name="b_title" value="<?php echo $cat_cat_title; ?>"  class="filter_brand_and_item_divvs"> <label for="<?php echo $cat_cat_title; ?>"><?php echo $cat_cat_title; ?></label>
+                    <input type="hidden" name="sub_cat_identification_id" value="<?php echo $cat_subs_cat_identification_id; ?>">
+                    <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $cat_subs_cat_identification_id_two; ?>">
+                    </div>
+                    </form>
                            
-                            <div>
-                            <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="fliter_form<?php echo $temprory_value; ?>" method="GET">
-                            <input type="hidden" name="b_and_i_identification_id" value="<?php echo $pro_b_and_i_identification_id; ?>">
-                            <input type="checkbox" id="<?php echo $pro_cat_titles; ?>" onchange="document.getElementById('fliter_form<?php echo $temprory_value; ?>').submit()" name="b_title" value="<?php echo $pro_cat_titles; ?>"  class="filter_brand_and_item_divvs"> <label for="<?php echo $pro_cat_titles; ?>"><?php echo $pro_cat_titles; ?></label>
-                            <input type="hidden" name="sub_cat_identification_id" value="<?php echo $pro_subs_cat_identification_id; ?>">
-                             <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $pro_subs_cat_identification_id_two; ?>">
-                             </form>
-                            </div>
-                            
-                            
-                            <?php  $temprory_value++; } ?>
+                    <?php $temp_variable++; } ?>
+                           
+                    </div>
+    
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="filters_for_mob_form" method="GET">
+                    <?php 
+                   $filter1_content_retrieve_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id` = $product_sub_cat_identification_id_two;";
+                   $filter1_content_retrieve_result = mysqli_query($con, $filter1_content_retrieve_query);
+                   $dummy = 2;
+                   while($row = mysqli_fetch_assoc($filter1_content_retrieve_result)) {
+                       $fil1_title = $row['filter_title'];
+                       $fil1_sub_title = $row['filter_sub_title'];
+                       $fil1_id = $row['filter_id'];
+                       $fil1_details_category = $row['filter_details_category'];
+
+                   ?>
+
+                    <div class="rating_list_container filter_for_mobile_container_body_container_inner_container2_div<?php echo $dummy; ?>">
+                    <h3><u><?php echo $fil1_title; ?></u></h3>
+
+                    
+                   <?php 
+                  
+                   $fil1_sub_query = "SELECT * FROM `filter_sub` WHERE `filters_id` = $fil1_id;";
+                   $fil1_sub_result = mysqli_query($con, $fil1_sub_query);
+                   while($row1 = mysqli_fetch_assoc($fil1_sub_result)) {
+                    $fil1_sub_filter_datas = $row1['filter_datas'];
+            
+                    ?>         
+                           
+
+           
+
+            <div>
+           <input type="checkbox" id="<?php echo $fil1_sub_filter_datas; ?>" onchange="document.getElementById('filters_for_mob_form').submit()" name="<?php echo $fil1_sub_title; ?>" value="<?php echo $fil1_sub_filter_datas; ?>"> <label for="<?php echo $fil1_sub_filter_datas; ?>"><?php echo $fil1_sub_filter_datas; ?></label>
+           <input type="hidden" name="sub_cat_identification_id" value="<?php echo $cat_subs_cat_identification_id; ?>">
+             <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $cat_subs_cat_identification_id_two; ?>">
+             <input type="hidden" name="b_and_i_identification_id" value="<?php echo $cat_b_and_i_identification_id; ?>">
+             <input type="hidden" name="b_title" value="Filtered Items">
+            </div>
+
+         
+
+                            <?php } ?>
+
                            
                         </div>
 
+                        <?php 
+                        
+                        $dummy++; 
+                    
+                    if(isset($_GET[$fil1_sub_title])) {
+                        $temp_fil1_sub_title_data = $_GET[$fil1_sub_title];
+                    $fil1_filters_retrieving_query = "SELECT `pro_id` FROM `$fil1_details_category` WHERE `$fil1_sub_title` = '$temp_fil1_sub_title_data';";
+                    $fil1_filters_retrieving_result = mysqli_query($con, $fil1_filters_retrieving_query);
+                    $row_of_fil1_filter_counter = 0;
+                    while($row_of_fil = mysqli_fetch_assoc($fil1_filters_retrieving_result)) {
+                        $row_of_fil1_filter =  $row_of_fil['pro_id'];
+                        $row_of_filter_counter_array[$row_of_fil1_filter_counter] = $row_of_fil1_filter;
+                        $row_of_fil1_filter_counter++;
+                    }
+                    }
 
-    
+                    } ?>
 
-                        <?php
+</form>
 
 
-                        $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id_two;";
-                        $temp_result = mysqli_query($con, $temp_query);
-                        $dummy2 = 2;
-  
-                        while($row = mysqli_fetch_assoc($temp_result)) {
-                        $temp_title = $row['filter_title'];
-                       $temp_sub_title = $row['filter_sub_title'];
-                        $temp_id = $row['filter_id'];
-                        $temp_filter_details_category = $row['filter_details_category'];
-                   
-                        ?>
-                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="filter_formm" method="GET">
-                        <div class="rating_list_container filter_for_mobile_container_body_container_inner_container2_div<?php echo $dummy2; ?>">
-                            <h3><u><?php echo $temp_title; ?></u></h3>
 
-                            <?php
-
-                        $temp_sub_query = "SELECT * FROM `filter_sub` WHERE `filters_id`=$temp_id;";
-                        $temp_sub_result = mysqli_query($con, $temp_sub_query);
-                        while($row1 = mysqli_fetch_assoc($temp_sub_result)) {
-                         $temp_sub_filter_datas = $row1['filter_datas'];
-
-                            ?>
-
-                            <div>
-                            <input type="checkbox" id="<?php echo $temp_sub_filter_datas; ?>" onchange="document.getElementById('filter_formm').submit()" name="<?php echo $temp_sub_title; ?>" value="<?php echo $temp_sub_filter_datas; ?>"> <label for="<?php echo $temp_sub_filter_datas; ?>"><?php echo $temp_sub_filter_datas; ?></label>
-                            <input type="hidden" name="sub_cat_identification_id" value="<?php echo $pro_subs_cat_identification_id; ?>">
-                            <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $pro_subs_cat_identification_id_two; ?>">
-                            <input type="hidden" name="b_title" value="Filtered Items">
-                            </div>
-                            
-                            <?php } ?>
-                           
-                            </div>
-                            </form>
-
-                             <?php
-                             
-                             if(isset($_GET[$temp_sub_title])) {
-                                $temp_sub_title_data = $_GET[$temp_sub_title];
-                            $filters_retrieving_query = "SELECT `pro_id` FROM `$temp_filter_details_category` WHERE `$temp_sub_title` = '$temp_sub_title_data';";
-                            $filters_retrieving_result = mysqli_query($con, $filters_retrieving_query);
-                            $row_of_filter_counter = 0;
-                            while($row_of_fil = mysqli_fetch_assoc($filters_retrieving_result)) {
-                                $row_of_filter =  $row_of_fil['pro_id'];
-                                $row_of_filter_counter_array[$row_of_filter_counter] = $row_of_filter;
-                                $row_of_filter_counter++;
-                            }
-                            }
-
-                             $dummy2++; } ?>
+                        
 
                         <!-- <div class="color_list_container filter_for_mobile_container_body_container_inner_container2_div3">
                             <h3><u>COLORS</u></h3>
@@ -386,7 +396,7 @@ if(isset($_GET['searchItem'])) {
                             </div>
                         </div> -->
     
-                       
+                        
                 </div>
            
         </div>
@@ -501,8 +511,7 @@ if(isset($_GET['searchItem'])) {
                 </div>
             </div>
 
-            <?php 
-
+    <?php 
 
    $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id_two;";
    $temp_result = mysqli_query($con, $temp_query);
@@ -541,6 +550,7 @@ if(isset($_GET['searchItem'])) {
            <input type="checkbox" id="<?php echo $temp_sub_filter_datas; ?>" onchange="document.getElementById('filter_form').submit()" name="<?php echo $temp_sub_title; ?>" value="<?php echo $temp_sub_filter_datas; ?>"> <label for="<?php echo $temp_sub_filter_datas; ?>"><?php echo $temp_sub_filter_datas; ?></label>
            <input type="hidden" name="sub_cat_identification_id" value="<?php echo $pro_subs_cat_identification_id; ?>">
              <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $pro_subs_cat_identification_id_two; ?>">
+             <input type="hidden" name="b_and_i_identification_id" value="<?php echo $pro_b_and_i_identification_id; ?>">
              <input type="hidden" name="b_title" value="Filtered Items">
            
          
@@ -1393,9 +1403,9 @@ if(isset($_GET['searchItem'])) {
 
 <?php
 if(isset($_GET['sub_cat_title'])) {
-    $end_value = 2;
-} else {
     $end_value = 1;
+} else {
+    $end_value = 0;
     ?>
     <script>
         document.getElementById("brand_list_container").style.display = "none";
@@ -1413,7 +1423,7 @@ while($dummy > $end_value) {
     hide_extra_filter_box(end_value++);
 </script>
 <?php
-echo "hi";
+
 $end_value++;
 }
 ?>
