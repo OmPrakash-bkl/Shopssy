@@ -11,18 +11,27 @@
 include './action.php';
 
 if(isset($_GET['new_ques'])) {
-    $users_id = $_SESSION['user_id'];
-    $retrieve_name_query = "SELECT `f_name`, `l_name` FROM `register` WHERE `user_id` = $users_id;";
-    $retrieve_name_result = mysqli_query($con, $retrieve_name_query);
-    $fetch_name = mysqli_fetch_assoc($retrieve_name_result);
-    $full_name = $fetch_name['f_name']." ".$fetch_name['l_name'];
-   $product_id = $_GET['p_id'];
-   $new_ques = $_GET['new_ques'];
-   $new_ques = stripcslashes($new_ques);
-   $new_ques = mysqli_real_escape_string($con, $new_ques);
-   $new_ques_insert_query = "INSERT INTO `product_questions_and_answers` (`p_id`, `user_id`, `ques_person_name`, `p_ques`, `p_ans`, `status`) VALUES ($product_id, $users_id, '$full_name', '$new_ques', '', 'waiting');";
-   mysqli_query($con, $new_ques_insert_query);
-   refresh();
+    if(isset($_SESSION['user_id'])) {
+        $users_id = $_SESSION['user_id'];
+        $retrieve_name_query = "SELECT `f_name`, `l_name` FROM `register` WHERE `user_id` = $users_id;";
+        $retrieve_name_result = mysqli_query($con, $retrieve_name_query);
+        $fetch_name = mysqli_fetch_assoc($retrieve_name_result);
+        $full_name = $fetch_name['f_name']." ".$fetch_name['l_name'];
+       $product_id = $_GET['p_id'];
+       $new_ques = $_GET['new_ques'];
+       $new_ques = stripcslashes($new_ques);
+       $new_ques = mysqli_real_escape_string($con, $new_ques);
+       $new_ques_insert_query = "INSERT INTO `product_questions_and_answers` (`p_id`, `user_id`, `ques_person_name`, `p_ques`, `p_ans`, `status`) VALUES ($product_id, $users_id, '$full_name', '$new_ques', '', 'waiting');";
+       mysqli_query($con, $new_ques_insert_query);
+       refresh();
+    } else {
+           ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/login.php';
+            </script>
+            <?php
+    }
+    
 }
 
 function refresh() {
@@ -455,6 +464,9 @@ if(isset($_GET['review_sub_btn'])) {
 }
 
 if(isset($_GET['review_id'])) {
+
+    if(isset($_SESSION['user_id'])) {
+
     $p_review_id = $_GET['review_id'];
     if(isset($_GET['p_like'])) {
         $p_known_user_id = $_SESSION['user_id'];
@@ -509,19 +521,25 @@ if(isset($_GET['review_id'])) {
         }
         refresh();
     }
+
+} else {
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/login.php';
+    </script>
+    <?php
+}
     
 }
+
+
+
 if(isset($_GET['p_q_and_a_id'])) {
+
+    if(isset($_SESSION['user_id'])) {
     $p_p_q_and_a_id = $_GET['p_q_and_a_id'];
     if(isset($_GET['p_q_like'])) {
         $p_known_user_id = $_SESSION['user_id'];
-        if(!isset($_SESSION['user_id'])) {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/login.php';
-            </script>
-            <?php
-        }
         $check_query = "SELECT `ques_id`, `ques_and_ans_id` FROM `sub_question_and_answers` WHERE `user_id` = $p_known_user_id AND `is_like` = 1 AND `ques_id` = $p_p_q_and_a_id;";
         $check_result = mysqli_query($con, $check_query);
         $check_rows = mysqli_num_rows($check_result);
@@ -572,9 +590,21 @@ if(isset($_GET['p_q_and_a_id'])) {
         }
         refresh();
     }
+
+} else {
+           ?>
+            <script type="text/javascript">
+            window.location.href = 'http://localhost:3000/login.php';
+            </script>
+            <?php
+}
 }
 
+
+
 if(isset($_GET['notify_me_req'])) {
+
+    if(isset($_SESSION['user_id'])) {
     $pro_id = $_GET['p_id'];
     $pro_sub_cat_id = $_GET['sub_cat_id'];
     $p_known_user_id = $_SESSION['user_id'];
@@ -624,6 +654,14 @@ if(isset($_GET['notify_me_req'])) {
     } else {
         echo "";
     }
+
+} else {
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/login.php';
+    </script>
+    <?php
+}
     
 }
 
@@ -1029,21 +1067,31 @@ if(isset($_GET['notify_me_req'])) {
                 $review_review_id = $row['review_id'];
                 $review_known_user_id = $row['known_user_id'];
                 $review_p_id = $row['p_id'];
-                $p_known_user_id = $_SESSION['user_id'];
 
-            $give_color_to_like_query = "SELECT * FROM `sub_reviews` WHERE `review_id` = $review_review_id AND `user_id` = $p_known_user_id;";
+
+                $give_color_to_like_query = "SELECT * FROM `sub_reviews` WHERE `review_id` = $review_review_id";
+
+                if(isset($_SESSION['user_id'])) {
+                    $p_known_user_id = $_SESSION['user_id'];
+                    $give_color_to_like_query = "SELECT * FROM `sub_reviews` WHERE `review_id` = $review_review_id AND `user_id` = $p_known_user_id;";
+                }
+                
             $give_color_to_like_result = mysqli_query($con, $give_color_to_like_query);
             $give_color_to_like_fetch = mysqli_fetch_assoc($give_color_to_like_result);
             
             $like_class = "";
-            if($give_color_to_like_fetch['is_like'] == 1) {
-                $like_class = "checked_like";
+            $dislike_class = "";
+
+            if(isset($_SESSION['user_id'])) {
+                if($give_color_to_like_fetch['is_like'] == 1) {
+                    $like_class = "checked_like";
+                }
+                
+                if($give_color_to_like_fetch['is_dislike'] == 1) {
+                    $dislike_class = "checked_like";
+                }
             }
             
-            $dislike_class = "";
-            if($give_color_to_like_fetch['is_dislike'] == 1) {
-                $dislike_class = "checked_like";
-            }
 
                 $product_like_count_query = "SELECT COUNT(is_like) AS `is_like` FROM `sub_reviews` WHERE `review_id` = $review_review_id AND `is_like` = 1;";
                 $product_like_count_result = mysqli_query($con, $product_like_count_query);
@@ -1174,21 +1222,30 @@ if(isset($_GET['notify_me_req'])) {
             $product_ques_person_name = $row['ques_person_name'];
             $product_p_ques = $row['p_ques'];
             $product_p_ans = $row['p_ans'];
-            $p_known_user_id = $_SESSION['user_id'];
 
-            $give_color_to_like_query = "SELECT * FROM `sub_question_and_answers` WHERE `ques_id` = $product_p_q_and_a_id AND `user_id` = $p_known_user_id;";
+            $give_color_to_like_query = "SELECT * FROM `sub_question_and_answers` WHERE `ques_id` = $product_p_q_and_a_id;";
+
+            if(isset($_SESSION['user_id'])) {
+                $p_known_user_id = $_SESSION['user_id'];
+                $give_color_to_like_query = "SELECT * FROM `sub_question_and_answers` WHERE `ques_id` = $product_p_q_and_a_id AND `user_id` = $p_known_user_id;";
+            }
+            
             $give_color_to_like_result = mysqli_query($con, $give_color_to_like_query);
             $give_color_to_like_fetch = mysqli_fetch_assoc($give_color_to_like_result);
             
             $like_class = "";
-            if($give_color_to_like_fetch['is_like'] == 1) {
-                $like_class = "checked_like";
-            }
-            
             $dislike_class = "";
-            if($give_color_to_like_fetch['is_dislike'] == 1) {
-                $dislike_class = "checked_like";
+
+            if(isset($_SESSION['user_id'])) {
+                if($give_color_to_like_fetch['is_like'] == 1) {
+                    $like_class = "checked_like";
+                }
+                
+                if($give_color_to_like_fetch['is_dislike'] == 1) {
+                    $dislike_class = "checked_like";
+                }
             }
+           
 
             $question_like_count_query = "SELECT COUNT(is_like) AS `is_like` FROM `sub_question_and_answers` WHERE `ques_id` = $product_p_q_and_a_id AND `is_like` = 1;";
                 $question_like_count_result = mysqli_query($con, $question_like_count_query);
