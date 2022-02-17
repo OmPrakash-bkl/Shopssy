@@ -9,6 +9,7 @@
 // $_SESSION['user_id'] = 4;
 
 include './action.php';
+include './redirect_fun.php';
 
 if(isset($_GET['new_ques'])) {
     if(isset($_SESSION['user_id'])) {
@@ -664,6 +665,128 @@ if(isset($_GET['notify_me_req'])) {
 }
     
 }
+
+if(isset($_GET['product_id1'])) {
+    if(isset($_SESSION['user_login_id'])) {
+        $user_email_id = $_SESSION['user_login_email'];
+        $cart_process_query = "SELECT `user_id` FROM `register` WHERE `email`='$user_email_id';";
+        $cart_process_result = mysqli_query($con, $cart_process_query);
+        $cart_process_user_id = mysqli_fetch_assoc($cart_process_result);
+        $cart_process_user_id = $cart_process_user_id['user_id'];
+        $cart_process_pro_id = $_GET['product_id1'];
+        if(isset($_GET['best_selling_pro'])) {
+            $pro_type = 'normal';
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            $pro_type = 'hot';
+        } else {
+            $pro_type = 'offer';
+        }
+        $check_query = "SELECT * FROM `cart` WHERE (`u_id` = $cart_process_user_id AND `product_id` = $cart_process_pro_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1, 0, '', '$pro_type')";
+            mysqli_query($con, $cart_query);
+        }
+        $_SESSION['user_id'] = $cart_process_user_id;
+        refresh();
+    } else {
+
+        $prod_id_for_unnamed_cart_details = $_GET['product_id1'];
+          if(isset($_COOKIE['T093NO5A86H'])) {
+            $token_of_auth = "T093NO5A86H";
+            $token_for_un_u_cart_details = $_COOKIE[$token_of_auth];
+          }
+          if(isset($_GET['best_selling_pro'])) {
+            $pro_type = 'normal';
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            $pro_type = 'hot';
+        } else {
+            $pro_type = 'offer';
+        }
+        $check_query = "SELECT * FROM `unnamed_user_cart` WHERE (`un_u_cart_token` = $token_for_un_u_cart_details AND `prod_id_of_cart` = $prod_id_for_unnamed_cart_details);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $unnamed_user_cart_details_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `pro_type`) VALUES ($token_for_un_u_cart_details, $prod_id_for_unnamed_cart_details, 1, '$pro_type');";
+            mysqli_query($con, $unnamed_user_cart_details_insert_query);
+        }
+        refresh();
+        
+    }
+   
+}
+
+if(isset($_GET['wish_btn1'])) {
+    $produc_id = $_GET['productt_id'];
+    if(isset($_SESSION['user_login_id'])) {
+        $users_id = $_SESSION['user_id'];
+        if(isset($_GET['best_selling_pro'])){
+            $pro_type = 'normal';
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            $pro_type = 'hot';
+        } else {
+            $pro_type = 'offer';
+        }
+        $check_query = "SELECT * FROM `mywishlist` WHERE (`user_id` = $users_id AND `prod_id` = $produc_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else {
+            $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`, `pro_type`) VALUES ($users_id, $produc_id, '$pro_type');";
+            mysqli_query($con, $wishlist_insert_query);
+        }
+       
+    } else {
+        $token_of_wishlist = "W937LI25A856T0K3N";
+        $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
+        if(isset($_GET['best_selling_pro'])){
+            $pro_type = 'normal';
+        } elseif(isset($_GET['hot_deal_pro'])) {
+            $pro_type = 'hot';
+        } else {
+            $pro_type = 'offer';
+        }
+        $check_query = "SELECT * FROM `unnamed_user_wishlist` WHERE (`un_u_wishlist_token` = $token_for_un_u_wishlist_details AND `prod_id_of_wishlist` = $produc_id);";
+        $check_result = mysqli_query($con, $check_query);
+        $check_rows = mysqli_num_rows($check_result);
+        if($check_rows >= 1) {
+            echo "";
+        } else { 
+            $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`, `pro_type`) VALUES ($token_for_un_u_wishlist_details, $produc_id, '$pro_type');";
+            mysqli_query($con, $wishlist_insert_query);
+        }
+       
+    }
+  
+    refresh();
+}
+
+
+if(isset($_GET['view_all_related1'])) {
+if(isset($_GET['p_id'])) {
+$view_all_subs_cat_identification_id = $_GET['sub_cat_id'];
+$view_all_query = "SELECT `sub_cat_identification_id_two`, `subs_cat_title` FROM `sub_category` WHERE `sub_cat_identification_id` LIKE $view_all_subs_cat_identification_id;";
+$view_all_result = mysqli_query($con, $view_all_query);
+while($rows = mysqli_fetch_assoc($view_all_result)) {
+$view_all_sub_cat_identification_id_two = $rows['sub_cat_identification_id_two'];
+$view_all_subs_cat_title = $rows['subs_cat_title'];
+?>
+<script type="text/javascript">
+window.location.href = 'http://localhost:3000/product.php?sub_cat_identification_id=<?php echo $view_all_subs_cat_identification_id; ?>&sub_cat_title=<?php echo $view_all_subs_cat_title; ?>&sub_cat_identification_id_two=<?php echo $view_all_sub_cat_identification_id_two; ?>';
+</script>
+<?php
+    }
+  }
+}
+
+
+
 
 ?>
 
@@ -1358,6 +1481,7 @@ if(isset($_GET['notify_me_req'])) {
         $related_products_p_o_price = $row['p_o_price'];
         $related_products_p_star_rat = $row['p_star_rat'];
         $related_products_p_id = $row['p_id'];
+       
         $related_products_subs_cat_identification_id = $row['subs_cat_identification_id'];
     
         ?>
@@ -1419,19 +1543,74 @@ if(isset($_GET['notify_me_req'])) {
                          ?></h4>
                     </div>
                     <div>
-                        <h2>&#8377;<?php echo $related_products_p_a_price; ?> <del>&#8377;<?php echo $related_products_p_o_price; ?></del></h2>
-                        <h4 class="offer_value"><?php 
-                        $offer_value = ($related_products_p_o_price - $related_products_p_a_price) / $related_products_p_o_price;
-                        $offer_value = $offer_value * 100;
-                        echo intval($offer_value);
-                        ?>% off</h4>
+                    <?php 
+                  if(isset($_GET['best_selling_pro'])) {
+
+                    ?>
+
+                   <span>
+                    <span class="non_dash_price">&#8377;<?php echo $related_products_p_o_price; ?>.00</span>
+                    <span class="non_dash_price">Only</span>
+                    <h2 class="offer_value" style="opacity: 0.5"><del style="color: orangered;">50% off</del></h2>
+                   </span>
+
+                      <?php
+                      
+                  } elseif(isset($_GET['hot_deal_pro'])) {
+                    ?>
+
+                    <span>
+                        <span class="non_dash_price">&#8377;<?php echo floor($related_products_p_o_price/2); ?>.00</span>
+                        <del class="dash_price">&#8377;<?php echo $related_products_p_o_price; ?>.00</del>
+                        <h2 class="offer_value"><?php 
+                            echo 50;
+                            ?>% off</h2>
+                    </span>
+    
+                     <?php
+                  } else {
+                    ?>
+
+                    <span>
+                        <span class="non_dash_price">&#8377;<?php echo $related_products_p_a_price; ?>.00</span>
+                        <del class="dash_price">&#8377;<?php echo $related_products_p_o_price; ?>.00</del>
+                        <h2 class="offer_value"><?php 
+                            $offer_value = ($related_products_p_o_price - $related_products_p_a_price) / $related_products_p_o_price;
+                            $offer_value = $offer_value * 100;
+                            echo intval($offer_value);
+                            ?>% off</h2>
+                    </span>
+    
+                     <?php
+                  }
+                  
+                  ?>
+               
                     </div>
                 </div>
                </a>
                 <div class="products_container_products_inner_btn_divs">
-                    <button title="Add To Cart"><i class="fas fa-cart-plus" ></i></button>
-                    <button title="Add To Wishlist"><i class="far fa-heart"></i></button>
-                    <button title="Quick View"><i class="fas fa-search"></i></button>
+                <form action="./view_of_product.php" method="GET">
+                    <button title="Add To Cart" name="product_id1" value="<?php echo $related_products_p_id; ?>" ><i class="fas fa-cart-plus" ></i></button>
+                    <?php 
+                    redirect();
+                    ?>
+                    </form>
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET">
+                    <input type="hidden" name="productt_id" value="<?php echo $related_products_p_id; ?>">
+                    <button title="Add To Wishlist" name="wish_btn1" ><i class="far fa-heart"></i></button>
+                    <?php 
+                    redirect();
+                    ?>
+                    </form>
+                    <form action="./view_of_product.php" method="GET">
+                    <input type="hidden" name="p_id" value="<?php echo $related_products_p_id; ?>">
+                     <input type="hidden" name="sub_cat_id" value="<?php echo $related_products_subs_cat_identification_id; ?>">
+                     <button title="Quick View" name="view_all_related1"><i class="fas fa-search"></i></button>
+                     <?php
+                      redirect();
+                     ?>
+                     </form>
                 </div>
             </div>
            

@@ -67,6 +67,29 @@ function redirect() {
         <input type="hidden" name="dec" value="<?php echo $dec; ?>">
         <?php
     }
-   
+    if(isset($_GET['p_id'])) {
+        $p_id = $_GET['p_id'];
+        ?>
+        <input type="hidden" name="p_id" value="<?php echo $p_id; ?>">
+        <?php
+    }
+    if(isset($_GET['sub_cat_id'])) {
+        $sub_cat_id = $_GET['sub_cat_id'];
+        ?>
+        <input type="hidden" name="sub_cat_id" value="<?php echo $sub_cat_id; ?>">
+        <?php
+    }
+    if(isset($_GET['hot_deal_pro'])) {
+        $hot_deal_pro = $_GET['hot_deal_pro'];
+        ?>
+        <input type="hidden" name="hot_deal_pro" value="<?php echo $hot_deal_pro; ?>">
+        <?php
+    }
+    if(isset($_GET['best_selling_pro'])) {
+        $best_selling_pro = $_GET['best_selling_pro'];
+        ?>
+        <input type="hidden" name="best_selling_pro" value="<?php echo $best_selling_pro; ?>">
+        <?php
+    }
 }
 ?>

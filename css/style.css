@@ -735,6 +735,16 @@ height: 390px;
 .products_container_products_inner_text_divs div h2 del {
     color: rgb(128, 128, 128, 0.4);
 }
+.products_container_products_inner_text_divs .non_dash_price {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: rgb(0, 149, 0);
+    font-weight: bold;
+}
+.products_container_products_inner_text_divs .dash_price {
+    color: rgb(128, 128, 128, 0.6);
+    font-weight: bold;
+}
 .products_container_products_inner_btn_divs button {
     float: left;
     height: 40px;
