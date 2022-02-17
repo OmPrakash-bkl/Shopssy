@@ -9,26 +9,30 @@ if(isset($_SESSION['user_id'])) {
     $date_update_query = "SELECT `pro_id`, `n_id` FROM `notification` WHERE `noti_for_who` = $p_known_user_id;";
     $date_update_result = mysqli_query($con, $date_update_query);
 
-    while($row = mysqli_fetch_assoc($date_update_result)) {
-        $fetch_prod_id = $row['pro_id'];
-        $fetch_n_id = $row['n_id'];
+    $date_update_check_row = mysqli_num_rows($date_update_result); 
+    if($date_update_check_row > 0) {
+        while($row = mysqli_fetch_assoc($date_update_result)) {
+            $fetch_prod_id = $row['pro_id'];
+            $fetch_n_id = $row['n_id'];
+        }
+        
+        $check_product_avail_status_query = "SELECT `p_avail` FROM `products_sub` WHERE `p_id` = $fetch_prod_id;";
+        $check_product_avail_status_result = mysqli_query($con, $check_product_avail_status_query);
+        $check_product_avail_status = "";
+        while($row = mysqli_fetch_assoc($check_product_avail_status_result)) {
+            $check_product_avail_status = $row['p_avail'];
+        }
+       
+        if($check_product_avail_status == "In Stock") {
+            $date = new DateTime('', new DateTimezone("Asia/Kolkata"));
+            $day = $date->format('d/m/y');
+            $time = $date->format('H:i A');
+            $date_and_time = $day." ".$time;
+            $update_date_query = "UPDATE `notification` SET `n_time` = '$date_and_time' WHERE `n_id` = $fetch_n_id;";
+            mysqli_query($con, $update_date_query);
+        }
     }
     
-    $check_product_avail_status_query = "SELECT `p_avail` FROM `products_sub` WHERE `p_id` = $fetch_prod_id;";
-    $check_product_avail_status_result = mysqli_query($con, $check_product_avail_status_query);
-    $check_product_avail_status = "";
-    while($row = mysqli_fetch_assoc($check_product_avail_status_result)) {
-        $check_product_avail_status = $row['p_avail'];
-    }
-   
-    if($check_product_avail_status == "In Stock") {
-        $date = new DateTime('', new DateTimezone("Asia/Kolkata"));
-        $day = $date->format('d/m/y');
-        $time = $date->format('H:i A');
-        $date_and_time = $day." ".$time;
-        $update_date_query = "UPDATE `notification` SET `n_time` = '$date_and_time' WHERE `n_id` = $fetch_n_id;";
-        mysqli_query($con, $update_date_query);
-    }
 }
 
 

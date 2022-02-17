@@ -3,6 +3,14 @@ include './action.php';
 $title = "Track Your Order - Shopssy";
 include './header.php';
 
+if(!isset($_SESSION['user_login_id'])) {
+    ?>
+    <script type="text/javascript">
+    window.location.href = 'http://localhost:3000/login.php';
+    </script>
+    <?php
+    }
+
 ?>
 
 

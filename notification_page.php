@@ -22,8 +22,13 @@ include './header.php';
     <center>
     <div class="notification_page_master_container">
         <?php 
-         $user_id =  $_SESSION['user_id'];
-        $notification_retrieve_query = "SELECT * FROM `notification` WHERE `noti_for_who` = 0 OR `noti_for_who` = $user_id;";
+        if(!isset($_SESSION['user_id'])) {
+            $notification_retrieve_query = "SELECT * FROM `notification` WHERE `noti_for_who` = 0;";
+        } else {
+            $user_id =  $_SESSION['user_id'];
+            $notification_retrieve_query = "SELECT * FROM `notification` WHERE `noti_for_who` = 0 OR `noti_for_who` = $user_id;";
+        }
+        
         $notification_retrieve_result = mysqli_query($con, $notification_retrieve_query);
         while($row = mysqli_fetch_assoc($notification_retrieve_result)) {
             $notification_link = $row['link'];
