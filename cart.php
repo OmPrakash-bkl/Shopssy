@@ -52,13 +52,13 @@ if(isset($_POST['delete_btn'])) {
     } else {
         $cart_sub_product_id = $_POST['product_id'];
         $cart_sub_delete_query = "DELETE FROM `unnamed_user_cart` WHERE `prod_id_of_cart` = $cart_sub_product_id;";
-        ?>
+    }
+    mysqli_query($con, $cart_sub_delete_query);
+    ?>
     <script type="text/javascript">
     window.location.href = 'http://localhost:3000/cart.php';
     </script>
     <?php
-    }
-    mysqli_query($con, $cart_sub_delete_query);
 }
 
 
@@ -102,6 +102,8 @@ if(isset($_POST['delete_btn'])) {
                 $pro_cart_user_desc="";
                 $cart_page_query = "SELECT * FROM `cart` WHERE `u_id`=$user_id;";
                 $cart_page_result = mysqli_query($con, $cart_page_query);
+                $cart_count_checking = mysqli_num_rows($cart_page_result); 
+                
                 $cart_products_total_price = 0;
                 while($row = mysqli_fetch_assoc($cart_page_result)) {
                     $pro_id = $row['product_id'];
@@ -195,6 +197,8 @@ if(isset($_POST['delete_btn'])) {
                     $pro_cart_user_desc="";
                     $cart_page_query = "SELECT * FROM `unnamed_user_cart` WHERE `un_u_cart_token`=$user_id;";
                     $cart_page_result = mysqli_query($con, $cart_page_query);
+                    $cart_count_checking = mysqli_num_rows($cart_page_result); 
+                   
                     $cart_products_total_price = 0;
                     while($row = mysqli_fetch_assoc($cart_page_result)) {
                         $pro_id = $row['prod_id_of_cart'];
@@ -609,14 +613,44 @@ if(isset($_POST['delete_btn'])) {
 
 
         </div>
+
+        <div class="cart_empty_message_container">
+            <h1><i class="fas fa-shopping-cart"></i></h1>
+            <h1>Your Cart Is Currently Empty!</h1>
+            <p>Before proceed to checkout you must add some products to your shopping cart.</p>
+            <p>You will find a lot of interesting products on our "Home" page.</p>
+            <a href="./index.php"><button>Back To Home</button></a>
+        </div>
    
     </center>
     <!--shopping cart container end-->
     
     <?php 
     include "./footer.php";
-    ?>
 
+    if($cart_count_checking == 0) {
+        ?>
+        <script>
+            /* Cart Empty Message Function Start */
+
+function empty_msg_show_off() {
+document.getElementsByClassName("shopping_cart_container")[0].style.display = "none";
+document.getElementsByClassName("mini_cart_products_container")[0].style.display = "none";
+document.getElementsByClassName("mini_cart_form_container")[0].style.display = "none";
+document.getElementsByClassName("cart_empty_message_container")[0].style.display = "block";
+document.getElementsByClassName("cart_empty_message_container")[1].style.display = "block";
+document.getElementsByClassName("cart_empty_message_container")[2].style.display = "block";
+document.getElementsByClassName("cart_empty_message_container")[3].style.display = "block";
+}
+
+/* Cart Empty Message Function End */
+
+            empty_msg_show_off();
+        </script>
+        <?php
+    }
+
+    ?>
     <script src="./javascript/index.js"></script>
     <script src="./javascript/incre_and_decre.js"></script>
 </body>

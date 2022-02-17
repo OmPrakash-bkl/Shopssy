@@ -1,6 +1,8 @@
 <?php 
 session_start();
 
+            
+
 $_SESSION['prod_qty'] = 1;
 
 include './action.php';
@@ -11,6 +13,19 @@ if(isset($_POST['logout_request'])) {
     unset($_SESSION['user_login_id']);
     header("Location: http://localhost:3000/login.php");
 }
+
+$user_id = $_SESSION['user_id'];
+$cart_details_query = "SELECT * FROM `cart` WHERE `u_id` = $user_id;";
+$cart_details__result = mysqli_query($con, $cart_details_query);
+$cart_count_checking = mysqli_num_rows($cart_details__result);
+if($cart_count_checking == 0) {
+ ?>
+ <script type="text/javascript">
+ window.location.href = 'http://localhost:3000/index.php';
+ </script>
+ <?php
+}
+
 $customer_add_details_address = "There is";
 $customer_add_details_city = "No Default";
 $customer_add_details_state = "Address.";
@@ -306,6 +321,7 @@ if(isset($_POST['new_add'])) {
             $user_id = $_SESSION['user_id'];
             $cart_details_query = "SELECT * FROM `cart` WHERE `u_id` = $user_id;";
             $cart_details__result = mysqli_query($con, $cart_details_query);
+            $cart_count_checking = mysqli_num_rows($cart_details__result);
             $product_sub_total = 0;
             while($row = mysqli_fetch_assoc($cart_details__result)) {
                 $cart_details_product_id = $row['product_id'];

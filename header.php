@@ -846,6 +846,7 @@ if(isset($_POST['share_list_request'])) {
             $mini_cart_page_query = "SELECT * FROM `cart` WHERE `u_id`=$mini_user_id;";
             $mini_cart_page_result = mysqli_query($con, $mini_cart_page_query);
             $mini_cart_products_total_price = 0;
+            $cart_count_checking = mysqli_num_rows($mini_cart_page_result); 
             while($row = mysqli_fetch_assoc($mini_cart_page_result)) {
                $mini_pro_id = $row['product_id'];
                $mini_pro_quantity = $row['quantity'];
@@ -907,6 +908,7 @@ if(isset($_POST['share_list_request'])) {
             $mini_pro_cart_user_desc="";
             $mini_cart_page_query = "SELECT * FROM `unnamed_user_cart` WHERE `un_u_cart_token`=$mini_user_id;";
             $mini_cart_page_result = mysqli_query($con, $mini_cart_page_query);
+            $cart_count_checking = mysqli_num_rows($mini_cart_page_result); 
             $mini_cart_products_total_price = 0;
             while($row = mysqli_fetch_assoc($mini_cart_page_result)) {
                $mini_pro_id = $row['prod_id_of_cart'];
@@ -962,12 +964,12 @@ if(isset($_POST['share_list_request'])) {
 
               <?php   }  } ?>
               
-          
-         
-          
-               
             </table>
+
+            
+
            </div>
+           
            
 
            <div class="mini_cart_form_container">
@@ -992,7 +994,12 @@ if(isset($_POST['share_list_request'])) {
                </form>
            </div>
 
-           
+           <center>
+            <div class="mini_cart_empty_message_container">
+            <h1><i class="fas fa-shopping-cart"></i></h1>
+            <h1 class="emp_msg">Your Cart Is Currently Empty!</h1>
+            </div>
+            </center>
 
            </div>
            <!--mini cart container end-->
@@ -1205,6 +1212,28 @@ if(isset($_POST['share_list_request'])) {
 
     <!--Navbar Container End-->
 
+
+    <?php 
+
+if($cart_count_checking == 0) {
+    ?>
+    <script>
+        /* Cart Empty Message Function Start */
+
+function empty_msg_show_off() {
+document.getElementsByClassName("mini_cart_products_container")[0].style.display = "none";
+document.getElementsByClassName("mini_cart_form_container")[0].style.display = "none";
+document.getElementsByClassName("mini_cart_empty_message_container")[0].style.display = "block";
+}
+
+/* Cart Empty Message Function End */
+
+        empty_msg_show_off();
+    </script>
+    <?php
+}
+
+?>
 
 
 
