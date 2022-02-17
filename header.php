@@ -614,6 +614,7 @@ if(isset($_POST['share_list_request'])) {
    <body>
        <center>
        <h1 class='site_name'>Shopssy</h1>
+       <h4>&#x60;Find it, love it, buy it&#x60;</h4>
        </center>
        <h2 class='msg_head_text'>Wishlist from $sender_name</h2>
        <p class='info_text'>$receiver_msg</p>
