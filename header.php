@@ -2,6 +2,8 @@
 session_start();
 include './db_con.php';
 
+
+
 if(isset($_SESSION['user_id'])) {
     $p_known_user_id = $_SESSION['user_id'];
     $date_update_query = "SELECT `pro_id`, `n_id` FROM `notification` WHERE `noti_for_who` = $p_known_user_id;";
@@ -270,14 +272,14 @@ if(isset($_SESSION['user_login_id'])) {
                 <h2 class="email_heading">Share List Via Email</h2>
 
                 <div class="share_email_form_container">
-                    <form action="">
+                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                         <label for="name_of_email">Sender Name</label> <br>
-                        <input type="text" id="name_of_email" placeholder="Your Full Name"> <br>
+                        <input type="text" id="name_of_email" name="sender_name" placeholder="Your Full Name" required> <br>
                         <label for="email_of_email">Recipients Email <span class="astri">*</span></label> <br>
-                        <input type="email" id="email_of_email" placeholder="shopper@example.com"> <br>
+                        <input type="email" id="email_of_email" name="receiver_email" placeholder="shopper@example.com" required> <br>
                         <label for="message_of_email">Message</label> <br>
-                        <textarea id="message_of_email" placeholder="Add a note here..">Hey there! Check out My Wishlist</textarea> <br>
-                       <button type="submit" class="share_list_btn">SHARE LIST</button>
+                        <textarea id="message_of_email" name="msg_for_receiver" placeholder="Add a note here.."></textarea> <br>
+                       <button type="submit" name="share_list_request" class="share_list_btn">SHARE LIST</button>
                     </form>
                 </div>
 
@@ -287,7 +289,7 @@ if(isset($_SESSION['user_login_id'])) {
             <!--save your list container start-->
             <div class="save_your_list_container">
                 <button class="savelist_close_btn_of_wishlist"><i class="far fa-window-close"></i></button>
-                <h2>Save Your List</h2>
+                <h2>Are you sure?</h2>
                 <p>You are logged in as</p>
                 <b><?php echo $_SESSION['user_login_email'];?></b> <br>
                 <center>
@@ -302,18 +304,18 @@ if(isset($_SESSION['user_login_id'])) {
             <!--save your list container 2 start-->
             <div class="save_your_list_container save_your_list_container1">
                 <button class="savelist_close_btn_of_wishlist savelist_close_btn_of_wishlist1"><i class="far fa-window-close"></i></button>
-                <h2>Save Your List</h2>
-                <p>You are currently shopping anonymously. Either log in or save your wishlist items by entering your email address.</p>
+                <h2>Register or Login</h2>
+                <p>You are currently shopping anonymously. Either log in or register the account by entering the below buttons.</p>
                <br>
                 <center>
                 <a href="./login.php"><button class="btn_1">LOG IN</button></a>
-                <button class="btn_2 savelist_close_btn_of_wishlist1_savelist_btn">SAVE LIST</button>
+                <a href="./register.php"><button class="btn_2 savelist_close_btn_of_wishlist1_savelist_btn">REGISTER</button></a>
                 </center>
             </div>
             <!--save your list container 2 end-->
 
             <!--save your list container 3 start-->
-            <div class="enter_email_address_container">
+            <!-- <div class="enter_email_address_container">
                 <button class="email_close_btn_of_wishlist email_close_btn_of_wishlist2"><i class="far fa-window-close"></i></button>
                 <h2 class="email_heading">Save List Via Email</h2>
                 <p>Please enter your email address. You will be sent a validation link to click on.</p>
@@ -328,7 +330,7 @@ if(isset($_SESSION['user_login_id'])) {
                     <button type="submit" class="save_list_btn">SAVE LIST</button>
                    </center>
                 </form>
-            </div>
+            </div> -->
             <!--save your list container 3 end -->
 
             <!--clear list conform container start-->
@@ -374,8 +376,11 @@ if(isset($_SESSION['user_login_id'])) {
 
                     <?php
 
-                      $wish_section_query = "SELECT * FROM `mywishlist` WHERE `user_id` = $users_id;";
+                $wish_section_query = "SELECT * FROM `mywishlist` WHERE `user_id` = $users_id;";
                 $wish_section_result = mysqli_query($con, $wish_section_query);
+                $share_list_variable = "";
+                $share_list_counter = 1;
+                $share_list_prefix = "Rs.";
                 while($row = mysqli_fetch_assoc($wish_section_result)) {
                     
                     $wish_prod_id = $row['prod_id'];
@@ -390,6 +395,17 @@ if(isset($_SESSION['user_login_id'])) {
                     $wish_p_image = $row1['p_image'];
                     $wish_p_a_price = $row1['p_a_price'];
                     $wish_p_o_price = $row1['p_o_price'];
+                    $wish_subs_cat_identify_id = $row1['subs_cat_identification_id'];
+
+                    $share_list_variable = $share_list_variable . 
+                    "<tr>
+                    <th>$share_list_counter.</th>
+                    <td><a href='http://localhost:3000/view_of_product.php?p_id=$wish_p_id&sub_cat_id=$wish_subs_cat_identify_id'>$wish_p_title</a></td>
+                    <td>$share_list_prefix $wish_p_a_price</td>
+                    </tr>";
+
+                    $share_list_counter++;
+
                 ?>
                 <div class="wishlist_product_inner_container">
                     <div class="btn_div1">
@@ -437,6 +453,9 @@ if(isset($_SESSION['user_login_id'])) {
 
                     $wish_section_query = "SELECT * FROM `unnamed_user_wishlist` WHERE `un_u_wishlist_token` = $token_for_un_u_wishlist_details;";
                     $wish_section_result = mysqli_query($con, $wish_section_query);
+                    $share_list_variable = "";
+                    $share_list_counter = 1;
+                    $share_list_prefix = "Rs.";
                     while($row = mysqli_fetch_assoc($wish_section_result)) {
                         $wish_prod_type = $row['pro_type'];
                         $wish_prod_id = $row['prod_id_of_wishlist'];
@@ -451,6 +470,16 @@ if(isset($_SESSION['user_login_id'])) {
                         $wish_p_a_price = $row1['p_a_price'];
                         $wish_p_o_price = $row1['p_o_price'];
                         $wish_subs_cat_identification_id =$row1['subs_cat_identification_id'];
+
+                    $share_list_variable = $share_list_variable . 
+                    "<tr>
+                    <th>$share_list_counter.</th>
+                    <td><a href='http://localhost:3000/view_of_product.php?p_id=$wish_p_id&sub_cat_id=$wish_subs_cat_identification_id'>$wish_p_title</a></td>
+                    <td>$share_list_prefix $wish_p_a_price</td>
+                    </tr>";
+
+                    $share_list_counter++;
+
                     ?>
                     <div class="wishlist_product_inner_container">
                         <div class="btn_div1">
@@ -496,8 +525,132 @@ if(isset($_SESSION['user_login_id'])) {
                         </div>
                     </div>
     
-                   <?php } } } ?>
+                   <?php } } } share_list_val($share_list_variable); ?>
 
+                   <?php
+
+                   
+ function share_list_val($argum) {
+    global $wishlist_prod_detail;
+   $wishlist_prod_detail = $argum;
+} 
+
+
+
+if(isset($_POST['share_list_request'])) {
+   $receiver_mail = test_input_data($_POST['receiver_email']);
+   $sender_name = test_input_data($_POST['sender_name']);
+   $receiver_msg = test_input_data($_POST['msg_for_receiver']);
+
+   
+   require "./Mail/phpmailer/PHPMailerAutoload.php";
+   $user_mail_id = "";
+   $mail = new PHPMailer;
+   $mail -> isSMTP();
+   $mail -> Host = 'smtp.gmail.com';
+   $mail -> Port = 587;
+   $mail -> SMTPAuth = true;
+   $mail -> SMTPSecure = 'tls';
+
+   $mail -> Username = 'shopssyz@gmail.com';
+   $mail -> Password = 'Shopssy$#@123';
+
+   $mail -> setFrom('shopssyz@gmail.com', 'Wishlist - Shopssy');
+   $mail -> addAddress("$receiver_mail");
+
+   $mail -> isHTML(true);
+   $mail -> Subject = 'Wishlist Details';
+   $mail -> Body = "
+   <!DOCTYPE html>
+   <html lang='en'>
+   <head>
+       <style>
+           * {
+               margin: 0px;
+               padding: 0px;
+               box-sizing: border-box;
+               font-family: Arial, Helvetica, sans-serif;
+           }
+           body {
+               padding: 0px 5px;
+           }
+           .site_name {
+               color: #1792E9;
+               font-size: 35px;
+           }
+           .msg_head_text {
+               margin: 10px 0px;
+               color: black;
+           }
+           
+           .info_text {
+               color: black;
+           }
+           .table_heading {
+               margin: 10px 0px 5px 0px;
+               color: black;
+           }
+           .table, .table td, .table th  {
+               border: 1px solid gainsboro;
+              border-collapse: collapse;
+               padding: 5px 10px;
+               margin: 10px 0px;
+               text-align: left;
+               color: black;
+           }
+           .help_para {
+               margin: 20px 0px;
+               color: black;
+           }
+   
+           .help_para a {
+               text-decoration: none;
+               color: #1792E9;
+           }
+           
+
+       </style>
+   </head>
+   <body>
+       <center>
+       <h1 class='site_name'>Shopssy</h1>
+       </center>
+       <h2 class='msg_head_text'>Wishlist from $sender_name</h2>
+       <p class='info_text'>$receiver_msg</p>
+       
+   
+       <h2 class='table_heading'>Product Details</h2>
+       <table class='table'>
+           <tr>
+               <th>S.No</th>
+               <th>Product Name</th>
+               <th>Price</th>
+           </tr>
+           $wishlist_prod_detail
+       </table>
+     
+   
+       
+       <p class='help_para'>If you have any questions, contact shopssy at <a href='http://localhost:3000/contactus.php'>http://localhost:3000/contactus.php</a> or call at <a href='tel: 1234567890'>+91 1234567890</a>.</p>
+       
+   </body>
+   </html>
+   ";
+
+   if(!$mail -> send()) {
+       echo "Sending Mail is Failed, Invalid Email";
+   } else {
+       ?>
+       <script>
+           window.location.href = 'http://localhost:3000/index.php';
+       </script>
+       <?php
+   }
+
+  
+}
+
+                   ?>
                
             </div>
            </div>
