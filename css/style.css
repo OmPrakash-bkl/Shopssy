@@ -2997,6 +2997,7 @@ transition: color 0.3s;
 }
 .information_inner_container2_divs {
     display: flex;
+    align-items: center;
 }
 .information_inner_container2_divs div {
     margin: 10px 0px;
@@ -3007,9 +3008,10 @@ transition: color 0.3s;
 }
 .information_inner_container2_divs_image {
     flex: 10%;
+    margin: auto 5px;
 }
 .information_inner_container2_divs_image img {
-    border-radius: 10px;
+    border-radius: 3px;
 }
 .information_inner_container2_divs_title {
     flex: 45%;
@@ -3802,15 +3804,22 @@ width: 100%;
   }
 
 .order_history_table {
-    border: 1px solid rgb(175, 175, 175);
+   border: 1px solid gainsboro;
     padding: 2px;
     border-collapse: collapse;
     text-align: center;
     margin-bottom: 20px;
 }
 .order_history_table td, .order_history_table th {
-    border: 1px solid rgb(175, 175, 175);
-    padding: 5px 3px;
+    padding: 10px 3px;
+    border: 1px solid gainsboro;
+}
+.order_history_table th {
+    background-color: #E0FFFF;
+}
+
+.order_history_table tr:nth-child(odd) {
+    background-color: #F5ECF9;
 }
 
   /* My Account Container End */
@@ -3978,6 +3987,7 @@ width: 100%;
 .order_tracker_container {
     max-width: 1000px;
     font-family: Arial, Helvetica, sans-serif;
+    margin: auto 5px;
 }
 
 .order_id_container h3 {
@@ -3989,6 +3999,7 @@ width: 100%;
     display: flex;
     border-left: 1px solid gainsboro;
     border-right: 1px solid gainsboro;
+   
 }
 
 .product_display_container1 {
@@ -4237,6 +4248,7 @@ font-family: Arial, Helvetica, sans-serif;
     }
     .semi_final_details_container .mail_and_home_add {
         margin: 3px 15px;
+        width: 70%;
     }
     .share_and_clear_container {
         right: 13%;
@@ -4905,6 +4917,20 @@ font-family: Arial, Helvetica, sans-serif;
             text-align: left;
             margin-left: 5px;
         }
+        .category_products_container_products_inner_divs {
+            height: auto;
+            padding-bottom: 5px;
+            width: 140px;
+        }
+        .category_products_container_products_inner_divs img {
+            height: 120px;
+            width: 100px;
+        }
+        .product_title_container {
+         
+            height: 35px;
+            overflow: hidden;
+        }
         .notification_page_child_1 {
             flex: 15%;
         }
@@ -4993,7 +5019,7 @@ font-family: Arial, Helvetica, sans-serif;
         background-color: #2D9AE8;
     }
     .products_container_products_inner_divs {
-        height: 290px;
+        height: 310px;
         width: 120px;
         margin: 10px 5px;
         padding: 10px 5px;
@@ -5228,6 +5254,7 @@ font-family: Arial, Helvetica, sans-serif;
         width: 80%;
         left: 10%;
     }
+    
 }
 
 @media only screen and (max-width: 300px) {

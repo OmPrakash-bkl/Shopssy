@@ -374,7 +374,7 @@ if(isset($_GET['wish_btn'])) {
     
                         ?>
                 </div>
-                <div>
+                <div class="product_title_container">
                     <h4><?php
                         $string_of_title = $category_products_p_title;
                         if(strlen($string_of_title) > 35) {

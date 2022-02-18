@@ -704,7 +704,7 @@ if(isset($_GET['searchItem'])) {
     
                     
                     </div>
-                    <div>
+                    <div class="product_title_container">
                         <h4><?php
                             $string_of_title = $category_products_p_title;
                             if(strlen($string_of_title) > 35) {
@@ -841,7 +841,7 @@ if(isset($_GET['searchItem'])) {
     
                     
                     </div>
-                    <div>
+                    <div class="product_title_container">
                         <h4><?php
                             $string_of_title = $category_products_p_title;
                             if(strlen($string_of_title) > 35) {
@@ -970,7 +970,7 @@ if(isset($_GET['searchItem'])) {
       
              
              </div>
-             <div>
+             <div class="product_title_container">
                  <h4><?php
                      if(strlen($category_products_p_title) > 35) {
                          echo substr($category_products_p_title, 0, 35)." ...";
@@ -1115,7 +1115,7 @@ if(isset($_GET['searchItem'])) {
   
          
          </div>
-         <div>
+         <div class="product_title_container">
              <h4><?php
                  if(strlen($category_products_p_title) > 35) {
                      echo substr($category_products_p_title, 0, 35)." ...";
