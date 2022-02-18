@@ -234,6 +234,11 @@ if(isset($_SESSION['user_login_id'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&family=Josefin+Sans:wght@700&family=Lobster&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+.checked_stat_rat_of_wish {
+color: orangered;
+}
+</style>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
@@ -413,6 +418,7 @@ if(isset($_SESSION['user_login_id'])) {
                     $wish_p_image = $row1['p_image'];
                     $wish_p_a_price = $row1['p_a_price'];
                     $wish_p_o_price = $row1['p_o_price'];
+                    $wish_p_rating = $row1['p_star_rat'];
                     $wish_subs_cat_identify_id = $row1['subs_cat_identification_id'];
 
                     $share_list_variable = $share_list_variable . 
@@ -443,17 +449,64 @@ if(isset($_SESSION['user_login_id'])) {
                         }
                         echo $string_of_title;
                         ?></h2>
-                        <p>S / White</p>
+                        <p>
+                        <?php
+                        switch($wish_p_rating) {
+                            case 1:
+                                echo '<span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 2:
+                                echo '<span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 3:
+                                echo '<span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 4:
+                                echo '<span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 5:
+                                echo '<span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>';
+                            break;
+
+                        }
+    
+                        ?>
+                        </p>
                         <h2 class="pricee">&#8377;<?php 
+                        $pro_display_link = "";
                         if($wish_prod_type == 'normal') {
                             echo $wish_p_o_price;
+                        $pro_display_link = "./view_of_product.php?p_id=$wish_p_id&sub_cat_id=$wish_subs_cat_identify_id&best_selling_pro=1";
                         } elseif($wish_prod_type == 'hot') {
                             echo floor($wish_p_o_price/2);
+                            $pro_display_link = "./view_of_product.php?p_id=$wish_p_id&sub_cat_id=$wish_subs_cat_identify_id&hot_deal_pro=1";
                         } else {
                             echo $wish_p_a_price;
+                            $pro_display_link = "./view_of_product.php?p_id=$wish_p_id&sub_cat_id=$wish_subs_cat_identify_id";
                         }
                         ?></h2>
-                        <a href="#"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
+                        
+                        <a href="<?php echo $pro_display_link; ?>"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                         <input type="hidden" name="prod_type" value="<?php echo $wish_prod_type; ?>">
                         <button class="add_to_cart_btn" name="add_to_cart_id" value="<?php echo $wish_p_id; ?>">ADD TO CART</button>
@@ -487,6 +540,7 @@ if(isset($_SESSION['user_login_id'])) {
                         $wish_p_image = $row1['p_image'];
                         $wish_p_a_price = $row1['p_a_price'];
                         $wish_p_o_price = $row1['p_o_price'];
+                        $wish_p_rating = $row1['p_star_rat'];
                         $wish_subs_cat_identification_id =$row1['subs_cat_identification_id'];
 
                     $share_list_variable = $share_list_variable . 
@@ -517,25 +571,64 @@ if(isset($_SESSION['user_login_id'])) {
                             }
                             echo $string_of_title;
                             ?></h2>
-                            <p>S / White</p>
+                            <p>
+                            <?php
+                        switch($wish_p_rating) {
+                            case 1:
+                                echo '<span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 2:
+                                echo '<span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 3:
+                                echo '<span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 4:
+                                echo '<span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star"></span>';
+                            break;
+                            case 5:
+                                echo '<span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>
+                                      <span class="fa fa-star checked_stat_rat_of_wish"></span>';
+                            break;
+
+                        }
+    
+                        ?>
+                            </p>
                             <h2 class="pricee">&#8377;<?php 
+                            $pro_display_link = "";
                         if($wish_prod_type == 'normal') {
                             echo $wish_p_o_price;
+                            $pro_display_link = "./view_of_product.php?p_id=$wish_p_id&sub_cat_id=$wish_subs_cat_identification_id&best_selling_pro=1";
                         } elseif($wish_prod_type == 'hot') {
                             echo floor($wish_p_o_price/2);
+                            $pro_display_link = "./view_of_product.php?p_id=$wish_p_id&sub_cat_id=$wish_subs_cat_identification_id&hot_deal_pro=1";
                         }  else {
                             echo $wish_p_a_price;
+                            $pro_display_link = "./view_of_product.php?p_id=$wish_p_id&sub_cat_id=$wish_subs_cat_identification_id";
                         }
                         ?></h2>
-                        <?php 
-                        $view_more_query = "SELECT `sub_cat_identification_id_two`, `subs_cat_title` FROM `sub_category` WHERE `sub_cat_identification_id` LIKE $wish_subs_cat_identification_id;";
-                        $view_more_result = mysqli_query($con, $view_more_query);
-                        while($row = mysqli_fetch_assoc($view_more_result)) {
-                            $view_more_sub_cat_identification_id_two = $row['sub_cat_identification_id_two'];
-                            $view_more_sub_cat_title = $row['subs_cat_title'];
-                        }
-                        ?>
-                            <a href="./product.php?sub_cat_identification_id=<?php echo $wish_subs_cat_identification_id; ?>&sub_cat_title=<?php echo $view_more_sub_cat_title; ?>&sub_cat_identification_id_two=<?php echo $view_more_sub_cat_identification_id_two; ?>"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
+                        
+                            <a href="<?php echo $pro_display_link; ?>"><button class="view_more_btn">View More <i class="fa fa-angle-double-right"></i></button></a>
                             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                             <input type="hidden" name="prod_type" value="<?php echo $wish_prod_type; ?>">
                             <button class="add_to_cart_btn" name="add_to_cart_id" value="<?php echo $wish_p_id; ?>">ADD TO CART</button>
