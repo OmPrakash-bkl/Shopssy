@@ -3,17 +3,14 @@ include './action.php';
 $title = "Verification - Shopssy";
 include './header.php';
 
+$error_messages = "";
 if(isset($_POST['verify'])) {
     $otp = $_SESSION['OTP'];
     $email = $_SESSION['EMAIL'];
     $otp_code = $_POST['otp_code'];
 
-    if($otp != $otp_code) {
-        ?>
-           <script>
-               alert("Invalid OTP code");
-           </script>
-        <?php
+    if($otp != $otp_code) { 
+    $error_messages = "Invalid OTP code";
     } else {
         $update_register_query = "UPDATE `register` SET `status` = 1 WHERE `email` = '$email';";
         mysqli_query($con, $update_register_query);
@@ -50,6 +47,7 @@ if(isset($_POST['verify'])) {
                 <div>
                     <label for="veri">OTP Code</label> <br>
                 <input type="text" id="veri" name="otp_code" required autofocus>
+                <p class="text_of_error_message"><?php echo $error_messages; ?></p>
                 </div>
             <button type="submit" name="verify">Verify</button>
         </form>

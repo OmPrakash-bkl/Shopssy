@@ -29,6 +29,9 @@ if(!isset($_SESSION['user_login_id'])) {
      $user_id =  $_SESSION['user_id'];
      $order_tracker_id_retrieve_query = "SELECT `order_id`, `p_status`, `user_id` FROM `orders_table` WHERE `user_id` = $user_id;";
      $order_tracker_id_retrieve_result = mysqli_query($con, $order_tracker_id_retrieve_query);
+     $order_tracker_check_row = mysqli_num_rows($order_tracker_id_retrieve_result);
+
+     if($order_tracker_check_row >= 0) {
      while($row = mysqli_fetch_assoc($order_tracker_id_retrieve_result)) {
          $fetch_order_tracker_id = $row['order_id'];
          $fetch_order_tracker_status = $row['p_status'];
@@ -39,6 +42,10 @@ if(!isset($_SESSION['user_login_id'])) {
     <center>
     <div class="order_tracker_container">
         <div class="order_id_container">
+
+        <?php
+        if(isset($fetch_order_tracker_id)) {
+        ?>
             <h3>Order ID - #00<?php if(isset($_GET['ordered_id'])) {
            $ordered_id = $_GET['ordered_id'];
            $order_tracker_check_query = "SELECT `user_id` FROM `orders_table` WHERE `order_id` = $ordered_id;";
@@ -58,9 +65,14 @@ if(!isset($_SESSION['user_login_id'])) {
        } ?></h3>
         </div>
         <hr>
+
+        <?php } ?>
         <!--order tracker product container start-->
 
         <?php
+
+        if(isset($fetch_order_tracker_id)) {
+       
        $order_tracker_data_retrieve_query = "SELECT * FROM `order_tracker` WHERE `order_id` = $fetch_order_tracker_id;";
 
        if(isset($_GET['ordered_id'])) {
@@ -79,6 +91,9 @@ if(!isset($_SESSION['user_login_id'])) {
         }
        }
 
+    }
+
+    if(isset($fetch_order_tracker_id)) {
        $order_tracker_data_retrieve_result = mysqli_query($con, $order_tracker_data_retrieve_query);
        while($row = mysqli_fetch_assoc($order_tracker_data_retrieve_result)) {
            $order_tracker_prod_name = $row['prod_name'];
@@ -113,8 +128,15 @@ if(!isset($_SESSION['user_login_id'])) {
         <hr>
 
         <?php } ?>
+
+        <?php } }?>
         <!-- order tracker bar container start -->
 
+        <?php
+        if(isset($fetch_order_tracker_status)) {
+        if($fetch_order_tracker_status != "") {
+
+        ?>
         <div class="order_tracker_bar_parent_container">
             <div class="order_tracker_bar_container">
                 <div class="progress_bar_parent">
@@ -240,11 +262,24 @@ if(!isset($_SESSION['user_login_id'])) {
             </div>
         </div>
         <hr>
+
+        <?php } } ?>
+
+        <?php 
+        if($order_tracker_check_row == 0) {
+            ?>
+            <div class="no_product_to_track">
+               <h1>Sorry!, You haven't any products to track.</h1>
+            </div>
+            <?php
+        }
+        ?>
         
         <div class="help_btn_of_order_page">
         <a href="./contactus.php"><button>Need help?</button></a>
         </div>
         <!-- order tracker bar container end -->
+
     </div>
     </center>
     <!--order tracker container end-->

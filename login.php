@@ -2,7 +2,7 @@
 include './action.php';
 $title = "Login - Shopssy";
 include './header.php';
-
+$error_messages = "";
 if(isset($_POST['submit1'])) {
     $userName = stripcslashes($_POST['user_email']);
     $userName = mysqli_real_escape_string($con, $userName);
@@ -18,7 +18,7 @@ if(isset($_POST['submit1'])) {
                 $db_u_status = $row['status'];
             }
             if($db_u_status == 0) {
-                echo "Please Verify Email Address Before Login.";
+                $error_messages = "Please Verify Email Address Before Login.";
             } else if(password_verify($userPassword, $db_u_hash_pass_word)) {
                 $_SESSION['user_login_id'] = $userName."Shopssy";
                 $_SESSION['user_login_email'] = $userName;
@@ -29,7 +29,7 @@ if(isset($_POST['submit1'])) {
                </script>
                <?php
             } else {
-                echo "Email or Password Invalid, Please Try Again.";
+                $error_messages = "Email or Password Invalid, Please Try Again.";
             }
         }
     }
@@ -53,16 +53,18 @@ if(isset($_POST['submit1'])) {
 
     <!--login container start-->
     <div class="login_register_container">
-    
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+            <p class="text_of_error_message"><?php echo $error_messages; ?></p>
                 <div>
                     <label for="mail">Email</label> <br>
                 <input type="email" id="mail" name="user_email" required>
                 </div>
+               
                 <div>
                     <label for="pass">Password</label> <br>
                     <input type="password" id="pass" name="user_pass" required>
                 </div>
+                
             <center>
                 <span><a href="./recover.php">Forgot your password?</a></span>
                 <span><a href="./register.php">Register?</a></span>

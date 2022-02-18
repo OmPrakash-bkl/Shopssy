@@ -17,10 +17,22 @@ if(preg_match($nameval, $name) and preg_match($emailval, $email) and preg_match(
     mysqli_query($con, $sql);
 }
 
+?>
+<script>
+    document.getElementsByClassName("message_box")[0].style.display = "flex";
+    document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Message Sent</span>";
+    setTimeout(function() {
+        document.getElementsByClassName("message_box")[0].style.display = "none";
+    }, 3000);
+</script>
+<?php
+
 }
 
 ?> 
  
+
+
     <!--sub navigation container start-->
     <div class="sub_navigation_container">
 <center>

@@ -2,7 +2,7 @@
 include './action.php';
 $title = "Create Account - Shopssy";
 include './header.php';
-
+$error_messages = "";
 if(isset($_POST['submit'])) {
     $f_name = $_POST['f_name'];
     $l_name = $_POST['l_name'];
@@ -23,7 +23,7 @@ if(isset($_POST['submit'])) {
 
         if(!empty($email) && !empty($pass)) {
             if($check_rows > 0) {
-                echo "User with email is already exist!";
+                $error_messages = "User with email is already exist!";
             } else {
                 $password_hash = password_hash($pass, PASSWORD_BCRYPT);
                 $register_query = "INSERT INTO `register` (`f_name`, `l_name`, `email`, `password`, `full_name`, `address`, `city`, `zip`, `phone_number`, `country`, `status`) VALUES ('$f_name', '$l_name', '$email', '$password_hash', '', '', '', '', '', '', 0);";
@@ -104,6 +104,7 @@ if(isset($_POST['submit'])) {
                 <div>
                     <label for="mail">Email</label> <br>
                     <input type="email" id="mail" name="email" required>
+                    <p class="text_of_error_message"><?php echo $error_messages; ?></p>
                 </div>
                 <div>
                     <label for="pass">Password</label> <br>

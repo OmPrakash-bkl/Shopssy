@@ -52,6 +52,7 @@ if(isset($_GET['delete_btn_of_mini_cart'])) {
         $mini_cart_sub_product_id = $_GET['product_id'];
         $mini_cart_sub_delete_query = "DELETE FROM `cart` WHERE `product_id` = $mini_cart_sub_product_id;";
         mysqli_query($con, $mini_cart_sub_delete_query);
+      
         ?>
     <script type="text/javascript">
     window.location.href = 'http://localhost:3000/index.php';
@@ -61,12 +62,14 @@ if(isset($_GET['delete_btn_of_mini_cart'])) {
         $mini_cart_sub_product_id = $_GET['product_id'];
         $mini_cart_sub_delete_query = "DELETE FROM `unnamed_user_cart` WHERE `prod_id_of_cart` = $mini_cart_sub_product_id;";
         mysqli_query($con, $mini_cart_sub_delete_query);
+       
         ?>
     <script type="text/javascript">
     window.location.href = 'http://localhost:3000/index.php';
     </script>
     <?php
     }
+
   
 }
 
@@ -89,7 +92,7 @@ if(isset($_POST['cart_update_and_checkout'])) {
     {
         $cart_update_query = "UPDATE `unnamed_user_cart` SET `cart_desc` = '$cart_update_cart_user_desc' WHERE `prod_id_of_cart` = $cart_update_produc_id;";
     }
-
+   
 mysqli_query($con, $cart_update_query);
 ?>
 <script type="text/javascript">
@@ -124,6 +127,7 @@ if(isset($_POST['delete_all_from_wishlist'])) {
     }
     mysqli_query($con, $wish_item_delete_query);
     $empty = "emptied";
+   
     ?>
     <script type="text/javascript">
     window.location.href = 'http://localhost:3000/index.php';
@@ -202,7 +206,7 @@ if(isset($_SESSION['user_login_id'])) {
     unset($_SESSION['user_login_id']);
     unset($_SESSION['user_login_email']);
     unset($_SESSION['user_id']);
-    
+  
    //session_destroy();
    ?>
    <script type="text/javascript">
@@ -233,6 +237,16 @@ if(isset($_SESSION['user_login_id'])) {
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+
+     
+       <div class="message_box">
+            <div class="message_box_1">
+            </div>
+            <div class="message_box_2">
+            <button class="message_send_cross_btn"><i class="fa fa-close"></i></button>
+            </div>
+        </div>
+      
 
     <!--wishlist container start-->
     <center>
@@ -675,6 +689,7 @@ if(isset($_POST['share_list_request'])) {
         <div class="header_container_childs header_container_left">
             <h1><a href="./index.php">Shopssy</a></h1>
         </div>
+      
         <div class="header_container_childs header_container_right">
             <div>
                 <i class="fas fa-headset" style="color:#1792e9;font-size: 45px;"></i>
@@ -1106,9 +1121,11 @@ if(isset($_POST['share_list_request'])) {
                 $user_id = $_SESSION['user_id'];
                 $select_user_name_query = "SELECT `my_name` FROM `account` WHERE `user_id` = $user_id";
                 $select_user_name_result = mysqli_query($con, $select_user_name_query);
+                $full_name = "";
                 while($row = mysqli_fetch_assoc($select_user_name_result)) {
                     $full_name = $row['my_name'];
                 }
+
                 if($full_name == "" OR $full_name == "   ") {
                     $select_user_name_query = "SELECT `f_name`, `l_name` FROM `register` WHERE `user_id` = $user_id";
                     $select_user_name_result = mysqli_query($con, $select_user_name_query);
@@ -1118,8 +1135,9 @@ if(isset($_POST['share_list_request'])) {
                     }
                     $full_name = $f_name." ".$l_name;
                 }
+                
                 ?>
-                <h3 class="register_person_name"><?php echo $full_name; ?></h3>
+                <h3 class="register_person_name"><?php if(isset($full_name)) { echo $full_name; } ?></h3>
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                 <button id="hamburger_btn_signup_btn"  name="logout">Log Out</button>
                 </form>

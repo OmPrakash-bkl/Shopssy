@@ -30,31 +30,39 @@ include './header.php';
         }
         
         $notification_retrieve_result = mysqli_query($con, $notification_retrieve_query);
-        while($row = mysqli_fetch_assoc($notification_retrieve_result)) {
-            $notification_link = $row['link'];
-            $notification_title = $row['n_title'];
-            $notification_content = $row['n_content'];
-            $notification_time = $row['n_time'];
-            
-            if($notification_time != "") {
-        ?>
-    <a href="<?php echo $notification_link; ?>" class="notifi_link">
-        <div class="notification_page_parent_container">
-            <div class="notification_page_child_1">
-                <h1>S</h1>
-            </div>
-            <div class="notification_page_child_2">
-                <div class="notification_page_child_2_content_div">
-                <h2><?php echo $notification_title; ?></h2>
-                <p><?php echo $notification_content; ?></p>
-                </div>
-                <hr class="hr_line">
-                <h4><?php echo $notification_time; ?></h4>
-            </div>
-        </div>
-    </a>
+        $notification_retrieve_check_row = mysqli_num_rows($notification_retrieve_result);
+        if($notification_retrieve_check_row > 0) {
 
-    <?php } } ?>
+            while($row = mysqli_fetch_assoc($notification_retrieve_result)) {
+                $notification_link = $row['link'];
+                $notification_title = $row['n_title'];
+                $notification_content = $row['n_content'];
+                $notification_time = $row['n_time'];
+                
+                if($notification_time != "") {
+            ?>
+        <a href="<?php echo $notification_link; ?>" class="notifi_link">
+            <div class="notification_page_parent_container">
+                <div class="notification_page_child_1">
+                    <h1>S</h1>
+                </div>
+                <div class="notification_page_child_2">
+                    <div class="notification_page_child_2_content_div">
+                    <h2><?php echo $notification_title; ?></h2>
+                    <p><?php echo $notification_content; ?></p>
+                    </div>
+                    <hr class="hr_line">
+                    <h4><?php echo $notification_time; ?></h4>
+                </div>
+            </div>
+        </a>
+    
+        <?php } } ?>
+        
+
+   <?php  } else {
+       echo "<h1 class='no_notification_msg'>There are no notifications to display!</h1>";
+   } ?>
   
     </div>
     </center>

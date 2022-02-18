@@ -45,6 +45,17 @@ if(isset($_POST['add_address'])){
     }
     $account_insert_query = "INSERT INTO `account` (`user_id`, `f_name`, `l_name`, `my_name`, `address`, `city`, `state`, `zip`, `phone`, `country`, `status`) VALUES ($user_identity, '$fir_name', '$las_name', '$my_full_name', '$address', '$city', '$state', '$zip', '$phone', '$country', '$checkbox');";
     mysqli_query($con, $account_insert_query);
+
+    ?>
+   <script type="text/javascript">
+       document.getElementsByClassName("message_box")[0].style.display = "flex";
+        document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Address Added Successfully!</span>";
+        setTimeout(function() {
+            document.getElementsByClassName("message_box")[0].style.display = "none";
+        }, 2000);
+   </script>
+   <?php
+
    }
 
 }
@@ -112,6 +123,17 @@ if(isset($_POST['update_acc_details'])) {
     $user_identity =  $_SESSION['user_id'];
     $account_insert_query = "UPDATE `account` SET `f_name` = '$fir_name1', `l_name` = '$las_name1', `my_name` = '$my_full_name1', `address` = '$address1', `city` = '$city1', `state` = '$state1', `zip` = '$zip1', `phone`= '$phone1', `country` = '$country1', `status` = '$checkbox1' WHERE `user_id` = $user_identity;";
     mysqli_query($con, $account_insert_query);
+
+    ?>
+    <script type="text/javascript">
+        document.getElementsByClassName("message_box")[0].style.display = "flex";
+         document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Address Updated Successfully!</span>";
+         setTimeout(function() {
+             document.getElementsByClassName("message_box")[0].style.display = "none";
+         }, 2000);
+    </script>
+    <?php
+
    }
 }
 
@@ -119,6 +141,19 @@ if(isset($_POST['delete_default_add'])) {
     $user_identity =  $_SESSION['user_id'];
     $delete_default_add_query = "DELETE FROM `account` WHERE `user_id` = $user_identity AND `status`='default';";
     mysqli_query($con, $delete_default_add_query);
+
+    ?>
+   <script type="text/javascript">
+       document.getElementsByClassName("message_box")[0].style.backgroundColor = "#da0000";
+       document.getElementsByClassName("message_send_cross_btn")[0].style.backgroundColor = "#da0000";
+       document.getElementsByClassName("message_box")[0].style.display = "flex";
+        document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Default Address Deleted Successfully</span>";
+        setTimeout(function() {
+            document.getElementsByClassName("message_box")[0].style.display = "none";
+        }, 2000);
+   </script>
+   <?php
+
 }
 
 ?>

@@ -2,7 +2,7 @@
 include './action.php';
 $title = "Recover Email - Shopssy";
 include './header.php';
-
+$error_messages = "";
 if(isset($_POST['recover'])) {
 $email = $_POST['mail_add'];
 $recover_query = "SELECT * FROM `register` WHERE `email` = '$email';";
@@ -11,9 +11,9 @@ $no_of_rows = mysqli_num_rows($recover_result);
 $fetch = mysqli_fetch_assoc($recover_result);
 
 if($no_of_rows <= 0){
-    echo "Sorry, No Email Exists!";
+    $error_messages = "Sorry, No Email Exists!";
 }else if($fetch["status"] == 0){
-    echo "Sorry, Your Account Must Verify First, Before You Recover Your Password!!";
+    $error_messages = "Sorry, Your Account Must Verify First, Before You Recover Your Password!!";
 }else{
    
     $_SESSION['emailid'] = $email;
@@ -82,6 +82,7 @@ if($no_of_rows <= 0){
                 <div>
                     <label for="recover">Email Address</label> <br>
                 <input type="email" id="recover" name="mail_add" required autofocus>
+                <p class="text_of_error_message"><?php echo $error_messages; ?></p>
                 </div>
             <button type="submit" name="recover">Recover</button>
         </form>

@@ -1,3 +1,9 @@
+/* Message Box Closing Function Start */
+document.getElementsByClassName("message_send_cross_btn")[0].addEventListener("click", function() {
+    document.getElementsByClassName("message_box")[0].style.display = "none";
+});
+/* Message Box Closing Function End */
+
 /* Main Navbar Functions Start */
 
 document.getElementById("table_navbar_showing_container").addEventListener("click", function() {

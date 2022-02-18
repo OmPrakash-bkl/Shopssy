@@ -895,6 +895,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
         </div>
     </center>
     <!--top categories container end-->
+    
 
     <?php 
     include "./footer.php";

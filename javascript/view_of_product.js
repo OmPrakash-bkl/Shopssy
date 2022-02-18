@@ -17,10 +17,10 @@ document.getElementsByClassName(`small_images_container_images${image_num}`)[0].
 document.getElementsByClassName("review_btn")[0].addEventListener("click", function() {
 let review_form = document.getElementsByClassName("review_form_container")[0];
 
-if(review_form.style.display=="none") {
-    review_form.style.display="block";
-} else {
+if(review_form.style.display=="block") {
     review_form.style.display="none";
+} else {
+    review_form.style.display="block";
 }
 });
 

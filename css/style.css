@@ -21,7 +21,6 @@ a{
     -webkit-tap-highlight-color: transparent;
  }
 
- /* Change the white to any color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
@@ -31,6 +30,12 @@ input:-webkit-autofill:active{
 /* Code Reset End*/
 
 /*Navbar Start*/
+
+.text_of_error_message {
+    margin-top: 5px;
+    color: red;
+}
+
 .navbar_container {
     margin-bottom: 20px;
 }
@@ -64,6 +69,45 @@ input:-webkit-autofill:active{
     font-family: 'Josefin Sans', sans-serif;
 
 }
+
+.message_box {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 50%;
+    background-color: rgb(0, 170, 0);
+    position: fixed;
+    top: 12%;
+    left: 25%;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: rgba(2, 0, 0, 0.35) 0px 5px 10px;
+    display: none;
+    padding: 10px;
+    text-align: center;
+    z-index: 2;
+}
+
+.message_box .message_box_1 {
+flex: 90%;
+}
+.message_box .message_box_2 {
+    flex: 10%;
+}
+
+.message_send_cross_btn {
+    float: right;
+    width: 10px;
+    background-color: rgb(0, 170, 0);
+    cursor: pointer;
+    border: 0px;
+    font-size: 15px;
+    color: black;
+    margin: 3px auto;
+}
+
+
 .navbar_main_container {
   
     max-width: 1200px;
@@ -2309,6 +2353,8 @@ font-weight: bold;
     color: #2D9AE8;
  }
 
+ 
+
  /* Login and Register Container End */
 
 /* Verification Account Container Start */
@@ -2362,6 +2408,14 @@ font-weight: bold;
 .contactus_form_container div {
     margin: 10px 0px;
 }
+
+.contactus_form_container input:-webkit-autofill,
+.contactus_form_container input:-webkit-autofill:hover, 
+.contactus_form_container input:-webkit-autofill:focus, 
+.contactus_form_container input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px #ECECEC inset !important;
+}
+
 .contactus_form_container input, .contactus_form_container textarea {
     width: 50%;
     padding: 10px;
@@ -3615,6 +3669,7 @@ width: 100%;
       margin: 20px 0px 40px 0px;
   }
   .account_details_table_container table {
+      text-align: left;
       width: 100%;
   }
   .account_details_table_container td,  .account_details_table_container th {
@@ -3698,6 +3753,7 @@ width: 100%;
   .my_address_container table {
       width: 80%;
   }
+  
 .address_details_table_container1 th, .address_details_table_container3 th {
     color: rgb(102, 102, 102);
       font-size: 14px;
@@ -4021,6 +4077,10 @@ width: 100%;
 .text_containers em {
     color: gray;
 }
+.no_product_to_track h1 {
+    margin: 20px 5px;
+    color: gray;
+}
 .help_btn_of_order_page button {
     padding: 10px 20px;
     border: 0px;
@@ -4097,7 +4157,14 @@ font-family: Arial, Helvetica, sans-serif;
     display: table;
 }
 
+.no_notification_msg {
+    margin: 100px 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: gray;
+}
+
 /* Notification Page Container End */
+
 
 /*Keyframes Start*/
 
@@ -4623,6 +4690,12 @@ font-family: Arial, Helvetica, sans-serif;
     .notification_page_child_1 h1 {
         margin: 0px 10px;
     }
+    .message_box {
+        width: 60%;
+        top: 12%;
+        left: 20%;
+    }
+    
 }
 
 @media only screen and (max-width: 600px) {
@@ -4800,6 +4873,10 @@ font-family: Arial, Helvetica, sans-serif;
         .cart_empty_message_container > h1 i {
             font-size: 100px;
             margin: 15px 0px 25px 0px;
+        }
+        .no_notification_msg {
+            margin: 50px 5px;
+            font-size: 20px;
         }
 }
 @media only screen and (max-width: 400px) {
@@ -5061,6 +5138,10 @@ font-family: Arial, Helvetica, sans-serif;
     .all_categories_sub_container img {
         height: 150px;
         width: 100px;
+    }
+    .message_box {
+        width: 80%;
+        left: 10%;
     }
 }
 

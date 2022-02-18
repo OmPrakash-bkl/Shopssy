@@ -194,32 +194,42 @@ if(isset($_GET['cart_adding_req'])) {
         $check_result = mysqli_query($con, $check_query);
         $check_rows = mysqli_num_rows($check_result);
         if($check_rows >= 1) {
-            echo "";
+            ?>
+      <script>
+       document.getElementsByClassName("message_box")[0].style.display = "flex";
+       document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Already added to your cart</span>";
+       setTimeout(function() {
+        document.getElementsByClassName("message_box")[0].style.display = "none";
+       }, 3000);
+      </script>
+      <?php
         } else {
             $cart_inserting_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_adding_result_user_id, $product_id, $cart_inserting_qty, 0, '', '$pro_type');";
             mysqli_query($con, $cart_inserting_query);
+
+            if(isset($_GET['best_selling_pro'])) {
+                ?>
+                <script type="text/javascript">
+                window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
+                </script>
+                <?php
+    
+            } elseif(isset($_GET['hot_deal_pro'])) {
+                ?>
+                <script type="text/javascript">
+                window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
+                </script>
+                <?php
+            } else {
+                ?>
+                <script type="text/javascript">
+                window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+                </script>
+                <?php
+            }
         }
        
-        if(isset($_GET['best_selling_pro'])) {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
-            </script>
-            <?php
-
-        } elseif(isset($_GET['hot_deal_pro'])) {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
-            </script>
-            <?php
-        } else {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
-            </script>
-            <?php
-        }
+        
         
     } else {
         if(isset($_COOKIE['T093NO5A86H'])) {
@@ -237,31 +247,42 @@ if(isset($_GET['cart_adding_req'])) {
             $check_result = mysqli_query($con, $check_query);
             $check_rows = mysqli_num_rows($check_result);
             if($check_rows >= 1) {
-                echo "";
+                ?>
+              <script>
+              document.getElementsByClassName("message_box")[0].style.display = "flex";
+              document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Already added to your cart</span>";
+              setTimeout(function() {
+               document.getElementsByClassName("message_box")[0].style.display = "none";
+               }, 3000);
+              </script>
+              <?php
             } else {
                 $unname_user_cart_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`, `pro_type`) VALUES ($unnamed_user_token, $product_id,  $unnamed_cart_inserting_qty, '', '$pro_type');";
                 mysqli_query($con, $unname_user_cart_query);
+
+                if(isset($_GET['best_selling_pro'])) {
+                    ?>
+                    <script type="text/javascript">
+                    window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
+                    </script>
+                    <?php
+                } elseif(isset($_GET['hot_deal_pro'])) {
+                    ?>
+                    <script type="text/javascript">
+                    window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
+                    </script>
+                    <?php
+                } else {
+                    ?>
+                    <script type="text/javascript">
+                    window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+                    </script>
+                    <?php
+                }
+
             }
            
-           if(isset($_GET['best_selling_pro'])) {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
-            </script>
-            <?php
-        } elseif(isset($_GET['hot_deal_pro'])) {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
-            </script>
-            <?php
-        } else {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
-            </script>
-            <?php
-        }
+           
         }
     }
    
@@ -324,31 +345,42 @@ if(isset($_GET['wishlist_adding_req'])) {
         $check_result = mysqli_query($con, $check_query);
         $check_rows = mysqli_num_rows($check_result);
         if($check_rows >= 1) {
-            echo "";
+            ?>
+            <script>
+            document.getElementsByClassName("message_box")[0].style.display = "flex";
+            document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Already added to your wishlist</span>";
+            setTimeout(function() {
+             document.getElementsByClassName("message_box")[0].style.display = "none";
+             }, 3000);
+            </script>
+            <?php
         } else {
             $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`, `pro_type`) VALUES ($users_id, $prod_id, '$pro_type');";
             mysqli_query($con, $wishlist_insert_query);
+
+            if(isset($_GET['best_selling_pro'])) {
+                ?>
+                <script type="text/javascript">
+                window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
+                </script>
+                <?php
+            } elseif(isset($_GET['hot_deal_pro'])) {
+                ?>
+                <script type="text/javascript">
+                window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
+                </script>
+                <?php
+            } else {
+                ?>
+                <script type="text/javascript">
+                window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+                </script>
+                <?php
+            }
+
         }
        
-           if(isset($_GET['best_selling_pro'])) {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
-            </script>
-            <?php
-        } elseif(isset($_GET['hot_deal_pro'])) {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
-            </script>
-            <?php
-        } else {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
-            </script>
-            <?php
-        }
+           
     }else {
         $prod_id = $_GET['p_id'];
         $token_of_wishlist = "W937LI25A856T0K3N";
@@ -364,31 +396,42 @@ if(isset($_GET['wishlist_adding_req'])) {
         $check_result = mysqli_query($con, $check_query);
         $check_rows = mysqli_num_rows($check_result);
         if($check_rows >= 1) {
-            echo "";
+            ?>
+            <script>
+            document.getElementsByClassName("message_box")[0].style.display = "flex";
+            document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Already added to your wishlist</span>";
+            setTimeout(function() {
+             document.getElementsByClassName("message_box")[0].style.display = "none";
+             }, 3000);
+            </script>
+            <?php
         } else {
             $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`, `pro_type`) VALUES ($token_for_un_u_wishlist_details, $prod_id, '$pro_type');";
             mysqli_query($con, $wishlist_insert_query);
+
+            if(isset($_GET['best_selling_pro'])) {
+                ?>
+                <script type="text/javascript">
+                window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
+                </script>
+                <?php
+            } elseif(isset($_GET['hot_deal_pro'])) {
+                ?>
+                <script type="text/javascript">
+                window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
+                </script>
+                <?php
+            } else {
+                ?>
+                <script type="text/javascript">
+                window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
+                </script>
+                <?php
+            }
+
         }
        
-           if(isset($_GET['best_selling_pro'])) {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&best_selling_pro=1';
-            </script>
-            <?php
-        } elseif(isset($_GET['hot_deal_pro'])) {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>&hot_deal_pro=1';
-            </script>
-            <?php
-        } else {
-            ?>
-            <script type="text/javascript">
-            window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $product_id; ?>&sub_cat_id=<?php echo $product_sub_cat_id; ?>';
-            </script>
-            <?php
-        }
+           
     }
 } 
 
@@ -432,34 +475,55 @@ if(isset($_GET['review_sub_btn'])) {
             if(preg_match($nameval, $p_cus_name)) {
                 $pro_review_query = "INSERT INTO `reviews` (`known_user_id`, `p_id`, `p_customer_name`, `p_rating`, `p_desc`) VALUES ($known_user_id, '$pro_id', '$p_cus_name', '$p_cus_rating', '$p_cus_description');";
                 mysqli_query($con, $pro_review_query);
+
+                if(isset($_GET['hot_deal_pro'])) {
+                    ?>
+                    <script type="text/javascript">
+                    window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>&hot_deal_pro=1';
+                    </script>
+                    <?php
+                } else if(isset($_GET['best_selling_pro'])) {
+                    ?>
+                    <script type="text/javascript">
+                    window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>&best_selling_pro=1';
+                    </script>
+                    <?php
+                } else {
+                    ?>
+                    <script type="text/javascript">
+                    window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>';
+                    </script>
+                    <?php
+                }
+
             }
         } else {
-            echo "";
+            ?>
+            <script>
+            document.getElementsByClassName("message_box")[0].style.display = "flex";
+            document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Already your review is added</span>";
+            setTimeout(function() {
+             document.getElementsByClassName("message_box")[0].style.display = "none";
+             }, 3000);
+            </script>
+            <?php
         }
+
+        
         
     } else {
-        echo "<h1>Haven't purchased this product?</h1><h4>Sorry! You are not allowed to review this product since you haven't bought it on Flipkart.</h4>";
-    }
-    
-
-    if(isset($_GET['hot_deal_pro'])) {
         ?>
         <script type="text/javascript">
-        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>&hot_deal_pro=1';
+            document.getElementsByClassName("message_box")[0].style.backgroundColor = "#da0000";
+            document.getElementsByClassName("message_send_cross_btn")[0].style.backgroundColor = "#da0000";
+            document.getElementsByClassName("message_box")[0].style.display = "flex";
+             document.getElementsByClassName("message_box_1")[0].innerHTML = "<h1>Haven't purchased this product?</h1><h4>Sorry! You are not allowed to review this product since you haven't bought it on Shopssy.</h4>";
+             setTimeout(function() {
+                 document.getElementsByClassName("message_box")[0].style.display = "none";
+             }, 3000);
         </script>
         <?php
-    } else if(isset($_GET['best_selling_pro'])) {
-        ?>
-        <script type="text/javascript">
-        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>&best_selling_pro=1';
-        </script>
-        <?php
-    } else {
-        ?>
-        <script type="text/javascript">
-        window.location.href = 'http://localhost:3000/view_of_product.php?p_id=<?php echo $pro_id; ?>&sub_cat_id=<?php echo $pro_sub_cat_id; ?>';
-        </script>
-        <?php
+        
     }
     
 }
@@ -653,7 +717,15 @@ if(isset($_GET['notify_me_req'])) {
             <?php
         }
     } else {
-        echo "";
+           ?>
+            <script>
+            document.getElementsByClassName("message_box")[0].style.display = "flex";
+            document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>You will get the notification once the product is get stock in shopssy.</span>";
+            setTimeout(function() {
+             document.getElementsByClassName("message_box")[0].style.display = "none";
+             }, 3000);
+            </script>
+            <?php
     }
 
 } else {
@@ -685,13 +757,22 @@ if(isset($_GET['product_id1'])) {
         $check_result = mysqli_query($con, $check_query);
         $check_rows = mysqli_num_rows($check_result);
         if($check_rows >= 1) {
-            echo "";
+            ?>
+            <script>
+            document.getElementsByClassName("message_box")[0].style.display = "flex";
+            document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Already added to your cart</span>";
+            setTimeout(function() {
+             document.getElementsByClassName("message_box")[0].style.display = "none";
+             }, 3000);
+            </script>
+            <?php
         } else {
             $cart_query = "INSERT INTO `cart` (`u_id`, `product_id`, `quantity`, `pro_tot_price`, `cart_user_desc`, `pro_type`) VALUES ($cart_process_user_id, $cart_process_pro_id, 1, 0, '', '$pro_type')";
             mysqli_query($con, $cart_query);
-        }
-        $_SESSION['user_id'] = $cart_process_user_id;
+            $_SESSION['user_id'] = $cart_process_user_id;
         refresh();
+        }
+        
     } else {
 
         $prod_id_for_unnamed_cart_details = $_GET['product_id1'];
@@ -710,12 +791,21 @@ if(isset($_GET['product_id1'])) {
         $check_result = mysqli_query($con, $check_query);
         $check_rows = mysqli_num_rows($check_result);
         if($check_rows >= 1) {
-            echo "";
+            ?>
+            <script>
+            document.getElementsByClassName("message_box")[0].style.display = "flex";
+            document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Already added to your cart</span>";
+            setTimeout(function() {
+             document.getElementsByClassName("message_box")[0].style.display = "none";
+             }, 3000);
+            </script>
+            <?php
         } else {
             $unnamed_user_cart_details_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `pro_type`) VALUES ($token_for_un_u_cart_details, $prod_id_for_unnamed_cart_details, 1, '$pro_type');";
             mysqli_query($con, $unnamed_user_cart_details_insert_query);
+            refresh();
         }
-        refresh();
+        
         
     }
    
@@ -736,10 +826,19 @@ if(isset($_GET['wish_btn1'])) {
         $check_result = mysqli_query($con, $check_query);
         $check_rows = mysqli_num_rows($check_result);
         if($check_rows >= 1) {
-            echo "";
+            ?>
+            <script>
+            document.getElementsByClassName("message_box")[0].style.display = "flex";
+            document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Already added to your wishlist</span>";
+            setTimeout(function() {
+             document.getElementsByClassName("message_box")[0].style.display = "none";
+             }, 3000);
+            </script>
+            <?php
         } else {
             $wishlist_insert_query = "INSERT INTO `mywishlist` (`user_id`, `prod_id`, `pro_type`) VALUES ($users_id, $produc_id, '$pro_type');";
             mysqli_query($con, $wishlist_insert_query);
+            refresh();
         }
        
     } else {
@@ -756,15 +855,24 @@ if(isset($_GET['wish_btn1'])) {
         $check_result = mysqli_query($con, $check_query);
         $check_rows = mysqli_num_rows($check_result);
         if($check_rows >= 1) {
-            echo "";
+            ?>
+            <script>
+            document.getElementsByClassName("message_box")[0].style.display = "flex";
+            document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Already added to your wishlist</span>";
+            setTimeout(function() {
+             document.getElementsByClassName("message_box")[0].style.display = "none";
+             }, 3000);
+            </script>
+            <?php
         } else { 
             $wishlist_insert_query = "INSERT INTO `unnamed_user_wishlist` (`un_u_wishlist_token`, `prod_id_of_wishlist`, `pro_type`) VALUES ($token_for_un_u_wishlist_details, $produc_id, '$pro_type');";
             mysqli_query($con, $wishlist_insert_query);
+            refresh();
         }
        
     }
   
-    refresh();
+   
 }
 
 

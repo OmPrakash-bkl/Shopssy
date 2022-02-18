@@ -13,11 +13,21 @@ if(!isset($_SESSION['user_login_id'])) {
 
 if(isset($_POST['log_out'])){
     unset($_SESSION['user_login_id']);
+    unset($_SESSION['user_login_email']);
+    unset($_SESSION['user_id']);
     ?>
    <script type="text/javascript">
-   window.location.href = 'http://localhost:3000/account.php';
+       document.getElementsByClassName("message_box")[0].style.backgroundColor = "#da0000";
+       document.getElementsByClassName("message_send_cross_btn")[0].style.backgroundColor = "#da0000";
+       document.getElementsByClassName("message_box")[0].style.display = "flex";
+        document.getElementsByClassName("message_box_1")[0].innerHTML = "<span>Logout Successfully!</span>";
+        setTimeout(function() {
+            document.getElementsByClassName("message_box")[0].style.display = "none";
+        }, 3000);
+   window.location.href = 'http://localhost:3000/index.php';
    </script>
    <?php
+  
 }
 
 ?>
@@ -128,13 +138,22 @@ if(isset($_POST['log_out'])){
 
            
             <table class="order_history_table">
-                <tr>
-                    <th>S.No</th>
-                    <th>Order Id</th>
-                    <th>Product</th>
-                    <th>Qty</th>
-                    <th>Status</th>
-                </tr>
+                <?php
+                   function dont_display($status_variable) {
+                       if($status_variable == "zero") {
+                           echo "";
+                       } else {
+                        echo "<tr>
+                        <th>S.No</th>
+                        <th>Order Id</th>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Status</th>
+                        </tr>";
+                       }
+                   
+                }
+                ?>
 
                 <?php
                 $user_identity =  $_SESSION['user_id'];
@@ -143,7 +162,7 @@ if(isset($_POST['log_out'])){
                 $order_history_result = mysqli_query($con, $order_history_query);
                 if(mysqli_num_rows($order_history_result) > 0) {
 
-
+                    dont_display("one");
                 while($row = mysqli_fetch_assoc($order_history_result)) {
                     $order_id = $row['order_id'];
                     $status = $row['p_status'];
@@ -168,6 +187,7 @@ if(isset($_POST['log_out'])){
                 </tr>
                 <?php $s_no++;  } } } } else {
                     echo "<p>You haven't placed any orders yet.</p>";
+                    dont_display("zero");
                 } ?>
             </table>
            

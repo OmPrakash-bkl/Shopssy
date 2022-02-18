@@ -2,7 +2,7 @@
 include './action.php';
 $title = "Reset Password - Shopssy";
 include './header.php';
-
+$error_messages = "";
 if(isset($_POST['reset'])) {
 
         $psw = $_POST["password"];
@@ -30,7 +30,7 @@ if(isset($_POST['reset'])) {
         } else{
             ?>
             <script>
-                alert("<?php echo "Please Try Again!"?>");
+               $error_messages = "Please Try Again!";
             </script>
             <?php
         }
@@ -60,6 +60,7 @@ if(isset($_POST['reset'])) {
                 <div>
                     <label for="newpass">New Password</label> <br>
                 <input type="password" id="newpass" name="password" required autofocus>
+                <p class="text_of_error_message"><?php echo $error_messages; ?></p>
                 </div>
             <button type="submit" name="reset">Reset</button>
         </form>
