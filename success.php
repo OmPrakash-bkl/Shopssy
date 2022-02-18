@@ -10,16 +10,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&family=Josefin+Sans:wght@700&family=Lobster&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/style.css">
    
 </head>
 <body>
-<div>
 <center>
-<i class="fas fa-check-circle" style="font-size: 100px;"></i>
+<div class="success_page_texts">
+<i class="fas fa-check-circle"></i>
 <h1>Payment Complete</h1>
 <p>Thank you, your payment has been successful. A confirmation email has been sent to your mail id.</p>
-</center>
 </div>
+</center>
 <script>
     setTimeout(function() {
         window.location.href = 'http://localhost:3000/index.php';
