@@ -126,7 +126,7 @@ if(isset($_POST['delete_btn'])) {
 
                 <tr>
                     <td><img src="./images/<?php echo $big_cart_p_image; ?>" alt="mobile image" class="shopping_cart_images"></td>
-                    <td>
+                    <td class="product_name_container">
                         <span class="product_name"><?php echo $big_cart_p_title; ?></span> <br>
 
                         <?php 
@@ -220,7 +220,7 @@ if(isset($_POST['delete_btn'])) {
     
                     <tr>
                         <td><img src="./images/<?php echo $big_cart_p_image; ?>" alt="mobile image" class="shopping_cart_images"></td>
-                        <td>
+                        <td class="product_name_container">
                             <span class="product_name"><?php echo $big_cart_p_title; ?></span> <br>
 
                             <?php 
