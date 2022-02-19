@@ -2,17 +2,17 @@ mysql -u root -p
 create database shopssy_onlineshop;
 use shopssy_onlineshop;
 
-1. email_subscription:-
+/* 1. email_subscription */
 
 create table email_subscription(id int(100) AUTO_INCREMENT, user_email varchar(200), primary key(id));
 insert into email_subscription(user_email) values ('kumaru1@gmail.com'), ('priya123@gmail.com');
 
-2. Contact Us:-
+/* 2. Contact Us */
 
 create table contact_us(id int(100) AUTO_INCREMENT, name varchar(200), email varchar(200), phone varchar(150), message varchar(300), primary key(id));
 insert into contact_us(name, email, phone, message) values('prakash', 'prakash@gmail.com', '1234567890', 'hello sir, good evening');
 
-3. Category
+/* 3. Category */
 
 create table category(cat_id int(100) AUTO_INCREMENT, cat_title varchar(200), cat_image_name varchar(200), cat_icon_name varchar(200), cat_name_description varchar(200), primary key(cat_id));
 
@@ -30,7 +30,7 @@ insert into category(cat_title, cat_image_name, cat_icon_name, cat_name_descript
 ('Books & Stationery Items', 'entranceexambooks4_image1.jpg', 'fas fa-book', 'Pens, Diaries, Calculators ...');
 
 
-4. Sub_Category
+/* 4. Sub_Category */
 
  create table sub_category(sub_cat_id int(100) AUTO_INCREMENT, cats_id int(100), sub_cat_identification_id float(4), sub_cat_identification_id_two int(100), subs_cat_title varchar(200), sub_cat_image_name varchar(200), primary key(sub_cat_id));
 
@@ -59,7 +59,7 @@ insert into category(cat_title, cat_image_name, cat_icon_name, cat_name_descript
 (12, 12.1, 122, "Books", 'nonfictionbooks3_image1.jpg'),
 (12, 12.2, 123, "Stationery Items", 'deskorganizers2_image1.jpg');
 
-5. Brands and Item List 
+/* 5. Brands and Item List */
 
  create table brand_and_item_list(brand_id int(100) AUTO_INCREMENT, cats_id int(100), subs_cat_identification_id double, subs_cat_identification_id_two int,  b_and_i_identification_id double, b_title varchar(200), b_sub_title varchar(200), b_sub_title_two varchar(200), primary key(brand_id));
 
@@ -244,7 +244,7 @@ insert into brand_and_item_list(cats_id, subs_cat_identification_id, subs_cat_id
 (12, 12.2, 123,  122.5, 'Calculators', 'Calculators Stationery Items', 'Stationery Items'),
 (12, 12.2, 123,  122.6, 'Key Chains', 'Key Chains Stationery Items', 'Stationery Items');
 
-6. Products
+/* 6. Products */
 
 create table products(p_id int(100) AUTO_INCREMENT, cats_id int(100), subs_cat_identification_id double, b_and_i_identification_id double, item_id double, p_title varchar(300), p_image varchar(200), p_star_rat int(20), p_o_price float(8), p_a_price float(8), primary key(p_id));
 
@@ -974,13 +974,13 @@ insert into products(cats_id, subs_cat_identification_id, b_and_i_identification
 (12, 12.2, 122.6, 482.3, 'MorningVale Dreamcatcher With Turquoise & Feather Charm Keyring', 'keychains3_image1.jpg', 3, 579.00, 379.00),
 (12, 12.2, 122.6, 482.4, 'AUGEN PVC Keychain For Gifting With Key Ring Anti-Rust (Pack Of 1)', 'keychains4_image1.jpg', 5, 549.00, 449.00);
 
-7. Products_sub 
+/* 7. Products_sub */
 
 create table products_sub(products_sub_id int(100) AUTO_INCREMENT, p_id int(100), p_image varchar(200), p_s_image1 varchar(200), p_s_image2 varchar(200), p_s_image3 varchar(200), p_avail varchar(200), p_tags1 varchar(200), p_tags2 varchar(200), p_tags3 varchar(200), p_desc varchar(400), primary key(products_sub_id));
 
 insert into products_sub(p_id, p_image, p_s_image1, p_s_image2, p_s_image3, p_avail, p_tags1, p_tags2, p_tags3, p_desc) values (1, 'samsung_mobiles1_image1.jpg', 'samsung_mobiles1_image2.jpg', 'samsung_mobiles1_image3.jpg', 'samsung_mobiles1_image4.jpg', 'In Stock', 'Smart Phones', 'Low Budget Mobiles', 'Trending Mobiles', 'Samsung Galaxy M32 5G mobile comes with a 6.50-inch touchscreen display with a resolution of 720x1600 pixels. Samsung Galaxy M32 5G is powered by an octa-core MediaTek Dimensity 720 processor. It comes with 6GB of RAM. The Samsung Galaxy M32 5G runs Android 11 and is powered by a 5000mAh battery. The Samsung Galaxy M32 5G supports proprietary fast charging.');
 
-8. Products_Specifications
+/* 8. Products_Specifications */
 
 create table products_specification(p_spec_id int(100) AUTO_INCREMENT, p_id int(100), p_spec_title varchar(200), p_spec_details varchar(400), primary key(p_spec_id)); 
 
@@ -1004,14 +1004,14 @@ Handset, Adaptor (15W), Charging Cable, Sim Ejector Pin, User Manual'),
 (1, 'Battery Capacity', '5000 mAh'),
 (1, 'Warranty Summary', '1 Year Warranty Provided by the Manufacturer from Date of Purchase');
 
-9. Reviews 
+/* 9. Reviews */
 
 create table reviews(review_id int(100) AUTO_INCREMENT, known_user_id int(100) default NULL, p_id int(100), p_customer_name varchar(200), p_rating int(50), p_desc varchar(400), primary key(review_id));
 
 insert into reviews(known_user_id, p_id, p_customer_name, p_rating, p_desc) values
 ( 0, 1, 'Prakash', '4', 'very good product. all youtuber and negative opinion are fake. this is really a good product.');
 
-10. Product_Questions_and_Answers
+/* 10. Product_Questions_and_Answers */
 
 create table product_questions_and_answers(p_q_and_a_id int(100) AUTO_INCREMENT, p_id int(100), user_id int(100), ques_person_name varchar(200), p_ques varchar(200), p_ans varchar(300), primary key(p_q_and_a_id));
 
@@ -1021,7 +1021,7 @@ insert into product_questions_and_answers(p_id, user_id, ques_person_name, p_que
 (1, 13, 'Aarthi', 'WiFi calling available in this phone?', 'Yes'),
 (1, 31, 'Keerthi', 'Popup Camera is available in this phone?', 'Yes');
 
-11. Filter Table
+/* 11. Filter Table */
 
 create table filter(filter_id int(100) AUTO_INCREMENT, subs_cat_identification_id int(100),  filter_title varchar(200), filter_sub_title varchar(200), primary key(filter_id));
 
@@ -1052,7 +1052,7 @@ insert into filter(subs_cat_identification_id, filter_title, filter_sub_title) v
 (102, 'BUDGET', 'BUDGET');
 
 
-12. Filter Sub
+/* 12. Filter Sub */
 
 create table filter_sub(filter_sub_id int(100) AUTO_INCREMENT, filters_id int(100), filter_datas varchar(200), primary key(filter_sub_id));
 
@@ -1196,40 +1196,40 @@ insert into filter_sub(filters_id, filter_datas) values
 (24, 'Rs. 30000 & Above');
 
 
-13. Register 
+/* 13. Register */
 
 create table register(user_id int(100) AUTO_INCREMENT, f_name varchar(200), l_name varchar(200), email varchar(200), password varchar(300), full_name varchar(200) default NULL, address varchar(300) default NULL, city varchar(200) default NULL, zip int(50) default NULL, phone_number varchar(100) default NULL, country varchar(300) default NULL, status int(50) default 0, primary key(user_id));
 
 insert into register(f_name, l_name, email, password, full_name, address, city, zip, phone_number, country, status) values
 ('Om', 'Prakash', 'Prakash123@gmail.com', 'Prakash123@developer', 'Om Prakash', '13/A, Prasanna Colony, 3rd Street, Avaniyapuram, Madurai - 12.', 'Madurai', '625012', '8838067309', 'India', 0);
-14. Cart 
+/* 14. Cart */
 
 create table cart(c_s_id int(100) AUTO_INCREMENT, u_id int(100), product_id int(100), quantity int(100) default 1, pro_price int(100) default 0, pro_tot_price float(8) default 0, cart_user_desc varchar(300) default NULL, pro_type varchar(150) default NULL, primary key(c_s_id));
 
 insert into cart(u_id, product_id, quantity, pro_price, pro_tot_price, cart_user_desc, pro_type) values(1, 4, 2, 18999, 37998, 'i need to buy this product within a week.', 'normal');
 
-15. MyWishlist 
+/* 15. MyWishlist */
 
 create table mywishlist(wish_id int(100) AUTO_INCREMENT, user_id int(100), prod_id int(100), pro_type varchar(150) default NULL, primary key(wish_id));
 
 insert into mywishlist(user_id, prod_id, pro_type) values
 (1,1, '');
 
-14. Account
+/* 16. Account */
 
 create table account(acc_id int(100) AUTO_INCREMENT, user_id int(100), f_name varchar(200) default NULL, l_name varchar(200) default NULL, my_name varchar(200) default NULL, address varchar(300) default NULL, city varchar(200) default NULL, state varchar(200) default NULL, zip varchar(200) default NULL, phone varchar(200) default NULL, country varchar(100) default NULL, status varchar(100) default NULL, primary key(acc_id));
 
 insert into account(user_id, f_name, l_name, my_name, address, city, state, zip, phone, country, status) values
 (4, 'Ram', 'Kumar', 'Ram Kumar', '13/A, Prasanna Colony, 3rd Street, Avaniyapuram, Madurai - 12.', 'Madurai', 'Tamil Nadu', '625012', '1234567890', 'India', 'default');
 
-15. Payment 
+/* 17. Payment */
 
 create table payment(id int(100) AUTO_INCREMENT, user_id int(100), order_id int(100), card_type varchar(200), card_number varchar(300), exp_date varchar(200), CVV varchar(100), primary key(id));
 
 insert into payment(user_id, order_id, card_type, card_number, exp_date, CVV) values
 (4, 1, 'Classic', '4111 1111 4555 1142', '03/2030', '744');
 
-16. Order 
+/* 18. Order */
 
 create table orders_table(order_id int(100) AUTO_INCREMENT, user_id int(100), trx_id varchar(200), trx_count int(100), p_status varchar(100), pro_tot_amount int(150), order_date varchar(100), primary key(order_id));
 
@@ -1237,7 +1237,7 @@ insert into orders_table(user_id, trx_id, trx_count, p_status, pro_tot_amount, o
 (4, 'trx0000', 1, 'ordered', 40000, '12-02-22');
 
 
-17. Orders Sub 
+/* 19. Orders Sub */
 
 create table orders_sub_table(o_s_id int(100) AUTO_INCREMENT, order_id int(100), product_id int(100), quantity int(50), primary key(o_s_id));
 
@@ -1245,7 +1245,7 @@ insert into orders_sub_table(order_id, product_id, quantity) values
 (1, 4, 3),
 (1, 7, 2);
 
-17. Filter Details For Mobile
+/* 20. Filter Details For Mobile */
 
 create table filter_detail_for_mob (mob_id int(100) AUTO_INCREMENT, pro_id int(100), subs_cat_identification_id int(100), RAM varchar(150), CUSTOMER_RATINGS varchar(150), INTERNAL_STORAGE varchar(150), BATTERY_CAPACITY varchar(150), OPERATING_SYSTEM varchar(150), NETWORK_TYPE varchar(150), SCREEN_SIZE varchar(150), SIM_TYPE varchar(150), PRIMARY_CAMERA varchar(150), SECONDARY_CAMERA varchar(150), PROCESSOR_BRAND varchar(150), OPERATING_SYSTEM_VERSION varchar(150), NUMBER_OF_CORES varchar(150), BUDGET varchar(150), primary key(mob_id));
 
@@ -1262,7 +1262,7 @@ insert into filter_detail_for_mob(pro_id, subs_cat_identification_id, RAM, CUSTO
 insert into filter_detail_for_mob(pro_id, subs_cat_identification_id, RAM, CUSTOMER_RATINGS, INTERNAL_STORAGE, BATTERY_CAPACITY, OPERATING_SYSTEM, NETWORK_TYPE, SCREEN_SIZE, SIM_TYPE, PRIMARY_CAMERA, SECONDARY_CAMERA, PROCESSOR_BRAND, OPERATING_SYSTEM_VERSION, NUMBER_OF_CORES, BUDGET) values
 (9, 101, '4 GB', '3 & Above', '64 - 127 GB', '5000 mAh & Above', 'Android', '4G VOLTE', '6 inch & Above', 'Dual Sim', '48 MP & Above', '1 - 9 MP', 'Mediatek', 'Android Q', 'Octo Core', 'Rs. 10000 & Rs. 14999');
 
-18. Filter Details For Tablets 
+/* 21. Filter Details For Tablets */
 
 
 create table filter_detail_for_tab (tab_id int(100) AUTO_INCREMENT, pro_id int(100), subs_cat_identification_id int(100), DISPLAY_SIZE varchar(150), CONNECTIVITY varchar(150), RAM varchar(150), CUSTOMER_RATINGS varchar(150), INTERNAL_STORAGE varchar(150), OPERATING_SYSTEM varchar(150), DISPLAY varchar(150), PRIMARY_CAMERA varchar(150), BATTERY_CAPACITY varchar(150), BUDGET varchar(150), primary key(tab_id));
@@ -1273,14 +1273,14 @@ insert into filter_detail_for_tab(pro_id, subs_cat_identification_id, DISPLAY_SI
 insert into filter_detail_for_tab(pro_id, subs_cat_identification_id, DISPLAY_SIZE, CONNECTIVITY, RAM, CUSTOMER_RATINGS, INTERNAL_STORAGE, OPERATING_SYSTEM, DISPLAY, PRIMARY_CAMERA, BATTERY_CAPACITY, BUDGET) values
 (61, 102, '7 - 8 inch', 'WiFi Only', '3 GB', '3 & Above', '64 - 127 GB', 'Android', 'Full HD', '12 MP & Above', '5000 mAh & Above', 'Rs. 10000 & Rs. 14999');
 
-19. Unnamed User Cart
+/* 22. Unnamed User Cart */
 
 create table unnamed_user_cart(u_u_cart_id int(100) AUTO_INCREMENT, un_u_cart_token int(100) default 0, prod_id_of_cart int(100) default 0, qty int(100) default 0, cart_desc varchar(300) default NULL, pro_type varchar(150) default NULL, primary key(u_u_cart_id));
 
 insert into unnamed_user_cart(un_u_cart_token, prod_id_of_cart, qty, cart_desc, pro_type) values
 (0, 1, 2, 'need to buy', '');
 
-20. Unnamed User Wishlist
+/* 23. Unnamed User Wishlist */
 
 create table unnamed_user_wishlist(u_u_wishlist_id int(100) AUTO_INCREMENT, un_u_wishlist_token int(100) default 0, prod_id_of_wishlist int(100) default 0, pro_type varchar(150) default NULL, primary key(u_u_wishlist_id));
 
@@ -1288,14 +1288,14 @@ create table unnamed_user_wishlist(u_u_wishlist_id int(100) AUTO_INCREMENT, un_u
 insert into unnamed_user_wishlist(un_u_wishlist_token, prod_id_of_wishlist, pro_type) values
 (1, 1, '');
 
-21. Sub Reviews 
+/* 24. Sub Reviews */
 
 create table sub_reviews(like_and_unlike_id int(100) AUTO_INCREMENT, review_id int(100), user_id int(100), is_like int(100), is_dislike int(100), primary key(like_and_unlike_id));
 
 insert into sub_reviews(review_id, user_id, is_like, is_dislike) values
 (1, 13, 0, 0);
 
-22. Sub Questions And Answers
+/* 25. Sub Questions And Answers */
 
 create table sub_question_and_answers(ques_and_ans_id int(100) AUTO_INCREMENT, ques_id int(100), user_id int(100), is_like int(100), is_dislike int(100), primary key(ques_and_ans_id));
 
@@ -1305,14 +1305,14 @@ insert into sub_question_and_answers(ques_id, user_id, is_like, is_dislike) valu
 (3, 13, 0, 1),
 (4, 31, 0, 1);
 
-23. Order Tracker 
+/* 26. Order Tracker */
 
 create table order_tracker(ot_id int(100) AUTO_INCREMENT, order_id int(100), prod_name varchar(200), prod_img_name varchar(200), prod_price int(150), offer_percentage_val int(100), order_date varchar(100), primary key(ot_id));
 
 insert into order_tracker(order_id, prod_name, prod_img_name, prod_price, offer_percentage_val, order_date) values
 (1, 'samsung mobile', 'samsung.jpg', 10999, 0, '12/02/22');
 
-24. Notification 
+/* 27. Notification */
 
 create table notification(n_id int(100) AUTO_INCREMENT, n_title varchar(200), n_content varchar(300), n_time varchar(200), noti_for_who int(100), link varchar(200), pro_id int(100), primary key(n_id));
 
@@ -1326,7 +1326,7 @@ insert into notification(n_title, n_content, n_time, noti_for_who, link, pro_id)
 ('Free shipping for a month!', 'Hi, this week only we are offering free shipping on all products for a whole month when you sign-up.', '12/02/22 18:00 AM', 33, 'http://localhost:3000/index.php', 0);
 
 
-25. NewsLetter 
+/* 28. NewsLetter */
 
 create table newsletter(s_id int(100) AUTO_INCREMENT, html_data text, title varchar(200), subject varchar(250), primary key(s_id));
 
