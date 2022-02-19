@@ -57,7 +57,7 @@ if(isset($_POST['submit1'])) {
             <p class="text_of_error_message"><?php echo $error_messages; ?></p>
                 <div>
                     <label for="mail">Email</label> <br>
-                <input type="email" id="mail" name="user_email" required>
+                <input type="email" id="mail" name="user_email" required autofocus>
                 </div>
                
                 <div>

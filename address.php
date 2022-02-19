@@ -3,6 +3,7 @@ include './action.php';
 $title = "Addresses - Shopssy";
 include './header.php';
 
+// Redirect If User Not Login Section Start
 if(!isset($_SESSION['user_login_id'])) {
     ?>
    <script type="text/javascript">
@@ -10,6 +11,9 @@ if(!isset($_SESSION['user_login_id'])) {
    </script>
    <?php
 }
+//Redirect If User Not Login Section End
+
+// Address Adding Section Start
 
 if(isset($_POST['add_address'])){
     $fir_name = $_POST['fir_name'];
@@ -57,8 +61,11 @@ if(isset($_POST['add_address'])){
    <?php
 
    }
-
 }
+// Address Adding Section End
+
+// Delete If User Have More Than One Address Section Start
+
 $user_identity =  $_SESSION['user_id'];
 $extra_account_check_query = "SELECT * FROM `account` WHERE `status` ='default' AND `user_id` = $user_identity;";
 $extra_account_check_result = mysqli_query($con, $extra_account_check_query);
@@ -87,6 +94,11 @@ while($row1 = mysqli_fetch_assoc($extra_account_check_result1)) {
     $counter1++;
 }
 }
+
+// Delete If User Have More Than One Address Section End
+
+
+// Update Address Section Start
 
 if(isset($_POST['update_acc_details'])) {
     $fir_name1 = $_POST['fir_name1'];
@@ -137,6 +149,11 @@ if(isset($_POST['update_acc_details'])) {
    }
 }
 
+// Update Address Section End
+
+
+// Delete Default Address Section Start
+
 if(isset($_POST['delete_default_add'])) {
     $user_identity =  $_SESSION['user_id'];
     $delete_default_add_query = "DELETE FROM `account` WHERE `user_id` = $user_identity AND `status`='default';";
@@ -155,6 +172,8 @@ if(isset($_POST['delete_default_add'])) {
    <?php
 
 }
+
+// Delete Default Address Section End
 
 ?>
     
@@ -177,6 +196,8 @@ if(isset($_POST['delete_default_add'])) {
             <span class="return_link"><a href="./account.php"><i class="fa fa-angle-left"></i> Return to Account Details</a></span> <br>
             <button class="add_new_add_btn">ADD A NEW ADDRESS</button>
            
+             <!-- Add Address Section Start -->
+
             <div class="address_details_table_container1">
                 <h2 class="heading2">ADD A NEW ADDRESS</h2>
 
@@ -244,6 +265,10 @@ if(isset($_POST['delete_default_add'])) {
                <button type="button" class="cancel_btn_of_new_add">CANCEL</button>
             </form>
             </div>
+
+             <!-- Add Address Section End -->
+
+            <!-- Default Address Display Section Start -->
 
             <div class="address_details_table_container2">
                 <h2 class="heading1">DEFAULT</h2>
@@ -337,6 +362,10 @@ if(isset($_POST['delete_default_add'])) {
 
             </div>
 
+            <!-- Default Address Display Section End -->
+
+             <!-- Edit Address Section Start -->
+
             <div class="address_details_table_container3">
                 <h2 class="heading2">EDIT ADDRESS</h2>
 
@@ -405,6 +434,8 @@ if(isset($_POST['delete_default_add'])) {
 
 
             </div>
+
+            <!-- Edit Address Section End -->
 
         </div>
     </center>

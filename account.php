@@ -3,6 +3,8 @@ include './action.php';
 $title = "My Account - Shopssy";
 include './header.php';
 
+// Redirect If User Not Login Section Start
+
 if(!isset($_SESSION['user_login_id'])) {
     ?>
    <script type="text/javascript">
@@ -10,6 +12,10 @@ if(!isset($_SESSION['user_login_id'])) {
    </script>
    <?php
 }
+
+// Redirect If User Not Login Section End
+
+// Logout Section Start
 
 if(isset($_POST['log_out'])){
     unset($_SESSION['user_login_id']);
@@ -27,8 +33,9 @@ if(isset($_POST['log_out'])){
    window.location.href = 'http://localhost:3000/index.php';
    </script>
    <?php
-  
 }
+
+// Logout Section End
 
 ?>
 
@@ -134,9 +141,9 @@ if(isset($_POST['log_out'])){
                 </form>
             </div>
             <h2 class="heading2">ORDER HISTORY</h2>
-            <!-- order history table start -->
 
-           
+
+            <!-- order history table start -->
             <table class="order_history_table">
                 <?php
                    function dont_display($status_variable) {

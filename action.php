@@ -7,7 +7,7 @@ include './db_con.php';
 // $_SESSION['user_login_email'] = "ram@gmail.com";
 //  $_SESSION['user_id'] = 4;
 
-// Email Validation Start
+// Email Subscription Container Start
 if(isset($_POST['subscribe'])) {
   $email = test_input_data($_POST['user_email']);
   $check_query = "SELECT * FROM `email_subscription` WHERE `user_email` = '$email';";
@@ -40,7 +40,7 @@ function test_input_data($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
-// Email Validation End
+// Email Subscription Container End
 
 //Cart Add and Update start
 
