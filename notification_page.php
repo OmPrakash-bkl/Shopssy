@@ -22,13 +22,24 @@ include './header.php';
     <center>
     <div class="notification_page_master_container">
         <?php 
+
+        // Query For Unknown User Fun Start
+
         if(!isset($_SESSION['user_id'])) {
             $notification_retrieve_query = "SELECT * FROM `notification` WHERE `noti_for_who` = 0;";
-        } else {
+        } 
+            // Query For Unknown User Fun End
+
+            // Query For Shopssy User Fun Start
+
+        else {
             $user_id =  $_SESSION['user_id'];
             $notification_retrieve_query = "SELECT * FROM `notification` WHERE `noti_for_who` = 0 OR `noti_for_who` = $user_id;";
         }
+        // Query For Shopssy User Fun End
         
+        // Notification Retrieve Fun Start
+
         $notification_retrieve_result = mysqli_query($con, $notification_retrieve_query);
         $notification_retrieve_check_row = mysqli_num_rows($notification_retrieve_result);
         if($notification_retrieve_check_row > 0) {
@@ -60,7 +71,11 @@ include './header.php';
         <?php } } ?>
         
 
-   <?php  } else {
+   <?php  }
+
+   // Notification Retrieve Fun End
+   
+   else {
        echo "<h1 class='no_notification_msg'>There are no notifications to display!</h1>";
    } ?>
   

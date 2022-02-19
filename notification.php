@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <!-- Notification Of Login Verification Section Start -->
     <center>
         <div class="notification_texts">
         <h1>A verification link has been sent to your gmail account</h1>
@@ -15,6 +16,6 @@
         <p><b>Tip: </b>Didn't receive the email?, check your spam folder in case the email was incorrectly identified.</p>
         </div>
     </center>
-
+  <!-- Notification Of Login Verification Section End -->
 </body>
 </html>

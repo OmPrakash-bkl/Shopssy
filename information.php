@@ -1,18 +1,26 @@
 <?php 
 session_start();
-
-            
-
 $_SESSION['prod_qty'] = 1;
-
 include './action.php';
+
+// Redirect If User Not Login Fun Start 
+
 if(!isset($_SESSION['user_login_id'])) {
 header("Location: http://localhost:3000/login.php");
 }
+
+// Redirect If User Not Login Fun Start 
+
+// Logout Fun Start
+
 if(isset($_POST['logout_request'])) {
     unset($_SESSION['user_login_id']);
     header("Location: http://localhost:3000/login.php");
 }
+
+// Logout Fun Start
+
+// Redirect If Cart Is Empty Fun Start
 
 $user_id = $_SESSION['user_id'];
 $cart_details_query = "SELECT * FROM `cart` WHERE `u_id` = $user_id;";
@@ -25,6 +33,10 @@ if($cart_count_checking == 0) {
  </script>
  <?php
 }
+
+// Redirect If Cart Is Empty Fun End
+
+// Fetching Default Address From DB Fun Start
 
 $customer_add_details_address = "There is";
 $customer_add_details_city = "No Default";
@@ -43,10 +55,17 @@ if(isset($_SESSION['user_login_email'])) {
         $customer_add_details_state = $row2['state'];
     }
 }
+
+// Radio Btn Fun Start
 $color_for_one = "#4285F4";
 $color_for_two = "rgb(167, 167, 167)";
 $color_for_three = "rgb(167, 167, 167)";
 $status_code = "default";
+// Radio Btn Fun End
+
+// Fetching Default Address From DB Fun End
+
+// Subscription Fun Start
 
 if(isset($_POST['subscription_box'])){
     $user_email_id = $_SESSION['user_login_email'];
@@ -54,13 +73,25 @@ if(isset($_POST['subscription_box'])){
 $check_result = mysqli_query($con, $check_query);
 $check_no_of_rows = mysqli_num_rows($check_result);
 if($check_no_of_rows >= 1) {
-  echo "";
+    ?>
+    <script>
+        alert("Already Subscripted!");
+    </script>
+      <?php
 } else {
 $subscription_query = "INSERT INTO `email_subscription` (`user_email`) VALUES ('$user_email_id');";
 mysqli_query($con, $subscription_query);
+?>
+<script>
+    alert("Subscripted!");
+</script>
+  <?php
 }
 }
 
+// Subscription Fun End
+
+// Radio Btn Fun Start
 if(isset($_POST['old_add'])) {
     $color_for_one = "#4285F4";
     $status_code = "default";
@@ -88,8 +119,10 @@ if(isset($_POST['secon_add'])) {
     $color_for_two = "rgb(167, 167, 167)";
     $status_code = "secondary";
     $address_type = "secondary";
-    
 }
+// Radio Btn Fun End
+
+// Fetch Address From DB Fun Start
 
 $users_id_value = $_SESSION['user_id'];
 $address_details_fetch_query = "SELECT * FROM `account` WHERE `user_id` = $users_id_value AND `status` = '$status_code';";
@@ -115,6 +148,11 @@ while($row3  = mysqli_fetch_assoc($address_details_fetch_result)) {
     $address_details_state = $row3['state'];
     $address_details_zip = $row3['zip'];
 }
+
+// Fetch Address From DB Fun End
+
+
+// Address Update And Insert Fun Start
 
 if(isset($_POST['continue_to_ship'])) {
     $fir_name = $_POST['f_name'];
@@ -146,9 +184,9 @@ if(isset($_POST['continue_to_ship'])) {
 
    if(preg_match($nameval, $city) and preg_match($nameval, $country) and preg_match($nameval, $state) and preg_match($numberval, $zip) and preg_match($numberval, $phone)) {
 
-   if($address_upload_type == "default") {
-   
+    // Default Address Insertion And Updation Fun Start
 
+   if($address_upload_type == "default") {
     $users_id_value = $_SESSION['user_id'];
     $address_details_fetch_query = "SELECT * FROM `account` WHERE `user_id` = $users_id_value AND `status` = 'default';";
     if(mysqli_num_rows($address_details_fetch_result) === 0) {
@@ -162,6 +200,10 @@ if(isset($_POST['continue_to_ship'])) {
     </script>
     <?php 
    }
+       // Default Address Insertion And Updation Fun End
+
+       // Secondary Address Insertion And Updation Fun Start
+
    if($address_upload_type == "secondary") {
     $users_id_value = $_SESSION['user_id'];
     $address_details_fetch_query = "SELECT * FROM `account` WHERE `user_id` = $users_id_value AND `status` = 'secondary';";
@@ -177,6 +219,10 @@ if(isset($_POST['continue_to_ship'])) {
     <?php 
    }
 
+    // Secondary Address Insertion And Updation Fun End
+
+     // New Address Insertion And Updation Fun Start
+
    if($address_upload_type == "new") {
     $account_uploading_query = "INSERT INTO `account` (`user_id`, `f_name`, `l_name`, `my_name`, `address`, `city`, `state`, `zip`, `phone`, `country`, `status`) VALUES ($users_id_value, '$fir_name', '$las_name', '$my_full_name', '$address', '$city', '$state', '$zip', '$phone', '$country', 'secondary');";
     ?>
@@ -185,6 +231,8 @@ if(isset($_POST['continue_to_ship'])) {
     </script>
     <?php 
    }
+
+    // New Address Insertion And Updation Fun End
 
     mysqli_query($con, $account_uploading_query);
     ?>
@@ -196,8 +244,9 @@ if(isset($_POST['continue_to_ship'])) {
 
 }
 
+// Address Update And Insert Fun End
 
-
+// New Address Sub Fun Start
 
 if(isset($_POST['new_add'])) {
     $color_for_two = "#4285F4";
@@ -212,6 +261,8 @@ if(isset($_POST['new_add'])) {
     $address_details_state = "";
     $address_details_zip = "";
 }
+
+// New Address Sub Fun(Functionality) End
 
 ?>
 
@@ -275,8 +326,9 @@ if(isset($_POST['new_add'])) {
                    </form>
                 </div>
             </div>
+            
+            <!-- 3 Type Of Address Radio Btn Section Start -->
 
-          
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="subscription_form" method="POST">
 
                 <div class="checkbox_container">
@@ -294,9 +346,13 @@ if(isset($_POST['new_add'])) {
 
                    <button type="submit" name="new_add" value="2" class="new_and_old_buttons" ><i class="fas fa-circle" style="color: <?php echo $color_for_two; ?>;"></i> New Address</button>
                 </form>
+
+                  <!-- 3 Type Of Address Radio Btn Section End -->
                     <br>
+                    <!-- Address Form Section Start -->
+
                     <form action="" method="POST">
-                        <input type="hidden" name="add_type" value="<?php echo $address_type; ?>">
+                    <input type="hidden" name="add_type" value="<?php echo $address_type; ?>">
                     <input type="text" placeholder="Country" name="country" value="<?php echo $address_details_country; ?>" required> <br>
                     <input type="text" placeholder="First name(Optional)" name="f_name" class="fname" value="<?php echo $address_details_f_name; ?>" required> 
                     <input type="text" placeholder="Last name" class="lname" name="l_name" value="<?php echo $address_details_l_name; ?>" required> <br>
@@ -308,15 +364,18 @@ if(isset($_POST['new_add'])) {
                     <button type="submit" name="continue_to_ship" class="continue_btn">Continue to shipping</button>
                     <span class="return_link"><a href="./cart.php"><i class="fa fa-angle-left"></i> Return to cart</a></span>
                     </form>
-                </div>
-           
 
+                    <!-- Address Form Section End -->
+
+                </div>
         </div>
 
         <div class="information_inner_container2">
             <div class="information_inner_container2_1st">
 
             <?php 
+
+            // Product Of Cart Displaying Fun Start
          
             $user_id = $_SESSION['user_id'];
             $cart_details_query = "SELECT * FROM `cart` WHERE `u_id` = $user_id;";
@@ -336,7 +395,7 @@ if(isset($_POST['new_add'])) {
                     $cart_details_product_p_o_price = $row2['p_o_price'];
                
 
-            ?>
+                ?>
 
                 <div class="information_inner_container2_divs">
                     <div class="information_inner_container2_divs_image">
@@ -365,7 +424,11 @@ if(isset($_POST['new_add'])) {
                     </div>
             </div>
 
-            <?php } } ?>
+            <?php } }
+            
+            // Product Of Cart Displaying Fun End
+
+            ?>
                
             </div>
 
@@ -418,9 +481,7 @@ if(isset($_POST['new_add'])) {
                     </div>
                 </div>
     
-                
             </div>
-
 
         </div>
 

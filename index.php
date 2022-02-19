@@ -1,9 +1,9 @@
 <?php 
 include './action.php';
 
+// Sending Mail Of Newsletter Fun Start
+
 if(isset($_SESSION['user_login_email'])) {
-
-
 $user_mail_id = $_SESSION['user_login_email'];
 
 $check_email_sub_query = "SELECT * FROM `email_subscription` WHERE `user_email` = '$user_mail_id';";
@@ -59,8 +59,12 @@ if($_COOKIE['N32SL33673R'] != $newsletter_s_id) {
 }
 }
 
+// Sending Mail Of Newsletter Fun End
+
 $_SESSION['prod_qty'] = 1;
 unset($_SESSION['store_count']);
+
+// Page Count Section Start
 
 if(isset($_GET['page'])) {
     $no_of_page = $_GET['page'];
@@ -70,6 +74,10 @@ if(isset($_GET['page'])) {
 } else {
     $no_of_page = 1;
 }
+
+// Page Count Section End
+
+// Setting A Id To Track For Unknown User Function Start
 
 if(!isset($_COOKIE['T093NO5A86H'])) {
     $unnamed_user_cart_query = "SELECT `un_u_cart_token` FROM `unnamed_user_cart`;";
@@ -83,6 +91,10 @@ $token_of_auth = "T093NO5A86H";
 setcookie($token_of_auth, $token_for_un_u_cart_details, time() + (86400 * 730));
 }
 
+// Setting A Id To Track Unknown User Function End
+
+// Setting Wishlist Id To Track Unknown User Wishing Product Fun Start
+
 if(!isset($_COOKIE['W937LI25A856T0K3N'])) {
     $unnamed_user_wishlist_query = "SELECT `un_u_wishlist_token` FROM `unnamed_user_wishlist`;";
 $unnamed_user_wishlist_result = mysqli_query($con, $unnamed_user_wishlist_query);
@@ -95,10 +107,15 @@ $token_of_wishlist = "W937LI25A856T0K3N";
 setcookie($token_of_wishlist, $token_for_un_u_wishlist_details, time() + (86400 * 730));
 }
 
+// Setting Wishlist Id To Track Unknown User Wishing Product Fun End
+
 $title = "Shopssy | Online Shopping Site for Mobiles, Electronics and More.";
 include './header.php';
 
 if(isset($_POST['product_id'])) {
+
+    // Adding Product To The Cart Of Shopssy User Fun Start
+
     if(isset($_SESSION['user_login_id'])) {
         $user_email_id = $_SESSION['user_login_email'];
         $cart_process_query = "SELECT `user_id` FROM `register` WHERE `email`='$user_email_id';";
@@ -128,7 +145,13 @@ if(isset($_POST['product_id'])) {
         window.location.href = 'http://localhost:3000/index.php';
         </script>
         <?php
-    } else {
+    }
+    
+     // Adding Product To The Cart Of Shopssy User Fun End
+
+      // Adding Product To The Cart Of Unknown User Fun Start
+
+    else {
 
         $prod_id_for_unnamed_cart_details = $_POST['product_id'];
           if(isset($_COOKIE['T093NO5A86H'])) {
@@ -158,11 +181,16 @@ if(isset($_POST['product_id'])) {
            <?php
         
     }
+
+    // Adding Product To The Cart Of Unknown User Fun End
    
 }
 
 if(isset($_POST['wish_btn'])) {
     $produc_id = $_POST['productt_id'];
+
+    // Adding Product To The Wishlist Of Shopssy User Fun Start
+
     if(isset($_SESSION['user_login_id'])) {
         $users_id = $_SESSION['user_id'];
         if(isset($_POST['best_selling_pro'])){
@@ -182,7 +210,13 @@ if(isset($_POST['wish_btn'])) {
             mysqli_query($con, $wishlist_insert_query);
         }
        
-    } else {
+    } 
+    
+     // Adding Product To The Wishlist Of Shopssy User Fun End
+
+       // Adding Product To The Wishlist Of Unknown User Fun Start
+
+    else {
         $token_of_wishlist = "W937LI25A856T0K3N";
         $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
         if(isset($_POST['best_selling_pro'])){
@@ -210,8 +244,11 @@ if(isset($_POST['wish_btn'])) {
     window.location.href = 'http://localhost:3000/index.php';
     </script>
     <?php
+
+      // Adding Product To The Wishlist Of Unknown User Fun End
 }
 
+// View Related Product Of Your Current Selected Product Fun Start
 
 if(isset($_POST['view_all_related'])) {
 if(isset($_POST['productt_id'])) {
@@ -229,6 +266,8 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
     }
   }
 }
+
+// View Related Product Of Your Current Selected Product Fun End
 
 ?>
 
@@ -311,6 +350,8 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
 
         <?php
         
+        // Displaying Of New Arrival Products Fun Start
+
         $products_query = "SELECT * FROM `products` ORDER BY RAND() LIMIT 10;";
         $products_result = mysqli_query($con, $products_query);
        while($row = mysqli_fetch_assoc($products_result)) {
@@ -409,7 +450,11 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                 </div>
             </div>
             
-            <?php } ?>
+            <?php }
+            
+            // Displaying Of New Arrival Products Fun End
+
+            ?>
         </div>
 
         <div class="products_container_button_div">
@@ -427,6 +472,8 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
         <div class="products_container_products_div">
 
         <?php
+
+        // Displaying Of Best Selling Products Fun Start
         
         $products_query = "SELECT * FROM `products` ORDER BY RAND() LIMIT 10;";
         $products_result = mysqli_query($con, $products_query);
@@ -522,7 +569,11 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                 </div>
             </div>
             
-            <?php } ?>
+            <?php }
+            
+             // Displaying Of Best Selling Products Fun End
+
+            ?>
         </div>
 
         <div class="products_container_button_div">
@@ -540,6 +591,8 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
         <div class="products_container_products_div">
 
         <?php
+
+         // Displaying Of On Sale Products Fun Start
         
         $products_query = "SELECT * FROM `products` ORDER BY RAND() LIMIT 10;";
         $products_result = mysqli_query($con, $products_query);
@@ -638,7 +691,11 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                 </div>
             </div>
             
-            <?php } ?>
+            <?php }
+            
+             // Displaying Of On Sale Products Fun End
+
+            ?>
         </div>
 
     </div>
@@ -653,6 +710,9 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                 <h2>HOT DEALS</h2>
                </div>
                <div class="hot_deals_text_container_div2">
+
+               <!-- Pagination Btn Fun Of Hot Deal Product Start -->
+
                 <form action="./index.php#hot_deals_product_container" method="GET">
                     <?php
                     if($no_of_page < 2) {
@@ -680,11 +740,16 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
 
                     ?>
                 </form>
+
+                  <!-- Pagination Btn Fun Of Hot Deal Product End -->
+
                </div>
             </div>
             <div class="hot_deals_product_outer_container">
 
             <?php 
+
+             // Displaying Of Hot Deal Products Fun Start
 
             $h = 1;
              $hot_deal_query = "SELECT * FROM `products` WHERE `hot_deal_type` = 'yes';";
@@ -707,9 +772,6 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                $start = $end - 3;
            }
 
-          
-
-          
             foreach(array_slice($_SESSION['hot_product_id'], $start-1, 4) as $hot_val) {
             $hot_deal_query = "SELECT * FROM `products` WHERE `p_id` = $hot_val;";
             $hot_deal_result = mysqli_query($con, $hot_deal_query);
@@ -814,7 +876,11 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                     </div>
                 </div>
                
-                <?php } } ?>
+                <?php } } 
+                
+                 // Displaying Of Hot Deal Products Fun End
+
+                ?>
                
             </div>
         </div>
@@ -839,7 +905,10 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
             </div>
             <div class="top_categories_container_product_nav_div">
 
-            <?php 
+            <?php
+
+            // Displaying Link Of Top Categories Fun Start
+
             $top_category_retrieve_query = "SELECT `cat_id`, `cat_title`, `cat_image_name` FROM `category` ORDER BY RAND() LIMIT 6;";
             $top_category_retrieve_result = mysqli_query($con, $top_category_retrieve_query);
             $border_counter1 = 1;
@@ -887,7 +956,11 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                 
                 <?php
                  $border_counter1++;
-                } 
+                
+                }
+                
+                   // Displaying Link Of Top Categories Fun End
+
              ?>
 
             </div>

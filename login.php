@@ -2,6 +2,9 @@
 include './action.php';
 $title = "Login - Shopssy";
 include './header.php';
+
+// Login Fun(Functionality) Start
+
 $error_messages = "";
 if(isset($_POST['submit1'])) {
     $userName = stripcslashes($_POST['user_email']);
@@ -35,6 +38,7 @@ if(isset($_POST['submit1'])) {
     }
 }
 
+// Login Fun(Functionality) End
 
 ?>
 

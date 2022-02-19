@@ -2,7 +2,7 @@
 session_start();
 include './db_con.php';
 
-
+// Notification Fun Start
 
 if(isset($_SESSION['user_id'])) {
     $p_known_user_id = $_SESSION['user_id'];
@@ -35,6 +35,9 @@ if(isset($_SESSION['user_id'])) {
     
 }
 
+// Notification Fun End
+
+// Header Hamburger Section Closing Fun Start
 
 if(isset($_GET['close_hamburger'])) {
     ?>
@@ -46,6 +49,10 @@ if(isset($_GET['close_hamburger'])) {
     </script>
     <?php
 }
+
+// Header Hamburger Section Closing Fun End
+
+// Delete Product From Mini Cart Fun Start
 
 if(isset($_GET['delete_btn_of_mini_cart'])) {
     if(isset($_SESSION['user_login_id'])) {
@@ -69,10 +76,11 @@ if(isset($_GET['delete_btn_of_mini_cart'])) {
     </script>
     <?php
     }
-
-  
 }
 
+// Delete Product From Mini Cart Fun End
+
+// View Btn Of Mini Cart Fun Start
 
 if(isset($_POST['view_cart'])) {
     ?>
@@ -81,6 +89,11 @@ if(isset($_POST['view_cart'])) {
     </script>
     <?php
 }
+
+// View Btn Of Mini Cart Fun End
+
+// Cart Update And Checkout Section Of Mini Cart Start
+
 if(isset($_POST['cart_update_and_checkout'])) {
     $cart_update_u_id = $_POST['u_id'];
     $cart_update_pro_tot_price = $_POST['pro_tot_price'];
@@ -101,6 +114,10 @@ window.location.href = 'http://localhost:3000/information.php';
 <?php
 }
 
+// Cart Update And Checkout Section Of Mini Cart End
+
+// Wishlist One Product Delete Fun Start 
+
 if(isset($_POST['wish_del_id'])) {
     $wish_delete_id = $_POST['wish_del_id'];
     if(isset($_SESSION['user_login_id'])) { 
@@ -115,6 +132,10 @@ window.location.href = 'http://localhost:3000/index.php';
 </script>
 <?php
 }
+
+// Wishlist One Product Delete Fun End
+
+// Wishlist All Product Delete Fun Start 
 
 if(isset($_POST['delete_all_from_wishlist'])) {
     if(isset($_SESSION['user_login_id'])) {
@@ -135,10 +156,17 @@ if(isset($_POST['delete_all_from_wishlist'])) {
     <?php
 }
 
+// Wishlist All Product Delete Fun End
+
+// Add To Cart Fun Start 
+
 if(isset($_POST['add_to_cart_id'])) {
     $produc_id = $_POST['add_to_cart_id'];
     $users_id = $_SESSION['user_id'];
     $produc_type = $_POST['prod_type'];
+
+    // Adding Product To Cart For Shopssy User Fun Start
+
     if(isset($_SESSION['user_login_id'])) {
         $check_query = "SELECT * FROM `cart` WHERE (`u_id` = $users_id AND `product_id` = $produc_id);";
         $check_result = mysqli_query($con, $check_query);
@@ -150,7 +178,13 @@ if(isset($_POST['add_to_cart_id'])) {
             mysqli_query($con, $cart_insert_query);
         }
        
-    } else {
+    } 
+    
+     // Adding Product To Cart For Shopssy User Fun End
+
+      // Adding Product To Cart For Unknown User Fun Start
+
+    else {
         $users_id = $_COOKIE['T093NO5A86H'];
         $check_query = "SELECT * FROM `unnamed_user_cart` WHERE (`un_u_cart_token` = $users_id AND `prod_id_of_cart` = $produc_id);";
         $check_result = mysqli_query($con, $check_query);
@@ -161,8 +195,9 @@ if(isset($_POST['add_to_cart_id'])) {
             $cart_insert_query = "INSERT INTO `unnamed_user_cart` (`un_u_cart_token`, `prod_id_of_cart`, `qty`, `cart_desc`, `pro_type`) VALUES ($users_id, $produc_id, 1, '', '$produc_type');";
             mysqli_query($con, $cart_insert_query);
         }
-       
     }
+
+     // Adding Product To Cart For Unknown User Fun End
    
     ?>
 <script type="text/javascript">
@@ -170,6 +205,12 @@ window.location.href = 'http://localhost:3000/index.php';
 </script>
 <?php
 }
+
+// Add To Cart Fun End
+
+// Add to Wishlist Fun Start
+
+// Add Product To Wishlist For Shopssy User Fun Start
 
 if(isset($_SESSION['user_login_id'])) {
     if(isset($_SESSION['user_id'])) {
@@ -184,7 +225,13 @@ if(isset($_SESSION['user_login_id'])) {
         }
     }
     } 
-} else {
+} 
+
+// Add Product To Wishlist For Shopssy User Fun End
+
+// Add Product To Wishlist For Unknown User Fun Start
+
+else {
     if(isset($_COOKIE['W937LI25A856T0K3N'])) {
         $token_of_wishlist = "W937LI25A856T0K3N";
         $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
@@ -197,10 +244,14 @@ if(isset($_SESSION['user_login_id'])) {
             $empty = "";
         }
     }
-    }
-  
+    } 
 }
 
+// Add Product To Wishlist For Unknown User Fun End
+
+// Add to Wishlist Fun End
+
+// Logout Fun Start
 
  if(isset($_POST['logout'])) {
     unset($_SESSION['user_login_id']);
@@ -214,6 +265,8 @@ if(isset($_SESSION['user_login_id'])) {
    </script>
    <?php
    }
+
+// Logout Fun End
 
 ?>
 <!DOCTYPE html>
@@ -243,7 +296,8 @@ color: orangered;
 </head>
 <body>
 
-     
+     <!-- Message(alert) Box Section Start -->
+
        <div class="message_box">
             <div class="message_box_1">
             </div>
@@ -251,7 +305,8 @@ color: orangered;
             <button class="message_send_cross_btn"><i class="fa fa-close"></i></button>
             </div>
         </div>
-      
+
+        <!-- Message(alert) Box Section End -->
 
     <!--wishlist container start-->
     <center>
@@ -309,7 +364,7 @@ color: orangered;
             </div>
             <!--share email container end-->
 
-            <!--save your list container start-->
+            <!-- logout confirmation container start -->
             <div class="save_your_list_container">
                 <button class="savelist_close_btn_of_wishlist"><i class="far fa-window-close"></i></button>
                 <h2>Are you sure?</h2>
@@ -322,9 +377,9 @@ color: orangered;
                </form>
                 </center>
             </div>
-            <!--save your list container end-->
+            <!-- logout confirmation container end -->
 
-            <!--save your list container 2 start-->
+            <!-- register or login section start -->
             <div class="save_your_list_container save_your_list_container1">
                 <button class="savelist_close_btn_of_wishlist savelist_close_btn_of_wishlist1"><i class="far fa-window-close"></i></button>
                 <h2>Register or Login</h2>
@@ -335,9 +390,10 @@ color: orangered;
                 <a href="./register.php"><button class="btn_2 savelist_close_btn_of_wishlist1_savelist_btn">REGISTER</button></a>
                 </center>
             </div>
-            <!--save your list container 2 end-->
+            <!-- register or login section end -->
 
-            <!--save your list container 3 start-->
+            <!--save your list container start-->
+
             <!-- <div class="enter_email_address_container">
                 <button class="email_close_btn_of_wishlist email_close_btn_of_wishlist2"><i class="far fa-window-close"></i></button>
                 <h2 class="email_heading">Save List Via Email</h2>
@@ -354,9 +410,10 @@ color: orangered;
                    </center>
                 </form>
             </div> -->
-            <!--save your list container 3 end -->
 
-            <!--clear list conform container start-->
+            <!--save your list container end -->
+
+            <!--clear list confirm container start-->
             <div class="clear_list_container">
               
                     <button class="clearlist_close_btn_of_wishlist"><i class="far fa-window-close"></i></button>
@@ -389,6 +446,8 @@ color: orangered;
                 <!--empty message container end-->
 
                 <?php 
+
+                // Product Display For Shopssy User Fun Start
 
                 if(isset($_SESSION['user_login_id'])) {
 
@@ -517,7 +576,13 @@ color: orangered;
                <?php } } ?>
 
                <?php 
-                } else {
+                } 
+                
+                 // Product Display For Shopssy User Fun End
+
+                  // Product Display For Unknown User Fun Start
+
+                else {
 
                     $token_of_wishlist = "W937LI25A856T0K3N";
                     $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
@@ -636,17 +701,20 @@ color: orangered;
                         </div>
                     </div>
     
-                   <?php } } } share_list_val($share_list_variable); ?>
+                   <?php } } }
+
+                   // Product Display For Unknown User Fun Start
+
+                   share_list_val($share_list_variable); ?>
 
                    <?php
 
+                   // Sending Mail Of Wishlist Fun Start
                    
- function share_list_val($argum) {
-    global $wishlist_prod_detail;
-   $wishlist_prod_detail = $argum;
-} 
-
-
+              function share_list_val($argum) {
+               global $wishlist_prod_detail;
+               $wishlist_prod_detail = $argum;
+                } 
 
 if(isset($_POST['share_list_request'])) {
    $receiver_mail = test_input_data($_POST['receiver_email']);
@@ -762,7 +830,9 @@ if(isset($_POST['share_list_request'])) {
   
 }
 
-                   ?>
+ // Sending Mail Of Wishlist Fun End
+
+             ?>
                
             </div>
            </div>
@@ -814,6 +884,8 @@ if(isset($_POST['share_list_request'])) {
 
                 <?php 
 
+                // Navbar Category Display Fun Start
+
                 $category_query = "SELECT * FROM `category` WHERE `cat_id` BETWEEN 1 AND 4;";
                 $category_result = mysqli_query($con, $category_query);
                while($row = mysqli_fetch_assoc($category_result)) {
@@ -834,7 +906,11 @@ if(isset($_POST['share_list_request'])) {
                         </td>
                     </tr>
 
-                    <?php } ?>
+                    <?php } 
+
+                        // Navbar Category Display Fun End
+
+                    ?>
                     
                 </table>
                 <h3 class="hamburger_main_container_table_h3_tag"><a href="./all_categories.php">View All Categories <i class="fa fa-angle-double-right"></i></a></h3>
@@ -858,7 +934,7 @@ if(isset($_POST['share_list_request'])) {
         </div>
 
         
-      
+      <!-- Search Product Section Start -->
             <div class="navbar_main_container_childs navbar_main_container_childs_two">
                 <form action="./product.php" method="GET">
                     <input type="search" placeholder="Search" name="searchItem" required>
@@ -867,7 +943,7 @@ if(isset($_POST['share_list_request'])) {
                     </button>
                 </form>
             </div>
-
+     <!-- Search Product Section End -->
       
            <!--shortcut link for user container start-->
            <div class="shortcut_link_for_user_container">
@@ -940,6 +1016,8 @@ if(isset($_POST['share_list_request'])) {
 
             <?php 
 
+            // Product Display For Shopssy User Fun Start
+
             if(isset($_SESSION['user_login_id'])) {
                 if(isset($_SESSION['user_id'])) {
                     $mini_user_id = $_SESSION['user_id'];
@@ -1009,7 +1087,13 @@ if(isset($_POST['share_list_request'])) {
 
               <?php   } ?>
               <?php 
-            } else {
+            }
+
+            // Product Display For Shopssy User Fun End
+
+            // Product Display For Unknown User Fun Start
+
+            else {
 
                 $mini_user_id = $_COOKIE['T093NO5A86H'];
                  
@@ -1070,7 +1154,11 @@ if(isset($_POST['share_list_request'])) {
                    </form>
                </tr>
 
-              <?php   }  } ?>
+              <?php   }  }
+              
+               // Product Display For Unknown User Fun End
+
+              ?>
               
             </table>
 
@@ -1078,7 +1166,7 @@ if(isset($_POST['share_list_request'])) {
 
            </div>
            
-           
+           <!-- Add Note To The Cart Section Start -->
 
            <div class="mini_cart_form_container">
                <p>Add a note to your order</p>
@@ -1102,6 +1190,10 @@ if(isset($_POST['share_list_request'])) {
                </form>
            </div>
 
+              <!-- Add Note To The Cart Section End -->
+
+            <!-- Empty Message Of Cart Section Start -->
+
            <center>
             <div class="mini_cart_empty_message_container">
             <h1><i class="fas fa-shopping-cart"></i></h1>
@@ -1109,26 +1201,41 @@ if(isset($_POST['share_list_request'])) {
             </div>
             </center>
 
+             <!-- Empty Message Of Cart Section End -->
+
            </div>
            <!--mini cart container end-->
 
+           <!-- User Detail Section Link Of Home Page Section Start -->
         <div class="navbar_main_container_childs navbar_main_container_childs_three"> 
             
             <button type="submit" class="user_icon_of_homepage" id="user_btn" title="sign in"><a><i class="far fa-user" style="font-size: 25px;color: #45b2ff;"></i></a></button>
             <div id="cart_count_container">
                 <button type="submit" class="cart_icon_of_homepage" title="view cart"><a href="./cart.php"><i class="fas fa-cart-plus" style="font-size: 25px;color: #45b2ff;"></i></a></button>
                 <?php 
+
+                // Displaying Cart Count Of Shopssy User Fun Start
+
                 if(isset($_SESSION['user_login_id'])){
                     $cart_count_user_id = $_SESSION['user_id'];
                     $cart_count_query = "SELECT COUNT(u_id) AS `cart_item_count` FROM `cart` WHERE `u_id` = $cart_count_user_id;";
                     $cart_count_result = mysqli_query($con, $cart_count_query);
                     $cart_item_count = mysqli_fetch_assoc($cart_count_result);
-                } else {
+                } 
+                
+                // Displaying Cart Count Of Shopssy User Fun End
+
+                // Displaying Cart Count Of Unknown User Fun Start
+
+                else {
                     $cart_count_user_id = $_COOKIE['T093NO5A86H'];
                     $cart_count_query = "SELECT COUNT(un_u_cart_token) AS `cart_item_count` FROM `unnamed_user_cart` WHERE `un_u_cart_token` = $cart_count_user_id;";
                     $cart_count_result = mysqli_query($con, $cart_count_query);
                     $cart_item_count = mysqli_fetch_assoc($cart_count_result);
                 }
+
+                // Displaying Cart Count Of Unknown User Fun End
+
                 ?>
                 <span><?php
                 if($cart_item_count['cart_item_count'] > 9) {
@@ -1142,6 +1249,7 @@ if(isset($_POST['share_list_request'])) {
                 </div>
            <button type="submit" title="wishlist" class="wishlist_btn"><a><i class="far fa-heart" style="font-size: 25px;color: #45b2ff;"></i></a></button>
         </div>
+        <!-- User Detail Section Link Of Home Page Section End -->
         
             <!--hamburger sub container start-->
 
@@ -1149,6 +1257,8 @@ if(isset($_POST['share_list_request'])) {
                 <!--hamburger_sub_container_tables start-->
 
                 <?php 
+
+                // Displaying Sub Category Of Category In Header Fun Start
 
                 $sub_cat_query = "SELECT * FROM `sub_category` WHERE `cats_id` BETWEEN 1 AND 4";
                 $sub_cat_result = mysqli_query($con, $sub_cat_query);
@@ -1180,7 +1290,11 @@ if(isset($_POST['share_list_request'])) {
                     </tr>
                   <?php } ?>
                 </table>
-               <?php } ?>
+               <?php }
+               
+               // Displaying Sub Category Of Category In Header Fun End
+
+               ?>
               
 
                 <!--hamburger_sub_container_tables end-->
@@ -1204,6 +1318,9 @@ if(isset($_POST['share_list_request'])) {
     <div id="hamburger_btn_login_signup_btn_div">
             
             <?php
+
+            // User Name Display In The Hamburger Mobile Of Navbar Fun Start
+
             if(!isset( $_SESSION['user_id'])) {
                 ?>
             <a href="#"><button id="hamburger_btn_user_icon"><i class="far fa-user" style="font-size: 25px;color: #45b2ff;"></i></button></a>
@@ -1236,6 +1353,9 @@ if(isset($_POST['share_list_request'])) {
                 </form>
                 <?php
             }
+
+             // User Name Display In The Hamburger Mobile Of Navbar Fun End
+
             ?>
             
       </div>
