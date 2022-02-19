@@ -1,3 +1,6 @@
+
+<!-- Cart Detail of Mobile Version Information, Shipping, Payment Page Container Start -->
+
 <div class="information_inner_container_for_mobile">
                 <button class="show_summary_btn"><i class="fas fa-shopping-cart"></i> show order summary <i class="fa fa-angle-down"></i></button>
                 <span class="tot_amt_of_mobile">&#8377; </span>
@@ -121,3 +124,5 @@
                 </div>
 
             </div>
+
+<!-- Cart Detail of Mobile Version Information, Shipping, Payment Page Container End -->

@@ -4,7 +4,7 @@ include './action.php';
 $title = "Your Shopping Cart - Shopssy";
 include './header.php';
 
-
+// Product Quantity Increment Section Start
 
 if(isset($_POST['product_id'])) {
     $cart_sub_pro_id = $_POST['product_id'];
@@ -26,6 +26,10 @@ if(isset($_SESSION['user_login_id'])) {
    <?php
 }
 
+// Product Quantity Increment Section End
+
+// Product Quantity Decrement Section Start
+
 if(isset($_POST['decre_quantity'])) {
     $qty = $_POST['quantity'];
     if($qty > 1) {
@@ -45,6 +49,10 @@ if(isset($_POST['decre_quantity'])) {
     </script>
     <?php
 }
+// Product Quantity Decrement Section End
+
+// Product Deletion Section Start
+
 if(isset($_POST['delete_btn'])) {
     if(isset($_SESSION['user_login_id'])) {
         $cart_sub_product_id = $_POST['product_id'];
@@ -60,7 +68,7 @@ if(isset($_POST['delete_btn'])) {
     </script>
     <?php
 }
-
+// Product Deletion Section End
 
 ?>    
     <!--sub navigation container start-->
@@ -90,6 +98,8 @@ if(isset($_POST['delete_btn'])) {
                 </tr>
 
                 <?php 
+
+                // Cart Function If User Is A Shopssy User Start
                 
                 if(isset($_SESSION['user_login_id'])) {
                     if(isset($_SESSION['user_id'])) {
@@ -192,7 +202,12 @@ if(isset($_POST['delete_btn'])) {
 
                 <?php  } ?>
                 <?php 
-                } else {
+                }
+                 // Cart Function If User Is A Shopssy User End
+
+                  // Cart Function If User Is Not A Shopssy User Start
+
+                  else {
                     $user_id = $_COOKIE['T093NO5A86H'];
                     $pro_cart_user_desc="";
                     $cart_page_query = "SELECT * FROM `unnamed_user_cart` WHERE `un_u_cart_token`=$user_id;";
@@ -283,7 +298,11 @@ if(isset($_POST['delete_btn'])) {
                         ?>.00</td>
                     </tr>
     
-                    <?php } } ?>
+                    <?php } }
+
+                    // Cart Function If User Is Not A Shopssy User End
+
+                    ?>
     
                 
               
@@ -291,9 +310,14 @@ if(isset($_POST['delete_btn'])) {
              
             </table>
 
+            <!-- Mobile Version Cart Section Start -->
+
            <div class="table_for_mobile_shopping_cart">
 
            <?php 
+
+            // Cart Function If User Is A Shopssy User Start
+
             if(isset($_SESSION['user_login_id'])) {
                 if(isset($_SESSION['user_id'])) {
                     $user_id = $_SESSION['user_id'];
@@ -442,7 +466,13 @@ if(isset($_POST['delete_btn'])) {
                 <?php } ?>
 
                 <?php
-            } else {
+            } 
+            
+            // Cart Function If User Is A Shopssy User End
+
+            // Cart Function If User Is Not A Shopssy User Start
+
+            else {
 
                 $user_id = $_COOKIE['T093NO5A86H'];
                 $pro_cart_user_desc="";
@@ -585,11 +615,18 @@ if(isset($_POST['delete_btn'])) {
                 </div>
 
 
-                <?php } } ?>
+                <?php } } 
+
+                 // Cart Function If User Is Not A Shopssy User End
+
+                ?>
                
 
             </div>
 
+             <!-- Mobile Version Cart Section End -->
+
+             <!-- Adding Cart Note Section Start -->
 
         <form action="./action.php" method="POST">
           <div class="shopping_cart_note_and_btn_container">
@@ -621,7 +658,9 @@ if(isset($_POST['delete_btn'])) {
             <p>You will find a lot of interesting products on our "Home" page.</p>
             <a href="./index.php"><button>Back To Home</button></a>
         </div>
-   
+
+          <!-- Adding Cart Note Section End -->
+
     </center>
     <!--shopping cart container end-->
     

@@ -3,6 +3,8 @@ include './action.php';
 $title = "Contact Us - Shopssy";
 include './header.php';
 
+// User Contact Form Section Start
+
 if(isset($_POST['submit'])) {
 $name = $_POST['name'];
 $email = $_POST['email'];
@@ -29,6 +31,8 @@ if(preg_match($nameval, $name) and preg_match($emailval, $email) and preg_match(
 
 }
 
+// User Contact Form Section End
+
 ?> 
  
 
@@ -50,6 +54,8 @@ if(preg_match($nameval, $name) and preg_match($emailval, $email) and preg_match(
     <div class="contactus_container">
       
         <h2>CONTACT US</h2>
+
+        <!-- Company Map Display Section Start -->
 
         <div class="map_container">
             <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Airport-Mattuthavani%20Ring%20Rd,%20Madurai,%20Tamil%20Nadu%20625020+(Shopssy%20IT%20Park)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/sport-gps/">swimming watch</a></iframe></div>
@@ -100,6 +106,10 @@ if(preg_match($nameval, $name) and preg_match($emailval, $email) and preg_match(
             </div>
         </div>
 
+         <!-- Company Map Display Section End -->
+
+          <!-- Contact Form Section Start -->
+
         <div class="messanger_icon_container">
             <span><i class="far fa-comments"></i></span>
         </div>
@@ -124,6 +134,7 @@ if(preg_match($nameval, $name) and preg_match($emailval, $email) and preg_match(
             </form>
         </div>
 
+        <!-- Contact Form Section End -->
 
     </div>
   </center>
