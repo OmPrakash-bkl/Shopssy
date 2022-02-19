@@ -2,6 +2,8 @@
 include './action.php';
 session_start();
 
+// Redirect If User Not Login Fun Start
+
 if(!isset($_SESSION['user_login_id'])) {
     ?>
    <script type="text/javascript">
@@ -9,6 +11,10 @@ if(!isset($_SESSION['user_login_id'])) {
    </script>
    <?php
 }
+
+// Redirect If User Not Login Fun End
+
+// Fetching User Detail Fun Start
 
 $shipping_address = "";
 $user_id = $_SESSION['user_id'];
@@ -35,7 +41,7 @@ else {
     header("Location: http://localhost:3000/information.php");
 }
 
-
+// Fetching User Detail Fun End
 
 ?>
 <!DOCTYPE html>
@@ -66,6 +72,8 @@ else {
            include './cart_detail_of_mobile.php';
            ?>
 
+           <!-- Navigation Link Section Start -->
+
             <div class="sub_navigation_of_info_div_inner_container">
                 <span><a href="./cart.php">Cart</a></span>
                 <span><i class="fa fa-angle-right" style="color: #666666;font-size: 14px;"></i></span>
@@ -76,7 +84,9 @@ else {
                 <span><a href="./payment.php">Payment</a></span>
             </div>
 
-                
+                <!-- Navigation Link Section End -->
+
+                <!-- User Details Display Section Start -->
 
                 <div class="semi_final_details_container">
                     <table>
@@ -96,8 +106,9 @@ else {
                     </table>
                 </div>
 
-                <h3>Shipping method</h3>
+                <!-- User Details Display Section End -->
 
+                <h3>Shipping method</h3>
                 <div class="mode_container">
                     <center>
                     <button><i class="fas fa-dot-circle"></i></button>
@@ -121,6 +132,7 @@ else {
 
 <?php 
 
+// Product Of Cart Displaying Fun Start
 
 $user_id = $_SESSION['user_id'];
 $cart_details_query = "SELECT * FROM `cart` WHERE `u_id` = $user_id;";
@@ -165,9 +177,15 @@ while($row = mysqli_fetch_assoc($cart_details__result)) {
         </div>
 </div>
 
-<?php } } ?>
+<?php } } 
+
+// Product Of Cart Displaying Fun End
+
+?>
    
 </div>
+
+      <!-- Total Amount Display Section Start -->
 
             <div class="information_inner_container2_1st">
             <div class="information_inner_container2_divs1">
@@ -202,6 +220,10 @@ while($row = mysqli_fetch_assoc($cart_details__result)) {
                 
             </div>
 
+            <!-- Total Amount Display Section End -->
+
+            <!-- Total Amount Display Section Start -->
+
             <div class="information_inner_container2_1st">
                 <div class="information_inner_container2_divs1">
                     <div class="information_inner_container2_divs_txt1">
@@ -221,8 +243,9 @@ while($row = mysqli_fetch_assoc($cart_details__result)) {
                     </div>
                 </div>
     
-                
             </div>
+
+            <!-- Total Amount Display Section End -->
 
 
         </div>

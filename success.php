@@ -14,6 +14,7 @@
    
 </head>
 <body>
+    <!-- Success Message Display Container Start -->
 <center>
 <div class="success_page_texts">
 <i class="fas fa-check-circle"></i>
@@ -21,10 +22,13 @@
 <p>Thank you, your payment has been successful. A confirmation email has been sent to your mail id.</p>
 </div>
 </center>
+    <!-- Success Message Display Container End -->
+    <!-- Redirect To Home Page Fun Start -->
 <script>
     setTimeout(function() {
         window.location.href = 'http://localhost:3000/index.php';
     }, 1000);
 </script>
+    <!-- Redirect To Home Page Fun End -->
 </body>
 </html>

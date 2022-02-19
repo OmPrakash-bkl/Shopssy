@@ -1,4 +1,7 @@
 <?php
+
+// Sub Fun Of Redirect Fun Start
+
 function redirect() {
     if(isset($_GET['b_title'])) {
         $b_title = $_GET['b_title'];
@@ -92,4 +95,7 @@ function redirect() {
         <?php
     }
 }
+
+// Sub Fun Of Redirect Fun End
+
 ?>

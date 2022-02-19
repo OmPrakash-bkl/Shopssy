@@ -3,6 +3,8 @@ include './action.php';
 $title = "Track Your Order - Shopssy";
 include './header.php';
 
+// Redirect If User Not Login Fun Start
+
 if(!isset($_SESSION['user_login_id'])) {
     ?>
     <script type="text/javascript">
@@ -10,6 +12,8 @@ if(!isset($_SESSION['user_login_id'])) {
     </script>
     <?php
     }
+
+// Redirect If User Not Login Fun End
 
 ?>
 
@@ -26,6 +30,7 @@ if(!isset($_SESSION['user_login_id'])) {
     </div>
     <!--sub navigation container end-->
     <?php 
+
      $user_id =  $_SESSION['user_id'];
      $order_tracker_id_retrieve_query = "SELECT `order_id`, `p_status`, `user_id` FROM `orders_table` WHERE `user_id` = $user_id;";
      $order_tracker_id_retrieve_result = mysqli_query($con, $order_tracker_id_retrieve_query);
@@ -44,6 +49,9 @@ if(!isset($_SESSION['user_login_id'])) {
         <div class="order_id_container">
 
         <?php
+
+ // Displaying Order Id Fun Start
+
         if(isset($fetch_order_tracker_id)) {
         ?>
             <h3>Order ID - #00<?php if(isset($_GET['ordered_id'])) {
@@ -66,10 +74,16 @@ if(!isset($_SESSION['user_login_id'])) {
         </div>
         <hr>
 
-        <?php } ?>
+        <?php } 
+        
+        // Displaying Order Id Fun End
+
+        ?>
         <!--order tracker product container start-->
 
         <?php
+
+        // To Secure From Tracking Others Ordered Product Fun Start
 
         if(isset($fetch_order_tracker_id)) {
        
@@ -92,6 +106,11 @@ if(!isset($_SESSION['user_login_id'])) {
        }
 
     }
+
+    // To Secure From Tracking Others Ordered Product Fun End
+
+
+    // Displaying Ordered Product Fun Start
 
     if(isset($fetch_order_tracker_id)) {
        $order_tracker_data_retrieve_result = mysqli_query($con, $order_tracker_data_retrieve_query);
@@ -129,10 +148,17 @@ if(!isset($_SESSION['user_login_id'])) {
 
         <?php } ?>
 
-        <?php } }?>
+        <?php }
+    
+    // Displaying Ordered Product Fun End
+
+    }?>
         <!-- order tracker bar container start -->
 
         <?php
+
+        // Displaying Order Status Fun Start
+        
         if(isset($fetch_order_tracker_status)) {
         if($fetch_order_tracker_status != "") {
 
@@ -263,7 +289,11 @@ if(!isset($_SESSION['user_login_id'])) {
         </div>
         <hr>
 
-        <?php } } ?>
+        <?php } } 
+        
+           // Displaying Order Status Fun End
+
+        ?>
 
         <?php 
         if($order_tracker_check_row == 0) {

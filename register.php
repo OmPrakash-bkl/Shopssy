@@ -2,8 +2,14 @@
 include './action.php';
 $title = "Create Account - Shopssy";
 include './header.php';
+
+// Register Fun Start
+
 $error_messages = "";
 if(isset($_POST['submit'])) {
+
+    // User Input Data Sanitizing Fun Start
+
     $f_name = $_POST['f_name'];
     $l_name = $_POST['l_name'];
     $email = $_POST['email'];
@@ -15,6 +21,10 @@ if(isset($_POST['submit'])) {
     $f_name = mysqli_real_escape_string($con, $f_name);
     $l_name = mysqli_real_escape_string($con, $l_name);
     $pass = mysqli_real_escape_string($con, $pass);
+
+     // User Input Data Sanitizing Fun End
+
+     // Sending Mail To The User Fun Start
 
     if(preg_match($emailval, $email)) {
         $check_query = "SELECT * FROM `register` WHERE `email` = '$email';";
@@ -70,10 +80,11 @@ if(isset($_POST['submit'])) {
             }
         }
 
-
-
     }
+         // Sending Mail To The User Fun End
 }
+
+// Register Fun End
 
 ?>
 
@@ -95,7 +106,7 @@ if(isset($_POST['submit'])) {
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                 <div>
                     <label for="first">First Name</label> <br>
-                <input type="text" id="first" name="f_name" required>
+                <input type="text" id="first" name="f_name" required autofocus>
                 </div>
                 <div>
                     <label for="last">Last Name</label> <br>

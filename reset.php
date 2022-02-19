@@ -2,6 +2,9 @@
 include './action.php';
 $title = "Reset Password - Shopssy";
 include './header.php';
+
+// Password Updation Fun Start
+
 $error_messages = "";
 if(isset($_POST['reset'])) {
 
@@ -27,7 +30,7 @@ if(isset($_POST['reset'])) {
                 alert("<?php echo "Your Password Has Been Reseted Successfully."?>");
             </script>
             <?php
-        } else{
+        } else {
             ?>
             <script>
                $error_messages = "Please Try Again!";
@@ -37,6 +40,7 @@ if(isset($_POST['reset'])) {
 
 }
 
+// Password Updation Fun End
 
 ?>
 

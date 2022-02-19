@@ -1271,7 +1271,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                     }
                     ?>
                     <label for="cus_name">Name</label> <br>
-                    <input type="text" placeholder="Enter your name" id="cus_name" name="p_customer_name" class="inp1" required> <br>
+                    <input type="text" placeholder="Enter your name" id="cus_name" name="p_customer_name" class="inp1" required autofocus> <br>
                     <label for="cus_rat">Rating</label> <br>
                     <label for="">1</label>
                     <input type="range" min="1" max="5" id="cus_rat" value="4" name="p_rating" class="inp3">
@@ -1547,7 +1547,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                     ?>
                    <input type="hidden" name="p_id" value="<?php echo $product_id;?>">
                     <input type="hidden" name="sub_cat_id" value="<?php echo $product_sub_cat_id; ?>">
-                        <textarea name="new_ques" placeholder="Post Your Question"></textarea> <br>
+                        <textarea name="new_ques" placeholder="Post Your Question" autofocus></textarea> <br>
                        <center>
                        <button type="submit" class="question_ask_btn">SUBMIT</button>
                        </center>

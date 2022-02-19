@@ -2,6 +2,8 @@
 session_start();
 include './action.php';
 
+// Redirect If Your Not Login Fun Start
+
 if(!isset($_SESSION['user_login_id'])) {
     ?>
    <script type="text/javascript">
@@ -9,6 +11,10 @@ if(!isset($_SESSION['user_login_id'])) {
    </script>
    <?php
 }
+
+// Redirect If Your Not Login Fun End
+
+// Payment Details Encryption Fun Start
 
 function encryption($input_data) {
 $ciphering = "AES-128-CTR";
@@ -19,6 +25,9 @@ $encryption_data = openssl_encrypt($input_data, $ciphering, $encryption_key, $op
 return $encryption_data;
 }
 
+// Payment Details Encryption Fun End
+
+// Order Request Processing Fun Start
 
 if(isset($_POST['order_req'])) {
     $orders_cart_type = $_POST['card_type'];
@@ -29,6 +38,9 @@ if(isset($_POST['order_req'])) {
     $orders_p_status = $_POST['p_status'];
     $orders_pro_tot_amt = $_POST['pro_tot_amt'];
     $cook_name = 'TRX_COUNTER';
+
+    // Fetching TRX Id From DB Fun Start 
+
     if(!isset($_COOKIE['TRX_COUNTER'])) {
         $cookie_count_query = "SELECT `trx_count` FROM `orders_table`";
         $cookie_count_result = mysqli_query($con, $cookie_count_query);
@@ -46,6 +58,11 @@ if(isset($_POST['order_req'])) {
     }
     setcookie($cook_name, $cookie_last_count, time() + (86400 * 730), '/');
 }
+
+// Fetching TRX Id From DB Fun End
+
+// Ordered Data Inserting To DB Fun Start
+
     $orders_trx_id = $_POST['trx_id'];
     $trx_counter = $cookie_last_count;
     $trx_counter = $trx_counter + 1;
@@ -61,7 +78,11 @@ if(isset($_POST['order_req'])) {
     $nameval = "/^[a-zA-Z ]+$/";
     $numberval = "/^[0-9]+$/";
 
+    // Ordered Data Inserting To DB Fun End
+
     if(preg_match($nameval, $orders_cart_type) and preg_match($numberval, $orders_card_number) and preg_match($numberval, $orders_card_cvv_num)) {
+
+        // Ordered Data Inserting Query Fun Start
 
         $orders_card_number = encryption($orders_card_number);
         $orders_card_e_date = encryption($orders_card_e_date);
@@ -122,6 +143,10 @@ if(isset($_POST['order_req'])) {
         }
     }
 
+     // Ordered Data Inserting Query Fun End
+
+     // Account Details And Ordered Products Details From DB Fun Start
+
     $user_detail_retrieve_query = "SELECT * FROM `account` WHERE `user_id` =  $orders_user_id;";
     $user_detail_retrieve_result = mysqli_query($con, $user_detail_retrieve_query);
     while($row = mysqli_fetch_assoc($user_detail_retrieve_result)) {
@@ -141,6 +166,9 @@ if(isset($_POST['order_req'])) {
         $user_order_date = $row['order_date'];
     }
 
+    // Account Details And Ordered Products Details From DB Fun End
+
+    // Fetching Ordered Products Details From DB Fun Start
    
     $user_id = $_SESSION['user_id'];
 
@@ -176,6 +204,9 @@ if(isset($_POST['order_req'])) {
            </tr>";
      } }
     
+     // Fetching Ordered Products Details From DB Fun End
+
+     // Mailing Ordered Products To The User Fun Start
 
     require "./Mail/phpmailer/PHPMailerAutoload.php";
     $user_mail_id = "";
@@ -341,13 +372,17 @@ if(isset($_POST['order_req'])) {
         <?php
     }
 
+         // Mailing Ordered Products To The User Fun End
+
 } else {
     echo "error";
 }
 
-  
-  
 }
+
+// Order Request Processing Fun End
+
+// Fetching Account details From DB Start
 
 $shipping_address = "";
 $user_id = $_SESSION['user_id'];
@@ -379,8 +414,7 @@ else
     <?php
 }
 
-
-
+// Fetching Account details From DB End
 
 ?>
 <!DOCTYPE html>
@@ -411,6 +445,8 @@ else
            include './cart_detail_of_mobile.php';
            ?>
 
+           <!-- Navlink Container Start -->
+
             <div class="sub_navigation_of_info_div_inner_container">
                 <span><a href="./cart.php">Cart</a></span>
                 <span><i class="fa fa-angle-right" style="color: #666666;font-size: 14px;"></i></span>
@@ -420,8 +456,10 @@ else
                 <span><i class="fa fa-angle-right" style="color: #666666;font-size: 14px;"></i></span>
                 <span><a class="active">Payment</a></span>
             </div>
+            
+             <!-- Navlink Container End -->
 
-                
+             <!-- User Email And Address Display Container Start -->
 
                 <div class="semi_final_details_container">
                     <table>
@@ -449,11 +487,15 @@ else
                     </table>
                 </div>
 
+                 <!-- User Email And Address Display Container End -->
+
+                  <!-- Payment Form Container Start -->
+
                 <h3>Payment</h3>
 
                 <div class="payment_container">
                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"  method="POST" autocomplete="off">
-                    <input type="text" name="card_type" placeholder="Type of Card" required> <br>
+                    <input type="text" name="card_type" placeholder="Type of Card" required autofocus> <br>
                     <input type="text" name="card_number" placeholder="Card Number" required> <br>
                     <input type="text" name="card_e_date" placeholder="Expiry Date (pattern - mm/yy)" required> <br>
                     <input type="number" name="card_cvv_num" placeholder="CVV" required> <br>
@@ -467,6 +509,7 @@ else
                    </form>
                 </div>
 
+                 <!-- Payment Form Container End -->
        
         </div>
 
@@ -477,6 +520,7 @@ else
 
 <?php 
 
+// Products Of Cart Display Fun Start
 
 $user_id = $_SESSION['user_id'];
 $cart_details_query = "SELECT * FROM `cart` WHERE `u_id` = $user_id;";
@@ -521,9 +565,15 @@ while($row = mysqli_fetch_assoc($cart_details__result)) {
         </div>
 </div>
 
-<?php } } ?>
+<?php } } 
+
+// Products Of Cart Display Fun End
+
+?>
    
 </div>
+
+<!-- Products Total Amount Display Container Start -->
 
             <div class="information_inner_container2_1st">
             <div class="information_inner_container2_divs1">
@@ -556,8 +606,11 @@ while($row = mysqli_fetch_assoc($cart_details__result)) {
                         &#8377; 50.00
                     </div>
                 </div>
-                
             </div>
+
+            <!-- Products Total Amount Display Container End -->
+
+            <!-- Products Total Amount Display Container Start -->
 
             <div class="information_inner_container2_1st">
             <div class="information_inner_container2_divs1">
@@ -574,9 +627,9 @@ while($row = mysqli_fetch_assoc($cart_details__result)) {
                         &#8377; <?php echo $product_sub_total + 50; ?>.00
                     </div>
                 </div>
-    
-                
             </div>
+
+            <!-- Products Total Amount Display Container End -->
 
 
         </div>

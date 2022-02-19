@@ -2,6 +2,9 @@
 include './action.php';
 $title = "Recover Email - Shopssy";
 include './header.php';
+
+// User Password Recover Fun Start
+
 $error_messages = "";
 if(isset($_POST['recover'])) {
 $email = $_POST['mail_add'];
@@ -16,6 +19,8 @@ if($no_of_rows <= 0){
     $error_messages = "Sorry, Your Account Must Verify First, Before You Recover Your Password!!";
 }else{
    
+// Password Reset Mail Sending Fun Start
+
     $_SESSION['emailid'] = $email;
 
     require "./Mail/phpmailer/PHPMailerAutoload.php";
@@ -55,10 +60,14 @@ if($no_of_rows <= 0){
             </script>
         <?php
     }
-}
+
+    // Password Reset Mail Sending Fun End
 
 }
 
+}
+
+// User Password Recover Fun End
 
 ?>
 

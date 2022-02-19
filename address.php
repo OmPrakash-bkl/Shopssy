@@ -207,7 +207,7 @@ if(isset($_POST['delete_default_add'])) {
                         <th><label for="fir_name">First Name</label></th>
                     </tr>
                     <tr>
-                        <td><input type="text" id="fir_name" name="fir_name" class="inp_box" required></td>
+                        <td><input type="text" id="fir_name" name="fir_name" class="inp_box" required autofocus></td>
                     </tr>
                     <tr>
                         <th><label for="las_name">Last Name</label></th>

@@ -3,6 +3,8 @@ include './action.php';
 $title = "Verification - Shopssy";
 include './header.php';
 
+// OTP Verification Fun Start
+
 $error_messages = "";
 if(isset($_POST['verify'])) {
     $otp = $_SESSION['OTP'];
@@ -24,6 +26,7 @@ if(isset($_POST['verify'])) {
 
 }
 
+// OTP Verification Fun End
 
 ?>
 
