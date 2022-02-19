@@ -4,6 +4,8 @@ include './action.php';
 if(isset($_GET['s'])) {
     $searchKeyword = $_GET['s'];
 }
+// Pagination Count Fun Start
+
 if(!isset($_GET['page'])) {
     unset($_SESSION['pagination_of_product2']);
     $page_count = 1;
@@ -13,6 +15,9 @@ if(!isset($_GET['page'])) {
         $page_count = 1;
     }
 }
+// Pagination Count Fun End
+
+// Retrieve Products Fun Start
 
 $category_products_query = "SELECT * FROM `products` WHERE `p_title` LIKE '%$searchKeyword%';";
 
@@ -23,13 +28,16 @@ while($row = mysqli_fetch_assoc($category_products_result)) {
     $_SESSION['pagination_of_product2'][$p2] = $category_products_p_id;
     $p2++;
 }
+// Retrieve Products Fun End 
 
 include './redirect_fun.php';
 
 $title = $searchKeyword . " - Shopssy";
 include './header.php';
 
+// Product Adding Fun Start
 if(isset($_GET['product_id'])) {
+    // Adding Product If The User Is A Shopssy User Fun Start
     if(isset($_SESSION['user_login_id'])) {
         $user_id = $_SESSION['user_id'];
         $product_id = $_GET['product_id'];
@@ -46,7 +54,10 @@ if(isset($_GET['product_id'])) {
         }
 
 
-    } else {
+    } 
+// Adding Product If The User Is A Shopssy User Fun End
+// Adding Product If The User Is A Unknown User Fun Start
+    else {
 
         $prod_id_for_unnamed_cart_details = $_GET['product_id'];
           if(isset($_COOKIE['T093NO5A86H'])) {
@@ -67,6 +78,7 @@ if(isset($_GET['product_id'])) {
 
        
     }
+    // Adding Product If The User Is A Unknown User Fun End
         ?>
         <script type="text/javascript">
        window.onload = function() {
@@ -78,10 +90,12 @@ if(isset($_GET['product_id'])) {
         </script>
         <?php
 }
+// Product Adding Fun End
 
-
+// Adding Product To Wishlist Fun Start
 if(isset($_GET['wish_btn'])) {
     $produc_id = $_GET['productt_id'];
+    // Adding Product If The User Is A Shopssy User Fun Start
     if(isset($_SESSION['user_login_id'])) {
         $users_id = $_SESSION['user_id'];
         $pro_type = 'offer';
@@ -95,7 +109,12 @@ if(isset($_GET['wish_btn'])) {
             mysqli_query($con, $wishlist_insert_query);
         }
        
-    } else {
+    }
+    // Adding Product If The User Is A Shopssy User Fun End
+
+    // Adding Product If The User Is A Unknown User Fun Start
+
+    else {
         $token_of_wishlist = "W937LI25A856T0K3N";
         $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
         $pro_type = 'offer';
@@ -110,7 +129,7 @@ if(isset($_GET['wish_btn'])) {
         }
        
     }
-  
+    // Adding Product If The User Is A Unknown User Fun End
     
     ?>
     <script type="text/javascript">
@@ -123,7 +142,7 @@ if(isset($_GET['wish_btn'])) {
     </script>
     <?php
 }
-
+// Adding Product To Wishlist Fun End
 
 ?>
 
@@ -297,6 +316,7 @@ if(isset($_GET['wish_btn'])) {
 
            <?php 
 
+           // Displaying Product Fun Start
                 $start = 1;
                 $end = 10;
                 $no_of_product_per_page = 10;
@@ -416,10 +436,12 @@ if(isset($_GET['wish_btn'])) {
             </div>
         </div>
         
-        <?php } } } ?>
+        <?php } } }
+        // Displaying Product Fun End
+        ?>
      
 </center>
-
+<!-- Pagination Section Container Start -->
 <div class="next_page_container">
     <?php
     if(isset($_GET['page']) or isset($_SESSION['pagination_of_product2'])) {
@@ -472,6 +494,7 @@ if(isset($_GET['wish_btn'])) {
     ?>
    
 </div>
+<!-- Pagination Section Container End -->
 
      </div>
     </div>

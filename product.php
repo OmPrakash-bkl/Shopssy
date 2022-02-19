@@ -3,6 +3,7 @@ include './action.php';
 $_SESSION['prod_qty'] = 1;
 $start = 1;
 
+// Page Count Fun Start
 if(!isset($_GET['page'])) {
     unset($_SESSION['pagination']);
     $_SESSION['count'] = 1;
@@ -11,7 +12,7 @@ if(!isset($_GET['page'])) {
 else {
    $page_count = $_GET['page'];
 }
-
+// Page Count Fun End
 
 
 if(isset($_GET['b_title'])) {
@@ -44,8 +45,9 @@ $title = $product_sub_cat_title . " - Shopssy";
 include './header.php';
 
 
-
+// Adding Product To Cart Fun Start
 if(isset($_GET['product_id'])) {
+    // Adding Product To Cart If The User Is A Shopssy User Fun Start
     if(isset($_SESSION['user_login_id'])) {
         $user_id = $_SESSION['user_id'];
         $product_id = $_GET['product_id'];
@@ -62,7 +64,11 @@ if(isset($_GET['product_id'])) {
         }
 
 
-    } else {
+    } 
+    // Adding Product To Cart If The User Is A Shopssy User Fun End
+
+    // Adding Product To Cart If The User Is A Unknown User Fun Start
+    else {
 
         $prod_id_for_unnamed_cart_details = $_GET['product_id'];
           if(isset($_COOKIE['T093NO5A86H'])) {
@@ -83,6 +89,7 @@ if(isset($_GET['product_id'])) {
 
        
     }
+// Adding Product To Cart If The User Is A Unknown User Fun End
         ?>
         <script type="text/javascript">
        window.onload = function() {
@@ -94,10 +101,12 @@ if(isset($_GET['product_id'])) {
         </script>
         <?php
 }
+// Adding Product To Cart Fun End
 
-
+// Adding Product To Wishlist Fun Start
 if(isset($_GET['wish_btn'])) {
     $produc_id = $_GET['productt_id'];
+    // Adding Product To Wishlist If The User Is A Shopssy User Fun Start
     if(isset($_SESSION['user_login_id'])) {
         $users_id = $_SESSION['user_id'];
         $pro_type = 'offer';
@@ -111,7 +120,10 @@ if(isset($_GET['wish_btn'])) {
             mysqli_query($con, $wishlist_insert_query);
         }
        
-    } else {
+    }
+    // Adding Product To Wishlist If The User Is A Shopssy User Fun End
+    // Adding Product To Wishlist If The User Is A Unknown User Fun Start
+    else {
         $token_of_wishlist = "W937LI25A856T0K3N";
         $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
         $pro_type = 'offer';
@@ -126,8 +138,9 @@ if(isset($_GET['wish_btn'])) {
         }
        
     }
-  
-    
+
+// Adding Product To Wishlist If The User Is A Unknown User Fun End  
+
     ?>
     <script type="text/javascript">
    window.onload = function() {
@@ -140,8 +153,9 @@ if(isset($_GET['wish_btn'])) {
     <?php
 }
 
+// Adding Product To Wishlist Fun End
 
-
+// Searching Item processing Fun Start
 if(isset($_GET['searchItem'])) {
    
     $searchKeyword = $_GET['searchItem'];
@@ -159,7 +173,7 @@ if(isset($_GET['searchItem'])) {
             $_SESSION['temp_product_id'][$l] = $search_b_and_i_identification_id;
             $l++;
          }
-        
+        // Redirecting Browser Page To Searched Product Fun Start
       if($search_result_count == 1) {
 
         ?>
@@ -202,12 +216,11 @@ if(isset($_GET['searchItem'])) {
         </script>
         <?php
       }
-    
-
+    // Redirecting Browser Page To Searched Product Fun End
     }
 }
 
-
+// Searching Item processing Fun End
 
 ?>
 
@@ -224,6 +237,8 @@ if(isset($_GET['searchItem'])) {
                     <button onclick="show_checkboxes(1)">BRANDS <i class="fa fa-angle-right"></i></button>
 
                    <?php 
+
+                   // Displaying Filter Categories Of Mobile Fun Start
                    $filter_content_retrieve_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id` = $product_sub_cat_identification_id_two;";
                    $filter_content_retrieve_result = mysqli_query($con, $filter_content_retrieve_query);
                    $dummy = 2;
@@ -239,7 +254,9 @@ if(isset($_GET['searchItem'])) {
 
                     <button onclick="show_checkboxes(<?php echo $dummy; ?>)"><?php echo $fil_title; ?> <i class="fa fa-angle-right"></i></button>
 
-                    <?php $dummy++; } ?>
+                    <?php $dummy++; } 
+                    // Displaying Filter Categories Of Mobile Fun End
+                    ?>
 
 
                 </div>
@@ -251,6 +268,8 @@ if(isset($_GET['searchItem'])) {
 
 
                     <?php
+
+                     // Displaying Product Types Of Mobile Fun Start
 
                    $category_title_retrieve_query = "SELECT * FROM `brand_and_item_list` WHERE `subs_cat_identification_id` = $product_sub_cat_identification_id;";
                     $category_title_retrieve_result = mysqli_query($con, $category_title_retrieve_query);
@@ -273,12 +292,16 @@ if(isset($_GET['searchItem'])) {
                     </div>
                     </form>
                            
-                    <?php $temp_variable++; } ?>
+                    <?php $temp_variable++; }
+                    // Displaying Product Types Of Mobile Fun End
+                    ?>
                            
                     </div>
     
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="filters_for_mob_form" method="GET">
                     <?php 
+
+                    // Displying Filter Categories, Product Types, Sub Filter Categories Of Mobile Fun Start
                    $filter1_content_retrieve_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id` = $product_sub_cat_identification_id_two;";
                    $filter1_content_retrieve_result = mysqli_query($con, $filter1_content_retrieve_query);
                    $dummy = 2;
@@ -337,7 +360,10 @@ if(isset($_GET['searchItem'])) {
                     }
                     }
 
-                    } ?>
+                    } 
+        // Displying Filter Categories, Product Types, Sub Filter Categories Of Mobile Fun End
+
+                    ?>
 
 </form>
          
@@ -422,7 +448,7 @@ if(isset($_GET['searchItem'])) {
 
                     <div class="brand_list_container" id="brand_list_container">
                         <?php
-                        
+                        // Display Filter Categories Fun Start
                         $product_cat_query = "SELECT * FROM `brand_and_item_list` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
                         $product_cat_result = mysqli_query($con, $product_cat_query);
                         $temprory_value = 1;
@@ -447,6 +473,7 @@ if(isset($_GET['searchItem'])) {
                       <?php 
                     $temprory_value++;
                     } 
+                    // Display Filter Categories Fun End
                     ?>
                       
                     </div>
@@ -456,6 +483,8 @@ if(isset($_GET['searchItem'])) {
             </div>
 
     <?php 
+
+    // Displying Filter Categories, Product Types, Sub Filter Categories Fun Start
 
    $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id_two;";
    $temp_result = mysqli_query($con, $temp_query);
@@ -524,7 +553,9 @@ if(isset($_GET['searchItem'])) {
        }
        }
 
-        } ?>
+        }
+    // Displying Filter Categories, Product Types, Sub Filter Categories Fun End
+        ?>
 
 </form>
             
@@ -567,6 +598,7 @@ if(isset($_GET['searchItem'])) {
        <center>
            <?php 
            
+           // Products Queries Based On Sort Value Fun Start
            $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
            $sort_val = 0;
            if(isset($_GET['sort'])) {
@@ -587,6 +619,10 @@ if(isset($_GET['searchItem'])) {
                     $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id ORDER BY `p_a_price` DESC;";
                 break;
            }
+
+            // Products Queries Based On Sort Value Fun End
+
+            // Products Queries Based On Sort Value Fun Start
 
            if(isset($_GET['b_and_i_identification_id'])) {
                $product_b_and_i_identification_id = $_GET['b_and_i_identification_id'];
@@ -609,7 +645,9 @@ if(isset($_GET['searchItem'])) {
            }
 
            }
+        // Products Queries Based On Sort Value Fun End
 
+        // Displaying Products Based On The Filter Request Fun Start
 
            if(isset($row_of_filter)) {
                if(!isset($_GET['page'])) {
@@ -891,7 +929,12 @@ if(isset($_GET['searchItem'])) {
                }
               
             
-           } else {
+           }
+           
+    // Displaying Products Based On The Filter Request Fun End
+
+    // Displaying Products As Default Fun Start
+           else {
           
             if(!isset($_GET['page'])) {
 
@@ -1171,12 +1214,16 @@ if(isset($_GET['searchItem'])) {
            }
 
         }
+    // Displaying Products As Default Fun End
 
 ?>
         </center>
 
 
-<?php if(isset($_SESSION['pagination'])) {
+<?php
+// Pagination Btn Fun Start
+
+if(isset($_SESSION['pagination'])) {
 
 ?>
 
@@ -1328,7 +1375,9 @@ if(isset($_GET['searchItem'])) {
     </center>
 </div>
 
-<?php } else { echo "<hr>"; } ?>
+<?php } 
+// Pagination Btn Fun End
+else { echo "<hr>"; } ?>
 
      </div>
     </div>
@@ -1344,7 +1393,7 @@ if(isset($_GET['searchItem'])) {
 
     <script src="./javascript/index.js"></script>
     <script src="./javascript/product.js"></script>
-
+<!-- Filter Section Hiding Fun Start -->
 <?php
 if(isset($_GET['sub_cat_title'])) {
     $end_value = 1;
@@ -1371,6 +1420,7 @@ while($dummy > $end_value) {
 $end_value++;
 }
 ?>
+<!-- Filter Section Hiding Fun End -->
 
 </body>
 </html>

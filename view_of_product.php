@@ -1,15 +1,8 @@
 <?php 
-//  $token_of_auth = "T093NO5A86H";
-//  setcookie($token_of_auth, 0, time() + (86400 * -10));
-// $token_of_wishlist = "W937LI25A856T0K3N";
-// setcookie($token_of_wishlist, $token_for_un_u_wishlist_details, time() + (86400 * -40));
-// session_start();
-// $_SESSION['user_login_id'] = "ram@gmail.comShopssy";
-// $_SESSION['user_login_email'] = "ram@gmail.com";
-// $_SESSION['user_id'] = 4;
-
 include './action.php';
 include './redirect_fun.php';
+
+// Question Insertion Fun Start
 
 if(isset($_GET['new_ques'])) {
     if(isset($_SESSION['user_id'])) {
@@ -35,6 +28,10 @@ if(isset($_GET['new_ques'])) {
     
 }
 
+// Question Insertion Fun End
+
+// Page Refresh Fun Start
+
 function refresh() {
     $pro_id = $_GET['p_id'];
     $pro_sub_cat_id = $_GET['sub_cat_id'];
@@ -59,6 +56,10 @@ function refresh() {
         <?php
     }
 }
+
+// Page Refresh Fun End
+
+// Product Detail Fetch Fun Start
 
 if(isset($_GET['p_id'])) {
     $product_id = $_GET['p_id'];
@@ -117,9 +118,12 @@ if($product_sub_cat_id ==  $temp3) {
 
 }
 
+// Product Detail Fetch Fun End
 
 $title = $sub_navigation_title . " - Shopssy";
 include './header.php';
+
+// Product Quantity Increment Fun Start
 
 if(!isset($_SESSION['prod_qty'])) {
     $_SESSION['prod_qty'] = 1;
@@ -146,8 +150,12 @@ if(isset($_GET['increment'])) {
         </script>
         <?php
     }
-   
 } 
+
+// Product Quantity Increment Fun End
+
+// Product Quantity Decrement Fun Start
+
 if(isset($_GET['decrement'])) {
     $_SESSION['prod_qty'] = $_SESSION['prod_qty'] - 1;
     if($_SESSION['prod_qty'] < 1) {
@@ -174,8 +182,15 @@ if(isset($_GET['decrement'])) {
     }
 }
 
+// Product Quantity Decrement Fun End
+
+// Adding Product To Cart Fun Start
+
 if(isset($_GET['cart_adding_req'])) {
     $product_id = $_GET['p_id'];
+
+    // Adding Product To Cart If User Is A Shopssy User Fun Start
+
     if(isset($_SESSION['user_login_id'])) {
         $user_email_id = $_SESSION['user_login_email'];
         $cart_adding_query = "SELECT `user_id` FROM `register` WHERE `email` = '$user_email_id';";
@@ -229,9 +244,12 @@ if(isset($_GET['cart_adding_req'])) {
             }
         }
        
-        
-        
-    } else {
+    }
+    
+    // Adding Product To Cart If User Is A Shopssy User Fun End
+
+   // Adding Product To Cart If User Is Unknown User Fun Start
+    else {
         if(isset($_COOKIE['T093NO5A86H'])) {
             $unnamed_user_token = $_COOKIE['T093NO5A86H'];
             $product_id = $_GET['p_id'];
@@ -285,10 +303,14 @@ if(isset($_GET['cart_adding_req'])) {
            
         }
     }
+
+    // Adding Product To Cart If User Is Unknown User Fun End
    
 }
 
+// Adding Product To Cart Fun End
 
+// Adding To Cart And Redirect To Information Page Or Login Page Fun Start
 if(isset($_GET['product_buy_req'])) {
     $product_id = $_GET['p_id'];
     if(isset($_SESSION['user_login_id'])) {
@@ -330,8 +352,15 @@ if(isset($_GET['product_buy_req'])) {
    
 }
 
+// Adding To Cart And Redirect To Information Page Or Login Page Fun End
+
+// Adding To Wishlist Fun Start
+
 if(isset($_GET['wishlist_adding_req'])) {
     $prod_id = $_GET['p_id'];
+
+    // Adding To Wishlist If User Is A Shopssy User Fun Start
+
     if(isset($_SESSION['user_login_id'])) {
         $users_id = $_SESSION['user_id'];
         if(isset($_GET['best_selling_pro'])) {
@@ -381,7 +410,13 @@ if(isset($_GET['wishlist_adding_req'])) {
         }
        
            
-    }else {
+    }
+    
+    // Adding To Wishlist If User Is A Shopssy User Fun End
+
+    // Adding To Wishlist If User Is A Unknown User Fun Start
+
+    else {
         $prod_id = $_GET['p_id'];
         $token_of_wishlist = "W937LI25A856T0K3N";
         $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
@@ -433,7 +468,12 @@ if(isset($_GET['wishlist_adding_req'])) {
        
            
     }
-} 
+   // Adding To Wishlist If User Is A Unknown User Fun End
+}
+
+// Adding To Wishlist Fun End
+
+// Fetching Product Details From DB Fun Start
 
 $products_details_query = "SELECT * FROM `products` WHERE `p_id`=$product_id;";
 $products_details_result = mysqli_query($con, $products_details_query);
@@ -444,6 +484,10 @@ $products_details_p_rating = $row['p_star_rat'];
 $products_details_p_o_price = $row['p_o_price'];
 $products_details_p_a_price = $row['p_a_price'];
 }
+
+// Fetching Product Details From DB Fun End
+
+// Review Insertion Fun Start
 
 if(isset($_GET['review_sub_btn'])) {
 
@@ -466,7 +510,7 @@ if(isset($_GET['review_sub_btn'])) {
         $check_result_2 = mysqli_query($con, $check_query_2);
         $fetch_rows = mysqli_num_rows($check_result_2);
     }
-   
+   // Checking If The User Is Purchased The Product And Review Insert To DB Fun Start
     if($fetch_rows >= 1) {
         $check_query = "SELECT * FROM `reviews` WHERE (`known_user_id` = $known_user_id AND `p_id` = $pro_id);";
         $check_result = mysqli_query($con, $check_query);
@@ -511,7 +555,13 @@ if(isset($_GET['review_sub_btn'])) {
 
         
         
-    } else {
+    }
+    
+    // Checking If The User Is Purchased The Product And Review Insert To DB Fun End
+
+    // Displaying Message If User Purchased Record = 0 Fun Start
+
+    else {
         ?>
         <script type="text/javascript">
             document.getElementsByClassName("message_box")[0].style.backgroundColor = "#da0000";
@@ -525,14 +575,21 @@ if(isset($_GET['review_sub_btn'])) {
         <?php
         
     }
+ // Displaying Message If User Purchased Record = 0 Fun End
     
 }
 
+// Review Insertion Fun End
+
+// Checking If The User Already Liked Or Unliked And Insert Like And Unlike Fun Start
 if(isset($_GET['review_id'])) {
+
+    // Checking If The User Login Fun Start
 
     if(isset($_SESSION['user_id'])) {
 
     $p_review_id = $_GET['review_id'];
+    // Like Inserting and Deleting If Already Liked Fun Start
     if(isset($_GET['p_like'])) {
         $p_known_user_id = $_SESSION['user_id'];
         $check_query = "SELECT `review_id`, `like_and_unlike_id` FROM `sub_reviews` WHERE `user_id` = $p_known_user_id AND `is_like` = 1 AND `review_id` = $p_review_id;";
@@ -560,6 +617,10 @@ if(isset($_GET['review_id'])) {
        
         refresh();
     } 
+
+    // Like Inserting and Deleting If Already Liked Fun End
+
+    // UnLike Inserting and Deleting If Already Liked Fun Start
     else {
         $p_known_user_id = $_SESSION['user_id'];
         $check_query = "SELECT `review_id`, `like_and_unlike_id` FROM `sub_reviews` WHERE `user_id` = $p_known_user_id AND `is_dislike` = 1 AND `review_id` = $p_review_id;";
@@ -586,23 +647,34 @@ if(isset($_GET['review_id'])) {
         }
         refresh();
     }
+ // UnLike Inserting and Deleting If Already Liked Fun End
 
-} else {
+
+}  
+
+    // Checking If The User Login Fun End
+
+// Redirecting If The User Not Login Fun Start
+else {
     ?>
     <script type="text/javascript">
     window.location.href = 'http://localhost:3000/login.php';
     </script>
     <?php
 }
+// Redirecting If The User Not Login Fun End
     
 }
 
+// Checking If The User Already Liked Or Unliked And Insert Like And Unlike Fun End
 
-
+// Checking If The User Already Liked Or Unliked And Insert Like And Unlike Fun Start
 if(isset($_GET['p_q_and_a_id'])) {
 
+      // Checking If The User Login Fun Start
     if(isset($_SESSION['user_id'])) {
     $p_p_q_and_a_id = $_GET['p_q_and_a_id'];
+      // Like Inserting and Deleting If Already Liked Fun Start
     if(isset($_GET['p_q_like'])) {
         $p_known_user_id = $_SESSION['user_id'];
         $check_query = "SELECT `ques_id`, `ques_and_ans_id` FROM `sub_question_and_answers` WHERE `user_id` = $p_known_user_id AND `is_like` = 1 AND `ques_id` = $p_p_q_and_a_id;";
@@ -629,7 +701,11 @@ if(isset($_GET['p_q_and_a_id'])) {
         }
        
         refresh();
-    } else {
+    }
+    // Like Inserting and Deleting If Already Liked Fun End
+
+    // UnLike Inserting and Deleting If Already Liked Fun Start
+    else {
         $p_known_user_id = $_SESSION['user_id'];
         $check_query = "SELECT `ques_id`, `ques_and_ans_id` FROM `sub_question_and_answers` WHERE `user_id` = $p_known_user_id AND `is_dislike` = 1 AND `ques_id` = $p_p_q_and_a_id;";
         $check_result = mysqli_query($con, $check_query);
@@ -655,20 +731,28 @@ if(isset($_GET['p_q_and_a_id'])) {
         }
         refresh();
     }
+    // UnLike Inserting and Deleting If Already Liked Fun End
 
-} else {
+} 
+  // Checking If The User Login Fun End
+
+  // Redirecting If The User Not Login Fun Start
+else {
            ?>
             <script type="text/javascript">
             window.location.href = 'http://localhost:3000/login.php';
             </script>
             <?php
 }
+// Redirecting If The User Not Login Fun End
 }
+// Checking If The User Already Liked Or Unliked And Insert Like And Unlike Fun End
 
-
+// Notification Fun Start
 
 if(isset($_GET['notify_me_req'])) {
 
+    // Checking If The User Is Login Or Not Fun Start
     if(isset($_SESSION['user_id'])) {
     $pro_id = $_GET['p_id'];
     $pro_sub_cat_id = $_GET['sub_cat_id'];
@@ -676,6 +760,7 @@ if(isset($_GET['notify_me_req'])) {
     $check_query = "SELECT `n_id` FROM `notification` WHERE `noti_for_who` = $p_known_user_id AND `pro_id` = $pro_id;";
     $check_result = mysqli_query($con, $check_query);
     $notify_row = mysqli_num_rows($check_result);
+    // Checking If The User Record Is Present In The Notification Table And Inserting Fun Start
     if($notify_row == 0) {
         $link_of_notify = "";
         if(isset($_GET['hot_deal_pro'])) {
@@ -716,7 +801,11 @@ if(isset($_GET['notify_me_req'])) {
             </script>
             <?php
         }
-    } else {
+    }
+    // Checking If The User Record Is Present In The Notification Table And Inserting Fun End
+
+    // Displaying Message If The User Already Clicked The Notify Me Button Fun Start
+    else {
            ?>
             <script>
             document.getElementsByClassName("message_box")[0].style.display = "flex";
@@ -727,18 +816,27 @@ if(isset($_GET['notify_me_req'])) {
             </script>
             <?php
     }
+    // Displaying Message If The User Already Clicked The Notify Me Button Fun End
+}
+    // Checking If The User Is Login Or Not Fun End
 
-} else {
+    // Redirecting If The User Not Login Fun Start
+else {
     ?>
     <script type="text/javascript">
     window.location.href = 'http://localhost:3000/login.php';
     </script>
     <?php
 }
-    
+    // Redirecting If The User Not Login Fun End
 }
 
+// Notification Fun End
+
+// Product Inserting Into Cart Fun Start
+
 if(isset($_GET['product_id1'])) {
+    // Insert And Displaying The Message If The Shopssy User Already Added Product To Cart Fun Start
     if(isset($_SESSION['user_login_id'])) {
         $user_email_id = $_SESSION['user_login_email'];
         $cart_process_query = "SELECT `user_id` FROM `register` WHERE `email`='$user_email_id';";
@@ -773,7 +871,11 @@ if(isset($_GET['product_id1'])) {
         refresh();
         }
         
-    } else {
+    } 
+// Insert And Displaying The Message If The Shopssy User Already Added Product To Cart Fun End
+
+// Insert And Displaying The Message If The Unknown User Already Added Product To Cart Fun Start
+    else {
 
         $prod_id_for_unnamed_cart_details = $_GET['product_id1'];
           if(isset($_COOKIE['T093NO5A86H'])) {
@@ -806,13 +908,17 @@ if(isset($_GET['product_id1'])) {
             refresh();
         }
         
-        
     }
+// Insert And Displaying The Message If The Unknown User Already Added Product To Cart Fun End
    
 }
+// Product Inserting Into Cart Fun End
+
+// Product Inserting Into Wishlist Fun Start
 
 if(isset($_GET['wish_btn1'])) {
     $produc_id = $_GET['productt_id'];
+    //Inserting And Checking If The Shopssy User Already Added Product To Cart Fun Start
     if(isset($_SESSION['user_login_id'])) {
         $users_id = $_SESSION['user_id'];
         if(isset($_GET['best_selling_pro'])){
@@ -841,7 +947,10 @@ if(isset($_GET['wish_btn1'])) {
             refresh();
         }
        
-    } else {
+    } 
+    //Inserting And Checking If The Shopssy User Already Added Product To Cart Fun End
+    //Inserting And Checking If The Unknown User Already Added Product To Cart Fun Start
+    else {
         $token_of_wishlist = "W937LI25A856T0K3N";
         $token_for_un_u_wishlist_details = $_COOKIE[$token_of_wishlist];
         if(isset($_GET['best_selling_pro'])){
@@ -871,10 +980,13 @@ if(isset($_GET['wish_btn1'])) {
         }
        
     }
-  
-   
+//Inserting And Checking If The Unknown User Already Added Product To Cart Fun End
+
 }
 
+// Product Inserting Into Wishlist Fun End
+
+// Show Related Product Of Current Product Fun Start
 
 if(isset($_GET['view_all_related1'])) {
 if(isset($_GET['p_id'])) {
@@ -893,8 +1005,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
   }
 }
 
-
-
+// Show Related Product Of Current Product Fun End
 
 ?>
 
@@ -1134,6 +1245,8 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                     </form>
                 </div>
               </div>
+              <!-- Add To Cart, Buy It, Add To Wishlist Container Start -->
+
              <div class="PIandC_cost_container_btn_div1">
                 <form action="./view_of_product.php" method="GET">
                 <input type="hidden" name="p_id" value="<?php echo $product_id; ?>">
@@ -1156,8 +1269,12 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                 <button class="btn3" name="wishlist_adding_req" value="1"><i class="fas fa-heart"></i></button>
                 </form>
              </div>
+                <!-- Add To Cart, Buy It, Add To Wishlist Container End -->
+
                   <?php
-              } else {
+              }
+              // Notify Me Container Start
+              else {
                   ?>
                   <form action="./view_of_product.php" method="GET">
                   <?php 
@@ -1183,11 +1300,8 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                   </form>
                   <?php
               }
-
+              // Notify Me Container End
               ?>
-
-              
-
 
              <div class="PIandC_cost_container_btn_div2">
                  <a href="https://www.facebook.com/"><button class="btn1" title="Share on Facebook"><i class="fab fa-facebook-f"></i> SHARE</button></a>
@@ -1287,6 +1401,8 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
             </div>
 
             <?php 
+
+            // Displaying Reviews and Like, Unlike Fun Start
             
             $product_review_query = "SELECT * FROM `reviews` WHERE `p_id`=$product_id;";
             $product_review_result = mysqli_query($con, $product_review_query);
@@ -1402,7 +1518,9 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                     </form>
                 </div>
                 
-                <?php } ?>
+                <?php } 
+                // Displaying Reviews and Like, Unlike Fun End
+                ?>
                 
         </div>
     </div>
@@ -1437,6 +1555,8 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
         <div class="content">
 
         <?php 
+
+        // Displaying Questions And Answers, Like And Unlike Fun Start
 
         $products_q_and_a_query = "SELECT * FROM `product_questions_and_answers` WHERE `p_id`=$product_id AND `status` = 'approved';";
 
@@ -1516,7 +1636,9 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
                 </form>
             </div>
            
-           <?php  } ?>
+           <?php  } 
+        // Displaying Questions And Answers, Like And Unlike Fun End
+           ?>
             
         </div>
         <?php
