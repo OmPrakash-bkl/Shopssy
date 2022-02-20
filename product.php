@@ -283,6 +283,8 @@ if(isset($_GET['searchItem'])) {
 
                     ?>
 
+                    <!-- Filter Form For Mobile Based On Sub Title Start -->
+
                     <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="fliter_formm<?php echo $temp_variable; ?>" method="GET">
                     <div>
                     <input type="hidden" name="b_and_i_identification_id" value="<?php echo $cat_b_and_i_identification_id; ?>">
@@ -291,6 +293,8 @@ if(isset($_GET['searchItem'])) {
                     <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $cat_subs_cat_identification_id_two; ?>">
                     </div>
                     </form>
+
+                     <!-- Filter Form For Mobile Based On Sub Title End -->
                            
                     <?php $temp_variable++; }
                     // Displaying Product Types Of Mobile Fun End
@@ -328,7 +332,7 @@ if(isset($_GET['searchItem'])) {
                            
 
            
-
+        <!-- Filter Form For Mobile Based On Filter Title And Filter Sub Title In DB Start -->
             <div>
            <input type="checkbox" id="<?php echo $fil1_sub_filter_datas; ?>" onchange="document.getElementById('filters_for_mob_form').submit()" name="<?php echo $fil1_sub_title; ?>" value="<?php echo $fil1_sub_filter_datas; ?>"> <label for="<?php echo $fil1_sub_filter_datas; ?>"><?php echo $fil1_sub_filter_datas; ?></label>
            <input type="hidden" name="sub_cat_identification_id" value="<?php echo $cat_subs_cat_identification_id; ?>">
@@ -336,18 +340,17 @@ if(isset($_GET['searchItem'])) {
              <input type="hidden" name="b_and_i_identification_id" value="<?php echo $cat_b_and_i_identification_id; ?>">
              <input type="hidden" name="b_title" value="Filtered Items">
             </div>
+        <!-- Filter Form For Mobile Based On Filter Title And Filter Sub Title In DB End -->
 
+            <?php } ?>
          
-
-                            <?php } ?>
-
-                           
                         </div>
 
                         <?php 
                         
                         $dummy++; 
                     
+                        // Checking If Product Are There Based On User Input Filter Category Data Fun Start
                     if(isset($_GET[$fil1_sub_title])) {
                         $temp_fil1_sub_title_data = $_GET[$fil1_sub_title];
                     $fil1_filters_retrieving_query = "SELECT `pro_id` FROM `$fil1_details_category` WHERE `$fil1_sub_title` = '$temp_fil1_sub_title_data';";
@@ -359,6 +362,7 @@ if(isset($_GET['searchItem'])) {
                         $row_of_fil1_filter_counter++;
                     }
                     }
+                    // Checking If Product Are There Based On User Input Filter Category Data Fun End
 
                     } 
         // Displying Filter Categories, Product Types, Sub Filter Categories Of Mobile Fun End
@@ -448,7 +452,7 @@ if(isset($_GET['searchItem'])) {
 
                     <div class="brand_list_container" id="brand_list_container">
                         <?php
-                        // Display Filter Categories Fun Start
+                        // Display Filter Categories For Computer Fun Start
                         $product_cat_query = "SELECT * FROM `brand_and_item_list` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
                         $product_cat_result = mysqli_query($con, $product_cat_query);
                         $temprory_value = 1;
@@ -460,7 +464,7 @@ if(isset($_GET['searchItem'])) {
                             $pro_subs_cat_identification_id = $row['subs_cat_identification_id'];
                         
                         ?>
-
+                    <!-- Filter Form For Computer Based On Sub Title Start -->
                         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="fliter_form<?php echo $temprory_value; ?>" method="GET">
                         <div>
                             <input type="hidden" name="b_and_i_identification_id" value="<?php echo $pro_b_and_i_identification_id; ?>">
@@ -469,11 +473,11 @@ if(isset($_GET['searchItem'])) {
                       <input type="hidden" name="sub_cat_identification_id_two" value="<?php echo $pro_subs_cat_identification_id_two; ?>">
                         </div>
                         </form>
-                     
+                        <!-- Filter Form For Computer Based On Sub Title End -->
                       <?php 
                     $temprory_value++;
                     } 
-                    // Display Filter Categories Fun End
+                    // Display Filter Categories For Computer Fun End
                     ?>
                       
                     </div>
@@ -484,19 +488,19 @@ if(isset($_GET['searchItem'])) {
 
     <?php 
 
-    // Displying Filter Categories, Product Types, Sub Filter Categories Fun Start
+    
 
    $temp_query = "SELECT * FROM `filter` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id_two;";
    $temp_result = mysqli_query($con, $temp_query);
    $dummy = 1;
-  
+  // Displying Filter Categories, Product Types, Sub Filter Categories Fun Start
    while($row = mysqli_fetch_assoc($temp_result)) {
        $temp_title = $row['filter_title'];
        $temp_sub_title = $row['filter_sub_title'];
        $temp_id = $row['filter_id'];
        $temp_filter_details_category = $row['filter_details_category'];
    ?>
-
+<!-- Filter Form For Computer Based On Filter Title And Filter Sub Title In DB Start -->
      <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="filter_form" method="GET">
                
             <div class="product_section_sub_container_customer_rating_container">
@@ -540,7 +544,7 @@ if(isset($_GET['searchItem'])) {
         $dummy++;
 
        
-
+ // Checking If Product Are There Based On User Input Filter Category Data Fun Start
        if(isset($_GET[$temp_sub_title])) {
            $temp_sub_title_data = $_GET[$temp_sub_title];
        $filters_retrieving_query = "SELECT `pro_id` FROM `$temp_filter_details_category` WHERE `$temp_sub_title` = '$temp_sub_title_data';";
@@ -552,13 +556,14 @@ if(isset($_GET['searchItem'])) {
            $row_of_filter_counter++;
        }
        }
-
+ // Checking If Product Are There Based On User Input Filter Category Data Fun End
         }
     // Displying Filter Categories, Product Types, Sub Filter Categories Fun End
         ?>
 
 </form>
-            
+<!-- Filter Form For Computer Based On Filter Title And Filter Sub Title In DB End -->
+
      
          
         </div>
@@ -598,13 +603,14 @@ if(isset($_GET['searchItem'])) {
        <center>
            <?php 
            
-           // Products Queries Based On Sort Value Fun Start
+           // Products Queries Based On Sort By Catogory Section In Navbar Fun Start
            $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id;";
+           // Products Queries Based On Sort By Catogory Section In Navbar Fun End
            $sort_val = 0;
            if(isset($_GET['sort'])) {
             $sort_val = $_GET['sort'];
            }
-         
+          // Products Queries Based On Sort Value Fun Start
            switch($sort_val) {
                case 1:
                 $category_products_query = "SELECT * FROM `products` WHERE `subs_cat_identification_id`=$product_sub_cat_identification_id ORDER BY `p_title`;";
@@ -622,12 +628,14 @@ if(isset($_GET['searchItem'])) {
 
             // Products Queries Based On Sort Value Fun End
 
-            // Products Queries Based On Sort Value Fun Start
-
+        
            if(isset($_GET['b_and_i_identification_id'])) {
+               // Products Queries Based On Sort By Catogory Inner Section In Navbar Fun Start
                $product_b_and_i_identification_id = $_GET['b_and_i_identification_id'];
                $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id`=$product_b_and_i_identification_id;";
+               // Products Queries Based On Sort By Catogory Inner Section In Navbar Fun End
 
+               // Products Queries Based On Sort Value Fun Start
                $sort_val = $_GET['sort'];
            switch($sort_val) {
                case 1:
@@ -651,6 +659,7 @@ if(isset($_GET['searchItem'])) {
 
            if(isset($row_of_filter)) {
                if(!isset($_GET['page'])) {
+            // Generating Products If Product Are There Based On User Input Filter Category Data Fun Start
                 foreach($row_of_filter_counter_array as $product_id_of_row_filter) {
                     $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter;";
 
@@ -790,7 +799,11 @@ if(isset($_GET['searchItem'])) {
                     <?php
     
                    }
-               } else {
+            // Generating Products If Product Are There Based On User Input Filter Category Data Fun End
+                   
+               } 
+            // Generating Products If Product Are There Based On User Input Filter Category Data With Pagination Fun Start
+               else {
 
                     $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter;";
 
@@ -927,7 +940,7 @@ if(isset($_GET['searchItem'])) {
     
                   
                }
-              
+                // Generating Products If Product Are There Based On User Input Filter Category Data With Pagination Fun End
             
            }
            
@@ -935,7 +948,7 @@ if(isset($_GET['searchItem'])) {
 
     // Displaying Products As Default Fun Start
            else {
-          
+          // Displaying Products As Default Without Pagination Fun Start
             if(!isset($_GET['page'])) {
 
                 $category_products_result = mysqli_query($con, $category_products_query);
@@ -1058,7 +1071,11 @@ if(isset($_GET['searchItem'])) {
 
       <?php
 
-            } else {
+            } 
+             // Displaying Products As Default Without Pagination Fun End
+
+              // Displaying Products As Default With Pagination Fun Start
+            else {
 
                 $start = 1;
                 $end = 12;
@@ -1212,6 +1229,8 @@ if(isset($_GET['searchItem'])) {
        <?php
 
            }
+        // Displaying Products As Default With Pagination Fun End
+
 
         }
     // Displaying Products As Default Fun End
@@ -1230,7 +1249,11 @@ if(isset($_SESSION['pagination'])) {
 <div class="next_page_container">
     <center>
         <?php 
+
+        // Btn Based On Sub Cat Title In URL String Fun Start
+
         if(isset($_GET['sub_cat_title'])) {
+              // Previous Btn Based On Sub Cat Title In URL String Fun Start
             if($start == 1) {
                 ?>
                 <button class="for_box_button">Previous</button>
@@ -1246,9 +1269,11 @@ if(isset($_SESSION['pagination'])) {
                 ?>&dec"><button class="for_box_button">Previous</button></a>
                 <?php
             }
+        // Previous Btn Based On Sub Cat Title In URL String Fun End
+
         ?>
         
-
+<!-- Round Btn1 Of Pagination Section Start -->
         <button class="for_round_btn <?php 
         if($_GET['page'] == 1) { echo "active"; } 
         if(!isset($_GET['page'])) { echo "active"; }
@@ -1258,8 +1283,11 @@ if(isset($_SESSION['pagination'])) {
         }else {
             echo $page_count - 1; 
         }
-        ?></button>
+        ?>
+        </button>
+        <!-- Round Btn1 Of Pagination Section End -->
 
+        <!-- Round Btn2 Of Pagination Section Start -->
           <?php 
           if(isset($_GET['page']) and $_GET['page'] > 1) {
               ?>
@@ -1267,10 +1295,15 @@ if(isset($_SESSION['pagination'])) {
             <?php
           }
           ?>
+           <!-- Round Btn2 Of Pagination Section End -->
 
+            <!-- Round Btn3 Of Pagination Section Start -->
         <button class="for_round_btn"><?php echo $page_count + 1; ?></button>
+         <!-- Round Btn3 Of Pagination Section End -->
         <?php
 
+
+        // Next Btn Based On Sub Cat Title In URL String Fun Start
         if(end($_SESSION['pagination']) == $pro_value) {
            ?>
          <button class="for_box_button">Next</button>
@@ -1287,12 +1320,16 @@ if(isset($_SESSION['pagination'])) {
            }
           
        }
-
+    // Next Btn Based On Sub Cat Title In URL String Fun End
        ?>
 
             <?php
-        } else {
+        }
+    // Btn Based On Sub Cat Title In URL String Fun End
 
+        // Btn Without Sub Cat Title URL String Fun Start
+        else {
+    // Previous Btn Without Sub Cat Title URL String Fun Start
             if($start == 1) {
                 ?>
                 <button class="for_box_button">Previous</button>
@@ -1316,10 +1353,11 @@ if(isset($_SESSION['pagination'])) {
                 }
                 
             }
-
+    // Previous Btn Without Sub Cat Title URL String Fun End
             ?>
             
-            
+    <!-- Round Btn1 Of Pagination Section Start -->
+
         <button class="for_round_btn <?php 
         if($_GET['page'] == 1) { echo "active"; } 
         if(!isset($_GET['page'])) { echo "active"; }
@@ -1331,6 +1369,10 @@ if(isset($_SESSION['pagination'])) {
         }
         ?></button>
 
+<!-- Round Btn1 Of Pagination Section End -->
+
+<!-- Round Btn2 Of Pagination Section Start -->
+
          <?php 
           if(isset($_GET['page']) and $_GET['page'] > 1) {
               ?>
@@ -1338,12 +1380,15 @@ if(isset($_SESSION['pagination'])) {
             <?php
           }
           ?>
+<!-- Round Btn2 Of Pagination Section End -->
 
+<!-- Round Btn3 Of Pagination Section Start -->
         <button class="for_round_btn"><?php echo $page_count + 1; ?></button>
-
+<!-- Round Btn3 Of Pagination Section End -->
        <?php
 
       if(isset($_SESSION['pagination'])) {
+    // Next Btn Without Sub Cat Title In URL String Fun Start
         if(end($_SESSION['pagination']) == $pro_value) {
             ?>
           <button class="for_box_button">Next</button>
@@ -1358,8 +1403,9 @@ if(isset($_SESSION['pagination'])) {
              <button class="for_box_button">Next</button>
                <?php
             }
-           
         }
+    // Next Btn Without Sub Cat Title In URL String Fun End
+
       } else {
           echo "";
       }
@@ -1370,7 +1416,7 @@ if(isset($_SESSION['pagination'])) {
 
             <?php
         }
-        
+    // Btn Without Sub Cat Title URL String Fun End
         ?>
     </center>
 </div>
