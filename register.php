@@ -36,7 +36,7 @@ if(isset($_POST['submit'])) {
                 $error_messages = "User with email is already exist!";
             } else {
                 $password_hash = password_hash($pass, PASSWORD_BCRYPT);
-                $register_query = "INSERT INTO `register` (`f_name`, `l_name`, `email`, `password`, `full_name`, `address`, `city`, `zip`, `phone_number`, `country`, `status`) VALUES ('$f_name', '$l_name', '$email', '$password_hash', '', '', '', '', '', '', 0);";
+                $register_query = "INSERT INTO `register` (`f_name`, `l_name`, `email`, `password`, `full_name`, `street`, `city`, `zip`, `phone_number`, `country`, `status`) VALUES ('$f_name', '$l_name', '$email', '$password_hash', '', '', '', '', '', '', 0);";
                $register_result = mysqli_query($con, $register_query);
 
                if($register_result) {

@@ -38,7 +38,7 @@ if($cart_count_checking == 0) {
 
 // Fetching Default Address From DB Fun Start
 
-$customer_add_details_address = "There is";
+$customer_add_details_street = "There is";
 $customer_add_details_city = "No Default";
 $customer_add_details_state = "Address.";
 $customer_add_details_my_name = "Anonymous User";
@@ -50,7 +50,7 @@ if(isset($_SESSION['user_login_email'])) {
     $customer_add_details_result = mysqli_query($con, $customer_add_details_query);
     While($row2 = mysqli_fetch_assoc($customer_add_details_result)) {
         $customer_add_details_my_name = $row2['my_name'];
-        $customer_add_details_address = $row2['address'];
+        $customer_add_details_street = $row2['street'];
         $customer_add_details_city = $row2['city'];
         $customer_add_details_state = $row2['state'];
     }
@@ -106,7 +106,7 @@ if(isset($_POST['new_add'])) {
     $address_details_country = "";
     $address_details_f_name = "";
     $address_details_l_name = "";
-    $address_details_add = "";
+    $address_details_street = "";
     $address_details_phone = "";
     $address_details_city = "";
     $address_details_state = "";
@@ -131,7 +131,7 @@ if(mysqli_num_rows($address_details_fetch_result) === 0) {
     $address_details_country = "";
     $address_details_f_name = "";
     $address_details_l_name = "";
-    $address_details_add = "";
+    $address_details_street = "";
     $address_details_phone = "";
     $address_details_city = "";
     $address_details_state = "";
@@ -142,7 +142,7 @@ while($row3  = mysqli_fetch_assoc($address_details_fetch_result)) {
     $address_details_country = $row3['country'];
     $address_details_f_name = $row3['f_name'];
     $address_details_l_name = $row3['l_name'];
-    $address_details_add = $row3['address'];
+    $address_details_street = $row3['street'];
     $address_details_phone = $row3['phone'];
     $address_details_city = $row3['city'];
     $address_details_state = $row3['state'];
@@ -158,7 +158,7 @@ if(isset($_POST['continue_to_ship'])) {
     $fir_name = $_POST['f_name'];
     $las_name = $_POST['l_name'];
     $my_full_name = $fir_name." ".$las_name;
-    $address = $_POST['address'];
+    $street = $_POST['street'];
     $city = $_POST['city'];
     $country = $_POST['country'];
     $state = $_POST['state'];
@@ -190,9 +190,9 @@ if(isset($_POST['continue_to_ship'])) {
     $users_id_value = $_SESSION['user_id'];
     $address_details_fetch_query = "SELECT * FROM `account` WHERE `user_id` = $users_id_value AND `status` = 'default';";
     if(mysqli_num_rows($address_details_fetch_result) === 0) {
-        $account_uploading_query = "INSERT INTO `account` (`user_id`, `f_name`, `l_name`, `my_name`, `address`, `city`, `state`, `zip`, `phone`, `country`, `status`) VALUES ($users_id_value, '$fir_name', '$las_name', '$my_full_name', '$address', '$city', '$state', '$zip', '$phone', '$country', 'default');";
+        $account_uploading_query = "INSERT INTO `account` (`user_id`, `f_name`, `l_name`, `my_name`, `street`, `city`, `state`, `zip`, `phone`, `country`, `status`) VALUES ($users_id_value, '$fir_name', '$las_name', '$my_full_name', '$street', '$city', '$state', '$zip', '$phone', '$country', 'default');";
     } else {
-        $account_uploading_query = "UPDATE `account` SET `f_name` = '$fir_name', `l_name` = '$las_name', `my_name` = '$my_full_name', `address` = '$address', `city` = '$city', `state` = '$state', `zip` = '$zip', `phone`= '$phone', `country` = '$country', `status` = 'default' WHERE `user_id` = $users_id_value AND `status` = 'default';";
+        $account_uploading_query = "UPDATE `account` SET `f_name` = '$fir_name', `l_name` = '$las_name', `my_name` = '$my_full_name', `street` = '$street', `city` = '$city', `state` = '$state', `zip` = '$zip', `phone`= '$phone', `country` = '$country', `status` = 'default' WHERE `user_id` = $users_id_value AND `status` = 'default';";
     }
     ?>
     <script>
@@ -208,9 +208,9 @@ if(isset($_POST['continue_to_ship'])) {
     $users_id_value = $_SESSION['user_id'];
     $address_details_fetch_query = "SELECT * FROM `account` WHERE `user_id` = $users_id_value AND `status` = 'secondary';";
     if(mysqli_num_rows($address_details_fetch_result) === 0) {
-        $account_uploading_query = "INSERT INTO `account` (`user_id`, `f_name`, `l_name`, `my_name`, `address`, `city`, `state`, `zip`, `phone`, `country`, `status`) VALUES ($users_id_value, '$fir_name', '$las_name', '$my_full_name', '$address', '$city', '$state', '$zip', '$phone', '$country', 'secondary');";
+        $account_uploading_query = "INSERT INTO `account` (`user_id`, `f_name`, `l_name`, `my_name`, `street`, `city`, `state`, `zip`, `phone`, `country`, `status`) VALUES ($users_id_value, '$fir_name', '$las_name', '$my_full_name', '$street', '$city', '$state', '$zip', '$phone', '$country', 'secondary');";
     } else {
-        $account_uploading_query = "UPDATE `account` SET `f_name` = '$fir_name', `l_name` = '$las_name', `my_name` = '$my_full_name', `address` = '$address', `city` = '$city', `state` = '$state', `zip` = '$zip', `phone`= '$phone', `country` = '$country', `status` = 'secondary' WHERE `user_id` = $users_id_value AND `status` = 'secondary';";
+        $account_uploading_query = "UPDATE `account` SET `f_name` = '$fir_name', `l_name` = '$las_name', `my_name` = '$my_full_name', `street` = '$street', `city` = '$city', `state` = '$state', `zip` = '$zip', `phone`= '$phone', `country` = '$country', `status` = 'secondary' WHERE `user_id` = $users_id_value AND `status` = 'secondary';";
     }
     ?>
     <script>
@@ -224,7 +224,7 @@ if(isset($_POST['continue_to_ship'])) {
      // New Address Insertion And Updation Fun Start
 
    if($address_upload_type == "new") {
-    $account_uploading_query = "INSERT INTO `account` (`user_id`, `f_name`, `l_name`, `my_name`, `address`, `city`, `state`, `zip`, `phone`, `country`, `status`) VALUES ($users_id_value, '$fir_name', '$las_name', '$my_full_name', '$address', '$city', '$state', '$zip', '$phone', '$country', 'secondary');";
+    $account_uploading_query = "INSERT INTO `account` (`user_id`, `f_name`, `l_name`, `my_name`, `street`, `city`, `state`, `zip`, `phone`, `country`, `status`) VALUES ($users_id_value, '$fir_name', '$las_name', '$my_full_name', '$street', '$city', '$state', '$zip', '$phone', '$country', 'secondary');";
     ?>
     <script>
         var next_page_link = "http://localhost:3000/shipping.php?p=2";
@@ -255,7 +255,7 @@ if(isset($_POST['new_add'])) {
     $address_details_country = "";
     $address_details_f_name = "";
     $address_details_l_name = "";
-    $address_details_add = "";
+    $address_details_street = "";
     $address_details_phone = "";
     $address_details_city = "";
     $address_details_state = "";
@@ -356,7 +356,7 @@ if(isset($_POST['new_add'])) {
                     <input type="text" placeholder="Country" name="country" value="<?php echo $address_details_country; ?>" required> <br>
                     <input type="text" placeholder="First name(Optional)" name="f_name" class="fname" value="<?php echo $address_details_f_name; ?>" required> 
                     <input type="text" placeholder="Last name" class="lname" name="l_name" value="<?php echo $address_details_l_name; ?>" required> <br>
-                    <input type="text" placeholder="Address" name="address" value="<?php echo $address_details_add; ?>" required> 
+                    <input type="text" placeholder="Street" name="street" value="<?php echo $address_details_street; ?>" required> 
                     <input type="text" placeholder="Mobile Number" name="mob_number" value="<?php echo $address_details_phone; ?>" required> 
                     <input type="text" placeholder="City" class="city" name="city" value="<?php echo $address_details_city; ?>" required> 
                     <input type="text" placeholder="State" class="state" name="state" value="<?php echo $address_details_state; ?>" required>

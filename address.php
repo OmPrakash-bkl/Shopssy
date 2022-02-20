@@ -19,7 +19,7 @@ if(isset($_POST['add_address'])){
     $fir_name = $_POST['fir_name'];
     $las_name = $_POST['las_name'];
     $my_full_name = $fir_name." ".$las_name;
-    $address = $_POST['address'];
+    $street = $_POST['street'];
     $city = $_POST['city'];
     $country = $_POST['country'];
     $state = $_POST['state'];
@@ -47,7 +47,7 @@ if(isset($_POST['add_address'])){
     } else {
         $checkbox = "secondary";
     }
-    $account_insert_query = "INSERT INTO `account` (`user_id`, `f_name`, `l_name`, `my_name`, `address`, `city`, `state`, `zip`, `phone`, `country`, `status`) VALUES ($user_identity, '$fir_name', '$las_name', '$my_full_name', '$address', '$city', '$state', '$zip', '$phone', '$country', '$checkbox');";
+    $account_insert_query = "INSERT INTO `account` (`user_id`, `f_name`, `l_name`, `my_name`, `street`, `city`, `state`, `zip`, `phone`, `country`, `status`) VALUES ($user_identity, '$fir_name', '$las_name', '$my_full_name', '$street', '$city', '$state', '$zip', '$phone', '$country', '$checkbox');";
     mysqli_query($con, $account_insert_query);
 
     ?>
@@ -104,7 +104,7 @@ if(isset($_POST['update_acc_details'])) {
     $fir_name1 = $_POST['fir_name1'];
     $las_name1 = $_POST['las_name1'];
     $my_full_name1 = $fir_name1." ".$las_name1;
-    $address1 = $_POST['address1'];
+    $street1 = $_POST['street1'];
     $city1 = $_POST['city1'];
     $country1 = $_POST['country1'];
     $state1 = $_POST['state1'];
@@ -133,7 +133,7 @@ if(isset($_POST['update_acc_details'])) {
         $checkbox1 = "secondary";
     }
     $user_identity =  $_SESSION['user_id'];
-    $account_insert_query = "UPDATE `account` SET `f_name` = '$fir_name1', `l_name` = '$las_name1', `my_name` = '$my_full_name1', `address` = '$address1', `city` = '$city1', `state` = '$state1', `zip` = '$zip1', `phone`= '$phone1', `country` = '$country1', `status` = '$checkbox1' WHERE `user_id` = $user_identity;";
+    $account_insert_query = "UPDATE `account` SET `f_name` = '$fir_name1', `l_name` = '$las_name1', `my_name` = '$my_full_name1', `street` = '$street1', `city` = '$city1', `state` = '$state1', `zip` = '$zip1', `phone`= '$phone1', `country` = '$country1', `status` = '$checkbox1' WHERE `user_id` = $user_identity;";
     mysqli_query($con, $account_insert_query);
 
     ?>
@@ -217,10 +217,10 @@ if(isset($_POST['delete_default_add'])) {
                     </tr>
                    
                     <tr>
-                        <th><label for="add">Address</label></th>
+                        <th><label for="add">Street</label></th>
                     </tr>
                     <tr>
-                        <td><input type="text" id="add" name="address" class="inp_box" required></td>
+                        <td><input type="text" id="add" name="street" class="inp_box" required></td>
                     </tr>
                     <tr>
                         <th><label for="cit">City</label></th>
@@ -280,7 +280,7 @@ if(isset($_POST['delete_default_add'])) {
                 $default_accounts_my_name = "-- NIL --";
                 $default_accounts_f_name = "-- NIL --";
                     $default_accounts_l_name = "-- NIL --";
-                    $default_accounts_address = "-- NIL --";
+                    $default_accounts_street = "-- NIL --";
                     $default_accounts_city = "-- NIL --";
                     $default_accounts_zip = "-- NIL --";
                     $default_accounts_phone = "-- NIL --";
@@ -290,7 +290,7 @@ if(isset($_POST['delete_default_add'])) {
                     $default_accounts_my_name = $row['my_name'];
                     $default_accounts_f_name = $row['f_name'];
                     $default_accounts_l_name = $row['l_name'];
-                    $default_accounts_address = $row['address'];
+                    $default_accounts_street = $row['street'];
                     $default_accounts_city = $row['city'];
                     $default_accounts_zip = $row['zip'];
                     $default_accounts_phone = $row['phone'];
@@ -312,8 +312,8 @@ if(isset($_POST['delete_default_add'])) {
                     </tr>
                    
                     <tr>
-                        <th>Address: </th>
-                        <td><?php echo $default_accounts_address; ?></td>
+                        <th>Street: </th>
+                        <td><?php echo $default_accounts_street; ?></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="bottom_border"></td>
@@ -388,7 +388,7 @@ if(isset($_POST['delete_default_add'])) {
                             <th><label for="add1">Address</label></th>
                         </tr>
                         <tr>
-                            <td><input type="text" id="add1" value="<?php echo $default_accounts_address; ?>" name="address1" class="inp_box" required></td>
+                            <td><input type="text" id="add1" value="<?php echo $default_accounts_street; ?>" name="street1" class="inp_box" required></td>
                         </tr>
                         <tr>
                             <th><label for="cit1">City</label></th>

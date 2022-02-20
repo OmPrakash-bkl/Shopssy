@@ -62,7 +62,7 @@ if(isset($_POST['log_out'])){
             $account_query = "SELECT * FROM `account` WHERE `status` ='default' AND `user_id` = $user_identity;";
             $account_result = mysqli_query($con, $account_query);
             $accounts_my_name = "-- NIL --";
-                $accounts_address = "-- NIL --";
+                $accounts_street = "-- NIL --";
                 $accounts_city = "-- NIL --";
                 $accounts_zip = "-- NIL --";
                 $accounts_phone = "-- NIL --";
@@ -70,7 +70,7 @@ if(isset($_POST['log_out'])){
                 $accounts_state = "-- NIL --";
             while($row = mysqli_fetch_assoc($account_result)) {
                 $accounts_my_name = $row['my_name'];
-                $accounts_address = $row['address'];
+                $accounts_street = $row['street'];
                 $accounts_city = $row['city'];
                 $accounts_zip = $row['zip'];
                 $accounts_phone = $row['phone'];
@@ -93,8 +93,8 @@ if(isset($_POST['log_out'])){
                     </tr>
                 
                     <tr>
-                        <th>Address: </th>
-                        <td><?php echo $accounts_address; ?></td>
+                        <th>Street: </th>
+                        <td><?php echo $accounts_street; ?></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="bottom_border"></td>

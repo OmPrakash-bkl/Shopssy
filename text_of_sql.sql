@@ -1198,9 +1198,9 @@ insert into filter_sub(filters_id, filter_datas) values
 
 /* 13. Register */
 
-create table register(user_id int(100) AUTO_INCREMENT, f_name varchar(200), l_name varchar(200), email varchar(200), password varchar(300), full_name varchar(200) default NULL, address varchar(300) default NULL, city varchar(200) default NULL, zip int(50) default NULL, phone_number varchar(100) default NULL, country varchar(300) default NULL, status int(50) default 0, primary key(user_id));
+create table register(user_id int(100) AUTO_INCREMENT, f_name varchar(200), l_name varchar(200), email varchar(200), password varchar(300), full_name varchar(200) default NULL, street varchar(300) default NULL, city varchar(200) default NULL, zip int(50) default NULL, phone_number varchar(100) default NULL, country varchar(300) default NULL, status int(50) default 0, primary key(user_id));
 
-insert into register(f_name, l_name, email, password, full_name, address, city, zip, phone_number, country, status) values
+insert into register(f_name, l_name, email, password, full_name, street, city, zip, phone_number, country, status) values
 ('Om', 'Prakash', 'Prakash123@gmail.com', 'Prakash123@developer', 'Om Prakash', '13/A, Prasanna Colony, 3rd Street, Avaniyapuram, Madurai - 12.', 'Madurai', '625012', '8838067309', 'India', 0);
 /* 14. Cart */
 
@@ -1217,9 +1217,9 @@ insert into mywishlist(user_id, prod_id, pro_type) values
 
 /* 16. Account */
 
-create table account(acc_id int(100) AUTO_INCREMENT, user_id int(100), f_name varchar(200) default NULL, l_name varchar(200) default NULL, my_name varchar(200) default NULL, address varchar(300) default NULL, city varchar(200) default NULL, state varchar(200) default NULL, zip varchar(200) default NULL, phone varchar(200) default NULL, country varchar(100) default NULL, status varchar(100) default NULL, primary key(acc_id));
+create table account(acc_id int(100) AUTO_INCREMENT, user_id int(100), f_name varchar(200) default NULL, l_name varchar(200) default NULL, my_name varchar(200) default NULL, street varchar(300) default NULL, city varchar(200) default NULL, state varchar(200) default NULL, zip varchar(200) default NULL, phone varchar(200) default NULL, country varchar(100) default NULL, status varchar(100) default NULL, primary key(acc_id));
 
-insert into account(user_id, f_name, l_name, my_name, address, city, state, zip, phone, country, status) values
+insert into account(user_id, f_name, l_name, my_name, street, city, state, zip, phone, country, status) values
 (4, 'Ram', 'Kumar', 'Ram Kumar', '13/A, Prasanna Colony, 3rd Street, Avaniyapuram, Madurai - 12.', 'Madurai', 'Tamil Nadu', '625012', '1234567890', 'India', 'default');
 
 /* 17. Payment */

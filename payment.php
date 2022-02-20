@@ -151,7 +151,7 @@ if(isset($_POST['order_req'])) {
     $user_detail_retrieve_result = mysqli_query($con, $user_detail_retrieve_query);
     while($row = mysqli_fetch_assoc($user_detail_retrieve_result)) {
         $user_full_name = $row['my_name'];
-        $user_full_address = $row['address'];
+        $user_full_address = $row['street'];
         $user_full_address = $user_full_address.', '.$row['country'];
         $user_full_address = $user_full_address.', '.$row['state'];
         $user_full_address = $user_full_address.', '.$row['city'];
@@ -398,11 +398,11 @@ if($_GET['p'] == 1) {
 $add_retrieve_query = "SELECT * FROM `account` WHERE `user_id` = $user_id AND `status` = '$status_of_add';";
 $add_retrieve_result = mysqli_query($con, $add_retrieve_query);
 while($row2 = mysqli_fetch_assoc($add_retrieve_result)) {
-    $customer_add_details_address = $row2['address'];
+    $customer_add_details_street = $row2['street'];
     $customer_add_details_city = $row2['city'];
     $customer_add_details_state = $row2['state'];
     $customer_add_details_country = $row2['country'];
-    $shipping_address = $customer_add_details_address.", ".$customer_add_details_city.", ".$customer_add_details_state.", ".$customer_add_details_country.".";
+    $shipping_address = $customer_add_details_street.", ".$customer_add_details_city.", ".$customer_add_details_state.", ".$customer_add_details_country.".";
 }
 } 
 else 
