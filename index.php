@@ -364,7 +364,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
            $product_subs_cat_identification_id = $row['subs_cat_identification_id'];
         ?>
 
-            <div class="products_container_products_inner_divs">
+            <div class="products_container_products_inner_divs products_container_products_inner_divs_of_home_page">
             <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>">
                 <img src="./images/<?php echo $product_p_image; ?>" alt="products images">
            </a>
@@ -606,7 +606,7 @@ window.location.href = 'http://localhost:3000/product.php?sub_cat_identification
            $product_subs_cat_identification_id = $row['subs_cat_identification_id'];
         ?>
 
-            <div class="products_container_products_inner_divs">
+            <div class="products_container_products_inner_divs products_container_products_inner_divs_of_home_page">
             <a href="./view_of_product.php?p_id=<?php echo $product_p_id; ?>&sub_cat_id=<?php echo $product_subs_cat_identification_id; ?>">
                 <img src="./images/<?php echo $product_p_image; ?>" alt="products images">
            </a>

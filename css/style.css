@@ -5024,6 +5024,9 @@ font-family: Arial, Helvetica, sans-serif;
         margin: 10px 5px;
         padding: 10px 5px;
     }
+    .products_container_products_inner_divs_of_home_page {
+        height: 290px;
+    }
     .products_container_products_inner_divs img {
         height: 100px;
         width: 80px;

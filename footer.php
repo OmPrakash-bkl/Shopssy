@@ -92,7 +92,7 @@
                 <div class="footer_inner_container_sections footer_inner_container_sections2">
                     <h4>CORPORATE INFO</h4>
                     <ul>
-                        <li><a href="./about_us.html">Who We Are ?</a></li>
+                        <li><a href="./about_us.php">Who We Are ?</a></li>
                         <li><a href="#">Corporate Responsibility</a></li>
                         <li><a href="#">California Laws</a></li>
                         <li><a href="#">Careers</a></li>
