@@ -496,9 +496,9 @@ else
                 <div class="payment_container">
                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"  method="POST" autocomplete="off">
                     <input type="text" name="card_type" placeholder="Type of Card" required autofocus> <br>
-                    <input type="text" name="card_number" placeholder="Card Number" required> <br>
+                    <input type="number" name="card_number" placeholder="Card Number" required> <br>
                     <input type="text" name="card_e_date" placeholder="Expiry Date (pattern - mm/yy)" required> <br>
-                    <input type="number" name="card_cvv_num" placeholder="CVV" required> <br>
+                    <input type="number" name="card_cvv_num" placeholder="CVV" required maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"> <br>
                     <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
                     <input type="hidden" name="p_status" value="ordered">
                     <input type="hidden" name="trx_id" value="trx0000">

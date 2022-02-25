@@ -27,7 +27,7 @@
 <script>
     setTimeout(function() {
         window.location.href = 'http://localhost:3000/index.php';
-    }, 1000);
+    }, 2000);
 </script>
     <!-- Redirect To Home Page Fun End -->
 </body>
