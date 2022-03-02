@@ -16,5 +16,66 @@
 </head>
 <body>
     
+<!-- Admin Home Page Container Start -->
+
+<div class="admin_container">
+
+<!-- Admin Table Navigation Container Start -->
+
+<div class="admin_table_navigation_container">
+
+<h1 class="admin_table_navigation_shop_title">Shopssy</h1>
+
+</div>
+
+<!-- Admin Table Navigation Container End -->
+
+<!-- Admin Show Tables Container Start -->
+
+<div class="admin_show_table_container">
+
+<!-- Header Of Show Table Container Start -->
+
+<div class="header_of_show_table_container">
+
+<div class="header_of_show_table_container_1">
+
+<h2 class="header_of_show_table_container_1_table_name">Order</h2>
+<p>28 Orders Found</p>
+
+</div>
+<div class="header_of_show_table_container_2">
+
+<div class="notification_and_user_img_container">
+
+<div class="notification_icon_container">
+<span><i class="fa fa-bell"></i></span>
+</div>
+
+<div class="user_image_icon_container">
+<div>
+<img src="../images/myimg1.jpeg" alt="admin image" class="admin_picture">
+</div>
+<div>
+<span><i class="fa fa-caret-down"></i></span>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Header Of Show Table Container End -->
+
+</div>
+
+<!-- Admin Show Tables Container End -->
+
+</div>
+
+<!-- Admin Home Page Container End -->
+
 </body>
 </html>

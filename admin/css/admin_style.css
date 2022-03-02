@@ -27,4 +27,104 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active{
     box-shadow: 0 0 0 30px white inset !important;
 }
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
 /* Code Reset End*/
+
+/* Admin Container Start */
+
+/* Admin Header Container Start */
+
+.admin_container {
+    border: 1px solid red;
+    display: flex;
+}
+
+/* Admin Table Navigation Container Start */
+
+.admin_table_navigation_container {
+    border: 1px solid green;
+    flex: 15%;
+    background-color: #1792E9;
+    padding: 30px 10px;
+}
+
+.admin_table_navigation_shop_title {
+    color: white;
+    text-align: center;
+    font-size: 45px;
+}
+
+/* Admin Table Navigation Container End */
+
+/*  Admin Show Tables Container Start */
+
+.admin_show_table_container {
+    border: 1px solid black;
+    flex: 85%;
+    padding: 30px 10px;
+}
+
+.header_of_show_table_container {
+    border: 1px solid blue;
+}
+.header_of_show_table_container_1 {
+border: 1px solid yellow;
+float: left;
+}
+
+.header_of_show_table_container_2 {
+    border: 1px solid orange;
+    float: right;
+}
+.header_of_show_table_container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.header_of_show_table_container_1_table_name {
+    margin-bottom: 5px;
+}
+.notification_and_user_img_container {
+display: flex;
+margin: 0px 15px;
+
+}
+.notification_icon_container {
+    height: 40px;
+    width: 40px;
+    border: 1px solid purple;
+    margin: 0px 10px 0px 0px;
+    border: 0px;
+    border-radius: 50%;
+    background-color: #fafafa;
+    padding: 10px 12px;
+    color: gray;
+    cursor: pointer;
+}
+.user_image_icon_container {
+    border: 1px solid purple;
+    cursor: pointer;
+    display: flex;
+    background-color: #fafafa;
+} 
+.admin_picture {
+    height: 40px;
+    width: 40px;
+    border: 0px;
+    border-radius: 50%;
+}
+.user_image_icon_container div:nth-child(2) {
+   padding: 12px 5px;
+   color: gray;
+} 
+
+/*  Admin Show Tables Container End */
+
+
+/* Admin Header Container End */
+
+/* Admin Container End */
