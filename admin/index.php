@@ -59,6 +59,19 @@
 <div>
 <span><i class="fa fa-caret-down"></i></span>
 </div>
+
+<!-- User Image Icon Floating Container Start -->
+
+<div class="user_image_icon_floating_container">
+<span><a href="#"><i class='far fa-user-circle'></i> Profile</a></span>
+<hr>
+<span><a href="#"><i class="fa fa-sign-out"></i> Logout</a></span>
+
+</div>
+
+<!-- User Image Icon Floating Container End -->
+
+
 </div>
 
 </div>
@@ -77,5 +90,6 @@
 
 <!-- Admin Home Page Container End -->
 
+<script src="./js/user_icon.js"></script>
 </body>
 </html>
