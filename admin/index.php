@@ -57,7 +57,7 @@
 <img src="../images/myimg1.jpeg" alt="admin image" class="admin_picture">
 </div>
 <div>
-<span><i class="fa fa-caret-down"></i></span>
+<span><i class="fa fa-caret-down notification_icon_container_arrow_icon"></i></span>
 </div>
 
 <!-- User Image Icon Floating Container Start -->
