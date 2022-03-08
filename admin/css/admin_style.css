@@ -39,7 +39,7 @@ body {
 /* Admin Header Container Start */
 
 .admin_container {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
 }
 
@@ -49,7 +49,7 @@ body {
     border: 1px solid green;
     flex: 15%;
     background-color: #1792E9;
-    padding: 30px 10px;
+    padding: 20px 10px;
 }
 
 .admin_table_navigation_shop_title {
@@ -65,11 +65,13 @@ body {
 .admin_show_table_container {
     border: 1px solid black;
     flex: 85%;
-    padding: 30px 10px;
+    padding: 10px 0px;
 }
 
 .header_of_show_table_container {
     border: 1px solid blue;
+    padding: 15px 0px 15px 10px;
+    box-shadow: 0 8px 6px -4px gainsboro;
 }
 .header_of_show_table_container_1 {
 border: 1px solid yellow;
