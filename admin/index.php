@@ -82,6 +82,29 @@
 
 <!-- Header Of Show Table Container End -->
 
+<!-- Body Of Show Table Container Start -->
+
+<div class="main_table_of_show_table">
+
+<!-- CURD Main Container Start -->
+
+<div class="curd_main_container">
+
+<div class="curd_child_container">
+<span><a href="#" class="active">Show</a></span>
+<span><a href="#">Insert</a></span>
+<span><a href="#">Update</a></span>
+<span><a href="#">Delete</a></span>
+</div>
+
+</div>
+
+<!-- CURD Main Container End -->
+
+</div>
+
+<!-- Body Of Show Table Container End -->
+
 </div>
 
 <!-- Admin Show Tables Container End -->

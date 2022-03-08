@@ -145,9 +145,63 @@ margin: 0px 15px;
 .user_image_icon_floating_container > span > a {
     text-decoration: none;
     color: black;
+    transition: color 0.2s;
 }
+
+.user_image_icon_floating_container > span > a:hover {
+    color: #167bc3;
+}
+
 /* User Image Icon Floating Container End */
 
+/* Main Body Of Show Table Container Start */
+
+.main_table_of_show_table {
+border: 1px solid gray;
+}
+
+/* curd container start */
+.curd_main_container {
+    margin-right: 10px;
+}
+
+.curd_child_container {
+    float: right;
+    border: 1px solid greenyellow;
+    padding: 10px 5px;
+}
+
+.curd_main_container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.curd_child_container > span {
+    display: inline-block;
+    padding: 0px 5px;
+}
+
+.curd_child_container > span > a {
+   text-decoration: none;
+   color: black;
+   transition: color 0.2s;
+}
+
+.curd_child_container > span > a:hover {
+    color: #167bc3;
+ }
+
+.curd_child_container > span > .active {
+    border-bottom: 1px solid #167bc3;
+    padding-bottom: 1px;
+    text-decoration-color: rgb(182, 182, 182);
+    color: #167bc3;
+ }
+
+/* curd container end */
+
+/* Main Body Of Show Table Container End */
 
 /*  Admin Show Tables Container End */
 
