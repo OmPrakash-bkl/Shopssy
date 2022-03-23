@@ -38,7 +38,7 @@ body {
 /* Admin Panel Container Start */
 
 .admin_panel_container {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     max-width: 1400px;
 }
 
@@ -47,7 +47,7 @@ body {
 /* Admin Panel Main Container Start */
 
 .admin_panel_main_container {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 /* Admin Panel Main Container End */
@@ -55,14 +55,119 @@ body {
 /* Admin Panel Header Container Start */
 
 .admin_panel_header_container {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 100%;
+    margin: 5px 0px;
+    padding-bottom: 5px;
+    box-shadow: 0 8px 7px -10px black;
+}
+.admin_panel_header_left_container {
+    /* border: 1px solid royalblue; */
+    float: left;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+.admin_panel_header_right_container {
+    /* border: 1px solid royalblue; */
+    float: right;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+.admin_panel_header_container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.user_db_container {
+    /* border: 1px solid green; */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.admin_db_image {
+    height: 40px;
+    width: 40px;
+    border: 0px;
+    border-radius: 50%;
+}
+.user_db_container_arrow {
+    padding: 0px 10px;
+    /* border: 1px solid palevioletred; */
+    color: #808080;
+}
+.admin_panel_header_icons {
+    font-size: 25px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    
+}
+
+.admin_panel_header_bell_icon {
+    font-size: 15px;
+    border: 0px;
+    background-color: #f3f3f3;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    color: #808080;
+}
+.admin_panel_header_web_title {
+    color: #1792E9;
+    font-size: 40px;
+}
+
+.profile_and_logout_container {
+    position: absolute;
+    background-color: white;
+    top: 65px;
+    right: 1%;
+    border: 0px;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: none;
+}
+.profile_and_logout_container_buttons {
+    background-color: white;
+    font-size: 18px;
+    border: none;
+    font-weight: bold;
+    margin: 5px 0px;
+    transition: color 0.2s;
+}
+.profile_and_logout_container_buttons:hover {
+    color: #1792E9;
 }
 
 /* Admin Panel Header Container End */   
 
 
+/* Media Query Start */
 
+@media only screen and (min-width: 1400px) {
+    .profile_and_logout_container {
+        right: 3%;
+    }
+}
+@media only screen and (min-width: 1600px) {
+    .profile_and_logout_container {
+        right: 10%;
+    }
+}
+@media only screen and (min-width: 1900px) {
+    .profile_and_logout_container {
+        right: 15%;
+    }
+}
+
+/* Media Query End */
 
 
 

@@ -30,10 +30,34 @@
 <div class="admin_panel_header_container">
 
 <div class="admin_panel_header_left_container">
-<button type="button"><i class="fa fa-bars"></i></button>
-<h1>Shopssy</h1>
+<div>
+<button type="button"  class="admin_panel_header_icons"><i class="fa fa-bars"></i></button>
+</div>
+<div>
+<h1 class="admin_panel_header_web_title">Shopssy</h1>
+</div>
 </div>
 <div class="admin_panel_header_right_container">
+<div>
+<button type="button" class="admin_panel_header_icons admin_panel_header_bell_icon"><i class="fa fa-bell"></i></button>
+</div>
+<div class="user_db_container">
+<div>
+<img src="../images/myimg1.jpeg" alt="admin profile" class="admin_db_image">
+</div>
+<div class="user_db_container_arrow"><i class="fa fa-caret-down user_db_arrow_icon"></i></div>
+</div>
+
+<!-- Profile and Logout Container Start -->
+
+<div class="profile_and_logout_container">
+<a href="#"><button class="profile_and_logout_container_buttons"><i class="far fa-user-circle" aria-hidden="true"></i> Profile</button></a>
+<hr>
+<a href="#"><button class="profile_and_logout_container_buttons"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button></a>
+</div>
+
+<!-- Profile and Logout Container End -->
+
 
 </div>
 
@@ -50,6 +74,6 @@
 </center>
 
 <!-- Admin Panel Container End -->
-
+<script src="./js/user_icon.js"></script>
 </body>
 </html>
