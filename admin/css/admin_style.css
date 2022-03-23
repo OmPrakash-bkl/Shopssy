@@ -29,8 +29,40 @@ input:-webkit-autofill:active{
 }
 
 body {
-    font-family: 'Josefin Sans', sans-serif;
+    /* font-family: 'Josefin Sans', sans-serif; */
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Code Reset End*/
+
+/* Admin Panel Container Start */
+
+.admin_panel_container {
+    border: 1px solid red;
+    max-width: 1400px;
+}
+
+/* Admin Panel Container End */
+
+/* Admin Panel Main Container Start */
+
+.admin_panel_main_container {
+    border: 1px solid blue;
+}
+
+/* Admin Panel Main Container End */
+
+/* Admin Panel Header Container Start */
+
+.admin_panel_header_container {
+    border: 1px solid black;
+    width: 100%;
+}
+
+/* Admin Panel Header Container End */   
+
+
+
+
+
 

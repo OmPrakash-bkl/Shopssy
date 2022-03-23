@@ -16,7 +16,32 @@
 </head>
 <body>
 
+<!-- Admin Panel Container Start -->
 
+<center>
+<div class="admin_panel_container">
+
+<!-- Admin Panel Main Container Start -->
+
+<div class="admin_panel_main_container">
+
+<!-- Admin Panel Header Container Start -->
+
+<div class="admin_panel_header_container">
+fgfd
+</div>
+
+<!-- Admin Panel Header Container End -->
+
+
+</div>
+
+<!-- Admin Panel Main Container End -->
+
+</div>
+</center>
+
+<!-- Admin Panel Container End -->
 
 </body>
 </html>
