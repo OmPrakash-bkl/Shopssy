@@ -31,7 +31,7 @@
 
 <div class="admin_panel_header_left_container">
 <div>
-<button type="button"  class="admin_panel_header_icons"><i class="fa fa-bars"></i></button>
+<button type="button"  class="admin_panel_header_icons"><i class="fa fa-bars hamburger_open_icon"></i><i class="fa fa-close hamburger_close_icon"></i></button>
 </div>
 <div>
 <h1 class="admin_panel_header_web_title">Shopssy</h1>
@@ -69,6 +69,19 @@
 </div>
 
 <!-- Admin Panel Main Container End -->
+
+<!-- Admin Panel Body Container Start -->
+
+<div class="admin_panel_body_container">
+<div class="admin_panel_body_navbar_container">
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quas labore maxime fugit nostrum cumque dolores qui sequi? Corporis reiciendis facilis facere similique velit quis, voluptas fugit tenetur inventore fugiat veniam repellendus repudiandae provident esse officiis amet ab error neque dolorem quae eligendi. Similique doloremque repudiandae, enim corrupti, explicabo numquam dolor ullam incidunt ad vitae odio adipisci ab sequi nostrum modi laboriosam delectus, eaque cupiditate tenetur fugit! Accusamus ipsa voluptate nisi cupiditate ex culpa veniam illo autem, iure sit minus quisquam optio repellat facere libero dicta! Porro, enim. Blanditiis sed tenetur minima reiciendis quidem mollitia repellendus voluptate molestiae, harum repudiandae.
+</div>
+<div class="admin_panel_body_content_container">
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt delectus laborum corporis mollitia, in blanditiis repudiandae nulla non obcaecati veritatis, vero nesciunt eveniet. Rem assumenda tenetur labore molestiae ipsam, eligendi magni voluptatem sunt dolores porro? Suscipit modi optio eius necessitatibus non id enim ipsum doloremque, sequi aut quos, cupiditate numquam quaerat sunt voluptatem accusantium repellendus praesentium explicabo impedit corrupti ipsa reiciendis voluptates possimus adipisci? Consectetur culpa exercitationem provident quo animi ducimus, assumenda unde impedit eaque labore officia nemo, natus atque commodi. Eos doloremque dolore error, fugit aperiam commodi ratione quis asperiores maiores quibusdam dolor, repellat, repellendus sit similique? Nemo, mollitia?
+</div>
+</div>
+
+<!-- Admin Panel Body Container End -->
 
 </div>
 </center>

@@ -38,7 +38,7 @@ body {
 /* Admin Panel Container Start */
 
 .admin_panel_container {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     max-width: 1400px;
 }
 
@@ -47,7 +47,7 @@ body {
 /* Admin Panel Main Container Start */
 
 .admin_panel_main_container {
-    /* border: 1px solid blue; */
+    border: 1px solid blue;
 }
 
 /* Admin Panel Main Container End */
@@ -55,14 +55,14 @@ body {
 /* Admin Panel Header Container Start */
 
 .admin_panel_header_container {
-    /* border: 1px solid black; */
+    border: 1px solid black;
     width: 100%;
     margin: 5px 0px;
     padding-bottom: 5px;
     box-shadow: 0 8px 7px -10px black;
 }
 .admin_panel_header_left_container {
-    /* border: 1px solid royalblue; */
+    border: 1px solid royalblue;
     float: left;
     margin-left: 20px;
     display: flex;
@@ -71,7 +71,7 @@ body {
 
 
 .admin_panel_header_right_container {
-    /* border: 1px solid royalblue; */
+    border: 1px solid royalblue;
     float: right;
     display: flex;
     align-items: center;
@@ -84,7 +84,7 @@ body {
 }
 
 .user_db_container {
-    /* border: 1px solid green; */
+    border: 1px solid green;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -97,7 +97,7 @@ body {
 }
 .user_db_container_arrow {
     padding: 0px 10px;
-    /* border: 1px solid palevioletred; */
+    border: 1px solid palevioletred;
     color: #808080;
 }
 .admin_panel_header_icons {
@@ -148,6 +148,44 @@ body {
 
 /* Admin Panel Header Container End */   
 
+/* Admin Panel Body Container Start */
+
+.admin_panel_body_container {
+    border: 1px solid red;
+    display: flex;
+    background-color: #e4e4e4;
+    margin: 10px 0px;
+}
+
+.admin_panel_body_navbar_container {
+    flex: 20%;
+    padding: 5px;
+    margin: 5px 5px 5px 0px;
+    display: none;
+    border: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #1792E9;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  
+}
+.admin_panel_body_content_container {
+    flex: 100%;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+    border: 0px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+ 
+}
+
+.hamburger_close_icon {
+    display: none;
+}
+
+/* Admin Panel Body Container End */
 
 /* Media Query Start */
 
@@ -165,6 +203,66 @@ body {
     .profile_and_logout_container {
         right: 15%;
     }
+}
+
+@media only screen and (max-width: 1200px) {
+    .admin_panel_body_navbar_container {
+        flex: 25%;
+    }
+    .admin_panel_body_content_container {
+        flex: 75%;
+    }
+    
+}
+
+@media only screen and (max-width: 1000px) {
+    .admin_panel_body_navbar_container {
+        flex: 30%;
+    }
+    .admin_panel_body_content_container {
+        flex: 70%;
+    }
+    
+}
+
+@media only screen and (max-width: 800px) {
+    .admin_panel_body_navbar_container {
+        flex: 35%;
+    }
+    .admin_panel_body_content_container {
+        flex: 65%;
+    }
+    
+}
+
+@media only screen and (max-width: 700px) {
+    .admin_panel_body_navbar_container {
+        flex: 40%;
+    }
+    .admin_panel_body_content_container {
+        flex: 60%;
+    }
+    
+}
+
+@media only screen and (max-width: 600px) {
+    .admin_panel_body_navbar_container {
+        flex: 45%;
+    }
+    .admin_panel_body_content_container {
+        flex:55%;
+    }
+    
+}
+
+@media only screen and (max-width: 500px) {
+    .admin_panel_body_navbar_container {
+        flex: 50%;
+    }
+    .admin_panel_body_content_container {
+        flex:50%;
+    }
+    
 }
 
 /* Media Query End */
