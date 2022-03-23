@@ -129,7 +129,7 @@ body {
     top: 65px;
     right: 1%;
     border: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: none;
@@ -168,11 +168,13 @@ body {
     background-color: #1792E9;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   
+  
 }
 .admin_panel_body_content_container {
+    width: 100%;
     flex: 100%;
     border: 1px solid black;
-    padding: 5px;
+    padding: 10px;
     margin: 5px;
     border: 0px;
     border-radius: 10px;
@@ -185,7 +187,28 @@ body {
     display: none;
 }
 
+
 /* Admin Panel Body Container End */
+
+/* Admin Panel Body's Details Table Start */
+
+.admin_panel_details_table {
+    text-align: left;
+    border: 1px solid red;
+    border-collapse: collapse;
+    width: 100%;
+    
+}
+.admin_panel_details_table tr, .admin_panel_details_table td, .admin_panel_details_table th {
+    border: 1px solid red;
+    padding: 5px;
+}
+.admin_panel_details_table_container {
+    overflow-x: auto;
+}
+
+/* Admin Panel Body's Details Table End */
+
 
 /* Media Query Start */
 

@@ -77,7 +77,66 @@
 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quas labore maxime fugit nostrum cumque dolores qui sequi? Corporis reiciendis facilis facere similique velit quis, voluptas fugit tenetur inventore fugiat veniam repellendus repudiandae provident esse officiis amet ab error neque dolorem quae eligendi. Similique doloremque repudiandae, enim corrupti, explicabo numquam dolor ullam incidunt ad vitae odio adipisci ab sequi nostrum modi laboriosam delectus, eaque cupiditate tenetur fugit! Accusamus ipsa voluptate nisi cupiditate ex culpa veniam illo autem, iure sit minus quisquam optio repellat facere libero dicta! Porro, enim. Blanditiis sed tenetur minima reiciendis quidem mollitia repellendus voluptate molestiae, harum repudiandae.
 </div>
 <div class="admin_panel_body_content_container">
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt delectus laborum corporis mollitia, in blanditiis repudiandae nulla non obcaecati veritatis, vero nesciunt eveniet. Rem assumenda tenetur labore molestiae ipsam, eligendi magni voluptatem sunt dolores porro? Suscipit modi optio eius necessitatibus non id enim ipsum doloremque, sequi aut quos, cupiditate numquam quaerat sunt voluptatem accusantium repellendus praesentium explicabo impedit corrupti ipsa reiciendis voluptates possimus adipisci? Consectetur culpa exercitationem provident quo animi ducimus, assumenda unde impedit eaque labore officia nemo, natus atque commodi. Eos doloremque dolore error, fugit aperiam commodi ratione quis asperiores maiores quibusdam dolor, repellat, repellendus sit similique? Nemo, mollitia?
+<div class="admin_panel_details_table_container">
+<table class="admin_panel_details_table">
+    <tr>
+        <th>USER ID</th>
+        <th>F.NAME</th>
+        <th>L.NAME</th>
+        <th>EMAIL</th>
+        <th>PASSWORD</th>
+        <th>FULLNAME</th>
+        <th>STREET</th>
+        <th>CITY</th>
+        <th>ZIP</th>
+        <th>PH.NUMBER</th>
+        <th>COUNTRY</th>
+        <th>VERIFIED USER?</th>
+    </tr>
+    <tr>
+        <td>1.</td>
+        <td>Om</td>
+        <td>Prakash</td>
+        <td>xyz@gmail.com</td>
+        <td>Prakash123</td>
+        <td>Om Prakash</td>
+        <td>Prasana colony 3rd street</td>
+        <td>Madurai</td>
+        <td>625012</td>
+        <td>9095362323</td>
+        <td>India</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>1.</td>
+        <td>Om</td>
+        <td>Prakash</td>
+        <td>xyz@gmail.com</td>
+        <td>Prakash123</td>
+        <td>Om Prakash</td>
+        <td>Prasana colony 3rd street</td>
+        <td>Madurai</td>
+        <td>625012</td>
+        <td>9095362323</td>
+        <td>India</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>1.</td>
+        <td>Om</td>
+        <td>Prakash</td>
+        <td>xyz@gmail.com</td>
+        <td>Prakash123</td>
+        <td>Om Prakash</td>
+        <td>Prasana colony 3rd street</td>
+        <td>Madurai</td>
+        <td>625012</td>
+        <td>9095362323</td>
+        <td>India</td>
+        <td>Yes</td>
+    </tr>
+</table>
+</div>
 </div>
 </div>
 

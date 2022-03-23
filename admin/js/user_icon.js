@@ -18,11 +18,13 @@ document.getElementsByClassName("user_db_container")[0].addEventListener("click"
 
 document.getElementsByClassName("admin_panel_header_icons")[0].addEventListener("click", function() {
 var navbar_section = document.getElementsByClassName("admin_panel_body_navbar_container")[0];
-var content_section = document.getElementsByClassName("admin_panel_body_navbar_container")[0];
+var content_section = document.getElementsByClassName("admin_panel_body_content_container")[0];
 if(navbar_section.style.display == "flex") {
     navbar_section.style.display = "none";
     content_section.style.flex = "100%";
     navbar_section.style.flex = "0%";
+    content_section.style.width = "100%";
+  
     document.getElementsByClassName("hamburger_open_icon")[0].style.display ="block";
     document.getElementsByClassName("hamburger_close_icon")[0].style.display ="none";
   
@@ -30,6 +32,8 @@ if(navbar_section.style.display == "flex") {
     navbar_section.style.display = "flex";
     content_section.style.flex = "80%";
     navbar_section.style.flex = "20%";
+    content_section.style.width = "70%";
+   
     document.getElementsByClassName("hamburger_open_icon")[0].style.display ="none";
     document.getElementsByClassName("hamburger_close_icon")[0].style.display ="block";
 }
