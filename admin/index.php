@@ -28,7 +28,15 @@
 <!-- Admin Panel Header Container Start -->
 
 <div class="admin_panel_header_container">
-fgfd
+
+<div class="admin_panel_header_left_container">
+<button type="button"><i class="fa fa-bars"></i></button>
+<h1>Shopssy</h1>
+</div>
+<div class="admin_panel_header_right_container">
+
+</div>
+
 </div>
 
 <!-- Admin Panel Header Container End -->
