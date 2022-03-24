@@ -77,6 +77,30 @@
 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quas labore maxime fugit nostrum cumque dolores qui sequi? Corporis reiciendis facilis facere similique velit quis, voluptas fugit tenetur inventore fugiat veniam repellendus repudiandae provident esse officiis amet ab error neque dolorem quae eligendi. Similique doloremque repudiandae, enim corrupti, explicabo numquam dolor ullam incidunt ad vitae odio adipisci ab sequi nostrum modi laboriosam delectus, eaque cupiditate tenetur fugit! Accusamus ipsa voluptate nisi cupiditate ex culpa veniam illo autem, iure sit minus quisquam optio repellat facere libero dicta! Porro, enim. Blanditiis sed tenetur minima reiciendis quidem mollitia repellendus voluptate molestiae, harum repudiandae.
 </div>
 <div class="admin_panel_body_content_container">
+
+<!-- Table Name and Other Details Display Container Start -->
+
+<div class="table_name_and_other_details_display_container">
+
+<div class="table_name_and_other_details_display_containers_inner_left_container">
+    <h2>Order</h2>
+    <p>28 Orders Found</p>
+</div>
+
+<div class="table_name_and_other_details_display_containers_inner_right_container">
+
+<form action="">
+    <input type="search" placeholder="Search Details">
+    <button type="submit">Search</button>
+</form>
+
+</div>
+
+</div>
+
+<!-- Table Name and Other Details Display Container End -->
+
+
 <div class="admin_panel_details_table_container">
 <table class="admin_panel_details_table">
     <tr>
@@ -92,6 +116,7 @@ Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quas labore max
         <th>PH.NUMBER</th>
         <th>COUNTRY</th>
         <th>VERIFIED USER?</th>
+        <th>ACTION</th>
     </tr>
     <tr>
         <td>1.</td>
@@ -106,6 +131,7 @@ Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quas labore max
         <td>9095362323</td>
         <td>India</td>
         <td>Yes</td>
+        <td><button title="Edit" class="edit_button_of_table"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table"><i class="fa fa-trash-o"></i></button></td>
     </tr>
     <tr>
         <td>1.</td>
@@ -120,6 +146,7 @@ Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quas labore max
         <td>9095362323</td>
         <td>India</td>
         <td>Yes</td>
+        <td><button title="Edit" class="edit_button_of_table"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table"><i class="fa fa-trash-o"></i></button></td>
     </tr>
     <tr>
         <td>1.</td>
@@ -134,6 +161,7 @@ Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quas labore max
         <td>9095362323</td>
         <td>India</td>
         <td>Yes</td>
+        <td><button title="Edit" class="edit_button_of_table"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table"><i class="fa fa-trash-o"></i></button></td>
     </tr>
 </table>
 </div>
