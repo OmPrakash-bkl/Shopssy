@@ -86,9 +86,122 @@
 <div class="hamburger_main_container">
 <h3>Prakashz</h3>
 <p>(Admin)</p>
-
 </div>
 <!-- Hamburger Main Container End -->
+
+<!-- Hamburger Link Section Container Start -->
+<div class="hamburger_link_section_container">
+
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container">
+  <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-eye"></i> View Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container">
+  <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-eye"></i> View Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container">
+  <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-eye"></i> View Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container">
+  <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-eye"></i> View Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container">
+  <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-eye"></i> View Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container">
+  <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-eye"></i> View Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+</div>
+<!-- Hamburger Link Section Container End -->
 
 </div>
 </div>
