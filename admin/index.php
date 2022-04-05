@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="./css/admin_style.css">
 
 </head>
-<body>
+<body onresize="func()">
 
 <!-- Admin Panel Container Start -->
 

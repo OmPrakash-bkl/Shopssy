@@ -16,9 +16,9 @@ document.getElementsByClassName("user_db_container")[0].addEventListener("click"
 
 /* Hamburger Section Start */
 
-document.getElementsByClassName("admin_panel_header_icons")[0].addEventListener("click", function() {
 var navbar_section = document.getElementsByClassName("admin_panel_body_navbar_container")[0];
 var content_section = document.getElementsByClassName("admin_panel_body_content_container")[0];
+document.getElementsByClassName("admin_panel_header_icons")[0].addEventListener("click", function() {
 if(navbar_section.style.display == "flex") {
     navbar_section.style.display = "none";
     content_section.style.flex = "100%";
@@ -30,14 +30,26 @@ if(navbar_section.style.display == "flex") {
   
 }else {
     navbar_section.style.display = "flex";
-    content_section.style.flex = "80%";
-    navbar_section.style.flex = "20%";
+    content_section.style.flex = "84%";
+    navbar_section.style.flex = "16%";
     content_section.style.width = "70%";
    
     document.getElementsByClassName("hamburger_open_icon")[0].style.display ="none";
     document.getElementsByClassName("hamburger_close_icon")[0].style.display ="block";
 }
 });
+
+
+
+function func() {
+if(1230 > window.innerWidth) {
+content_section.style.flex = "81%";
+navbar_section.style.flex = "19%";
+} else {
+    content_section.style.flex = "85%";
+    navbar_section.style.flex = "15%";
+}
+}
 
 /* Hamburger Section End */
 

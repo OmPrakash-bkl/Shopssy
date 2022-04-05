@@ -433,9 +433,11 @@ margin: 5px;
         flex: 70%;
     }
     .admin_panel_body_navbar_container {
-        flex: 0%;
+        flex: 20%;
+        height: 100%;
+        overflow-y: scroll;
         position: absolute;
-        width: 230px;
+        width: 200px;
     }
 }
 
