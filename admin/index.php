@@ -38,7 +38,7 @@
 </div>
 </div>
 <div class="admin_panel_header_right_container">
-<div>
+<div><span class="admin_panel_header_new_notify_dot"><i class="fa fa-circle"></i></span>
 <button type="button" class="admin_panel_header_icons admin_panel_header_bell_icon"><i class="fa fa-bell"></i></button>
 </div>
 <div class="user_db_container">

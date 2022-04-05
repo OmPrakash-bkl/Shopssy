@@ -99,6 +99,16 @@ body {
     align-items: center;
     margin-right: 20px;
 }
+.admin_panel_header_new_notify_dot {
+    display: inline-block;
+    font-size: 8px;
+    border: 0px;
+    border-radius: 50%;
+    color: #FC0D1B;
+    position: absolute;
+    margin-left: 25px;
+    top: 20px;
+}
 .admin_panel_header_container::after {
     content: "";
     clear: both;
