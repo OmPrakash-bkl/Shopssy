@@ -93,12 +93,12 @@
 <div class="hamburger_link_section_container">
 
 <div class="hamburger_link_section_inner_container">
-  <div class="hamburger_link_section_inner_heading_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(1)">
   <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
-  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow1"></i></span>
   </div>
 
-  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container1">
   <div class="hamburger_link_section_inner_hidden_floating_container">
   <button><i class="fa fa-eye"></i> View Users</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
@@ -111,12 +111,12 @@
 </div>
 
 <div class="hamburger_link_section_inner_container">
-  <div class="hamburger_link_section_inner_heading_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(2)">
   <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
-  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow2"></i></span>
   </div>
 
-  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container2">
   <div class="hamburger_link_section_inner_hidden_floating_container">
   <button><i class="fa fa-eye"></i> View Users</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
@@ -129,12 +129,12 @@
 </div>
 
 <div class="hamburger_link_section_inner_container">
-  <div class="hamburger_link_section_inner_heading_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(3)">
   <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
-  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow3"></i></span>
   </div>
 
-  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container3">
   <div class="hamburger_link_section_inner_hidden_floating_container">
   <button><i class="fa fa-eye"></i> View Users</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
@@ -147,12 +147,12 @@
 </div>
 
 <div class="hamburger_link_section_inner_container">
-  <div class="hamburger_link_section_inner_heading_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(4)">
   <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
-  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow4"></i></span>
   </div>
 
-  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container4">
   <div class="hamburger_link_section_inner_hidden_floating_container">
   <button><i class="fa fa-eye"></i> View Users</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
@@ -165,12 +165,12 @@
 </div>
 
 <div class="hamburger_link_section_inner_container">
-  <div class="hamburger_link_section_inner_heading_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(5)">
   <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
-  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow5"></i></span>
   </div>
 
-  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container5">
   <div class="hamburger_link_section_inner_hidden_floating_container">
   <button><i class="fa fa-eye"></i> View Users</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
@@ -183,12 +183,12 @@
 </div>
 
 <div class="hamburger_link_section_inner_container">
-  <div class="hamburger_link_section_inner_heading_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(6)">
   <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
-  <span class="heading_arrow"><i class="fa fa-chevron-down"></i></span>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow6"></i></span>
   </div>
 
-  <div class="hamburger_link_section_inner_hidden_container">
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container6">
   <div class="hamburger_link_section_inner_hidden_floating_container">
   <button><i class="fa fa-eye"></i> View Users</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
@@ -304,5 +304,6 @@
 
 <!-- Admin Panel Container End -->
 <script src="./js/user_icon.js"></script>
+<script src="./js/hamburger_funcs.js"></script>
 </body>
 </html>
