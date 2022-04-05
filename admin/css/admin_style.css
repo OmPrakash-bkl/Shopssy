@@ -262,7 +262,6 @@ body {
     width: 100%;
 }
 .industry_name_container {
-  
     border: 0px;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
@@ -271,11 +270,15 @@ body {
     color: white;
     font-size: 20px;
     background-color: #2E93E9;
-    
+    display: none;
 }
 .hamburger_main_container {
-    
+    padding: 5px 0px;
+    background-color: #F3F3F3;
 }
+.hamburger_main_container > h3 {
+    font-size: 30px;
+ }
 
 
 /* Admin Panel Body Container End */
@@ -436,6 +439,10 @@ display: inline-block;
 border: 1px solid black;
 width: 100%;
 margin: 4px auto;
+}
+
+.industry_name_container {
+    display: block;
 }
 
 }
