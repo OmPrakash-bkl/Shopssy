@@ -74,7 +74,22 @@
 
 <div class="admin_panel_body_container">
 <div class="admin_panel_body_navbar_container">
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta quas labore maxime fugit nostrum cumque dolores qui sequi? Corporis reiciendis facilis facere similique velit quis, voluptas fugit tenetur inventore fugiat veniam repellendus repudiandae provident esse officiis amet ab error neque dolorem quae eligendi. Similique doloremque repudiandae, enim corrupti, explicabo numquam dolor ullam incidunt ad vitae odio adipisci ab sequi nostrum modi laboriosam delectus, eaque cupiditate tenetur fugit! Accusamus ipsa voluptate nisi cupiditate ex culpa veniam illo autem, iure sit minus quisquam optio repellat facere libero dicta! Porro, enim. Blanditiis sed tenetur minima reiciendis quidem mollitia repellendus voluptate molestiae, harum repudiandae.
+<div class="hamburger_container_of_admin_panel">
+    
+    <!-- Industry(shopssy) name container start -->
+<div class="industry_name_container">
+    <h1>Shopssy</h1>
+</div>
+    <!-- Industry(shopssy) name container end -->
+
+<!-- Hamburger Main Container Start -->
+<div class="hamburger_main_container">
+<p>dsfsffsfsfff</p>
+
+</div>
+<!-- Hamburger Main Container End -->
+
+</div>
 </div>
 <div class="admin_panel_body_content_container">
 

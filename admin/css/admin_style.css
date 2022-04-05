@@ -256,6 +256,26 @@ body {
 .hamburger_close_icon {
     display: none;
 }
+.hamburger_container_of_admin_panel {
+    display: block;
+    /* border: 1px solid green; */
+    width: 100%;
+}
+.industry_name_container {
+  
+    border: 0px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    color: white;
+    font-size: 20px;
+    background-color: #2E93E9;
+    
+}
+.hamburger_main_container {
+    
+}
 
 
 /* Admin Panel Body Container End */
