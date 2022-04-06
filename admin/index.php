@@ -16,6 +16,12 @@
 </head>
 <body onresize="func()">
 
+<!-- Pre Loader Container Start -->
+
+
+
+<!-- Pre Loader Container End -->
+
 <!-- Admin Panel Container Start -->
 
 <center>

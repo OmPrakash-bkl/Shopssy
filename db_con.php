@@ -16,6 +16,7 @@ if(!$con) {
     die("Connection Failed :" . mysqli_connect_error());
 }
 
+
 // Connect Error Checker Fun End
 
 // Connect Functionality End
