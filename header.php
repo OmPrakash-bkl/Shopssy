@@ -977,10 +977,8 @@ if(isset($_POST['share_list_request'])) {
                        <td colspan="2">--------------------</td>
                    </tr>
                    <tr>
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                     <td><button><i class="fas fa-user-plus"></i></button></td>
                     <td><a href="./register.php"><button>Register</button></a></td>
-                    </form>
                    </tr>
 
                    <?php

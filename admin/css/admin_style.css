@@ -300,6 +300,10 @@ body {
 float: left;
 }
 
+.hamburger_link_section_inner_heading_container > .heading_text:hover {
+color: rgb(69, 69, 69);    
+}
+
 .hamburger_link_section_inner_heading_container > .heading_arrow {
 float: right;
 margin: 5px;
@@ -326,6 +330,9 @@ margin: 5px;
     border: none;
     background-color: transparent;
     cursor: pointer;
+}
+.hamburger_link_section_inner_hidden_floating_container > button:hover  {
+   color: rgb(49, 49, 49);
 }
 .hamburger_link_section_inner_hidden_floating_container > span {
     float: right;
