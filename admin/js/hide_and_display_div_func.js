@@ -6,6 +6,16 @@ function display_preLoader() {
 function unDisplay_preLoader() {
     document.getElementsByClassName("pre_loader_container")[0].style.display = "none";
 }
+let display_blocked_array = new Set();
+function display_blocked_containers(display_container_values)  {
+    display_blocked_array.add(display_container_values);
+}
+
+function undisplay_displayed_blocked_containers() {
+    display_blocked_array.forEach(function(item) {
+        document.getElementsByClassName(`${item}`)[0].style.display = "none";
+    })
+}
 
 function make_user_details(method, url) {
 
@@ -34,7 +44,6 @@ display_preLoader();
 responseObj.then((sucvalue) => {
     unDisplay_preLoader();
     let resultData = JSON.parse(sucvalue);
-    console.log(resultData);
     let table_datas = `<tr><th>S.NO</th>
     <th>USER ID</th>
     <th>F.NAME</th>
@@ -51,7 +60,7 @@ responseObj.then((sucvalue) => {
     <th>ACTION</th></tr>`;
     for(let i = 0; i < resultData.length; i++) {
         var isVerifiedUser = "";
-        console.log(resultData[i].r_status);
+
         if(resultData[i].r_status == 0) {
             isVerifiedUser = "No";
         } else {
@@ -75,9 +84,20 @@ responseObj.then((sucvalue) => {
         </tr>`
     }
     document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+
+    undisplay_displayed_blocked_containers(); 
     document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+    display_blocked_containers("admin_panel_details_table_container"); 
     document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+    display_blocked_containers("table_name_and_other_details_display_container"); 
     }).catch((rejvalue) => {
         console.log(rejvalue);
     }) 
 }
+
+function add_users() {
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("add_user_form_container")[0].style.display = "block";
+    display_blocked_containers("add_user_form_container"); 
+}
+

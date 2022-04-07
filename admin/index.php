@@ -114,7 +114,7 @@
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <button onclick="add_users()"><i class='fas fa-user-plus'></i> Add Users</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -241,12 +241,24 @@
 
 <!-- Table Name and Other Details Display Container End -->
 
-
 <div class="admin_panel_details_table_container">
 <table class="admin_panel_details_table">
-    
+   
 </table>
 </div>
+
+<!-- Add User Form Container Start -->
+
+<div class="add_user_form_container">
+<form action="">
+  <input type="text"> <br>
+  <input type="password"> <br>
+  <input type="submit" value="Submit">
+</form>
+</div>
+
+<!-- Add User Form Container End -->
+
 </div>
 
 </div>

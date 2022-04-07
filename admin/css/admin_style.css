@@ -250,6 +250,7 @@ body {
     color: white;
     height: 30px;
     padding: 5px 10px;
+    cursor: pointer;
 }
 .table_name_and_other_details_display_container::after {
     content: "";
@@ -416,6 +417,15 @@ margin: 5px;
 }
 
 /* Admin Panel Body's Details Table End */
+
+/* Admin Panel Adding User Container Start */
+
+.add_user_form_container {
+    border: 1px solid green;
+    display: none;
+}
+
+/* Admin Panel Adding User Container End */
 
 
 /* Media Query Start */
