@@ -250,11 +250,30 @@
 <!-- Add User Form Container Start -->
 
 <div class="add_user_form_container">
-<form action="">
-  <input type="text"> <br>
-  <input type="password"> <br>
-  <input type="submit" value="Submit">
+<center>
+    <h1>Add User</h1>
+</center>
+
+<div class="add_user_step1_container">
+<form action="" class="add_user_form">
+  <label for="fir_name">First Name</label> <br>
+  <input type="text" id="fir_name"> <br>
+  <label for="las_name">Last Name</label> <br>
+  <input type="text" id="las_name"> <br>
+  <label for="user_email">Email</label> <br>
+  <input type="email" id="user_email"> <br>
+  <label for="user_pass">Password</label> <br>
+  <input type="password" id="user_pass"> <br>
+  <label >Is Verified User?</label> <br>
+  <input type="radio" name="verified_user" id="yes_verified_user"> <label for="yes_verified_user">Yes</label>
+  <input type="radio" name="verified_user" id="no_not_verified_user"> <label for="no_not_verified_user">No</label> <br>
+ <center>
+ <button type="submit" class="add_user_next_btn">Next</button>
+ </center>
 </form>
+</div>
+
+
 </div>
 
 <!-- Add User Form Container End -->

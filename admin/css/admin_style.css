@@ -422,7 +422,44 @@ margin: 5px;
 
 .add_user_form_container {
     border: 1px solid green;
-    display: none;
+}
+.add_user_step1_container {
+    width: 60%;
+    text-align: left;
+    border: 1px solid red;
+}
+.add_user_form > label {
+    display: inline-block;
+    font-size: 15px;
+    color: rgb(109, 109, 109);
+    margin: 5px 20px 5px 0px;
+}
+.add_user_form > input[type="text"], .add_user_form > input[type="email"], .add_user_form > input[type="password"] {
+width: 100%;
+border: 1px solid gainsboro;
+padding: 0px 10px;
+color: rgb(109, 109, 109);
+height: 30px;
+border-radius: 5px;
+margin-bottom: 10px;
+}
+
+
+.add_user_next_btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    background-color: #2D9AE8;
+    font-size: 15px;
+    border: 0px;
+    border-radius: 10px;
+}
+
+.add_user_next_btn:hover {
+    background-color: #127cc7;
+
 }
 
 /* Admin Panel Adding User Container End */
@@ -502,6 +539,9 @@ margin: 5px;
     .admin_panel_body_content_container {
         flex:55%;
     }
+    .add_user_step1_container {
+        width: 80%;
+    }
     
 }
 
@@ -538,6 +578,10 @@ margin: 4px auto;
 
 .industry_name_container {
     display: block;
+}
+
+.add_user_step1_container {
+    width: 90%;
 }
 
 }
