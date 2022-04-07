@@ -33,7 +33,8 @@ display_preLoader();
 
 responseObj.then((sucvalue) => {
     unDisplay_preLoader();
-    console.log(sucvalue);
+    let resultData = JSON.parse(sucvalue);
+    console.log(resultData);
     document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
     document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
     }).catch((rejvalue) => {
