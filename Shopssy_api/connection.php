@@ -8,11 +8,11 @@ $password = '';
 $db = 'shopssy_onlineshop';
 
 
-$con = mysqli_connect($serverName, $userName, $password, $db);
+$conn = mysqli_connect($serverName, $userName, $password, $db);
 
 // Connect Error Checker Fun Start
 
-if(!$con) {
+if(!$conn) {
     die("Connection Failed :" . mysqli_connect_error());
 }
 
