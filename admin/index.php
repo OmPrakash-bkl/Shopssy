@@ -256,19 +256,24 @@
 
 <div class="add_user_step1_container">
 <form action="" class="add_user_form" method="POST">
-  <label for="fir_name">First Name</label> <br>
-  <input type="text" id="fir_name"> <br>
-  <label for="las_name">Last Name</label> <br>
-  <input type="text" id="las_name"> <br>
-  <label for="user_email">Email</label> <br>
-  <input type="email" id="user_email"> <br>
-  <label for="user_pass">Password</label> <br>
-  <input type="password" id="user_pass"> <br>
-  <label >Is Verified User?</label> <br>
-  <input type="radio" name="verified_user" id="yes_verified_user"> <label for="yes_verified_user">Yes</label>
-  <input type="radio" name="verified_user" id="no_not_verified_user"> <label for="no_not_verified_user">No</label> <br>
+  <label for="fir_name1">First Name <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="fir_name1" autofocus> <br>
+  <p class="add_user_error_message_place add_user_fname_error_message_place"></p>
+  <label for="las_name1">Last Name <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="las_name1"> <br>
+  <p class="add_user_error_message_place add_user_lname_error_message_place"></p>
+  <label for="user_email1">Email <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="email" id="user_email1"> <br>
+  <p class="add_user_error_message_place add_user_email_error_message_place"></p>
+  <label for="user_pass1">Password <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="password" id="user_pass1"> <br>
+  <p class="add_user_error_message_place add_user_password_error_message_place"></p>
+  <label >Is Verified User? <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="radio" name="verified_user" id="yes_verified_user" value="Yes" checked> <label for="yes_verified_user">Yes</label>
+  <input type="radio" name="verified_user" id="no_not_verified_user" value="No"> <label for="no_not_verified_user">No</label>
+  <p class="add_user_error_message_place add_user_radio_error_message_place"></p>
  <center>
- <button type="button" class="add_user_next_btn">Next</button>
+ <button type="submit" class="add_user_next_btn">Next</button>
  </center>
 </form>
 </div>

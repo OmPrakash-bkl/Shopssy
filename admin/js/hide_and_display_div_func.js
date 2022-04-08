@@ -101,3 +101,58 @@ function add_users() {
     display_blocked_containers("add_user_form_container"); 
 }
 
+document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click", function(event) {
+    event.preventDefault();
+    email_type = "invalid_email";
+    let first_name = document.getElementById("fir_name1").value;
+    let last_name = document.getElementById("las_name1").value;
+    let user_mail = document.getElementById("user_email1").value;
+    let user_password = document.getElementById("user_pass1").value;
+    function remove_slashes(inp_data) {
+        return inp_data.replace(/\/+$/g, '')
+    }
+    function remove_special_chars(inp_data) {
+        return inp_data.replace(/[^a-zA-Z0-9@. ]/g, "");
+    }
+    first_name = remove_slashes(first_name);
+    last_name = remove_slashes(last_name);
+    user_mail = remove_slashes(user_mail);
+    user_password = remove_slashes(user_password);
+    first_name = remove_special_chars(first_name);
+    last_name = remove_special_chars(last_name);
+    user_mail = remove_special_chars(user_mail);
+    user_password = remove_special_chars(user_password);
+
+    let yes_radio_btn = document.querySelector('input[name="verified_user"]:checked').value;
+    if(first_name == "") {
+        document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "FirstName is required!";
+    } else {
+        document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "";
+    }
+     if(last_name == "") {
+        document.getElementsByClassName("add_user_lname_error_message_place")[0].innerText = "LastName is required!";
+    } else {
+        document.getElementsByClassName("add_user_lname_error_message_place")[0].innerText = "";
+    }
+    if(user_mail == "") {
+        document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "Email is required!";
+    } else {
+        document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "";
+    }
+    if(user_password == "") {
+        document.getElementsByClassName("add_user_password_error_message_place")[0].innerText = "Password is required!";
+    } else {
+        document.getElementsByClassName("add_user_password_error_message_place")[0].innerText = "";
+    }
+    if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(user_mail)) && !(user_mail =="")){
+        document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "Invalid Email Address!";
+    } else {
+        email_type = "valid_email";
+    }
+    console.log(first_name, last_name, user_mail, user_password);
+
+    if(!(first_name == "") && !(last_name == "") && !(user_mail == "") && !(user_password == "") && email_type == "valid_email") {
+        
+    }
+
+})

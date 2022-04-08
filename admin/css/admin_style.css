@@ -460,7 +460,10 @@ margin-bottom: 10px;
 
 .add_user_next_btn:hover {
     background-color: #127cc7;
+}
 
+.add_user_error_message_place, .add_user_required_field_asterisk_symbol {
+    color: red;
 }
 
 /* Admin Panel Adding User Container End */
