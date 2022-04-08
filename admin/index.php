@@ -255,7 +255,7 @@
 </center>
 
 <div class="add_user_step1_container">
-<form action="" class="add_user_form">
+<form action="" class="add_user_form" method="POST">
   <label for="fir_name">First Name</label> <br>
   <input type="text" id="fir_name"> <br>
   <label for="las_name">Last Name</label> <br>
@@ -268,11 +268,16 @@
   <input type="radio" name="verified_user" id="yes_verified_user"> <label for="yes_verified_user">Yes</label>
   <input type="radio" name="verified_user" id="no_not_verified_user"> <label for="no_not_verified_user">No</label> <br>
  <center>
- <button type="submit" class="add_user_next_btn">Next</button>
+ <button type="button" class="add_user_next_btn">Next</button>
  </center>
 </form>
 </div>
 
+<div class="add_user_step2_container">
+<form action="">
+
+</form>
+</div>
 
 </div>
 
