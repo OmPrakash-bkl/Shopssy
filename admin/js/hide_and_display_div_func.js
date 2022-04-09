@@ -1,4 +1,4 @@
-
+/* PreLoader On and Off Section Start */
 function display_preLoader() {
     document.getElementsByClassName("pre_loader_container")[0].style.display = "block";
 }
@@ -6,6 +6,9 @@ function display_preLoader() {
 function unDisplay_preLoader() {
     document.getElementsByClassName("pre_loader_container")[0].style.display = "none";
 }
+/* PreLoader On and Off Section End */
+
+/* Display and Undisplay Container Section Start */
 let display_blocked_array = new Set();
 function display_blocked_containers(display_container_values)  {
     display_blocked_array.add(display_container_values);
@@ -16,7 +19,9 @@ function undisplay_displayed_blocked_containers() {
         document.getElementsByClassName(`${item}`)[0].style.display = "none";
     })
 }
+/* Display and Undisplay Container Section End */
 
+/* Request Sending and Response Getting Section Start */
 function make_user_details(method, url, sendingData) {
 
     let responseObj = new Promise((resolve, reject)=> {
@@ -40,9 +45,9 @@ function make_user_details(method, url, sendingData) {
 })
 return responseObj;
 }
+/* Request Sending and Response Getting Section End */
 
-
-
+/* Showing User List Table Container Section Start */
 function show_users() {
 let responseObj = make_user_details("GET", "../Shopssy_api/Users/get_users.php", "");
 display_preLoader();
@@ -100,13 +105,16 @@ responseObj.then((sucvalue) => {
         console.log(rejvalue);
     }) 
 }
+/* Showing User List Table Container Section End */
 
+/* Add User Form Section Start */
 function add_users() {
     undisplay_displayed_blocked_containers(); 
     document.getElementsByClassName("add_user_form_container")[0].style.display = "block";
     display_blocked_containers("add_user_form_container"); 
 }
-
+/* Add User Form Section End */
+/* Adding User Step1 Section Start */
 document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click", function(event) {
     event.preventDefault();
     email_type = "invalid_email";
@@ -166,7 +174,7 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
             if(resultData >= 1) {
                 document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "Email already exists!";
             } else {
-                
+
             }
         }).catch((errorData)=> {
             console.log(errorData);
@@ -175,3 +183,5 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
     }
 
 })
+
+/* Adding User Step1 Section End */
