@@ -169,19 +169,27 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
     } else {
         email_type = "valid_email";
     }
-    console.log(first_name, last_name, user_mail, user_password);
+   
 
     if((document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_user_lname_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_user_password_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_user_email_error_message_place")[0].innerText == "") && email_type == "valid_email") {
 
-        let emailCheckingRes = make_user_details("POST", "../Shopssy_api/Users/check_email.php", `user_email=${user_mail}`);
+        let emailCheckingRes = make_user_details("POST", "../Shopssy_api/Users/check_email_and_insert.php", `user_email=${user_mail}&command=checking`);
         display_preLoader();
         emailCheckingRes.then((resultData)=> {
-            console.log(resultData);
+           
             unDisplay_preLoader();
             if(resultData >= 1) {
                 document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "Email already exists!";
             } else {
-
+                display_preLoader();
+                let userInsertDatasRes = make_user_details("POST", "../Shopssy_api/Users/check_email_and_insert.php", `fname=${first_name}&lname=${last_name}&user_mail=${user_mail}&user_pass=${user_password}&valid_user=${yes_radio_btn}&command=insert`);
+               
+                userInsertDatasRes.then((goodResponse)=> {
+                    unDisplay_preLoader();
+                    console.log(goodResponse);
+                }).catch((badResponse)=> {
+                    console.log(badResponse);
+                })
             }
         }).catch((errorData)=> {
             console.log(errorData);
