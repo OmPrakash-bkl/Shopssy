@@ -1,3 +1,21 @@
+<!-- Unfulfilled Data Delection Section Start -->
+<script>
+  document.cookie = "U345R47IX="+localStorage.getItem('U345R47IX');
+</script>
+<?php
+include '../db_con.php';
+$user_dump_id = $_COOKIE['U345R47IX'];
+$account_data_check_query = "SELECT * FROM `account` WHERE `user_id` = $user_dump_id;";
+$account_data_check_result = mysqli_query($con, $account_data_check_query);
+$account_check_rows_count = mysqli_num_rows($account_data_check_result);
+
+if($account_check_rows_count == 0) {
+$delete_unfulfill_data_query = "DELETE FROM `register` WHERE `user_id` = $user_dump_id;";
+mysqli_query($con, $delete_unfulfill_data_query);
+}
+?>
+<!-- Unfulfilled Data Delection Section End -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
