@@ -17,12 +17,18 @@ function undisplay_displayed_blocked_containers() {
     })
 }
 
-function make_user_details(method, url) {
+function make_user_details(method, url, sendingData) {
 
     let responseObj = new Promise((resolve, reject)=> {
         const req = new XMLHttpRequest();
         req.open(method, url, true);
-        req.send();
+        if(method == "POST") {
+            req.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+            req.send(sendingData);
+        } else {
+            req.send();
+        }
+      
         req.onload = function() {
         if(this.readyState == 4 && req.status == 200) {
         resolve(req.responseText);
@@ -38,7 +44,7 @@ return responseObj;
 
 
 function show_users() {
-let responseObj = make_user_details("GET", "../Shopssy_api/Users/get_users.php");
+let responseObj = make_user_details("GET", "../Shopssy_api/Users/get_users.php", "");
 display_preLoader();
 
 responseObj.then((sucvalue) => {
@@ -152,6 +158,19 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
     console.log(first_name, last_name, user_mail, user_password);
 
     if(!(first_name == "") && !(last_name == "") && !(user_mail == "") && !(user_password == "") && email_type == "valid_email") {
+
+        let emailCheckingRes = make_user_details("POST", "../Shopssy_api/Users/check_email.php", `user_email=${user_mail}`);
+        display_preLoader();
+        emailCheckingRes.then((resultData)=> {
+            unDisplay_preLoader();
+            if(resultData >= 1) {
+                document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "Email already exists!";
+            } else {
+                
+            }
+        }).catch((errorData)=> {
+            console.log(errorData);
+        })
         
     }
 
