@@ -114,7 +114,9 @@ function add_users() {
     display_blocked_containers("add_user_form_container"); 
 }
 /* Add User Form Section End */
+
 /* Adding User Step1 Section Start */
+let user_reg_id = 0;
 document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click", function(event) {
     event.preventDefault();
     email_type = "invalid_email";
@@ -140,8 +142,8 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
     let yes_radio_btn = document.querySelector('input[name="verified_user"]:checked').value;
     if(first_name == "") {
         document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "FirstName is required!";
-    } else if(first_name.length <= 3) {
-        document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "FirstName length must be minimum 4 characters!";
+    } else if(first_name.length <= 2) {
+        document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "FirstName length must be minimum 3 characters!";
     } else {
         document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "";
     }
@@ -186,7 +188,7 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
                
                 userInsertDatasRes.then((goodResponse)=> {
                     unDisplay_preLoader();
-                    console.log(goodResponse);
+                    setUserId(goodResponse);
                 }).catch((badResponse)=> {
                     console.log(badResponse);
                 })
@@ -200,3 +202,11 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
 })
 
 /* Adding User Step1 Section End */
+
+/* Adding User Step2 Section Start */
+
+function setUserId(user_id) {
+    user_reg_id = user_id;
+    }
+
+/* Adding User Step2 Section End */
