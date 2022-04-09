@@ -1,17 +1,21 @@
 <!-- Unfulfilled Data Delection Section Start -->
 <script>
-  document.cookie = "U345R47IX="+localStorage.getItem('U345R47IX');
+  if(localStorage.getItem('U345R47IX')) {
+    document.cookie = "U345R47IX="+localStorage.getItem('U345R47IX');
+  }
 </script>
 <?php
-include '../db_con.php';
+if(isset($_COOKIE['U345R47IX'])) {
+  include '../db_con.php';
 $user_dump_id = $_COOKIE['U345R47IX'];
-$account_data_check_query = "SELECT * FROM `account` WHERE `user_id` = $user_dump_id;";
+$account_data_check_query = "SELECT * FROM `account` WHERE `user_id` = '$user_dump_id';";
 $account_data_check_result = mysqli_query($con, $account_data_check_query);
 $account_check_rows_count = mysqli_num_rows($account_data_check_result);
 
 if($account_check_rows_count == 0) {
 $delete_unfulfill_data_query = "DELETE FROM `register` WHERE `user_id` = $user_dump_id;";
 mysqli_query($con, $delete_unfulfill_data_query);
+}
 }
 ?>
 <!-- Unfulfilled Data Delection Section End -->
@@ -301,8 +305,32 @@ mysqli_query($con, $delete_unfulfill_data_query);
     <h1>Add User Form</h1>
 </center>
 <form action="" class="add_user_form" method="POST">
+<label for="street">Street <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="street" autofocus> <br>
+  <p class="add_user_error_message_place add_street_error_message_place"></p>
+  <label for="city">City <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="city" autofocus> <br>
+  <p class="add_user_error_message_place add_city_error_message_place"></p>
+  <label for="state">State <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="state" autofocus> <br>
+  <p class="add_user_error_message_place add_state_error_message_place"></p>
+  <label for="country">Country <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="country" autofocus> <br>
+  <p class="add_user_error_message_place add_country_error_message_place"></p>
+  <label for="zip">Postal/Zip <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="zip" autofocus> <br>
+  <p class="add_user_error_message_place add_zip_error_message_place"></p>
+  <label for="phone">Phone <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="phone" autofocus> <br>
+  <p class="add_user_error_message_place add_phone_error_message_place"></p>
+  <label>Address Type <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <input type="radio" name="add_type" id="default_add" value="default" checked> <label for="default_add">Default</label>
+  <input type="radio" name="add_type" id="secondary_add" value="secondary"> <label for="secondary_add">Secondary</label>
+  <p class="add_user_error_message_place add_user_add_radio_error_message_place"></p>
 <center>
   <button type="button" class="add_user_back_btn" onclick="showStep1Form()">Back</button>
+  <button type="button" class="add_user_submit_btn" onclick="insertAccountOfForm()">Submit</button>
+  <button type="button" class="add_user_cancel_btn" onclick="deleteDetailOfForm()">Cancel</button>
 </center>
 </form>
 </div>

@@ -429,6 +429,7 @@ margin: 5px;
     border: 1px solid red;
     display: none;
 }
+ 
 .add_user_form > label {
     display: inline-block;
     font-size: 15px;
@@ -446,9 +447,8 @@ margin-bottom: 10px;
 }
 
 
-.add_user_next_btn, .add_user_back_btn {
-    display: block;
-    margin: 10px auto;
+.add_user_next_btn, .add_user_back_btn, .add_user_submit_btn, .add_user_cancel_btn {
+    margin: 10px 5px;
     padding: 10px 20px;
     color: white;
     font-weight: bold;
@@ -458,9 +458,21 @@ margin-bottom: 10px;
     border-radius: 10px;
     cursor: pointer;
 }
+.add_user_submit_btn {
+    background-color: #4aaa4a;
+}
+.add_user_cancel_btn {
+    background-color: #d5342e;
+}
 
 .add_user_next_btn:hover, .add_user_back_btn:hover {
     background-color: #127cc7;
+}
+.add_user_submit_btn:hover {
+    background-color: #3f923f;
+}
+.add_user_cancel_btn:hover {
+    background-color: #c2302b;
 }
 
 .add_user_error_message_place, .add_user_required_field_asterisk_symbol {
@@ -544,7 +556,7 @@ margin-bottom: 10px;
     .admin_panel_body_content_container {
         flex:55%;
     }
-    .add_user_step1_container {
+    .add_user_step1_container, .add_user_step2_container {
         width: 80%;
     }
     
@@ -585,7 +597,7 @@ margin: 4px auto;
     display: block;
 }
 
-.add_user_step1_container {
+.add_user_step1_container, .add_user_step2_container {
     width: 90%;
 }
 

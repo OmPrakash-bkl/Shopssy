@@ -1,4 +1,5 @@
 /* PreLoader On and Off Section Start */
+
 function display_preLoader() {
     document.getElementsByClassName("pre_loader_container")[0].style.display = "block";
 }
@@ -25,6 +26,21 @@ undisplay_displayed_blocked_containers();
 document.getElementsByClassName("add_user_step1_container")[0].style.display="block";
 }
 /* Display and Undisplay Container Section End */
+
+/* Removing Unwanted Strings Section Start */
+function remove_slashes(inp_data) {
+    return inp_data.replace(/\/+$/g, '')
+}
+function remove_special_chars(inp_data) {
+    return inp_data.replace(/[^a-zA-Z0-9@. ]/g, "");
+}
+function remove_special_chars_for_add(inp_data) {
+    return inp_data.replace(/[^a-zA-Z0-9@./, ]/g, "");
+}
+function remove_special_chars_from_number(inp_data) {
+return inp_data.replace(/[^0-9]+$/, "");
+}
+/* Removing Unwanted Strings Section End */
 
 /* Request Sending and Response Getting Section Start */
 function make_user_details(method, url, sendingData) {
@@ -122,6 +138,8 @@ function add_users() {
 
 /* Adding User Step1 Section Start */
 let user_reg_id = 0;
+let first_name_of_account = "";
+let last_name_of_account = "";
 document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click", function(event) {
     event.preventDefault();
     email_type = "invalid_email";
@@ -129,12 +147,7 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
     let last_name = document.getElementById("las_name1").value;
     let user_mail = document.getElementById("user_email1").value;
     let user_password = document.getElementById("user_pass1").value;
-    function remove_slashes(inp_data) {
-        return inp_data.replace(/\/+$/g, '')
-    }
-    function remove_special_chars(inp_data) {
-        return inp_data.replace(/[^a-zA-Z0-9@. ]/g, "");
-    }
+    
     first_name = remove_slashes(first_name);
     last_name = remove_slashes(last_name);
     user_mail = remove_slashes(user_mail);
@@ -150,6 +163,7 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
     } else if(first_name.length <= 2) {
         document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "FirstName length must be minimum 3 characters!";
     } else {
+        first_name_of_account = first_name;
         document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "";
     }
      if(last_name == "") {
@@ -157,6 +171,7 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
     } else if(last_name.length <= 3) {
         document.getElementsByClassName("add_user_lname_error_message_place")[0].innerText = "LastName length must be minimum 4 characters!";
     } else {
+        last_name_of_account = last_name;
         document.getElementsByClassName("add_user_lname_error_message_place")[0].innerText = "";
     }
     if(user_mail == "") {
@@ -197,6 +212,7 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
                     undisplay_displayed_blocked_containers();
                     document.getElementsByClassName("add_user_step2_container")[0].style.display="block";
                     display_blocked_containers("add_user_step2_container"); 
+                  document.getElementById("fir_name1").value = document.getElementById("las_name1").value = document.getElementById("user_email1").value = document.getElementById("user_pass1").value = "";
 
                 }).catch((badResponse)=> {
                     console.log(badResponse);
@@ -217,7 +233,82 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
 function setUserId(user_id) {
     user_reg_id = user_id;
 localStorage.setItem("U345R47IX", user_reg_id);
-localStorage.getItem("U345R47IX");
+user_reg_id = localStorage.getItem("U345R47IX");
 }
+
+function insertAccountOfForm() {
+    let full_name = first_name_of_account+" "+last_name_of_account;
+    let street = document.getElementById("street").value;
+    let city = document.getElementById("city").value;
+    let state = document.getElementById("state").value;
+    let country = document.getElementById("country").value;
+    let zip = document.getElementById("zip").value;
+    let phone = document.getElementById("phone").value;
+    let dump_zip = document.getElementById("zip").value;
+    let dump_phone = document.getElementById("phone").value;
+    let add_type = document.querySelector('input[name="add_type"]:checked').value;
+    
+
+    city = remove_slashes(city);
+    state = remove_slashes(state);
+    country = remove_slashes(country);
+    city = remove_special_chars(city);
+    state = remove_special_chars(state);
+    country = remove_special_chars(country);
+    street = remove_special_chars_for_add(street);
+    zip = remove_special_chars_from_number(zip);
+    phone = remove_special_chars_from_number(phone);
+   
+    if(street == "") {
+        document.getElementsByClassName("add_street_error_message_place")[0].innerText = "Street is required!";
+    } else {
+        document.getElementsByClassName("add_street_error_message_place")[0].innerText = "";
+    }
+    if(state == "") {
+        document.getElementsByClassName("add_state_error_message_place")[0].innerText = "State is required!";
+    } else {
+        document.getElementsByClassName("add_state_error_message_place")[0].innerText = "";
+    }
+    if(city == "") {
+        document.getElementsByClassName("add_city_error_message_place")[0].innerText = "City is required!";
+    } else {
+        document.getElementsByClassName("add_city_error_message_place")[0].innerText = "";
+    }
+    if(country == "") {
+        document.getElementsByClassName("add_country_error_message_place")[0].innerText = "Country is required!";
+    } else {
+        document.getElementsByClassName("add_country_error_message_place")[0].innerText = "";
+    }
+    if(isNaN(dump_zip)) {
+        document.getElementsByClassName("add_zip_error_message_place")[0].innerText = "Give number as input!";
+    } else if(zip == "") {
+        document.getElementsByClassName("add_zip_error_message_place")[0].innerText = "Zip is required!";
+    } else {
+        document.getElementsByClassName("add_zip_error_message_place")[0].innerText = "";
+    }
+    
+    if(isNaN(dump_phone)) {
+        document.getElementsByClassName("add_phone_error_message_place")[0].innerText = "Give number as input!";
+    } else if(phone == "") {
+        document.getElementsByClassName("add_phone_error_message_place")[0].innerText = "Phone Number is required!";
+    } else {
+        document.getElementsByClassName("add_phone_error_message_place")[0].innerText = "";
+    }
+    if((document.getElementsByClassName("add_street_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_state_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_city_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_country_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_zip_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_phone_error_message_place")[0].innerText == "")) {
+        display_preLoader();
+        let insertAccountDataRes = make_user_details("POST", "../Shopssy_api/Users/check_email_and_insert.php", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&user_id=${user_reg_id}&command=insertIntoAccount`);
+        insertAccountDataRes.then((goodMsg)=> {
+            unDisplay_preLoader();
+           
+            document.getElementById("street").value = document.getElementById("city").value = document.getElementById("state").value = document.getElementById("country").value = document.getElementById("zip").value = document.getElementById("phone").value = "";
+            undisplay_displayed_blocked_containers();
+            alert("Inserted Successfully!")
+           
+        }).catch((badMsg)=> {
+            console.log(badMsg);
+        })
+    }
+}
+
 
 /* Adding User Step2 Section End */
