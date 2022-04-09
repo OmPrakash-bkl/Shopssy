@@ -250,11 +250,11 @@
 <!-- Add User Form Container Start -->
 
 <div class="add_user_form_container">
-<center>
-    <h1>Add User</h1>
-</center>
 
 <div class="add_user_step1_container">
+<center>
+    <h1>Add User Form</h1>
+</center>
 <form action="" class="add_user_form" method="POST">
   <label for="fir_name1">First Name <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="fir_name1" autofocus> <br>
@@ -279,8 +279,13 @@
 </div>
 
 <div class="add_user_step2_container">
-<form action="">
-
+<center>
+    <h1>Add User Form</h1>
+</center>
+<form action="" class="add_user_form" method="POST">
+<center>
+  <button type="button" class="add_user_back_btn" onclick="showStep1Form()">Back</button>
+</center>
 </form>
 </div>
 

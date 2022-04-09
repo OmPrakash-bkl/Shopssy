@@ -423,10 +423,11 @@ margin: 5px;
 .add_user_form_container {
     border: 1px solid green;
 }
-.add_user_step1_container {
+.add_user_step1_container, .add_user_step2_container {
     width: 60%;
     text-align: left;
     border: 1px solid red;
+    display: none;
 }
 .add_user_form > label {
     display: inline-block;
@@ -445,7 +446,7 @@ margin-bottom: 10px;
 }
 
 
-.add_user_next_btn {
+.add_user_next_btn, .add_user_back_btn {
     display: block;
     margin: 10px auto;
     padding: 10px 20px;
@@ -458,7 +459,7 @@ margin-bottom: 10px;
     cursor: pointer;
 }
 
-.add_user_next_btn:hover {
+.add_user_next_btn:hover, .add_user_back_btn:hover {
     background-color: #127cc7;
 }
 

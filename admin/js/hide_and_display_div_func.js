@@ -19,6 +19,11 @@ function undisplay_displayed_blocked_containers() {
         document.getElementsByClassName(`${item}`)[0].style.display = "none";
     })
 }
+
+function showStep1Form() {
+undisplay_displayed_blocked_containers();
+document.getElementsByClassName("add_user_step1_container")[0].style.display="block";
+}
 /* Display and Undisplay Container Section End */
 
 /* Request Sending and Response Getting Section Start */
@@ -110,8 +115,8 @@ responseObj.then((sucvalue) => {
 /* Add User Form Section Start */
 function add_users() {
     undisplay_displayed_blocked_containers(); 
-    document.getElementsByClassName("add_user_form_container")[0].style.display = "block";
-    display_blocked_containers("add_user_form_container"); 
+    document.getElementsByClassName("add_user_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_user_step1_container"); 
 }
 /* Add User Form Section End */
 
@@ -189,6 +194,10 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
                 userInsertDatasRes.then((goodResponse)=> {
                     unDisplay_preLoader();
                     setUserId(goodResponse);
+                    undisplay_displayed_blocked_containers();
+                    document.getElementsByClassName("add_user_step2_container")[0].style.display="block";
+                    display_blocked_containers("add_user_step2_container"); 
+
                 }).catch((badResponse)=> {
                     console.log(badResponse);
                 })
@@ -198,7 +207,7 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
         })
         
     }
-
+    
 })
 
 /* Adding User Step1 Section End */
@@ -207,6 +216,8 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
 
 function setUserId(user_id) {
     user_reg_id = user_id;
-    }
+localStorage.setItem("U345R47IX", user_reg_id);
+localStorage.getItem("U345R47IX");
+}
 
 /* Adding User Step2 Section End */
