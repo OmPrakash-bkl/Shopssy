@@ -140,11 +140,15 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
     let yes_radio_btn = document.querySelector('input[name="verified_user"]:checked').value;
     if(first_name == "") {
         document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "FirstName is required!";
+    } else if(first_name.length <= 3) {
+        document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "FirstName length must be minimum 4 characters!";
     } else {
         document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "";
     }
      if(last_name == "") {
         document.getElementsByClassName("add_user_lname_error_message_place")[0].innerText = "LastName is required!";
+    } else if(last_name.length <= 3) {
+        document.getElementsByClassName("add_user_lname_error_message_place")[0].innerText = "LastName length must be minimum 4 characters!";
     } else {
         document.getElementsByClassName("add_user_lname_error_message_place")[0].innerText = "";
     }
@@ -155,6 +159,8 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
     }
     if(user_password == "") {
         document.getElementsByClassName("add_user_password_error_message_place")[0].innerText = "Password is required!";
+    }  else if(user_password.length <= 5) {
+        document.getElementsByClassName("add_user_password_error_message_place")[0].innerText = "Password length must be minimum 6 characters!";
     } else {
         document.getElementsByClassName("add_user_password_error_message_place")[0].innerText = "";
     }
@@ -165,11 +171,12 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
     }
     console.log(first_name, last_name, user_mail, user_password);
 
-    if(!(first_name == "") && !(last_name == "") && !(user_mail == "") && !(user_password == "") && email_type == "valid_email") {
+    if((document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_user_lname_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_user_password_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_user_email_error_message_place")[0].innerText == "") && email_type == "valid_email") {
 
         let emailCheckingRes = make_user_details("POST", "../Shopssy_api/Users/check_email.php", `user_email=${user_mail}`);
         display_preLoader();
         emailCheckingRes.then((resultData)=> {
+            console.log(resultData);
             unDisplay_preLoader();
             if(resultData >= 1) {
                 document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "Email already exists!";
