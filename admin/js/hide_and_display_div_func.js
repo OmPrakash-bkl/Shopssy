@@ -302,7 +302,7 @@ function insertAccountOfForm() {
            
             document.getElementById("street").value = document.getElementById("city").value = document.getElementById("state").value = document.getElementById("country").value = document.getElementById("zip").value = document.getElementById("phone").value = "";
             undisplay_displayed_blocked_containers();
-            alert("Inserted Successfully!")
+            alert("Form Submitted Successfully!")
            
         }).catch((badMsg)=> {
             console.log(badMsg);
