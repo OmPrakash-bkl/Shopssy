@@ -21,10 +21,18 @@ function undisplay_displayed_blocked_containers() {
     })
 }
 
-function showStep1Form() {
+
+function showStep1Form(mode) {
 undisplay_displayed_blocked_containers();
 document.getElementsByClassName("add_user_step1_container")[0].style.display="block";
+display_blocked_containers("add_user_step1_container"); 
+if(mode == "insert") {
+    document.getElementById("fir_name1").value = document.getElementById("las_name1").value = document.getElementById("user_email1").value = document.getElementById("user_pass1").value = "";
 }
+}
+
+document.getElementsByClassName("add_user_back_btn")[0].addEventListener("click", showStep1Form("insert"));
+
 /* Display and Undisplay Container Section End */
 
 /* Removing Unwanted Strings Section Start */
@@ -194,7 +202,7 @@ function add_users() {
 let user_reg_id = 0;
 let first_name_of_account = "";
 let last_name_of_account = "";
-document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click", function(event) {
+function check_insert_update_user_details(event, decisionPara) {
     event.preventDefault();
     email_type = "invalid_email";
     let first_name = document.getElementById("fir_name1").value;
@@ -256,21 +264,28 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
             unDisplay_preLoader();
             if(resultData >= 1) {
                 document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "Email already exists!";
+                
             } else {
+                let userInsertDatasRes = "";
                 display_preLoader();
-                let userInsertDatasRes = make_user_details("POST", "../Shopssy_api/Users/check_email_and_insert.php", `fname=${first_name}&lname=${last_name}&user_mail=${user_mail}&user_pass=${user_password}&valid_user=${yes_radio_btn}&command=insert`);
-               
-                userInsertDatasRes.then((goodResponse)=> {
-                    unDisplay_preLoader();
-                    setUserId(goodResponse);
-                    undisplay_displayed_blocked_containers();
-                    document.getElementsByClassName("add_user_step2_container")[0].style.display="block";
-                    display_blocked_containers("add_user_step2_container"); 
-                  document.getElementById("fir_name1").value = document.getElementById("las_name1").value = document.getElementById("user_email1").value = document.getElementById("user_pass1").value = "";
+                if(decisionPara == "insert") {
+                    userInsertDatasRes = make_user_details("POST", "../Shopssy_api/Users/check_email_and_insert.php", `fname=${first_name}&lname=${last_name}&user_mail=${user_mail}&user_pass=${user_password}&valid_user=${yes_radio_btn}&command=insert`);
 
-                }).catch((badResponse)=> {
-                    console.log(badResponse);
-                })
+                    userInsertDatasRes.then((goodResponse)=> {
+                        unDisplay_preLoader();
+                        setUserId(goodResponse);
+                        undisplay_displayed_blocked_containers();
+                        document.getElementsByClassName("add_user_step2_container")[0].style.display="block";
+                        display_blocked_containers("add_user_step2_container"); 
+    
+                    }).catch((badResponse)=> {
+                        console.log(badResponse);
+                    })
+                } else {
+                    console.log("updated successfully");
+                }
+               
+                
             }
         }).catch((errorData)=> {
             console.log(errorData);
@@ -278,6 +293,9 @@ document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click"
         
     }
     
+}
+document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click", function(event) {
+    check_insert_update_user_details(event, "insert");
 })
 
 /* Adding User Step1 Section End */
@@ -290,7 +308,7 @@ localStorage.setItem("U345R47IX", user_reg_id);
 user_reg_id = localStorage.getItem("U345R47IX");
 }
 
-function insertAccountOfForm() {
+function insertAccountOfForm(mode) {
     let full_name = first_name_of_account+" "+last_name_of_account;
     let street = document.getElementById("street").value;
     let city = document.getElementById("city").value;
@@ -350,20 +368,30 @@ function insertAccountOfForm() {
     }
     if((document.getElementsByClassName("add_street_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_state_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_city_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_country_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_zip_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_phone_error_message_place")[0].innerText == "")) {
         display_preLoader();
-        let insertAccountDataRes = make_user_details("POST", "../Shopssy_api/Users/check_email_and_insert.php", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&user_id=${user_reg_id}&command=insertIntoAccount`);
-        insertAccountDataRes.then((goodMsg)=> {
-            unDisplay_preLoader();
-           
-            document.getElementById("street").value = document.getElementById("city").value = document.getElementById("state").value = document.getElementById("country").value = document.getElementById("zip").value = document.getElementById("phone").value = "";
-            undisplay_displayed_blocked_containers();
-            alert("Form Submitted Successfully!")
-           
-        }).catch((badMsg)=> {
-            console.log(badMsg);
-        })
+        let insertAccountDataRes = "";
+        if(mode == "insert") {
+            insertAccountDataRes = make_user_details("POST", "../Shopssy_api/Users/check_email_and_insert.php", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&user_id=${user_reg_id}&command=insertIntoAccount`);
+
+            insertAccountDataRes.then((goodMsg)=> {
+                unDisplay_preLoader();
+               
+                document.getElementById("street").value = document.getElementById("city").value = document.getElementById("state").value = document.getElementById("country").value = document.getElementById("zip").value = document.getElementById("phone").value = "";
+                undisplay_displayed_blocked_containers();
+                alert("Form Submitted Successfully!")
+               
+            }).catch((badMsg)=> {
+                console.log(badMsg);
+            })
+        } else {
+            console.log("updated");
+        }
+       
+
+       
     }
 }
 
+document.getElementsByClassName("add_user_submit_btn")[0].addEventListener("click", insertAccountOfForm("insert"));
 
 /* Adding User Step2 Section End */
 
@@ -410,17 +438,25 @@ responseObj.then((sucvalue) => {
 }
 
 function editUserRegistrationAndAccData(user_id) {
-    let responseObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${user_id}&command=update`, "");
     display_preLoader();
+    let responseObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${user_id}&command=update`, "");
     
     responseObj.then((sucvalue) => {
-      console.log(sucvalue);
         unDisplay_preLoader();
-       
+        undisplay_displayed_blocked_containers();
+        let registeredUserData = JSON.parse(sucvalue);
+        document.getElementsByClassName("add_user_step1_container")[0].style.display = "block";
+        display_blocked_containers("add_user_step1_container"); 
+        document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click", function(event) {
+            check_insert_update_user_details(event, "update");
+        })
+        document.getElementsByClassName("add_user_back_btn")[0].addEventListener("click", showStep1Form("update"));
+        document.getElementsByClassName("add_user_submit_btn")[0].addEventListener("click", insertAccountOfForm("update"));
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
 }
+
 
 
 function deleteUserRegistrationAndAccData(user_id) {
