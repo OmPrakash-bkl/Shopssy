@@ -392,7 +392,7 @@ responseObj.then((sucvalue) => {
         <td>${resultData[i].email}</td>
         <td>${resultData[i].city}</td>
         <td>${resultData[i].phone}</td>
-        <td><button title="Edit" class="edit_button_of_table"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table"><i class="fa fa-trash-o"></i></button></td>
+        <td><button title="Edit"  onclick="editUserRegistrationAndAccData(${resultData[i].user_id})" class="edit_button_of_table"><i class="fa fa-edit"></i></button> <button title="Delete" onclick="deleteUserRegistrationAndAccData(${resultData[i].user_id})" class="delete_button_of_table"><i class="fa fa-trash-o"></i></button></td>
         </tr>`
         totalC = i;
     }
@@ -408,6 +408,24 @@ responseObj.then((sucvalue) => {
         console.log(rejvalue);
     }) 
 }
+
+function editUserRegistrationAndAccData(user_id) {
+    let responseObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${user_id}&command=update`, "");
+    display_preLoader();
+    
+    responseObj.then((sucvalue) => {
+      console.log(sucvalue);
+        unDisplay_preLoader();
+       
+        }).catch((rejvalue) => {
+            console.log(rejvalue);
+        }) 
+}
+
+
+function deleteUserRegistrationAndAccData(user_id) {
+    console.log(user_id);
+    }
 
 /* Edit and Delete User Section End */
 
