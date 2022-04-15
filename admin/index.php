@@ -140,11 +140,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="edit_and_delete_users()"><i class="fa fa-edit"></i> Edit Users</button>
-  <span><i class="fa fa-arrow-circle-right"></i></span>
-  </div>
-  <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="edit_and_delete_users()"><i class="fa fa-trash" aria-hidden="true"></i> Delete Users</button>
+  <button onclick="edit_and_delete_users()"><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
