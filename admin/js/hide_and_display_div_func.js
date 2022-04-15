@@ -27,6 +27,7 @@ document.getElementsByClassName("add_user_next_btn")[0].style.display = "inline-
 document.getElementsByClassName("add_user_next_btn2")[0].style.display = "none";
 document.getElementsByClassName("add_user_submit_btn")[0].style.display = "inline-block";
 document.getElementsByClassName("add_user_submit_btn2")[0].style.display = "none";
+document.getElementsByClassName("addresses_sections")[0].style.display = "none";
 function showStep1Form(mode) {
 undisplay_displayed_blocked_containers();
 document.getElementsByClassName("add_user_step1_container")[0].style.display="block";
@@ -198,6 +199,7 @@ responseObj.then((sucvalue) => {
 /* Add User Form Section Start */
 function add_users() {
     undisplay_displayed_blocked_containers(); 
+    document.getElementById("fir_name1").value = document.getElementById("las_name1").value = document.getElementById("user_email1").value = document.getElementById("user_pass1").value = "";
     document.getElementsByClassName("add_user_step1_container")[0].style.display = "block";
     display_blocked_containers("add_user_step1_container"); 
 }
@@ -473,15 +475,33 @@ function editUserRegistrationAndAccData(user_id) {
     document.getElementsByClassName("add_user_submit_btn")[0].style.display = "none";
     document.getElementsByClassName("add_user_submit_btn2")[0].style.display = "inline-block";
     display_preLoader();
-    let responseObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${user_id}&command=update`, "");
+    let responseObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${user_id}&command=giveUserRegData`, "");
     
     responseObj.then((sucvalue) => {
+        
         unDisplay_preLoader();
         undisplay_displayed_blocked_containers();
         let registeredUserData = JSON.parse(sucvalue);
         document.getElementsByClassName("add_user_step1_container")[0].style.display = "block";
         display_blocked_containers("add_user_step1_container"); 
-        let isVerifiedUserOfReg = ""
+
+        display_preLoader();
+        let userDataAddCountObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${user_id}&command=giveUserAddCountData`, "");
+        unDisplay_preLoader();
+        
+        userDataAddCountObj.then((resobj) => {
+            let addCount = JSON.parse(resobj);
+            
+            address_dropdown_section_option = `<option value="0">Select Address</option>`;
+            for(let i = 1; i <= addCount.length; i++) {
+                address_dropdown_section_option += `<option value="${addCount[i-1].acc_id}">Address ${i}</option>`;
+            }
+            document.getElementById("addresses_tag").innerHTML = address_dropdown_section_option;
+            document.getElementsByClassName("addresses_sections")[0].style.display = "block";
+        }).catch((rejObj) => {
+            console.log("Not Found!");
+        })
+    
         if(registeredUserData.status == 1) {
             document.getElementById("yes_verified_user").checked = true;
         } else {
@@ -498,11 +518,26 @@ function editUserRegistrationAndAccData(user_id) {
         })
        
         document.getElementsByClassName("add_user_back_btn2")[0].addEventListener("click", showStep1Form("update"));
+
+
+
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
 }
 
+document.getElementById("addresses_tag").addEventListener("change", function() {
+    display_preLoader();
+    let account_id = this.value;
+    let userDataAddDataObj = make_user_details("POST", `../Shopssy_api/Users/edit_and_delete_users.php`, `acc_id=${account_id}&command=giveUserAddData`);
+    unDisplay_preLoader();
+
+    userDataAddDataObj.then((resobj) => {
+        console.log(JSON.parse(resobj));
+    }).catch((rejObj) => {
+        console.log("Not Found!");
+    })
+});
 
 
 function deleteUserRegistrationAndAccData(user_id) {

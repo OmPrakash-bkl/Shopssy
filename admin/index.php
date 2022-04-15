@@ -314,6 +314,10 @@ mysqli_query($con, $delete_unfulfill_data_query);
     <h1>Add User Form</h1>
 </center>
 <form action="" class="add_user_form" method="POST">
+<label for="addresses_tag" class="addresses_sections">No of Address <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <select id="addresses_tag" class="addresses_sections">
+    
+  </select> <br>
 <label for="street">Street <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="street" autofocus> <br>
   <p class="add_user_error_message_place add_street_error_message_place"></p>

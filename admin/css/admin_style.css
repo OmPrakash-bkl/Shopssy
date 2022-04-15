@@ -444,7 +444,7 @@ margin: 5px;
     color: rgb(109, 109, 109);
     margin: 5px 20px 5px 0px;
 }
-.add_user_form > input[type="text"], .add_user_form > input[type="email"], .add_user_form > input[type="password"] {
+.add_user_form > input[type="text"], .add_user_form > input[type="email"], .add_user_form > input[type="password"], .add_user_form > select {
 width: 100%;
 border: 1px solid gainsboro;
 padding: 0px 10px;
