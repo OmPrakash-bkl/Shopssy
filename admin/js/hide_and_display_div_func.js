@@ -68,11 +68,65 @@ return responseObj;
 }
 /* Request Sending and Response Getting Section End */
 
+/* Showing Register User List Table Container Start */
+
+function show_registered_users() {
+    let responseObj = make_user_details("GET", "../Shopssy_api/Users/get_users.php?show_registered_user_details_to_me=1", "");
+display_preLoader();
+let totalC = 0;
+
+responseObj.then((sucvalue) => {
+    unDisplay_preLoader();
+    let resultData = JSON.parse(sucvalue);
+    let table_datas = `<tr><th>S.NO</th>
+    <th>USER ID</th>
+    <th>F.NAME</th>
+    <th>L.NAME</th>
+    <th>EMAIL</th>
+    <th>PASSWORD</th>
+    <th>VERIFIED USER?</th>
+    <th>ACTION</th></tr>`;
+    for(let i = 0; i < resultData.length; i++) {
+        var isVerifiedUser = "";
+
+        if(resultData[i].status == 0) {
+            isVerifiedUser = "No";
+        } else {
+            isVerifiedUser = "Yes";
+        }
+        table_datas+=`<tr>
+        <td>${i+1}.</td>
+        <td>${resultData[i].user_id}</td>
+        <td>${resultData[i].f_name}</td>
+        <td>${resultData[i].l_name}</td>
+        <td>${resultData[i].email}</td>
+        <td>${resultData[i].password}</td>
+        <td>${isVerifiedUser}</td>
+        <td><button title="Edit" class="edit_button_of_table"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table"><i class="fa fa-trash-o"></i></button></td>
+        </tr>`;
+        totalC = i;
+    }
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Registered Users";
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+    display_blocked_containers("admin_panel_details_table_container"); 
+    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+    display_blocked_containers("table_name_and_other_details_display_container"); 
+    }).catch((rejvalue) => {
+        console.log(rejvalue);
+    }) 
+}
+
+/* Showing Register User List Table Container End */
+
 /* Showing User List Table Container Section Start */
 function show_users() {
-let responseObj = make_user_details("GET", "../Shopssy_api/Users/get_users.php", "");
+let responseObj = make_user_details("GET", "../Shopssy_api/Users/get_users.php?show_me=1", "");
 display_preLoader();
-
+let totalC = 0;
 responseObj.then((sucvalue) => {
     unDisplay_preLoader();
     let resultData = JSON.parse(sucvalue);
@@ -88,7 +142,7 @@ responseObj.then((sucvalue) => {
     <th>ZIP</th>
     <th>PH.NUMBER</th>
     <th>COUNTRY</th>
-    <th>VERIFIED USER?</th>`;
+    <th>VERIFIED USER?</th></tr>`;
     for(let i = 0; i < resultData.length; i++) {
         var isVerifiedUser = "";
 
@@ -112,9 +166,11 @@ responseObj.then((sucvalue) => {
         <td>${resultData[i].country}</td>
         <td>${isVerifiedUser}</td>
         </tr>`
+        totalC = i;
     }
     document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
-
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Customer Details";
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
     undisplay_displayed_blocked_containers(); 
     document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
     display_blocked_containers("admin_panel_details_table_container"); 
@@ -314,10 +370,11 @@ function insertAccountOfForm() {
 /* Edit and Delete User Section Start */
 
 function edit_and_delete_users() {
-    let responseObj = make_user_details("GET", "../Shopssy_api/Users/get_users.php", "");
+    let responseObj = make_user_details("GET", "../Shopssy_api/Users/get_users.php?show_me=1", "");
 display_preLoader();
 
 responseObj.then((sucvalue) => {
+    let totalC = 0;
     unDisplay_preLoader();
     let resultData = JSON.parse(sucvalue);
     let table_datas = `<tr><th>S.NO</th>
@@ -337,9 +394,11 @@ responseObj.then((sucvalue) => {
         <td>${resultData[i].phone}</td>
         <td><button title="Edit" class="edit_button_of_table"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table"><i class="fa fa-trash-o"></i></button></td>
         </tr>`
+        totalC = i;
     }
     document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
-
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Customer Details";
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
     undisplay_displayed_blocked_containers(); 
     document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
     display_blocked_containers("admin_panel_details_table_container"); 

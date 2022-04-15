@@ -132,7 +132,11 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container1">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="show_users()"><i class="fa fa-eye"></i> Users Details</button>
+  <button onclick="show_registered_users()"><i class="fa fa-address-book"></i> Short Details</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button onclick="show_users()"><i class="fa fa-address-card"></i> Full Details</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -250,8 +254,8 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <div class="table_name_and_other_details_display_container">
 
 <div class="table_name_and_other_details_display_containers_inner_left_container">
-    <h2>Order</h2>
-    <p>28 Orders Found</p>
+    <h2 class="table_name_and_other_details_display_containers_inner_left_containers_table_name">Order</h2>
+    <p class="table_name_and_other_details_display_containers_inner_left_containers_count">28 Orders Found</p>
 </div>
 
 <div class="table_name_and_other_details_display_containers_inner_right_container">
