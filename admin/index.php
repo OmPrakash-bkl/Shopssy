@@ -283,9 +283,10 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="add_user_step1_container">
 <center>
-    <h1>Add User Form</h1>
+    <h1 class="form_title">Add User Form</h1>
 </center>
 <form action="" class="add_user_form" method="POST">
+<input type="hidden" id="user_id">
   <label for="fir_name1">First Name <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="fir_name1" autofocus> <br>
   <p class="add_user_error_message_place add_user_fname_error_message_place"></p>
@@ -311,9 +312,10 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="add_user_step2_container">
 <center>
-    <h1>Add User Form</h1>
+    <h1 class="form_title">Add User Form</h1>
 </center>
 <form action="" class="add_user_form" method="POST">
+  <input type="hidden" id="account_id">
 <label for="addresses_tag" class="addresses_sections">No of Address <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
   <select id="addresses_tag" class="addresses_sections">
     
@@ -322,19 +324,19 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <input type="text" id="street" autofocus> <br>
   <p class="add_user_error_message_place add_street_error_message_place"></p>
   <label for="city">City <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
-  <input type="text" id="city" autofocus> <br>
+  <input type="text" id="city"> <br>
   <p class="add_user_error_message_place add_city_error_message_place"></p>
   <label for="state">State <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
-  <input type="text" id="state" autofocus> <br>
+  <input type="text" id="state"> <br>
   <p class="add_user_error_message_place add_state_error_message_place"></p>
   <label for="country">Country <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
-  <input type="text" id="country" autofocus> <br>
+  <input type="text" id="country"> <br>
   <p class="add_user_error_message_place add_country_error_message_place"></p>
   <label for="zip">Postal/Zip <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
-  <input type="text" id="zip" autofocus> <br>
+  <input type="text" id="zip"> <br>
   <p class="add_user_error_message_place add_zip_error_message_place"></p>
   <label for="phone">Phone <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
-  <input type="text" id="phone" autofocus> <br>
+  <input type="text" id="phone"> <br>
   <p class="add_user_error_message_place add_phone_error_message_place"></p>
   <label>Address Type <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
   <input type="radio" name="add_type" id="default_add" value="default" checked> <label for="default_add">Default</label>

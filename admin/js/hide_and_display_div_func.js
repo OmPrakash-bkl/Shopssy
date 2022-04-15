@@ -21,13 +21,21 @@ function undisplay_displayed_blocked_containers() {
     })
 }
 
+/* Reset Section Start */
+
 document.getElementsByClassName("add_user_back_btn")[0].style.display = "inline-block";
 document.getElementsByClassName("add_user_back_btn2")[0].style.display = "none";
 document.getElementsByClassName("add_user_next_btn")[0].style.display = "inline-block";
 document.getElementsByClassName("add_user_next_btn2")[0].style.display = "none";
 document.getElementsByClassName("add_user_submit_btn")[0].style.display = "inline-block";
 document.getElementsByClassName("add_user_submit_btn2")[0].style.display = "none";
+document.getElementById("user_email1").disabled = false;
 document.getElementsByClassName("addresses_sections")[0].style.display = "none";
+document.getElementsByClassName("addresses_sections")[1].style.display = "none";
+
+
+/* Reset Section End */
+
 function showStep1Form(mode) {
 undisplay_displayed_blocked_containers();
 document.getElementsByClassName("add_user_step1_container")[0].style.display="block";
@@ -198,8 +206,12 @@ responseObj.then((sucvalue) => {
 
 /* Add User Form Section Start */
 function add_users() {
+    document.getElementsByClassName("form_title")[0].innerHTML = "Add User Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementById("fir_name1").value = document.getElementById("las_name1").value = document.getElementById("user_email1").value = document.getElementById("user_pass1").value = "";
+    document.getElementsByClassName("addresses_sections")[0].style.display = "none";
+    document.getElementsByClassName("addresses_sections")[1].style.display = "none";
+    document.getElementById("user_email1").disabled = false;
     document.getElementsByClassName("add_user_step1_container")[0].style.display = "block";
     display_blocked_containers("add_user_step1_container"); 
 }
@@ -210,12 +222,14 @@ let user_reg_id = 0;
 let first_name_of_account = "";
 let last_name_of_account = "";
 function check_insert_update_user_details(event, decisionPara) {
+
     event.preventDefault();
     email_type = "invalid_email";
     let first_name = document.getElementById("fir_name1").value;
     let last_name = document.getElementById("las_name1").value;
     let user_mail = document.getElementById("user_email1").value;
     let user_password = document.getElementById("user_pass1").value;
+    let users_id = document.getElementById("user_id").value;
     
     first_name = remove_slashes(first_name);
     last_name = remove_slashes(last_name);
@@ -299,7 +313,7 @@ function check_insert_update_user_details(event, decisionPara) {
                         undisplay_displayed_blocked_containers();
                         document.getElementsByClassName("add_user_step2_container")[0].style.display="block";
                         display_blocked_containers("add_user_step2_container"); 
-                    setForm1Details(first_name, last_name, user_mail, user_password, yes_radio_btn);
+                    setForm1Details(users_id, first_name, last_name, user_mail, user_password, yes_radio_btn);
                 }
                
                 
@@ -330,7 +344,9 @@ let updatedLName = "";
 let updatedEmail = "";
 let updatedPass = "";
 let updatedUserType = "";
-function setForm1Details(first_name, last_name, user_mail, user_password, yes_radio_btn) {
+let users_id = "";
+function setForm1Details(users_id, first_name, last_name, user_mail, user_password, yes_radio_btn) {
+customer_id = users_id;
 updatedFName = first_name;
 updatedLName = last_name;
 updatedEmail = user_mail;
@@ -339,6 +355,7 @@ updatedUserType = yes_radio_btn;
 }
 
 function insertAccountOfForm(mode) {
+    let accounts_id =  document.getElementById("account_id").value;
     let full_name = first_name_of_account+" "+last_name_of_account;
     let street = document.getElementById("street").value;
     let city = document.getElementById("city").value;
@@ -413,8 +430,42 @@ function insertAccountOfForm(mode) {
                 console.log(badMsg);
             })
         } else {
-            console.log("updated");
-            console.log(updatedFName);
+            display_preLoader();
+          
+            updateRegisterDatasRes = make_user_details("POST", "../Shopssy_api/Users/edit_and_delete_users.php", `users_id=${customer_id}&fname=${updatedFName}&lname=${updatedLName}&user_mail=${updatedEmail}&user_pass=${updatedPass}&valid_user=${updatedUserType}&command=registerDataEditRequest`);
+
+            updateRegisterDatasRes.then((regiterResObj) => {
+                //console.log(regiterResObj);
+            }).catch((registerRejObj) => {
+                console.log(registerRejObj);
+            })
+
+            updateAccountDataRes = make_user_details("POST", "../Shopssy_api/Users/edit_and_delete_users.php", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&account_id=${accounts_id}&command=accountDataEditRequest`);
+            
+            updateAccountDataRes.then((accountResObj) => {
+                alert(accountResObj);
+               
+        document.getElementById("fir_name1").value = "";
+        document.getElementById("las_name1").value = "";
+        document.getElementById("user_email1").value = "";
+        document.getElementById("user_email1").disabled = false;
+        document.getElementById("user_pass1").value = "";
+        document.getElementById("street").value = "";
+        document.getElementById("city").value = "";
+        document.getElementById("state").value = "";
+        document.getElementById("country").value = "";
+        document.getElementById("zip").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementsByClassName("addresses_sections")[0].style.display = "none";
+        document.getElementsByClassName("addresses_sections")[1].style.display = "none";
+
+            }).catch((accountRejObj) => {
+                console.log(accountRejObj);
+            })
+
+            unDisplay_preLoader();
+
+
         }
        
 
@@ -468,6 +519,7 @@ responseObj.then((sucvalue) => {
 }
 
 function editUserRegistrationAndAccData(user_id) {
+    document.getElementsByClassName("form_title")[0].innerHTML = "Edit User Form";
     document.getElementsByClassName("add_user_back_btn")[0].style.display = "none";
     document.getElementsByClassName("add_user_back_btn2")[0].style.display = "inline-block";
     document.getElementsByClassName("add_user_next_btn")[0].style.display = "none";
@@ -488,7 +540,8 @@ function editUserRegistrationAndAccData(user_id) {
         display_preLoader();
         let userDataAddCountObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${user_id}&command=giveUserAddCountData`, "");
         unDisplay_preLoader();
-        
+        document.getElementsByClassName("addresses_sections")[0].style.display = "block";
+        document.getElementsByClassName("addresses_sections")[1].style.display = "block";
         userDataAddCountObj.then((resobj) => {
             let addCount = JSON.parse(resobj);
             
@@ -497,7 +550,7 @@ function editUserRegistrationAndAccData(user_id) {
                 address_dropdown_section_option += `<option value="${addCount[i-1].acc_id}">Address ${i}</option>`;
             }
             document.getElementById("addresses_tag").innerHTML = address_dropdown_section_option;
-            document.getElementsByClassName("addresses_sections")[0].style.display = "block";
+            
         }).catch((rejObj) => {
             console.log("Not Found!");
         })
@@ -507,19 +560,20 @@ function editUserRegistrationAndAccData(user_id) {
         } else {
             document.getElementById("no_not_verified_user").checked = true;
         }
+       
+        document.getElementById("user_id").value = registeredUserData.user_id;
         document.getElementById("fir_name1").value = registeredUserData.f_name;
         document.getElementById("las_name1").value = registeredUserData.l_name;
         document.getElementById("user_email1").value = registeredUserData.email;
         document.getElementById("user_email1").disabled = true;
         document.getElementById("user_pass1").value = registeredUserData.password;
         
+        
         document.getElementsByClassName("add_user_next_btn2")[0].addEventListener("click", function(event) {
             check_insert_update_user_details(event, "update");
         })
        
         document.getElementsByClassName("add_user_back_btn2")[0].addEventListener("click", showStep1Form("update"));
-
-
 
         }).catch((rejvalue) => {
             console.log(rejvalue);
@@ -529,11 +583,23 @@ function editUserRegistrationAndAccData(user_id) {
 document.getElementById("addresses_tag").addEventListener("change", function() {
     display_preLoader();
     let account_id = this.value;
-    let userDataAddDataObj = make_user_details("POST", `../Shopssy_api/Users/edit_and_delete_users.php`, `acc_id=${account_id}&command=giveUserAddData`);
+    let userDataOfAddDataObj = make_user_details("POST", `../Shopssy_api/Users/edit_and_delete_users.php`, `acc_id=${account_id}&command=giveUserAddData`);
     unDisplay_preLoader();
 
-    userDataAddDataObj.then((resobj) => {
-        console.log(JSON.parse(resobj));
+    userDataOfAddDataObj.then((resobj) => {
+        userDataOfAddDataResult = JSON.parse(resobj);
+    document.getElementById("account_id").value = userDataOfAddDataResult.acc_id;
+    document.getElementById("street").value = userDataOfAddDataResult.street;
+    document.getElementById("city").value = userDataOfAddDataResult.city;
+    document.getElementById("state").value = userDataOfAddDataResult.state;
+    document.getElementById("country").value = userDataOfAddDataResult.country;
+    document.getElementById("zip").value = userDataOfAddDataResult.zip;
+    document.getElementById("phone").value = userDataOfAddDataResult.phone;
+    if(userDataOfAddDataResult.status == "default") {
+        document.getElementById("default_add").checked = true;
+    } else {
+        document.getElementById("secondary_add").checked = true;
+    }
     }).catch((rejObj) => {
         console.log("Not Found!");
     })

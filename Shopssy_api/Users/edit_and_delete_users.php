@@ -35,6 +35,45 @@ if(isset($_POST['command'])) {
         }
         echo json_encode($addressed_data);
     }
+
+    if($_POST['command'] == "registerDataEditRequest") {
+        
+        $customer_id = $_POST['users_id'];
+        $user_f_name = $_POST['fname'];
+        $user_l_name = $_POST['lname'];
+        $user_mail = $_POST['user_mail'];
+        $user_pass = $_POST['user_pass'];
+        $valid_user = $_POST['valid_user'];
+        $user_pass = password_hash($user_pass, PASSWORD_BCRYPT);
+        if($valid_user == "No") {
+            $valid_user = 0;
+        } else {
+            $valid_user = 1;
+        }
+        $account_data_update_query = "UPDATE `register` SET `f_name` = '$user_f_name', `l_name` = '$user_l_name', `email` = '$user_mail', `password` = '$user_pass', `status` = '$valid_user' WHERE `user_id` = $customer_id;";
+         mysqli_query($conn, $account_data_update_query);
+       
+    }
+
+    if($_POST['command'] == "accountDataEditRequest") {
+    $fir_name = $_POST['fname'];
+    $las_name = $_POST['lname'];
+    $my_full_name = $_POST['full_name'];
+    $street = $_POST['street'];
+    $city = $_POST['city'];
+    $country = $_POST['country'];
+    $state = $_POST['state'];
+    $zip = $_POST['zip'];
+    $phone = $_POST['phone'];
+    $address_type =  $_POST['add_type'];
+    $account_identity = $_POST['account_id'];
+
+    $account_update_query = "UPDATE `account` SET `f_name` = '$fir_name', `l_name` = '$las_name', `my_name` = '$my_full_name', `street` = '$street', `city` = '$city', `state` = '$state', `zip` = '$zip', `phone`= '$phone', `country` = '$country', `status` = '$address_type' WHERE `acc_id` = $account_identity;";
+    mysqli_query($conn, $account_update_query);
+    echo "Updated Successfully";
+
+    }
+
 }
 
 
