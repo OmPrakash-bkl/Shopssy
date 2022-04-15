@@ -21,7 +21,12 @@ function undisplay_displayed_blocked_containers() {
     })
 }
 
-
+document.getElementsByClassName("add_user_back_btn")[0].style.display = "inline-block";
+document.getElementsByClassName("add_user_back_btn2")[0].style.display = "none";
+document.getElementsByClassName("add_user_next_btn")[0].style.display = "inline-block";
+document.getElementsByClassName("add_user_next_btn2")[0].style.display = "none";
+document.getElementsByClassName("add_user_submit_btn")[0].style.display = "inline-block";
+document.getElementsByClassName("add_user_submit_btn2")[0].style.display = "none";
 function showStep1Form(mode) {
 undisplay_displayed_blocked_containers();
 document.getElementsByClassName("add_user_step1_container")[0].style.display="block";
@@ -31,7 +36,7 @@ if(mode == "insert") {
 }
 }
 
-document.getElementsByClassName("add_user_back_btn")[0].addEventListener("click", showStep1Form("insert"));
+
 
 /* Display and Undisplay Container Section End */
 
@@ -219,6 +224,7 @@ function check_insert_update_user_details(event, decisionPara) {
     user_mail = remove_special_chars(user_mail);
     user_password = remove_special_chars(user_password);
 
+    
     let yes_radio_btn = document.querySelector('input[name="verified_user"]:checked').value;
     if(first_name == "") {
         document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText = "FirstName is required!";
@@ -236,10 +242,12 @@ function check_insert_update_user_details(event, decisionPara) {
         last_name_of_account = last_name;
         document.getElementsByClassName("add_user_lname_error_message_place")[0].innerText = "";
     }
-    if(user_mail == "") {
-        document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "Email is required!";
-    } else {
-        document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "";
+    if(decisionPara == "insert") {
+        if(user_mail == "") {
+            document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "Email is required!";
+        } else {
+            document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "";
+        }
     }
     if(user_password == "") {
         document.getElementsByClassName("add_user_password_error_message_place")[0].innerText = "Password is required!";
@@ -262,10 +270,13 @@ function check_insert_update_user_details(event, decisionPara) {
         emailCheckingRes.then((resultData)=> {
            
             unDisplay_preLoader();
-            if(resultData >= 1) {
+            if(decisionPara == "update") {
+                document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "";
+            }
+            if(resultData >= 1 && decisionPara == "insert") {
                 document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "Email already exists!";
-                
             } else {
+                
                 let userInsertDatasRes = "";
                 display_preLoader();
                 if(decisionPara == "insert") {
@@ -282,7 +293,11 @@ function check_insert_update_user_details(event, decisionPara) {
                         console.log(badResponse);
                     })
                 } else {
-                    console.log("updated successfully");
+                    unDisplay_preLoader();
+                        undisplay_displayed_blocked_containers();
+                        document.getElementsByClassName("add_user_step2_container")[0].style.display="block";
+                        display_blocked_containers("add_user_step2_container"); 
+                    setForm1Details(first_name, last_name, user_mail, user_password, yes_radio_btn);
                 }
                
                 
@@ -306,6 +321,19 @@ function setUserId(user_id) {
     user_reg_id = user_id;
 localStorage.setItem("U345R47IX", user_reg_id);
 user_reg_id = localStorage.getItem("U345R47IX");
+}
+
+let updatedFName = "";
+let updatedLName = "";
+let updatedEmail = "";
+let updatedPass = "";
+let updatedUserType = "";
+function setForm1Details(first_name, last_name, user_mail, user_password, yes_radio_btn) {
+updatedFName = first_name;
+updatedLName = last_name;
+updatedEmail = user_mail;
+updatedPass = user_password;
+updatedUserType = yes_radio_btn;
 }
 
 function insertAccountOfForm(mode) {
@@ -384,6 +412,7 @@ function insertAccountOfForm(mode) {
             })
         } else {
             console.log("updated");
+            console.log(updatedFName);
         }
        
 
@@ -391,7 +420,6 @@ function insertAccountOfForm(mode) {
     }
 }
 
-document.getElementsByClassName("add_user_submit_btn")[0].addEventListener("click", insertAccountOfForm("insert"));
 
 /* Adding User Step2 Section End */
 
@@ -438,6 +466,12 @@ responseObj.then((sucvalue) => {
 }
 
 function editUserRegistrationAndAccData(user_id) {
+    document.getElementsByClassName("add_user_back_btn")[0].style.display = "none";
+    document.getElementsByClassName("add_user_back_btn2")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_user_next_btn")[0].style.display = "none";
+    document.getElementsByClassName("add_user_next_btn2")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_user_submit_btn")[0].style.display = "none";
+    document.getElementsByClassName("add_user_submit_btn2")[0].style.display = "inline-block";
     display_preLoader();
     let responseObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${user_id}&command=update`, "");
     
@@ -447,11 +481,23 @@ function editUserRegistrationAndAccData(user_id) {
         let registeredUserData = JSON.parse(sucvalue);
         document.getElementsByClassName("add_user_step1_container")[0].style.display = "block";
         display_blocked_containers("add_user_step1_container"); 
-        document.getElementsByClassName("add_user_next_btn")[0].addEventListener("click", function(event) {
+        let isVerifiedUserOfReg = ""
+        if(registeredUserData.status == 1) {
+            document.getElementById("yes_verified_user").checked = true;
+        } else {
+            document.getElementById("no_not_verified_user").checked = true;
+        }
+        document.getElementById("fir_name1").value = registeredUserData.f_name;
+        document.getElementById("las_name1").value = registeredUserData.l_name;
+        document.getElementById("user_email1").value = registeredUserData.email;
+        document.getElementById("user_email1").disabled = true;
+        document.getElementById("user_pass1").value = registeredUserData.password;
+        
+        document.getElementsByClassName("add_user_next_btn2")[0].addEventListener("click", function(event) {
             check_insert_update_user_details(event, "update");
         })
-        document.getElementsByClassName("add_user_back_btn")[0].addEventListener("click", showStep1Form("update"));
-        document.getElementsByClassName("add_user_submit_btn")[0].addEventListener("click", insertAccountOfForm("update"));
+       
+        document.getElementsByClassName("add_user_back_btn2")[0].addEventListener("click", showStep1Form("update"));
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 

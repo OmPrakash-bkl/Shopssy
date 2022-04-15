@@ -455,7 +455,7 @@ margin-bottom: 10px;
 }
 
 
-.add_user_next_btn, .add_user_back_btn, .add_user_submit_btn, .add_user_cancel_btn {
+.add_user_next_btn, .add_user_back_btn, .add_user_submit_btn, .add_user_cancel_btn, .add_user_back_btn2, .add_user_next_btn2, .add_user_submit_btn2 {
     margin: 10px 5px;
     padding: 10px 20px;
     color: white;
@@ -466,17 +466,17 @@ margin-bottom: 10px;
     border-radius: 10px;
     cursor: pointer;
 }
-.add_user_submit_btn {
+.add_user_submit_btn, .add_user_submit_btn2 {
     background-color: #4aaa4a;
 }
 .add_user_cancel_btn {
     background-color: #d5342e;
 }
 
-.add_user_next_btn:hover, .add_user_back_btn:hover {
+.add_user_next_btn:hover, .add_user_back_btn:hover, .add_user_back_btn2:hover, .add_user_next_btn2:hover {
     background-color: #127cc7;
 }
-.add_user_submit_btn:hover {
+.add_user_submit_btn:hover, .add_user_submit_btn2:hover {
     background-color: #3f923f;
 }
 .add_user_cancel_btn:hover {
@@ -485,6 +485,9 @@ margin-bottom: 10px;
 
 .add_user_error_message_place, .add_user_required_field_asterisk_symbol {
     color: red;
+}
+.add_user_back_btn2, .add_user_next_btn2 {
+    display: none;
 }
 
 /* Admin Panel Adding User Container End */

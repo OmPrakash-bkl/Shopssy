@@ -304,6 +304,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <p class="add_user_error_message_place add_user_radio_error_message_place"></p>
  <center>
  <button type="submit" class="add_user_next_btn">Next</button>
+ <button type="submit" class="add_user_next_btn2">Next</button>
  </center>
 </form>
 </div>
@@ -336,8 +337,10 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <input type="radio" name="add_type" id="secondary_add" value="secondary"> <label for="secondary_add">Secondary</label>
   <p class="add_user_error_message_place add_user_add_radio_error_message_place"></p>
 <center>
-  <button type="button" class="add_user_back_btn">Back</button>
-  <button type="button" class="add_user_submit_btn">Submit</button>
+  <button type="button" class="add_user_back_btn" onclick="showStep1Form('insert')">Back</button>
+  <button type="button" class="add_user_back_btn2" onclick="showStep1Form('update')">Back</button>
+  <button type="button" class="add_user_submit_btn" onclick="insertAccountOfForm('insert')">Submit</button>
+  <button type="button" class="add_user_submit_btn2" onclick="insertAccountOfForm('update')">Submit</button>
   <button type="button" class="add_user_cancel_btn" onclick="deleteDetailOfForm()">Cancel</button>
 </center>
 </form>
