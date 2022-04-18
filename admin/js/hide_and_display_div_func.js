@@ -124,7 +124,7 @@ responseObj.then((sucvalue) => {
         <td>${resultData[i].email}</td>
         <td>${resultData[i].password}</td>
         <td>${isVerifiedUser}</td>
-        <td><button title="Edit" class="edit_button_of_table"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table"><i class="fa fa-trash-o"></i></button></td>
+        <td><button title="Edit" class="edit_button_of_table" onclick="editOfRegisteredUser(${resultData[i].user_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfRegisteredUser(${resultData[i].user_id})"><i class="fa fa-trash-o"></i></button></td>
         </tr>`;
         totalC = i;
     }
@@ -523,6 +523,7 @@ function editUserRegistrationAndAccData(user_id) {
     document.getElementsByClassName("add_user_back_btn")[0].style.display = "none";
     document.getElementsByClassName("add_user_back_btn2")[0].style.display = "inline-block";
     document.getElementsByClassName("add_user_next_btn")[0].style.display = "none";
+    document.getElementsByClassName("add_user_submition_btn")[0].style.display = "none";
     document.getElementsByClassName("add_user_next_btn2")[0].style.display = "inline-block";
     document.getElementsByClassName("add_user_submit_btn")[0].style.display = "none";
     document.getElementsByClassName("add_user_submit_btn2")[0].style.display = "inline-block";
@@ -622,5 +623,30 @@ function deleteUserRegistrationAndAccData(user_id) {
 }
 
 /* Edit and Delete User Section End */
+
+/* Registered Users Edit and Delete Section Start */
+
+function editOfRegisteredUser(users_id) {
+    display_preLoader();
+    let responseObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${users_id}&command=giveUserRegData`, "");
+
+    document.getElementsByClassName("add_user_submition_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_user_next_btn")[0].style.display = "none";
+    document.getElementsByClassName("add_user_next_btn2")[0].style.display = "none";
+
+    responseObj.then((resObj) => {
+        unDisplay_preLoader();
+
+    })
+    document.getElementsByClassName("form_title")[0].innerHTML = "Edit User Registration Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementById("user_email1").disabled = true;
+    document.getElementsByClassName("add_user_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_user_step1_container"); 
+}
+
+/* Registered Users Edit and Delete Section End */
+
+
 
 

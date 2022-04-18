@@ -306,6 +306,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
  <center>
  <button type="submit" class="add_user_next_btn">Next</button>
  <button type="submit" class="add_user_next_btn2">Next</button>
+ <button type="submit" class="add_user_submition_btn">Submit</button>
  </center>
 </form>
 </div>
