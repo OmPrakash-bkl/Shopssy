@@ -1,6 +1,9 @@
 <?php
 include '../connection.php';
 if(isset($_GET['command'])) {
+
+    /* Edit User Section Start */
+
     if($_GET['command'] == "giveUserRegData") {
         $users_id = $_GET['user_id'];
         $require_user_data_query = "SELECT * FROM `register` WHERE `user_id`= $users_id;";
@@ -20,9 +23,15 @@ if(isset($_GET['command'])) {
         }
         echo json_encode($addressed_data);
     }
+
+    /* Edit User Section End */
+
 }
 
 if(isset($_POST['command'])) {
+
+    /* Edit User Section Start */
+
     if($_POST['command'] == "giveUserAddData") {
         $accs_id = $_POST['acc_id'];
         $fetch_specified_user_add_query = "SELECT * FROM `account` WHERE `acc_id` LIKE $accs_id;";
@@ -73,6 +82,23 @@ if(isset($_POST['command'])) {
     echo "Updated Successfully";
 
     }
+
+    /* Edit User Section End */
+
+    /* Delete User Section Start */
+
+    if($_POST['command'] == "userDeleteReq") {
+        $customer_id = $_POST['user_id'];
+        $user_delete_req1_query = "DELETE FROM `account` WHERE  `user_id` = $customer_id;";
+        $user_delete_req1_result = mysqli_query($conn, $user_delete_req1_query);
+        if($user_delete_req1_result) {
+            $user_delete_req2_query  = "DELETE FROM `register` WHERE `user_id` = $customer_id;";
+            $user_delete_req2_result = mysqli_query($conn, $user_delete_req2_query);
+            echo "User Deleted Successfully!";
+        }
+    }
+
+    /* Delete User Section End */
 
 }
 

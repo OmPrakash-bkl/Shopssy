@@ -607,8 +607,19 @@ document.getElementById("addresses_tag").addEventListener("change", function() {
 
 
 function deleteUserRegistrationAndAccData(user_id) {
-    console.log(user_id);
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let userDeleteReqObj = make_user_details("POST", "../Shopssy_api/Users/edit_and_delete_users.php", `user_id=${user_id}&command=userDeleteReq`);
+        userDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            edit_and_delete_users();
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
     }
+}
 
 /* Edit and Delete User Section End */
 
