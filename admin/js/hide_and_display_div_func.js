@@ -42,6 +42,8 @@ document.getElementsByClassName("add_user_step1_container")[0].style.display="bl
 display_blocked_containers("add_user_step1_container"); 
 if(mode == "insert") {
     document.getElementById("fir_name1").value = document.getElementById("las_name1").value = document.getElementById("user_email1").value = document.getElementById("user_pass1").value = "";
+    document.getElementsByClassName("add_user_next_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_user_next_btn2")[0].style.display = "none";
 }
 }
 
@@ -209,6 +211,11 @@ function add_users() {
     document.getElementsByClassName("form_title")[0].innerHTML = "Add User Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementById("fir_name1").value = document.getElementById("las_name1").value = document.getElementById("user_email1").value = document.getElementById("user_pass1").value = "";
+    document.getElementsByClassName("add_user_next_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_user_submition_btn")[0].style.display = "none";
+    document.getElementsByClassName("add_user_next_btn2")[0].style.display = "none";
+    document.getElementsByClassName("add_user_back_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_user_back_btn2")[0].style.display = "none";
     document.getElementsByClassName("addresses_sections")[0].style.display = "none";
     document.getElementsByClassName("addresses_sections")[1].style.display = "none";
     document.getElementById("user_email1").disabled = false;
@@ -286,11 +293,13 @@ function check_insert_update_user_details(event, decisionPara) {
         emailCheckingRes.then((resultData)=> {
            
             unDisplay_preLoader();
-            if(decisionPara == "update") {
+            if(decisionPara == "update" || decisionPara == "registeredDataUpdate") {
                 document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "";
             }
             if(resultData >= 1 && decisionPara == "insert") {
                 document.getElementsByClassName("add_user_email_error_message_place")[0].innerText = "Email already exists!";
+            } else if(decisionPara == "registeredDataUpdate") {
+                updateRegisteredUserDetails();
             } else {
                 
                 let userInsertDatasRes = "";
@@ -501,7 +510,7 @@ responseObj.then((sucvalue) => {
         <td>${resultData[i].email}</td>
         <td>${resultData[i].city}</td>
         <td>${resultData[i].phone}</td>
-        <td><button title="Edit"  onclick="editUserRegistrationAndAccData(${resultData[i].user_id})" class="edit_button_of_table"><i class="fa fa-edit"></i></button> <button title="Delete" onclick="deleteUserRegistrationAndAccData(${resultData[i].user_id})" class="delete_button_of_table"><i class="fa fa-trash-o"></i></button></td>
+        <td><button title="Edit"  onclick="editUserRegistrationAndAccData(${resultData[i].user_id})" class="edit_button_of_table"><i class="fa fa-edit"></i></button> <button title="Delete" onclick="deleteUserRegistrationAndAccData(${resultData[i].user_id}, '')" class="delete_button_of_table"><i class="fa fa-trash-o"></i></button></td>
         </tr>`
         totalC = i;
     }
@@ -607,7 +616,7 @@ document.getElementById("addresses_tag").addEventListener("change", function() {
 });
 
 
-function deleteUserRegistrationAndAccData(user_id) {
+function deleteUserRegistrationAndAccData(user_id, descision_val) {
     let permission = confirm("Are you sure?");
     if(permission) {
         display_preLoader();
@@ -615,7 +624,11 @@ function deleteUserRegistrationAndAccData(user_id) {
         userDeleteReqObj.then((deleteRes) => {
             unDisplay_preLoader();
             alert(deleteRes);
-            edit_and_delete_users();
+            if(descision_val == "registerDataEditionWork") {
+                show_registered_users();
+            } else {
+                edit_and_delete_users();
+            }
         }).catch((deleteErrRes) => {
             console.log(deleteErrRes);
         })
@@ -636,6 +649,19 @@ function editOfRegisteredUser(users_id) {
 
     responseObj.then((resObj) => {
         unDisplay_preLoader();
+        registeredUsersData = JSON.parse(resObj);
+        if(registeredUsersData.status == 1) {
+            document.getElementById("yes_verified_user").checked = true;
+        } else {
+            document.getElementById("no_not_verified_user").checked = true;
+        }
+       
+        document.getElementById("user_id").value = registeredUsersData.user_id;
+        document.getElementById("fir_name1").value = registeredUsersData.f_name;
+        document.getElementById("las_name1").value = registeredUsersData.l_name;
+        document.getElementById("user_email1").value = registeredUsersData.email;
+        document.getElementById("user_email1").disabled = true;
+        document.getElementById("user_pass1").value = registeredUsersData.password;
 
     })
     document.getElementsByClassName("form_title")[0].innerHTML = "Edit User Registration Form";
@@ -643,6 +669,37 @@ function editOfRegisteredUser(users_id) {
     document.getElementById("user_email1").disabled = true;
     document.getElementsByClassName("add_user_step1_container")[0].style.display = "block";
     display_blocked_containers("add_user_step1_container"); 
+}
+
+document.getElementsByClassName("add_user_submition_btn")[0].addEventListener("click", function(event) {
+    check_insert_update_user_details(event, "registeredDataUpdate");
+});
+
+function updateRegisteredUserDetails() {
+    let yes_radio_btn = document.querySelector('input[name="verified_user"]:checked').value;
+        let useres_id = document.getElementById("user_id").value;
+        let fir_name = document.getElementById("fir_name1").value;
+        let las_name = document.getElementById("las_name1").value;
+        let email_id = document.getElementById("user_email1").value;
+        let user_pass = document.getElementById("user_pass1").value;
+
+        updateRegisterDatasRes = make_user_details("POST", "../Shopssy_api/Users/edit_and_delete_users.php", `users_id=${useres_id}&fname=${fir_name}&lname=${las_name}&user_mail=${email_id}&user_pass=${user_pass}&valid_user=${yes_radio_btn}&command=registerDataEditRequest`);
+
+            updateRegisterDatasRes.then((regiterResObj) => {
+              
+                    alert("Updated Successfully!");
+              
+            }).catch((registerRejObj) => {
+                console.log(registerRejObj);
+            })
+
+}
+
+function deleteOfRegisteredUser(user_id) {
+    deleteUserRegistrationAndAccData(user_id, 'registerDataEditionWork');
+}
+function deleteDetailOfForm() {
+    undisplay_displayed_blocked_containers();
 }
 
 /* Registered Users Edit and Delete Section End */
