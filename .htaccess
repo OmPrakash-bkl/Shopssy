@@ -1,3 +1,7 @@
 RewriteEngine On 
 
-RewriteRule ^Shopssy_api/users_api/show_user_details/([^/\.]+)?$ Shopssy_api/users_api.php?show_user_details=$1 [L]
+RewriteRule ^user/user_reg_details/?$ user/user_reg_details.php [L]
+
+RewriteRule ^user/user_account_details/?$ user/user_account_details.php [L]
+
+RewriteRule ^user/specific_user_reg_detail/user_id/([^/\.]+)?$ user/specific_user_reg_detail.php?user_id=$1 [L]

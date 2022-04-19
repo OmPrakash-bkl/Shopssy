@@ -71,7 +71,7 @@ function make_user_details(method, url, sendingData) {
 
     let responseObj = new Promise((resolve, reject)=> {
         const req = new XMLHttpRequest();
-        req.open(method, `../Shopssy_api/users_api/${url}`, true);
+        req.open(method, url, true);
         if(method == "POST") {
             req.setRequestHeader("content-type", "application/x-www-form-urlencoded");
             req.send(sendingData);
@@ -95,13 +95,13 @@ return responseObj;
 /* Showing Register User List Table Container Start */
 
 function show_registered_users() {
-    let responseObj = make_user_details("GET", "show_user_details/RUD", "");
+    let responseObj = make_user_details("GET", "../user/user_reg_details/", "");
 display_preLoader();
 let totalC = 0;
 
 responseObj.then((sucvalue) => {
     unDisplay_preLoader();
-
+   
     let resultData = JSON.parse(sucvalue);
     let table_datas = `<tr><th>S.NO</th>
     <th>USER ID</th>
@@ -149,7 +149,7 @@ responseObj.then((sucvalue) => {
 
 /* Showing User List Table Container Section Start */
 function show_users() {
-let responseObj = make_user_details("GET", "show_user_details/RUAD", "");
+let responseObj = make_user_details("GET", "../user/user_account_details/", "");
 display_preLoader();
 let totalC = 0;
 responseObj.then((sucvalue) => {
@@ -538,7 +538,7 @@ function editUserRegistrationAndAccData(user_id) {
     document.getElementsByClassName("add_user_submit_btn")[0].style.display = "none";
     document.getElementsByClassName("add_user_submit_btn2")[0].style.display = "inline-block";
     display_preLoader();
-    let responseObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${user_id}&command=giveUserRegData`, "");
+    let responseObj = make_user_details("GET", `user_id/${user_id}/fetch_user_details/RUD`, "");
     
     responseObj.then((sucvalue) => {
         
@@ -642,7 +642,7 @@ function deleteUserRegistrationAndAccData(user_id, descision_val) {
 
 function editOfRegisteredUser(users_id) {
     display_preLoader();
-    let responseObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${users_id}&command=giveUserRegData`, "");
+    let responseObj = make_user_details("GET", `../user/specific_user_reg_detail/user_id/${users_id}`, "");
 
     document.getElementsByClassName("add_user_submition_btn")[0].style.display = "inline-block";
     document.getElementsByClassName("add_user_next_btn")[0].style.display = "none";
