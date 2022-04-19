@@ -1,0 +1,3 @@
+RewriteEngine On 
+
+RewriteRule ^Shopssy_api/Users/users_api/?$ ../Shopssy_api/Users/users_api.php [NC, L]
