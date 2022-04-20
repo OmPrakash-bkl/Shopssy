@@ -72,7 +72,7 @@ function make_user_details(method, url, sendingData) {
     let responseObj = new Promise((resolve, reject)=> {
         const req = new XMLHttpRequest();
         req.open(method, url, true);
-        if(method == "POST") {
+        if(method == "POST" || method == "PUT") {
             req.setRequestHeader("content-type", "application/x-www-form-urlencoded");
             req.send(sendingData);
         } else {
@@ -442,7 +442,7 @@ function insertAccountOfForm(mode) {
         } else {
             display_preLoader();
           
-            updateRegisterDatasRes = make_user_details("POST", "../Shopssy_api/Users/edit_and_delete_users.php", `users_id=${customer_id}&fname=${updatedFName}&lname=${updatedLName}&user_mail=${updatedEmail}&user_pass=${updatedPass}&valid_user=${updatedUserType}&command=registerDataEditRequest`);
+            updateRegisterDatasRes = make_user_details("PUT", "..user/registration_data_edit_request/", `users_id=${customer_id}&fname=${updatedFName}&lname=${updatedLName}&user_mail=${updatedEmail}&user_pass=${updatedPass}&valid_user=${updatedUserType}`);
 
             updateRegisterDatasRes.then((regiterResObj) => {
                 //console.log(regiterResObj);
@@ -450,7 +450,7 @@ function insertAccountOfForm(mode) {
                 console.log(registerRejObj);
             })
 
-            updateAccountDataRes = make_user_details("POST", "../Shopssy_api/Users/edit_and_delete_users.php", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&account_id=${accounts_id}&command=accountDataEditRequest`);
+            updateAccountDataRes = make_user_details("PUT", "../user/account_data_edit_request/", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&account_id=${accounts_id}`);
             
             updateAccountDataRes.then((accountResObj) => {
                 alert(accountResObj);
@@ -489,7 +489,7 @@ function insertAccountOfForm(mode) {
 /* Edit and Delete User Section Start */
 
 function edit_and_delete_users() {
-    let responseObj = make_user_details("GET", "../Shopssy_api/Users/get_users.php?show_me=1", "");
+    let responseObj = make_user_details("GET", "../user/user_account_details/", "");
 display_preLoader();
 
 responseObj.then((sucvalue) => {
@@ -549,7 +549,7 @@ function editUserRegistrationAndAccData(user_id) {
         display_blocked_containers("add_user_step1_container"); 
 
         display_preLoader();
-        let userDataAddCountObj = make_user_details("GET", `../Shopssy_api/Users/edit_and_delete_users.php?user_id=${user_id}&command=giveUserAddCountData`, "");
+        let userDataAddCountObj = make_user_details("GET", `../user/give_user_acc_count/user_id/${user_id}`, "");
         unDisplay_preLoader();
         document.getElementsByClassName("addresses_sections")[0].style.display = "block";
         document.getElementsByClassName("addresses_sections")[1].style.display = "block";
@@ -594,7 +594,7 @@ function editUserRegistrationAndAccData(user_id) {
 document.getElementById("addresses_tag").addEventListener("change", function() {
     display_preLoader();
     let account_id = this.value;
-    let userDataOfAddDataObj = make_user_details("POST", `../Shopssy_api/Users/edit_and_delete_users.php`, `acc_id=${account_id}&command=giveUserAddData`);
+    let userDataOfAddDataObj = make_user_details("POST", `..user/give_user_account_data/`, `acc_id=${account_id}`);
     unDisplay_preLoader();
 
     userDataOfAddDataObj.then((resobj) => {
@@ -621,7 +621,7 @@ function deleteUserRegistrationAndAccData(user_id, descision_val) {
     let permission = confirm("Are you sure?");
     if(permission) {
         display_preLoader();
-        let userDeleteReqObj = make_user_details("POST", "../Shopssy_api/Users/edit_and_delete_users.php", `user_id=${user_id}&command=userDeleteReq`);
+        let userDeleteReqObj = make_user_details("DELETE", "../user/user_deletion/", `user_id=${user_id}`);
         userDeleteReqObj.then((deleteRes) => {
             unDisplay_preLoader();
             alert(deleteRes);
@@ -684,7 +684,7 @@ function updateRegisteredUserDetails() {
         let email_id = document.getElementById("user_email1").value;
         let user_pass = document.getElementById("user_pass1").value;
 
-        updateRegisterDatasRes = make_user_details("POST", "../Shopssy_api/Users/edit_and_delete_users.php", `users_id=${useres_id}&fname=${fir_name}&lname=${las_name}&user_mail=${email_id}&user_pass=${user_pass}&valid_user=${yes_radio_btn}&command=registerDataEditRequest`);
+        updateRegisterDatasRes = make_user_details("PUT", "..user/registration_data_edit_request/", `users_id=${useres_id}&fname=${fir_name}&lname=${las_name}&user_mail=${email_id}&user_pass=${user_pass}&valid_user=${yes_radio_btn}`);
 
             updateRegisterDatasRes.then((regiterResObj) => {
               
