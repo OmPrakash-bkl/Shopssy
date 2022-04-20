@@ -289,7 +289,7 @@ function check_insert_update_user_details(event, decisionPara) {
 
     if((document.getElementsByClassName("add_user_fname_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_user_lname_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_user_password_error_message_place")[0].innerText == "") && (document.getElementsByClassName("add_user_email_error_message_place")[0].innerText == "") && email_type == "valid_email") {
 
-        let emailCheckingRes = make_user_details("POST", "../Shopssy_api/Users/check_email_and_insert.php", `user_email=${user_mail}&command=checking`);
+        let emailCheckingRes = make_user_details("POST", "../user/user_checker/", `user_email=${user_mail}`);
         display_preLoader();
         emailCheckingRes.then((resultData)=> {
            
@@ -306,7 +306,7 @@ function check_insert_update_user_details(event, decisionPara) {
                 let userInsertDatasRes = "";
                 display_preLoader();
                 if(decisionPara == "insert") {
-                    userInsertDatasRes = make_user_details("POST", "../Shopssy_api/Users/check_email_and_insert.php", `fname=${first_name}&lname=${last_name}&user_mail=${user_mail}&user_pass=${user_password}&valid_user=${yes_radio_btn}&command=insert`);
+                    userInsertDatasRes = make_user_details("POST", "user/user_regdata_insertion/", `fname=${first_name}&lname=${last_name}&user_mail=${user_mail}&user_pass=${user_password}&valid_user=${yes_radio_btn}`);
 
                     userInsertDatasRes.then((goodResponse)=> {
                         unDisplay_preLoader();
@@ -427,7 +427,7 @@ function insertAccountOfForm(mode) {
         display_preLoader();
         let insertAccountDataRes = "";
         if(mode == "insert") {
-            insertAccountDataRes = make_user_details("POST", "../Shopssy_api/Users/check_email_and_insert.php", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&user_id=${user_reg_id}&command=insertIntoAccount`);
+            insertAccountDataRes = make_user_details("POST", "user/user_accountdata_insertion/", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&user_id=${user_reg_id}&command=insertIntoAccount`);
 
             insertAccountDataRes.then((goodMsg)=> {
                 unDisplay_preLoader();

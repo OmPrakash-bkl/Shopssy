@@ -5,3 +5,13 @@ RewriteRule ^user/user_reg_details/?$ user/user_reg_details.php [L]
 RewriteRule ^user/user_account_details/?$ user/user_account_details.php [L]
 
 RewriteRule ^user/specific_user_reg_detail/user_id/([^/\.]+)?$ user/specific_user_reg_detail.php?user_id=$1 [L]
+
+RewriteRule ^user/user_checker/user_email/([^/\*]+)?$ user/user_checker.php?user_email=$1 [L]
+
+RewriteRule ^user/user_regdata_insertion/fname/([^/\*]+)/lname/([^/\*]+)/user_mail/([^/\*]+)/user_pass/([^/\*]+)/valid_user/([^/\*]+)?$ user/user_regdata_insertion.php?fname=$1&lname=$2&user_mail=$3&user_pass=$4&valid_user=$5 [L]
+
+RewriteRule ^user/user_accountdata_insertion/fname/([^/\*]+)/lname/([^/\*]+)/full_name/([^/\*]+)/street/([^/\*]+)/city/([^/\*]+)/state/([^/\*]+)/country/([^/\*]+)/zip/([^/\*]+)/phone/([^/\*]+)/add_type/([^/\*]+)/user_id/([^/\*]+)?$ user/user_accountdata_insertion.php?fname=$1&lname=$2&full_name=$3&street=$4&city=$5&state=$6&country=$7&zip=$8&phone=$9&add_type=$10&user_id=$11 [L]
+
+
+
+
