@@ -1,25 +1,33 @@
 RewriteEngine On 
 
+# ALLOW ONLY NECESSARY REQUEST METHODS
+RewriteCond %{REQUEST_METHOD} !^(GET|POST|PUT|DELETE) [NC]
+RewriteRule .* - [F,L]
+
 RewriteRule ^user/user_reg_details/?$ user/user_reg_details.php [L]
 
 RewriteRule ^user/user_account_details/?$ user/user_account_details.php [L]
 
 RewriteRule ^user/specific_user_reg_detail/user_id/([^/\.]+)?$ user/specific_user_reg_detail.php?user_id=$1 [L]
 
-RewriteRule ^user/user_checker/user_email/([^/\*]+)?$ user/user_checker.php?user_email=$1 [L]
+RewriteRule ^user/user_checker/?$ user/user_checker.php [L]
 
-RewriteRule ^user/user_regdata_insertion/fname/([^/\*]+)/lname/([^/\*]+)/user_mail/([^/\*]+)/user_pass/([^/\*]+)/valid_user/([^/\*]+)?$ user/user_regdata_insertion.php?fname=$1&lname=$2&user_mail=$3&user_pass=$4&valid_user=$5 [L]
+RewriteRule ^user/user_regdata_insertion/?$ user/user_regdata_insertion.php [L]
 
-RewriteRule ^user/user_accountdata_insertion/fname/([^/\*]+)/lname/([^/\*]+)/full_name/([^/\*]+)/street/([^/\*]+)/city/([^/\*]+)/state/([^/\*]+)/country/([^/\*]+)/zip/([^/\*]+)/phone/([^/\*]+)/add_type/([^/\*]+)/user_id/([^/\*]+)?$ user/user_accountdata_insertion.php?fname=$1&lname=$2&full_name=$3&street=$4&city=$5&state=$6&country=$7&zip=$8&phone=$9&add_type=$10&user_id=$11 [L]
+RewriteRule ^user/user_accountdata_insertion/?$ user/user_accountdata_insertion.php [L]
 
 RewriteRule ^user/give_user_acc_count/user_id/([^/\*]+)?$ user/give_user_acc_count.php?user_id=$1 [L]
 
-RewriteRule ^user/give_user_account_data/acc_id/([^/\*]+)?$ user/give_user_account_data.php?acc_id=$1 [L]
+RewriteRule ^user/give_user_account_data/?$ user/give_user_account_data.php [L]
 
-RewriteRule ^user/registration_data_edit_request/users_id/([^/\*]+)/fname/([^/\*]+)/lname/([^/\*]+)/user_mail/([^/\*]+)/user_pass/([^/\*]+)/valid_user/([^/\*]+)?$ user/registration_data_edit_request.php?users_id=$1&fname=$2&lname=$3&lname=$4&user_mail=$5&user_pass=$6&valid_user=$7 [L]
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^user/registration_data_edit_request/users_id/([^/\*]+)/fname/([^/\*]+)/lname/([^/\*]+)/user_mail/([^/\*]+)/user_pass/([^/\*]+)/valid_user/([^/\*]+)?$ user/registration_data_edit_request.php?users_id=$1&fname=$2&lname=$3&user_mail=$4&user_pass=$5&valid_user=$6 [L]
 
-RewriteRule ^user/account_data_edit_request/fname/([^/\*]+)/lname/([^/\*]+)/full_name/([^/\*]+)/street/([^/\*]+)/city/([^/\*]+)/state/([^/\*]+)/country/([^/\*]+)/zip/([^/\*]+)/phone/([^/\*]+)/add_type/([^/\*]+)/account_id/([^/\*]+)?$ user/account_data_edit_request.php?fname=$1&lname=$2&full_name=$3&street=$4&city=$5&state=$6&country=$7&zip=$8&phone=$9&add_type=$10&account_id=$11 [L]
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^user/account_data_edit_request/fname/([^/\*]+)/lname/([^/\*]+)/full_name/([^/\*]+)/street/([^/\*]+)/city/([^/\*]+)/state/([^/\*]+)/country/([^/\*]+)/zip/([^/\*]+)/phone/([^/\*]+)/add_type/([^/\*]+)/account_id/([^/\*]+)/?$ user/account_data_edit_request.php?fname=$1&lname=$2&full_name=$3&street=$4&city=$5&state=$6&country=$7&zip=$8&phone=$9&add_type=$10&account_id=$11 [L]
 
+
+RewriteCond %{REQUEST_METHOD} =DELETE
 RewriteRule ^user/user_deletion/user_id/([^/\*]+)?$ user/user_deletion.php?user_id=$1 [L]
 
 

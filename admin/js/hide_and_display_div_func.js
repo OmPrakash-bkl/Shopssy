@@ -72,7 +72,7 @@ function make_user_details(method, url, sendingData) {
     let responseObj = new Promise((resolve, reject)=> {
         const req = new XMLHttpRequest();
         req.open(method, url, true);
-        if(method == "POST" || method == "PUT") {
+        if(method == "POST") {
             req.setRequestHeader("content-type", "application/x-www-form-urlencoded");
             req.send(sendingData);
         } else {
@@ -306,7 +306,7 @@ function check_insert_update_user_details(event, decisionPara) {
                 let userInsertDatasRes = "";
                 display_preLoader();
                 if(decisionPara == "insert") {
-                    userInsertDatasRes = make_user_details("POST", "user/user_regdata_insertion/", `fname=${first_name}&lname=${last_name}&user_mail=${user_mail}&user_pass=${user_password}&valid_user=${yes_radio_btn}`);
+                    userInsertDatasRes = make_user_details("POST", "../user/user_regdata_insertion/", `fname=${first_name}&lname=${last_name}&user_mail=${user_mail}&user_pass=${user_password}&valid_user=${yes_radio_btn}`);
 
                     userInsertDatasRes.then((goodResponse)=> {
                         unDisplay_preLoader();
@@ -427,7 +427,7 @@ function insertAccountOfForm(mode) {
         display_preLoader();
         let insertAccountDataRes = "";
         if(mode == "insert") {
-            insertAccountDataRes = make_user_details("POST", "user/user_accountdata_insertion/", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&user_id=${user_reg_id}&command=insertIntoAccount`);
+            insertAccountDataRes = make_user_details("POST", "../user/user_accountdata_insertion/", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&user_id=${user_reg_id}&command=insertIntoAccount`);
 
             insertAccountDataRes.then((goodMsg)=> {
                 unDisplay_preLoader();
@@ -442,7 +442,7 @@ function insertAccountOfForm(mode) {
         } else {
             display_preLoader();
           
-            updateRegisterDatasRes = make_user_details("PUT", "..user/registration_data_edit_request/", `users_id=${customer_id}&fname=${updatedFName}&lname=${updatedLName}&user_mail=${updatedEmail}&user_pass=${updatedPass}&valid_user=${updatedUserType}`);
+            updateRegisterDatasRes = make_user_details("GET", `../user/registration_data_edit_request/users_id/${customer_id}/fname/${updatedFName}/lname/${updatedLName}/user_mail/${updatedEmail}/user_pass/${updatedPass}/valid_user/${updatedUserType}`, ``);
 
             updateRegisterDatasRes.then((regiterResObj) => {
                 //console.log(regiterResObj);
@@ -450,7 +450,7 @@ function insertAccountOfForm(mode) {
                 console.log(registerRejObj);
             })
 
-            updateAccountDataRes = make_user_details("PUT", "../user/account_data_edit_request/", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&account_id=${accounts_id}`);
+            updateAccountDataRes = make_user_details("GET", `../user/account_data_edit_request/fname/${first_name_of_account}/lname/${last_name_of_account}/full_name/${full_name}/street/${street}/city/${city}/state/${state}/country/${country}/zip/${zip}/phone/${phone}/add_type/${add_type}/account_id/${accounts_id}/`, ``);
             
             updateAccountDataRes.then((accountResObj) => {
                 alert(accountResObj);
@@ -538,7 +538,7 @@ function editUserRegistrationAndAccData(user_id) {
     document.getElementsByClassName("add_user_submit_btn")[0].style.display = "none";
     document.getElementsByClassName("add_user_submit_btn2")[0].style.display = "inline-block";
     display_preLoader();
-    let responseObj = make_user_details("GET", `user_id/${user_id}/fetch_user_details/RUD`, "");
+    let responseObj = make_user_details("GET", `../user/specific_user_reg_detail/user_id/${user_id}`, "");
     
     responseObj.then((sucvalue) => {
         
@@ -594,7 +594,7 @@ function editUserRegistrationAndAccData(user_id) {
 document.getElementById("addresses_tag").addEventListener("change", function() {
     display_preLoader();
     let account_id = this.value;
-    let userDataOfAddDataObj = make_user_details("POST", `..user/give_user_account_data/`, `acc_id=${account_id}`);
+    let userDataOfAddDataObj = make_user_details("POST", `../user/give_user_account_data/`, `acc_id=${account_id}`);
     unDisplay_preLoader();
 
     userDataOfAddDataObj.then((resobj) => {
@@ -621,7 +621,7 @@ function deleteUserRegistrationAndAccData(user_id, descision_val) {
     let permission = confirm("Are you sure?");
     if(permission) {
         display_preLoader();
-        let userDeleteReqObj = make_user_details("DELETE", "../user/user_deletion/", `user_id=${user_id}`);
+        let userDeleteReqObj = make_user_details("DELETE", `../user/user_deletion/user_id/${user_id}`, ``);
         userDeleteReqObj.then((deleteRes) => {
             unDisplay_preLoader();
             alert(deleteRes);

@@ -3,15 +3,16 @@
 include("./connection.php");
 
 header("Access-Control-Allow-Origin: http://localhost/");
+header("Access-Control-Allow_Methods: GET");
 
 if(isset($_SERVER['REQUEST_METHOD'])) {
 
-        $customer_id = $_POST['users_id'];
-        $user_f_name = $_POST['fname'];
-        $user_l_name = $_POST['lname'];
-        $user_mail = $_POST['user_mail'];
-        $user_pass = $_POST['user_pass'];
-        $valid_user = $_POST['valid_user'];
+        $customer_id = $_GET['users_id'];
+        $user_f_name = $_GET['fname'];
+        $user_l_name = $_GET['lname'];
+        $user_mail = $_GET['user_mail'];
+        $user_pass = $_GET['user_pass'];
+        $valid_user = $_GET['valid_user'];
         $user_pass = password_hash($user_pass, PASSWORD_BCRYPT);
         if($valid_user == "No") {
             $valid_user = 0;
