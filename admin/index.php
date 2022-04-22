@@ -152,7 +152,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="hamburger_link_section_inner_container">
   <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(2)">
-  <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
+  <h2 class="heading_text"><i class="fa fa-list-alt"></i> Category</h2>
   <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow2"></i></span>
   </div>
 
@@ -170,7 +170,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="hamburger_link_section_inner_container">
   <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(3)">
-  <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
+  <h2 class="heading_text"><i class="fa fa-list" aria-hidden="true"></i> Sub Cat</h2>
   <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow3"></i></span>
   </div>
 
@@ -188,7 +188,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="hamburger_link_section_inner_container">
   <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(4)">
-  <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
+  <h2 class="heading_text"><i class="fa fa-skype"></i> Brand&Item</h2>
   <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow4"></i></span>
   </div>
 
@@ -206,7 +206,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="hamburger_link_section_inner_container">
   <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(5)">
-  <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
+  <h2 class="heading_text"><i class='fas fa-box-open'></i> Products</h2>
   <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow5"></i></span>
   </div>
 
@@ -224,11 +224,101 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="hamburger_link_section_inner_container">
   <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(6)">
-  <h2 class="heading_text"><i class='far fa-address-book'></i> USERS</h2>
+  <h2 class="heading_text"><i class="fa fa-television"></i> Sub Prod</h2>
   <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow6"></i></span>
   </div>
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container6">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-eye"></i> View Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(7)">
+  <h2 class="heading_text"><i class="fa fa-file-text-o"></i> Prod's Spec</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow7"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container7">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-eye"></i> View Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(8)">
+  <h2 class="heading_text"><i class="fa fa-question"></i> Prod's FAQ</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow8"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container8">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-eye"></i> View Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(9)">
+  <h2 class="heading_text"><i class="fa fa-question-circle" aria-hidden="true"></i> Sub FAQ</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow9"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container9">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-eye"></i> View Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(10)">
+  <h2 class="heading_text"><i class="fa fa-star-o"></i> Reviews</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow10"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container10">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-eye"></i> View Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(11)">
+  <h2 class="heading_text"><i class="fa fa-comment-o"></i> Sub Reviews</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow11"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container11">
   <div class="hamburger_link_section_inner_hidden_floating_container">
   <button><i class="fa fa-eye"></i> View Users</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>

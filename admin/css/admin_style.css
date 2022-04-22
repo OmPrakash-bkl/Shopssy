@@ -311,6 +311,7 @@ body {
      cursor: pointer;
  }
 .hamburger_link_section_inner_heading_container > .heading_text {
+font-size: 19px;
 float: left;
 }
 
