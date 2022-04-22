@@ -217,6 +217,8 @@ function add_users() {
     document.getElementsByClassName("add_user_next_btn2")[0].style.display = "none";
     document.getElementsByClassName("add_user_back_btn")[0].style.display = "inline-block";
     document.getElementsByClassName("add_user_back_btn2")[0].style.display = "none";
+    document.getElementsByClassName("add_user_submit_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_user_submit_btn2")[0].style.display = "none";
     document.getElementsByClassName("addresses_sections")[0].style.display = "none";
     document.getElementsByClassName("addresses_sections")[1].style.display = "none";
     document.getElementById("user_email1").disabled = false;
@@ -303,10 +305,10 @@ function check_insert_update_user_details(event, decisionPara) {
                 updateRegisteredUserDetails();
             } else {
                 
-                let userInsertDatasRes = "";
+               
                 display_preLoader();
                 if(decisionPara == "insert") {
-                    userInsertDatasRes = make_user_details("POST", "../user/user_regdata_insertion/", `fname=${first_name}&lname=${last_name}&user_mail=${user_mail}&user_pass=${user_password}&valid_user=${yes_radio_btn}`);
+                    let userInsertDatasRes = make_user_details("POST", "../user/user_regdata_insertion/", `fname=${first_name}&lname=${last_name}&user_mail=${user_mail}&user_pass=${user_password}&valid_user=${yes_radio_btn}`);
 
                     userInsertDatasRes.then((goodResponse)=> {
                         unDisplay_preLoader();
@@ -427,7 +429,7 @@ function insertAccountOfForm(mode) {
         display_preLoader();
         let insertAccountDataRes = "";
         if(mode == "insert") {
-            insertAccountDataRes = make_user_details("POST", "../user/user_accountdata_insertion/", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&user_id=${user_reg_id}`);
+           let insertAccountDataRes = make_user_details("POST", "../user/user_accountdata_insertion/", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&user_id=${user_reg_id}`);
 
             insertAccountDataRes.then((goodMsg)=> {
                 unDisplay_preLoader();
@@ -442,7 +444,7 @@ function insertAccountOfForm(mode) {
         } else {
             display_preLoader();
 
-            update_register_data_object = {
+            let update_register_data_object = {
                 users_id: customer_id,
                 fname: updatedFName,
                 lname: updatedLName,
@@ -451,17 +453,17 @@ function insertAccountOfForm(mode) {
                 valid_user: updatedUserType
             }
 
-            update_register_data = JSON.stringify(update_register_data_object);
+            let update_register_data = JSON.stringify(update_register_data_object);
 
-            updateRegisterDatasRes = make_user_details("POST", `../user/registration_data_edit_request/`, `${update_register_data}`);
+            let updateRegisterDatasRes = make_user_details("POST", `../user/registration_data_edit_request/`, `${update_register_data}`);
 
-            updateRegisterDatasRes.then((regiterResObj) => {
+             updateRegisterDatasRes.then((regiterResObj) => {
                 //console.log(regiterResObj);
             }).catch((registerRejObj) => {
                 console.log(registerRejObj);
             })
 
-            update_account_data_object = {
+            let update_account_data_object = {
                 fname: first_name_of_account,
                 lname: last_name_of_account,
                 full_name: full_name,
@@ -475,9 +477,9 @@ function insertAccountOfForm(mode) {
                 accounts_id: accounts_id
             }
 
-            update_account_data = JSON.stringify(update_account_data_object);
+           let update_account_data = JSON.stringify(update_account_data_object);
         
-            updateAccountDataRes = make_user_details("POST", `../user/account_data_edit_request/`, `${update_account_data}`);
+           let updateAccountDataRes = make_user_details("POST", `../user/account_data_edit_request/`, `${update_account_data}`);
             
             updateAccountDataRes.then((accountResObj) => {
                 alert(accountResObj);
@@ -711,7 +713,18 @@ function updateRegisteredUserDetails() {
         let email_id = document.getElementById("user_email1").value;
         let user_pass = document.getElementById("user_pass1").value;
 
-        updateRegisterDatasRes = make_user_details("PUT", "..user/registration_data_edit_request/", `users_id=${useres_id}&fname=${fir_name}&lname=${las_name}&user_mail=${email_id}&user_pass=${user_pass}&valid_user=${yes_radio_btn}`);
+        let update_register_data_object = {
+            users_id: useres_id,
+            fname: fir_name,
+            lname: las_name,
+            user_mail: email_id,
+            user_pass: user_pass,
+            valid_user: yes_radio_btn
+        }
+
+        let update_register_data = JSON.stringify(update_register_data_object);
+
+        let updateRegisterDatasRes = make_user_details("POST", "../user/registration_data_edit_request/", `${update_register_data}`);
 
             updateRegisterDatasRes.then((regiterResObj) => {
               

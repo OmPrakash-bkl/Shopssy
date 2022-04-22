@@ -4,20 +4,28 @@ RewriteEngine On
 RewriteCond %{REQUEST_METHOD} !^(GET|POST|PUT|DELETE) [NC]
 RewriteRule .* - [F,L]
 
+RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^user/user_reg_details/?$ user/user_reg_details.php [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^user/user_account_details/?$ user/user_account_details.php [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^user/specific_user_reg_detail/user_id/([^/\.]+)?$ user/specific_user_reg_detail.php?user_id=$1 [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^user/user_checker/?$ user/user_checker.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^user/user_regdata_insertion/?$ user/user_regdata_insertion.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^user/user_accountdata_insertion/?$ user/user_accountdata_insertion.php [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^user/give_user_acc_count/user_id/([^/\*]+)?$ user/give_user_acc_count.php?user_id=$1 [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^user/give_user_account_data/?$ user/give_user_account_data.php [L]
 
 RewriteCond %{REQUEST_METHOD} =POST

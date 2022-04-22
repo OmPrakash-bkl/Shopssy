@@ -22,6 +22,7 @@ if(isset($_SERVER['REQUEST_METHOD'])) {
         $account_insert_query = "INSERT INTO `account` (`user_id`, `f_name`, `l_name`, `my_name`, `street`, `city`, `state`, `zip`, `phone`, `country`, `status`) VALUES ($user_identity, '$fir_name', '$las_name', '$my_full_name', '$street', '$city', '$state', '$zip', '$phone', '$country', '$address_type');";
         $account_insert_result = mysqli_query($conn, $account_insert_query);
         echo $conn->insert_id;
+        
        
     
 }
