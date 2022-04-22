@@ -427,7 +427,7 @@ function insertAccountOfForm(mode) {
         display_preLoader();
         let insertAccountDataRes = "";
         if(mode == "insert") {
-            insertAccountDataRes = make_user_details("POST", "../user/user_accountdata_insertion/", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&user_id=${user_reg_id}&command=insertIntoAccount`);
+            insertAccountDataRes = make_user_details("POST", "../user/user_accountdata_insertion/", `fname=${first_name_of_account}&lname=${last_name_of_account}&full_name=${full_name}&street=${street}&city=${city}&state=${state}&country=${country}&zip=${zip}&phone=${phone}&add_type=${add_type}&user_id=${user_reg_id}`);
 
             insertAccountDataRes.then((goodMsg)=> {
                 unDisplay_preLoader();
@@ -441,8 +441,19 @@ function insertAccountOfForm(mode) {
             })
         } else {
             display_preLoader();
-          
-            updateRegisterDatasRes = make_user_details("GET", `../user/registration_data_edit_request/users_id/${customer_id}/fname/${updatedFName}/lname/${updatedLName}/user_mail/${updatedEmail}/user_pass/${updatedPass}/valid_user/${updatedUserType}`, ``);
+
+            update_register_data_object = {
+                users_id: customer_id,
+                fname: updatedFName,
+                lname: updatedLName,
+                user_mail: updatedEmail,
+                user_pass: updatedPass,
+                valid_user: updatedUserType
+            }
+
+            update_register_data = JSON.stringify(update_register_data_object);
+
+            updateRegisterDatasRes = make_user_details("POST", `../user/registration_data_edit_request/`, `${update_register_data}`);
 
             updateRegisterDatasRes.then((regiterResObj) => {
                 //console.log(regiterResObj);
@@ -450,7 +461,23 @@ function insertAccountOfForm(mode) {
                 console.log(registerRejObj);
             })
 
-            updateAccountDataRes = make_user_details("GET", `../user/account_data_edit_request/fname/${first_name_of_account}/lname/${last_name_of_account}/full_name/${full_name}/street/${street}/city/${city}/state/${state}/country/${country}/zip/${zip}/phone/${phone}/add_type/${add_type}/account_id/${accounts_id}/`, ``);
+            update_account_data_object = {
+                fname: first_name_of_account,
+                lname: last_name_of_account,
+                full_name: full_name,
+                street: street,
+                city: city,
+                state: state,
+                country: country,
+                zip: zip,
+                phone: phone,
+                add_type: add_type,
+                accounts_id: accounts_id
+            }
+
+            update_account_data = JSON.stringify(update_account_data_object);
+        
+            updateAccountDataRes = make_user_details("POST", `../user/account_data_edit_request/`, `${update_account_data}`);
             
             updateAccountDataRes.then((accountResObj) => {
                 alert(accountResObj);

@@ -20,11 +20,11 @@ RewriteRule ^user/give_user_acc_count/user_id/([^/\*]+)?$ user/give_user_acc_cou
 
 RewriteRule ^user/give_user_account_data/?$ user/give_user_account_data.php [L]
 
-RewriteCond %{REQUEST_METHOD} =GET
-RewriteRule ^user/registration_data_edit_request/users_id/([^/\*]+)/fname/([^/\*]+)/lname/([^/\*]+)/user_mail/([^/\*]+)/user_pass/([^/\*]+)/valid_user/([^/\*]+)?$ user/registration_data_edit_request.php?users_id=$1&fname=$2&lname=$3&user_mail=$4&user_pass=$5&valid_user=$6 [L]
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^user/registration_data_edit_request/?$ user/registration_data_edit_request.php [L]
 
-RewriteCond %{REQUEST_METHOD} =GET
-RewriteRule ^user/account_data_edit_request/fname/([^/\*]+)/lname/([^/\*]+)/full_name/([^/\*]+)/street/([^/\*]+)/city/([^/\*]+)/state/([^/\*]+)/country/([^/\*]+)/zip/([^/\*]+)/phone/([^/\*]+)/add_type/([^/\*]+)/account_id/([^/\*]+)/?$ user/account_data_edit_request.php?fname=$1&lname=$2&full_name=$3&street=$4&city=$5&state=$6&country=$7&zip=$8&phone=$9&add_type=$10&account_id=$11 [L]
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^user/account_data_edit_request/?$ user/account_data_edit_request.php [L]
 
 
 RewriteCond %{REQUEST_METHOD} =DELETE
