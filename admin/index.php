@@ -158,11 +158,15 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container2">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View Users</button>
+  <button><i class="fa fa-eye"></i> View Cat</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <button><i class="fa fa-plus-square"></i> Add Cat</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -176,11 +180,15 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container3">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View Users</button>
+  <button><i class="fa fa-eye"></i> View SubCat</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <button><i class='fas fa-plus-square'></i> Add SubCat</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -194,11 +202,15 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container4">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View Users</button>
+  <button><i class="fa fa-eye"></i> View B & I</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <button><i class='fas fa-plus-square'></i> Add B & I</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -212,11 +224,15 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container5">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View Users</button>
+  <button><i class="fa fa-eye"></i> View Prods</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <button><i class='fas fa-user-plus'></i> Add Prods</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -224,17 +240,21 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="hamburger_link_section_inner_container">
   <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(6)">
-  <h2 class="heading_text"><i class="fa fa-television"></i> Sub Prod</h2>
+  <h2 class="heading_text"><i class="fa fa-television"></i> Sub Prods</h2>
   <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow6"></i></span>
   </div>
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container6">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View Users</button>
+  <button><i class="fa fa-eye"></i> View S.Prods</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <button><i class='fas fa-plus-square'></i> Add S.Prods</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -242,17 +262,21 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="hamburger_link_section_inner_container">
   <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(7)">
-  <h2 class="heading_text"><i class="fa fa-file-text-o"></i> Prod's Spec</h2>
+  <h2 class="heading_text"><i class="fa fa-file-text-o"></i> Prod's Specs</h2>
   <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow7"></i></span>
   </div>
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container7">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View Users</button>
+  <button><i class="fa fa-eye"></i> View Specs</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <button><i class='fas fa-plus-square'></i> Add Specs</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -266,11 +290,15 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container8">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View Users</button>
+  <button><i class="fa fa-eye"></i> View FAQ</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <button><i class='fas fa-plus-square'></i> Add FAQ</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -284,11 +312,15 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container9">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View Users</button>
+  <button><i class="fa fa-eye"></i> View S.FAQ</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <button><i class='fas fa-plus-square'></i> Add S.FAQ</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -302,11 +334,15 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container10">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View Users</button>
+  <button><i class="fa fa-eye"></i> View Review</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <button><i class='fas fa-plus-square'></i> Add Review</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -320,11 +356,15 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container11">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View Users</button>
+  <button><i class="fa fa-eye"></i> View S.Review</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Users</button>
+  <button><i class='fas fa-plus-square'></i> Add S.Review</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
