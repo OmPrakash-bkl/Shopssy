@@ -1,7 +1,6 @@
 <?php
 
-include("./connection.php");
-
+include("../connection.php");
 header("Access-Control-Allow-Origin: http://localhost/");
 
 if(isset($_SERVER['REQUEST_METHOD'])) {

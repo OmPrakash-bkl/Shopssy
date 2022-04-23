@@ -36,6 +36,7 @@ document.getElementsByClassName("addresses_sections")[1].style.display = "none";
 
 /* Reset Section End */
 
+/* User Start */
 function showStep1Form(mode) {
 undisplay_displayed_blocked_containers();
 document.getElementsByClassName("add_user_step1_container")[0].style.display="block";
@@ -745,6 +746,52 @@ function deleteDetailOfForm() {
 
 /* Registered Users Edit and Delete Section End */
 
+/* User End */
+
+/* Category Start */
+
+function show_cat() {
+    let responseObj = make_user_details("GET", "../category/category_details/", "");
+display_preLoader();
+let totalC = 0;
+
+responseObj.then((sucvalue) => {
+    unDisplay_preLoader();
+  
+    let resultData = JSON.parse(sucvalue);
+    let table_datas = `<tr><th>S.NO</th>
+    <th>CAT ID</th>
+    <th>CAT TITLE</th>
+    <th>CAT IMG NAME</th>
+    <th>CAT ICON NAME</th>
+    <th>CAT DESCRIPTION</th></tr>`;
+    for(let i = 0; i < resultData.length; i++) {
+        
+        table_datas+=`<tr>
+        <td>${i+1}.</td>
+        <td>${resultData[i].cat_id}</td>
+        <td>${resultData[i].cat_title}</td>
+        <td>${resultData[i].cat_image_name}</td>
+        <td>${resultData[i].cat_icon_name}</td>
+        <td>${resultData[i].cat_name_description}</td>
+        </tr>`;
+        totalC = i;
+    }
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Category Details";
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+    display_blocked_containers("admin_panel_details_table_container"); 
+    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+    display_blocked_containers("table_name_and_other_details_display_container"); 
+    }).catch((rejvalue) => {
+        console.log(rejvalue);
+    }) 
+}
+
+/* Category End */
 
 
 

@@ -4,6 +4,7 @@ RewriteEngine On
 RewriteCond %{REQUEST_METHOD} !^(GET|POST|PUT|DELETE) [NC]
 RewriteRule .* - [F,L]
 
+# User Start
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^user/user_reg_details/?$ user/user_reg_details.php [L]
 
@@ -38,4 +39,12 @@ RewriteRule ^user/account_data_edit_request/?$ user/account_data_edit_request.ph
 RewriteCond %{REQUEST_METHOD} =DELETE
 RewriteRule ^user/user_deletion/user_id/([^/\*]+)?$ user/user_deletion.php?user_id=$1 [L]
 
+# User End
+
+# Category Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^category/category_details/?$ category/category_details.php [L]
+
+# Category End
 
