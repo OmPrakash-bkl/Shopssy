@@ -52,5 +52,11 @@ RewriteRule ^category/insert_cat_data/?$ category/insert_cat_data.php [L]
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^category/check_cat_title/?$ category/check_cat_title.php [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^category/specific_cat_detail/cat_id/([^/\*]+)?$ category/specific_cat_detail.php?cat_id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^category/update_category/?$ category/update_category.php [L]
+
 # Category End
 

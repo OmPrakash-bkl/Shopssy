@@ -166,7 +166,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-edit"></i> Edit & Delete</button>
+  <button onclick="edit_and_delete_category()"><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -512,6 +512,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   
  <center>
  <button type="button" class="add_category_submition_btn">Submit</button>
+ <button type="button" class="add_category_submition_btn2">Submit</button>
  </center>
 </form>
 </div>

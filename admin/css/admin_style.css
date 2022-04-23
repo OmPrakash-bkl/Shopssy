@@ -456,7 +456,7 @@ margin-bottom: 10px;
 }
 
 
-.add_user_next_btn, .add_user_back_btn, .add_user_submit_btn, .add_user_cancel_btn, .add_user_back_btn2, .add_user_next_btn2, .add_user_submit_btn2, .add_user_submition_btn, .add_category_submition_btn {
+.add_user_next_btn, .add_user_back_btn, .add_user_submit_btn, .add_user_cancel_btn, .add_user_back_btn2, .add_user_next_btn2, .add_user_submit_btn2, .add_user_submition_btn, .add_category_submition_btn, .add_category_submition_btn2 {
     margin: 10px 5px;
     padding: 10px 20px;
     color: white;
@@ -474,7 +474,7 @@ margin-bottom: 10px;
     background-color: #d5342e;
 }
 
-.add_user_next_btn:hover, .add_user_back_btn:hover, .add_user_back_btn2:hover, .add_user_next_btn2:hover, .add_user_submition_btn:hover, .add_category_submition_btn:hover {
+.add_user_next_btn:hover, .add_user_back_btn:hover, .add_user_back_btn2:hover, .add_user_next_btn2:hover, .add_user_submition_btn:hover, .add_category_submition_btn:hover, .add_category_submition_btn2:hover {
     background-color: #127cc7;
 }
 .add_user_submit_btn:hover, .add_user_submit_btn2:hover {
@@ -487,7 +487,7 @@ margin-bottom: 10px;
 .error_message_place, .required_field_asterisk_symbol {
     color: red;
 }
-.add_user_back_btn2, .add_user_next_btn2, .add_user_submition_btn, .add_category_submition_btn {
+.add_user_back_btn2, .add_user_next_btn2, .add_user_submition_btn, .add_category_submition_btn, .add_category_submition_btn2 {
     display: none;
 }
 
