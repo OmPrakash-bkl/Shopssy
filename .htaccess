@@ -46,5 +46,11 @@ RewriteRule ^user/user_deletion/user_id/([^/\*]+)?$ user/user_deletion.php?user_
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^category/category_details/?$ category/category_details.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^category/insert_cat_data/?$ category/insert_cat_data.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^category/check_cat_title/?$ category/check_cat_title.php [L]
+
 # Category End
 

@@ -162,7 +162,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-plus-square"></i> Add Cat</button>
+  <button onclick="add_cat()"><i class="fa fa-plus-square"></i> Add Cat</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -413,26 +413,26 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="add_user_step1_container">
 <center>
-    <h1 class="form_title">Add User Form</h1>
+    <h1 class="form_title">User Form</h1>
 </center>
 <form action="" class="add_user_form" method="POST">
 <input type="hidden" id="user_id">
-  <label for="fir_name1">First Name <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <label for="fir_name1">First Name <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="fir_name1" autofocus> <br>
-  <p class="add_user_error_message_place add_user_fname_error_message_place"></p>
-  <label for="las_name1">Last Name <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <p class="error_message_place add_user_fname_error_message_place"></p>
+  <label for="las_name1">Last Name <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="las_name1"> <br>
-  <p class="add_user_error_message_place add_user_lname_error_message_place"></p>
-  <label for="user_email1">Email <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <p class="error_message_place add_user_lname_error_message_place"></p>
+  <label for="user_email1">Email <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="email" id="user_email1"> <br>
-  <p class="add_user_error_message_place add_user_email_error_message_place"></p>
-  <label for="user_pass1">Password <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <p class="error_message_place add_user_email_error_message_place"></p>
+  <label for="user_pass1">Password <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="password" id="user_pass1"> <br>
-  <p class="add_user_error_message_place add_user_password_error_message_place"></p>
-  <label >Is Verified User? <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <p class="error_message_place add_user_password_error_message_place"></p>
+  <label >Is Verified User? <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="radio" name="verified_user" id="yes_verified_user" value="Yes" checked> <label for="yes_verified_user">Yes</label>
   <input type="radio" name="verified_user" id="no_not_verified_user" value="No"> <label for="no_not_verified_user">No</label>
-  <p class="add_user_error_message_place add_user_radio_error_message_place"></p>
+  <p class="error_message_place add_user_radio_error_message_place"></p>
  <center>
  <button type="submit" class="add_user_next_btn">Next</button>
  <button type="submit" class="add_user_next_btn2">Next</button>
@@ -443,36 +443,36 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="add_user_step2_container">
 <center>
-    <h1 class="form_title">Add User Form</h1>
+    <h1 class="form_title">User Form</h1>
 </center>
 <form action="" class="add_user_form" method="POST">
   <input type="hidden" id="account_id">
-<label for="addresses_tag" class="addresses_sections">No of Address <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+<label for="addresses_tag" class="addresses_sections">No of Address <span class="required_field_asterisk_symbol">*</span></label> <br>
   <select id="addresses_tag" class="addresses_sections">
     
   </select> <br>
-<label for="street">Street <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+<label for="street">Street <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="street" autofocus> <br>
-  <p class="add_user_error_message_place add_street_error_message_place"></p>
-  <label for="city">City <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <p class="error_message_place add_street_error_message_place"></p>
+  <label for="city">City <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="city"> <br>
-  <p class="add_user_error_message_place add_city_error_message_place"></p>
-  <label for="state">State <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <p class="error_message_place add_city_error_message_place"></p>
+  <label for="state">State <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="state"> <br>
-  <p class="add_user_error_message_place add_state_error_message_place"></p>
-  <label for="country">Country <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <p class="error_message_place add_state_error_message_place"></p>
+  <label for="country">Country <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="country"> <br>
-  <p class="add_user_error_message_place add_country_error_message_place"></p>
-  <label for="zip">Postal/Zip <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <p class="error_message_place add_country_error_message_place"></p>
+  <label for="zip">Postal/Zip <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="zip"> <br>
-  <p class="add_user_error_message_place add_zip_error_message_place"></p>
-  <label for="phone">Phone <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <p class="error_message_place add_zip_error_message_place"></p>
+  <label for="phone">Phone <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="phone"> <br>
-  <p class="add_user_error_message_place add_phone_error_message_place"></p>
-  <label>Address Type <span class="add_user_required_field_asterisk_symbol">*</span></label> <br>
+  <p class="error_message_place add_phone_error_message_place"></p>
+  <label>Address Type <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="radio" name="add_type" id="default_add" value="default" checked> <label for="default_add">Default</label>
   <input type="radio" name="add_type" id="secondary_add" value="secondary"> <label for="secondary_add">Secondary</label>
-  <p class="add_user_error_message_place add_user_add_radio_error_message_place"></p>
+  <p class="error_message_place add_user_add_radio_error_message_place"></p>
 <center>
   <button type="button" class="add_user_back_btn" onclick="showStep1Form('insert')">Back</button>
   <button type="button" class="add_user_back_btn2" onclick="showStep1Form('update')">Back</button>
@@ -486,6 +486,39 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </div>
 
 <!-- Add User Form Container End -->
+
+<!-- Add Category Form Container Start -->
+
+<div class="add_category_form_container">
+
+<div class="add_category_step1_container">
+<center>
+    <h1 class="form_title">Category Form</h1>
+</center>
+<form action="" class="add_category_form" method="POST">
+<input type="hidden" id="cat_id">
+  <label for="cat_title">Category Title <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="cat_title" autofocus> <br>
+  <p class="error_message_place cat_name_error_message_place"></p>
+  <label for="cat_image_name">Category Image Name <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="cat_image_name"> <br>
+  <p class="error_message_place category_image_name_error_message_place"></p>
+  <label for="cat_icon_name">Category Icon Name <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="cat_icon_name"> <br>
+  <p class="error_message_place cat_icon_name_error_message_place"></p>
+  <label for="cat_name_desc">Category Description <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="cat_name_desc"> <br>
+  <p class="error_message_place cat_name_desc_error_message_place"></p>
+  
+ <center>
+ <button type="button" class="add_category_submition_btn">Submit</button>
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- Add Category Form Container End -->
 
 </div>
 

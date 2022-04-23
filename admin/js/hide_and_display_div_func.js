@@ -210,7 +210,7 @@ responseObj.then((sucvalue) => {
 
 /* Add User Form Section Start */
 function add_users() {
-    document.getElementsByClassName("form_title")[0].innerHTML = "Add User Form";
+    document.getElementsByClassName("form_title")[0].innerHTML = "User Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementById("fir_name1").value = document.getElementById("las_name1").value = document.getElementById("user_email1").value = document.getElementById("user_pass1").value = "";
     document.getElementsByClassName("add_user_next_btn")[0].style.display = "inline-block";
@@ -750,6 +750,8 @@ function deleteDetailOfForm() {
 
 /* Category Start */
 
+/* Category View Section Start */
+
 function show_cat() {
     let responseObj = make_user_details("GET", "../category/category_details/", "");
 display_preLoader();
@@ -790,6 +792,121 @@ responseObj.then((sucvalue) => {
         console.log(rejvalue);
     }) 
 }
+
+/* Category View Section End */
+
+/* Category Add Section Start */
+
+function add_cat() {
+    document.getElementsByClassName("form_title")[0].innerHTML = "Category Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementById("cat_title").value = document.getElementById("cat_image_name").value = document.getElementById("cat_icon_name").value = document.getElementById("cat_name_desc").value = "";
+    document.getElementsByClassName("add_category_submition_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_category_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_category_step1_container"); 
+}
+
+document.getElementsByClassName("add_category_submition_btn")[0].addEventListener("click", function(event) {
+category_submission_form(event, "insert");
+});
+
+function category_submission_form(event, decisionPara) {
+event.preventDefault();
+
+let cat_title = document.getElementById("cat_title").value;
+let cat_image_name = document.getElementById("cat_image_name").value;
+let cat_icon_name = document.getElementById("cat_icon_name").value;
+let cat_desc = document.getElementById("cat_name_desc").value;
+
+cat_title = cat_title.replace(/\/+$/g, '');
+cat_image_name = cat_image_name.replace(/\/+$/g, '');
+cat_icon_name = cat_icon_name.replace(/\/+$/g, '');
+cat_desc = cat_desc.replace(/\/+$/g, '');
+cat_title = cat_title.replace(/[^a-zA-Z0-9@.& ]/g, "");
+cat_image_name = cat_image_name.replace(/[^a-zA-Z0-9@. ]/g, "");
+cat_icon_name = cat_icon_name.replace(/[^a-zA-Z0-9- ]/g, "");
+cat_desc = cat_desc.replace(/[^a-zA-Z0-9@.,  ]/g, "");
+
+if(cat_title == "") {
+    document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "Category Name is required!";
+} else if(cat_title.length <= 5) {
+    document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "Category Name length must be minimum 6 characters!";
+} else {
+    document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "";
+}
+if(cat_image_name == "") {
+    document.getElementsByClassName("category_image_name_error_message_place")[0].innerText = "Category Image Name is required!";
+} else if(cat_image_name.length <= 5) {
+    document.getElementsByClassName("category_image_name_error_message_place")[0].innerText = "Category Image Name length must be minimum 6 characters!";
+} else {
+    document.getElementsByClassName("category_image_name_error_message_place")[0].innerText = "";
+}
+if(cat_icon_name == "") {
+    document.getElementsByClassName("cat_icon_name_error_message_place")[0].innerText = "Category Icon Name is required!";
+} else if(cat_icon_name.length <= 6) {
+    document.getElementsByClassName("cat_icon_name_error_message_place")[0].innerText = "Category Icon Name length must be minimum 7 characters!";
+} else {
+    document.getElementsByClassName("cat_icon_name_error_message_place")[0].innerText = "";
+}
+if(cat_desc == "") {
+    document.getElementsByClassName("cat_name_desc_error_message_place")[0].innerText = "Category Description is required!";
+} else if(cat_desc.length <= 6) {
+    document.getElementsByClassName("cat_name_desc_error_message_place")[0].innerText = "Category Description length must be minimum 7 characters!";
+} else {
+    document.getElementsByClassName("cat_name_desc_error_message_place")[0].innerText = "";
+}
+
+if((document.getElementsByClassName("cat_name_error_message_place")[0].innerText == "") && (document.getElementsByClassName("category_image_name_error_message_place")[0].innerText == "") && (document.getElementsByClassName("cat_icon_name_error_message_place")[0].innerText == "") && (document.getElementsByClassName("cat_name_desc_error_message_place")[0].innerText == "")) {
+
+    let categoryDataObj = {
+        cat_title: cat_title,
+    }
+    categoryDataObj = JSON.stringify(categoryDataObj);
+    display_preLoader();
+    let categoryTitleCheckerRes = make_user_details("POST", "../category/check_cat_title/", `${categoryDataObj}`);
+
+    
+    categoryTitleCheckerRes.then((response) => {
+        unDisplay_preLoader();
+        let avail_count = response;
+    if(avail_count == 0) {
+        document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "";
+    categoryDataObj = {
+        cat_title: cat_title,
+        cat_image_name: cat_image_name,
+        cat_icon_name: cat_icon_name,
+        cat_desc: cat_desc
+    }
+
+    categoryDataObj = JSON.stringify(categoryDataObj);
+
+    display_preLoader();
+    if(decisionPara == "insert") {
+        let categoryInsertDatasRes = make_user_details("POST", "../category/insert_cat_data/", `${categoryDataObj}`);
+
+        categoryInsertDatasRes.then((goodResponse) => {
+            unDisplay_preLoader();
+            alert(goodResponse);
+       document.getElementById("cat_title").value = document.getElementById("cat_image_name").value = document.getElementById("cat_icon_name").value = document.getElementById("cat_name_desc").value = "";
+        }).catch((badResponse) => {
+            console.log(badResponse);
+        })
+   
+    }
+
+    } else {
+        document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "Category Name already exits!";
+    }
+
+    })
+    
+    
+
+    
+  }
+}
+
+/* Category Add Section End */
 
 /* Category End */
 

@@ -429,23 +429,23 @@ margin: 5px;
 
 /* Admin Panel Adding User Container Start */
 
-.add_user_form_container {
+.add_user_form_container, .add_category_form_container {
     border: 1px solid green;
 }
-.add_user_step1_container, .add_user_step2_container {
+.add_user_step1_container, .add_user_step2_container, .add_category_step1_container {
     width: 60%;
     text-align: left;
     border: 1px solid red;
     display: none;
 }
  
-.add_user_form > label {
+.add_user_form > label, .add_category_form > label {
     display: inline-block;
     font-size: 15px;
     color: rgb(109, 109, 109);
     margin: 5px 20px 5px 0px;
 }
-.add_user_form > input[type="text"], .add_user_form > input[type="email"], .add_user_form > input[type="password"], .add_user_form > select {
+.add_user_form > input[type="text"], .add_user_form > input[type="email"], .add_user_form > input[type="password"], .add_user_form > select, .add_category_form > input[type="text"] {
 width: 100%;
 border: 1px solid gainsboro;
 padding: 0px 10px;
@@ -456,7 +456,7 @@ margin-bottom: 10px;
 }
 
 
-.add_user_next_btn, .add_user_back_btn, .add_user_submit_btn, .add_user_cancel_btn, .add_user_back_btn2, .add_user_next_btn2, .add_user_submit_btn2, .add_user_submition_btn {
+.add_user_next_btn, .add_user_back_btn, .add_user_submit_btn, .add_user_cancel_btn, .add_user_back_btn2, .add_user_next_btn2, .add_user_submit_btn2, .add_user_submition_btn, .add_category_submition_btn {
     margin: 10px 5px;
     padding: 10px 20px;
     color: white;
@@ -474,7 +474,7 @@ margin-bottom: 10px;
     background-color: #d5342e;
 }
 
-.add_user_next_btn:hover, .add_user_back_btn:hover, .add_user_back_btn2:hover, .add_user_next_btn2:hover, .add_user_submition_btn:hover {
+.add_user_next_btn:hover, .add_user_back_btn:hover, .add_user_back_btn2:hover, .add_user_next_btn2:hover, .add_user_submition_btn:hover, .add_category_submition_btn:hover {
     background-color: #127cc7;
 }
 .add_user_submit_btn:hover, .add_user_submit_btn2:hover {
@@ -484,10 +484,10 @@ margin-bottom: 10px;
     background-color: #c2302b;
 }
 
-.add_user_error_message_place, .add_user_required_field_asterisk_symbol {
+.error_message_place, .required_field_asterisk_symbol {
     color: red;
 }
-.add_user_back_btn2, .add_user_next_btn2, .add_user_submition_btn {
+.add_user_back_btn2, .add_user_next_btn2, .add_user_submition_btn, .add_category_submition_btn {
     display: none;
 }
 
@@ -570,7 +570,7 @@ margin-bottom: 10px;
     .admin_panel_body_content_container {
         flex:55%;
     }
-    .add_user_step1_container, .add_user_step2_container {
+    .add_user_step1_container, .add_user_step2_container, .add_category_step1_container {
         width: 80%;
     }
     
@@ -611,7 +611,7 @@ margin: 4px auto;
     display: block;
 }
 
-.add_user_step1_container, .add_user_step2_container {
+.add_user_step1_container, .add_user_step2_container, .add_category_step1_container {
     width: 90%;
 }
 
