@@ -58,5 +58,8 @@ RewriteRule ^category/specific_cat_detail/cat_id/([^/\*]+)?$ category/specific_c
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^category/update_category/?$ category/update_category.php [L]
 
+RewriteCond %{REQUEST_METHOD} =DELETE
+RewriteRule ^category/category_deletion/cat_id/([^/\*]+)?$ category/category_deletion.php?cat_id=$1 [L]
+
 # Category End
 

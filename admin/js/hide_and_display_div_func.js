@@ -905,17 +905,22 @@ if((document.getElementsByClassName("cat_name_error_message_place")[0].innerText
     }
    
     if(decisionPara == "update") {
-        document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "";
-        let categoryUpdateDatasRes = make_user_details("POST", "../category/update_category/", `${categoryDataObj}`);
-
-        categoryUpdateDatasRes.then((goodResponse) => {
-            unDisplay_preLoader();
-            alert(goodResponse);
-       document.getElementById("cat_title").value = document.getElementById("cat_image_name").value = document.getElementById("cat_icon_name").value = document.getElementById("cat_name_desc").value = "";
-        }).catch((badResponse) => {
-            console.log(badResponse);
-        })
-   
+        if(avail_count >= 1) {
+            document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "Category Name already exits!";
+        } else {
+            document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "";
+            document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "";
+            let categoryUpdateDatasRes = make_user_details("POST", "../category/update_category/", `${categoryDataObj}`);
+    
+            categoryUpdateDatasRes.then((goodResponse) => {
+                unDisplay_preLoader();
+                alert(goodResponse);
+           document.getElementById("cat_title").value = document.getElementById("cat_image_name").value = document.getElementById("cat_icon_name").value = document.getElementById("cat_name_desc").value = "";
+            }).catch((badResponse) => {
+                console.log(badResponse);
+            })
+        }
+        
     }
 
     })
@@ -994,7 +999,18 @@ document.getElementsByClassName("add_category_submition_btn2")[0].addEventListen
 /* Category Delete Section Start */
 
 function deleteOfSpecCategory(cat_id) {
-
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let categoryDeleteReqObj = make_user_details("DELETE", `../category/category_deletion/cat_id/${cat_id}`, ``);
+        categoryDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            show_cat();
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
+    }
 }
 
 /* Category Delete Section End */
