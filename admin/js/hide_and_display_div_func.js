@@ -909,7 +909,7 @@ if((document.getElementsByClassName("cat_name_error_message_place")[0].innerText
             document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "Category Name already exits!";
         } else {
             document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "";
-            document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "";
+           
             let categoryUpdateDatasRes = make_user_details("POST", "../category/update_category/", `${categoryDataObj}`);
     
             categoryUpdateDatasRes.then((goodResponse) => {
@@ -1019,7 +1019,7 @@ function deleteOfSpecCategory(cat_id) {
 
 /* Sub Category Start */
 
-/* Category Insert Section Start */
+/* Sub Category View Section Start */
 
 function view_sub_cat() {
    
@@ -1066,7 +1066,159 @@ function view_sub_cat() {
  
 }
 
-/* Category Insert Section End */
+/* Sub Category View Section End */
+
+/* Sub Category Insert Section Start */
+
+function add_subcat() {
+    display_preLoader();
+    let retrieveAllCatDetails = make_user_details("GET", "../category/category_details/", "");
+
+    retrieveAllCatDetails.then((resData) => {
+        unDisplay_preLoader();
+     
+        let resultData = JSON.parse(resData);
+        let appendedResultData = `<option value="0">Select Category</option>`;
+        for(let i = 0; i < resultData.length; i++) {
+            appendedResultData+=`<option value=${resultData[i].cat_id}>${resultData[i].cat_title}</option>`;
+        }
+        appendedResultData+=`<option value="add_cat">Add New Category</option>`;
+    document.getElementById("cats_id").innerHTML = appendedResultData;
+    
+    document.getElementsByClassName("form_title")[0].innerHTML = "Sub Category Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementById("sub_cat_identification_id").value = document.getElementById("sub_cat_identification_id_two").value = document.getElementById("sub_cat_title").value = document.getElementById("sub_cat_image_name").value = "";
+    document.getElementsByClassName("add_sub_category_submition_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_sub_category_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_sub_category_step1_container"); 
+    document.getElementsByClassName("add_sub_category_submition_btn2")[0].style.display = "none";
+    document.getElementsByClassName("add_sub_category_submition_btn")[0].style.display = "inline-block";
+    }).catch((errData) => {
+        console.log(errData);
+    })
+       
+}
+
+let sub_cats_id = 0;
+document.getElementById("cats_id").addEventListener("change" , function() {
+    
+    if(this.value == 0) {
+        document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "Select Category!";
+    } else if(this.value == "add_cat") {
+        document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "";
+        add_cat();
+      
+    } else {
+        document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "";
+        sub_cats_id = this.value;
+    }
+   
+});
+
+document.getElementsByClassName("add_sub_category_submition_btn")[0].addEventListener("click", function(event) {
+    sub_category_submission_form(event, "insert");    
+});
+    
+    function sub_category_submission_form(event, decisionPara) {
+    event.preventDefault();
+    
+    let cats_id = sub_cats_id;
+    let sub_cat_identification_id = document.getElementById("sub_cat_identification_id").value;
+    let sub_cat_identification_id_two = document.getElementById("sub_cat_identification_id_two").value;
+    let sub_cat_title = document.getElementById("sub_cat_title").value;
+    let sub_cat_image_name = document.getElementById("sub_cat_image_name").value;
+    
+    sub_cat_title = sub_cat_title.replace(/\/+$/g, '');
+    sub_cat_image_name = sub_cat_image_name.replace(/\/+$/g, '');
+    sub_cat_title = sub_cat_title.replace(/[^a-zA-Z0-9@.& ]/g, "");
+    sub_cat_image_name = sub_cat_image_name.replace(/[^a-zA-Z0-9@. ]/g, "");
+    
+    if(sub_cats_id == 0) {
+        document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "Select Category!";
+    } else {
+        document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "";
+    }
+    if(sub_cat_title == "") {
+        document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Sub Category Name is required!";
+    } else if(sub_cat_title.length <= 5) {
+        document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Sub Category Name length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "";
+    }
+    if(sub_cat_image_name == "") {
+        document.getElementsByClassName("sub_category_image_name_error_message_place")[0].innerText = "Sub Category Image Name is required!";
+    } else if(sub_cat_image_name.length <= 5) {
+        document.getElementsByClassName("sub_category_image_name_error_message_place")[0].innerText = "Sub Category Image Name length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("sub_category_image_name_error_message_place")[0].innerText = "";
+    }
+   
+    if((document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText == "") && (document.getElementsByClassName("sub_category_image_name_error_message_place")[0].innerText == "") && (document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText == "")) {
+    
+        let subCategoryDataObj = {
+            sub_cat_title: sub_cat_title
+        }
+        subCategoryDataObj = JSON.stringify(subCategoryDataObj);
+        display_preLoader();
+        let subCategoryTitleCheckerRes = make_user_details("POST", "../sub_category/check_subcat_title/", `${subCategoryDataObj}`);
+    
+        
+        subCategoryTitleCheckerRes.then((response) => {
+            unDisplay_preLoader();
+            let avail_count = response;
+            subCategoryDataObj = {
+                cats_id: cats_id,
+                sub_cat_identification_id: sub_cat_identification_id,
+                sub_cat_identification_id_two: sub_cat_identification_id_two,
+                sub_cat_title: sub_cat_title,
+                sub_cat_image_name: sub_cat_image_name
+            }
+           
+            subCategoryDataObj = JSON.stringify(subCategoryDataObj);
+    
+        if(avail_count == 0 && decisionPara == "insert") {
+            document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "";
+            display_preLoader();
+            if(decisionPara == "insert") {
+                let subCategoryInsertDatasRes = make_user_details("POST", "../sub_category/insert_subcat_data/", `${subCategoryDataObj}`);
+        
+                subCategoryInsertDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    document.getElementById("sub_cat_identification_id").value = document.getElementById("sub_cat_identification_id_two").value = document.getElementById("sub_cat_title").value = document.getElementById("sub_cat_image_name").value = "";
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+           
+            }
+        } else {
+            document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Category Name already exits!";
+        }
+       
+        if(decisionPara == "update") {
+            if(avail_count >= 1) {
+                document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Category Name already exits!";
+            } else {
+                document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "";
+               
+                let subCategoryUpdateDatasRes = make_user_details("POST", "../sub_category/update_subcategory/", `${subCategoryDataObj}`);
+        
+                subCategoryUpdateDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    document.getElementById("sub_cat_identification_id").value = document.getElementById("sub_cat_identification_id_two").value = document.getElementById("sub_cat_title").value = document.getElementById("sub_cat_image_name").value = "";
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
+            
+        }
+    
+        })
+      }
+    }
+
+/* Sub Category Insert Section End */
 
 /* Sub Category End */
 
