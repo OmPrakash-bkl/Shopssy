@@ -11,6 +11,7 @@ if(isset($_SERVER['REQUEST_METHOD'])) {
  
   $cats_id = $inputData['cats_id'];
   $sub_cat_identification_id = $inputData['sub_cat_identification_id'];
+  
   $sub_cat_identification_id_two = $inputData['sub_cat_identification_id_two'];
   $sub_cat_title = $inputData['sub_cat_title'];
   $sub_cat_image_name = $inputData['sub_cat_image_name'];

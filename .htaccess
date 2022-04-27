@@ -74,5 +74,9 @@ RewriteRule ^sub_category/check_subcat_title/?$ sub_category/check_subcat_title.
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^sub_category/insert_subcat_data/?$ sub_category/insert_subcat_data.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^sub_category/get_sciidandsciidit/?$ sub_category/get_sciidandsciidit.php [L]
+
+
 # Sub Category End
 

@@ -1100,6 +1100,7 @@ function add_subcat() {
 }
 
 let sub_cats_id = 0;
+
 document.getElementById("cats_id").addEventListener("change" , function() {
     
     if(this.value == 0) {
@@ -1111,6 +1112,34 @@ document.getElementById("cats_id").addEventListener("change" , function() {
     } else {
         document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "";
         sub_cats_id = this.value;
+        input_id = {
+            cats_id: sub_cats_id
+        }
+     
+        input_id = JSON.stringify(input_id);
+        display_preLoader();
+        let subCategoryTitleCheckerRes = make_user_details("POST", "../sub_category/get_sciidandsciidit/", `${input_id}`);
+    
+        
+        subCategoryTitleCheckerRes.then((response) => {
+       
+            let sub_cat_identification_id_and_sub_cat_identification_id_two_array = JSON.parse(response);
+         
+            if(sub_cat_identification_id_and_sub_cat_identification_id_two_array[0] == `${Math.trunc(sub_cat_identification_id_and_sub_cat_identification_id_two_array[0])}.9`) {
+            final_sub_cat_identification_id = Number(Math.trunc(sub_cat_identification_id_and_sub_cat_identification_id_two_array[0])) + 1 + '.0';
+            } else if(sub_cat_identification_id_and_sub_cat_identification_id_two_array[0] == 0 || sub_cat_identification_id_and_sub_cat_identification_id_two_array[0] == null) {
+                final_sub_cat_identification_id = 1.1;
+            } else {
+                final_sub_cat_identification_id = Number(sub_cat_identification_id_and_sub_cat_identification_id_two_array[0]) + 0.1;
+            }
+            
+            document.getElementById("sub_cat_identification_id").value = final_sub_cat_identification_id;
+            document.getElementById("sub_cat_identification_id_two").value  = Number(sub_cat_identification_id_and_sub_cat_identification_id_two_array[1].last_sub_cat_identification_id_two) + 1;
+           
+            unDisplay_preLoader();
+        }).catch((errData) => {
+            console.log(errData);
+        });
     }
    
 });
@@ -1175,7 +1204,7 @@ document.getElementsByClassName("add_sub_category_submition_btn")[0].addEventLis
             }
            
             subCategoryDataObj = JSON.stringify(subCategoryDataObj);
-    
+            
         if(avail_count == 0 && decisionPara == "insert") {
             document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "";
             display_preLoader();
