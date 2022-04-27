@@ -1015,8 +1015,59 @@ function deleteOfSpecCategory(cat_id) {
 
 /* Category Delete Section End */
 
-
 /* Category End */
 
+/* Sub Category Start */
+
+/* Category Insert Section Start */
+
+function view_sub_cat() {
+   
+        let responseObj = make_user_details("GET", "../sub_category/sub_cat_details/", "");
+    display_preLoader();
+    let totalC = 0;
+    
+    responseObj.then((sucvalue) => {
+        unDisplay_preLoader();
+      
+        let resultData = JSON.parse(sucvalue);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>SUB.CAT ID</th>
+        <th>CAT ID</th>
+        <th>SUB.CAT ID - 1</th>
+        <th>SUB.CAT ID - 2</th>
+        <th>TITLE</th>
+        <th>IMG NAME</th></tr>`;
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].sub_cat_id}</td>
+            <td>${resultData[i].cats_id}</td>
+            <td>${resultData[i].sub_cat_identification_id}</td>
+            <td>${resultData[i].sub_cat_identification_id_two}</td>
+            <td>${resultData[i].subs_cat_title}</td>
+            <td>${resultData[i].sub_cat_image_name}</td>
+            </tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Sub Category Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+        }).catch((rejvalue) => {
+            console.log(rejvalue);
+        }) 
+ 
+}
+
+/* Category Insert Section End */
+
+/* Sub Category End */
 
 

@@ -63,3 +63,10 @@ RewriteRule ^category/category_deletion/cat_id/([^/\*]+)?$ category/category_del
 
 # Category End
 
+# Sub Category Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^sub_category/sub_cat_details/?$ sub_category/sub_cat_details.php [L]
+
+# Sub Category End
+
