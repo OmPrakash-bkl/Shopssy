@@ -88,3 +88,10 @@ RewriteRule ^sub_category/sub_category_deletion/subcat_id/([^/\*]+)?$ sub_catego
 
 # Sub Category End
 
+# Brand And Item Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^brand_and_items/b_and_i_details/?$ brand_and_items/b_and_i_details.php [L]
+
+# Brand And Item End
+

@@ -202,7 +202,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container4">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View B & I</button>
+  <button onclick="show_BandI()"><i class="fa fa-eye"></i> View B & I</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -228,7 +228,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-user-plus'></i> Add Prods</button>
+  <button><i class='fas fa-plus-square'></i> Add Prods</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -546,6 +546,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
  <center>
  <button type="button" class="add_sub_category_submition_btn">Submit</button>
  <button type="button" class="add_sub_category_submition_btn2">Submit</button>
+ 
  </center>
 </form>
 </div>
