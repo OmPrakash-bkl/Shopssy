@@ -800,7 +800,7 @@ responseObj.then((sucvalue) => {
 /* Category Add & Edit Section Start */
 
 function add_cat() {
-    document.getElementsByClassName("form_title")[0].innerHTML = "Category Form";
+    document.getElementsByClassName("form_title1")[0].innerHTML = "Category Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementById("cat_title").value = document.getElementById("cat_image_name").value = document.getElementById("cat_icon_name").value = document.getElementById("cat_name_desc").value = "";
     document.getElementsByClassName("add_category_submition_btn")[0].style.display = "inline-block";
@@ -984,7 +984,7 @@ function editOfSpecCategory(cat_id) {
         document.getElementById("cat_name_desc").value = categoryData.cat_name_description;
        
     })
-    document.getElementsByClassName("form_title")[0].innerHTML = "Edit Category Form";
+    document.getElementsByClassName("form_title1")[0].innerHTML = "Edit Category Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementsByClassName("add_category_step1_container")[0].style.display = "block";
     display_blocked_containers("add_category_step1_container"); 
@@ -1087,7 +1087,7 @@ function add_subcat() {
         appendedResultData+=`<option value="add_cat">Add New Category</option>`;
     document.getElementById("cats_id").innerHTML = appendedResultData;
     
-    document.getElementsByClassName("form_title")[0].innerHTML = "Sub Category Form";
+    document.getElementsByClassName("form_title2")[0].innerHTML = "Sub Category Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementById("sub_cat_identification_id").value = document.getElementById("sub_cat_identification_id_two").value = document.getElementById("sub_cat_title").value = document.getElementById("sub_cat_image_name").value = "";
     document.getElementsByClassName("add_sub_category_submition_btn")[0].style.display = "inline-block";
@@ -1322,7 +1322,7 @@ function editOfSpecSubCategory(sub_cat_id) {
         document.getElementById("sub_cat_image_name").value = SubcategoryData.sub_cat_image_name; 
        
     })
-    document.getElementsByClassName("form_title")[0].innerHTML = "Edit Sub Category Form";
+    document.getElementsByClassName("form_title2")[0].innerHTML = "Edit Sub Category Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementsByClassName("add_sub_category_step1_container")[0].style.display = "block";
     display_blocked_containers("add_sub_category_step1_container"); 
@@ -1354,7 +1354,7 @@ function deleteOfSpecSubCategory(sub_cat_id) {
 
 /* Sub Category End */
 
-/* Brand And Item Insert Section Start */
+/* Brand And Item View Section Start */
 
 function show_BandI() {
     let responseObj = make_user_details("GET", "../brand_and_items/b_and_i_details/", "");
@@ -1402,6 +1402,58 @@ function show_BandI() {
             console.log(rejvalue);
         }) 
  
+}
+
+/* Brand And Item View Section End */
+
+/* Brand And Item Insert Section Start */
+
+function add_BandI() {
+   
+    display_preLoader();
+    let retrieveAllCatDetails1 = make_user_details("GET", "../category/category_details/", "");
+
+    retrieveAllCatDetails1.then((resData) => {
+        unDisplay_preLoader();
+     
+        let resultData = JSON.parse(resData);
+        let appendedResultData = `<option value="0">Select Category</option>`;
+        for(let i = 0; i < resultData.length; i++) {
+            appendedResultData+=`<option value=${resultData[i].cat_id}>${resultData[i].cat_title}</option>`;
+        }
+        appendedResultData+=`<option value="add_cat">Add New Category</option>`;
+    document.getElementById("category_id").innerHTML = appendedResultData;
+
+    let retrieveAllCatDetails2 = make_user_details("GET", "../sub_category/sub_cat_details/", "");
+
+    retrieveAllCatDetails2.then((resData) => {
+        unDisplay_preLoader();
+     
+        let resultData = JSON.parse(resData);
+        let appendedResultData = `<option value="0">Select Sub Category</option>`;
+        for(let i = 0; i < resultData.length; i++) {
+            appendedResultData+=`<option value=${resultData[i].subs_cat_id}>${resultData[i].subs_cat_title}</option>`;
+        }
+        appendedResultData+=`<option value="add_subcat">Add New Sub Category</option>`;
+    document.getElementById("sub_category_id").innerHTML = appendedResultData;
+
+    document.getElementsByClassName("form_title3")[0].innerHTML = "Brand And Item Add Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementById("sub_cat_identification_id_2").value = document.getElementById("sub_cat_identification_id_two_2").value = document.getElementById("b_and_i_identification_id").value = document.getElementById("brand_name").value = document.getElementById("brand_sub_name1").value = document.getElementById("brand_sub_name2").value = "";
+   
+    document.getElementsByClassName("add_bandi_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_bandi_step1_container"); 
+    document.getElementsByClassName("brand_and_item_submition_btn2")[0].style.display = "none";
+    document.getElementsByClassName("brand_and_item_submition_btn")[0].style.display = "inline-block";
+
+    }).catch((errData) => {
+        console.log(errData);
+    })
+    
+    }).catch((errData) => {
+        console.log(errData);
+    })
+       
 }
 
 /* Brand And Item Insert Section End */

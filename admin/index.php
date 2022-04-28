@@ -206,7 +206,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-plus-square'></i> Add B & I</button>
+  <button onclick="add_BandI()"><i class='fas fa-plus-square'></i> Add B & I</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -493,7 +493,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="add_category_step1_container">
 <center>
-    <h1 class="form_title">Category Form</h1>
+    <h1 class="form_title1">Category Form</h1>
 </center>
 <form action="" class="add_category_form" method="POST">
 <input type="hidden" id="cat_id">
@@ -527,7 +527,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="add_sub_category_step1_container">
 <center>
-    <h1 class="form_title">Sub Category Form</h1>
+    <h1 class="form_title2">Sub Category Form</h1>
 </center>
 <form action="" class="add_sub_category_form" method="POST">
   <select id="cats_id">
@@ -554,6 +554,48 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </div>
 
 <!-- Add Sub Category Form Container End -->
+
+<!-- Add B and I Form Container Start -->
+
+<div class="add_bandi_form_container">
+
+<div class="add_bandi_step1_container">
+<center>
+    <h1 class="form_title3">Brand And Items Add Form</h1>
+</center>
+<form action="" class="add_bandi_form" method="POST">
+  <select id="category_id">
+
+  </select> <br>
+  <p class="error_message_place category_id_error_message_place"></p> <br>
+  <select id="sub_category_id">
+
+  </select> <br>
+  <p class="error_message_place sub_category_id_error_message_place"></p> <br>
+<input type="hidden" id="sub_cat_identification_id_2">
+<input type="hidden" id="sub_cat_identification_id_two_2">
+<input type="hidden" id="b_and_i_identification_id">
+  <label for="brand_name">Brand Name <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="brand_name" autofocus> <br>
+  <p class="error_message_place brand_name_error_message_place"></p>
+  <label for="brand_sub_name1">Brand Sub Name 1<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="brand_sub_name1"> <br>
+  <p class="error_message_place brand_sub_name1_error_message_place"></p>
+  <label for="brand_sub_name2">Brand Sub Name 2<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="brand_sub_name2"> <br>
+  <p class="error_message_place brand_sub_name2_error_message_place"></p>
+
+ <center>
+ <button type="button" class="brand_and_item_submition_btn">Submit</button>
+ <button type="button" class="brand_and_item_submition_btn2">Submit</button>
+ 
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- Add B and I Form Container End -->
 
 </div>
 
