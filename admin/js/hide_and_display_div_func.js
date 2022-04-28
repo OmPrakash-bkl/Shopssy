@@ -1071,6 +1071,8 @@ function view_sub_cat() {
 /* Sub Category Insert Section Start */
 
 function add_subcat() {
+    document.getElementById("cats_id").style.display = "inline-block";
+    document.getElementsByClassName("sub_cat_id_error_message_place")[0].style.display = "inline-block";
     display_preLoader();
     let retrieveAllCatDetails = make_user_details("GET", "../category/category_details/", "");
 
@@ -1150,8 +1152,12 @@ document.getElementsByClassName("add_sub_category_submition_btn")[0].addEventLis
     
     function sub_category_submission_form(event, decisionPara) {
     event.preventDefault();
-    
+ 
     let cats_id = sub_cats_id;
+    if(decisionPara == "update") {
+     
+        cats_id = document.getElementById("cats_id").value;
+    }
     let sub_cat_identification_id = document.getElementById("sub_cat_identification_id").value;
     let sub_cat_identification_id_two = document.getElementById("sub_cat_identification_id_two").value;
     let sub_cat_title = document.getElementById("sub_cat_title").value;
@@ -1162,7 +1168,7 @@ document.getElementsByClassName("add_sub_category_submition_btn")[0].addEventLis
     sub_cat_title = sub_cat_title.replace(/[^a-zA-Z0-9@.& ]/g, "");
     sub_cat_image_name = sub_cat_image_name.replace(/[^a-zA-Z0-9@. ]/g, "");
     
-    if(sub_cats_id == 0) {
+    if(cats_id == 0) {
         document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "Select Category!";
     } else {
         document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "";
@@ -1221,15 +1227,16 @@ document.getElementsByClassName("add_sub_category_submition_btn")[0].addEventLis
            
             }
         } else {
-            document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Category Name already exits!";
+            document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Sub Category Name already exits!";
         }
        
         if(decisionPara == "update") {
             if(avail_count >= 1) {
-                document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Category Name already exits!";
+                document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Sub Category Name already exits!";
             } else {
+              
                 document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "";
-               
+                display_preLoader();
                 let subCategoryUpdateDatasRes = make_user_details("POST", "../sub_category/update_subcategory/", `${subCategoryDataObj}`);
         
                 subCategoryUpdateDatasRes.then((goodResponse) => {
@@ -1252,8 +1259,98 @@ document.getElementsByClassName("add_sub_category_submition_btn")[0].addEventLis
 /* Sub Category Edit And Delete Section Start */
 
 function edit_and_delete_of_subcat() {
+   
+        let responseObj = make_user_details("GET", "../sub_category/sub_cat_details/", "");
+    display_preLoader();
+    let totalC = 0;
+    
+    responseObj.then((sucvalue) => {
+        unDisplay_preLoader();
+      
+        let resultData = JSON.parse(sucvalue);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>SUB.CAT ID</th>
+        <th>CAT ID</th>
+        <th>TITLE</th>
+        <th>ACTION</th></tr>`;
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].sub_cat_id}</td>
+            <td>${resultData[i].cats_id}</td>
+            <td>${resultData[i].subs_cat_title}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecSubCategory(${resultData[i].sub_cat_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecSubCategory(${resultData[i].sub_cat_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Sub Category Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+        }).catch((rejvalue) => {
+            console.log(rejvalue);
+        }) 
     
 }
+
+function editOfSpecSubCategory(sub_cat_id) {
+    display_preLoader();
+    let responseObj = make_user_details("GET", `../sub_category/specific_subcat_detail/subcat_id/${sub_cat_id}`, "");
+
+    document.getElementsByClassName("add_sub_category_submition_btn2")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_sub_category_submition_btn")[0].style.display = "none";
+
+   
+
+    responseObj.then((resObj) => {
+        unDisplay_preLoader();
+       let SubcategoryData = JSON.parse(resObj);
+        
+       document.getElementById("cats_id").style.display = "none";
+       document.getElementsByClassName("sub_cat_id_error_message_place")[0].style.display = "none";
+
+        let appendedResultData = ``;
+            appendedResultData+=`<option value=${SubcategoryData.sub_cat_id}>Db Value</option>`;
+        document.getElementById("cats_id").innerHTML = appendedResultData;
+
+        document.getElementById("sub_cat_title").value = SubcategoryData.subs_cat_title;
+        document.getElementById("sub_cat_image_name").value = SubcategoryData.sub_cat_image_name; 
+       
+    })
+    document.getElementsByClassName("form_title")[0].innerHTML = "Edit Sub Category Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("add_sub_category_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_sub_category_step1_container"); 
+}
+
+document.getElementsByClassName("add_sub_category_submition_btn2")[0].addEventListener("click", function(event) {
+   
+    sub_category_submission_form(event, "update");
+    });
+
+
+function deleteOfSpecSubCategory(sub_cat_id) {
+ 
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let subCategoryDeleteReqObj = make_user_details("DELETE", `../sub_category/sub_category_deletion/subcat_id/${sub_cat_id}`, ``);
+        subCategoryDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            view_sub_cat();
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
+    }
+}
+
+
 
 /* Sub Category Edit And Delete Section End */
 

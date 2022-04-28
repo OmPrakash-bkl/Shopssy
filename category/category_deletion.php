@@ -10,7 +10,7 @@ header("Access-Control-Allow_Methods: DELETE");
     $cat_id = $_GET['cat_id'];
     $cat_delete_query = "DELETE FROM `category` WHERE  `cat_id` = $cat_id;";
     mysqli_query($conn, $cat_delete_query); 
-    echo "User Deleted Successfully!";
+    echo "Category Deleted Successfully!";
    
 }
 
