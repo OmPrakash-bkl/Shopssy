@@ -188,7 +188,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-edit"></i> Edit & Delete</button>
+  <button onclick="edit_and_delete_of_subcat()"><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -531,11 +531,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </center>
 <form action="" class="add_sub_category_form" method="POST">
   <select id="cats_id">
-<option value="0">Select Category</option>
-<option value="1">Smartphones & Tablets</option>
-<option value="2">Smartphones & Tablets</option>
-<option value="3">Smartphones & Tablets</option>
-<option value="4">Smartphones & Tablets</option>
+
   </select> <br>
   <p class="error_message_place sub_cat_id_error_message_place"></p> <br>
 <input type="hidden" id="sub_cat_identification_id">

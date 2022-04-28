@@ -1249,6 +1249,15 @@ document.getElementsByClassName("add_sub_category_submition_btn")[0].addEventLis
 
 /* Sub Category Insert Section End */
 
+/* Sub Category Edit And Delete Section Start */
+
+function edit_and_delete_of_subcat() {
+    
+}
+
+/* Sub Category Edit And Delete Section End */
+
+
 /* Sub Category End */
 
 
