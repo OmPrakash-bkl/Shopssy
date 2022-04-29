@@ -86,12 +86,18 @@ RewriteRule ^sub_category/update_subcategory/?$ sub_category/update_subcategory.
 RewriteCond %{REQUEST_METHOD} =DELETE
 RewriteRule ^sub_category/sub_category_deletion/subcat_id/([^/\*]+)?$ sub_category/sub_category_deletion.php?subcat_id=$1 [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^sub_category/set_of_details/cats_id/([^/\*]+)?$ sub_category/set_of_details.php?cats_id=$1 [L]
+
 # Sub Category End
 
 # Brand And Item Start
 
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^brand_and_items/b_and_i_details/?$ brand_and_items/b_and_i_details.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^brand_and_items/get_bandi_id/?$ brand_and_items/get_bandi_id.php [L]
 
 # Brand And Item End
 

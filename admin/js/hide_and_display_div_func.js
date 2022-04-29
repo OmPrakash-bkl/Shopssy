@@ -1409,7 +1409,8 @@ function show_BandI() {
 /* Brand And Item Insert Section Start */
 
 function add_BandI() {
-   
+    document.getElementById("sub_category_id").style.display = "none";
+    document.getElementsByClassName("sub_category_id_error_message_place")[0].style.display = "none";
     display_preLoader();
     let retrieveAllCatDetails1 = make_user_details("GET", "../category/category_details/", "");
 
@@ -1424,19 +1425,7 @@ function add_BandI() {
         appendedResultData+=`<option value="add_cat">Add New Category</option>`;
     document.getElementById("category_id").innerHTML = appendedResultData;
 
-    let retrieveAllCatDetails2 = make_user_details("GET", "../sub_category/sub_cat_details/", "");
-
-    retrieveAllCatDetails2.then((resData) => {
-        unDisplay_preLoader();
-     
-        let resultData = JSON.parse(resData);
-        let appendedResultData = `<option value="0">Select Sub Category</option>`;
-        for(let i = 0; i < resultData.length; i++) {
-            appendedResultData+=`<option value=${resultData[i].subs_cat_id}>${resultData[i].subs_cat_title}</option>`;
-        }
-        appendedResultData+=`<option value="add_subcat">Add New Sub Category</option>`;
-    document.getElementById("sub_category_id").innerHTML = appendedResultData;
-
+    
     document.getElementsByClassName("form_title3")[0].innerHTML = "Brand And Item Add Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementById("sub_cat_identification_id_2").value = document.getElementById("sub_cat_identification_id_two_2").value = document.getElementById("b_and_i_identification_id").value = document.getElementById("brand_name").value = document.getElementById("brand_sub_name1").value = document.getElementById("brand_sub_name2").value = "";
@@ -1446,15 +1435,108 @@ function add_BandI() {
     document.getElementsByClassName("brand_and_item_submition_btn2")[0].style.display = "none";
     document.getElementsByClassName("brand_and_item_submition_btn")[0].style.display = "inline-block";
 
-    }).catch((errData) => {
-        console.log(errData);
-    })
     
     }).catch((errData) => {
         console.log(errData);
     })
        
 }
+
+let sub_cats_id2 = 0;
+
+
+document.getElementById("sub_category_id").addEventListener("change", function() {
+
+    if(this.value == 0) {
+        document.getElementsByClassName("sub_category_id_error_message_place")[0].innerText = "Select Sub Category!";
+        
+    } else if(this.value == "add_subcat") {
+        document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "";
+        add_subcat();
+      
+    } else {
+
+        sub_cat_identification_id = this.value;
+        let input_id = {
+            sub_cat_identification_id: sub_cat_identification_id
+        }
+        document.getElementById("sub_cat_identification_id_2").value = sub_cat_identification_id;
+     
+        input_id = JSON.stringify(input_id);
+      
+        display_preLoader();
+        let bAndICheckerRes = make_user_details("POST", "../brand_and_items/get_bandi_id/", `${input_id}`);
+    
+        
+        bAndICheckerRes.then((response) => {
+       
+            let bAndIId = JSON.parse(response);
+            console.log(bAndIId.subs_cat_identification_id_two_count_val.subs_cat_identification_id_two_count_val);
+          if(bAndIId.subs_cat_identification_id_two_count_val.subs_cat_identification_id_two_count_val) {
+
+
+
+
+
+
+
+              
+            document.getElementById("sub_cat_identification_id_two_2").value = bAndIId.subs_cat_identification_id_two;
+          }
+       
+           
+            unDisplay_preLoader();
+        }).catch((errData) => {
+            console.log(errData);
+        });
+
+     
+       
+    }
+
+})
+
+document.getElementById("category_id").addEventListener("change" , function() {
+    
+    if(this.value == 0) {
+        document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "Select Category!";
+        document.getElementById("sub_category_id").style.display = "none";
+        document.getElementsByClassName("sub_category_id_error_message_place")[0].style.display = "none";
+        
+    } else if(this.value == "add_cat") {
+        document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "";
+        add_cat();
+      
+    } else {
+
+        let retrieveAllCatDetails2 = make_user_details("GET", `../sub_category/set_of_details/cats_id/${this.value}`, "");
+
+    retrieveAllCatDetails2.then((resData) => {
+        unDisplay_preLoader();
+        let resultData = JSON.parse(resData);
+        let appendedResultData = `<option value="0">Select Sub Category</option>`;
+        for(let i = 0; i < resultData.length; i++) {
+            appendedResultData+=`<option value=${resultData[i].sub_cat_identification_id}>${resultData[i].subs_cat_title}</option>`;
+            
+        }
+        appendedResultData+=`<option value="add_subcat">Add New Sub Category</option>`;
+    document.getElementById("sub_category_id").innerHTML = appendedResultData;
+    
+    document.getElementById("sub_category_id").style.display = "inline-block";
+    document.getElementsByClassName("sub_category_id_error_message_place")[0].style.display = "inline-block";
+   
+
+    }).catch((errData) => {
+        console.log(errData);
+    })
+    document.getElementsByClassName("sub_cat_id_error_message_place")[0].innerText = "";
+    }
+   
+});
+
+document.getElementsByClassName("add_sub_category_submition_btn")[0].addEventListener("click", function(event) {
+    sub_category_submission_form(event, "insert");    
+});
 
 /* Brand And Item Insert Section End */
 

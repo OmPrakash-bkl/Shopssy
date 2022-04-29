@@ -566,12 +566,12 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <form action="" class="add_bandi_form" method="POST">
   <select id="category_id">
 
-  </select> <br>
-  <p class="error_message_place category_id_error_message_place"></p> <br>
+  </select> 
+  <p class="error_message_place category_id_error_message_place"></p> 
   <select id="sub_category_id">
 
-  </select> <br>
-  <p class="error_message_place sub_category_id_error_message_place"></p> <br>
+  </select> 
+  <p class="error_message_place sub_category_id_error_message_place"></p> 
 <input type="hidden" id="sub_cat_identification_id_2">
 <input type="hidden" id="sub_cat_identification_id_two_2">
 <input type="hidden" id="b_and_i_identification_id">
