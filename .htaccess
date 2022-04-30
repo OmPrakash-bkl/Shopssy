@@ -99,5 +99,11 @@ RewriteRule ^brand_and_items/b_and_i_details/?$ brand_and_items/b_and_i_details.
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^brand_and_items/get_bandi_id/?$ brand_and_items/get_bandi_id.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^brand_and_items/check_bandi_title/?$ brand_and_items/check_bandi_title.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^brand_and_items/insert_bandi_data/?$ brand_and_items/insert_bandi_data.php [L]
+
 # Brand And Item End
 

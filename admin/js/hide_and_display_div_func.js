@@ -1480,10 +1480,11 @@ document.getElementById("sub_category_id").addEventListener("change", function()
             document.getElementById("b_and_i_identification_id").value = sendingb_and_i_identification_id;
            
           } else {
+              
             document.getElementById("sub_cat_identification_id_2").value = sub_cat_identification_id;
             document.getElementById("sub_cat_identification_id_two_2").value = Number(sub_cat_i_id_two) + 1;
             document.getElementById("b_and_i_identification_id").value = Number(sub_cat_i_id_two) + 0.1;
-            console.log(document.getElementById("b_and_i_identification_id").value);
+          
           }
        
            
@@ -1537,9 +1538,139 @@ document.getElementById("category_id").addEventListener("change" , function() {
    
 });
 
-document.getElementsByClassName("add_sub_category_submition_btn")[0].addEventListener("click", function(event) {
-    sub_category_submission_form(event, "insert");    
+document.getElementsByClassName("brand_and_item_submition_btn")[0].addEventListener("click", function(event) {
+    brand_and_item_submission_form(event, "insert");    
 });
+
+
+function brand_and_item_submission_form(event, decisionPara) {
+    event.preventDefault();
+ 
+    //let cats_id = sub_cats_id;
+    // if(decisionPara == "update") {
+     
+    //     cats_id = document.getElementById("cats_id").value;
+    // }
+    let cats_ids = document.getElementById("category_id").value;
+    let sub_cat_identy_ids = document.getElementById("sub_cat_identification_id_2").value;
+    let sub_cat_identy_ids_two = document.getElementById("sub_cat_identification_id_two_2").value;
+    let b_and_i_ids = document.getElementById("b_and_i_identification_id").value;
+    let b_titles = document.getElementById("brand_name").value;
+    let b_sub_titles = document.getElementById("brand_sub_name1").value;
+    let b_sub_title_two = document.getElementById("brand_sub_name2").value;
+    
+    b_titles = b_titles.replace(/\/+$/g, '');
+    b_sub_titles = b_sub_titles.replace(/\/+$/g, '');
+    b_sub_title_two = b_sub_title_two.replace(/\/+$/g, '');
+    b_titles = b_titles.replace(/[^a-zA-Z0-9@.& ]/g, "");
+    b_sub_titles = b_sub_titles.replace(/[^a-zA-Z0-9@. ]/g, "");
+    b_sub_title_two = b_sub_title_two.replace(/[^a-zA-Z0-9@. ]/g, "");
+    
+    if(cats_ids == 0) {
+        document.getElementsByClassName("category_id_error_message_place")[0].innerText = "Select Category!";
+    } else {
+        document.getElementsByClassName("category_id_error_message_place")[0].innerText = "";
+    }
+     
+    if(sub_cat_identy_ids == 0) {
+        document.getElementsByClassName("sub_category_id_error_message_place")[0].innerText = "Select Sub Category!";
+    } else {
+        document.getElementsByClassName("sub_category_id_error_message_place")[0].innerText = "";
+    }
+    if(b_titles == "") {
+        document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "Brand Name is required!";
+    } else if(b_titles.length <= 5) {
+        document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "Brand Name length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "";
+    }
+    if(b_sub_titles == "") {
+        document.getElementsByClassName("brand_sub_name1_error_message_place")[0].innerText = "Brand Sub Name - 1 is required!";
+    } else if(sub_cat_image_name.length <= 5) {
+        document.getElementsByClassName("brand_sub_name1_error_message_place")[0].innerText = "Brand Sub Name - 1 length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("brand_sub_name1_error_message_place")[0].innerText = "";
+    }
+    if(b_sub_title_two == "") {
+        document.getElementsByClassName("brand_sub_name2_error_message_place")[0].innerText = "Brand Sub Name - 2 is required!";
+    } else if(sub_cat_image_name.length <= 5) {
+        document.getElementsByClassName("brand_sub_name2_error_message_place")[0].innerText = "Brand Sub Name - 2 length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("brand_sub_name2_error_message_place")[0].innerText = "";
+    }
+   
+    if((document.getElementsByClassName("category_id_error_message_place")[0].innerText == "") && (document.getElementsByClassName("sub_category_id_error_message_place")[0].innerText == "") && (document.getElementsByClassName("brand_name_error_message_place")[0].innerText == "")  && (document.getElementsByClassName("brand_sub_name1_error_message_place")[0].innerText == "")  && (document.getElementsByClassName("brand_sub_name2_error_message_place")[0].innerText == "")) {
+    
+        let b_and_i_DataObj = {
+            b_titles: b_titles
+        }
+        b_and_i_DataObj = JSON.stringify(b_and_i_DataObj);
+        display_preLoader();
+        let bandiTitleCheckerRes = make_user_details("POST", "../brand_and_items/check_bandi_title/", `${b_and_i_DataObj}`);
+    
+        
+        bandiTitleCheckerRes.then((response) => {
+            unDisplay_preLoader();
+            let avail_count = response;
+
+
+            bandiDataObj = {
+                cats_ids: cats_ids,
+                sub_cat_identy_ids: sub_cat_identy_ids,
+                sub_cat_identy_ids_two: sub_cat_identy_ids_two,
+                b_and_i_ids: b_and_i_ids,
+                b_titles: b_titles,
+                b_sub_titles: b_sub_titles,
+                b_sub_title_two: b_sub_title_two
+            }
+           
+            bandiDataObj = JSON.stringify(bandiDataObj);
+            
+            
+        if(avail_count == 0 && decisionPara == "insert") {
+            document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "";
+            display_preLoader();
+            if(decisionPara == "insert") {
+                let bandiInsertDatasRes = make_user_details("POST", "../brand_and_items/insert_bandi_data/", `${bandiDataObj}`);
+        
+                bandiInsertDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+
+                    document.getElementById("category_id").value = document.getElementById("sub_cat_identification_id_2").value = document.getElementById("sub_cat_identification_id_two_2").value = document.getElementById("b_and_i_identification_id").value = document.getElementById("brand_name").value = document.getElementById("brand_sub_name1").value = document.getElementById("brand_sub_name2").value= "";
+
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
+        } else {
+            document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "Brand Name already exits!";
+        }
+       
+        // if(decisionPara == "update") {
+        //     if(avail_count >= 1) {
+        //         document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Sub Category Name already exits!";
+        //     } else {
+              
+        //         document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "";
+        //         display_preLoader();
+        //         let subCategoryUpdateDatasRes = make_user_details("POST", "../sub_category/update_subcategory/", `${subCategoryDataObj}`);
+        
+        //         subCategoryUpdateDatasRes.then((goodResponse) => {
+        //             unDisplay_preLoader();
+        //             alert(goodResponse);
+        //             document.getElementById("sub_cat_identification_id").value = document.getElementById("sub_cat_identification_id_two").value = document.getElementById("sub_cat_title").value = document.getElementById("sub_cat_image_name").value = "";
+        //         }).catch((badResponse) => {
+        //             console.log(badResponse);
+        //         })
+        //     }
+            
+        // }
+    
+        })
+      }
+    }
+
 
 /* Brand And Item Insert Section End */
 

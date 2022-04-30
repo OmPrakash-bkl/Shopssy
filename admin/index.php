@@ -571,7 +571,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <select id="sub_category_id">
 
   </select> 
-  <p class="error_message_place sub_category_id_error_message_place"></p> 
+  <p class="error_message_place sub_category_id_error_message_place"></p> <br>
 <input type="hidden" id="sub_cat_identification_id_2">
 <input type="hidden" id="sub_cat_identification_id_two_2">
 <input type="hidden" id="b_and_i_identification_id">
