@@ -210,7 +210,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-edit"></i> Edit & Delete</button>
+  <button onclick="edit_and_delete_of_bandi()"><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -564,6 +564,10 @@ mysqli_query($con, $delete_unfulfill_data_query);
     <h1 class="form_title3">Brand And Items Add Form</h1>
 </center>
 <form action="" class="add_bandi_form" method="POST">
+
+<select id="brands_id">
+
+  </select>
   <select id="category_id">
 
   </select> 

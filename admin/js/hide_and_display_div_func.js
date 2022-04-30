@@ -561,7 +561,7 @@ responseObj.then((sucvalue) => {
 }
 
 function editUserRegistrationAndAccData(user_id) {
-    document.getElementsByClassName("form_title")[0].innerHTML = "Edit User Form";
+    document.getElementsByClassName("form_title")[0].innerHTML = "User Edit Form";
     document.getElementsByClassName("add_user_back_btn")[0].style.display = "none";
     document.getElementsByClassName("add_user_back_btn2")[0].style.display = "inline-block";
     document.getElementsByClassName("add_user_next_btn")[0].style.display = "none";
@@ -697,7 +697,7 @@ function editOfRegisteredUser(users_id) {
         document.getElementById("user_pass1").value = registeredUsersData.password;
 
     })
-    document.getElementsByClassName("form_title")[0].innerHTML = "Edit User Registration Form";
+    document.getElementsByClassName("form_title")[0].innerHTML = "User Registration Edit Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementById("user_email1").disabled = true;
     document.getElementsByClassName("add_user_step1_container")[0].style.display = "block";
@@ -984,7 +984,7 @@ function editOfSpecCategory(cat_id) {
         document.getElementById("cat_name_desc").value = categoryData.cat_name_description;
        
     })
-    document.getElementsByClassName("form_title1")[0].innerHTML = "Edit Category Form";
+    document.getElementsByClassName("form_title1")[0].innerHTML = "Category Edit Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementsByClassName("add_category_step1_container")[0].style.display = "block";
     display_blocked_containers("add_category_step1_container"); 
@@ -1322,7 +1322,7 @@ function editOfSpecSubCategory(sub_cat_id) {
         document.getElementById("sub_cat_image_name").value = SubcategoryData.sub_cat_image_name; 
        
     })
-    document.getElementsByClassName("form_title2")[0].innerHTML = "Edit Sub Category Form";
+    document.getElementsByClassName("form_title2")[0].innerHTML = "Sub Category Edit Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementsByClassName("add_sub_category_step1_container")[0].style.display = "block";
     display_blocked_containers("add_sub_category_step1_container"); 
@@ -1409,6 +1409,9 @@ function show_BandI() {
 /* Brand And Item Insert Section Start */
 
 function add_BandI() {
+    document.getElementById("category_id").style.display = "inline-block";
+   document.getElementsByClassName("category_id_error_message_place")[0].style.display = "inline-block";
+   
     document.getElementById("sub_category_id").style.display = "none";
     document.getElementsByClassName("sub_category_id_error_message_place")[0].style.display = "none";
     display_preLoader();
@@ -1517,11 +1520,13 @@ document.getElementById("category_id").addEventListener("change" , function() {
     retrieveAllCatDetails2.then((resData) => {
         unDisplay_preLoader();
         let resultData = JSON.parse(resData);
+        
         let appendedResultData = `<option value="0">Select Sub Category</option>`;
         for(let i = 0; i < resultData.length; i++) {
-            appendedResultData+=`<option value=${resultData[i].sub_cat_identification_id}>${resultData[i].subs_cat_title}</option>`;
-            sub_cat_i_id_two = resultData[i].sub_cat_identification_id_two;
-            
+          
+                appendedResultData+=`<option value=${resultData[i].sub_cat_identification_id}>${resultData[i].subs_cat_title}</option>`;
+                sub_cat_i_id_two = resultData[i].sub_cat_identification_id_two;
+           
         }
         appendedResultData+=`<option value="add_subcat">Add New Sub Category</option>`;
     document.getElementById("sub_category_id").innerHTML = appendedResultData;
@@ -1544,15 +1549,17 @@ document.getElementsByClassName("brand_and_item_submition_btn")[0].addEventListe
 
 
 function brand_and_item_submission_form(event, decisionPara) {
+   
     event.preventDefault();
  
-    //let cats_id = sub_cats_id;
-    // if(decisionPara == "update") {
-     
-    //     cats_id = document.getElementById("cats_id").value;
-    // }
+    let brand_id = 0;
+   
     let cats_ids = document.getElementById("category_id").value;
     let sub_cat_identy_ids = document.getElementById("sub_cat_identification_id_2").value;
+    if(decisionPara == "update") {
+        brand_id = document.getElementById("brands_id").value;
+        sub_cat_identy_ids = document.getElementById("sub_cat_identification_id_2").value;
+    }
     let sub_cat_identy_ids_two = document.getElementById("sub_cat_identification_id_two_2").value;
     let b_and_i_ids = document.getElementById("b_and_i_identification_id").value;
     let b_titles = document.getElementById("brand_name").value;
@@ -1571,12 +1578,14 @@ function brand_and_item_submission_form(event, decisionPara) {
     } else {
         document.getElementsByClassName("category_id_error_message_place")[0].innerText = "";
     }
-     
-    if(sub_cat_identy_ids == 0) {
-        document.getElementsByClassName("sub_category_id_error_message_place")[0].innerText = "Select Sub Category!";
-    } else {
-        document.getElementsByClassName("sub_category_id_error_message_place")[0].innerText = "";
-    }
+     if(decisionPara == "insert") {
+        if(sub_cat_identy_ids == 0) {
+            document.getElementsByClassName("sub_category_id_error_message_place")[0].innerText = "Select Sub Category!";
+        } else {
+            document.getElementsByClassName("sub_category_id_error_message_place")[0].innerText = "";
+        }
+     }
+   
     if(b_titles == "") {
         document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "Brand Name is required!";
     } else if(b_titles.length <= 5) {
@@ -1615,6 +1624,7 @@ function brand_and_item_submission_form(event, decisionPara) {
 
 
             bandiDataObj = {
+                brand_id: brand_id,
                 cats_ids: cats_ids,
                 sub_cat_identy_ids: sub_cat_identy_ids,
                 sub_cat_identy_ids_two: sub_cat_identy_ids_two,
@@ -1647,25 +1657,25 @@ function brand_and_item_submission_form(event, decisionPara) {
             document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "Brand Name already exits!";
         }
        
-        // if(decisionPara == "update") {
-        //     if(avail_count >= 1) {
-        //         document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Sub Category Name already exits!";
-        //     } else {
+        if(decisionPara == "update") {
+            if(avail_count > 1) {
+                document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "Brand Name already exits!";
+            } else {
               
-        //         document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "";
-        //         display_preLoader();
-        //         let subCategoryUpdateDatasRes = make_user_details("POST", "../sub_category/update_subcategory/", `${subCategoryDataObj}`);
+                document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "";
+                display_preLoader();
+                let bAndIUpdateDatasRes = make_user_details("POST", "../brand_and_items/update_bandi/", `${bandiDataObj}`);
         
-        //         subCategoryUpdateDatasRes.then((goodResponse) => {
-        //             unDisplay_preLoader();
-        //             alert(goodResponse);
-        //             document.getElementById("sub_cat_identification_id").value = document.getElementById("sub_cat_identification_id_two").value = document.getElementById("sub_cat_title").value = document.getElementById("sub_cat_image_name").value = "";
-        //         }).catch((badResponse) => {
-        //             console.log(badResponse);
-        //         })
-        //     }
+                bAndIUpdateDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    document.getElementById("category_id").value = document.getElementById("sub_cat_identification_id_2").value = document.getElementById("sub_cat_identification_id_two_2").value = document.getElementById("b_and_i_identification_id").value = document.getElementById("brand_name").value = document.getElementById("brand_sub_name1").value = document.getElementById("brand_sub_name2").value= "";
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
             
-        // }
+        }
     
         })
       }
@@ -1673,5 +1683,118 @@ function brand_and_item_submission_form(event, decisionPara) {
 
 
 /* Brand And Item Insert Section End */
+
+/* Brand And Item Update and Delete Section Start */
+
+function edit_and_delete_of_bandi() {
+   
+    let responseObj = make_user_details("GET", "../brand_and_items/b_and_i_details/", "");
+display_preLoader();
+let totalC = 0;
+
+responseObj.then((sucvalue) => {
+    unDisplay_preLoader();
+  
+    let resultData = JSON.parse(sucvalue);
+    let table_datas = `<tr><th>S.NO</th>
+    <th>B&I ID</th>
+    <th>B&I SUB ID</th>
+    <th>TITLE</th>
+    <th>SUB TITLE - 1</th>
+    <th>SUB TITLE - 2</th>
+    <th>ACTION</th></tr>`;
+    for(let i = 0; i < resultData.length; i++) {
+        
+        table_datas+=`<tr>
+        <td>${i+1}.</td>
+        <td>${resultData[i].brand_id}</td>
+        <td>${resultData[i].b_and_i_identification_id}</td>
+        <td>${resultData[i].b_title}</td>
+        <td>${resultData[i].b_sub_title}</td>
+        <td>${resultData[i].b_sub_title_two}</td>
+        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecBAndI(${resultData[i].brand_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecBAndI(${resultData[i].brand_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+        totalC = i;
+    }
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Brand And Item Details";
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+    display_blocked_containers("admin_panel_details_table_container"); 
+    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+    display_blocked_containers("table_name_and_other_details_display_container"); 
+    }).catch((rejvalue) => {
+        console.log(rejvalue);
+    }) 
+
+}
+
+function editOfSpecBAndI(bandi_id) {
+display_preLoader();
+let responseObj = make_user_details("GET", `../brand_and_items/specific_bandi_detail/bandi_id/${bandi_id}`, "");
+
+document.getElementsByClassName("brand_and_item_submition_btn2")[0].style.display = "inline-block";
+document.getElementsByClassName("brand_and_item_submition_btn")[0].style.display = "none";
+
+
+
+responseObj.then((resObj) => {
+    unDisplay_preLoader();
+   let bAndIData = JSON.parse(resObj);
+    
+   document.getElementById("category_id").style.display = "none";
+   document.getElementsByClassName("category_id_error_message_place")[0].style.display = "none";
+   document.getElementById("sub_category_id").style.display = "none";
+   document.getElementsByClassName("sub_category_id_error_message_place")[0].style.display = "none";
+
+let brandIdData = ``;
+brandIdData+=`<option value=${bAndIData.brand_id}>Db Value</option>`;
+document.getElementById("brands_id").innerHTML = brandIdData;
+   
+    let categoryData = ``;
+    categoryData+=`<option value=${bAndIData.cats_id}>Db Value</option>`;
+document.getElementById("category_id").innerHTML = categoryData;
+let subCategoryData = ``;
+subCategoryData+=`<option value=${bAndIData.subs_cat_identification_id}>Db Value</option>`;
+document.getElementById("sub_category_id").innerHTML = subCategoryData;
+
+    document.getElementById("b_and_i_identification_id").value = bAndIData.b_and_i_identification_id;
+    document.getElementById("brand_name").value = bAndIData.b_title;
+    document.getElementById("brand_sub_name1").value = bAndIData.b_sub_title;
+    document.getElementById("brand_sub_name2").value = bAndIData.b_sub_title_two;
+    
+   
+})
+document.getElementsByClassName("form_title3")[0].innerHTML = "Brand & Items Edit Form";
+undisplay_displayed_blocked_containers(); 
+document.getElementsByClassName("add_bandi_step1_container")[0].style.display = "block";
+display_blocked_containers("add_bandi_step1_container"); 
+}
+
+document.getElementsByClassName("brand_and_item_submition_btn2")[0].addEventListener("click", function(event) {
+
+    brand_and_item_submission_form(event, "update");
+});
+
+
+function deleteOfSpecBAndI(brand_id) {
+
+let permission = confirm("Are you sure?");
+if(permission) {
+    display_preLoader();
+    let bAndIDeleteReqObj = make_user_details("DELETE", `../brand_and_items/bandi_deletion/brand_id/${brand_id}`, ``);
+    bAndIDeleteReqObj.then((deleteRes) => {
+        unDisplay_preLoader();
+        alert(deleteRes);
+        show_BandI();
+    }).catch((deleteErrRes) => {
+        console.log(deleteErrRes);
+    })
+}
+}
+
+
+/* Brand And Item Update and Delete Section End */
 
 

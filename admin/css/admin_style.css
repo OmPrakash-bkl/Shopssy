@@ -455,13 +455,16 @@ border-radius: 5px;
 margin-bottom: 10px;
 }
 
-#cats_id, #category_id, #sub_category_id {
+#cats_id, #category_id, #sub_category_id, #brands_id {
 width: 100%;
 border: 1px solid gainsboro;
 color: rgb(109, 109, 109);
 height: 30px;
 border-radius: 5px;
 margin-bottom: 10px;
+}
+#brands_id {
+    display: none;
 }
 
 .add_user_next_btn, .add_user_back_btn, .add_user_submit_btn, .add_user_cancel_btn, .add_user_back_btn2, .add_user_next_btn2, .add_user_submit_btn2, .add_user_submition_btn, .add_category_submition_btn, .add_category_submition_btn2, .add_sub_category_submition_btn, .add_sub_category_submition_btn2, .brand_and_item_submition_btn, .brand_and_item_submition_btn2 {
