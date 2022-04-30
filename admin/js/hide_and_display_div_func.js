@@ -1443,7 +1443,7 @@ function add_BandI() {
 }
 
 let sub_cats_id2 = 0;
-
+let sub_cat_i_id_two = 0;
 
 document.getElementById("sub_category_id").addEventListener("change", function() {
 
@@ -1460,7 +1460,6 @@ document.getElementById("sub_category_id").addEventListener("change", function()
         let input_id = {
             sub_cat_identification_id: sub_cat_identification_id
         }
-        document.getElementById("sub_cat_identification_id_2").value = sub_cat_identification_id;
      
         input_id = JSON.stringify(input_id);
       
@@ -1469,19 +1468,22 @@ document.getElementById("sub_category_id").addEventListener("change", function()
     
         
         bAndICheckerRes.then((response) => {
-       
+      
             let bAndIId = JSON.parse(response);
-            console.log(bAndIId.subs_cat_identification_id_two_count_val.subs_cat_identification_id_two_count_val);
-          if(bAndIId.subs_cat_identification_id_two_count_val.subs_cat_identification_id_two_count_val) {
-
-
-
-
-
-
-
-              
+            let givenb_and_i_identification_id = bAndIId.b_and_i_identification_id;
+            givenb_and_i_identification_id = (givenb_and_i_identification_id + "").split(".");
+           let sendingb_and_i_identification_id = givenb_and_i_identification_id[0] + "." +(Number(givenb_and_i_identification_id[1])+1);
+            
+          if(bAndIId.b_and_i_identification_id) {
+            document.getElementById("sub_cat_identification_id_2").value = sub_cat_identification_id;
             document.getElementById("sub_cat_identification_id_two_2").value = bAndIId.subs_cat_identification_id_two;
+            document.getElementById("b_and_i_identification_id").value = sendingb_and_i_identification_id;
+           
+          } else {
+            document.getElementById("sub_cat_identification_id_2").value = sub_cat_identification_id;
+            document.getElementById("sub_cat_identification_id_two_2").value = Number(sub_cat_i_id_two) + 1;
+            document.getElementById("b_and_i_identification_id").value = Number(sub_cat_i_id_two) + 0.1;
+            console.log(document.getElementById("b_and_i_identification_id").value);
           }
        
            
@@ -1517,6 +1519,7 @@ document.getElementById("category_id").addEventListener("change" , function() {
         let appendedResultData = `<option value="0">Select Sub Category</option>`;
         for(let i = 0; i < resultData.length; i++) {
             appendedResultData+=`<option value=${resultData[i].sub_cat_identification_id}>${resultData[i].subs_cat_title}</option>`;
+            sub_cat_i_id_two = resultData[i].sub_cat_identification_id_two;
             
         }
         appendedResultData+=`<option value="add_subcat">Add New Sub Category</option>`;
