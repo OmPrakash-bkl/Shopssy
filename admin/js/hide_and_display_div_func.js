@@ -1864,7 +1864,6 @@ function show_products() {
 /* Products View Section End */
 
 /* Product Add Section Start */
-
 function add_product() {
     document.getElementById("categories_id").style.display = "inline-block";
     document.getElementsByClassName("categories_id_error_message_place")[0].style.display = "inline-block";
@@ -1875,15 +1874,16 @@ function add_product() {
      document.getElementById("bandi_id").style.display = "none";
      document.getElementsByClassName("bandi_id_error_message_place")[0].style.display = "none";
      display_preLoader();
-     let retrieveAllProdDetails1 = make_user_details("GET", "../category/category_details/", "");
+     let retrieveAllCatDetails1 = make_user_details("GET", "../category/category_details/", "");
  
-     retrieveAllProdDetails1.then((resData) => {
+     retrieveAllCatDetails1.then((resData) => {
          unDisplay_preLoader();
       
          let resultData = JSON.parse(resData);
          let appendedResultData = `<option value="0">Select Category</option>`;
          for(let i = 0; i < resultData.length; i++) {
              appendedResultData+=`<option value=${resultData[i].cat_id}>${resultData[i].cat_title}</option>`;
+            
          }
          appendedResultData+=`<option value="add_cat">Add New Category</option>`;
      document.getElementById("categories_id").innerHTML = appendedResultData;
@@ -1903,6 +1903,333 @@ function add_product() {
          console.log(errData);
      })
 }
+
+let sub_cats_id3 = 0;
+let sub_cat_i_id_two2 = 0;
+let sub_cat_i_id_two3 = 0;
+
+
+document.getElementById("sub_categories_id").addEventListener("change", function() {
+
+    if(this.value == 0) {
+        document.getElementsByClassName("sub_categories_id_error_message_place")[0].innerText = "Select Sub Category!";
+        
+    } else if(this.value == "add_subcat") {
+        document.getElementsByClassName("sub_categories_id_error_message_place")[0].innerText = "";
+        add_subcat();
+      
+    } else {
+
+        let retrieveAllBandIDetails1 = make_user_details("GET", `../brand_and_items/set_of_details/sub_c_i_id_two/${this.value}`, "");
+
+        retrieveAllBandIDetails1.then((resData) => {
+            unDisplay_preLoader();
+            let resultData = JSON.parse(resData);
+            
+            let appendedResultData = `<option value="0">Select Brand (OR) Item</option>`;
+            for(let i = 0; i < resultData.length; i++) {
+              
+                    appendedResultData+=`<option value=${resultData[i].b_and_i_identification_id}>${resultData[i].b_title}</option>`;
+                    sub_cat_i_id_two3 = resultData[i].subs_cat_identification_id_two;
+                    sub_cats_id3 = resultData[i].subs_cat_identification_id;
+                   
+            }
+            appendedResultData+=`<option value="add_BandI">Add New Brand (OR) Item</option>`;
+        document.getElementById("bandi_id").innerHTML = appendedResultData;
+        
+        document.getElementById("bandi_id").style.display = "inline-block";
+        document.getElementsByClassName("bandi_id_error_message_place")[0].style.display = "inline-block";
+       
+    
+        }).catch((errData) => {
+            console.log(errData);
+        })
+        document.getElementsByClassName("bandi_id_error_message_place")[0].innerText = "";
+
+    }
+
+})
+
+document.getElementById("bandi_id").addEventListener("change", function() {
+   
+    if(this.value == 0) {
+        document.getElementsByClassName("bandi_id_error_message_place")[0].innerText = "Select Brand (OR) Item!";
+        
+    } else if(this.value == "add_BandI") {
+        document.getElementsByClassName("bandi_id_error_message_place")[0].innerText = "";
+        add_BandI();
+      
+    } else {
+      
+        let brand_and_item_id = this.value;
+        let input_id = {
+            b_and_i_identification_id: brand_and_item_id,
+            subs_cat_identification_id: sub_cats_id3
+        }
+        document.getElementById("b_and_i_identification_id_3").value = brand_and_item_id;
+        input_id = JSON.stringify(input_id);
+      
+        display_preLoader();
+        let bAndICheckerRes = make_user_details("POST", "../products/get_bandi_id/", `${input_id}`);
+    
+        
+        bAndICheckerRes.then((response) => {
+      console.log(response);
+            let bAndIId = JSON.parse(response);
+            let given_item_id = bAndIId.item_id;
+            given_item_id = (given_item_id + "").split(".");
+           let sending_item_id = given_item_id[0] + "." +(Number(given_item_id[1])+1);
+           
+            let new_item_id = bAndIId.max_val_of_item_id.items_id_count_val;
+            new_item_id = (new_item_id + "").split(".");
+            new_item_id = Number(new_item_id[0]);
+           let newsending_item_id = (new_item_id+1) + ".1";
+           
+           document.getElementById("sub_cat_identification_id_3").value = bAndIId.subs_cat_identification_id;
+           document.getElementById("item_id").value = sending_item_id;
+          if(Number(bAndIId.subs_cat_identification_id)) {
+            console.log(document.getElementById("sub_cat_identification_id_3").value);
+            console.log(document.getElementById("b_and_i_identification_id_3").value);
+            console.log(document.getElementById("item_id").value);
+            console.log(sub_cats_id3);
+          } else {
+            sending_item_id = newsending_item_id;
+            document.getElementById("sub_cat_identification_id_3").value = sub_cats_id3;
+            console.log(sub_cats_id3);
+            document.getElementById("item_id").value = sending_item_id;
+          
+            console.log(document.getElementById("sub_cat_identification_id_3").value);
+            console.log(document.getElementById("b_and_i_identification_id_3").value);
+            console.log(document.getElementById("item_id").value);
+          }
+          document.getElementById("item_id").value = sending_item_id;
+        
+           
+            unDisplay_preLoader();
+        }).catch((errData) => {
+            console.log(errData);
+        });
+
+     
+       
+    }
+
+})
+
+document.getElementById("categories_id").addEventListener("change" , function() {
+    
+    if(this.value == 0) {
+        document.getElementsByClassName("categories_id_error_message_place")[0].innerText = "Select Category!";
+        document.getElementById("sub_categories_id").style.display = "none";
+        document.getElementsByClassName("sub_categories_id_error_message_place")[0].style.display = "none";
+        
+    } else if(this.value == "add_cat") {
+        document.getElementsByClassName("categories_id_error_message_place")[0].innerText = "";
+        add_cat();
+      
+    } else {
+
+        let retrieveAllCatDetails2 = make_user_details("GET", `../sub_category/set_of_details/cats_id/${this.value}`, "");
+
+    retrieveAllCatDetails2.then((resData) => {
+        unDisplay_preLoader();
+        let resultData = JSON.parse(resData);
+        
+        let appendedResultData = `<option value="0">Select Sub Category</option>`;
+        for(let i = 0; i < resultData.length; i++) {
+          
+                appendedResultData+=`<option value=${resultData[i].sub_cat_identification_id_two}>${resultData[i].subs_cat_title}</option>`;
+                sub_cat_i_id_two2 = resultData[i].sub_cat_identification_id_two;
+                
+           
+        }
+        appendedResultData+=`<option value="add_subcat">Add New Sub Category</option>`;
+    document.getElementById("sub_categories_id").innerHTML = appendedResultData;
+    
+    document.getElementById("sub_categories_id").style.display = "inline-block";
+    document.getElementsByClassName("sub_categories_id_error_message_place")[0].style.display = "inline-block";
+   
+
+    }).catch((errData) => {
+        console.log(errData);
+    })
+    document.getElementsByClassName("sub_categories_id_error_message_place")[0].innerText = "";
+    }
+   
+});
+
+document.getElementsByClassName("product_submition_btn")[0].addEventListener("click", function(event) {
+    product_submission_form(event, "insert");    
+});
+
+
+function product_submission_form(event, decisionPara) {
+   
+    event.preventDefault();
+ 
+    let prod_id = 0;
+   
+    let categories_id = document.getElementById("categories_id").value;
+    let sub_categories_id = document.getElementById("sub_cat_identification_id_3").value;
+    if(decisionPara == "update") {
+        prod_id = document.getElementById("prod_id").value;
+    }
+    
+    let b_and_i_ids = document.getElementById("b_and_i_identification_id_3").value;
+    let item_id = document.getElementById("item_id").value;
+    let prod_title = document.getElementById("prod_title").value;
+    let prod_imagename = document.getElementById("prod_imagename").value;
+    let rate_of_prod = document.getElementById("rate_of_prod").value;
+    let original_price = document.getElementById("original_price").value;
+    let offer_price = document.getElementById("offer_price").value;
+    let hot_deal_radio_btn = document.querySelector('input[name="hot_deal_pro"]:checked').value;
+    
+    prod_title = prod_title.replace(/\/+$/g, '');
+    prod_imagename = prod_imagename.replace(/\/+$/g, '');
+    rate_of_prod = rate_of_prod.replace(/\/+$/g, '');
+    original_price = original_price.replace(/\/+$/g, '');
+    offer_price = offer_price.replace(/\/+$/g, '');
+    hot_deal_radio_btn = hot_deal_radio_btn.replace(/\/+$/g, '');
+    console.log(prod_title);
+    // prod_title = prod_title.replace(/[^a-zA-Z0-9@).-,|+"'(& ]/g, "");
+    prod_imagename = prod_imagename.replace(/[^a-zA-Z0-9@. ]/g, "");
+    rate_of_prod = rate_of_prod.replace(/[^a-zA-Z0-9@. ]/g, "");
+    original_price = original_price.replace(/[^a-zA-Z0-9@.& ]/g, "");
+    offer_price = offer_price.replace(/[^a-zA-Z0-9@. ]/g, "");
+    hot_deal_radio_btn = hot_deal_radio_btn.replace(/[^a-zA-Z0-9@. ]/g, "");
+    console.log(prod_title);
+
+    
+    if(categories_id == 0) {
+        document.getElementsByClassName("categories_id_error_message_place")[0].innerText = "Select Category!";
+    } else {
+        document.getElementsByClassName("categories_id_error_message_place")[0].innerText = "";
+    }
+     if(decisionPara == "insert") {
+        if(sub_categories_id == 0) {
+            document.getElementsByClassName("sub_categories_id_error_message_place")[0].innerText = "Select Sub Category!";
+        } else {
+            document.getElementsByClassName("sub_categories_id_error_message_place")[0].innerText = "";
+        }
+     }
+     if(bandi_id == 0) {
+        document.getElementsByClassName("bandi_id_error_message_place")[0].innerText = "Select Brand (OR) Item!";
+    } else {
+        document.getElementsByClassName("bandi_id_error_message_place")[0].innerText = "";
+    }
+   
+    if(prod_title == "") {
+        document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "Product title is required!";
+    } else if(prod_title.length <= 5) {
+        document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "Product title length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "";
+    }
+    if(prod_imagename == "") {
+        document.getElementsByClassName("prod_imagename_error_message_place")[0].innerText = "Product imagename is required!";
+    } else if(prod_imagename.length <= 5) {
+        document.getElementsByClassName("prod_imagename_error_message_place")[0].innerText = "Product imagename length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("prod_imagename_error_message_place")[0].innerText = "";
+    }
+    if(rate_of_prod == "") {
+        document.getElementsByClassName("rate_of_prod_error_message_place")[0].innerText = "Rating of product is required!";
+    } else if(rate_of_prod.length < 1) {
+        document.getElementsByClassName("rate_of_prod_error_message_place")[0].innerText = "Rating of product length must be equal 1 characters!";
+    } else {
+        document.getElementsByClassName("rate_of_prod_error_message_place")[0].innerText = "";
+    }
+    if(original_price == "") {
+        document.getElementsByClassName("original_price_error_message_place")[0].innerText = "Product original price is required!";
+    } else if(original_price.length <= 2) {
+        document.getElementsByClassName("original_price_error_message_place")[0].innerText = "Product original price length must be minimum 2 characters!";
+    } else {
+        document.getElementsByClassName("original_price_error_message_place")[0].innerText = "";
+    }
+    if(offer_price == "") {
+        document.getElementsByClassName("offer_price_error_message_place")[0].innerText = "Product offer price is required!";
+    } else if(offer_price.length <= 2) {
+        document.getElementsByClassName("offer_price_error_message_place")[0].innerText = "Product offer price length must be minimum 2 characters!";
+    } else {
+        document.getElementsByClassName("offer_price_error_message_place")[0].innerText = "";
+    }
+   
+    if((document.getElementsByClassName("categories_id_error_message_place")[0].innerText == "") && (document.getElementsByClassName("sub_categories_id_error_message_place")[0].innerText == "") && (document.getElementsByClassName("bandi_id_error_message_place")[0].innerText == "")  && (document.getElementsByClassName("prod_title_error_message_place")[0].innerText == "")  && (document.getElementsByClassName("prod_imagename_error_message_place")[0].innerText == "")  && (document.getElementsByClassName("rate_of_prod_error_message_place")[0].innerText == "")  && (document.getElementsByClassName("original_price_error_message_place")[0].innerText == "")  && (document.getElementsByClassName("offer_price_error_message_place")[0].innerText == "")) {
+    
+        let prodTitleDataObj = {
+            prod_title: prod_title
+        }
+        prodTitleDataObj = JSON.stringify(prodTitleDataObj);
+        display_preLoader();
+        let prodTitleCheckerRes = make_user_details("POST", "../products/check_prod_title/", `${prodTitleDataObj}`);
+    
+        
+        prodTitleCheckerRes.then((response) => {
+            unDisplay_preLoader();
+            let avail_count = response;
+            console.log(response);
+            prodDataObj = {
+                prod_id: prod_id,
+                categories_id: categories_id,
+                sub_categories_id: sub_categories_id,
+                b_and_i_ids: b_and_i_ids,
+                item_id: item_id,
+                prod_title: prod_title,
+                prod_imagename: prod_imagename,
+                rate_of_prod: rate_of_prod,
+                original_price: original_price,
+                offer_price: offer_price,
+                hot_deal_radio_btn: hot_deal_radio_btn
+            }
+           
+            prodDataObj = JSON.stringify(prodDataObj);
+            console.log(prodDataObj);
+            
+        if(avail_count == 0 && decisionPara == "insert") {
+            document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "";
+            display_preLoader();
+            if(decisionPara == "insert") {
+                let bandiInsertDatasRes = make_user_details("POST", "../products/insert_prod_data/", `${prodDataObj}`);
+        
+                bandiInsertDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+
+                    document.getElementById("categories_id").value = document.getElementById("sub_cat_identification_id_3").value = document.getElementById("b_and_i_identification_id_3").value = document.getElementById("item_id").value = document.getElementById("prod_title").value = document.getElementById("prod_imagename").value = document.getElementById("rate_of_prod").value = document.getElementById("original_price").value = document.getElementById("offer_price").value= "";
+
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
+        } else {
+            document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "Product title already exits!";
+        }
+       
+        // if(decisionPara == "update") {
+        //     if(avail_count > 1) {
+        //         document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "Brand Name already exits!";
+        //     } else {
+              
+        //         document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "";
+        //         display_preLoader();
+        //         let bAndIUpdateDatasRes = make_user_details("POST", "../brand_and_items/update_bandi/", `${bandiDataObj}`);
+        
+        //         bAndIUpdateDatasRes.then((goodResponse) => {
+        //             unDisplay_preLoader();
+        //             alert(goodResponse);
+        //             document.getElementById("category_id").value = document.getElementById("sub_cat_identification_id_2").value = document.getElementById("sub_cat_identification_id_two_2").value = document.getElementById("b_and_i_identification_id").value = document.getElementById("brand_name").value = document.getElementById("brand_sub_name1").value = document.getElementById("brand_sub_name2").value= "";
+        //         }).catch((badResponse) => {
+        //             console.log(badResponse);
+        //         })
+        //     }
+            
+        // }
+    
+        })
+      }
+    }
+
+
 
 /* Product Add Section End */
 

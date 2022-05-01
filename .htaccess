@@ -114,11 +114,24 @@ RewriteRule ^brand_and_items/bandi_deletion/brand_id/([^/\*]+)?$ brand_and_items
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^brand_and_items/update_bandi/?$ brand_and_items/update_bandi.php [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^brand_and_items/set_of_details/sub_c_i_id_two/([^/\*]+)?$ brand_and_items/set_of_details.php?sub_c_i_id_two=$1 [L]
+
+
 # Brand And Item End
 
 # Products Start
 
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^products/product_details/?$ products/product_details.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^products/get_bandi_id/?$ products/get_bandi_id.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^products/check_prod_title/?$ products/check_prod_title.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^products/insert_prod_data/?$ products/insert_prod_data.php [L]
 
 # Products End
