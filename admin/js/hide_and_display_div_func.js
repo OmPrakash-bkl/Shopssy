@@ -1800,6 +1800,7 @@ if(permission) {
 
 /* Brand And Item Section End */
 
+/* Products Section Start */
 
 /* Products View Section Start */
 
@@ -1862,4 +1863,48 @@ function show_products() {
 
 /* Products View Section End */
 
+/* Product Add Section Start */
+
+function add_product() {
+    document.getElementById("categories_id").style.display = "inline-block";
+    document.getElementsByClassName("categories_id_error_message_place")[0].style.display = "inline-block";
+    
+     document.getElementById("sub_categories_id").style.display = "none";
+     document.getElementsByClassName("sub_categories_id_error_message_place")[0].style.display = "none";
+
+     document.getElementById("bandi_id").style.display = "none";
+     document.getElementsByClassName("bandi_id_error_message_place")[0].style.display = "none";
+     display_preLoader();
+     let retrieveAllProdDetails1 = make_user_details("GET", "../category/category_details/", "");
+ 
+     retrieveAllProdDetails1.then((resData) => {
+         unDisplay_preLoader();
+      
+         let resultData = JSON.parse(resData);
+         let appendedResultData = `<option value="0">Select Category</option>`;
+         for(let i = 0; i < resultData.length; i++) {
+             appendedResultData+=`<option value=${resultData[i].cat_id}>${resultData[i].cat_title}</option>`;
+         }
+         appendedResultData+=`<option value="add_cat">Add New Category</option>`;
+     document.getElementById("categories_id").innerHTML = appendedResultData;
+ 
+     
+     document.getElementsByClassName("form_title4")[0].innerHTML = "Product Add Form";
+     undisplay_displayed_blocked_containers(); 
+     document.getElementById("sub_cat_identification_id_3").value = document.getElementById("b_and_i_identification_id_3").value = document.getElementById("item_id").value = document.getElementById("prod_title").value = document.getElementById("prod_imagename").value = document.getElementById("rate_of_prod").value = document.getElementById("original_price").value = document.getElementById("offer_price").value = "";
+    
+     document.getElementsByClassName("add_product_step1_container")[0].style.display = "block";
+     display_blocked_containers("add_product_step1_container"); 
+     document.getElementsByClassName("product_submition_btn2")[0].style.display = "none";
+     document.getElementsByClassName("product_submition_btn")[0].style.display = "inline-block";
+ 
+     
+     }).catch((errData) => {
+         console.log(errData);
+     })
+}
+
+/* Product Add Section End */
+
+/* Products Section End */
 

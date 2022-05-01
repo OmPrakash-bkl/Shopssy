@@ -228,7 +228,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-plus-square'></i> Add Prods</button>
+  <button onclick="add_product()"><i class='fas fa-plus-square'></i> Add Prods</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -600,6 +600,69 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </div>
 
 <!-- Add B and I Form Container End -->
+
+<!-- Add Product Form Container Start -->
+
+<div class="add_product_form_container">
+
+<div class="add_product_step1_container">
+<center>
+    <h1 class="form_title4">Product Add Form</h1>
+</center>
+<form action="" class="add_product_form" method="POST">
+
+<select id="prod_id">
+
+  </select>
+  <select id="categories_id">
+
+  </select> 
+  <p class="error_message_place categories_id_error_message_place"></p> 
+  <select id="sub_categories_id">
+
+  </select> 
+  <p class="error_message_place sub_categories_id_error_message_place"></p>
+  <select id="bandi_id">
+
+  </select> 
+  <p class="error_message_place bandi_id_error_message_place"></p> <br>
+<input type="hidden" id="sub_cat_identification_id_3">
+<input type="hidden" id="b_and_i_identification_id_3">
+<input type="hidden" id="item_id">
+<label for="prod_title">Product Title <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="prod_title" autofocus> <br>
+  <p class="error_message_place prod_title_error_message_place"></p>
+  <label for="prod_imagename">Product Image Name<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="prod_imagename"> <br>
+  <p class="error_message_place prod_imagename_error_message_place"></p>
+  <label for="rate_of_prod">Rating Of Product<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="rate_of_prod"> <br>
+  <p class="error_message_place rate_of_prod_error_message_place"></p>
+  <label for="original_price">Original Price<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="original_price"> <br>
+  <p class="error_message_place original_price_error_message_place"></p>
+  <label for="offer_price">Offer Price<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="offer_price"> <br>
+  <p class="error_message_place offer_price_error_message_place"></p>
+  <label for="hot_deal_prod">Is Hot Deal Product?<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="radio" name="hot_deal_pro" id="hot_deal_prod_yes" value="Yes" checked>
+  <label for="hot_deal_prod_yes">Yes</label>
+  <input type="radio" name="hot_deal_pro" id="hot_deal_prod_no" value="No">
+  <label for="hot_deal_prod_no">No</label>
+ <br>
+  <p class="error_message_place hot_deal_prod_error_message_place"></p>
+
+ <center>
+ <button type="button" class="product_submition_btn">Submit</button>
+ <button type="button" class="product_submition_btn2">Submit</button>
+ 
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- Add Product Form Container End -->
 
 </div>
 
