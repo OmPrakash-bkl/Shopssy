@@ -116,3 +116,9 @@ RewriteRule ^brand_and_items/update_bandi/?$ brand_and_items/update_bandi.php [L
 
 # Brand And Item End
 
+# Products Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^products/product_details/?$ products/product_details.php [L]
+
+# Products End
