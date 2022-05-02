@@ -250,7 +250,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-plus-square'></i> Add S.Prods</button>
+  <button onclick="add_sub_prods()"><i class='fas fa-plus-square'></i> Add S.Prods</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -663,6 +663,64 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </div>
 
 <!-- Add Product Form Container End -->
+
+<!-- Add Sub Product Form Container Start -->
+
+<div class="add_sub_prod_form_container">
+
+<div class="add_sub_prod_step1_container">
+<center>
+    <h1 class="form_title5">Sub Category Form</h1>
+</center>
+<form action="" class="add_sub_prod_form" method="POST">
+<select id="sub_pro_id">
+
+</select>
+  <select id="pro_id">
+
+  </select> <br>
+  <p class="error_message_place pro_id_error_message_place"></p> <br>
+
+  <label for="main_image_name">Main Image Name <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="main_image_name" autofocus> <br>
+  <p class="error_message_place main_image_name_error_message_place"></p>
+  <label for="sub_image_name1">Sub Image Name 1 <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="sub_image_name1"> <br>
+  <p class="error_message_place sub_image_name1_error_message_place"></p>
+  <label for="sub_image_name2">Sub Image Name 2 <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="sub_image_name2"> <br>
+  <p class="error_message_place sub_image_name2_error_message_place"></p>
+  <label for="sub_image_name3">Sub Image Name 3 <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="sub_image_name3"> <br>
+  <p class="error_message_place sub_image_name3_error_message_place"></p>
+  <label for="Availability">Availability <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="Availability"> <br>
+  <p class="error_message_place Availability_error_message_place"></p>
+  <label for="prod_tag1">Product Tag 1 <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="prod_tag1"> <br>
+  <p class="error_message_place prod_tag1_error_message_place"></p>
+  <label for="prod_tag2">Product Tag 2 <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="prod_tag2"> <br>
+  <p class="error_message_place prod_tag2_error_message_place"></p>
+  <label for="prod_tag3">Product Tag 3 <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="prod_tag3"> <br>
+  <p class="error_message_place prod_tag3_error_message_place"></p>
+  <label for="prod_desc">Product Description <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="prod_desc"> <br>
+  <p class="error_message_place prod_desc_error_message_place"></p>
+
+ <center>
+ <button type="button" class="add_sub_prod_submition_btn">Submit</button>
+ <button type="button" class="add_sub_prod_submition_btn2">Submit</button>
+ 
+ </center>
+</form>
+</div>
+
+</div>
+
+
+<!-- Add Sub Product Form Container End -->
 
 </div>
 

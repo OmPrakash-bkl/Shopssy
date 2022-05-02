@@ -429,10 +429,10 @@ margin: 5px;
 
 /* Admin Panel Adding User Container Start */
 
-.add_user_form_container, .add_category_form_container, .add_sub_category_form_container, .add_bandi_form_container, .add_product_form_container {
+.add_user_form_container, .add_category_form_container, .add_sub_category_form_container, .add_bandi_form_container, .add_product_form_container, .add_sub_prod_form_container {
     border: 1px solid green;
 }
-.add_user_step1_container, .add_user_step2_container, .add_category_step1_container, .add_sub_category_step1_container, .add_bandi_step1_container, .add_product_step1_container {
+.add_user_step1_container, .add_user_step2_container, .add_category_step1_container, .add_sub_category_step1_container, .add_bandi_step1_container, .add_product_step1_container, .add_sub_prod_step1_container {
     width: 60%;
     text-align: left;
     border: 1px solid red;
@@ -455,7 +455,7 @@ border-radius: 5px;
 margin-bottom: 10px;
 }
 
-#cats_id, #category_id, #sub_category_id, #brands_id, #prod_id, #categories_id, #sub_categories_id, #bandi_id {
+#cats_id, #category_id, #sub_category_id, #brands_id, #prod_id, #categories_id, #sub_categories_id, #bandi_id, #sub_pro_id, #pro_id {
 width: 100%;
 border: 1px solid gainsboro;
 color: rgb(109, 109, 109);
@@ -463,11 +463,11 @@ height: 30px;
 border-radius: 5px;
 margin-bottom: 10px;
 }
-#brands_id, #prod_id {
+#brands_id, #prod_id, #sub_pro_id {
     display: none;
 }
 
-.add_user_next_btn, .add_user_back_btn, .add_user_submit_btn, .add_user_cancel_btn, .add_user_back_btn2, .add_user_next_btn2, .add_user_submit_btn2, .add_user_submition_btn, .add_category_submition_btn, .add_category_submition_btn2, .add_sub_category_submition_btn, .add_sub_category_submition_btn2, .brand_and_item_submition_btn, .brand_and_item_submition_btn2, .product_submition_btn, .product_submition_btn2 {
+.add_user_next_btn, .add_user_back_btn, .add_user_submit_btn, .add_user_cancel_btn, .add_user_back_btn2, .add_user_next_btn2, .add_user_submit_btn2, .add_user_submition_btn, .add_category_submition_btn, .add_category_submition_btn2, .add_sub_category_submition_btn, .add_sub_category_submition_btn2, .brand_and_item_submition_btn, .brand_and_item_submition_btn2, .product_submition_btn, .product_submition_btn2, .add_sub_prod_submition_btn, .add_sub_prod_submition_btn2 {
     margin: 10px 5px;
     padding: 10px 20px;
     color: white;
@@ -485,7 +485,7 @@ margin-bottom: 10px;
     background-color: #d5342e;
 }
 
-.add_user_next_btn:hover, .add_user_back_btn:hover, .add_user_back_btn2:hover, .add_user_next_btn2:hover, .add_user_submition_btn:hover, .add_category_submition_btn:hover, .add_category_submition_btn2:hover, .add_sub_category_submition_btn:hover, .add_sub_category_submition_btn2:hover, .brand_and_item_submition_btn:hover, .brand_and_item_submition_btn2:hover, .product_submition_btn:hover, .product_submition_btn2:hover {
+.add_user_next_btn:hover, .add_user_back_btn:hover, .add_user_back_btn2:hover, .add_user_next_btn2:hover, .add_user_submition_btn:hover, .add_category_submition_btn:hover, .add_category_submition_btn2:hover, .add_sub_category_submition_btn:hover, .add_sub_category_submition_btn2:hover, .brand_and_item_submition_btn:hover, .brand_and_item_submition_btn2:hover, .product_submition_btn:hover, .product_submition_btn2:hover, .add_sub_prod_submition_btn:hover, .add_sub_prod_submition_btn2:hover {
     background-color: #127cc7;
 }
 .add_user_submit_btn:hover, .add_user_submit_btn2:hover {
@@ -498,7 +498,7 @@ margin-bottom: 10px;
 .error_message_place, .required_field_asterisk_symbol {
     color: red;
 }
-.add_user_back_btn2, .add_user_next_btn2, .add_user_submition_btn, .add_category_submition_btn, .add_category_submition_btn2, .add_sub_category_submition_btn, .add_sub_category_submition_btn2, .brand_and_item_submition_btn, .brand_and_item_submition_btn2, .product_submition_btn, .product_submition_btn2 {
+.add_user_back_btn2, .add_user_next_btn2, .add_user_submition_btn, .add_category_submition_btn, .add_category_submition_btn2, .add_sub_category_submition_btn, .add_sub_category_submition_btn2, .brand_and_item_submition_btn, .brand_and_item_submition_btn2, .product_submition_btn, .product_submition_btn2, .add_sub_prod_submition_btn, .add_sub_prod_submition_btn2 {
     display: none;
 }
 
@@ -581,7 +581,7 @@ margin-bottom: 10px;
     .admin_panel_body_content_container {
         flex:55%;
     }
-    .add_user_step1_container, .add_user_step2_container, .add_category_step1_container, .add_sub_category_step1_container, .add_bandi_step1_container, .add_product_step1_container {
+    .add_user_step1_container, .add_user_step2_container, .add_category_step1_container, .add_sub_category_step1_container, .add_bandi_step1_container, .add_product_step1_container, .add_sub_prod_step1_container {
         width: 80%;
     }
     
@@ -622,7 +622,7 @@ margin: 4px auto;
     display: block;
 }
 
-.add_user_step1_container, .add_user_step2_container, .add_category_step1_container, .add_sub_category_step1_container, .add_bandi_step1_container, .add_product_step1_container {
+.add_user_step1_container, .add_user_step2_container, .add_category_step1_container, .add_sub_category_step1_container, .add_bandi_step1_container, .add_product_step1_container, .add_sub_prod_step1_container {
     width: 90%;
 }
 

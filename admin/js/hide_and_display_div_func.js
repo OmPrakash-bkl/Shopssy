@@ -2415,5 +2415,40 @@ function show_sub_prods() {
 
 /* Sub Products View Section End */
 
+/* Sub Products Add Section Start */
+
+function add_sub_prods() {
+    document.getElementById("pro_id").style.display = "inline-block";
+    document.getElementsByClassName("pro_id_error_message_place")[0].style.display = "inline-block";
+    display_preLoader();
+    let retrieveAllSubProdDetails = make_user_details("GET", "../products/product_details/", "");
+
+    retrieveAllSubProdDetails.then((resData) => {
+        unDisplay_preLoader();
+     
+        let resultData = JSON.parse(resData);
+        let appendedResultData = `<option value="0">Select Product</option>`;
+        for(let i = 0; i < resultData.length; i++) {
+            appendedResultData+=`<option value=${resultData[i].p_id}>${resultData[i].p_id} - ${resultData[i].p_title}</option>`;
+        }
+        appendedResultData+=`<option value="add_subprod">Add New Product Sub</option>`;
+    document.getElementById("pro_id").innerHTML = appendedResultData;
+    
+    document.getElementsByClassName("pro_id")[0].innerHTML = "Sub Product Add Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementById("sub_pro_id").value = document.getElementById("main_image_name").value = document.getElementById("sub_image_name1").value = document.getElementById("sub_image_name2").value = document.getElementById("sub_image_name3").value = document.getElementById("Availability").value = document.getElementById("prod_tag1").value = document.getElementById("prod_tag2").value = document.getElementById("prod_tag3").value = document.getElementById("prod_tag3").value = document.getElementById("prod_desc").value = "";
+    document.getElementsByClassName("add_sub_prod_submition_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("product_submition_btn")[0].style.display = "block";
+    display_blocked_containers("add_product_step1_container"); 
+    document.getElementsByClassName("add_sub_category_submition_btn2")[0].style.display = "none";
+    document.getElementsByClassName("add_sub_prod_submition_btn2")[0].style.display = "none";
+     }).catch((errData) => {
+        console.log(errData);
+    })
+       
+}
+
+/* Sub Products Add Section End */
+
 /* Sub Products Section End */
 
