@@ -582,10 +582,10 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <label for="brand_name">Brand Name <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="brand_name" autofocus> <br>
   <p class="error_message_place brand_name_error_message_place"></p>
-  <label for="brand_sub_name1">Brand Sub Name 1<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <label for="brand_sub_name1">Brand Sub Name 1 <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="brand_sub_name1"> <br>
   <p class="error_message_place brand_sub_name1_error_message_place"></p>
-  <label for="brand_sub_name2">Brand Sub Name 2<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <label for="brand_sub_name2">Brand Sub Name 2 <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="brand_sub_name2"> <br>
   <p class="error_message_place brand_sub_name2_error_message_place"></p>
 
@@ -632,19 +632,19 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <label for="prod_title">Product Title <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="prod_title" autofocus> <br>
   <p class="error_message_place prod_title_error_message_place"></p>
-  <label for="prod_imagename">Product Image Name<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <label for="prod_imagename">Product Image Name <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="prod_imagename"> <br>
   <p class="error_message_place prod_imagename_error_message_place"></p>
-  <label for="rate_of_prod">Rating Of Product<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <label for="rate_of_prod">Rating Of Product <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="rate_of_prod"> <br>
   <p class="error_message_place rate_of_prod_error_message_place"></p>
-  <label for="original_price">Original Price<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <label for="original_price">Original Price <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="original_price"> <br>
   <p class="error_message_place original_price_error_message_place"></p>
-  <label for="offer_price">Offer Price<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <label for="offer_price">Offer Price <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="offer_price"> <br>
   <p class="error_message_place offer_price_error_message_place"></p>
-  <label for="hot_deal_prod">Is Hot Deal Product?<span class="required_field_asterisk_symbol">*</span></label> <br>
+  <label for="hot_deal_prod">Is Hot Deal Product? <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="radio" name="hot_deal_pro" id="hot_deal_prod_yes" value="yes" checked>
   <label for="hot_deal_prod_yes">Yes</label>
   <input type="radio" name="hot_deal_pro" id="hot_deal_prod_no" value="no">

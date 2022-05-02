@@ -439,13 +439,13 @@ margin: 5px;
     display: none;
 }
  
-.add_user_form > label, .add_category_form > label, .add_sub_category_form > label, .add_bandi_form > label, .add_product_form > label {
+.add_user_form > label, .add_category_form > label, .add_sub_category_form > label, .add_bandi_form > label, .add_product_form > label, .add_sub_prod_form > label {
     display: inline-block;
     font-size: 15px;
     color: rgb(109, 109, 109);
     margin: 5px 20px 5px 0px;
 }
-.add_user_form > input[type="text"], .add_user_form > input[type="email"], .add_user_form > input[type="password"], .add_user_form > select, .add_category_form > input[type="text"], .add_sub_category_form > input[type="text"], .add_bandi_form > input[type="text"], .add_product_form > input[type="text"] {
+.add_user_form > input[type="text"], .add_user_form > input[type="email"], .add_user_form > input[type="password"], .add_user_form > select, .add_category_form > input[type="text"], .add_sub_category_form > input[type="text"], .add_bandi_form > input[type="text"], .add_product_form > input[type="text"], .add_sub_prod_form > input[type="text"] {
 width: 100%;
 border: 1px solid gainsboro;
 padding: 0px 10px;

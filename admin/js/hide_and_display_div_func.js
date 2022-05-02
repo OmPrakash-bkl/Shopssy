@@ -2434,14 +2434,14 @@ function add_sub_prods() {
         appendedResultData+=`<option value="add_subprod">Add New Product Sub</option>`;
     document.getElementById("pro_id").innerHTML = appendedResultData;
     
-    document.getElementsByClassName("pro_id")[0].innerHTML = "Sub Product Add Form";
+    document.getElementsByClassName("form_title5")[0].innerHTML = "Sub Product Add Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementById("sub_pro_id").value = document.getElementById("main_image_name").value = document.getElementById("sub_image_name1").value = document.getElementById("sub_image_name2").value = document.getElementById("sub_image_name3").value = document.getElementById("Availability").value = document.getElementById("prod_tag1").value = document.getElementById("prod_tag2").value = document.getElementById("prod_tag3").value = document.getElementById("prod_tag3").value = document.getElementById("prod_desc").value = "";
     document.getElementsByClassName("add_sub_prod_submition_btn")[0].style.display = "inline-block";
-    document.getElementsByClassName("product_submition_btn")[0].style.display = "block";
-    display_blocked_containers("add_product_step1_container"); 
-    document.getElementsByClassName("add_sub_category_submition_btn2")[0].style.display = "none";
+    document.getElementsByClassName("add_sub_prod_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_sub_prod_step1_container"); 
     document.getElementsByClassName("add_sub_prod_submition_btn2")[0].style.display = "none";
+
      }).catch((errData) => {
         console.log(errData);
     })
