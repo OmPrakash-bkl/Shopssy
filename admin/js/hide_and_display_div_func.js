@@ -1974,7 +1974,7 @@ document.getElementById("bandi_id").addEventListener("change", function() {
     
         
         bAndICheckerRes.then((response) => {
-      console.log(response);
+    //   console.log(response);
             let bAndIId = JSON.parse(response);
             let given_item_id = bAndIId.item_id;
             given_item_id = (given_item_id + "").split(".");
@@ -1988,19 +1988,19 @@ document.getElementById("bandi_id").addEventListener("change", function() {
            document.getElementById("sub_cat_identification_id_3").value = bAndIId.subs_cat_identification_id;
            document.getElementById("item_id").value = sending_item_id;
           if(Number(bAndIId.subs_cat_identification_id)) {
-            console.log(document.getElementById("sub_cat_identification_id_3").value);
-            console.log(document.getElementById("b_and_i_identification_id_3").value);
-            console.log(document.getElementById("item_id").value);
-            console.log(sub_cats_id3);
+            // console.log(document.getElementById("sub_cat_identification_id_3").value);
+            // console.log(document.getElementById("b_and_i_identification_id_3").value);
+            // console.log(document.getElementById("item_id").value);
+            // console.log(sub_cats_id3);
           } else {
             sending_item_id = newsending_item_id;
             document.getElementById("sub_cat_identification_id_3").value = sub_cats_id3;
             console.log(sub_cats_id3);
             document.getElementById("item_id").value = sending_item_id;
           
-            console.log(document.getElementById("sub_cat_identification_id_3").value);
-            console.log(document.getElementById("b_and_i_identification_id_3").value);
-            console.log(document.getElementById("item_id").value);
+            // console.log(document.getElementById("sub_cat_identification_id_3").value);
+            // console.log(document.getElementById("b_and_i_identification_id_3").value);
+            // console.log(document.getElementById("item_id").value);
           }
           document.getElementById("item_id").value = sending_item_id;
         
@@ -2090,33 +2090,35 @@ function product_submission_form(event, decisionPara) {
     original_price = original_price.replace(/\/+$/g, '');
     offer_price = offer_price.replace(/\/+$/g, '');
     hot_deal_radio_btn = hot_deal_radio_btn.replace(/\/+$/g, '');
-    console.log(prod_title);
+   // console.log(prod_title);
     // prod_title = prod_title.replace(/[^a-zA-Z0-9@).-,|+"'(& ]/g, "");
     prod_imagename = prod_imagename.replace(/[^a-zA-Z0-9@. ]/g, "");
     rate_of_prod = rate_of_prod.replace(/[^a-zA-Z0-9@. ]/g, "");
     original_price = original_price.replace(/[^a-zA-Z0-9@.& ]/g, "");
     offer_price = offer_price.replace(/[^a-zA-Z0-9@. ]/g, "");
     hot_deal_radio_btn = hot_deal_radio_btn.replace(/[^a-zA-Z0-9@. ]/g, "");
-    console.log(prod_title);
+    //console.log(prod_title);
 
     
-    if(categories_id == 0) {
-        document.getElementsByClassName("categories_id_error_message_place")[0].innerText = "Select Category!";
-    } else {
-        document.getElementsByClassName("categories_id_error_message_place")[0].innerText = "";
-    }
+    
      if(decisionPara == "insert") {
+        if(categories_id == 0) {
+            document.getElementsByClassName("categories_id_error_message_place")[0].innerText = "Select Category!";
+        } else {
+            document.getElementsByClassName("categories_id_error_message_place")[0].innerText = "";
+        }
         if(sub_categories_id == 0) {
             document.getElementsByClassName("sub_categories_id_error_message_place")[0].innerText = "Select Sub Category!";
         } else {
             document.getElementsByClassName("sub_categories_id_error_message_place")[0].innerText = "";
         }
+        if(bandi_id == 0) {
+            document.getElementsByClassName("bandi_id_error_message_place")[0].innerText = "Select Brand (OR) Item!";
+        } else {
+            document.getElementsByClassName("bandi_id_error_message_place")[0].innerText = "";
+        }
      }
-     if(bandi_id == 0) {
-        document.getElementsByClassName("bandi_id_error_message_place")[0].innerText = "Select Brand (OR) Item!";
-    } else {
-        document.getElementsByClassName("bandi_id_error_message_place")[0].innerText = "";
-    }
+     
    
     if(prod_title == "") {
         document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "Product title is required!";
@@ -2167,7 +2169,7 @@ function product_submission_form(event, decisionPara) {
         prodTitleCheckerRes.then((response) => {
             unDisplay_preLoader();
             let avail_count = response;
-            console.log(response);
+          
             prodDataObj = {
                 prod_id: prod_id,
                 categories_id: categories_id,
@@ -2183,7 +2185,7 @@ function product_submission_form(event, decisionPara) {
             }
            
             prodDataObj = JSON.stringify(prodDataObj);
-            console.log(prodDataObj);
+          
             
         if(avail_count == 0 && decisionPara == "insert") {
             document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "";
@@ -2205,25 +2207,25 @@ function product_submission_form(event, decisionPara) {
             document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "Product title already exits!";
         }
        
-        // if(decisionPara == "update") {
-        //     if(avail_count > 1) {
-        //         document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "Brand Name already exits!";
-        //     } else {
+        if(decisionPara == "update") {
+            if(avail_count > 1) {
+                document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "Product already exits!";
+            } else {
               
-        //         document.getElementsByClassName("brand_name_error_message_place")[0].innerText = "";
-        //         display_preLoader();
-        //         let bAndIUpdateDatasRes = make_user_details("POST", "../brand_and_items/update_bandi/", `${bandiDataObj}`);
+                document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "";
+                display_preLoader();
+                let prodUpdateDatasRes = make_user_details("POST", "../products/update_product/", `${prodDataObj}`);
         
-        //         bAndIUpdateDatasRes.then((goodResponse) => {
-        //             unDisplay_preLoader();
-        //             alert(goodResponse);
-        //             document.getElementById("category_id").value = document.getElementById("sub_cat_identification_id_2").value = document.getElementById("sub_cat_identification_id_two_2").value = document.getElementById("b_and_i_identification_id").value = document.getElementById("brand_name").value = document.getElementById("brand_sub_name1").value = document.getElementById("brand_sub_name2").value= "";
-        //         }).catch((badResponse) => {
-        //             console.log(badResponse);
-        //         })
-        //     }
+                prodUpdateDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    document.getElementById("prod_id").value = document.getElementById("prod_title").value = document.getElementById("prod_imagename").value = document.getElementById("rate_of_prod").value = document.getElementById("original_price").value = document.getElementById("offer_price").value =  "";
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
             
-        // }
+        }
     
         })
       }
@@ -2232,6 +2234,125 @@ function product_submission_form(event, decisionPara) {
 
 
 /* Product Add Section End */
+
+/* Product Update And Delete Section Start */
+
+function edit_and_delete_of_product() {
+   
+    let responseObj = make_user_details("GET", "../products/product_details/", "");
+display_preLoader();
+let totalC = 0;
+
+responseObj.then((sucvalue) => {
+    unDisplay_preLoader();
+  
+    let resultData = JSON.parse(sucvalue);
+    let table_datas = `<tr>
+    <th>S.NO</th>
+    <th>PRODUCT ID</th>
+    <th>PROD TITLE</th>
+    <th>PROD IMAGE</th>
+    <th>OFFER PRICE</th>
+    <th>IS HOT DEAL PROD?</th>
+    <th>ACTION</th>
+    </tr>`;
+    for(let i = 0; i < resultData.length; i++) {
+        let isHotDealProd = "";
+            if(resultData[i].hot_deal_type == null) {
+                isHotDealProd = "No";
+            } else {
+                isHotDealProd = "Yes";
+            }
+        table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].p_id}</td>
+            <td>${resultData[i].p_title}</td>
+            <td>${resultData[i].p_image}</td>
+            <td>${resultData[i].p_a_price}</td>
+            <td>${isHotDealProd}</td>
+        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecProd(${resultData[i].p_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecProd(${resultData[i].p_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+        totalC = i;
+    }
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Product Details";
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+    display_blocked_containers("admin_panel_details_table_container"); 
+    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+    display_blocked_containers("table_name_and_other_details_display_container"); 
+    }).catch((rejvalue) => {
+        console.log(rejvalue);
+    }) 
+
+}
+
+function editOfSpecProd(p_id) {
+display_preLoader();
+let responseObj = make_user_details("GET", `../products/specific_product_detail/p_id/${p_id}`, "");
+
+document.getElementsByClassName("product_submition_btn2")[0].style.display = "inline-block";
+document.getElementsByClassName("product_submition_btn")[0].style.display = "none";
+
+
+
+responseObj.then((resObj) => {
+    unDisplay_preLoader();
+   let prodData = JSON.parse(resObj);
+    
+   document.getElementById("categories_id").style.display = "none";
+   document.getElementsByClassName("categories_id_error_message_place")[0].style.display = "none";
+   document.getElementById("sub_categories_id").style.display = "none";
+   document.getElementsByClassName("sub_categories_id_error_message_place")[0].style.display = "none";
+   document.getElementById("bandi_id").style.display = "none";
+   document.getElementsByClassName("bandi_id_error_message_place")[0].style.display = "none";
+
+let prodsData = ``;
+prodsData+=`<option value=${prodData.p_id}>Db Value</option>`;
+document.getElementById("prod_id").innerHTML = prodsData;
+   
+    document.getElementById("prod_title").value = prodData.p_title;
+    document.getElementById("prod_imagename").value = prodData.p_image;
+    document.getElementById("rate_of_prod").value = prodData.p_star_rat;
+    document.getElementById("original_price").value = prodData.p_a_price;
+    document.getElementById("offer_price").value = prodData.p_o_price;
+    if(prodData.hot_deal_type == "yes") {
+        document.getElementById("hot_deal_prod_yes").checked = true;
+    } else {
+        document.getElementById("hot_deal_prod_no").checked = true;
+    }
+    
+})
+document.getElementsByClassName("form_title4")[0].innerHTML = "Products Edit Form";
+undisplay_displayed_blocked_containers(); 
+document.getElementsByClassName("add_product_step1_container")[0].style.display = "block";
+display_blocked_containers("add_product_step1_container"); 
+}
+
+document.getElementsByClassName("product_submition_btn2")[0].addEventListener("click", function(event) {
+
+    product_submission_form(event, "update");
+});
+
+
+function deleteOfSpecProd(p_id) {
+
+let permission = confirm("Are you sure?");
+if(permission) {
+    display_preLoader();
+    let prodDeleteReqObj = make_user_details("DELETE", `../products/product_deletion/p_id/${p_id}`, ``);
+    prodDeleteReqObj.then((deleteRes) => {
+        unDisplay_preLoader();
+        alert(deleteRes);
+        show_products();
+    }).catch((deleteErrRes) => {
+        console.log(deleteErrRes);
+    })
+}
+}
+
+/* Product Update And Delete Section Start */
 
 /* Products Section End */
 

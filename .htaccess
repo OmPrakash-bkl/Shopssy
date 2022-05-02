@@ -134,4 +134,13 @@ RewriteRule ^products/check_prod_title/?$ products/check_prod_title.php [L]
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^products/insert_prod_data/?$ products/insert_prod_data.php [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^products/specific_product_detail/p_id/([^/\*]+)?$ products/specific_product_detail.php?p_id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =DELETE
+RewriteRule ^products/product_deletion/p_id/([^/\*]+)?$ products/product_deletion.php?p_id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^products/update_product/?$ products/update_product.php [L]
+
 # Products End

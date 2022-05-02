@@ -37,7 +37,7 @@ if(isset($_SERVER['REQUEST_METHOD'])) {
   $original_price = mysqli_real_escape_string($conn, $original_price);
   $offer_price = mysqli_real_escape_string($conn, $offer_price);
   $hot_deal_radio_btn = mysqli_real_escape_string($conn, $hot_deal_radio_btn);
-if($hot_deal_radio_btn == "Yes") {
+if($hot_deal_radio_btn == "yes") {
     $data_insert_query = "INSERT INTO `products` (`cats_id`, `subs_cat_identification_id`, `b_and_i_identification_id`, `item_id`, `p_title`, `p_image`, `p_star_rat`, `p_o_price`, `p_a_price`, `hot_deal_type`) VALUES ('$categories_id', '$sub_categories_id', '$b_and_i_ids', '$item_id', '$prod_title', '$prod_imagename', '$rate_of_prod', '$original_price', '$offer_price', '$hot_deal_radio_btn');";
 } else {
     $data_insert_query = "INSERT INTO `products` (`cats_id`, `subs_cat_identification_id`, `b_and_i_identification_id`, `item_id`, `p_title`, `p_image`, `p_star_rat`, `p_o_price`, `p_a_price`, `hot_deal_type`) VALUES ('$categories_id', '$sub_categories_id', '$b_and_i_ids', '$item_id', '$prod_title', '$prod_imagename', '$rate_of_prod', '$original_price', '$offer_price', NULL);";

@@ -232,7 +232,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-edit"></i> Edit & Delete</button>
+  <button onclick="edit_and_delete_of_product()"><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -645,9 +645,9 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <input type="text" id="offer_price"> <br>
   <p class="error_message_place offer_price_error_message_place"></p>
   <label for="hot_deal_prod">Is Hot Deal Product?<span class="required_field_asterisk_symbol">*</span></label> <br>
-  <input type="radio" name="hot_deal_pro" id="hot_deal_prod_yes" value="Yes" checked>
+  <input type="radio" name="hot_deal_pro" id="hot_deal_prod_yes" value="yes" checked>
   <label for="hot_deal_prod_yes">Yes</label>
-  <input type="radio" name="hot_deal_pro" id="hot_deal_prod_no" value="No">
+  <input type="radio" name="hot_deal_pro" id="hot_deal_prod_no" value="no">
   <label for="hot_deal_prod_no">No</label>
  <br>
   <p class="error_message_place hot_deal_prod_error_message_place"></p>
