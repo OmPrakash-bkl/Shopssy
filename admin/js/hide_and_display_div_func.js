@@ -2356,3 +2356,64 @@ if(permission) {
 
 /* Products Section End */
 
+/* Sub Products Section Start */
+
+/* Sub Products View Section Start */
+
+function show_sub_prods() {
+    let responseObj = make_user_details("GET", "../sub_products/show_subprods/", "");
+    display_preLoader();
+    let totalC = 0;
+    
+    responseObj.then((sucvalue) => {
+        unDisplay_preLoader();
+      
+        let resultData = JSON.parse(sucvalue);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>PROD.SUB ID</th>
+        <th>PROD ID</th>
+        <th>MAIN IMAGE NAME</th>
+        <th>SUB IMAGE NAME - 1</th>
+        <th>SUB IMAGE NAME - 2</th>
+        <th>SUB IMAGE NAME - 3</th>
+        <th>AVAILABILITY</th>
+        <th>PROD TAG 1</th>
+        <th>PROD TAG 2</th>
+        <th>PROD TAG 3</th>
+        <th>PROD DESCRIPTION</th></tr>`;
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].products_sub_id}</td>
+            <td>${resultData[i].p_id}</td>
+            <td>${resultData[i].p_image}</td>
+            <td>${resultData[i].p_s_image1}</td>
+            <td>${resultData[i].p_s_image2}</td>
+            <td>${resultData[i].p_s_image3}</td>
+            <td>${resultData[i].p_avail}</td>
+            <td>${resultData[i].p_tags1}</td>
+            <td>${resultData[i].p_tags2}</td>
+            <td>${resultData[i].p_tags3}</td>
+            <td>${resultData[i].p_desc}</td>
+            </tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Sub Product Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+        }).catch((rejvalue) => {
+            console.log(rejvalue);
+        }) 
+}
+
+/* Sub Products View Section End */
+
+/* Sub Products Section End */
+

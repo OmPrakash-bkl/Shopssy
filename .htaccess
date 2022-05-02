@@ -144,3 +144,12 @@ RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^products/update_product/?$ products/update_product.php [L]
 
 # Products End
+
+# Sub Products Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^sub_products/show_subprods/?$ sub_products/show_subprods.php [L]
+
+# Sub Products End
+
+
