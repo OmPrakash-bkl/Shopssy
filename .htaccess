@@ -150,6 +150,15 @@ RewriteRule ^products/update_product/?$ products/update_product.php [L]
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^sub_products/show_subprods/?$ sub_products/show_subprods.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^sub_products/get_sub_prod_id/?$ sub_products/get_sub_prod_id.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^sub_products/check_prod_main_name/?$ sub_products/check_prod_main_name.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^sub_products/insert_subprod_data/?$ sub_products/insert_subprod_data.php [L]
+
 # Sub Products End
 
 

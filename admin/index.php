@@ -693,9 +693,9 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <label for="sub_image_name3">Sub Image Name 3 <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="sub_image_name3"> <br>
   <p class="error_message_place sub_image_name3_error_message_place"></p>
-  <label for="Availability">Availability <span class="required_field_asterisk_symbol">*</span></label> <br>
-  <input type="text" id="Availability"> <br>
-  <p class="error_message_place Availability_error_message_place"></p>
+  <label for="availability">Availability <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="availability"> <br>
+  <p class="error_message_place availability_error_message_place"></p>
   <label for="prod_tag1">Product Tag 1 <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="prod_tag1"> <br>
   <p class="error_message_place prod_tag1_error_message_place"></p>

@@ -2431,12 +2431,12 @@ function add_sub_prods() {
         for(let i = 0; i < resultData.length; i++) {
             appendedResultData+=`<option value=${resultData[i].p_id}>${resultData[i].p_id} - ${resultData[i].p_title}</option>`;
         }
-        appendedResultData+=`<option value="add_subprod">Add New Product Sub</option>`;
+        appendedResultData+=`<option value="add_prod">Add New Product</option>`;
     document.getElementById("pro_id").innerHTML = appendedResultData;
     
     document.getElementsByClassName("form_title5")[0].innerHTML = "Sub Product Add Form";
     undisplay_displayed_blocked_containers(); 
-    document.getElementById("sub_pro_id").value = document.getElementById("main_image_name").value = document.getElementById("sub_image_name1").value = document.getElementById("sub_image_name2").value = document.getElementById("sub_image_name3").value = document.getElementById("Availability").value = document.getElementById("prod_tag1").value = document.getElementById("prod_tag2").value = document.getElementById("prod_tag3").value = document.getElementById("prod_tag3").value = document.getElementById("prod_desc").value = "";
+    document.getElementById("sub_pro_id").value = document.getElementById("main_image_name").value = document.getElementById("sub_image_name1").value = document.getElementById("sub_image_name2").value = document.getElementById("sub_image_name3").value = document.getElementById("availability").value = document.getElementById("prod_tag1").value = document.getElementById("prod_tag2").value = document.getElementById("prod_tag3").value = document.getElementById("prod_tag3").value = document.getElementById("prod_desc").value = "";
     document.getElementsByClassName("add_sub_prod_submition_btn")[0].style.display = "inline-block";
     document.getElementsByClassName("add_sub_prod_step1_container")[0].style.display = "block";
     display_blocked_containers("add_sub_prod_step1_container"); 
@@ -2447,6 +2447,249 @@ function add_sub_prods() {
     })
        
 }
+
+let prod_id = 0;
+
+document.getElementById("pro_id").addEventListener("change" , function() {
+    
+    if(this.value == 0) {
+        document.getElementsByClassName("pro_id_error_message_place")[0].innerText = "Select Product!";
+    } else if(this.value == "add_prod") {
+        document.getElementsByClassName("pro_id_error_message_place")[0].innerText = "";
+        add_product();
+      
+    } else {
+        document.getElementsByClassName("pro_id_error_message_place")[0].innerText = "";
+        prod_id = this.value;
+        input_id = {
+            prods_id: prod_id
+        }
+     
+        input_id = JSON.stringify(input_id);
+        display_preLoader();
+        let subProdImageCheckerRes = make_user_details("POST", "../sub_products/get_sub_prod_id/", `${input_id}`);
+    
+        
+        subProdImageCheckerRes.then((response) => {
+       
+            let subProdImageCheckRes = JSON.parse(response);
+         if(subProdImageCheckRes >=1) {
+            document.getElementsByClassName("pro_id_error_message_place")[0].innerText = "Product's sub details already exits!";
+         } else {
+            document.getElementsByClassName("pro_id_error_message_place")[0].innerText = "";
+         }
+            
+            unDisplay_preLoader();
+        }).catch((errData) => {
+            console.log(errData);
+        });
+    }
+   
+});
+
+document.getElementsByClassName("add_sub_prod_submition_btn")[0].addEventListener("click", function(event) {
+    sub_product_submission_form(event, "insert");    
+});
+
+function sub_product_submission_form(event, decisionPara) {
+   
+    event.preventDefault();
+ 
+    let sub_pro_id = 0;
+   
+    let products_id = document.getElementById("pro_id").value;
+   
+    if(decisionPara == "update") {
+        sub_pro_id = document.getElementById("sub_pro_id").value;
+    }
+    
+    let main_image_name = document.getElementById("main_image_name").value;
+    let sub_image_name1 = document.getElementById("sub_image_name1").value;
+    let sub_image_name2 = document.getElementById("sub_image_name2").value;
+    let sub_image_name3 = document.getElementById("sub_image_name3").value;
+    let availability = document.getElementById("availability").value;
+    let prod_tag1 = document.getElementById("prod_tag1").value;
+    let prod_tag2 = document.getElementById("prod_tag2").value;
+    let prod_tag3 = document.getElementById("prod_tag3").value;
+    let prod_desc = document.getElementById("prod_desc").value;
+
+    main_image_name = main_image_name.replace(/\/+$/g, '');
+    sub_image_name1 = sub_image_name1.replace(/\/+$/g, '');
+    sub_image_name2 = sub_image_name2.replace(/\/+$/g, '');
+    sub_image_name3 = sub_image_name3.replace(/\/+$/g, '');
+    availability = availability.replace(/\/+$/g, '');
+    prod_tag1 = prod_tag1.replace(/\/+$/g, '');
+    prod_tag2 = prod_tag2.replace(/\/+$/g, '');
+    prod_tag3 = prod_tag3.replace(/\/+$/g, '');
+    prod_desc = prod_desc.replace(/\/+$/g, '');
+   // console.log(prod_title);
+    // prod_title = prod_title.replace(/[^a-zA-Z0-9@).-,|+"'(& ]/g, "");
+    main_image_name = main_image_name.replace(/[^a-zA-Z0-9@. ]/g, "");
+    sub_image_name1 = sub_image_name1.replace(/[^a-zA-Z0-9@. ]/g, "");
+    sub_image_name2 = sub_image_name2.replace(/[^a-zA-Z0-9@. ]/g, "");
+    sub_image_name3 = sub_image_name3.replace(/[^a-zA-Z0-9@. ]/g, "");
+    availability = availability.replace(/[^a-zA-Z0-9@. ]/g, "");
+    prod_tag1 = prod_tag1.replace(/[^a-zA-Z0-9@. ]/g, "");
+    prod_tag2 = prod_tag2.replace(/[^a-zA-Z0-9@. ]/g, "");
+    prod_tag3 = prod_tag3.replace(/[^a-zA-Z0-9@. ]/g, "");
+    prod_desc = prod_desc.replace(/[^a-zA-Z0-9@. ]/g, "");
+    //console.log(prod_title);
+
+    
+    
+     if(decisionPara == "insert") {
+        if(products_id == 0) {
+            document.getElementsByClassName("pro_id_error_message_place")[0].innerText = "Select Product!";
+        } else {
+            if(document.getElementsByClassName("pro_id_error_message_place")[0].value == "") {
+                document.getElementsByClassName("pro_id_error_message_place")[0].innerText = "";
+            }
+            
+        }
+     }
+     
+   
+    if(main_image_name == "") {
+        document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "Main image name is required!";
+    } else if(main_image_name.length <= 5) {
+        document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "Main image name length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "";
+    }
+    if(sub_image_name1 == "") {
+        document.getElementsByClassName("sub_image_name1_error_message_place")[0].innerText = "Sub image name 1 is required!";
+    } else if(sub_image_name1.length <= 5) {
+        document.getElementsByClassName("sub_image_name1_error_message_place")[0].innerText = "Sub image name 1 length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("sub_image_name1_error_message_place")[0].innerText = "";
+    }
+    if(sub_image_name2 == "") {
+        document.getElementsByClassName("sub_image_name2_error_message_place")[0].innerText = "Sub image name 2 is required!";
+    } else if(sub_image_name2.length <= 5) {
+        document.getElementsByClassName("sub_image_name2_error_message_place")[0].innerText = "Sub image name 2 length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("sub_image_name2_error_message_place")[0].innerText = "";
+    }
+    if(sub_image_name3 == "") {
+        document.getElementsByClassName("sub_image_name3_error_message_place")[0].innerText = "Sub image name 3 is required!";
+    } else if(sub_image_name3.length <= 5) {
+        document.getElementsByClassName("sub_image_name3_error_message_place")[0].innerText = "Sub image name 3 length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("sub_image_name3_error_message_place")[0].innerText = "";
+    }
+    if(availability == "") {
+        document.getElementsByClassName("availability_error_message_place")[0].innerText = "Product availability detail is required!";
+    } else if(availability.length <= 5) {
+        document.getElementsByClassName("availability_error_message_place")[0].innerText = "Product availability detail length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("availability_error_message_place")[0].innerText = "";
+    }
+    if(prod_tag1 == "") {
+        document.getElementsByClassName("prod_tag1_error_message_place")[0].innerText = "Product tag 1 is required!";
+    } else if(prod_tag1.length <= 5) {
+        document.getElementsByClassName("prod_tag1_error_message_place")[0].innerText = "Product tag 1 length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("prod_tag1_error_message_place")[0].innerText = "";
+    }
+    if(prod_tag2 == "") {
+        document.getElementsByClassName("prod_tag2_error_message_place")[0].innerText = "Product tag 2 is required!";
+    } else if(prod_tag2.length <= 5) {
+        document.getElementsByClassName("prod_tag2_error_message_place")[0].innerText = "Product tag 2 length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("prod_tag2_error_message_place")[0].innerText = "";
+    }
+    if(prod_tag3 == "") {
+        document.getElementsByClassName("prod_tag3_error_message_place")[0].innerText = "Product tag 3 is required!";
+    } else if(prod_tag3.length <= 5) {
+        document.getElementsByClassName("prod_tag3_error_message_place")[0].innerText = "Product tag 3 length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("prod_tag3_error_message_place")[0].innerText = "";
+    }
+    if(prod_desc == "") {
+        document.getElementsByClassName("prod_desc_error_message_place")[0].innerText = "Product Description is required!";
+    } else if(prod_desc.length <= 24) {
+        document.getElementsByClassName("prod_desc_error_message_place")[0].innerText = "Product Description length must be minimum 25 characters!";
+    } else {
+        document.getElementsByClassName("prod_desc_error_message_place")[0].innerText = "";
+    }
+   
+    if((document.getElementsByClassName("pro_id_error_message_place")[0].innerText == "") && (document.getElementsByClassName("main_image_name_error_message_place")[0].innerText == "") && (document.getElementsByClassName("sub_image_name1_error_message_place")[0].innerText == "")  && (document.getElementsByClassName("sub_image_name2_error_message_place")[0].innerText == "")  && (document.getElementsByClassName("sub_image_name3_error_message_place")[0].innerText == "")  && (document.getElementsByClassName("availability_error_message_place")[0].innerText == "")  && (document.getElementsByClassName("prod_tag1_error_message_place")[0].innerText == "") && (document.getElementsByClassName("prod_tag2_error_message_place")[0].innerText == "") && (document.getElementsByClassName("prod_tag3_error_message_place")[0].innerText == "") && (document.getElementsByClassName("prod_desc_error_message_place")[0].innerText == "")) {
+    
+        let prodMainImageNameDataObj = {
+            main_image_name: main_image_name
+        }
+        prodMainImageNameDataObj = JSON.stringify(prodMainImageNameDataObj);
+        display_preLoader();
+        let prodMainImageNameCheckerRes = make_user_details("POST", "../sub_products/check_prod_main_name/", `${prodMainImageNameDataObj}`);
+    
+        
+        prodMainImageNameCheckerRes.then((response) => {
+            unDisplay_preLoader();
+            let avail_count = response;
+
+            subProdDataObj = {
+                sub_pro_id: sub_pro_id,
+                products_id: products_id,
+                main_image_name: main_image_name,
+                sub_image_name1: sub_image_name1,
+                sub_image_name2: sub_image_name2,
+                sub_image_name3: sub_image_name3,
+                availability: availability,
+                prod_tag1: prod_tag1,
+                prod_tag2: prod_tag2,
+                prod_tag3: prod_tag3,
+                prod_desc: prod_desc
+            }
+           
+            subProdDataObj = JSON.stringify(subProdDataObj);
+          
+            
+        if(avail_count == 0 && decisionPara == "insert") {
+           
+            document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "";
+            display_preLoader();
+            if(decisionPara == "insert") {
+                let prodSubInsertDatasRes = make_user_details("POST", "../sub_products/insert_subprod_data/", `${subProdDataObj}`);
+        
+                prodSubInsertDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+
+                    document.getElementById("pro_id").value = document.getElementById("main_image_name").value = document.getElementById("sub_image_name1").value = document.getElementById("sub_image_name2").value = document.getElementById("sub_image_name3").value = document.getElementById("availability").value = document.getElementById("prod_tag1").value = document.getElementById("prod_tag2").value = document.getElementById("prod_tag3").value  = document.getElementById("prod_desc").value = "";
+
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
+        } else {
+            document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "Main image name already exits!";
+        }
+       
+        // if(decisionPara == "update") {
+        //     if(avail_count > 1) {
+        //         document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "Product already exits!";
+        //     } else {
+              
+        //         document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "";
+        //         display_preLoader();
+        //         let prodUpdateDatasRes = make_user_details("POST", "../products/update_product/", `${prodDataObj}`);
+        
+        //         prodUpdateDatasRes.then((goodResponse) => {
+        //             unDisplay_preLoader();
+        //             alert(goodResponse);
+        //             document.getElementById("prod_id").value = document.getElementById("prod_title").value = document.getElementById("prod_imagename").value = document.getElementById("rate_of_prod").value = document.getElementById("original_price").value = document.getElementById("offer_price").value =  "";
+        //         }).catch((badResponse) => {
+        //             console.log(badResponse);
+        //         })
+        //     }
+            
+        // }
+    
+        })
+      }
+    }
+
+    
 
 /* Sub Products Add Section End */
 
