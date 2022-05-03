@@ -276,7 +276,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-edit"></i> Edit & Delete</button>
+  <button onclick="edit_and_delete_of_prod_spec()"><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -670,7 +670,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="add_sub_prod_step1_container">
 <center>
-    <h1 class="form_title5">Sub Category Form</h1>
+    <h1 class="form_title5">Sub Product Form</h1>
 </center>
 <form action="" class="add_sub_prod_form" method="POST">
 <select id="sub_pro_id">
@@ -727,7 +727,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="add_prod_spec_step1_container">
 <center>
-    <h1 class="form_title6">Sub Category Form</h1>
+    <h1 class="form_title6">Product Specification Form</h1>
 </center>
 <form action="" class="add_prod_spec_form" method="POST">
 <select id="p_spec_id">
@@ -735,7 +735,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </select>
   <select id="produc_id">
 
-  </select> <br>
+  </select> 
   <p class="error_message_place produc_id_error_message_place"></p> <br>
 
   <label for="spec_name">Specification Name <span class="required_field_asterisk_symbol">*</span></label> <br>

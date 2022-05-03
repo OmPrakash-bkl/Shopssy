@@ -2913,7 +2913,7 @@ document.getElementById("produc_id").addEventListener("change" , function() {
         prod_id_CheckerRes.then((response) => {
        
             let prod_id_CheckerRes = JSON.parse(response);
-         if(prod_id_CheckerRes >=20) {
+         if(prod_id_CheckerRes >= 20) {
             document.getElementsByClassName("produc_id_error_message_place")[0].innerText = "Can't add more than 20 specification details!";
          } else {
             document.getElementsByClassName("produc_id_error_message_place")[0].innerText = "";
@@ -3026,26 +3026,26 @@ function prod_specification_submission_form(event, decisionPara) {
             document.getElementsByClassName("spec_name_error_message_place")[0].innerText = "Specification name already exits!";
         }
        
-        // if(decisionPara == "update") {
-        //     if(avail_count > 1) {
-        //         document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "Main image name already exits!";
-        //     } else {
+        if(decisionPara == "update") {
+            if(avail_count > 1) {
+                document.getElementsByClassName("spec_name_error_message_place")[0].innerText = "Specification name already exits!";
+            } else {
               
-        //         document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "";
-        //         display_preLoader();
-        //         let subProdUpdateDatasRes = make_user_details("POST", "../sub_products/update_sub_product/", `${subProdDataObj}`);
+                document.getElementsByClassName("spec_name_error_message_place")[0].innerText = "";
+                display_preLoader();
+                let prodSpecUpdateDatasRes = make_user_details("POST", "../prods_specification/update_prod_spec/", `${prodSpecDataObj}`);
         
-        //         subProdUpdateDatasRes.then((goodResponse) => {
-        //             unDisplay_preLoader();
-        //             alert(goodResponse);
-        //             document.getElementById("sub_pro_id").value = document.getElementById("main_image_name").value = document.getElementById("sub_image_name1").value = document.getElementById("sub_image_name2").value = document.getElementById("sub_image_name3").value = document.getElementById("availability").value = document.getElementById("prod_tag1").value = document.getElementById("prod_tag2").value = document.getElementById("prod_tag3").value  = document.getElementById("prod_desc").value = "";
+                prodSpecUpdateDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    document.getElementById("p_spec_id").value = document.getElementById("spec_name").value = document.getElementById("spec_value").value = "";
 
-        //         }).catch((badResponse) => {
-        //             console.log(badResponse);
-        //         })
-        //     }
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
             
-        // }
+        }
     
         })
       }
@@ -3053,6 +3053,107 @@ function prod_specification_submission_form(event, decisionPara) {
 
 
 /* Product Specificatioin Add Section End */
+
+/* Product Specification Edit And Delete Section Start */
+
+function edit_and_delete_of_prod_spec() {
+   
+    let responseObj = make_user_details("GET", "../prods_specification/show_prod_spec/", "");
+display_preLoader();
+let totalC = 0;
+
+responseObj.then((sucvalue) => {
+    unDisplay_preLoader();
+  
+    let resultData = JSON.parse(sucvalue);
+    let table_datas = `<tr>
+        <th>S.NO</th>
+        <th>PROD.SPEC ID</th>
+        <th>PROD ID</th>
+        <th>SPEC NAME</th>
+        <th>SPEC VALUE</th>
+        <th>ACTION</th>
+    </tr>`;
+    for(let i = 0; i < resultData.length; i++) {
+       
+        table_datas+=`<tr>
+        <td>${i+1}.</td>
+        <td>${resultData[i].p_spec_id}</td>
+        <td>${resultData[i].p_id}</td>
+        <td>${resultData[i].p_spec_title}</td>
+        <td>${resultData[i].p_spec_details}</td>
+        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecProdSpecs(${resultData[i].p_spec_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecProdSpecs(${resultData[i].p_spec_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+        totalC = i;
+    }
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Product Specification Details";
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+    display_blocked_containers("admin_panel_details_table_container"); 
+    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+    display_blocked_containers("table_name_and_other_details_display_container"); 
+    }).catch((rejvalue) => {
+        console.log(rejvalue);
+    }) 
+
+}
+
+function editOfSpecProdSpecs(products_spec_id) {
+display_preLoader();
+let responseObj = make_user_details("GET", `../prods_specification/specific_prod_spec_detail/products_spec_id/${products_spec_id}`, "");
+
+document.getElementsByClassName("prod_spec_submition_btn2")[0].style.display = "inline-block";
+document.getElementsByClassName("prod_spec_submition_btn")[0].style.display = "none";
+
+
+
+responseObj.then((resObj) => {
+    unDisplay_preLoader();
+   let prod_spec_data = JSON.parse(resObj);
+    
+   document.getElementById("produc_id").style.display = "none";
+   document.getElementsByClassName("produc_id_error_message_place")[0].style.display = "none";
+   document.getElementsByClassName("produc_id_error_message_place")[0].innerText = "";
+
+let prodSpecDatas = ``;
+prodSpecDatas+=`<option value=${prod_spec_data.p_spec_id}>Db Value</option>`;
+document.getElementById("p_spec_id").innerHTML = prodSpecDatas;
+   
+    document.getElementById("spec_name").value = prod_spec_data.p_spec_title;
+    document.getElementById("spec_value").value = prod_spec_data.p_spec_details;
+    
+})
+document.getElementsByClassName("form_title6")[0].innerHTML = "Product Specification Edit Form";
+undisplay_displayed_blocked_containers(); 
+document.getElementsByClassName("add_prod_spec_step1_container")[0].style.display = "block";
+display_blocked_containers("add_prod_spec_step1_container"); 
+}
+
+document.getElementsByClassName("prod_spec_submition_btn2")[0].addEventListener("click", function(event) {
+
+    prod_specification_submission_form(event, "update");
+});
+
+
+function deleteOfSpecProdSpecs(products_spec_id) {
+
+let permission = confirm("Are you sure?");
+if(permission) {
+    display_preLoader();
+    let prodDeleteReqObj = make_user_details("DELETE", `../prods_specification/prod_spec_deletion/products_spec_id/${products_spec_id}`, ``);
+    prodDeleteReqObj.then((deleteRes) => {
+        unDisplay_preLoader();
+        alert(deleteRes);
+        show_prod_specs();
+    }).catch((deleteErrRes) => {
+        console.log(deleteErrRes);
+    })
+}
+}
+
+/* Product Specification Edit And Delete Section End */
 
 /* Product Specification End */
 

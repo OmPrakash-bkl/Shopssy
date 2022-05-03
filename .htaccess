@@ -184,6 +184,15 @@ RewriteRule ^prods_specification/check_prod_spec_name/?$ prods_specification/che
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^prods_specification/insert_p_spec_data/?$ prods_specification/insert_p_spec_data.php [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^prods_specification/specific_prod_spec_detail/products_spec_id/([^/\*]+)?$ prods_specification/specific_prod_spec_detail.php?products_spec_id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =DELETE
+RewriteRule ^prods_specification/prod_spec_deletion/products_spec_id/([^/\*]+)?$ prods_specification/prod_spec_deletion.php?products_spec_id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_specification/update_prod_spec/?$ prods_specification/update_prod_spec.php [L]
+
 # Product Specification End
 
 
