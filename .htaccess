@@ -195,4 +195,13 @@ RewriteRule ^prods_specification/update_prod_spec/?$ prods_specification/update_
 
 # Product Specification End
 
+# Products FAQ Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^prods_faq/show_prod_faq/?$ prods_faq/show_prod_faq.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_faq/like_and_dislike_count/?$ prods_faq/like_and_dislike_count.php [L]
+
+# Products FAQ End
 
