@@ -175,6 +175,15 @@ RewriteRule ^sub_products/update_sub_product/?$ sub_products/update_sub_product.
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^prods_specification/show_prod_spec/?$ prods_specification/show_prod_spec.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_specification/get_prod_id/?$ prods_specification/get_prod_id.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_specification/check_prod_spec_name/?$ prods_specification/check_prod_spec_name.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_specification/insert_p_spec_data/?$ prods_specification/insert_p_spec_data.php [L]
+
 # Product Specification End
 
 

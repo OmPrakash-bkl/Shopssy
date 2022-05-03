@@ -2855,5 +2855,204 @@ function show_prod_specs() {
 
 /* Product Specification View Section End */
 
+/* Product Specification Add Section Start */
+
+function add_prod_specs() {
+    document.getElementById("produc_id").style.display = "inline-block";
+    document.getElementsByClassName("produc_id_error_message_place")[0].style.display = "inline-block";
+    display_preLoader();
+    let retrieveAllProdDetails = make_user_details("GET", "../products/product_details/", "");
+
+    retrieveAllProdDetails.then((resData) => {
+        unDisplay_preLoader();
+     
+        let resultData = JSON.parse(resData);
+        let appendedResultData = `<option value="0">Select Product</option>`;
+        for(let i = 0; i < resultData.length; i++) {
+            appendedResultData+=`<option value=${resultData[i].p_id}>${resultData[i].p_id} - ${resultData[i].p_title}</option>`;
+        }
+        appendedResultData+=`<option value="add_prod">Add New Product</option>`;
+    document.getElementById("produc_id").innerHTML = appendedResultData;
+    
+    document.getElementsByClassName("form_title6")[0].innerHTML = "Product Specification Add Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementById("produc_id").value = document.getElementById("spec_name").value = document.getElementById("spec_value").value = "";
+    document.getElementsByClassName("prod_spec_submition_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_prod_spec_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_prod_spec_step1_container"); 
+    document.getElementsByClassName("prod_spec_submition_btn2")[0].style.display = "none";
+
+     }).catch((errData) => {
+        console.log(errData);
+    })
+       
+}
+
+let produc_id = 0;
+
+document.getElementById("produc_id").addEventListener("change" , function() {
+    
+    if(this.value == 0) {
+        document.getElementsByClassName("produc_id_error_message_place")[0].innerText = "Select Product!";
+    } else if(this.value == "add_prod") {
+        document.getElementsByClassName("produc_id_error_message_place")[0].innerText = "";
+        add_product();
+      
+    } else {
+        document.getElementsByClassName("produc_id_error_message_place")[0].innerText = "";
+        produc_id = this.value;
+        input_id = {
+            prods_id: produc_id
+        }
+     
+        input_id = JSON.stringify(input_id);
+        display_preLoader();
+        let prod_id_CheckerRes = make_user_details("POST", "../prods_specification/get_prod_id/", `${input_id}`);
+    
+        
+        prod_id_CheckerRes.then((response) => {
+       
+            let prod_id_CheckerRes = JSON.parse(response);
+         if(prod_id_CheckerRes >=20) {
+            document.getElementsByClassName("produc_id_error_message_place")[0].innerText = "Can't add more than 20 specification details!";
+         } else {
+            document.getElementsByClassName("produc_id_error_message_place")[0].innerText = "";
+         }
+            
+            unDisplay_preLoader();
+        }).catch((errData) => {
+            console.log(errData);
+        });
+    }
+   
+});
+
+document.getElementsByClassName("prod_spec_submition_btn")[0].addEventListener("click", function(event) {
+    prod_specification_submission_form(event, "insert");    
+});
+
+function prod_specification_submission_form(event, decisionPara) {
+   
+    event.preventDefault();
+ 
+    let p_spec_id = 0;
+   
+    let products_id = document.getElementById("produc_id").value;
+   
+    if(decisionPara == "update") {
+        p_spec_id = document.getElementById("p_spec_id").value;
+    }
+    
+    let spec_name = document.getElementById("spec_name").value;
+    let spec_value = document.getElementById("spec_value").value;
+
+    spec_name = spec_name.replace(/\/+$/g, '');
+    spec_value = spec_value.replace(/\/+$/g, '');
+  
+    spec_name = spec_name.replace(/[^a-zA-Z0-9@. ]/g, "");
+    spec_value = spec_value.replace(/[^a-zA-Z0-9@. ]/g, "");
+ 
+    
+     if(decisionPara == "insert") {
+        if(products_id == 0) {
+            document.getElementsByClassName("produc_id_error_message_place")[0].innerText = "Select Product!";
+        } else {
+            if(document.getElementsByClassName("produc_id_error_message_place")[0].value == "") {
+            document.getElementsByClassName("produc_id_error_message_place")[0].innerText = "";
+            }
+            
+        }
+     }
+     
+   
+    if(spec_name == "") {
+        document.getElementsByClassName("spec_name_error_message_place")[0].innerText = "Specification name is required!";
+    } else if(spec_name.length <= 5) {
+        document.getElementsByClassName("spec_name_error_message_place")[0].innerText = "Specification name length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("spec_name_error_message_place")[0].innerText = "";
+    }
+    if(spec_value == "") {
+        document.getElementsByClassName("spec_value_error_message_place")[0].innerText = "Specification value is required!";
+    } else if(spec_value.length <= 5) {
+        document.getElementsByClassName("spec_value_error_message_place")[0].innerText = "Specification value length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("spec_value_error_message_place")[0].innerText = "";
+    }
+   
+   
+    if((document.getElementsByClassName("produc_id_error_message_place")[0].innerText == "") && (document.getElementsByClassName("spec_name_error_message_place")[0].innerText == "") && (document.getElementsByClassName("spec_value_error_message_place")[0].innerText == "")) {
+    
+        let prodSpecNameDataObj = {
+            spec_name: spec_name
+        }
+        prodSpecNameDataObj = JSON.stringify(prodSpecNameDataObj);
+        display_preLoader();
+        let prodSpecNameCheckerRes = make_user_details("POST", "../prods_specification/check_prod_spec_name/", `${prodSpecNameDataObj}`);
+    
+        
+        prodSpecNameCheckerRes.then((response) => {
+            unDisplay_preLoader();
+            let avail_count = response;
+
+            prodSpecDataObj = {
+                p_spec_id: p_spec_id,
+                products_id: products_id,
+                spec_name: spec_name,
+                spec_value: spec_value,
+            }
+           
+            prodSpecDataObj = JSON.stringify(prodSpecDataObj);
+          
+            
+        if(avail_count == 0 && decisionPara == "insert") {
+           
+            document.getElementsByClassName("spec_name_error_message_place")[0].innerText = "";
+            display_preLoader();
+            if(decisionPara == "insert") {
+                let prodSpecInsertDatasRes = make_user_details("POST", "../prods_specification/insert_p_spec_data/", `${prodSpecDataObj}`);
+        
+                prodSpecInsertDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+
+                    document.getElementById("produc_id").value = document.getElementById("spec_name").value = document.getElementById("spec_value").value = "";
+
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
+        } else {
+            document.getElementsByClassName("spec_name_error_message_place")[0].innerText = "Specification name already exits!";
+        }
+       
+        // if(decisionPara == "update") {
+        //     if(avail_count > 1) {
+        //         document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "Main image name already exits!";
+        //     } else {
+              
+        //         document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "";
+        //         display_preLoader();
+        //         let subProdUpdateDatasRes = make_user_details("POST", "../sub_products/update_sub_product/", `${subProdDataObj}`);
+        
+        //         subProdUpdateDatasRes.then((goodResponse) => {
+        //             unDisplay_preLoader();
+        //             alert(goodResponse);
+        //             document.getElementById("sub_pro_id").value = document.getElementById("main_image_name").value = document.getElementById("sub_image_name1").value = document.getElementById("sub_image_name2").value = document.getElementById("sub_image_name3").value = document.getElementById("availability").value = document.getElementById("prod_tag1").value = document.getElementById("prod_tag2").value = document.getElementById("prod_tag3").value  = document.getElementById("prod_desc").value = "";
+
+        //         }).catch((badResponse) => {
+        //             console.log(badResponse);
+        //         })
+        //     }
+            
+        // }
+    
+        })
+      }
+    }
+
+
+/* Product Specificatioin Add Section End */
+
 /* Product Specification End */
 

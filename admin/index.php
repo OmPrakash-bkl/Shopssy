@@ -272,7 +272,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-plus-square'></i> Add Specs</button>
+  <button onclick="add_prod_specs()"><i class='fas fa-plus-square'></i> Add Specs</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -719,8 +719,43 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 </div>
 
-
 <!-- Add Sub Product Form Container End -->
+
+<!-- Add Product Specification Form Container Start -->
+
+<div class="add_prod_spec_form_container">
+
+<div class="add_prod_spec_step1_container">
+<center>
+    <h1 class="form_title6">Sub Category Form</h1>
+</center>
+<form action="" class="add_prod_spec_form" method="POST">
+<select id="p_spec_id">
+
+</select>
+  <select id="produc_id">
+
+  </select> <br>
+  <p class="error_message_place produc_id_error_message_place"></p> <br>
+
+  <label for="spec_name">Specification Name <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="spec_name" autofocus> <br>
+  <p class="error_message_place spec_name_error_message_place"></p>
+  <label for="spec_value">Specification Value <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="spec_value"> <br>
+  <p class="error_message_place spec_value_error_message_place"></p>
+ 
+ <center>
+ <button type="button" class="prod_spec_submition_btn">Submit</button>
+ <button type="button" class="prod_spec_submition_btn2">Submit</button>
+ 
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- Add Product Specification Form Container End -->
 
 </div>
 
