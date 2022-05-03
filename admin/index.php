@@ -304,63 +304,21 @@ mysqli_query($con, $delete_unfulfill_data_query);
   </div>
 </div>
 
+
+
 <div class="hamburger_link_section_inner_container">
   <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(9)">
-  <h2 class="heading_text"><i class="fa fa-question-circle" aria-hidden="true"></i> Sub FAQ</h2>
+  <h2 class="heading_text"><i class="fa fa-star-o"></i> Reviews</h2>
   <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow9"></i></span>
   </div>
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container9">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View S.FAQ</button>
-  <span><i class="fa fa-arrow-circle-right"></i></span>
-  </div>
-  <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-plus-square'></i> Add S.FAQ</button>
-  <span><i class="fa fa-arrow-circle-right"></i></span>
-  </div>
-  <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-edit"></i> Edit & Delete</button>
-  <span><i class="fa fa-arrow-circle-right"></i></span>
-  </div>
-  </div>
-</div>
-
-<div class="hamburger_link_section_inner_container">
-  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(10)">
-  <h2 class="heading_text"><i class="fa fa-star-o"></i> Reviews</h2>
-  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow10"></i></span>
-  </div>
-
-  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container10">
-  <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View Review</button>
+  <button onclick="show_reviews()"><i class="fa fa-eye"></i> View Review</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
   <button><i class='fas fa-plus-square'></i> Add Review</button>
-  <span><i class="fa fa-arrow-circle-right"></i></span>
-  </div>
-  <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-edit"></i> Edit & Delete</button>
-  <span><i class="fa fa-arrow-circle-right"></i></span>
-  </div>
-  </div>
-</div>
-
-<div class="hamburger_link_section_inner_container">
-  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(11)">
-  <h2 class="heading_text"><i class="fa fa-comment-o"></i> Sub Reviews</h2>
-  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow11"></i></span>
-  </div>
-
-  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container11">
-  <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View S.Review</button>
-  <span><i class="fa fa-arrow-circle-right"></i></span>
-  </div>
-  <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-plus-square'></i> Add S.Review</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
