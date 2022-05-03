@@ -294,11 +294,11 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-plus-square'></i> Add FAQ</button>
+  <button onclick="add_prod_faq_ans()"><i class='fas fa-plus-square'></i> Add Answers</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-edit"></i> Edit & Delete</button>
+  <button onclick="delete_prod_faq()"><i class="fa fa-trash-o"></i> Delete FAQ</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -756,6 +756,45 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </div>
 
 <!-- Add Product Specification Form Container End -->
+
+<!-- Product FAQ Form Container Start -->
+
+<div class="add_prod_faq_ans_form_container">
+
+<div class="add_prod_faq_ans_step1_container">
+<center>
+    <h1 class="form_title7">Product FAQ Answering Form</h1>
+</center>
+<form action="" class="add_prod_faq_ans_form" method="POST">
+<select id="p_and_q_id">
+
+</select> 
+<p class="error_message_place p_and_q_id_error_message_place"></p> 
+
+  <label for="prod_faq_ques">Question <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="prod_faq_ques" autofocus> <br>
+  <p class="error_message_place prod_faq_ques_error_message_place"></p>
+  <label for="prod_faq_ans">Answer <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="prod_faq_ans"> <br>
+  <p class="error_message_place prod_faq_ans_error_message_place"></p> <br>
+<select id="prod_faq_ques_status">
+<option value="0">Select Status</option>
+  <option value="waiting">Un Approve</option>
+  <option value="approved">Approve</option>
+</select> <br>
+<p class="error_message_place prod_faq_ques_status_error_message_place"></p>
+
+ <center>
+
+ <button type="button" class="p_q_and_a_submition_btn2">Submit</button>
+ 
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- Product FAQ Form Container End -->
 
 </div>
 

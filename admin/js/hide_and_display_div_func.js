@@ -3181,7 +3181,7 @@ function view_faq() {
     display_preLoader();
     likeAndDislickResponseObj.then((countres) => {
         let countResultData = JSON.parse(countres);
-        console.log(countResultData);
+        
         unDisplay_preLoader();
 
         let table_datas = `<tr><th>S.NO</th>
@@ -3231,6 +3231,222 @@ function view_faq() {
 }
 
 /* Products FAQ View Section End */
+
+/* Products FAQ Adding Answers Section Start */
+
+function add_prod_faq_ans() {
+   
+    display_preLoader();
+    let retrieveAllProdFaqDetails = make_user_details("GET", "../prods_faq/show_prod_faq/", "");
+
+    retrieveAllProdFaqDetails.then((resData) => {
+        unDisplay_preLoader();
+     
+        let resultData = JSON.parse(resData);
+        let appendedResultData = `<option value="0">Select Question</option>`;
+        for(let i = 0; i < resultData.length; i++) {
+            appendedResultData+=`<option value=${resultData[i].p_q_and_a_id}>${resultData[i].p_q_and_a_id} - ${resultData[i].p_ques}</option>`;
+        }
+        
+    document.getElementById("p_and_q_id").innerHTML = appendedResultData;
+    
+    document.getElementsByClassName("form_title7")[0].innerHTML = "Product FAQ Answering Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementById("prod_faq_ques").value = document.getElementById("prod_faq_ans").value = "";
+    document.getElementById("prod_faq_ques_status").value = 0;
+    document.getElementsByClassName("p_q_and_a_submition_btn2")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_prod_faq_ans_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_prod_faq_ans_step1_container"); 
+    
+
+     }).catch((errData) => {
+        console.log(errData);
+    })
+}
+
+let p_and_q_id = 0;
+document.getElementById("prod_faq_ques").disabled = true;
+
+document.getElementById("p_and_q_id").addEventListener("change" , function() {
+    
+    if(this.value == 0) {
+        document.getElementsByClassName("p_and_q_id_error_message_place")[0].innerText = "Select Question!";
+        document.getElementById("prod_faq_ques").value = "";
+        document.getElementById("prod_faq_ans").value = "";
+        document.getElementById("prod_faq_ques_status").value = "0";
+       
+    } else {
+        document.getElementsByClassName("prod_faq_ques_error_message_place")[0].innerText = "";
+        document.getElementsByClassName("prod_faq_ans_error_message_place")[0].innerText = "";
+        document.getElementsByClassName("prod_faq_ques_status_error_message_place")[0].innerText = "";
+        document.getElementsByClassName("p_and_q_id_error_message_place")[0].innerText = "";
+        p_and_q_id = this.value;
+
+        display_preLoader();
+    let retrieveSpecProdFaqDetails = make_user_details("GET", `../prods_faq/spec_prod_faq_ques/prod_faq_id/${p_and_q_id}`, "");
+
+    retrieveSpecProdFaqDetails.then((specRes) => {
+        unDisplay_preLoader();
+
+        responseData = JSON.parse(specRes);
+        document.getElementById("prod_faq_ques").value = responseData.p_ques;
+        document.getElementById("prod_faq_ans").value = responseData.p_ans;
+        document.getElementById("prod_faq_ques_status").value = responseData.status;
+
+    }).catch((errorData) => {
+        console.log(errorData);
+    })
+        
+    }
+   
+});
+
+document.getElementsByClassName("p_q_and_a_submition_btn2")[0].addEventListener("click", function(event) {
+    prod_faq_answer_submission_form(event, "insert");    
+});
+
+function prod_faq_answer_submission_form(event, decisionPara) {
+    
+    event.preventDefault();
+ 
+ 
+    let p_and_q_id = document.getElementById("p_and_q_id").value;
+   
+    let prod_faq_ques = document.getElementById("prod_faq_ques").value;
+    let prod_faq_ans = document.getElementById("prod_faq_ans").value;
+    let prod_faq_ques_status = document.getElementById("prod_faq_ques_status").value;
+
+    prod_faq_ques = prod_faq_ques.replace(/\/+$/g, '');
+    prod_faq_ans = prod_faq_ans.replace(/\/+$/g, '');
+    prod_faq_ques_status = prod_faq_ques_status.replace(/\/+$/g, '');
+
+    prod_faq_ques = prod_faq_ques.replace(/[^a-zA-Z0-9@. ]/g, "");
+    prod_faq_ans = prod_faq_ans.replace(/[^a-zA-Z0-9@. ]/g, "");
+    prod_faq_ques_status = prod_faq_ques_status.replace(/[^a-zA-Z0-9@. ]/g, "");
+
+        if(p_and_q_id == 0) {
+            document.getElementsByClassName("p_and_q_id_error_message_place")[0].innerText = "Select Question!";
+        } 
+    
+    if(prod_faq_ques == "") {
+        document.getElementsByClassName("prod_faq_ques_error_message_place")[0].innerText = "Question is required!";
+    } else if(prod_faq_ques.length <= 5) {
+        document.getElementsByClassName("prod_faq_ques_error_message_place")[0].innerText = "Question length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("prod_faq_ques_error_message_place")[0].innerText = "";
+    }
+    if(prod_faq_ans == "") {
+        document.getElementsByClassName("prod_faq_ans_error_message_place")[0].innerText = "|Answer is required!";
+    } else if(prod_faq_ans.length <= 5) {
+        document.getElementsByClassName("prod_faq_ans_error_message_place")[0].innerText = "Answer length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("prod_faq_ans_error_message_place")[0].innerText = "";
+    }
+    if(prod_faq_ques_status == "0") {
+        document.getElementsByClassName("prod_faq_ques_status_error_message_place")[0].innerText = "Question status is required!";
+    } else if(prod_faq_ques_status.length <= 4) {
+        document.getElementsByClassName("prod_faq_ques_status_error_message_place")[0].innerText = "Question status must be minimum 5 characters!";
+    } else {
+        document.getElementsByClassName("prod_faq_ques_status_error_message_place")[0].innerText = "";
+    }
+   
+   
+    if((document.getElementsByClassName("p_and_q_id_error_message_place")[0].innerText == "") && (document.getElementsByClassName("prod_faq_ques_error_message_place")[0].innerText == "") && (document.getElementsByClassName("prod_faq_ans_error_message_place")[0].innerText == "") && (document.getElementsByClassName("prod_faq_ques_status_error_message_place")[0].innerText == "")) {
+    
+     
+            prodFaqDataObj = {
+                p_and_q_id: p_and_q_id,
+                prod_faq_ques: prod_faq_ques,
+                prod_faq_ans: prod_faq_ans,
+                prod_faq_ques_status: prod_faq_ques_status,
+            }
+           
+            prodFaqDataObj = JSON.stringify(prodFaqDataObj);
+            display_preLoader();
+            if(decisionPara == "insert") {
+                let prodFaqInsertDatasRes = make_user_details("POST", "../prods_faq/insert_prod_faq_data/", `${prodFaqDataObj}`);
+        
+                prodFaqInsertDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+
+                    document.getElementById("p_and_q_id").value = document.getElementById("prod_faq_ques").value = document.getElementById("prod_faq_ans").value = document.getElementById("prod_faq_ques_status").value = "";
+
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
+            unDisplay_preLoader();
+      }
+    }
+
+
+/* Products FAQ Adding Answers Section End */
+
+/* Products Delete FAQ Section Start */
+
+function delete_prod_faq() {
+    let responseObj = make_user_details("GET", "../prods_faq/show_prod_faq/", "");
+    display_preLoader();
+    let totalC = 0;
+    
+    responseObj.then((sucvalue) => {
+        unDisplay_preLoader();
+      
+        let resultData = JSON.parse(sucvalue);
+        let table_datas = `<tr>
+        <th>S.NO</th>
+        <th>PROD.FAQ ID</th>
+        <th>PROD ID</th>
+        <th>QUESTIONS</th>
+        <th>ANSWERS</th>
+        <th>STATUS</th>
+        <th>ACTION</th>
+        </tr>`;
+        for(let i = 0; i < resultData.length; i++) {
+           
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].p_q_and_a_id}</td>
+            <td>${resultData[i].p_id}</td>
+            <td>${resultData[i].p_ques}</td>
+            <td>${resultData[i].p_ans}</td>
+            <td>${resultData[i].status}</td>
+           
+            <td><button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecProdFaq(${resultData[i].p_q_and_a_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Product FAQ Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+        }).catch((rejvalue) => {
+            console.log(rejvalue);
+        }) 
+    
+}
+
+function deleteOfSpecProdFaq(p_q_and_a_id) {
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let prodDeleteReqObj = make_user_details("DELETE", `../prods_faq/prod_faq_deletion/products_faq_id/${p_q_and_a_id}`, ``);
+        prodDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            view_faq();
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
+    }
+}
+
+/* Products Delete FAQ Section End */
 
 /* Products FAQ End */
 

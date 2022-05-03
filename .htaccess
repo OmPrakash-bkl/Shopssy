@@ -203,5 +203,14 @@ RewriteRule ^prods_faq/show_prod_faq/?$ prods_faq/show_prod_faq.php [L]
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^prods_faq/like_and_dislike_count/?$ prods_faq/like_and_dislike_count.php [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^prods_faq/spec_prod_faq_ques/prod_faq_id/([^/\*]+)?$ prods_faq/spec_prod_faq_ques.php?prod_faq_id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_faq/insert_prod_faq_data/?$ prods_faq/insert_prod_faq_data.php [L]
+
+RewriteCond %{REQUEST_METHOD} =DELETE
+RewriteRule ^prods_faq/prod_faq_deletion/products_faq_id/([^/\*]+)?$ prods_faq/prod_faq_deletion.php?products_faq_id=$1 [L]
+
 # Products FAQ End
 
