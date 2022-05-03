@@ -214,3 +214,13 @@ RewriteRule ^prods_faq/prod_faq_deletion/products_faq_id/([^/\*]+)?$ prods_faq/p
 
 # Products FAQ End
 
+# Reviews Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^reviews/show_prod_reviews/?$ reviews/show_prod_reviews.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^reviews/like_and_dislike_count/?$ reviews/like_and_dislike_count.php [L]
+
+# Reviews End
+
