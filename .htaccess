@@ -159,6 +159,15 @@ RewriteRule ^sub_products/check_prod_main_name/?$ sub_products/check_prod_main_n
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^sub_products/insert_subprod_data/?$ sub_products/insert_subprod_data.php [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^sub_products/specific_subproduct_detail/sub_pro_id/([^/\*]+)?$ sub_products/specific_subproduct_detail.php?sub_pro_id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =DELETE
+RewriteRule ^sub_products/sub_product_deletion/sub_pro_id/([^/\*]+)?$ sub_products/sub_product_deletion.php?sub_pro_id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^sub_products/update_sub_product/?$ sub_products/update_sub_product.php [L]
+
 # Sub Products End
 
 

@@ -2665,25 +2665,26 @@ function sub_product_submission_form(event, decisionPara) {
             document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "Main image name already exits!";
         }
        
-        // if(decisionPara == "update") {
-        //     if(avail_count > 1) {
-        //         document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "Product already exits!";
-        //     } else {
+        if(decisionPara == "update") {
+            if(avail_count > 1) {
+                document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "Main image name already exits!";
+            } else {
               
-        //         document.getElementsByClassName("prod_title_error_message_place")[0].innerText = "";
-        //         display_preLoader();
-        //         let prodUpdateDatasRes = make_user_details("POST", "../products/update_product/", `${prodDataObj}`);
+                document.getElementsByClassName("main_image_name_error_message_place")[0].innerText = "";
+                display_preLoader();
+                let subProdUpdateDatasRes = make_user_details("POST", "../sub_products/update_sub_product/", `${subProdDataObj}`);
         
-        //         prodUpdateDatasRes.then((goodResponse) => {
-        //             unDisplay_preLoader();
-        //             alert(goodResponse);
-        //             document.getElementById("prod_id").value = document.getElementById("prod_title").value = document.getElementById("prod_imagename").value = document.getElementById("rate_of_prod").value = document.getElementById("original_price").value = document.getElementById("offer_price").value =  "";
-        //         }).catch((badResponse) => {
-        //             console.log(badResponse);
-        //         })
-        //     }
+                subProdUpdateDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    document.getElementById("sub_pro_id").value = document.getElementById("main_image_name").value = document.getElementById("sub_image_name1").value = document.getElementById("sub_image_name2").value = document.getElementById("sub_image_name3").value = document.getElementById("availability").value = document.getElementById("prod_tag1").value = document.getElementById("prod_tag2").value = document.getElementById("prod_tag3").value  = document.getElementById("prod_desc").value = "";
+
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
             
-        // }
+        }
     
         })
       }
@@ -2692,6 +2693,120 @@ function sub_product_submission_form(event, decisionPara) {
     
 
 /* Sub Products Add Section End */
+
+/* Sub Products Edit And Delete Section Start */
+
+function edit_and_delete_of_sub_product() {
+   
+    let responseObj = make_user_details("GET", "../sub_products/show_subprods/", "");
+display_preLoader();
+let totalC = 0;
+
+responseObj.then((sucvalue) => {
+    unDisplay_preLoader();
+  
+    let resultData = JSON.parse(sucvalue);
+    let table_datas = `<tr>
+        <th>S.NO</th>
+        <th>PROD.SUB ID</th>
+        <th>MAIN IMAGE NAME</th>
+        <th>AVAILABILITY</th>
+        <th>PROD TAG 1</th>
+        <th>PROD TAG 2</th>
+        <th>PROD TAG 3</th>
+        <th>ACTION</th>
+    </tr>`;
+    for(let i = 0; i < resultData.length; i++) {
+       
+        table_datas+=`<tr>
+        <td>${i+1}.</td>
+        <td>${resultData[i].products_sub_id}</td>
+        <td>${resultData[i].p_image}</td>
+        <td>${resultData[i].p_avail}</td>
+        <td>${resultData[i].p_tags1}</td>
+        <td>${resultData[i].p_tags2}</td>
+        <td>${resultData[i].p_tags3}</td>
+        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecSubProd(${resultData[i].products_sub_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecSubProd(${resultData[i].products_sub_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+        totalC = i;
+    }
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Sub Product Details";
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+    display_blocked_containers("admin_panel_details_table_container"); 
+    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+    display_blocked_containers("table_name_and_other_details_display_container"); 
+    }).catch((rejvalue) => {
+        console.log(rejvalue);
+    }) 
+
+}
+
+function editOfSpecSubProd(products_sub_id) {
+display_preLoader();
+let responseObj = make_user_details("GET", `../sub_products/specific_subproduct_detail/sub_pro_id/${products_sub_id}`, "");
+
+document.getElementsByClassName("add_sub_prod_submition_btn2")[0].style.display = "inline-block";
+document.getElementsByClassName("add_sub_prod_submition_btn")[0].style.display = "none";
+
+
+
+responseObj.then((resObj) => {
+    unDisplay_preLoader();
+   let subProdData = JSON.parse(resObj);
+    
+   document.getElementById("pro_id").style.display = "none";
+   document.getElementsByClassName("pro_id_error_message_place")[0].style.display = "none";
+   document.getElementsByClassName("pro_id_error_message_place")[0].innerText = "";
+
+let subProdsDatas = ``;
+subProdsDatas+=`<option value=${subProdData.products_sub_id}>Db Value</option>`;
+document.getElementById("sub_pro_id").innerHTML = subProdsDatas;
+   
+    document.getElementById("main_image_name").value = subProdData.p_image;
+    document.getElementById("sub_image_name1").value = subProdData.p_s_image1;
+    document.getElementById("sub_image_name2").value = subProdData.p_s_image2;
+    document.getElementById("sub_image_name3").value = subProdData.p_s_image3;
+    document.getElementById("availability").value = subProdData.p_avail;
+    document.getElementById("prod_tag1").value = subProdData.p_tags1;
+    document.getElementById("prod_tag2").value = subProdData.p_tags2;
+    document.getElementById("prod_tag3").value = subProdData.p_tags3;
+    document.getElementById("prod_desc").value = subProdData.p_desc;
+   
+    
+})
+document.getElementsByClassName("form_title5")[0].innerHTML = "Sub Products Edit Form";
+undisplay_displayed_blocked_containers(); 
+document.getElementsByClassName("add_sub_prod_step1_container")[0].style.display = "block";
+display_blocked_containers("add_sub_prod_step1_container"); 
+}
+
+document.getElementsByClassName("add_sub_prod_submition_btn2")[0].addEventListener("click", function(event) {
+
+    sub_product_submission_form(event, "update");
+});
+
+
+function deleteOfSpecSubProd(products_sub_id) {
+
+let permission = confirm("Are you sure?");
+if(permission) {
+    display_preLoader();
+    let prodDeleteReqObj = make_user_details("DELETE", `../sub_products/sub_product_deletion/sub_pro_id/${products_sub_id}`, ``);
+    prodDeleteReqObj.then((deleteRes) => {
+        unDisplay_preLoader();
+        alert(deleteRes);
+        show_sub_prods();
+    }).catch((deleteErrRes) => {
+        console.log(deleteErrRes);
+    })
+}
+}
+
+
+/* Sub Products Edit And Delete Section End*/
 
 /* Sub Products Section End */
 
