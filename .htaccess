@@ -170,4 +170,11 @@ RewriteRule ^sub_products/update_sub_product/?$ sub_products/update_sub_product.
 
 # Sub Products End
 
+# Product Specification Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^prods_specification/show_prod_spec/?$ prods_specification/show_prod_spec.php [L]
+
+# Product Specification End
+
 
