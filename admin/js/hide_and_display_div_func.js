@@ -3523,5 +3523,70 @@ function show_reviews() {
 
 /* Show Reviews Section End */
 
+/* Review Delete Section Start */
+
+function delete_prod_review() {
+    let responseObj = make_user_details("GET", "../reviews/show_prod_reviews/", "");
+    display_preLoader();
+    let totalC = 0;
+    
+    responseObj.then((sucvalue) => {
+        unDisplay_preLoader();
+      
+        let resultData = JSON.parse(sucvalue);
+        let table_datas = `<tr>
+        <th>S.NO</th>
+        <th>PROD.REVIEW ID</th>
+        <th>USER ID</th>
+        <th>PROD ID</th>
+        <th>RATINGS</th>
+        <th>DESCRIPTION</th>
+        <th>ACTION</th>
+        </tr>`;
+        for(let i = 0; i < resultData.length; i++) {
+           
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].review_id}</td>
+            <td>${resultData[i].known_user_id}</td>
+            <td>${resultData[i].p_id}</td>
+            <td>${resultData[i].p_rating}</td>
+            <td>${resultData[i].p_desc}</td>
+           
+            <td><button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecProdReview(${resultData[i].review_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Product Review Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+        }).catch((rejvalue) => {
+            console.log(rejvalue);
+        }) 
+    
+}
+
+function deleteOfSpecProdReview(review_id) {
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let prodDeleteReqObj = make_user_details("DELETE", `../reviews/prod_review_deletion/products_review_id/${review_id}`, ``);
+        prodDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            show_reviews();
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
+    }
+}
+
+/* Review Delete Section End */
+
 /* Review End */
 

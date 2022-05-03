@@ -318,11 +318,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-plus-square'></i> Add Review</button>
-  <span><i class="fa fa-arrow-circle-right"></i></span>
-  </div>
-  <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-edit"></i> Edit & Delete</button>
+  <button onclick="delete_prod_review()"><i class="fa fa-trash-o"></i> Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
