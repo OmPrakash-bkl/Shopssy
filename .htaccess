@@ -227,3 +227,9 @@ RewriteRule ^reviews/prod_review_deletion/products_review_id/([^/\*]+)?$ reviews
 
 # Reviews End
 
+# Filter Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^filter/filter_details/?$ filter/filter_details.php [L]
+
+# Filter End

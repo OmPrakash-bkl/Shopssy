@@ -332,11 +332,15 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container10">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="show_reviews()"><i class="fa fa-eye"></i> View Review</button>
+  <button onclick="view_filter_data()"><i class="fa fa-eye"></i> View F.Data</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="delete_prod_review()"><i class="fa fa-trash-o"></i> Delete</button>
+  <button><i class='fas fa-plus-square'></i> Add F.Data</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -350,11 +354,15 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container11">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="show_reviews()"><i class="fa fa-eye"></i> View Review</button>
+  <button><i class="fa fa-eye"></i> View S.F.Data</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="delete_prod_review()"><i class="fa fa-trash-o"></i> Delete</button>
+  <button><i class='fas fa-plus-square'></i> Add S.F.Data</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -368,11 +376,15 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container12">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="show_reviews()"><i class="fa fa-eye"></i> View Review</button>
+  <button><i class="fa fa-eye"></i> View P.Data</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="delete_prod_review()"><i class="fa fa-trash-o"></i> Delete</button>
+  <button><i class='fas fa-plus-square'></i> Add P.Data</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
