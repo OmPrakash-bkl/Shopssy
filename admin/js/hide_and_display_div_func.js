@@ -3610,7 +3610,7 @@ function view_filter_data() {
         <th>FILTER ID</th>
         <th>CAT ID</th>
         <th>TITLE</th>
-        <th>details for which product?</th></tr>`;
+        <th>DETAILS FOR WHICH PRODUCT?</th></tr>`;
         for(let i = 0; i < resultData.length; i++) {
             
             table_datas+=`<tr>
@@ -3644,6 +3644,8 @@ function view_filter_data() {
 /* Filter Add Section Start */
 
 function add_filter_data() {
+    document.getElementsByClassName("filter_data_submition_btn")[0].style.display = "inline-block";
+document.getElementsByClassName("filter_data_submition_btn2")[0].style.display = "none";
     display_preLoader();
     let retrieveAllSubCatDetails = make_user_details("GET", "../sub_category/sub_cat_details/", "");
    
@@ -3721,6 +3723,7 @@ document.getElementsByClassName("filter_data_submition_btn")[0].addEventListener
 });
     
     function filter_data_submission_form(event, decisionPara) {
+       
     event.preventDefault();
  
     subs_cats_id = document.getElementById("subes_cats_id").value;
@@ -3804,33 +3807,169 @@ document.getElementsByClassName("filter_data_submition_btn")[0].addEventListener
             document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "Filter Title already exits!";
         }
        
-        // if(decisionPara == "update") {
-        //     if(avail_count >= 1) {
-        //         document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Sub Category Name already exits!";
-        //     } else {
+        if(decisionPara == "update") {
+            if(avail_count >= 1) {
+                document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "Filter title already exits!";
+            } else {
               
-        //         document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "";
-        //         display_preLoader();
-        //         let subCategoryUpdateDatasRes = make_user_details("POST", "../sub_category/update_subcategory/", `${subCategoryDataObj}`);
+                document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "";
+                display_preLoader();
+                let filterUpdateDatasRes = make_user_details("POST", "../filter/update_filter/", `${filterDataObj}`);
         
-        //         subCategoryUpdateDatasRes.then((goodResponse) => {
-        //             unDisplay_preLoader();
-        //             alert(goodResponse);
-        //             document.getElementById("sub_cat_identification_id").value = document.getElementById("sub_cat_identification_id_two").value = document.getElementById("sub_cat_title").value = document.getElementById("sub_cat_image_name").value = "";
-        //         }).catch((badResponse) => {
-        //             console.log(badResponse);
-        //         })
-        //     }
+                filterUpdateDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    document.getElementById("filter_id").value = document.getElementById("filter_title").value = document.getElementById("filter_sub_title").value = document.getElementById("details_for_which_prod").value = "";
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
             
-        // }
+         }
     
         })
       }
     }
 
-
-
 /* Filter Add Section End */
+
+/* Filter Edit And Delete Section Start */
+
+function edit_and_delete_of_filter_data() {
+   
+    let responseObj = make_user_details("GET", "../filter/filter_details/", "");
+display_preLoader();
+let totalC = 0;
+
+responseObj.then((sucvalue) => {
+    unDisplay_preLoader();
+  
+    let resultData = JSON.parse(sucvalue);
+    let table_datas = `<tr><th>S.NO</th>
+    <th>FILTER ID</th>
+    <th>CAT ID</th>
+    <th>TITLE</th>
+    <th>DETAILS FOR WHICH PRODUCT?</th>
+    <th>ACTION</th></tr>`;
+    for(let i = 0; i < resultData.length; i++) {
+        
+        table_datas+=`<tr>
+        <td>${i+1}.</td>
+        <td>${resultData[i].filter_id}</td>
+        <td>${resultData[i].subs_cat_identification_id}</td>
+        <td>${resultData[i].filter_title}</td>
+        <td>${resultData[i].filter_details_category}</td>
+        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecFilter(${resultData[i].filter_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecFilter(${resultData[i].filter_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+        totalC = i;
+    }
+
+    let retrieveAllSubCatDetails = make_user_details("GET", "../sub_category/sub_cat_details/", "");
+   
+    retrieveAllSubCatDetails.then((resData) => {
+       
+        unDisplay_preLoader();
+     
+        let resultData = JSON.parse(resData);
+        let appendedResultData = `<option value="0">Select Category</option>`;
+        for(let i = 0; i < resultData.length; i++) {
+            appendedResultData+=`<option value=${resultData[i].sub_cat_identification_id_two}>${resultData[i].sub_cat_identification_id_two} - ${resultData[i].subs_cat_title}</option>`;
+        }
+        appendedResultData += `<option value="add_cat">Add New Category</option>`;
+        document.getElementById("subes_cats_id").innerHTML = appendedResultData;
+       
+    })
+
+    let responseObj = make_user_details("GET", "../filter/fetch_details_category/", "");
+    display_preLoader();
+   
+    
+    responseObj.then((sucvalue) => {
+        let filter_data_category = `<option value="0">
+        Select Details</option>`;
+        unDisplay_preLoader();
+        let resultData = JSON.parse(sucvalue);
+      
+        for(let i = 0; i < resultData.length; i++) {
+           
+            filter_data_category+=`<option value="${resultData[i].filter_details_category}">
+            ${resultData[i].filter_details_category}</option>`; 
+        }
+        filter_data_category+=`<option value="new_fil_data_cat">Add New Details Section</option>`;
+        document.getElementById("details_for_which_prod").innerHTML = filter_data_category;
+       
+
+        }).catch((rejvalue) => {
+            console.log(rejvalue);
+        }) 
+
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Filter Details";
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+    display_blocked_containers("admin_panel_details_table_container"); 
+    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+    display_blocked_containers("table_name_and_other_details_display_container"); 
+    }).catch((rejvalue) => {
+        console.log(rejvalue);
+    }) 
+
+}
+
+function editOfSpecFilter(filter_id) {
+display_preLoader();
+let responseObj = make_user_details("GET", `../filter/specific_filter_detail/filter_id/${filter_id}`, "");
+
+document.getElementsByClassName("filter_data_submition_btn2")[0].style.display = "inline-block";
+document.getElementsByClassName("filter_data_submition_btn")[0].style.display = "none";
+
+
+
+responseObj.then((resObj) => {
+    unDisplay_preLoader();
+   let filterData = JSON.parse(resObj);
+    
+//    document.getElementById("subes_cats_id").style.display = "none";
+//    document.getElementsByClassName("sub_cats_id_error_message_place")[0].style.display = "none";
+
+    let appendedResultData = ``;
+        appendedResultData+=`<option value=${filterData.filter_id}>Db Value</option>`;
+    document.getElementById("filter_id").innerHTML = appendedResultData;
+
+    document.getElementById("filter_title").value = filterData.filter_title;
+    document.getElementById("filter_sub_title").value = filterData.filter_sub_title; 
+   
+})
+document.getElementsByClassName("form_title8")[0].innerHTML = "Filter Edit Form";
+undisplay_displayed_blocked_containers(); 
+document.getElementsByClassName("add_filter_step1_container")[0].style.display = "block";
+display_blocked_containers("add_filter_step1_container"); 
+}
+
+document.getElementsByClassName("filter_data_submition_btn2")[0].addEventListener("click", function(event) {
+
+    filter_data_submission_form(event, "update");
+});
+
+
+function deleteOfSpecFilter(filter_id) {
+
+let permission = confirm("Are you sure?");
+if(permission) {
+    display_preLoader();
+    let subCategoryDeleteReqObj = make_user_details("DELETE", `../filter/filter_deletion/filter_id/${filter_id}`, ``);
+    subCategoryDeleteReqObj.then((deleteRes) => {
+        unDisplay_preLoader();
+        alert(deleteRes);
+        view_filter_data();
+    }).catch((deleteErrRes) => {
+        console.log(deleteErrRes);
+    })
+}
+}
+
+/* Filter Edit And Delete Section End */
 
 /* Filter End */
 

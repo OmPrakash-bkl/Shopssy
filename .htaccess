@@ -241,4 +241,13 @@ RewriteRule ^filter/check_filter_title/?$ filter/check_filter_title.php [L]
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^filter/insert_filter_data/?$ filter/insert_filter_data.php [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^filter/specific_filter_detail/filter_id/([^/\*]+)?$ filter/specific_filter_detail.php?filter_id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^filter/update_filter/?$ filter/update_filter.php [L]
+
+RewriteCond %{REQUEST_METHOD} =DELETE
+RewriteRule ^filter/filter_deletion/filter_id/([^/\*]+)?$ filter/filter_deletion.php?filter_id=$1 [L]
+
 # Filter End
