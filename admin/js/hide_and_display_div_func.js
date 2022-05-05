@@ -3594,6 +3594,8 @@ function deleteOfSpecProdReview(review_id) {
 
 /* Filter View Section Start */
 
+
+
 function view_filter_data() {
     
     let responseObj = make_user_details("GET", "../filter/filter_details/", "");
@@ -3618,8 +3620,10 @@ function view_filter_data() {
             <td>${resultData[i].filter_title}</td>
             <td>${resultData[i].filter_details_category}</td>
             </tr>`;
+
             totalC = i;
         }
+
         document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Product Filter Details";
         document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
         document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
@@ -3636,6 +3640,65 @@ function view_filter_data() {
 }
 
 /* Filter View Section End */
+
+/* Filter Add Section Start */
+
+function add_filter_data() {
+    display_preLoader();
+    let retrieveAllSubCatDetails = make_user_details("GET", "../sub_category/sub_cat_details/", "");
+   
+    retrieveAllSubCatDetails.then((resData) => {
+        unDisplay_preLoader();
+     
+        let resultData = JSON.parse(resData);
+        let appendedResultData = `<option value="0">Select Category</option>`;
+        for(let i = 0; i < resultData.length; i++) {
+            appendedResultData+=`<option value=${resultData[i].sub_cat_identification_id_two}>${resultData[i].sub_cat_identification_id_two} - ${resultData[i].subs_cat_title}</option>`;
+        }
+
+        let responseObj = make_user_details("GET", "../filter/fetch_details_category/", "");
+        display_preLoader();
+       
+        
+        responseObj.then((sucvalue) => {
+            let filter_data_category = `<option value="0">
+            Select Details</option>`;
+            unDisplay_preLoader();
+            let resultData = JSON.parse(sucvalue);
+          
+            for(let i = 0; i < resultData.length; i++) {
+               
+                filter_data_category+=`<option value="${resultData[i].filter_details_category}">
+                ${resultData[i].filter_details_category}</option>`; 
+            }
+            filter_data_category+=`<option value="new_fil_data_cat">Add New Details Section</option>`;
+            document.getElementById("details_for_which_prod").innerHTML = filter_data_category;
+           
+
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+     
+        
+    document.getElementById("sub_cats_id").innerHTML = appendedResultData;
+    
+    
+    document.getElementsByClassName("form_title8")[0].innerHTML = "Filter Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementById("filter_title").value = document.getElementById("filter_sub_title").value = "";
+
+    //document.getElementById("details_for_which_prod").value = 0;
+    document.getElementsByClassName("filter_data_submition_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_filter_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_filter_step1_container"); 
+    
+
+     }).catch((errData) => {
+        console.log(errData);
+    })
+}
+
+/* Filter Add Section End */
 
 /* Filter End */
 

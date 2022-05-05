@@ -336,7 +336,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-plus-square'></i> Add F.Data</button>
+  <button onclick="add_filter_data()"><i class='fas fa-plus-square'></i> Add F.Data</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -815,6 +815,46 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </div>
 
 <!-- Product FAQ Form Container End -->
+
+<!-- Filter Form Container Start -->
+
+<div class="add_filter_form_container">
+
+<div class="add_filter_step1_container">
+<center>
+    <h1 class="form_title8">Filter Form</h1>
+</center>
+<form action="" class="add_filter_form" method="POST">
+<select id="filter_id">
+
+</select>
+<select id="sub_cats_id">
+
+</select> 
+<p class="error_message_place sub_cats_id_error_message_place"></p> 
+
+  <label for="filter_title">Filter Title <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="filter_title" autofocus> <br>
+  <p class="error_message_place filter_title_error_message_place"></p>
+  <input type="hidden" id="filter_sub_title">
+  
+<select id="details_for_which_prod">
+
+</select> <br>
+<p class="error_message_place details_for_which_prod_status_error_message_place"></p>
+
+ <center>
+
+ <button type="button" class="filter_data_submition_btn">Submit</button>
+ <button type="button" class="filter_data_submition_btn2">Submit</button>
+ 
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- Filter Form Container End -->
 
 </div>
 
