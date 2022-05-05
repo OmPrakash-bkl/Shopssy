@@ -455,7 +455,7 @@ border-radius: 5px;
 margin-bottom: 10px;
 }
 
-#cats_id, #category_id, #sub_category_id, #brands_id, #prod_id, #categories_id, #sub_categories_id, #bandi_id, #sub_pro_id, #pro_id, #p_spec_id, #produc_id, #p_and_q_id, #prod_faq_ques_status, #sub_cats_id, #details_for_which_prod {
+#cats_id, #category_id, #sub_category_id, #brands_id, #prod_id, #categories_id, #sub_categories_id, #bandi_id, #sub_pro_id, #pro_id, #p_spec_id, #produc_id, #p_and_q_id, #prod_faq_ques_status, #subes_cats_id, #details_for_which_prod {
 width: 100%;
 border: 1px solid gainsboro;
 color: rgb(109, 109, 109);

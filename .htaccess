@@ -235,4 +235,10 @@ RewriteRule ^filter/filter_details/?$ filter/filter_details.php [L]
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^filter/fetch_details_category/?$ filter/fetch_details_category.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^filter/check_filter_title/?$ filter/check_filter_title.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^filter/insert_filter_data/?$ filter/insert_filter_data.php [L]
+
 # Filter End

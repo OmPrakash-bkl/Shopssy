@@ -3648,6 +3648,7 @@ function add_filter_data() {
     let retrieveAllSubCatDetails = make_user_details("GET", "../sub_category/sub_cat_details/", "");
    
     retrieveAllSubCatDetails.then((resData) => {
+       
         unDisplay_preLoader();
      
         let resultData = JSON.parse(resData);
@@ -3655,6 +3656,9 @@ function add_filter_data() {
         for(let i = 0; i < resultData.length; i++) {
             appendedResultData+=`<option value=${resultData[i].sub_cat_identification_id_two}>${resultData[i].sub_cat_identification_id_two} - ${resultData[i].subs_cat_title}</option>`;
         }
+        appendedResultData += `<option value="add_cat">Add New Category</option>`;
+        document.getElementById("subes_cats_id").innerHTML = appendedResultData;
+       
 
         let responseObj = make_user_details("GET", "../filter/fetch_details_category/", "");
         display_preLoader();
@@ -3679,15 +3683,12 @@ function add_filter_data() {
                 console.log(rejvalue);
             }) 
      
-        
-    document.getElementById("sub_cats_id").innerHTML = appendedResultData;
-    
     
     document.getElementsByClassName("form_title8")[0].innerHTML = "Filter Form";
     undisplay_displayed_blocked_containers(); 
     document.getElementById("filter_title").value = document.getElementById("filter_sub_title").value = "";
 
-    //document.getElementById("details_for_which_prod").value = 0;
+   
     document.getElementsByClassName("filter_data_submition_btn")[0].style.display = "inline-block";
     document.getElementsByClassName("add_filter_step1_container")[0].style.display = "block";
     display_blocked_containers("add_filter_step1_container"); 
@@ -3697,6 +3698,137 @@ function add_filter_data() {
         console.log(errData);
     })
 }
+
+let subs_cats_id = 0;
+let filters_id = 0;
+
+document.getElementById("subes_cats_id").addEventListener("change" , function() {
+    
+    if(this.value == 0) {
+        document.getElementsByClassName("sub_cats_id_error_message_place")[0].innerText = "Select Category!";
+    } else if(this.value == "add_cat") {
+        document.getElementsByClassName("sub_cats_id_error_message_place")[0].innerText = "";
+        add_cat();
+      
+    } else {
+        document.getElementsByClassName("sub_cats_id_error_message_place")[0].innerText = "";
+    }
+   
+});
+
+document.getElementsByClassName("filter_data_submition_btn")[0].addEventListener("click", function(event) {
+    filter_data_submission_form(event, "insert");    
+});
+    
+    function filter_data_submission_form(event, decisionPara) {
+    event.preventDefault();
+ 
+    subs_cats_id = document.getElementById("subes_cats_id").value;
+    if(decisionPara == "update") {
+        filters_id = document.getElementById("filter_id").value;
+    }
+    let filteres_title = document.getElementById("filter_title").value;
+    let filter_sub_title = filteres_title;
+    let details_for_which_prod = document.getElementById("details_for_which_prod").value;
+   
+    
+    filteres_title = filteres_title.replace(/\/+$/g, '');
+    subs_cats_id = subs_cats_id.replace(/\/+$/g, '');
+    filter_sub_title = filter_sub_title.replace(/\/+$/g, '');
+    filteres_title = filteres_title.replace(/[^a-zA-Z0-9@.& ]/g, "");
+    subs_cats_id = subs_cats_id.replace(/[^a-zA-Z0-9@.& ]/g, "");
+    filter_sub_title = filter_sub_title.replace(/[^a-zA-Z0-9@. ]/g, "");
+    filteres_title = filteres_title.toUpperCase();
+    filter_sub_title = filter_sub_title.toUpperCase();
+    filter_sub_title = filter_sub_title.replaceAll(" ", "_");
+
+    
+    if(subs_cats_id == 0) {
+        document.getElementsByClassName("sub_cats_id_error_message_place")[0].innerText = "Select Category!";
+    } else {
+        document.getElementsByClassName("sub_cats_id_error_message_place")[0].innerText = "";
+    }
+    if(filteres_title == "") {
+        document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "Filter Title is required!";
+    } else if(filteres_title.length <= 5) {
+        document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "Filter Title length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "";
+    }
+    if(details_for_which_prod == 0) {
+        document.getElementsByClassName("details_for_which_prod_status_error_message_place")[0].innerText = "Details Section is required!";
+    } else {
+        document.getElementsByClassName("details_for_which_prod_status_error_message_place")[0].innerText = "";
+    }
+   
+    if((document.getElementsByClassName("sub_cats_id_error_message_place")[0].innerText == "") && (document.getElementsByClassName("filter_title_error_message_place")[0].innerText == "") && (document.getElementsByClassName("details_for_which_prod_status_error_message_place")[0].innerText == "")) {
+    
+        let filterTitleDataObj = {
+            subs_cats_id: subs_cats_id,
+            filteres_title: filteres_title
+        }
+        filterTitleDataObj = JSON.stringify(filterTitleDataObj);
+        display_preLoader();
+        let filterTitleCheckerRes = make_user_details("POST", "../filter/check_filter_title/", `${filterTitleDataObj}`);
+    
+        
+        filterTitleCheckerRes.then((response) => {
+            unDisplay_preLoader();
+            let avail_count = response;
+            filterDataObj = {
+                filters_id: filters_id,
+                subs_cats_id: subs_cats_id,
+                filteres_title: filteres_title,
+                filter_sub_title: filter_sub_title,
+                details_for_which_prod: details_for_which_prod
+            }
+           
+            filterDataObj = JSON.stringify(filterDataObj);
+            
+        if(avail_count == 0 && decisionPara == "insert") {
+            document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "";
+            display_preLoader();
+            if(decisionPara == "insert") {
+                let subCategoryInsertDatasRes = make_user_details("POST", "../filter/insert_filter_data/", `${filterDataObj}`);
+        
+                subCategoryInsertDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    document.getElementById("subes_cats_id").value = document.getElementById("filter_title").value = document.getElementById("details_for_which_prod").value = "";
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+           
+            }
+        } else {
+            document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "Filter Title already exits!";
+        }
+       
+        // if(decisionPara == "update") {
+        //     if(avail_count >= 1) {
+        //         document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "Sub Category Name already exits!";
+        //     } else {
+              
+        //         document.getElementsByClassName("sub_cat_name_error_message_place")[0].innerText = "";
+        //         display_preLoader();
+        //         let subCategoryUpdateDatasRes = make_user_details("POST", "../sub_category/update_subcategory/", `${subCategoryDataObj}`);
+        
+        //         subCategoryUpdateDatasRes.then((goodResponse) => {
+        //             unDisplay_preLoader();
+        //             alert(goodResponse);
+        //             document.getElementById("sub_cat_identification_id").value = document.getElementById("sub_cat_identification_id_two").value = document.getElementById("sub_cat_title").value = document.getElementById("sub_cat_image_name").value = "";
+        //         }).catch((badResponse) => {
+        //             console.log(badResponse);
+        //         })
+        //     }
+            
+        // }
+    
+        })
+      }
+    }
+
+
 
 /* Filter Add Section End */
 
