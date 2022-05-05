@@ -4020,6 +4020,8 @@ function view_sub_filter_data() {
 function add_sub_filter_data() {
     document.getElementsByClassName("sub_filter_data_submition_btn")[0].style.display = "inline-block";
     document.getElementsByClassName("sub_filter_data_submition_btn2")[0].style.display = "none";
+    document.getElementById("sub_catego_id").style.display = "inline-block";
+    document.getElementById("filters_id").style.display = "inline-block";
         display_preLoader();
         let retrieveAllSubCatDetails = make_user_details("GET", "../sub_category/sub_cat_details/", "");
        
@@ -4128,20 +4130,20 @@ document.getElementsByClassName("sub_filter_data_submition_btn")[0].addEventList
     sub_filter_data = sub_filter_data.replace(/\/+$/g, '');
     sub_filter_data = sub_filter_data.replace(/[^a-zA-Z0-9@.& ]/g, "");
 
-    if(sub_catego_id == 0) {
+    if(sub_catego_id == 0 && decisionPara == "insert") {
         document.getElementsByClassName("sub_catego_id_error_message_place")[0].innerText = "Select Category!";
     } else {
         document.getElementsByClassName("sub_catego_id_error_message_place")[0].innerText = "";
     }
-    if(filteres_id == 0) {
+    if(filteres_id == 0 && decisionPara == "insert") {
         document.getElementsByClassName("filters_id_error_message_place")[0].innerText = "Select Filter Title!";
     } else {
         document.getElementsByClassName("filters_id_error_message_place")[0].innerText = "";
     }
     if(sub_filter_data == "") {
         document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "Filter Data is required!";
-    } else if(sub_filter_data.length <= 5) {
-        document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "Filter Data length must be minimum 6 characters!";
+    } else if(sub_filter_data.length <= 2) {
+        document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "Filter Data length must be minimum 3 characters!";
     } else {
         document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "";
     }
@@ -4157,7 +4159,7 @@ document.getElementsByClassName("sub_filter_data_submition_btn")[0].addEventList
    
         display_preLoader();
         let filterDatasesCheckerRes = make_user_details("POST", "../sub_filter/check_filter_data_value/", `${filtersDataObj}`);
-    
+   
         
         filterDatasesCheckerRes.then((response) => {
             unDisplay_preLoader();
@@ -4189,31 +4191,136 @@ document.getElementsByClassName("sub_filter_data_submition_btn")[0].addEventList
             document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "Filter's Data already exits!";
         }
        
-        // if(decisionPara == "update") {
-        //     if(avail_count >= 1) {
-        //         document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "Filter title already exits!";
-        //     } else {
+        if(decisionPara == "update") {
+           
+            if(avail_count >= 1) {
+                document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "Filter's Data already exits!";
+            } else {
               
-        //         document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "";
-        //         display_preLoader();
-        //         let filterUpdateDatasRes = make_user_details("POST", "../filter/update_filter/", `${filterDataObj}`);
+                document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "";
+                display_preLoader();
+               
+                let subFilterUpdateDatasRes = make_user_details("POST", "../sub_filter/update_sub_filter/", `${filtersDataObj}`);
         
-        //         filterUpdateDatasRes.then((goodResponse) => {
-        //             unDisplay_preLoader();
-        //             alert(goodResponse);
-        //             document.getElementById("filter_id").value = document.getElementById("filter_title").value = document.getElementById("filter_sub_title").value = document.getElementById("details_for_which_prod").value = "";
-        //         }).catch((badResponse) => {
-        //             console.log(badResponse);
-        //         })
-        //     }
+                subFilterUpdateDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    document.getElementById("sub_filter_id").value = document.getElementById("sub_filter_data").value = "";
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+            }
             
-        //  }
+         }
     
         })
       }
     }
 
 /* Sub Filter Add Section End */
+
+/* Sub Filter Edit And Delete Section Start */
+
+function edit_sub_filter_data() {
+
+     document.getElementById("sub_catego_id").style.display = "none";
+     document.getElementById("filters_id").style.display = "none";
+   
+
+    let responseObj = make_user_details("GET", "../sub_filter/sub_filter_details/", "");
+display_preLoader();
+let totalC = 0;
+
+responseObj.then((sucvalue) => {
+    unDisplay_preLoader();
+  
+    let resultData = JSON.parse(sucvalue);
+    let table_datas = `<tr><th>S.NO</th>
+    <th>SUB.FILTER ID</th>
+    <th>FILTER ID</th>
+    <th>FILTER DATA</th>
+    <th>ACTION</th></tr>`;
+    for(let i = 0; i < resultData.length; i++) {
+        
+        table_datas+=`<tr>
+        <td>${i+1}.</td>
+        <td>${resultData[i].filter_sub_id}</td>
+        <td>${resultData[i].filters_id}</td>
+        <td>${resultData[i].filter_datas}</td>
+       
+        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecSubFilter(${resultData[i].filter_sub_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecSubFilter(${resultData[i].filter_sub_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+        totalC = i;
+    }
+
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Sub Filter Details";
+    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+    display_blocked_containers("admin_panel_details_table_container"); 
+    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+    display_blocked_containers("table_name_and_other_details_display_container"); 
+    }).catch((rejvalue) => {
+        console.log(rejvalue);
+    }) 
+
+}
+
+function editOfSpecSubFilter(filter_sub_id) {
+    display_preLoader();
+    let responseObj = make_user_details("GET", `../sub_filter/specific_sub_filter_detail/sub_filter_id/${filter_sub_id}`, "");
+    
+    document.getElementsByClassName("sub_filter_data_submition_btn2")[0].style.display = "inline-block";
+    document.getElementsByClassName("sub_filter_data_submition_btn")[0].style.display = "none";
+    
+    
+    
+    responseObj.then((resObj) => {
+        unDisplay_preLoader();
+       let subFilterData = JSON.parse(resObj);
+    
+        let appendedResultData = ``;
+            appendedResultData+=`<option value=${subFilterData.filter_sub_id}>Db Value</option>`;
+        document.getElementById("sub_filter_id").innerHTML = appendedResultData;
+
+        let appendedResultData2 = ``;
+        appendedResultData2 += `<option value=${subFilterData.filters_id}>Db Value</option>`;
+        document.getElementById("filters_id").innerHTML = appendedResultData2;
+
+        document.getElementById("sub_filter_data").value = subFilterData.filter_datas;
+      
+       
+    })
+    document.getElementsByClassName("form_title9")[0].innerHTML = "Sub Filter Edit Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("add_sub_filter_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_sub_filter_step1_container"); 
+    }
+    
+    document.getElementsByClassName("sub_filter_data_submition_btn2")[0].addEventListener("click", function(event) {
+    
+        sub_filter_data_submission_form(event, "update");
+    });
+    
+    
+    function deleteOfSpecSubFilter(filter_sub_id) {
+    
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let subCategoryDeleteReqObj = make_user_details("DELETE", `../sub_filter/sub_filter_deletion/filter_sub_id/${filter_sub_id}`, ``);
+        subCategoryDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            view_sub_filter_data();
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
+    }
+    }
+
+/* Sub Filter Edit And Delete Section End*/
 
 
 /* Sub Filter End */
