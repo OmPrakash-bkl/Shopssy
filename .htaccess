@@ -251,3 +251,12 @@ RewriteCond %{REQUEST_METHOD} =DELETE
 RewriteRule ^filter/filter_deletion/filter_id/([^/\*]+)?$ filter/filter_deletion.php?filter_id=$1 [L]
 
 # Filter End
+
+# Sub Filter Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^sub_filter/sub_filter_details/?$ sub_filter/sub_filter_details.php [L]
+
+# Sub Filter End
+
+
