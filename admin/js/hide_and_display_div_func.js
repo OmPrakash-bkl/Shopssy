@@ -3792,9 +3792,9 @@ document.getElementsByClassName("filter_data_submition_btn")[0].addEventListener
             document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "";
             display_preLoader();
             if(decisionPara == "insert") {
-                let subCategoryInsertDatasRes = make_user_details("POST", "../filter/insert_filter_data/", `${filterDataObj}`);
+                let filterDataInsertDatasRes = make_user_details("POST", "../filter/insert_filter_data/", `${filterDataObj}`);
         
-                subCategoryInsertDatasRes.then((goodResponse) => {
+                filterDataInsertDatasRes.then((goodResponse) => {
                     unDisplay_preLoader();
                     alert(goodResponse);
                     document.getElementById("subes_cats_id").value = document.getElementById("filter_title").value = document.getElementById("details_for_which_prod").value = "";
@@ -3929,9 +3929,6 @@ document.getElementsByClassName("filter_data_submition_btn")[0].style.display = 
 responseObj.then((resObj) => {
     unDisplay_preLoader();
    let filterData = JSON.parse(resObj);
-    
-//    document.getElementById("subes_cats_id").style.display = "none";
-//    document.getElementsByClassName("sub_cats_id_error_message_place")[0].style.display = "none";
 
     let appendedResultData = ``;
         appendedResultData+=`<option value=${filterData.filter_id}>Db Value</option>`;
@@ -4017,6 +4014,207 @@ function view_sub_filter_data() {
 }
 
 /* Sub Filter View Section End */
+
+/* Sub Filter Add Section Start */
+
+function add_sub_filter_data() {
+    document.getElementsByClassName("sub_filter_data_submition_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("sub_filter_data_submition_btn2")[0].style.display = "none";
+        display_preLoader();
+        let retrieveAllSubCatDetails = make_user_details("GET", "../sub_category/sub_cat_details/", "");
+       
+        retrieveAllSubCatDetails.then((resData) => {
+           
+            unDisplay_preLoader();
+         
+            let resultData = JSON.parse(resData);
+            let appendedResultData = `<option value="0">Select Category</option>`;
+            for(let i = 0; i < resultData.length; i++) {
+                appendedResultData+=`<option value=${resultData[i].sub_cat_identification_id_two}>${resultData[i].sub_cat_identification_id_two} - ${resultData[i].subs_cat_title}</option>`;
+            }
+            appendedResultData += `<option value="add_cat">Add New Category</option>`;
+            document.getElementById("sub_catego_id").innerHTML = appendedResultData;
+        
+           
+        
+        document.getElementsByClassName("form_title9")[0].innerHTML = "Sub Filter Form";
+        undisplay_displayed_blocked_containers(); 
+        document.getElementById("sub_filter_data").value = document.getElementById("filters_id").value = document.getElementById("sub_catego_id").value = "";
+    
+       
+        document.getElementsByClassName("sub_filter_data_submition_btn")[0].style.display = "inline-block";
+        document.getElementsByClassName("add_sub_filter_step1_container")[0].style.display = "block";
+        display_blocked_containers("add_sub_filter_step1_container"); 
+        
+    
+         }).catch((errData) => {
+            console.log(errData);
+        })
+}
+
+let sub_filter_id = 0;
+let sub_catego_id = 0;
+let filteres_id = 0;
+
+document.getElementById("sub_catego_id").addEventListener("change" , function() {
+    
+    if(this.value == 0) {
+        document.getElementsByClassName("sub_catego_id_error_message_place")[0].innerText = "Select Category!";
+    } else if(this.value == "add_cat") {
+        document.getElementsByClassName("sub_catego_id_error_message_place")[0].innerText = "";
+        add_cat();
+      
+    } else {
+        document.getElementsByClassName("sub_catego_id_error_message_place")[0].innerText = "";
+
+        let sub_cat_id_two = this.value;
+
+            let responseObj = make_user_details("GET", `../sub_filter/specific_sub_filter_details/sub_cat_id/${sub_cat_id_two}`, "");
+            display_preLoader();
+           
+            
+            responseObj.then((sucvalue) => {
+                let filter_data_category = `<option value="0">
+                Select Filter Title</option>`;
+                unDisplay_preLoader();
+                let resultData = JSON.parse(sucvalue);
+
+                for(let i = 0; i < resultData.length; i++) {
+                   
+                    filter_data_category+=`<option value="${resultData[i].filter_id}">
+                    ${resultData[i].filter_title}</option>`; 
+                }
+                filter_data_category+=`<option value="add_new_fil_title">Add New Filter Title</option>`;
+                document.getElementById("filters_id").innerHTML = filter_data_category;
+               
+                }).catch((rejvalue) => {
+                    console.log(rejvalue);
+                }) 
+
+    }
+   
+});
+
+document.getElementById("filters_id").addEventListener("change", function() {
+
+    if(this.value == 0) {
+        document.getElementsByClassName("filters_id_error_message_place")[0].innerText = "Select Filter Title!";
+    } else if(this.value == "add_new_fil_title") {
+        document.getElementsByClassName("filters_id_error_message_place")[0].innerText = "";
+        add_filter_data();
+      
+    } else {
+        document.getElementsByClassName("filters_id_error_message_place")[0].innerText = "";
+    }
+
+});
+
+
+document.getElementsByClassName("sub_filter_data_submition_btn")[0].addEventListener("click", function(event) {
+    sub_filter_data_submission_form(event, "insert");    
+});
+    
+    function sub_filter_data_submission_form(event, decisionPara) {
+       
+    event.preventDefault();
+ 
+    filteres_id = document.getElementById("filters_id").value;
+    sub_catego_id = document.getElementById("sub_catego_id").value;
+    if(decisionPara == "update") {
+        sub_filter_id = document.getElementById("sub_filter_id").value;
+    }
+    let sub_filter_data = document.getElementById("sub_filter_data").value;
+  
+    sub_filter_data = sub_filter_data.replace(/\/+$/g, '');
+    sub_filter_data = sub_filter_data.replace(/[^a-zA-Z0-9@.& ]/g, "");
+
+    if(sub_catego_id == 0) {
+        document.getElementsByClassName("sub_catego_id_error_message_place")[0].innerText = "Select Category!";
+    } else {
+        document.getElementsByClassName("sub_catego_id_error_message_place")[0].innerText = "";
+    }
+    if(filteres_id == 0) {
+        document.getElementsByClassName("filters_id_error_message_place")[0].innerText = "Select Filter Title!";
+    } else {
+        document.getElementsByClassName("filters_id_error_message_place")[0].innerText = "";
+    }
+    if(sub_filter_data == "") {
+        document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "Filter Data is required!";
+    } else if(sub_filter_data.length <= 5) {
+        document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "Filter Data length must be minimum 6 characters!";
+    } else {
+        document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "";
+    }
+   
+   
+    if((document.getElementsByClassName("sub_catego_id_error_message_place")[0].innerText == "") && (document.getElementsByClassName("filters_id_error_message_place")[0].innerText == "") && (document.getElementsByClassName("filter_title_error_message_place")[0].innerText == "") && (document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText == "")) {
+    
+        let filtersDataObj = {
+            filteres_id: filteres_id,
+            sub_filter_data: sub_filter_data
+        }
+        filtersDataObj = JSON.stringify(filtersDataObj);
+   
+        display_preLoader();
+        let filterDatasesCheckerRes = make_user_details("POST", "../sub_filter/check_filter_data_value/", `${filtersDataObj}`);
+    
+        
+        filterDatasesCheckerRes.then((response) => {
+            unDisplay_preLoader();
+            let avail_count = response;
+            filtersDataObj = {
+                sub_filter_id: sub_filter_id,
+                filteres_id: filteres_id,
+                sub_filter_data: sub_filter_data,
+            }
+           
+            filtersDataObj = JSON.stringify(filtersDataObj);
+            
+        if(avail_count == 0 && decisionPara == "insert") {
+            document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "";
+            display_preLoader();
+            if(decisionPara == "insert") {
+                let subFilterInsertDatasRes = make_user_details("POST", "../sub_filter/insert_sub_filter_data/", `${filtersDataObj}`);
+        
+                subFilterInsertDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    document.getElementById("filters_id").value = document.getElementById("sub_filter_data").value = "";
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+           
+            }
+        } else {
+            document.getElementsByClassName("sub_filter_data_error_message_place")[0].innerText = "Filter's Data already exits!";
+        }
+       
+        // if(decisionPara == "update") {
+        //     if(avail_count >= 1) {
+        //         document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "Filter title already exits!";
+        //     } else {
+              
+        //         document.getElementsByClassName("filter_title_error_message_place")[0].innerText = "";
+        //         display_preLoader();
+        //         let filterUpdateDatasRes = make_user_details("POST", "../filter/update_filter/", `${filterDataObj}`);
+        
+        //         filterUpdateDatasRes.then((goodResponse) => {
+        //             unDisplay_preLoader();
+        //             alert(goodResponse);
+        //             document.getElementById("filter_id").value = document.getElementById("filter_title").value = document.getElementById("filter_sub_title").value = document.getElementById("details_for_which_prod").value = "";
+        //         }).catch((badResponse) => {
+        //             console.log(badResponse);
+        //         })
+        //     }
+            
+        //  }
+    
+        })
+      }
+    }
+
+/* Sub Filter Add Section End */
+
 
 /* Sub Filter End */
 

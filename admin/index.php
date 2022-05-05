@@ -358,7 +358,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-plus-square'></i> Add S.F.Data</button>
+  <button onclick="add_sub_filter_data()"><i class='fas fa-plus-square'></i> Add S.F.Data</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -855,6 +855,44 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </div>
 
 <!-- Filter Form Container End -->
+
+<!-- Sub Filter Form Container Start -->
+
+<div class="add_sub_filter_form_container">
+
+<div class="add_sub_filter_step1_container">
+<center>
+    <h1 class="form_title9">Sub Filter Form</h1>
+</center>
+<form action="" class="add_sub_filter_form" method="POST">
+<select id="sub_filter_id">
+
+</select>
+<select id="sub_catego_id">
+
+</select>
+<p class="error_message_place sub_catego_id_error_message_place"></p> 
+<select id="filters_id">
+
+</select> 
+<p class="error_message_place filters_id_error_message_place"></p> 
+
+  <label for="sub_filter_data">Filter Data <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="sub_filter_data" autofocus> <br>
+  <p class="error_message_place sub_filter_data_error_message_place"></p>
+
+ <center>
+
+ <button type="button" class="sub_filter_data_submition_btn">Submit</button>
+ <button type="button" class="sub_filter_data_submition_btn2">Submit</button>
+ 
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- Sub Filter Form Container End -->
 
 </div>
 
