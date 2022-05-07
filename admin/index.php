@@ -376,7 +376,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container12">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class="fa fa-eye"></i> View P.Data</button>
+  <button onclick="show_prods_data_tables()"><i class="fa fa-eye"></i> View P.Data</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
