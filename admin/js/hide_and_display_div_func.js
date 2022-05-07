@@ -4327,7 +4327,7 @@ function editOfSpecSubFilter(filter_sub_id) {
 
 /* Prods Data Start */
 
-/* Prods Data View Section Start */
+/* Prods Data View Section - 1 Start */
 
 function show_prods_data_tables() {
     let responseObj = make_user_details("GET", "../prods_data/prods_data_details/", "");
@@ -4347,7 +4347,7 @@ function show_prods_data_tables() {
             table_datas+=`<tr>
             <td>${i+1}.</td>
             <td>${resultData[i].mytables}</td>
-            <td><button title="View" class="edit_button_of_table" onclick="viewProdDetails(${resultData[i].mytables})"><i class="fa fa-eye"></i></button></td>
+            <td><button title="View" class="edit_button_of_table" onclick="viewProdDetails('${resultData[i].mytables}')"><i class="fa fa-eye"></i></button></td>
             </tr>`;
 
             totalC = i;
@@ -4367,7 +4367,79 @@ function show_prods_data_tables() {
         }) 
 }
 
-/* Prods Data View Section End */
+/* Prods Data View Section - 1 End */
+
+/* Prods Data View Section - 2 Start */
+
+function viewProdDetails(table_name) {
+    
+    let tabname = {
+        tab_name : table_name
+    } 
+    tab_name = JSON.stringify(tabname);
+  
+    let responseObj = make_user_details("POST", "../prods_data/specific_prod_data_details/", `${tab_name}`);
+    display_preLoader();
+    let totalC = 0;
+    
+    responseObj.then((sucvalue) => {
+        unDisplay_preLoader();
+      
+        
+       resultData = JSON.parse(JSON.stringify(sucvalue));
+        resultData = JSON.parse(resultData);
+     
+        var temp_field_array = [];
+        let table_datas = `<tr><th>S.NO</th>`;
+        for(let i = 0; i < resultData[0].length; i++) {
+           
+            table_datas+=`
+            <th>${(resultData[0][i]).toUpperCase()}</th>
+           `;
+           if(resultData[0].length == (i + 1)) {
+            after_loop();
+           }
+           
+           temp_field_array[i] = resultData[0][i];
+        }
+    
+        table_datas += `</tr>`;
+      
+
+        function after_loop() {
+       
+                let lessuse_arr = [];
+              
+               for(let j = 0; j < resultData[1].length; j++) {
+                table_datas+=`<tr>`;
+                table_datas+=`<td>${j+1}.</td>`;
+                lessuse_arr = resultData[1][j];
+                for(let [key, val] of Object.entries(lessuse_arr)) {
+                    table_datas+=`<td>${val}</td>`
+                }
+                table_datas += `</tr>`;
+                totalC = j;
+               }
+             
+            
+        }
+        
+
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Product Details Section";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+        }).catch((rejvalue) => {
+            console.log(rejvalue);
+        }) 
+}
+
+/* Prods Data View Section - 2 End */
 
 /* Prods Data End */
 

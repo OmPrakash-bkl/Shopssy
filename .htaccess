@@ -282,6 +282,9 @@ RewriteRule ^sub_filter/sub_filter_deletion/filter_sub_id/([^/\*]+)?$ sub_filter
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^prods_data/prods_data_details/?$ prods_data/prods_data_details.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_data/specific_prod_data_details/?$ prods_data/specific_prod_data_details.php [L]
+
 # Prods End
 
 
