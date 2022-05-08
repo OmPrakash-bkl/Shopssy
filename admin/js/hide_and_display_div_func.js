@@ -4444,6 +4444,7 @@ function viewProdDetails(table_name) {
 /* Prods Data Add Section Start */
 
 function add_prods_data_tables() {
+    document.getElementById("productt_name_or_id").style.display = "none";
     document.getElementById("filter_table_names").style.display = "inline-block";
     document.getElementsByClassName("filter_table_names_error_message_place")[0].style.display = "inline-block";
     display_preLoader();
@@ -4472,6 +4473,189 @@ function add_prods_data_tables() {
         console.log(errData);
     })
 }
+
+let input_fields_of_prod_data = ``;
+let add_prods_data_form_tags = `<select id="filter_table_prods_id">
+
+</select>
+  <select id="filter_table_names">
+
+  </select> <br>
+  <p class="error_message_place filter_table_names_error_message_place"></p> <br>
+  <select id="productt_name_or_id">
+
+  </select> <br>
+  <p class="error_message_place productt_name_or_id_error_message_place"></p> <br>
+  <input type="hidden" id="filter_table_name">
+  <input type="hidden" id="subsCatIdenId">
+
+  ${input_fields_of_prod_data}
+  <center>
+  <button type="button" class="add_prods_data_submition_btn">Submit</button>
+  <button type="button" class="add_prods_data_submition_btn2">Submit</button>
+  
+  </center>`;
+
+document.getElementsByClassName("add_prods_data_form")[0].innerHTML = add_prods_data_form_tags;
+
+let filter_table_name = 0;
+
+function recursiveOfFilterData() {
+
+    document.getElementsByClassName("add_prods_data_submition_btn")[0].addEventListener("click", function(event) {
+        console.log("id="+document.getElementById("productt_name_or_id").value);
+        // products_filter_data_submission_form(event, "insert");    
+    });
+    
+
+    document.getElementById("productt_name_or_id").addEventListener("change", function() {
+        if(this.value == 0) {
+            document.getElementsByClassName("productt_name_or_id_error_message_place")[0].innerText = "Select Product!";
+        } else if(this.value == "add_prod") {
+            document.getElementsByClassName("productt_name_or_id_error_message_place")[0].innerText = "";
+            add_product();
+          
+        } else {
+          console.log(this.value);
+        }
+    });
+
+document.getElementById("filter_table_names").addEventListener("change" , function() {
+    
+    if(this.value == 0) {
+        document.getElementsByClassName("filter_table_names_error_message_place")[0].innerText = "Select Filter's Data Section!";
+    } else if(this.value == "add_fil_table") {
+        document.getElementsByClassName("filter_table_names_error_message_place")[0].innerText = "";
+        create_name_filter_data_table();
+      
+    } else {
+        document.getElementsByClassName("filter_table_names_error_message_place")[0].innerText = "";
+      let table_name = this.value;
+      document.getElementById("filter_table_name").value = table_name;
+      tableName = {
+          tab_name: table_name
+      }
+      tableName  = JSON.stringify(tableName);
+      display_preLoader();
+    let responseObj = make_user_details("POST", "../prods_data/prods_data_field_name/", `${tableName}`);
+
+    responseObj.then((goodRes) => {
+        unDisplay_preLoader();
+       let table_field_names = JSON.parse(goodRes);
+       input_fields_of_prod_data = ``;
+       for(let i = 0; i < table_field_names.length; i++) {
+           if(i == 0){
+
+           } else if(i == 1) {
+           
+            let retrieveAllSubProdDetails = make_user_details("GET", "../products/product_details/", "");
+
+            retrieveAllSubProdDetails.then((resData) => {
+                let resultData = JSON.parse(resData);
+                 let input_fields_of_prod_id_data = `<option value="0">Select Product</option>`;
+                for(let i = 0; i < resultData.length; i++) {
+                    input_fields_of_prod_id_data += `<option value=${resultData[i].p_id}>${resultData[i].p_id} - ${resultData[i].p_title}</option>`;
+                }
+                input_fields_of_prod_id_data += `<option value="add_prod">Add New Product</option>`;
+                document.getElementById("productt_name_or_id").innerHTML = input_fields_of_prod_id_data;
+                unDisplay_preLoader();
+            }).catch((errorMsg) => {
+                console.log(errorMsg);
+            })
+
+           } else if(i == 2) {
+            display_preLoader();
+         let responseObj = make_user_details("POST", "../prods_data/get_scii/", `${tableName}`);
+         responseObj.then((crtRes) =>{
+          
+         let subcatidenid = JSON.parse(crtRes);
+         document.getElementById("subsCatIdenId").value = subcatidenid.subs_cat_identification_id;
+         unDisplay_preLoader();
+       
+         }).catch((badRes) => {
+             console.log(badRes);
+         })
+        
+           } else {
+            let field_name = table_field_names[i].replaceAll("_", " ");
+            input_fields_of_prod_data += `<label for="${table_field_names[i]}">${field_name} <span class="required_field_asterisk_symbol">*</span></label> <br>
+            <input type="text" id="${table_field_names[i]}"> <br>
+            <p class="error_message_place ${table_field_names[i]}_error_message_place"></p>`;
+           }
+           
+
+       }
+       
+       
+
+document.getElementsByClassName("add_prods_data_form")[0].innerHTML = `<select id="filter_table_prods_id">
+
+</select>
+  <select id="filter_table_names">
+
+  </select> <br>
+  <p class="error_message_place filter_table_names_error_message_place"></p> <br>
+  <select id="productt_name_or_id">
+
+  </select> <br>
+  <p class="error_message_place productt_name_or_id_error_message_place"></p> <br>
+  <input type="hidden" id="filter_table_name">
+  <input type="hidden" id="subsCatIdenId">
+
+  ${input_fields_of_prod_data}
+  <center>
+  <button type="button" class="add_prods_data_submition_btn">Submit</button>
+  <button type="button" class="add_prods_data_submition_btn2">Submit</button>
+  
+  </center>`
+
+  
+
+  document.getElementsByClassName("add_prods_data_submition_btn2")[0].style.display = "none";
+  document.getElementsByClassName("add_prods_data_submition_btn")[0].style.display = "inline-block";
+
+  let retrieveAllProdsDataDetails = make_user_details("GET", "../prods_data/prods_data_details/", "");
+
+  retrieveAllProdsDataDetails.then((resData) => {
+      unDisplay_preLoader();
+      
+      let resultData = JSON.parse(resData);
+      let appendedResultData = `<option value="${table_name}">${table_name}</option>`;
+      for(let i = 0; i < resultData.length; i++) {
+      
+        if(!(table_name == resultData[i].mytables)) {
+            appendedResultData+=`<option value=${resultData[i].mytables}>${resultData[i].mytables}</option>`;
+        }
+          
+      }
+      appendedResultData+=`<option value="add_fil_table">Add New Filter Table</option>`;
+  document.getElementById("filter_table_names").innerHTML = appendedResultData;
+
+  recursiveOfFilterData();
+  
+  
+  }).catch((errData) => {
+      console.log(errData);
+  })
+
+    }).catch((badRes) => {
+        console.log(badRes);
+    })
+    
+  
+    }
+   
+});
+
+}
+recursiveOfFilterData();
+
+
+function create_name_filter_data_table() {
+ console.log("sdfsd");
+}
+
+
 
 /* Prods Data Add Section End */
 

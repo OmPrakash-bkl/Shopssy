@@ -880,7 +880,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <label for="sub_filter_data">Filter Data <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="sub_filter_data" autofocus> <br>
   <p class="error_message_place sub_filter_data_error_message_place"></p>
-
+  
  <center>
 
  <button type="button" class="sub_filter_data_submition_btn">Submit</button>
@@ -900,29 +900,11 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <div class="add_prods_data_step1_container">
 <center>
-    <h1 class="form_title10">Prods Details Form</h1>
+    <h1 class="form_title10">Prods Details Form</h1> <br>
 </center>
 <form action="" class="add_prods_data_form" method="POST">
-<select id="filter_table_prods_id">
 
-</select>
-  <select id="filter_table_names">
 
-  </select> <br>
-  <p class="error_message_place filter_table_names_error_message_place"></p> <br>
-
-  <!-- <label for="sub_cat_title">Sub Category Title <span class="required_field_asterisk_symbol">*</span></label> <br>
-  <input type="text" id="sub_cat_title" autofocus> <br>
-  <p class="error_message_place sub_cat_name_error_message_place"></p>
-  <label for="sub_cat_image_name">Sub Category Image Name <span class="required_field_asterisk_symbol">*</span></label> <br>
-  <input type="text" id="sub_cat_image_name"> <br>
-  <p class="error_message_place sub_category_image_name_error_message_place"></p> -->
-  
- <center>
- <button type="button" class="add_prods_data_submition_btn">Submit</button>
- <button type="button" class="add_prods_data_submition_btn2">Submit</button>
- 
- </center>
 </form>
 </div>
 
