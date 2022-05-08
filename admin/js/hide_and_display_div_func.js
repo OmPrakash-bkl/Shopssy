@@ -4441,5 +4441,39 @@ function viewProdDetails(table_name) {
 
 /* Prods Data View Section - 2 End */
 
+/* Prods Data Add Section Start */
+
+function add_prods_data_tables() {
+    document.getElementById("filter_table_names").style.display = "inline-block";
+    document.getElementsByClassName("filter_table_names_error_message_place")[0].style.display = "inline-block";
+    display_preLoader();
+    let retrieveAllProdsDataDetails = make_user_details("GET", "../prods_data/prods_data_details/", "");
+
+    retrieveAllProdsDataDetails.then((resData) => {
+        unDisplay_preLoader();
+     
+        let resultData = JSON.parse(resData);
+        let appendedResultData = `<option value="0">Select Filter Table</option>`;
+        for(let i = 0; i < resultData.length; i++) {
+            appendedResultData+=`<option value=${resultData[i].mytables}>${resultData[i].mytables}</option>`;
+        }
+        appendedResultData+=`<option value="add_fil_table">Add New Filter Table</option>`;
+    document.getElementById("filter_table_names").innerHTML = appendedResultData;
+    
+    document.getElementsByClassName("form_title10")[0].innerHTML = "Prods Details Form";
+    undisplay_displayed_blocked_containers(); 
+    // document.getElementById("sub_cat_identification_id").value = document.getElementById("sub_cat_identification_id_two").value = document.getElementById("sub_cat_title").value = document.getElementById("sub_cat_image_name").value = "";
+   
+    document.getElementsByClassName("add_prods_data_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_prods_data_step1_container"); 
+    document.getElementsByClassName("add_prods_data_submition_btn2")[0].style.display = "none";
+    document.getElementsByClassName("add_prods_data_submition_btn")[0].style.display = "inline-block";
+    }).catch((errData) => {
+        console.log(errData);
+    })
+}
+
+/* Prods Data Add Section End */
+
 /* Prods Data End */
 

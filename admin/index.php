@@ -380,7 +380,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button><i class='fas fa-plus-square'></i> Add P.Data</button>
+  <button onclick="add_prods_data_tables()"><i class='fas fa-plus-square'></i> Add P.Data</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -893,6 +893,42 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </div>
 
 <!-- Sub Filter Form Container End -->
+
+<!-- Prods Data Form Container Start -->
+
+<div class="add_prods_data_form_container">
+
+<div class="add_prods_data_step1_container">
+<center>
+    <h1 class="form_title10">Prods Details Form</h1>
+</center>
+<form action="" class="add_prods_data_form" method="POST">
+<select id="filter_table_prods_id">
+
+</select>
+  <select id="filter_table_names">
+
+  </select> <br>
+  <p class="error_message_place filter_table_names_error_message_place"></p> <br>
+
+  <!-- <label for="sub_cat_title">Sub Category Title <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="sub_cat_title" autofocus> <br>
+  <p class="error_message_place sub_cat_name_error_message_place"></p>
+  <label for="sub_cat_image_name">Sub Category Image Name <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="sub_cat_image_name"> <br>
+  <p class="error_message_place sub_category_image_name_error_message_place"></p> -->
+  
+ <center>
+ <button type="button" class="add_prods_data_submition_btn">Submit</button>
+ <button type="button" class="add_prods_data_submition_btn2">Submit</button>
+ 
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- Prods Data Form Container End -->
 
 </div>
 
