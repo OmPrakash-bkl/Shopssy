@@ -4443,6 +4443,8 @@ function viewProdDetails(table_name) {
 
 /* Prods Data Add Section Start */
 
+let filter_table_field_name = [];
+
 function add_prods_data_tables() {
     document.getElementById("productt_name_or_id").style.display = "none";
     document.getElementById("filter_table_names").style.display = "inline-block";
@@ -4504,7 +4506,8 @@ function recursiveOfFilterData() {
 
     document.getElementsByClassName("add_prods_data_submition_btn")[0].addEventListener("click", function(event) {
         console.log("id="+document.getElementById("productt_name_or_id").value);
-        // products_filter_data_submission_form(event, "insert");    
+        products_filter_data_submission_form(event, "insert");  
+        
     });
     
 
@@ -4519,6 +4522,8 @@ function recursiveOfFilterData() {
           console.log(this.value);
         }
     });
+
+    
 
 document.getElementById("filter_table_names").addEventListener("change" , function() {
     
@@ -4570,6 +4575,8 @@ document.getElementById("filter_table_names").addEventListener("change" , functi
           
          let subcatidenid = JSON.parse(crtRes);
          document.getElementById("subsCatIdenId").value = subcatidenid.subs_cat_identification_id;
+         console.log(tableName.tab_name);
+         document.getElementById("filter_table_name").value = tableName;
          unDisplay_preLoader();
        
          }).catch((badRes) => {
@@ -4581,6 +4588,8 @@ document.getElementById("filter_table_names").addEventListener("change" , functi
             input_fields_of_prod_data += `<label for="${table_field_names[i]}">${field_name} <span class="required_field_asterisk_symbol">*</span></label> <br>
             <input type="text" id="${table_field_names[i]}"> <br>
             <p class="error_message_place ${table_field_names[i]}_error_message_place"></p>`;
+            filter_table_field_name.push(table_field_names[i]);
+           
            }
            
 
@@ -4649,6 +4658,76 @@ document.getElementsByClassName("add_prods_data_form")[0].innerHTML = `<select i
 
 }
 recursiveOfFilterData();
+
+
+function products_filter_data_submission_form(event, decisionPara) {
+    event.preventDefault();
+    let filter_table_prods_id = 0;
+    if(decisionPara == "update") {
+     filter_table_prods_id = document.getElementById("filter_table_prods_id").value;
+    }
+    let productt_id = document.getElementById("productt_name_or_id").value;
+    let table_name_of_filter_data = document.getElementById("filter_table_name").value;
+    table_name_of_filter_data = JSON.parse(table_name_of_filter_data);
+    table_name_of_filter_data = table_name_of_filter_data.tab_name;
+    console.log(table_name_of_filter_data);
+    let sub_cat_id_of_filter_table = document.getElementById("subsCatIdenId").value;
+    console.log(table_name_of_filter_data);
+
+    let filter_data_obj = {
+        filter_table_primary_id: filter_table_prods_id,
+        product_id: productt_id,
+        table_name_of_filter: table_name_of_filter_data,
+        sub_cat_iden_id_of_filter_table: sub_cat_id_of_filter_table
+    };
+let json_filter_data_obj = JSON.stringify(filter_data_obj);
+    display_preLoader();
+    let filterDatasCheckerRes = make_user_details("POST", "../prods_data/data_checker/", `${json_filter_data_obj}`);
+
+    
+    filterDatasCheckerRes.then((response) => {
+        unDisplay_preLoader();
+
+        let avail_count = response;
+        console.log(response);
+    
+        if(avail_count == 0 && decisionPara == "insert") {
+            document.getElementsByClassName("productt_name_or_id_error_message_place")[0].innerText = "";
+            let before_filter = "";
+            let error_counter = 0;
+            for(let i = 0; i < filter_table_field_name.length; i++) {
+            before_filter = document.getElementById(`${filter_table_field_name[i]}`).value;
+            before_filter = before_filter.replace(/\/+$/g, '');
+           
+            if(before_filter == "") {
+                document.getElementsByClassName(`${filter_table_field_name[i]}_error_message_place`)[0].innerHTML = "Field can't be empty!";
+                error_counter += 1;
+            } else {
+                document.getElementsByClassName(`${filter_table_field_name[i]}_error_message_place`)[0].innerHTML = "";
+                if(!(error_counter == 0)) {
+                    error_counter -= 1;
+                }
+               
+            }
+                filter_data_obj[`${filter_table_field_name[i]}`] = before_filter;
+            }
+           console.log(error_counter);
+            if(error_counter == 0) {
+                json_filter_data_obj = JSON.stringify(filter_data_obj);
+                console.log(json_filter_data_obj);
+            }
+            
+        } else {
+            document.getElementsByClassName("productt_name_or_id_error_message_place")[0].innerText = "Filteration Data Already Exits!";
+        }
+
+    })
+
+   
+
+   
+
+}
 
 
 function create_name_filter_data_table() {
