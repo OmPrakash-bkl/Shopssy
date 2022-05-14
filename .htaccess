@@ -294,6 +294,9 @@ RewriteRule ^prods_data/get_scii/?$ prods_data/get_scii.php [L]
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^prods_data/data_checker/?$ prods_data/data_checker.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_data/insert_prod_data/?$ prods_data/insert_prod_data.php [L]
+
 # Prods End
 
 

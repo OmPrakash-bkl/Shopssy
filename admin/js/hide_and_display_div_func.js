@@ -4505,7 +4505,7 @@ let filter_table_name = 0;
 function recursiveOfFilterData() {
 
     document.getElementsByClassName("add_prods_data_submition_btn")[0].addEventListener("click", function(event) {
-        console.log("id="+document.getElementById("productt_name_or_id").value);
+       
         products_filter_data_submission_form(event, "insert");  
         
     });
@@ -4546,7 +4546,8 @@ document.getElementById("filter_table_names").addEventListener("change" , functi
 
     responseObj.then((goodRes) => {
         unDisplay_preLoader();
-       let table_field_names = JSON.parse(goodRes);
+       let table_field_names = [];
+       table_field_names = JSON.parse(goodRes);
        input_fields_of_prod_data = ``;
        for(let i = 0; i < table_field_names.length; i++) {
            if(i == 0){
@@ -4575,7 +4576,7 @@ document.getElementById("filter_table_names").addEventListener("change" , functi
           
          let subcatidenid = JSON.parse(crtRes);
          document.getElementById("subsCatIdenId").value = subcatidenid.subs_cat_identification_id;
-         console.log(tableName.tab_name);
+      
          document.getElementById("filter_table_name").value = tableName;
          unDisplay_preLoader();
        
@@ -4670,9 +4671,9 @@ function products_filter_data_submission_form(event, decisionPara) {
     let table_name_of_filter_data = document.getElementById("filter_table_name").value;
     table_name_of_filter_data = JSON.parse(table_name_of_filter_data);
     table_name_of_filter_data = table_name_of_filter_data.tab_name;
-    console.log(table_name_of_filter_data);
+  
     let sub_cat_id_of_filter_table = document.getElementById("subsCatIdenId").value;
-    console.log(table_name_of_filter_data);
+ 
 
     let filter_data_obj = {
         filter_table_primary_id: filter_table_prods_id,
@@ -4689,32 +4690,52 @@ let json_filter_data_obj = JSON.stringify(filter_data_obj);
         unDisplay_preLoader();
 
         let avail_count = response;
-        console.log(response);
+      
     
         if(avail_count == 0 && decisionPara == "insert") {
             document.getElementsByClassName("productt_name_or_id_error_message_place")[0].innerText = "";
             let before_filter = "";
             let error_counter = 0;
             for(let i = 0; i < filter_table_field_name.length; i++) {
+          
             before_filter = document.getElementById(`${filter_table_field_name[i]}`).value;
             before_filter = before_filter.replace(/\/+$/g, '');
-           
+         
             if(before_filter == "") {
                 document.getElementsByClassName(`${filter_table_field_name[i]}_error_message_place`)[0].innerHTML = "Field can't be empty!";
                 error_counter += 1;
             } else {
                 document.getElementsByClassName(`${filter_table_field_name[i]}_error_message_place`)[0].innerHTML = "";
-                if(!(error_counter == 0)) {
-                    error_counter -= 1;
-                }
+               
                
             }
                 filter_data_obj[`${filter_table_field_name[i]}`] = before_filter;
             }
-           console.log(error_counter);
-            if(error_counter == 0) {
+         
+            if(error_counter == 0 && avail_count == 0) {
                 json_filter_data_obj = JSON.stringify(filter_data_obj);
-                console.log(json_filter_data_obj);
+              
+                if(decisionPara == "insert") {
+                    let prodDataInsertRes = make_user_details("POST", "../prods_data/insert_prod_data/", `${json_filter_data_obj}`);
+            
+                    prodDataInsertRes.then((goodResponse) => {
+                        unDisplay_preLoader();
+                        alert(goodResponse);
+                        table_field_names = [];
+                        
+                        filter_table_field_name.forEach(function(fieldName) {
+                            document.getElementById(`${fieldName}`).value = "";
+                           });
+
+                        filter_table_field_name = [];
+                       
+
+    
+                    }).catch((badResponse) => {
+                        console.log(badResponse);
+                    })
+                }
+                
             }
             
         } else {
