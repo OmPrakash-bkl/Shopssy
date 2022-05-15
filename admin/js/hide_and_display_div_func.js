@@ -4989,7 +4989,18 @@ display_blocked_containers("add_prods_data_step1_container");
 
 
 function deleteOfFilterDat(fieldname, fieldval, tablename) {
-    console.log(fieldname, fieldval, tablename);
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let prodsDataDeleteReqObj = make_user_details("DELETE", `../prods_data/prods_data_deletion/field_name/${fieldname}/field_val/${fieldval}/tab_name/${tablename}`, ``);
+        prodsDataDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            show_prods_data_tables('insert');
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
+    }
 }
 
 /* Prods Data Edit And Delete Section End */
