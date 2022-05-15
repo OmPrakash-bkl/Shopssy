@@ -4329,7 +4329,7 @@ function editOfSpecSubFilter(filter_sub_id) {
 
 /* Prods Data View Section - 1 Start */
 
-function show_prods_data_tables() {
+function show_prods_data_tables(decisition_parameter) {
     let responseObj = make_user_details("GET", "../prods_data/prods_data_details/", "");
     display_preLoader();
     let totalC = 0;
@@ -4342,15 +4342,31 @@ function show_prods_data_tables() {
         let table_datas = `<tr><th>S.NO</th>
         <th>DETAILS SECTION OF PRODUCT'S CATEGORIES</th>
         <th>ACTION</th></tr>`;
+        
+        if(decisition_parameter == "insert") {
+            for(let i = 0; i < resultData.length; i++) {
+            
+                table_datas+=`<tr>
+                <td>${i+1}.</td>
+                <td>${resultData[i].mytables}</td>
+                <td><button title="View" class="edit_button_of_table" onclick="viewProdDetails('${resultData[i].mytables}')"><i class="fa fa-eye"></i></button></td>
+                </tr>`;
+    
+                totalC = i;
+            }
+        }
+
+        if(decisition_parameter == "update") {
         for(let i = 0; i < resultData.length; i++) {
             
-            table_datas+=`<tr>
-            <td>${i+1}.</td>
-            <td>${resultData[i].mytables}</td>
-            <td><button title="View" class="edit_button_of_table" onclick="viewProdDetails('${resultData[i].mytables}')"><i class="fa fa-eye"></i></button></td>
-            </tr>`;
-
+                table_datas+=`<tr>
+                <td>${i+1}.</td>
+                <td>${resultData[i].mytables}</td>
+                <td><button title="View" class="edit_button_of_table" onclick="editProdDetails('${resultData[i].mytables}')"><i class="fa fa-eye"></i></button></td>
+                </tr>`;
+    
             totalC = i;
+        }
         }
 
         document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Product Details Section";
@@ -4446,6 +4462,8 @@ function viewProdDetails(table_name) {
 let filter_table_field_name = [];
 
 function add_prods_data_tables() {
+
+   
     document.getElementById("productt_name_or_id").style.display = "none";
     document.getElementById("filter_table_names").style.display = "inline-block";
     document.getElementsByClassName("filter_table_names_error_message_place")[0].style.display = "inline-block";
@@ -4465,7 +4483,7 @@ function add_prods_data_tables() {
     
     document.getElementsByClassName("form_title10")[0].innerHTML = "Prods Details Form";
     undisplay_displayed_blocked_containers(); 
-    // document.getElementById("sub_cat_identification_id").value = document.getElementById("sub_cat_identification_id_two").value = document.getElementById("sub_cat_title").value = document.getElementById("sub_cat_image_name").value = "";
+    
    
     document.getElementsByClassName("add_prods_data_step1_container")[0].style.display = "block";
     display_blocked_containers("add_prods_data_step1_container"); 
@@ -4476,7 +4494,8 @@ function add_prods_data_tables() {
     })
 }
 
-let input_fields_of_prod_data = ``;
+function form_related_func() {
+    let input_fields_of_prod_data = ``;
 let add_prods_data_form_tags = `<select id="filter_table_prods_id">
 
 </select>
@@ -4490,6 +4509,7 @@ let add_prods_data_form_tags = `<select id="filter_table_prods_id">
   <p class="error_message_place productt_name_or_id_error_message_place"></p> <br>
   <input type="hidden" id="filter_table_name">
   <input type="hidden" id="subsCatIdenId">
+  <input type="hidden" id="filter_table_id">
 
   ${input_fields_of_prod_data}
   <center>
@@ -4499,6 +4519,9 @@ let add_prods_data_form_tags = `<select id="filter_table_prods_id">
   </center>`;
 
 document.getElementsByClassName("add_prods_data_form")[0].innerHTML = add_prods_data_form_tags;
+}
+
+form_related_func();
 
 let filter_table_name = 0;
 
@@ -4526,7 +4549,7 @@ function recursiveOfFilterData() {
     
 
 document.getElementById("filter_table_names").addEventListener("change" , function() {
-    
+   
     if(this.value == 0) {
         document.getElementsByClassName("filter_table_names_error_message_place")[0].innerText = "Select Filter's Data Section!";
     } else if(this.value == "add_fil_table") {
@@ -4563,6 +4586,7 @@ document.getElementById("filter_table_names").addEventListener("change" , functi
                     input_fields_of_prod_id_data += `<option value=${resultData[i].p_id}>${resultData[i].p_id} - ${resultData[i].p_title}</option>`;
                 }
                 input_fields_of_prod_id_data += `<option value="add_prod">Add New Product</option>`;
+                document.getElementById("productt_name_or_id").style.display = "inline-block";
                 document.getElementById("productt_name_or_id").innerHTML = input_fields_of_prod_id_data;
                 unDisplay_preLoader();
             }).catch((errorMsg) => {
@@ -4611,6 +4635,8 @@ document.getElementsByClassName("add_prods_data_form")[0].innerHTML = `<select i
   <p class="error_message_place productt_name_or_id_error_message_place"></p> <br>
   <input type="hidden" id="filter_table_name">
   <input type="hidden" id="subsCatIdenId">
+  <input type="hidden" id="filter_table_id">
+
 
   ${input_fields_of_prod_data}
   <center>
@@ -4662,26 +4688,33 @@ recursiveOfFilterData();
 
 
 function products_filter_data_submission_form(event, decisionPara) {
+
     event.preventDefault();
     let filter_table_prods_id = 0;
-    if(decisionPara == "update") {
-     filter_table_prods_id = document.getElementById("filter_table_prods_id").value;
-    }
+    let primary_field_name = "";
     let productt_id = document.getElementById("productt_name_or_id").value;
+    if(decisionPara == "update") {
+     filter_table_prods_id = document.getElementById("filter_table_id").value;
+     productt_id = document.getElementById("filter_table_pro_id").value;
+     primary_field_name = document.getElementById("filter_table_primary_field_name").value;
+    }
+   
     let table_name_of_filter_data = document.getElementById("filter_table_name").value;
-    table_name_of_filter_data = JSON.parse(table_name_of_filter_data);
-    table_name_of_filter_data = table_name_of_filter_data.tab_name;
-  
+    if(decisionPara == "insert") {
+        table_name_of_filter_data = JSON.parse(table_name_of_filter_data);
+        table_name_of_filter_data = table_name_of_filter_data.tab_name;
+    }
+   
     let sub_cat_id_of_filter_table = document.getElementById("subsCatIdenId").value;
- 
-
     let filter_data_obj = {
+        primary_field_name: primary_field_name,
         filter_table_primary_id: filter_table_prods_id,
         product_id: productt_id,
         table_name_of_filter: table_name_of_filter_data,
         sub_cat_iden_id_of_filter_table: sub_cat_id_of_filter_table
     };
 let json_filter_data_obj = JSON.stringify(filter_data_obj);
+
     display_preLoader();
     let filterDatasCheckerRes = make_user_details("POST", "../prods_data/data_checker/", `${json_filter_data_obj}`);
 
@@ -4690,34 +4723,36 @@ let json_filter_data_obj = JSON.stringify(filter_data_obj);
         unDisplay_preLoader();
 
         let avail_count = response;
-      
+        let error_counter = 0;
     
-        if(avail_count == 0 && decisionPara == "insert") {
+        if(avail_count == 0 || decisionPara == "update") {
             document.getElementsByClassName("productt_name_or_id_error_message_place")[0].innerText = "";
             let before_filter = "";
-            let error_counter = 0;
+           
             for(let i = 0; i < filter_table_field_name.length; i++) {
           
             before_filter = document.getElementById(`${filter_table_field_name[i]}`).value;
             before_filter = before_filter.replace(/\/+$/g, '');
-         
+      
             if(before_filter == "") {
+        
                 document.getElementsByClassName(`${filter_table_field_name[i]}_error_message_place`)[0].innerHTML = "Field can't be empty!";
                 error_counter += 1;
             } else {
+             
                 document.getElementsByClassName(`${filter_table_field_name[i]}_error_message_place`)[0].innerHTML = "";
                
                
             }
                 filter_data_obj[`${filter_table_field_name[i]}`] = before_filter;
             }
-         
+        
+         json_filter_data_obj = JSON.stringify(filter_data_obj);
             if(error_counter == 0 && avail_count == 0) {
-                json_filter_data_obj = JSON.stringify(filter_data_obj);
               
                 if(decisionPara == "insert") {
                     let prodDataInsertRes = make_user_details("POST", "../prods_data/insert_prod_data/", `${json_filter_data_obj}`);
-            
+         
                     prodDataInsertRes.then((goodResponse) => {
                         unDisplay_preLoader();
                         alert(goodResponse);
@@ -4742,11 +4777,40 @@ let json_filter_data_obj = JSON.stringify(filter_data_obj);
             document.getElementsByClassName("productt_name_or_id_error_message_place")[0].innerText = "Filteration Data Already Exits!";
         }
 
+        if(decisionPara == "update") {
+            if(avail_count > 1) {
+                document.getElementsByClassName("productt_name_or_id_error_message_place")[0].innerText = "Filteration Data Already Exits!";
+            } else {
+                console.log(error_counter);
+              if(error_counter == 0) {
+                document.getElementsByClassName("productt_name_or_id_error_message_place")[0].innerText = "";
+                console.log(json_filter_data_obj);
+                display_preLoader();
+                let prodsUpdateDataesRes = make_user_details("POST", "../prods_data/update_prods_data/", `${json_filter_data_obj}`);
+        
+                prodsUpdateDataesRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    table_field_names = [];
+                        
+                        filter_table_field_name.forEach(function(fieldName) {
+                            document.getElementById(`${fieldName}`).value = "";
+                          
+                           });
+                        
+
+                        filter_table_field_name = [];
+                        window.location.href = 'http://localhost/my_clg_shopssy_project/admin/index.php';
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+              }
+                
+            }
+            
+        }
+
     })
-
-   
-
-   
 
 }
 
@@ -4758,6 +4822,177 @@ function create_name_filter_data_table() {
 
 
 /* Prods Data Add Section End */
+
+/* Prods Data Edit And Delete Section Start */
+
+function editProdDetails(tablesName) {
+
+     
+    let tabname = {
+        tab_name : tablesName
+    } 
+    tab_name = JSON.stringify(tabname);
+  
+    let responseObj = make_user_details("POST", "../prods_data/specific_prod_data_details/", `${tab_name}`);
+    display_preLoader();
+    let totalC = 0;
+    
+    responseObj.then((sucvalue) => {
+        unDisplay_preLoader();
+      
+        
+       resultData = JSON.parse(JSON.stringify(sucvalue));
+        resultData = JSON.parse(resultData);
+     
+        var temp_field_array = [];
+        let table_datas = `<tr><th>S.NO</th>`;
+        for(let i = 0; i < resultData[0].length; i++) {
+           
+            table_datas+=`
+            <th>${(resultData[0][i]).toUpperCase()}</th>
+           `;
+           if(resultData[0].length == (i + 1)) {
+            table_datas += `<th>ACTION</th></tr>`;
+            after_loop();
+           }
+           
+           temp_field_array[i] = resultData[0][i];
+        }
+    
+        table_datas += `</tr>`;
+      
+
+        function after_loop() {
+       
+                let lessuse_arr = [];
+              
+               for(let j = 0; j < resultData[1].length; j++) {
+                table_datas+=`<tr>`;
+                table_datas+=`<td>${j+1}.</td>`;
+                lessuse_arr = resultData[1][j];
+                propertyName = Object.keys(lessuse_arr)[0];
+                propertyVal = lessuse_arr[Object.keys(lessuse_arr)[0]];
+          
+                for(let [key, val] of Object.entries(lessuse_arr)) {
+                    table_datas+=`<td>${val}</td>`;
+                }
+                table_datas += `<td><button title="Edit" class="edit_button_of_table" onclick="editOfFilterDat('${propertyName}', '${propertyVal}', '${tablesName}')"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfFilterDat('${propertyName}', '${propertyVal}', '${tablesName}')"><i class="fa fa-trash-o"></i></button></td>`;
+                table_datas += `</tr>`;
+                totalC = j;
+               }
+             
+            
+        }
+        
+
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Product Details Section";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+        }).catch((rejvalue) => {
+            console.log(rejvalue);
+        }) 
+
+}
+
+function editOfFilterDat(fieldname, fieldval, tablename) {
+
+
+display_preLoader();
+let responseObj = make_user_details("GET", `../prods_data/specific_prod_data/proper_name/${fieldname}/proper_val/${fieldval}/tab_name/${tablename}`, "");
+
+
+responseObj.then((resObj) => {
+    unDisplay_preLoader();
+   let prodData = JSON.parse(resObj);
+    
+   document.getElementById("filter_table_names").style.display = "none";
+   document.getElementsByClassName("filter_table_names_error_message_place")[0].style.display = "none";
+   document.getElementById("productt_name_or_id").style.display = "none";
+   document.getElementsByClassName("productt_name_or_id_error_message_place")[0].style.display = "none";
+ 
+   input_fields_of_prod_data = ``;
+   prodData = Object.entries(prodData);
+  
+   let county = 0;
+   let filter_table_primary_field_name_var = "";
+   let filter_table_id_var = "";
+   let productt_name_or_id_var = "";
+   let subsCatIdenId = "";
+  
+   prodData.forEach(function(keyAndValue) {
+
+if(county == 0){
+    filter_table_primary_field_name_var = keyAndValue[0];
+    filter_table_id_var = keyAndValue[1];
+} else if(county == 1) {
+    productt_name_or_id_var = keyAndValue[1];
+} else if(county == 2) {
+    subsCatIdenId = keyAndValue[1];
+} else {
+ let field_name = keyAndValue[0].replaceAll("_", " ");
+ input_fields_of_prod_data += `<label for="${keyAndValue[0]}">${field_name} <span class="required_field_asterisk_symbol">*</span></label> <br>
+ <input type="text" id="${keyAndValue[0]}" value="${keyAndValue[1]}"> <br>
+ <p class="error_message_place ${keyAndValue[0]}_error_message_place"></p>`;
+ filter_table_field_name.push(keyAndValue[0]);
+
+
+}
+
+county++;
+
+})
+ 
+
+document.getElementsByClassName("add_prods_data_form")[0].innerHTML = `
+<select id="filter_table_prods_id" style="display: none;">
+
+</select>
+  <select id="filter_table_names" style="display: none;">
+
+  </select> <br>
+  <p class="error_message_place filter_table_names_error_message_place"></p> <br>
+  <select id="productt_name_or_id" style="display: none;">
+
+  </select> <br>
+  <p class="error_message_place productt_name_or_id_error_message_place"></p> <br>
+  <input type="hidden" id="filter_table_name" value="${tablename}">
+  <input type="hidden" id="subsCatIdenId" value="${subsCatIdenId}">
+  <input type="hidden" id="filter_table_id" value="${filter_table_id_var}">
+  <input type="hidden" id="filter_table_pro_id" value="${productt_name_or_id_var}">
+  <input type="hidden" id="filter_table_primary_field_name" value="${filter_table_primary_field_name_var}">
+
+
+  ${input_fields_of_prod_data}
+  <center>
+  <button type="button" class="add_prods_data_submition_btn" onclick="products_filter_data_submission_form(event, 'insert');">Submit</button>
+  <button type="button" class="add_prods_data_submition_btn2" onclick="products_filter_data_submission_form(event, 'update');">Submit</button>
+  
+  </center>`;
+
+  document.getElementsByClassName("add_prods_data_submition_btn2")[0].style.display = "inline-block";
+document.getElementsByClassName("add_prods_data_submition_btn")[0].style.display = "none";
+document.get
+    
+})
+document.getElementsByClassName("form_title10")[0].innerHTML = "Edit Prod Details";
+undisplay_displayed_blocked_containers(); 
+document.getElementsByClassName("add_prods_data_step1_container")[0].style.display = "block";
+display_blocked_containers("add_prods_data_step1_container"); 
+
+}
+
+
+function deleteOfFilterDat(fieldname, fieldval, tablename) {
+    console.log(fieldname, fieldval, tablename);
+}
+
+/* Prods Data Edit And Delete Section End */
 
 /* Prods Data End */
 

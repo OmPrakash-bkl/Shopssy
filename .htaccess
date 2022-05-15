@@ -297,6 +297,13 @@ RewriteRule ^prods_data/data_checker/?$ prods_data/data_checker.php [L]
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^prods_data/insert_prod_data/?$ prods_data/insert_prod_data.php [L]
 
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^prods_data/specific_prod_data/proper_name/([^/\*]+)/proper_val/([^/\*]+)/tab_name/([^/\*]+)?$ prods_data/specific_prod_data.php?proper_name=$1&proper_val=$2&tab_name=$3 [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_data/update_prods_data/?$ prods_data/update_prods_data.php [L]
+
+
 # Prods End
 
 

@@ -19,7 +19,7 @@ if(isset($_SERVER['REQUEST_METHOD'])) {
   $count = 0;
   foreach($inputData as $key => $val) {
       $count = $count + 1;
-      if($count > 4) {
+      if($count > 5) {
         $key = stripcslashes($key);
         $val = stripcslashes($val);
         $field_name = $field_name."`".$key."`, ";   
