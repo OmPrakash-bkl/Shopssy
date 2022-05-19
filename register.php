@@ -65,7 +65,11 @@ if(isset($_POST['submit'])) {
                    <b>Shopssy - The Online Shopping Site.</b>";
 
                    if(!$mail -> send()) {
-                       echo "Registration Failed, Invalid Email";
+                       ?>
+                       <script>
+                           alert("Registration Failed, Invalid Email");
+                       </script>
+                       <?php
                    } else {
                        ?>
                        <script>

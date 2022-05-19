@@ -912,6 +912,27 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <!-- Prods Data Form Container End -->
 
+<!-- New Filter Table Creation Form Start -->
+
+<div class="new_filter_table_data_form_container">
+
+<div class="new_filter_table_data_step1_container">
+<center>
+    <h1 class="form_title11">New Filter Table Creation Form</h1> <br>
+</center>
+<form action="" class="new_filter_table_data_form" method="POST">
+
+
+<center>
+ <button type="button" class="new_filter_table_data_submition_btn">Submit</button>
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- New Filter Table Creation Form End -->
+
 </div>
 
 </div>
