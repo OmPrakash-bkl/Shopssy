@@ -306,6 +306,12 @@ RewriteRule ^prods_data/update_prods_data/?$ prods_data/update_prods_data.php [L
 RewriteCond %{REQUEST_METHOD} =DELETE
 RewriteRule ^prods_data/prods_data_deletion/field_name/([^/\*]+)/field_val/([^/\*]+)/tab_name/([^/\*]+)?$ prods_data/prods_data_deletion.php?field_name=$1&field_val=$2&tab_name=$3 [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_data/check_filter_table_name/?$ prods_data/check_filter_table_name.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_data/insert_new_filter_table_field_data/?$ prods_data/insert_new_filter_table_field_data.php [L]
+
 # Prods End
 
 

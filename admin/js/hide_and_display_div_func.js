@@ -3671,7 +3671,7 @@ document.getElementsByClassName("filter_data_submition_btn2")[0].style.display =
             Select Details</option>`;
             unDisplay_preLoader();
             let resultData = JSON.parse(sucvalue);
-          
+         
             for(let i = 0; i < resultData.length; i++) {
                
                 filter_data_category+=`<option value="${resultData[i].filter_details_category}">
@@ -3965,6 +3965,12 @@ if(permission) {
     })
 }
 }
+
+document.getElementById("details_for_which_prod").addEventListener("change", function() {
+if(this.value == "new_fil_data_cat") {
+    create_new_filter_table_data_table();
+}
+});
 
 /* Filter Edit And Delete Section End */
 
@@ -4827,6 +4833,92 @@ function create_new_filter_table_data_table() {
 
 }
 
+document.getElementsByClassName("new_filter_table_data_submition_btn")[0].addEventListener("click", function(event) {
+       
+    new_filter_table_data_submission_form(event, "insert");  
+    
+});
+
+
+function new_filter_table_data_submission_form(event, decisionPara) {
+       
+    event.preventDefault();
+ 
+   let field_names = document.getElementById("new_filter_table_data").value;
+  let table_fields_names_array = [];
+   field_names = field_names.replaceAll(/\/+$/g, '');
+   field_names = field_names.replace(/[^a-zA-Z0-9@._&; ]/g, "");
+   let lastchar = field_names.substr(field_names.length - 1);
+   while(lastchar == ";") {
+    field_names = field_names.slice(0, -1);
+    lastchar = field_names.substr(field_names.length - 1);
+   }
+  field_names = field_names.split(";");
+ 
+
+
+    if(field_names[0].length == 0) {
+        document.getElementsByClassName("new_filter_table_data_error_message_place")[0].innerText = "Filter table field names is required!";
+    } else if(field_names[0].length <= 2)  {
+        document.getElementsByClassName("new_filter_table_data_error_message_place")[0].innerText = "New filter table name length must be minimum 3 characters!";
+    } else {
+        document.getElementsByClassName("new_filter_table_data_error_message_place")[0].innerText = "";
+    }
+
+   
+    if(document.getElementsByClassName("new_filter_table_data_error_message_place")[0].innerText == "") {
+        let filter_table_primary_id_name = field_names[0];
+        let subs_category = field_names[1];
+        let name_of_the_table = "filter_detail_for_"+field_names[0];
+
+        field_names.forEach(function(x) {
+            table_fields_names_array.push(x);
+        })
+    
+        let new_filter_table_field_names_obj = {
+            filter_table_primary_id_name: filter_table_primary_id_name,
+            subs_category: subs_category,
+            table_name: name_of_the_table,
+            field_names: table_fields_names_array
+        }
+        new_filter_table_field_names_obj = JSON.stringify(new_filter_table_field_names_obj);
+   
+        
+
+        display_preLoader();
+        let filter_data_table_name_checker_res = make_user_details("POST", "../prods_data/check_filter_table_name/", `${new_filter_table_field_names_obj}`);
+   
+        
+        filter_data_table_name_checker_res.then((response) => {
+            unDisplay_preLoader();
+            let avail_count = response;
+          
+            
+        if(avail_count == 0 && decisionPara == "insert") {
+            document.getElementsByClassName("new_filter_table_data_error_message_place")[0].innerText = "";
+            display_preLoader();
+          
+                let filter_data_tableInsertDatasRes = make_user_details("POST", "../prods_data/insert_new_filter_table_field_data/", `${new_filter_table_field_names_obj}`);
+        
+                filter_data_tableInsertDatasRes.then((goodResponse) => {
+                    unDisplay_preLoader();
+                    alert(goodResponse);
+                    document.getElementById("new_filter_table_data").value = "";
+                    field_names = [];
+                }).catch((badResponse) => {
+                    console.log(badResponse);
+                })
+           
+         
+        } 
+        else {
+            document.getElementsByClassName("new_filter_table_data_error_message_place")[0].innerText = "Filter table name already exits!";
+        }
+       
+    
+        })
+      }
+    }
 
 
 /* Prods Data Add Section End */

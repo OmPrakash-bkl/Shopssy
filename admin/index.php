@@ -923,7 +923,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <form action="" class="new_filter_table_data_form" method="POST">
 
 <label for="new_filter_table_data">New filter table field details <span class="required_field_asterisk_symbol">*</span></label> <br>
-  <input type="text" id="new_filter_table_data" autofocus> <br>
+  <input type="text" id="new_filter_table_data" placeholder="End all field names with semicolon. (ex: tableName;subCategory;fieldNames;...)" autofocus> <br>
   <p class="error_message_place new_filter_table_data_error_message_place"></p>
 
 <center>
