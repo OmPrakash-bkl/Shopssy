@@ -4554,7 +4554,7 @@ document.getElementById("filter_table_names").addEventListener("change" , functi
         document.getElementsByClassName("filter_table_names_error_message_place")[0].innerText = "Select Filter's Data Section!";
     } else if(this.value == "add_fil_table") {
         document.getElementsByClassName("filter_table_names_error_message_place")[0].innerText = "";
-        create_name_filter_data_table();
+        create_new_filter_table_data_table();
       
     } else {
         document.getElementsByClassName("filter_table_names_error_message_place")[0].innerText = "";
@@ -4815,8 +4815,16 @@ let json_filter_data_obj = JSON.stringify(filter_data_obj);
 }
 
 
-function create_name_filter_data_table() {
- console.log("sdfsd");
+function create_new_filter_table_data_table() {
+ 
+    
+    document.getElementsByClassName("form_title11")[0].innerHTML = "New Filter Table Creation Form";
+    undisplay_displayed_blocked_containers(); 
+    
+    document.getElementsByClassName("new_filter_table_data_step1_container")[0].style.display = "block";
+    display_blocked_containers("new_filter_table_data_step1_container"); 
+    document.getElementsByClassName("new_filter_table_data_submition_btn")[0].style.display = "inline-block";
+
 }
 
 
