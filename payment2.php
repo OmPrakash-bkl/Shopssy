@@ -36,11 +36,11 @@ if(!isset($_SESSION['user_login_id'])) {
     var totalAmount = payment;
     var product_id =  "P0XXX";
     var options = {
-    "key": "<your key>",
+    "key": "<your id>",
     "amount": (totalAmount*100), // 2000 paise = INR 20
     "name": "Shopssy",
     "description": "Payment",
-    "image": "./images/20211106_210936.png",
+    "image": "./images/favicon1.png",
     "handler": function (response){
         alert(response);
     window.location.href = './success.php';
@@ -57,7 +57,7 @@ if(!isset($_SESSION['user_login_id'])) {
     });
     },
     "theme": {
-    "color": "#64339c"
+    "color": "#528FF0"
     }
     };
     var rzp1 = new Razorpay(options);
