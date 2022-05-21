@@ -14,3 +14,4 @@ document.getElementsByClassName("show_summary_btn")[0].addEventListener("click",
 });
 
 /* information_inner_container2_of_mobile Functions End */
+

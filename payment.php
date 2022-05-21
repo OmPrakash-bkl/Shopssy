@@ -30,10 +30,10 @@ return $encryption_data;
 // Order Request Processing Fun Start
 
 if(isset($_POST['order_req'])) {
-    $orders_cart_type = $_POST['card_type'];
-    $orders_card_number = $_POST['card_number'];
-    $orders_card_e_date = $_POST['card_e_date'];
-    $orders_card_cvv_num = $_POST['card_cvv_num'];
+    // $orders_cart_type = $_POST['card_type'];
+    // $orders_card_number = $_POST['card_number'];
+    // $orders_card_e_date = $_POST['card_e_date'];
+    // $orders_card_cvv_num = $_POST['card_cvv_num'];
     $orders_user_id = $_POST['user_id'];
     $orders_p_status = $_POST['p_status'];
     $orders_pro_tot_amt = $_POST['pro_tot_amt'];
@@ -67,10 +67,10 @@ if(isset($_POST['order_req'])) {
     $trx_counter = $cookie_last_count;
     $trx_counter = $trx_counter + 1;
     $orders_trx_id = $orders_trx_id."".$trx_counter;
-    $orders_cart_type = stripcslashes($orders_cart_type);
-    $orders_cart_type = mysqli_real_escape_string($con, $orders_cart_type);
-    $orders_card_number = stripcslashes($orders_card_number);
-    $orders_card_number = mysqli_real_escape_string($con, $orders_card_number);
+    // $orders_cart_type = stripcslashes($orders_cart_type);
+    // $orders_cart_type = mysqli_real_escape_string($con, $orders_cart_type);
+    // $orders_card_number = stripcslashes($orders_card_number);
+    // $orders_card_number = mysqli_real_escape_string($con, $orders_card_number);
     
     $date = new DateTime('', new DateTimezone("Asia/Kolkata"));
     $orders_date = $date->format('d/m/y');
@@ -80,13 +80,13 @@ if(isset($_POST['order_req'])) {
 
     // Ordered Data Inserting To DB Fun End
 
-    if(preg_match($nameval, $orders_cart_type) and preg_match($numberval, $orders_card_number) and preg_match($numberval, $orders_card_cvv_num)) {
+    if(isset($orders_user_id) && isset($orders_pro_tot_amt)) {
 
         // Ordered Data Inserting Query Fun Start
 
-        $orders_card_number = encryption($orders_card_number);
-        $orders_card_e_date = encryption($orders_card_e_date);
-        $orders_card_cvv_num = encryption($orders_card_cvv_num);
+        // $orders_card_number = encryption($orders_card_number);
+        // $orders_card_e_date = encryption($orders_card_e_date);
+        // $orders_card_cvv_num = encryption($orders_card_cvv_num);
     
     $orders_query = "INSERT INTO `orders_table` (`user_id`, `trx_id`, `trx_count`, `p_status`, `pro_tot_amount`, `order_date`) VALUES ($orders_user_id, '$orders_trx_id',  $trx_counter, '$orders_p_status', $orders_pro_tot_amt, '$orders_date');";
     mysqli_query($con, $orders_query);
@@ -97,8 +97,8 @@ if(isset($_POST['order_req'])) {
         $orders_order_id = $row['order_id'];
     }
 
-    $payment_query = "INSERT INTO `payment` (`user_id`, `order_id`, `card_type`, `card_number`, `exp_date`, `CVV`) VALUES ($orders_user_id, $orders_order_id, '$orders_cart_type', '$orders_card_number', '$orders_card_e_date', '$orders_card_cvv_num');";
-    mysqli_query($con, $payment_query);
+    // $payment_query = "INSERT INTO `payment` (`user_id`, `order_id`, `card_type`, `card_number`, `exp_date`, `CVV`) VALUES ($orders_user_id, $orders_order_id, '$orders_cart_type', '$orders_card_number', '$orders_card_e_date', '$orders_card_cvv_num');";
+    // mysqli_query($con, $payment_query);
 
     if(isset($orders_order_id)) {
         $user_id = $_SESSION['user_id'];
@@ -171,7 +171,6 @@ if(isset($_POST['order_req'])) {
     // Fetching Ordered Products Details From DB Fun Start
    
     $user_id = $_SESSION['user_id'];
-
     $cart_detail_retrieve_query = "SELECT * FROM `cart` WHERE `u_id` = $user_id;";
     $cart_detail_retrieve_result = mysqli_query($con, $cart_detail_retrieve_query);
     $table_product_part = "";
@@ -181,6 +180,7 @@ if(isset($_POST['order_req'])) {
         $product_id = $row['product_id'];
         $pro_tot_price = $row['pro_tot_price'];
         $pro_final_tot_price = $pro_tot_price + 50;
+        $_SESSION['final_total_amt'] = $pro_final_tot_price;
         $product_detail_query = "SELECT * FROM `products` WHERE `p_id` = $product_id";
         $product_detail_result = mysqli_query($con, $product_detail_query);
         while($rows = mysqli_fetch_assoc($product_detail_result)) {
@@ -208,6 +208,7 @@ if(isset($_POST['order_req'])) {
 
      // Mailing Ordered Products To The User Fun Start
 
+   
     require "./Mail/phpmailer/PHPMailerAutoload.php";
     $user_mail_id = "";
     $mail = new PHPMailer;
@@ -220,11 +221,11 @@ if(isset($_POST['order_req'])) {
     $mail -> Username = 'shopssyz@gmail.com';
     $mail -> Password = 'Shopssy$#@123';
 
-    $mail -> setFrom('shopssyz@gmail.com', 'Order Confirmation');
+    $mail -> setFrom('shopssyz@gmail.com', 'Order Summary');
     $mail -> addAddress($_SESSION['user_login_email']);
 
     $mail -> isHTML(true);
-    $mail -> Subject = 'Order Confirmation - Shopssy';
+    $mail -> Subject = 'Order Summary - Shopssy';
     $mail -> Body = "
     <!DOCTYPE html>
     <html lang='en'>
@@ -365,11 +366,12 @@ if(isset($_POST['order_req'])) {
     if(!$mail -> send()) {
         echo "Sending Mail is Failed, Invalid Email";
     } else {
-        ?>
-        <script>
-            window.location.href = 'http://localhost:3000/success.php';
-        </script>
-        <?php
+
+         ?>
+         <script>
+        window.location.href = 'http://localhost:3000/payment2.php';
+         </script>
+         <?php
     }
 
          // Mailing Ordered Products To The User Fun End
@@ -495,15 +497,16 @@ else
 
                 <div class="payment_container">
                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"  method="POST" autocomplete="off">
-                    <input type="text" name="card_type" placeholder="Type of Card" required autofocus> <br>
+                    <!-- <input type="text" name="card_type" placeholder="Type of Card" required autofocus> <br>
                     <input type="number" name="card_number" placeholder="Card Number" required> <br>
                     <input type="text" name="card_e_date" placeholder="Expiry Date (pattern - mm/yy)" required> <br>
-                    <input type="number" name="card_cvv_num" placeholder="CVV" required maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"> <br>
+                    <input type="number" name="card_cvv_num" placeholder="CVV" required maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"> <br> -->
                     <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
                     <input type="hidden" name="p_status" value="ordered">
                     <input type="hidden" name="trx_id" value="trx0000">
                     <input type="hidden" name="pro_tot_amt" value="<?php echo $_SESSION['T_AMT']; ?>">
                     <center>
+                        
                         <button type="submit" name="order_req">PLACE THE ORDER</button>
                     </center>
                    </form>
@@ -639,7 +642,7 @@ while($row = mysqli_fetch_assoc($cart_details__result)) {
     </div>
    </center>
     <!--information container end-->
-           
     <script src="./javascript/info.js"></script>
+    
 </body>
 </html>
