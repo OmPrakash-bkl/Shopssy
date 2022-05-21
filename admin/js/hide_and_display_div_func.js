@@ -1473,7 +1473,7 @@ document.getElementById("sub_category_id").addEventListener("change", function()
     
         
         bAndICheckerRes.then((response) => {
-      
+     
             let bAndIId = JSON.parse(response);
             let givenb_and_i_identification_id = bAndIId.b_and_i_identification_id;
             givenb_and_i_identification_id = (givenb_and_i_identification_id + "").split(".");
@@ -1921,7 +1921,7 @@ document.getElementById("sub_categories_id").addEventListener("change", function
     } else {
 
         let retrieveAllBandIDetails1 = make_user_details("GET", `../brand_and_items/set_of_details/sub_c_i_id_two/${this.value}`, "");
-
+       
         retrieveAllBandIDetails1.then((resData) => {
             unDisplay_preLoader();
             let resultData = JSON.parse(resData);
@@ -4548,7 +4548,7 @@ function recursiveOfFilterData() {
             add_product();
           
         } else {
-          console.log(this.value);
+          //console.log(this.value);
         }
     });
 

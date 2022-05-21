@@ -17,6 +17,7 @@ if(isset($_SERVER['REQUEST_METHOD'])) {
   $subs_category = stripslashes($subs_category);
   $table_name = stripcslashes($table_name);
 
+  
   $subs_cat_id_retrieve_query = "SELECT `sub_cat_identification_id_two` FROM `sub_category` WHERE `subs_cat_title` LIKE '%$subs_category%';";
   $subs_cat_id_retrieve_result = mysqli_query($conn, $subs_cat_id_retrieve_query);
   $row = mysqli_fetch_assoc($subs_cat_id_retrieve_result);
@@ -35,9 +36,10 @@ if(isset($_SERVER['REQUEST_METHOD'])) {
   $external_field_name = rtrim($external_field_name, ", ");
 
 
-   $data_insert_query = "CREATE TABLE $table_name ($filter_table_primary_id_name int(100) AUTO_INCREMENT, pro_id int(100), subs_cat_identification_id int(100), $external_field_name ,primary key($filter_table_primary_id_name));";
+   $data_insert_query = "CREATE TABLE $table_name ($filter_table_primary_id_name int(100) AUTO_INCREMENT, pro_id int(100), subs_cat_identification_id int(100), $external_field_name,primary key($filter_table_primary_id_name));";
  $data_insert_result = mysqli_query($conn, $data_insert_query);
  $data_insert_query2 = "INSERT INTO $table_name(`subs_cat_identification_id`) VALUES ('$sub_cat_id')";
+ 
  $data_insert_result2 = mysqli_query($conn, $data_insert_query2);
   echo "Inserted Successfully!";
 
