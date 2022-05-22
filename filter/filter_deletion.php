@@ -10,6 +10,8 @@ header("Access-Control-Allow_Methods: DELETE");
     $filter_id = $_GET['filter_id'];
     $filter_id_delete_query = "DELETE FROM `filter` WHERE  `filter_id` = $filter_id;";
     mysqli_query($conn, $filter_id_delete_query); 
+    $filter_sub_id_delete_query = "DELETE FROM `filter_sub` WHERE  `filters_id` = $filter_id;";
+    mysqli_query($conn, $filter_sub_id_delete_query); 
     echo "Filter Data Deleted Successfully!";
    
 }
