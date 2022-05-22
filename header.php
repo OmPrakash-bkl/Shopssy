@@ -1001,6 +1001,20 @@ if(isset($_POST['share_list_request'])) {
                     <td><button><i class="fas fa-heart"></i></button></td>
                     <td><a><button class="wishlist_btn_of_homepage">My Wishlist</button></a></td>
                 </tr>
+                <tr>
+                    <td colspan="2">--------------------</td>
+                </tr>
+                <tr>
+                    <td><button><i class='fas fa-bell'></i></button></td>
+                    <td><a href="./notification_page.php"><button class="wishlist_btn_of_homepage">Notifications</button></a></td>
+                </tr>
+                <tr>
+                    <td colspan="2">--------------------</td>
+                </tr>
+                <tr>
+                    <td><button><i class="fa fa-truck"></i></button></td>
+                    <td><a href="./order_tracker.php"><button class="wishlist_btn_of_homepage">Track Order</button></a></td>
+                </tr>
                </table>
            
             </div>
