@@ -96,56 +96,72 @@ return responseObj;
 /* Request Sending and Response Getting Section End */
 
 /* Showing Register User List Table Container Start */
+let search_place_name = "";
+function show_registered_users(searchData) {
 
-function show_registered_users() {
-    let responseObj = make_user_details("GET", "../user/user_reg_details/", "");
-display_preLoader();
-let totalC = 0;
-
-responseObj.then((sucvalue) => {
-    unDisplay_preLoader();
-   
-    let resultData = JSON.parse(sucvalue);
-    let table_datas = `<tr><th>S.NO</th>
-    <th>USER ID</th>
-    <th>F.NAME</th>
-    <th>L.NAME</th>
-    <th>EMAIL</th>
-    <th>PASSWORD</th>
-    <th>VERIFIED USER?</th>
-    <th>ACTION</th></tr>`;
-    for(let i = 0; i < resultData.length; i++) {
-        var isVerifiedUser = "";
-
-        if(resultData[i].status == 0) {
-            isVerifiedUser = "No";
-        } else {
-            isVerifiedUser = "Yes";
-        }
-        table_datas+=`<tr>
-        <td>${i+1}.</td>
-        <td>${resultData[i].user_id}</td>
-        <td>${resultData[i].f_name}</td>
-        <td>${resultData[i].l_name}</td>
-        <td>${resultData[i].email}</td>
-        <td>${resultData[i].password}</td>
-        <td>${isVerifiedUser}</td>
-        <td><button title="Edit" class="edit_button_of_table" onclick="editOfRegisteredUser(${resultData[i].user_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfRegisteredUser(${resultData[i].user_id})"><i class="fa fa-trash-o"></i></button></td>
-        </tr>`;
-        totalC = i;
+    function UI_Fun_1(datas){
+      
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+            let table_datas = `<tr><th>S.NO</th>
+            <th>USER ID</th>
+            <th>F.NAME</th>
+            <th>L.NAME</th>
+            <th>EMAIL</th>
+            <th>PASSWORD</th>
+            <th>VERIFIED USER?</th>
+            <th>ACTION</th></tr>`;
+         
+            for(let i = 0; i < resultData.length; i++) {
+                var isVerifiedUser = "";
+        
+                if(resultData[i].status == 0) {
+                    isVerifiedUser = "No";
+                } else {
+                    isVerifiedUser = "Yes";
+                }
+                table_datas+=`<tr>
+                <td>${i+1}.</td>
+                <td>${resultData[i].user_id}</td>
+                <td>${resultData[i].f_name}</td>
+                <td>${resultData[i].l_name}</td>
+                <td>${resultData[i].email}</td>
+                <td>${resultData[i].password}</td>
+                <td>${isVerifiedUser}</td>
+                <td><button title="Edit" class="edit_button_of_table" onclick="editOfRegisteredUser(${resultData[i].user_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfRegisteredUser(${resultData[i].user_id})"><i class="fa fa-trash-o"></i></button></td>
+                </tr>`;
+                totalC = i;
+            }
+            document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Registered Users";
+            document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+            undisplay_displayed_blocked_containers(); 
+            document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+            display_blocked_containers("admin_panel_details_table_container"); 
+            document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+            display_blocked_containers("table_name_and_other_details_display_container"); 
     }
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Registered Users";
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
-    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
 
-    undisplay_displayed_blocked_containers(); 
-    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
-    display_blocked_containers("admin_panel_details_table_container"); 
-    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
-    display_blocked_containers("table_name_and_other_details_display_container"); 
-    }).catch((rejvalue) => {
-        console.log(rejvalue);
-    }) 
+   
+    if(searchData == '') {
+        let responseObj = make_user_details("GET", "../user/user_reg_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_1(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+
+    } else {
+            unDisplay_preLoader();
+            UI_Fun_1(searchData);
+    }
+   
+
+    search_place_name = "show_registered_users";
+   
 }
 
 /* Showing Register User List Table Container End */
@@ -207,6 +223,8 @@ responseObj.then((sucvalue) => {
     }).catch((rejvalue) => {
         console.log(rejvalue);
     }) 
+    search_place_name = "show_users";
+   
 }
 /* Showing User List Table Container Section End */
 
@@ -558,6 +576,7 @@ responseObj.then((sucvalue) => {
     }).catch((rejvalue) => {
         console.log(rejvalue);
     }) 
+    search_place_name = "edit_and_delete_users";
 }
 
 function editUserRegistrationAndAccData(user_id) {
@@ -658,7 +677,7 @@ function deleteUserRegistrationAndAccData(user_id, descision_val) {
             unDisplay_preLoader();
             alert(deleteRes);
             if(descision_val == "registerDataEditionWork") {
-                show_registered_users();
+                show_registered_users("");
             } else {
                 edit_and_delete_users();
             }
@@ -793,6 +812,7 @@ responseObj.then((sucvalue) => {
     }).catch((rejvalue) => {
         console.log(rejvalue);
     }) 
+    search_place_name = "show_cat";
 }
 
 /* Category View Section End */
@@ -962,6 +982,7 @@ responseObj.then((sucvalue) => {
     }).catch((rejvalue) => {
         console.log(rejvalue);
     }) 
+    search_place_name = "edit_and_delete_category";
 }
 
 function editOfSpecCategory(cat_id) {
@@ -1063,7 +1084,7 @@ function view_sub_cat() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
- 
+        search_place_name = "view_sub_cat";
 }
 
 /* Sub Category View Section End */
@@ -1295,7 +1316,7 @@ function edit_and_delete_of_subcat() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
-    
+        search_place_name = "edit_and_delete_of_subcat";
 }
 
 function editOfSpecSubCategory(sub_cat_id) {
@@ -1403,7 +1424,7 @@ function show_BandI() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
- 
+        search_place_name = "show_BandI";
 }
 
 /* Brand And Item View Section End */
@@ -1729,7 +1750,7 @@ responseObj.then((sucvalue) => {
     }).catch((rejvalue) => {
         console.log(rejvalue);
     }) 
-
+    search_place_name = "edit_and_delete_of_bandi";
 }
 
 function editOfSpecBAndI(bandi_id) {
@@ -1859,6 +1880,7 @@ function show_products() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
+        search_place_name = "show_products";
 }
 
 /* Products View Section End */
@@ -2288,7 +2310,7 @@ responseObj.then((sucvalue) => {
     }).catch((rejvalue) => {
         console.log(rejvalue);
     }) 
-
+    search_place_name = "edit_and_delete_of_product";
 }
 
 function editOfSpecProd(p_id) {
@@ -2414,6 +2436,7 @@ function show_sub_prods() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
+        search_place_name = "show_sub_prods";
 }
 
 /* Sub Products View Section End */
@@ -2744,7 +2767,7 @@ responseObj.then((sucvalue) => {
     }).catch((rejvalue) => {
         console.log(rejvalue);
     }) 
-
+    search_place_name = "edit_and_delete_of_sub_product";
 }
 
 function editOfSpecSubProd(products_sub_id) {
@@ -2854,6 +2877,7 @@ function show_prod_specs() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
+        search_place_name = "show_prod_specs";
 }
 
 /* Product Specification View Section End */
@@ -3100,7 +3124,7 @@ responseObj.then((sucvalue) => {
     }).catch((rejvalue) => {
         console.log(rejvalue);
     }) 
-
+    search_place_name = "edit_and_delete_of_prod_spec";
 }
 
 function editOfSpecProdSpecs(products_spec_id) {
@@ -3231,6 +3255,7 @@ function view_faq() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
+        search_place_name = "view_faq";
 }
 
 /* Products FAQ View Section End */
@@ -3431,7 +3456,7 @@ function delete_prod_faq() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
-    
+        search_place_name = "delete_prod_faq";
 }
 
 function deleteOfSpecProdFaq(p_q_and_a_id) {
@@ -3522,6 +3547,7 @@ function show_reviews() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
+        search_place_name = "show_reviews";
 }
 
 /* Show Reviews Section End */
@@ -3571,7 +3597,7 @@ function delete_prod_review() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
-    
+        search_place_name = "delete_prod_review";
 }
 
 function deleteOfSpecProdReview(review_id) {
@@ -3639,7 +3665,7 @@ function view_filter_data() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
- 
+        search_place_name = "view_filter_data";
 }
 
 /* Filter View Section End */
@@ -3917,7 +3943,7 @@ responseObj.then((sucvalue) => {
     }).catch((rejvalue) => {
         console.log(rejvalue);
     }) 
-
+    search_place_name = "edit_and_delete_of_filter_data";
 }
 
 function editOfSpecFilter(filter_id) {
@@ -4020,6 +4046,7 @@ function view_sub_filter_data() {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
+        search_place_name = "view_sub_filter_data";
 }
 
 /* Sub Filter View Section End */
@@ -4273,7 +4300,7 @@ responseObj.then((sucvalue) => {
     }).catch((rejvalue) => {
         console.log(rejvalue);
     }) 
-
+    search_place_name = "edit_sub_filter_data";
 }
 
 function editOfSpecSubFilter(filter_sub_id) {
@@ -4390,6 +4417,7 @@ function show_prods_data_tables(decisition_parameter) {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
+        search_place_name = "show_prods_data_tables";
 }
 
 /* Prods Data View Section - 1 End */
@@ -4462,6 +4490,7 @@ function viewProdDetails(table_name) {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
+        search_place_name = "viewProdDetails";
 }
 
 /* Prods Data View Section - 2 End */
@@ -5000,7 +5029,7 @@ function editProdDetails(tablesName) {
         }).catch((rejvalue) => {
             console.log(rejvalue);
         }) 
-
+        search_place_name = "editProdDetails";
 }
 
 function editOfFilterDat(fieldname, fieldval, tablename) {
@@ -5109,4 +5138,65 @@ function deleteOfFilterDat(fieldname, fieldval, tablename) {
 /* Prods Data Edit And Delete Section End */
 
 /* Prods Data End */
+
+/* Search Section Start */
+
+/* Request Sending and Response Getting Section Start */
+function make_response_details(method, url, sendingData) {
+
+    let responseObj = new Promise((resolve, reject)=> {
+        const req = new XMLHttpRequest();
+        req.open(method, url, true);
+        if(method == "POST") {
+            req.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+            req.send(sendingData);
+        } else {
+            req.send();
+        }
+      
+        req.onload = function() {
+        if(this.readyState == 4 && req.status == 200) {
+        resolve(req.responseText);
+        } else {
+            reject("Not Found");
+        }
+    }
+
+})
+return responseObj;
+}
+/* Request Sending and Response Getting Section End */
+
+
+function search_the_details() {
+
+    let searchWords = document.getElementById("search_bar").value;
+    searchWords = searchWords.replace(/\/+$/g, '');
+    searchWords = searchWords.replace(/[^a-zA-Z0-9@.& ]/g, "");
+
+    if(search_place_name == "show_users" || search_place_name == "show_registered_users") {
+        
+        let responseObjs = make_response_details("GET", `../user/search_details/search_keyword/${searchWords}`, "");
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            if(search_place_name == "show_users") {
+                show_users(response);
+            } else {
+                show_registered_users(response);
+            }
+           
+
+        }).catch((error) => {
+            console.log(error);
+        })
+           
+    }
+}
+
+
+
+/* Search Section End */
 
