@@ -172,13 +172,11 @@ function show_registered_users(searchData) {
 /* Showing Register User List Table Container End */
 
 /* Showing User List Table Container Section Start */
-function show_users() {
-let responseObj = make_user_details("GET", "../user/user_account_details/", "");
-display_preLoader();
-let totalC = 0;
-responseObj.then((sucvalue) => {
-    unDisplay_preLoader();
-    let resultData = JSON.parse(sucvalue);
+function show_users(searchData) {
+
+function UI_Fun_2(datas) {
+    let totalC = 0;
+    let resultData = JSON.parse(datas);
     let table_datas = `<tr><th>S.NO</th>
     <th>USER ID</th>
     <th>F.NAME</th>
@@ -192,6 +190,12 @@ responseObj.then((sucvalue) => {
     <th>PH.NUMBER</th>
     <th>COUNTRY</th>
     <th>VERIFIED USER?</th></tr>`;
+    if(resultData.length == 0) {
+        table_datas = `<center>
+            <h2>No Results</h2>
+            </center>`
+            totalC = -1;
+    }
     for(let i = 0; i < resultData.length; i++) {
         var isVerifiedUser = "";
 
@@ -224,10 +228,23 @@ responseObj.then((sucvalue) => {
     document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
     display_blocked_containers("admin_panel_details_table_container"); 
     document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
-    display_blocked_containers("table_name_and_other_details_display_container"); 
-    }).catch((rejvalue) => {
-        console.log(rejvalue);
-    }) 
+    display_blocked_containers("table_name_and_other_details_display_container");
+}
+
+if(searchData == '') {
+    let responseObj = make_user_details("GET", "../user/user_account_details/", "");
+
+    responseObj.then((sucvalue) => {
+        unDisplay_preLoader();
+        UI_Fun_2(sucvalue);
+        }).catch((rejvalue) => {
+            console.log(rejvalue);
+        }) 
+} else {
+        unDisplay_preLoader();
+        UI_Fun_2(searchData);
+}
+
     search_place_name = "show_users";
    
 }
@@ -543,14 +560,13 @@ function insertAccountOfForm(mode) {
 
 /* Edit and Delete User Section Start */
 
-function edit_and_delete_users() {
-    let responseObj = make_user_details("GET", "../user/user_account_details/", "");
-display_preLoader();
-
-responseObj.then((sucvalue) => {
+function edit_and_delete_users(searchData) {
+  
+function UI_Fun_3(datas) {
+  
     let totalC = 0;
     unDisplay_preLoader();
-    let resultData = JSON.parse(sucvalue);
+    let resultData = JSON.parse(datas);
     let table_datas = `<tr><th>S.NO</th>
     <th>USER ID</th>
     <th>FULLNAME</th>
@@ -558,6 +574,12 @@ responseObj.then((sucvalue) => {
     <th>CITY</th>
     <th>PH.NUMBER</th>
     <th>ACTION</th></tr>`;
+    if(resultData.length == 0) {
+        table_datas = `<center>
+            <h2>No Results</h2>
+            </center>`
+            totalC = -1;
+    }
     for(let i = 0; i < resultData.length; i++) {
         table_datas+=`<tr>
         <td>${i+1}.</td>
@@ -578,9 +600,21 @@ responseObj.then((sucvalue) => {
     display_blocked_containers("admin_panel_details_table_container"); 
     document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
     display_blocked_containers("table_name_and_other_details_display_container"); 
-    }).catch((rejvalue) => {
-        console.log(rejvalue);
-    }) 
+}
+
+if(searchData == '') {
+    let responseObj = make_user_details("GET", "../user/user_account_details/", "");
+    display_preLoader();
+    responseObj.then((sucvalue) => {
+        unDisplay_preLoader();
+        UI_Fun_3(sucvalue);
+        }).catch((rejvalue) => {
+            console.log(rejvalue);
+        }) 
+} else {
+        unDisplay_preLoader();
+        UI_Fun_3(searchData);
+}
     search_place_name = "edit_and_delete_users";
 }
 
@@ -684,7 +718,7 @@ function deleteUserRegistrationAndAccData(user_id, descision_val) {
             if(descision_val == "registerDataEditionWork") {
                 show_registered_users("");
             } else {
-                edit_and_delete_users();
+                edit_and_delete_users("");
             }
         }).catch((deleteErrRes) => {
             console.log(deleteErrRes);
@@ -756,7 +790,7 @@ function updateRegisteredUserDetails() {
             updateRegisterDatasRes.then((regiterResObj) => {
               
                     alert("Updated Successfully!");
-              
+                    show_registered_users('');
             }).catch((registerRejObj) => {
                 console.log(registerRejObj);
             })
@@ -5178,21 +5212,19 @@ function search_the_details() {
     let searchWords = document.getElementById("search_bar").value;
     searchWords = searchWords.replace(/\/+$/g, '');
     searchWords = searchWords.replace(/[^a-zA-Z0-9@.& ]/g, "");
-
-    if(search_place_name == "show_users" || search_place_name == "show_registered_users") {
-       searchWords = {
+    searchWords = {
         search_keyword: searchWords
        }
        searchWords = JSON.stringify(searchWords);
+
+    if(search_place_name == "show_registered_users") {
         let responseObjs = make_response_details("POST", "../user/search_details/", `${searchWords}`);
         display_preLoader();
         
         responseObjs.then((response) => {
             unDisplay_preLoader();
             document.getElementById("search_bar").value = "";
-            if(search_place_name == "show_users") {
-                show_users(response);
-            } else {
+            if(search_place_name == "show_registered_users") {
                 show_registered_users(response);
             }
            
@@ -5202,6 +5234,44 @@ function search_the_details() {
         })
            
     }
+    if(search_place_name == "show_users") {
+            let responseObjs = make_response_details("POST", "../user/search_full_details/", `${searchWords}`);
+            display_preLoader();
+            
+            responseObjs.then((response) => {
+                unDisplay_preLoader();
+                document.getElementById("search_bar").value = "";
+                if(search_place_name == "show_users") {
+                    show_users(response);
+                } 
+               
+               
+    
+            }).catch((error) => {
+                console.log(error);
+                document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+            })
+    }
+
+    if(search_place_name == "edit_and_delete_users") {
+        let responseObjs = make_response_details("POST", "../user/search_full_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name = "edit_and_delete_users") {
+                edit_and_delete_users(response);
+            }
+           
+
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+}
+
 }
 
 

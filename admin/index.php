@@ -136,7 +136,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="show_users()"><i class="fa fa-address-card"></i> Full Details</button>
+  <button onclick="show_users('')"><i class="fa fa-address-card"></i> Full Details</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -144,7 +144,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="edit_and_delete_users()"><i class="fa fa-edit"></i> Edit & Delete</button>
+  <button onclick="edit_and_delete_users('')"><i class="fa fa-edit"></i> Edit & Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
@@ -411,7 +411,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <div class="table_name_and_other_details_display_containers_inner_right_container">
 
 <form action="">
-    <input type="search" placeholder="Search Details" id="search_bar">
+    <input type="search" placeholder="Search Details" id="search_bar" required>
     <button type="button" onclick="search_the_details()">Search</button>
 </form>
 

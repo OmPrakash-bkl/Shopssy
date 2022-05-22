@@ -42,6 +42,9 @@ RewriteRule ^user/user_deletion/user_id/([^/\*]+)?$ user/user_deletion.php?user_
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^user/search_details/?$ user/search_details.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^user/search_full_details/?$ user/search_full_details.php [L]
+
 
 # User End
 
