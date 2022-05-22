@@ -11,7 +11,7 @@ header("Access-Control-Allow_Methods: DELETE");
     $cat_delete_query = "DELETE FROM `category` WHERE  `cat_id` = $cat_id;";
     mysqli_query($conn, $cat_delete_query); 
 
-    $sub_cat_select_query = "SELECT `sub_cat_identification_id_two` FROM `sub_category` WHERE `cats_id` = $cat_id;";
+    $sub_cat_select_query = "SELECT `sub_cat_identification_id_two` FROM `sub_category` WHERE `cats_id` = '$cat_id';";
    $sub_cat_select_result = mysqli_query($conn, $sub_cat_select_query);
    while($row = mysqli_fetch_assoc($sub_cat_select_result)) {
        $sub_cat_identification_id_two = $row['sub_cat_identification_id_two'];
@@ -33,7 +33,7 @@ header("Access-Control-Allow_Methods: DELETE");
     $cat_delete_query = "DELETE FROM `brand_and_item_list` WHERE  `cats_id` = $cat_id;";
     mysqli_query($conn, $cat_delete_query); 
 
-    $p_select_query = "SELECT `p_id` FROM `products` WHERE `cats_id` = $cat_id;";
+    $p_select_query = "SELECT `p_id` FROM `products` WHERE `cats_id` = '$cat_id';";
     $p_select_result = mysqli_query($conn, $p_select_query);
     while($row = mysqli_fetch_assoc($p_select_result)) {
 

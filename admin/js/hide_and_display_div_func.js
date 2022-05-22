@@ -1714,7 +1714,7 @@ responseObj.then((sucvalue) => {
         <td>${resultData[i].b_title}</td>
         <td>${resultData[i].b_sub_title}</td>
         <td>${resultData[i].b_sub_title_two}</td>
-        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecBAndI(${resultData[i].brand_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecBAndI(${resultData[i].brand_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecBAndI(${resultData[i].brand_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecBAndI(${resultData[i].brand_id}, ${resultData[i].subs_cat_identification_id_two})"><i class="fa fa-trash-o"></i></button></td></tr>`;
         totalC = i;
     }
     document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Brand And Item Details";
@@ -1780,12 +1780,12 @@ document.getElementsByClassName("brand_and_item_submition_btn2")[0].addEventList
 });
 
 
-function deleteOfSpecBAndI(brand_id) {
+function deleteOfSpecBAndI(brand_id, subcat_id_two) {
 
 let permission = confirm("Are you sure?");
 if(permission) {
     display_preLoader();
-    let bAndIDeleteReqObj = make_user_details("DELETE", `../brand_and_items/bandi_deletion/brand_id/${brand_id}`, ``);
+    let bAndIDeleteReqObj = make_user_details("DELETE", `../brand_and_items/bandi_deletion/brand_id/${brand_id}/subcat_id/${subcat_id_two}`, ``);
     bAndIDeleteReqObj.then((deleteRes) => {
         unDisplay_preLoader();
         alert(deleteRes);

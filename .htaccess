@@ -109,7 +109,7 @@ RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^brand_and_items/specific_bandi_detail/bandi_id/([^/\*]+)?$ brand_and_items/specific_bandi_detail.php?bandi_id=$1 [L]
 
 RewriteCond %{REQUEST_METHOD} =DELETE
-RewriteRule ^brand_and_items/bandi_deletion/brand_id/([^/\*]+)?$ brand_and_items/bandi_deletion.php?brand_id=$1 [L]
+RewriteRule ^brand_and_items/bandi_deletion/brand_id/([^/\*]+)/subcat_id/([^/\*]+)?$ brand_and_items/bandi_deletion.php?brand_id=$1&subcat_id=$2 [L]
 
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^brand_and_items/update_bandi/?$ brand_and_items/update_bandi.php [L]
