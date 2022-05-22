@@ -1919,8 +1919,11 @@ document.getElementById("sub_categories_id").addEventListener("change", function
         add_subcat();
       
     } else {
-
-        let retrieveAllBandIDetails1 = make_user_details("GET", `../brand_and_items/set_of_details/sub_c_i_id_two/${this.value}`, "");
+let incre_val = this.value;
+if(incre_val > 123) {
+    incre_val = Number(this.value) + 1;
+}
+        let retrieveAllBandIDetails1 = make_user_details("GET", `../brand_and_items/set_of_details/sub_c_i_id_two/${incre_val}`, "");
        
         retrieveAllBandIDetails1.then((resData) => {
             unDisplay_preLoader();

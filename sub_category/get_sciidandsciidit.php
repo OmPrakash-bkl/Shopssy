@@ -11,9 +11,15 @@ if(isset($_SERVER['REQUEST_METHOD'])) {
         $sciidandsciidit_get_query1 = "SELECT `sub_cat_identification_id` FROM `sub_category` WHERE `cats_id` LIKE '$cats_id';";
         $sciidandsciidit_get_result1 = mysqli_query($conn, $sciidandsciidit_get_query1);
         $sub_cat_identification_id = 0;
-        while($row = mysqli_fetch_assoc($sciidandsciidit_get_result1)) {
-            $sub_cat_identification_id = $row['sub_cat_identification_id'];
+        $count_value_of_row = mysqli_num_rows($sciidandsciidit_get_result1);
+        if($count_value_of_row == 0) {
+            $sub_cat_identification_id = $cats_id.".0";
+        } else {
+            while($row = mysqli_fetch_assoc($sciidandsciidit_get_result1)) {
+                $sub_cat_identification_id = $row['sub_cat_identification_id'];
+            }
         }
+       
       
         $sub_cat_identification_id_and_sub_cat_identification_id_two[0] = $sub_cat_identification_id;
         $sciidandsciidit_get_query2 = "SELECT MAX(sub_cat_identification_id_two) AS `last_sub_cat_identification_id_two` FROM `sub_category`;";
