@@ -111,7 +111,12 @@ function show_registered_users(searchData) {
             <th>PASSWORD</th>
             <th>VERIFIED USER?</th>
             <th>ACTION</th></tr>`;
-         
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
             for(let i = 0; i < resultData.length; i++) {
                 var isVerifiedUser = "";
         
@@ -5175,8 +5180,11 @@ function search_the_details() {
     searchWords = searchWords.replace(/[^a-zA-Z0-9@.& ]/g, "");
 
     if(search_place_name == "show_users" || search_place_name == "show_registered_users") {
-        
-        let responseObjs = make_response_details("GET", `../user/search_details/search_keyword/${searchWords}`, "");
+       searchWords = {
+        search_keyword: searchWords
+       }
+       searchWords = JSON.stringify(searchWords);
+        let responseObjs = make_response_details("POST", "../user/search_details/", `${searchWords}`);
         display_preLoader();
         
         responseObjs.then((response) => {

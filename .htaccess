@@ -39,8 +39,9 @@ RewriteRule ^user/account_data_edit_request/?$ user/account_data_edit_request.ph
 RewriteCond %{REQUEST_METHOD} =DELETE
 RewriteRule ^user/user_deletion/user_id/([^/\*]+)?$ user/user_deletion.php?user_id=$1 [L]
 
-RewriteCond %{REQUEST_METHOD} =GET
-RewriteRule ^user/search_details/search_keyword/([^/\.]+)?$ user/search_details.php?search_keyword=$1 [L]
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^user/search_details/?$ user/search_details.php [L]
+
 
 # User End
 
