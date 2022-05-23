@@ -159,6 +159,9 @@ RewriteRule ^products/product_deletion/p_id/([^/\*]+)?$ products/product_deletio
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^products/update_product/?$ products/update_product.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^products/search_details/?$ products/search_details.php [L]
+
 # Products End
 
 # Sub Products Start
