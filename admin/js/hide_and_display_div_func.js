@@ -1113,16 +1113,11 @@ function deleteOfSpecCategory(cat_id) {
 
 /* Sub Category View Section Start */
 
-function view_sub_cat() {
-   
-        let responseObj = make_user_details("GET", "../sub_category/sub_cat_details/", "");
-    display_preLoader();
-    let totalC = 0;
-    
-    responseObj.then((sucvalue) => {
+function view_sub_cat(searchData) {
+    function UI_Fun_6(datas) { 
+        let totalC = 0;
         unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
+        let resultData = JSON.parse(datas);
         let table_datas = `<tr><th>S.NO</th>
         <th>SUB.CAT ID</th>
         <th>CAT ID</th>
@@ -1130,6 +1125,12 @@ function view_sub_cat() {
         <th>SUB.CAT ID - 2</th>
         <th>TITLE</th>
         <th>IMG NAME</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         for(let i = 0; i < resultData.length; i++) {
             
             table_datas+=`<tr>
@@ -1152,9 +1153,23 @@ function view_sub_cat() {
         display_blocked_containers("admin_panel_details_table_container"); 
         document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
         display_blocked_containers("table_name_and_other_details_display_container"); 
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
+
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../sub_category/sub_cat_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_6(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_6(searchData);
+    }
+
         search_place_name = "view_sub_cat";
 }
 
@@ -1350,21 +1365,24 @@ document.getElementsByClassName("add_sub_category_submition_btn")[0].addEventLis
 
 /* Sub Category Edit And Delete Section Start */
 
-function edit_and_delete_of_subcat() {
-   
-        let responseObj = make_user_details("GET", "../sub_category/sub_cat_details/", "");
-    display_preLoader();
-    let totalC = 0;
-    
-    responseObj.then((sucvalue) => {
+function edit_and_delete_of_subcat(searchData) {
+
+    function UI_Fun_7(datas) { 
+
         unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
         let table_datas = `<tr><th>S.NO</th>
         <th>SUB.CAT ID</th>
         <th>CAT ID</th>
         <th>TITLE</th>
         <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         for(let i = 0; i < resultData.length; i++) {
             
             table_datas+=`<tr>
@@ -1384,10 +1402,23 @@ function edit_and_delete_of_subcat() {
         display_blocked_containers("admin_panel_details_table_container"); 
         document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
         display_blocked_containers("table_name_and_other_details_display_container"); 
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
-        search_place_name = "edit_and_delete_of_subcat";
+
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../sub_category/sub_cat_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_7(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_7(searchData);
+    }
+    search_place_name = "edit_and_delete_of_subcat";
 }
 
 function editOfSpecSubCategory(sub_cat_id) {
@@ -1435,7 +1466,7 @@ function deleteOfSpecSubCategory(sub_cat_id) {
         subCategoryDeleteReqObj.then((deleteRes) => {
             unDisplay_preLoader();
             alert(deleteRes);
-            view_sub_cat();
+            view_sub_cat("");
         }).catch((deleteErrRes) => {
             console.log(deleteErrRes);
         })
@@ -5334,6 +5365,42 @@ function search_the_details() {
             
             if(search_place_name == "edit_and_delete_category") {
                 edit_and_delete_category(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "view_sub_cat") {
+        let responseObjs = make_response_details("POST", "../sub_category/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "view_sub_cat") {
+                view_sub_cat(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "edit_and_delete_of_subcat") {
+        let responseObjs = make_response_details("POST", "../sub_category/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "edit_and_delete_of_subcat") {
+                edit_and_delete_of_subcat(response);
             }
            
     

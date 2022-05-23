@@ -100,6 +100,9 @@ RewriteRule ^sub_category/sub_category_deletion/subcat_id/([^/\*]+)?$ sub_catego
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^sub_category/set_of_details/cats_id/([^/\*]+)?$ sub_category/set_of_details.php?cats_id=$1 [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^sub_category/search_details/?$ sub_category/search_details.php [L]
+
 # Sub Category End
 
 # Brand And Item Start
