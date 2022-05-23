@@ -2541,83 +2541,6 @@ function product_submission_form(event, decisionPara) {
 /* Product Update And Delete Section Start */
 
 
-function show_products(searchData) {
-
-    function UI_Fun_10(datas) {    
-
-        unDisplay_preLoader();
-        let totalC = 0;
-        let resultData = JSON.parse(datas);
-        let table_datas = `<tr><th>S.NO</th>
-        <th>PRODUCT ID</th>
-        <th>CAT ID</th>
-        <th>SUB.CAT ID</th>
-        <th>B & I ID</th>
-        <th>PROD TITLE</th>
-        <th>PROD IMAGE</th>
-        <th>RATING</th>
-        <th>ORIGINAL PRICE</th>
-        <th>OFFER PRICE</th>
-        <th>IS HOT DEAL PROD?</th></tr>`;
-        if(resultData.length == 0) {
-            table_datas = `<center>
-                <h2>No Results</h2>
-                </center>`
-                totalC = -1;
-        }
-        for(let i = 0; i < resultData.length; i++) {
-            let isHotDealProd = "";
-            if(resultData[i].hot_deal_type == null) {
-                isHotDealProd = "No";
-            } else {
-                isHotDealProd = "Yes";
-            }
-            table_datas+=`<tr>
-            <td>${i+1}.</td>
-            <td>${resultData[i].p_id}</td>
-            <td>${resultData[i].cats_id}</td>
-            <td>${resultData[i].subs_cat_identification_id}</td>
-            <td>${resultData[i].b_and_i_identification_id}</td>
-            <td>${resultData[i].p_title}</td>
-            <td>${resultData[i].p_image}</td>
-            <td>${resultData[i].p_star_rat}</td>
-            <td>${resultData[i].p_o_price}</td>
-            <td>${resultData[i].p_a_price}</td>
-            <td>${isHotDealProd}</td>
-            
-            </tr>`;
-            totalC = i;
-        }
-        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Product Details";
-        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
-        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
-    
-        undisplay_displayed_blocked_containers(); 
-        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
-        display_blocked_containers("admin_panel_details_table_container"); 
-        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
-        display_blocked_containers("table_name_and_other_details_display_container"); 
-
-    }
-
-    if(searchData == '') { 
-        let responseObj = make_user_details("GET", "../products/product_details/", "");
-        display_preLoader();
-        responseObj.then((sucvalue) => {
-            unDisplay_preLoader();
-            UI_Fun_10(sucvalue);
-            }).catch((rejvalue) => {
-                console.log(rejvalue);
-            }) 
-    } else {
-        unDisplay_preLoader();
-        UI_Fun_10(searchData);
-    }
-
-    search_place_name = "show_products";
-}
-
-
 function edit_and_delete_of_product(searchData) {
    
     function UI_Fun_11(datas) {    
@@ -2759,15 +2682,13 @@ if(permission) {
 
 /* Sub Products View Section Start */
 
-function show_sub_prods() {
-    let responseObj = make_user_details("GET", "../sub_products/show_subprods/", "");
-    display_preLoader();
-    let totalC = 0;
-    
-    responseObj.then((sucvalue) => {
+function show_sub_prods(searchData) {
+
+    function UI_Fun_12(datas) {    
+
         unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
         let table_datas = `<tr><th>S.NO</th>
         <th>PROD.SUB ID</th>
         <th>PROD ID</th>
@@ -2780,6 +2701,12 @@ function show_sub_prods() {
         <th>PROD TAG 2</th>
         <th>PROD TAG 3</th>
         <th>PROD DESCRIPTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         for(let i = 0; i < resultData.length; i++) {
             
             table_datas+=`<tr>
@@ -2807,10 +2734,25 @@ function show_sub_prods() {
         display_blocked_containers("admin_panel_details_table_container"); 
         document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
         display_blocked_containers("table_name_and_other_details_display_container"); 
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
-        search_place_name = "show_sub_prods";
+
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../sub_products/show_subprods/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_12(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_12(searchData);
+    }
+
+
+    search_place_name = "show_sub_prods";
 }
 
 /* Sub Products View Section End */
@@ -3096,51 +3038,68 @@ function sub_product_submission_form(event, decisionPara) {
 
 /* Sub Products Edit And Delete Section Start */
 
-function edit_and_delete_of_sub_product() {
-   
-    let responseObj = make_user_details("GET", "../sub_products/show_subprods/", "");
-display_preLoader();
-let totalC = 0;
+function edit_and_delete_of_sub_product(searchData) {
 
-responseObj.then((sucvalue) => {
-    unDisplay_preLoader();
-  
-    let resultData = JSON.parse(sucvalue);
-    let table_datas = `<tr>
-        <th>S.NO</th>
-        <th>PROD.SUB ID</th>
-        <th>MAIN IMAGE NAME</th>
-        <th>AVAILABILITY</th>
-        <th>PROD TAG 1</th>
-        <th>PROD TAG 2</th>
-        <th>PROD TAG 3</th>
-        <th>ACTION</th>
-    </tr>`;
-    for(let i = 0; i < resultData.length; i++) {
-       
-        table_datas+=`<tr>
-        <td>${i+1}.</td>
-        <td>${resultData[i].products_sub_id}</td>
-        <td>${resultData[i].p_image}</td>
-        <td>${resultData[i].p_avail}</td>
-        <td>${resultData[i].p_tags1}</td>
-        <td>${resultData[i].p_tags2}</td>
-        <td>${resultData[i].p_tags3}</td>
-        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecSubProd(${resultData[i].products_sub_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecSubProd(${resultData[i].products_sub_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
-        totalC = i;
+    function UI_Fun_13(datas) {    
+
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr>
+            <th>S.NO</th>
+            <th>PROD.SUB ID</th>
+            <th>MAIN IMAGE NAME</th>
+            <th>AVAILABILITY</th>
+            <th>PROD TAG 1</th>
+            <th>PROD TAG 2</th>
+            <th>PROD TAG 3</th>
+            <th>ACTION</th>
+        </tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+           
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].products_sub_id}</td>
+            <td>${resultData[i].p_image}</td>
+            <td>${resultData[i].p_avail}</td>
+            <td>${resultData[i].p_tags1}</td>
+            <td>${resultData[i].p_tags2}</td>
+            <td>${resultData[i].p_tags3}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecSubProd(${resultData[i].products_sub_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecSubProd(${resultData[i].products_sub_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Sub Product Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+
     }
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Sub Product Details";
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
-    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
 
-    undisplay_displayed_blocked_containers(); 
-    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
-    display_blocked_containers("admin_panel_details_table_container"); 
-    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
-    display_blocked_containers("table_name_and_other_details_display_container"); 
-    }).catch((rejvalue) => {
-        console.log(rejvalue);
-    }) 
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../sub_products/show_subprods/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_13(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_13(searchData);
+    }
+ 
     search_place_name = "edit_and_delete_of_sub_product";
 }
 
@@ -3198,7 +3157,7 @@ if(permission) {
     prodDeleteReqObj.then((deleteRes) => {
         unDisplay_preLoader();
         alert(deleteRes);
-        show_sub_prods();
+        show_sub_prods("");
     }).catch((deleteErrRes) => {
         console.log(deleteErrRes);
     })
@@ -5745,6 +5704,42 @@ function search_the_details() {
             
             if(search_place_name == "edit_and_delete_of_product") {
                 edit_and_delete_of_product(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "show_sub_prods") {
+        let responseObjs = make_response_details("POST", "../sub_products/search_all_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "show_sub_prods") {
+                show_sub_prods(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "edit_and_delete_of_sub_product") {
+        let responseObjs = make_response_details("POST", "../sub_products/search_all_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "edit_and_delete_of_sub_product") {
+                edit_and_delete_of_sub_product(response);
             }
            
     
