@@ -349,6 +349,9 @@ RewriteRule ^prods_data/check_filter_table_name/?$ prods_data/check_filter_table
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^prods_data/insert_new_filter_table_field_data/?$ prods_data/insert_new_filter_table_field_data.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_data/search_details/?$ prods_data/search_details.php [L]
+
 # Prods End
 
 

@@ -34,7 +34,10 @@ document.getElementsByClassName("addresses_sections")[0].style.display = "none";
 document.getElementsByClassName("addresses_sections")[1].style.display = "none";
 document.getElementsByClassName("add_category_submition_btn")[0].style.display = "inline-block";
 document.getElementsByClassName("add_category_submition_btn2")[0].style.display = "none";
-
+function search_box_disabler() {
+    document.getElementById("search_bar").disabled = false;
+}
+search_box_disabler();
 
 /* Reset Section End */
 
@@ -166,7 +169,7 @@ function show_registered_users(searchData) {
    
 
     search_place_name = "show_registered_users";
-   
+    search_box_disabler();
 }
 
 /* Showing Register User List Table Container End */
@@ -246,7 +249,7 @@ if(searchData == '') {
 }
 
     search_place_name = "show_users";
-   
+    search_box_disabler();
 }
 /* Showing User List Table Container Section End */
 
@@ -616,6 +619,7 @@ if(searchData == '') {
         UI_Fun_3(searchData);
 }
     search_place_name = "edit_and_delete_users";
+    search_box_disabler();
 }
 
 function editUserRegistrationAndAccData(user_id) {
@@ -868,6 +872,7 @@ function show_cat(searchData) {
         UI_Fun_4(searchData);
     }
     search_place_name = "show_cat";
+    search_box_disabler();
 }
 
 /* Category View Section End */
@@ -1054,6 +1059,7 @@ function edit_and_delete_category(searchData) {
     }
 
     search_place_name = "edit_and_delete_category";
+    search_box_disabler();
 }
 
 function editOfSpecCategory(cat_id) {
@@ -1171,6 +1177,7 @@ function view_sub_cat(searchData) {
     }
 
         search_place_name = "view_sub_cat";
+        search_box_disabler();
 }
 
 /* Sub Category View Section End */
@@ -1419,6 +1426,7 @@ function edit_and_delete_of_subcat(searchData) {
         UI_Fun_7(searchData);
     }
     search_place_name = "edit_and_delete_of_subcat";
+    search_box_disabler();
 }
 
 function editOfSpecSubCategory(sub_cat_id) {
@@ -1535,6 +1543,7 @@ function edit_and_delete_of_subcat(searchData) {
         UI_Fun_7(searchData);
     }
     search_place_name = "edit_and_delete_of_subcat";
+    search_box_disabler();
 }
 
 function show_BandI(searchData) {
@@ -1601,6 +1610,7 @@ function show_BandI(searchData) {
     }
 
         search_place_name = "show_BandI";
+        search_box_disabler();
 }
 
 /* Brand And Item View Section End */
@@ -1949,6 +1959,7 @@ function show_BandI(searchData) {
     }
 
         search_place_name = "show_BandI";
+        search_box_disabler();
 }
 
 
@@ -2011,6 +2022,7 @@ function edit_and_delete_of_bandi(searchData) {
     }
  
     search_place_name = "edit_and_delete_of_bandi";
+    search_box_disabler();
 }
 
 function editOfSpecBAndI(bandi_id) {
@@ -2159,6 +2171,7 @@ function show_products(searchData) {
     }
 
     search_place_name = "show_products";
+    search_box_disabler();
 }
 
 /* Products View Section End */
@@ -2608,6 +2621,7 @@ function edit_and_delete_of_product(searchData) {
     }
 
     search_place_name = "edit_and_delete_of_product";
+    search_box_disabler();
 }
 
 function editOfSpecProd(p_id) {
@@ -2753,6 +2767,7 @@ function show_sub_prods(searchData) {
 
 
     search_place_name = "show_sub_prods";
+    search_box_disabler();
 }
 
 /* Sub Products View Section End */
@@ -3101,6 +3116,7 @@ function edit_and_delete_of_sub_product(searchData) {
     }
  
     search_place_name = "edit_and_delete_of_sub_product";
+    search_box_disabler();
 }
 
 function editOfSpecSubProd(products_sub_id) {
@@ -3229,6 +3245,7 @@ function show_prod_specs(searchData) {
     }
 
      search_place_name = "show_prod_specs";
+     search_box_disabler();
 }
 
 /* Product Specification View Section End */
@@ -3494,6 +3511,7 @@ function edit_and_delete_of_prod_spec(searchData) {
     }
 
     search_place_name = "edit_and_delete_of_prod_spec";
+    search_box_disabler();
 }
 
 function editOfSpecProdSpecs(products_spec_id) {
@@ -3640,6 +3658,7 @@ function view_faq(searchData) {
         }
 
         search_place_name = "view_faq";
+        search_box_disabler();
 }
 
 /* Products FAQ View Section End */
@@ -3859,6 +3878,7 @@ function delete_prod_faq(searchData) {
         }
     
     search_place_name = "delete_prod_faq";
+    search_box_disabler();
 }
 
 function deleteOfSpecProdFaq(p_q_and_a_id) {
@@ -4034,6 +4054,7 @@ function delete_prod_review(searchData) {
         }
 
         search_place_name = "delete_prod_review";
+        search_box_disabler();
 }
 
 function deleteOfSpecProdReview(review_id) {
@@ -4119,6 +4140,7 @@ function view_filter_data(searchData) {
         }
 
         search_place_name = "view_filter_data";
+        search_box_disabler();
 }
 
 /* Filter View Section End */
@@ -4414,6 +4436,7 @@ function edit_and_delete_of_filter_data(searchData) {
         }
 
     search_place_name = "edit_and_delete_of_filter_data";
+    search_box_disabler();
 }
 
 function editOfSpecFilter(filter_id) {
@@ -4535,6 +4558,7 @@ function view_sub_filter_data(searchData) {
         }
 
         search_place_name = "view_sub_filter_data";
+        search_box_disabler();
 }
 
 /* Sub Filter View Section End */
@@ -4806,6 +4830,7 @@ function edit_sub_filter_data(searchData) {
 
 
     search_place_name = "edit_sub_filter_data";
+    search_box_disabler();
 }
 
 function editOfSpecSubFilter(filter_sub_id) {
@@ -4870,21 +4895,23 @@ function editOfSpecSubFilter(filter_sub_id) {
 
 /* Prods Data View Section - 1 Start */
 
-function show_prods_data_tables(decisition_parameter) {
-    let responseObj = make_user_details("GET", "../prods_data/prods_data_details/", "");
-    display_preLoader();
-    let totalC = 0;
-    
-    responseObj.then((sucvalue) => {
+function show_prods_data_tables(decisition_parameter, searchData, decisionPara) {
+
+    function UI_Fun_24(datas) { 
         unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
-      
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
         let table_datas = `<tr><th>S.NO</th>
         <th>DETAILS SECTION OF PRODUCT'S CATEGORIES</th>
         <th>ACTION</th></tr>`;
-        
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         if(decisition_parameter == "insert") {
+           
             for(let i = 0; i < resultData.length; i++) {
             
                 table_datas+=`<tr>
@@ -4919,18 +4946,35 @@ function show_prods_data_tables(decisition_parameter) {
         display_blocked_containers("admin_panel_details_table_container"); 
         document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
         display_blocked_containers("table_name_and_other_details_display_container"); 
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
-        search_place_name = "show_prods_data_tables";
+
+    }
+
+    if(decisionPara == "") { 
+        let responseObj = make_user_details("GET", "../prods_data/prods_data_details/", "");
+        display_preLoader();
+            responseObj.then((sucvalue) => {
+                unDisplay_preLoader();
+                UI_Fun_24(sucvalue);
+                }).catch((rejvalue) => {
+                    console.log(rejvalue);
+                }) 
+        } else {
+            unDisplay_preLoader();
+            UI_Fun_24(searchData);
+        }
+
+
+     search_place_name = "show_prods_data_tables"+decisition_parameter;
+     search_box_disabler();
 }
 
 /* Prods Data View Section - 1 End */
 
 /* Prods Data View Section - 2 Start */
-
+let table_peyar = "";
 function viewProdDetails(table_name) {
-    
+    table_peyar = table_name;
+    document.getElementById("search_bar").disabled = true;
     let tabname = {
         tab_name : table_name
     } 
@@ -4996,6 +5040,7 @@ function viewProdDetails(table_name) {
             console.log(rejvalue);
         }) 
         search_place_name = "viewProdDetails";
+       
 }
 
 /* Prods Data View Section - 2 End */
@@ -5463,7 +5508,7 @@ function new_filter_table_data_submission_form(event, decisionPara) {
 /* Prods Data Edit And Delete Section Start */
 
 function editProdDetails(tablesName) {
-
+    document.getElementById("search_bar").disabled = true;
      
     let tabname = {
         tab_name : tablesName
@@ -5535,6 +5580,7 @@ function editProdDetails(tablesName) {
             console.log(rejvalue);
         }) 
         search_place_name = "editProdDetails";
+     
 }
 
 function editOfFilterDat(fieldname, fieldval, tablename) {
@@ -5633,7 +5679,7 @@ function deleteOfFilterDat(fieldname, fieldval, tablename) {
         prodsDataDeleteReqObj.then((deleteRes) => {
             unDisplay_preLoader();
             alert(deleteRes);
-            show_prods_data_tables('insert');
+            show_prods_data_tables("insert", "", "");
         }).catch((deleteErrRes) => {
             console.log(deleteErrRes);
         })
@@ -5676,12 +5722,13 @@ return responseObj;
 function search_the_details() {
 
     let searchWords = document.getElementById("search_bar").value;
-
     if(!(searchWords == "")) {
         searchWords = searchWords.replace(/\/+$/g, '');
         searchWords = searchWords.replace(/[^a-zA-Z0-9@.)(,-_& ]/g, "");
+       
         searchWords = {
-            search_keyword: searchWords
+            search_keyword: searchWords,
+            tab_name: table_peyar
            }
            searchWords = JSON.stringify(searchWords);
    
@@ -5700,7 +5747,8 @@ function search_the_details() {
             }).catch((error) => {
                 console.log(error);
             })
-               
+         
+
         }
         if(search_place_name == "show_users") {
                 let responseObjs = make_response_details("POST", "../user/search_full_details/", `${searchWords}`);
@@ -6100,8 +6148,30 @@ function search_the_details() {
             document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
         })
     }
+    if(search_place_name == "show_prods_data_tablesinsert" || search_place_name == "show_prods_data_tablesupdate") {
+        let responseObjs = make_response_details("POST", "../prods_data/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+           
+            if(search_place_name == "show_prods_data_tablesinsert") {
+                show_prods_data_tables("insert" ,response, "search");
+            }
+            if(search_place_name == "show_prods_data_tablesupdate") {
+                show_prods_data_tables("update" ,response, "search");
+            }
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    
 
     }
+    
 
 }
 
