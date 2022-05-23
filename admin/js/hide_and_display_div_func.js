@@ -3173,20 +3173,24 @@ if(permission) {
 
 /* Product Specification View Section Start */
 
-function show_prod_specs() {
-    let responseObj = make_user_details("GET", "../prods_specification/show_prod_spec/", "");
-    display_preLoader();
-    let totalC = 0;
-    
-    responseObj.then((sucvalue) => {
+function show_prod_specs(searchData) {
+
+    function UI_Fun_14(datas) {    
+
         unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
         let table_datas = `<tr><th>S.NO</th>
         <th>PROD.SPEC ID</th>
         <th>PROD ID</th>
         <th>SPEC NAME</th>
         <th>SPEC VALUE</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         for(let i = 0; i < resultData.length; i++) {
             
             table_datas+=`<tr>
@@ -3207,10 +3211,24 @@ function show_prod_specs() {
         display_blocked_containers("admin_panel_details_table_container"); 
         document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
         display_blocked_containers("table_name_and_other_details_display_container"); 
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
-        search_place_name = "show_prod_specs";
+
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../prods_specification/show_prod_spec/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_14(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_14(searchData);
+    }
+
+     search_place_name = "show_prod_specs";
 }
 
 /* Product Specification View Section End */
@@ -3416,47 +3434,65 @@ function prod_specification_submission_form(event, decisionPara) {
 
 /* Product Specification Edit And Delete Section Start */
 
-function edit_and_delete_of_prod_spec() {
-   
-    let responseObj = make_user_details("GET", "../prods_specification/show_prod_spec/", "");
-display_preLoader();
-let totalC = 0;
 
-responseObj.then((sucvalue) => {
-    unDisplay_preLoader();
-  
-    let resultData = JSON.parse(sucvalue);
-    let table_datas = `<tr>
-        <th>S.NO</th>
-        <th>PROD.SPEC ID</th>
-        <th>PROD ID</th>
-        <th>SPEC NAME</th>
-        <th>SPEC VALUE</th>
-        <th>ACTION</th>
-    </tr>`;
-    for(let i = 0; i < resultData.length; i++) {
-       
-        table_datas+=`<tr>
-        <td>${i+1}.</td>
-        <td>${resultData[i].p_spec_id}</td>
-        <td>${resultData[i].p_id}</td>
-        <td>${resultData[i].p_spec_title}</td>
-        <td>${resultData[i].p_spec_details}</td>
-        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecProdSpecs(${resultData[i].p_spec_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecProdSpecs(${resultData[i].p_spec_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
-        totalC = i;
+function edit_and_delete_of_prod_spec(searchData) {
+
+    function UI_Fun_15(datas) {    
+
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr>
+            <th>S.NO</th>
+            <th>PROD.SPEC ID</th>
+            <th>PROD ID</th>
+            <th>SPEC NAME</th>
+            <th>SPEC VALUE</th>
+            <th>ACTION</th>
+        </tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+           
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].p_spec_id}</td>
+            <td>${resultData[i].p_id}</td>
+            <td>${resultData[i].p_spec_title} <h3 style='display: inline-block'>:</h3></td>
+            <td>${resultData[i].p_spec_details}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecProdSpecs(${resultData[i].p_spec_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecProdSpecs(${resultData[i].p_spec_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Product Specification Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+
     }
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Product Specification Details";
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
-    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
 
-    undisplay_displayed_blocked_containers(); 
-    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
-    display_blocked_containers("admin_panel_details_table_container"); 
-    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
-    display_blocked_containers("table_name_and_other_details_display_container"); 
-    }).catch((rejvalue) => {
-        console.log(rejvalue);
-    }) 
+    if(searchData == '') { 
+    let responseObj = make_user_details("GET", "../prods_specification/show_prod_spec/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_15(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_15(searchData);
+    }
+
     search_place_name = "edit_and_delete_of_prod_spec";
 }
 
@@ -3506,7 +3542,7 @@ if(permission) {
     prodDeleteReqObj.then((deleteRes) => {
         unDisplay_preLoader();
         alert(deleteRes);
-        show_prod_specs();
+        show_prod_specs("");
     }).catch((deleteErrRes) => {
         console.log(deleteErrRes);
     })
@@ -5740,6 +5776,42 @@ function search_the_details() {
             
             if(search_place_name == "edit_and_delete_of_sub_product") {
                 edit_and_delete_of_sub_product(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "show_prod_specs") {
+        let responseObjs = make_response_details("POST", "../prods_specification/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "show_prod_specs") {
+                show_prod_specs(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "edit_and_delete_of_prod_spec") {
+        let responseObjs = make_response_details("POST", "../prods_specification/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "edit_and_delete_of_prod_spec") {
+                edit_and_delete_of_prod_spec(response);
             }
            
     
