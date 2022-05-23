@@ -3557,16 +3557,13 @@ if(permission) {
 
 /* Products FAQ View Section Start */
 
-function view_faq() {
-    let responseObj = make_user_details("GET", "../prods_faq/show_prod_faq/", "");
-    display_preLoader();
-    let totalC = 0;
-    
-    responseObj.then((sucvalue) => {
-        unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
+function view_faq(searchData) {
 
+    function UI_Fun_16(datas) {     
+
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
         let question_and_ans_id_array = [];
         for(let j = 0; j < resultData.length; j++) {
             question_and_ans_id_array[j] = resultData[j].p_q_and_a_id;
@@ -3590,6 +3587,12 @@ function view_faq() {
         <th>STATUS</th>
         <th>LIKES</th>
         <th>DISLIKES</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         for(let i = 0; i < resultData.length; i++) {
             
             table_datas+=`<tr>
@@ -3620,10 +3623,22 @@ function view_faq() {
             console.log(rejvalue);
     }) 
 
-       
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../prods_faq/show_prod_faq/", "");
+        display_preLoader();
+            responseObj.then((sucvalue) => {
+                unDisplay_preLoader();
+                UI_Fun_16(sucvalue);
+                }).catch((rejvalue) => {
+                    console.log(rejvalue);
+                }) 
+        } else {
+            unDisplay_preLoader();
+            UI_Fun_16(searchData);
+        }
+
         search_place_name = "view_faq";
 }
 
@@ -3718,7 +3733,7 @@ function prod_faq_answer_submission_form(event, decisionPara) {
     prod_faq_ques_status = prod_faq_ques_status.replace(/\/+$/g, '');
 
     prod_faq_ques = prod_faq_ques.replace(/[^a-zA-Z0-9@. ]/g, "");
-    prod_faq_ans = prod_faq_ans.replace(/[^a-zA-Z0-9@. ]/g, "");
+    prod_faq_ans = prod_faq_ans.replace(/[^a-zA-Z0-9@.)(,-_& ]/g, "");
     prod_faq_ques_status = prod_faq_ques_status.replace(/[^a-zA-Z0-9@. ]/g, "");
 
         if(p_and_q_id == 0) {
@@ -3782,15 +3797,13 @@ function prod_faq_answer_submission_form(event, decisionPara) {
 
 /* Products Delete FAQ Section Start */
 
-function delete_prod_faq() {
-    let responseObj = make_user_details("GET", "../prods_faq/show_prod_faq/", "");
-    display_preLoader();
-    let totalC = 0;
-    
-    responseObj.then((sucvalue) => {
+function delete_prod_faq(searchData) {
+
+    function UI_Fun_17(datas) {     
+
         unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
         let table_datas = `<tr>
         <th>S.NO</th>
         <th>PROD.FAQ ID</th>
@@ -3800,6 +3813,12 @@ function delete_prod_faq() {
         <th>STATUS</th>
         <th>ACTION</th>
         </tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         for(let i = 0; i < resultData.length; i++) {
            
             table_datas+=`<tr>
@@ -3822,10 +3841,24 @@ function delete_prod_faq() {
         display_blocked_containers("admin_panel_details_table_container"); 
         document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
         display_blocked_containers("table_name_and_other_details_display_container"); 
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
-        search_place_name = "delete_prod_faq";
+
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../prods_faq/show_prod_faq/", "");
+        display_preLoader();
+            responseObj.then((sucvalue) => {
+                unDisplay_preLoader();
+                UI_Fun_17(sucvalue);
+                }).catch((rejvalue) => {
+                    console.log(rejvalue);
+                }) 
+        } else {
+            unDisplay_preLoader();
+            UI_Fun_17(searchData);
+        }
+    
+    search_place_name = "delete_prod_faq";
 }
 
 function deleteOfSpecProdFaq(p_q_and_a_id) {
@@ -3836,7 +3869,7 @@ function deleteOfSpecProdFaq(p_q_and_a_id) {
         prodDeleteReqObj.then((deleteRes) => {
             unDisplay_preLoader();
             alert(deleteRes);
-            view_faq();
+            view_faq("");
         }).catch((deleteErrRes) => {
             console.log(deleteErrRes);
         })
@@ -5812,6 +5845,42 @@ function search_the_details() {
             
             if(search_place_name == "edit_and_delete_of_prod_spec") {
                 edit_and_delete_of_prod_spec(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "view_faq") {
+        let responseObjs = make_response_details("POST", "../prods_faq/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "view_faq") {
+                view_faq(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "delete_prod_faq") {
+        let responseObjs = make_response_details("POST", "../prods_faq/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "delete_prod_faq") {
+                delete_prod_faq(response);
             }
            
     

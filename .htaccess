@@ -237,6 +237,9 @@ RewriteRule ^prods_faq/insert_prod_faq_data/?$ prods_faq/insert_prod_faq_data.ph
 RewriteCond %{REQUEST_METHOD} =DELETE
 RewriteRule ^prods_faq/prod_faq_deletion/products_faq_id/([^/\*]+)?$ prods_faq/prod_faq_deletion.php?products_faq_id=$1 [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^prods_faq/search_details/?$ prods_faq/search_details.php [L]
+
 # Products FAQ End
 
 # Reviews Start
