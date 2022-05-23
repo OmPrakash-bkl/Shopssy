@@ -131,6 +131,8 @@ RewriteRule ^brand_and_items/update_bandi/?$ brand_and_items/update_bandi.php [L
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^brand_and_items/set_of_details/sub_c_i_id_two/([^/\*]+)?$ brand_and_items/set_of_details.php?sub_c_i_id_two=$1 [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^brand_and_items/search_details/?$ brand_and_items/search_details.php [L]
 
 # Brand And Item End
 

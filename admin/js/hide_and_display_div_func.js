@@ -1481,15 +1481,69 @@ function deleteOfSpecSubCategory(sub_cat_id) {
 
 /* Brand And Item View Section Start */
 
-function show_BandI() {
-    let responseObj = make_user_details("GET", "../brand_and_items/b_and_i_details/", "");
-    display_preLoader();
-    let totalC = 0;
-    
-    responseObj.then((sucvalue) => {
+function edit_and_delete_of_subcat(searchData) {
+
+    function UI_Fun_7(datas) { 
+
         unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>SUB.CAT ID</th>
+        <th>CAT ID</th>
+        <th>TITLE</th>
+        <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].sub_cat_id}</td>
+            <td>${resultData[i].cats_id}</td>
+            <td>${resultData[i].subs_cat_title}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecSubCategory(${resultData[i].sub_cat_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecSubCategory(${resultData[i].sub_cat_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Sub Category Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../sub_category/sub_cat_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_7(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_7(searchData);
+    }
+    search_place_name = "edit_and_delete_of_subcat";
+}
+
+function show_BandI(searchData) {
+
+    function UI_Fun_8(datas) {  
+
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
         let table_datas = `<tr><th>S.NO</th>
         <th>BRAND ID</th>
         <th>CAT ID</th>
@@ -1499,6 +1553,12 @@ function show_BandI() {
         <th>TITLE</th>
         <th>SUB TITLE-1</th>
         <th>SUB TITLE-2</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         for(let i = 0; i < resultData.length; i++) {
             
             table_datas+=`<tr>
@@ -1523,9 +1583,23 @@ function show_BandI() {
         display_blocked_containers("admin_panel_details_table_container"); 
         document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
         display_blocked_containers("table_name_and_other_details_display_container"); 
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
+
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../brand_and_items/b_and_i_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_8(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_8(searchData);
+    }
+
         search_place_name = "show_BandI";
 }
 
@@ -1811,47 +1885,131 @@ function brand_and_item_submission_form(event, decisionPara) {
 
 /* Brand And Item Update and Delete Section Start */
 
-function edit_and_delete_of_bandi() {
-   
-    let responseObj = make_user_details("GET", "../brand_and_items/b_and_i_details/", "");
-display_preLoader();
-let totalC = 0;
+function show_BandI(searchData) {
 
-responseObj.then((sucvalue) => {
-    unDisplay_preLoader();
-  
-    let resultData = JSON.parse(sucvalue);
-    let table_datas = `<tr><th>S.NO</th>
-    <th>B&I ID</th>
-    <th>B&I SUB ID</th>
-    <th>TITLE</th>
-    <th>SUB TITLE - 1</th>
-    <th>SUB TITLE - 2</th>
-    <th>ACTION</th></tr>`;
-    for(let i = 0; i < resultData.length; i++) {
-        
-        table_datas+=`<tr>
-        <td>${i+1}.</td>
-        <td>${resultData[i].brand_id}</td>
-        <td>${resultData[i].b_and_i_identification_id}</td>
-        <td>${resultData[i].b_title}</td>
-        <td>${resultData[i].b_sub_title}</td>
-        <td>${resultData[i].b_sub_title_two}</td>
-        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecBAndI(${resultData[i].brand_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecBAndI(${resultData[i].brand_id}, ${resultData[i].subs_cat_identification_id_two})"><i class="fa fa-trash-o"></i></button></td></tr>`;
-        totalC = i;
+    function UI_Fun_8(datas) {  
+
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>BRAND ID</th>
+        <th>CAT ID</th>
+        <th>SUB.CAT ID-1</th>
+        <th>SUB.CAT ID-2</th>
+        <th>SUB BRAND ID</th>
+        <th>TITLE</th>
+        <th>SUB TITLE-1</th>
+        <th>SUB TITLE-2</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].brand_id}</td>
+            <td>${resultData[i].cats_id}</td>
+            <td>${resultData[i].subs_cat_identification_id}</td>
+            <td>${resultData[i].subs_cat_identification_id_two}</td>
+            <td>${resultData[i].b_and_i_identification_id}</td>
+            <td>${resultData[i].b_title}</td>
+            <td>${resultData[i].b_sub_title}</td>
+            <td>${resultData[i].b_sub_title_two}</td>
+            </tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Brand & Item Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+
     }
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Brand And Item Details";
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
-    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
 
-    undisplay_displayed_blocked_containers(); 
-    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
-    display_blocked_containers("admin_panel_details_table_container"); 
-    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
-    display_blocked_containers("table_name_and_other_details_display_container"); 
-    }).catch((rejvalue) => {
-        console.log(rejvalue);
-    }) 
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../brand_and_items/b_and_i_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_8(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_8(searchData);
+    }
+
+        search_place_name = "show_BandI";
+}
+
+
+function edit_and_delete_of_bandi(searchData) {
+
+    function UI_Fun_9(datas) {   
+
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>B&I ID</th>
+        <th>B&I SUB ID</th>
+        <th>TITLE</th>
+        <th>SUB TITLE - 1</th>
+        <th>SUB TITLE - 2</th>
+        <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].brand_id}</td>
+            <td>${resultData[i].b_and_i_identification_id}</td>
+            <td>${resultData[i].b_title}</td>
+            <td>${resultData[i].b_sub_title}</td>
+            <td>${resultData[i].b_sub_title_two}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecBAndI(${resultData[i].brand_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecBAndI(${resultData[i].brand_id}, ${resultData[i].subs_cat_identification_id_two})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Brand And Item Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../brand_and_items/b_and_i_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_9(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_9(searchData);
+    }
+ 
     search_place_name = "edit_and_delete_of_bandi";
 }
 
@@ -1912,7 +2070,7 @@ if(permission) {
     bAndIDeleteReqObj.then((deleteRes) => {
         unDisplay_preLoader();
         alert(deleteRes);
-        show_BandI();
+        show_BandI("");
     }).catch((deleteErrRes) => {
         console.log(deleteErrRes);
     })
@@ -5409,7 +5567,42 @@ function search_the_details() {
             document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
         })
     }
-
+    if(search_place_name == "show_BandI") {
+        let responseObjs = make_response_details("POST", "../brand_and_items/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "show_BandI") {
+                show_BandI(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "edit_and_delete_of_bandi") {
+        let responseObjs = make_response_details("POST", "../brand_and_items/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "edit_and_delete_of_bandi") {
+                edit_and_delete_of_bandi(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
 
     }
 
