@@ -4479,19 +4479,23 @@ if(this.value == "new_fil_data_cat") {
 
 /* Sub Filter View Section Start */
 
-function view_sub_filter_data() {
-    let responseObj = make_user_details("GET", "../sub_filter/sub_filter_details/", "");
-    display_preLoader();
-    let totalC = 0;
-    
-    responseObj.then((sucvalue) => {
+function view_sub_filter_data(searchData) {
+
+    function UI_Fun_22(datas) { 
+
         unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
         let table_datas = `<tr><th>S.NO</th>
         <th>SUB.FILTER ID</th>
         <th>FILTER ID</th>
         <th>FILTER DATA</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         for(let i = 0; i < resultData.length; i++) {
             
             table_datas+=`<tr>
@@ -4513,9 +4517,23 @@ function view_sub_filter_data() {
         display_blocked_containers("admin_panel_details_table_container"); 
         document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
         display_blocked_containers("table_name_and_other_details_display_container"); 
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
+
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../sub_filter/sub_filter_details/", "");
+        display_preLoader();
+            responseObj.then((sucvalue) => {
+                unDisplay_preLoader();
+                UI_Fun_22(sucvalue);
+                }).catch((rejvalue) => {
+                    console.log(rejvalue);
+                }) 
+        } else {
+            unDisplay_preLoader();
+            UI_Fun_22(searchData);
+        }
+
         search_place_name = "view_sub_filter_data";
 }
 
@@ -4727,49 +4745,66 @@ document.getElementsByClassName("sub_filter_data_submition_btn")[0].addEventList
 
 /* Sub Filter Edit And Delete Section Start */
 
-function edit_sub_filter_data() {
+function edit_sub_filter_data(searchData) {
 
      document.getElementById("sub_catego_id").style.display = "none";
      document.getElementById("filters_id").style.display = "none";
    
+     function UI_Fun_23(datas) { 
 
-    let responseObj = make_user_details("GET", "../sub_filter/sub_filter_details/", "");
-display_preLoader();
-let totalC = 0;
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>SUB.FILTER ID</th>
+        <th>FILTER ID</th>
+        <th>FILTER DATA</th>
+        <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].filter_sub_id}</td>
+            <td>${resultData[i].filters_id}</td>
+            <td>${resultData[i].filter_datas}</td>
+           
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecSubFilter(${resultData[i].filter_sub_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecSubFilter(${resultData[i].filter_sub_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+    
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Sub Filter Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
 
-responseObj.then((sucvalue) => {
-    unDisplay_preLoader();
-  
-    let resultData = JSON.parse(sucvalue);
-    let table_datas = `<tr><th>S.NO</th>
-    <th>SUB.FILTER ID</th>
-    <th>FILTER ID</th>
-    <th>FILTER DATA</th>
-    <th>ACTION</th></tr>`;
-    for(let i = 0; i < resultData.length; i++) {
-        
-        table_datas+=`<tr>
-        <td>${i+1}.</td>
-        <td>${resultData[i].filter_sub_id}</td>
-        <td>${resultData[i].filters_id}</td>
-        <td>${resultData[i].filter_datas}</td>
-       
-        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecSubFilter(${resultData[i].filter_sub_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecSubFilter(${resultData[i].filter_sub_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
-        totalC = i;
-    }
+     }
 
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Sub Filter Details";
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
-    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+     if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../sub_filter/sub_filter_details/", "");
+        display_preLoader();
+            responseObj.then((sucvalue) => {
+                unDisplay_preLoader();
+                UI_Fun_23(sucvalue);
+                }).catch((rejvalue) => {
+                    console.log(rejvalue);
+                }) 
+        } else {
+            unDisplay_preLoader();
+            UI_Fun_23(searchData);
+        }
 
-    undisplay_displayed_blocked_containers(); 
-    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
-    display_blocked_containers("admin_panel_details_table_container"); 
-    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
-    display_blocked_containers("table_name_and_other_details_display_container"); 
-    }).catch((rejvalue) => {
-        console.log(rejvalue);
-    }) 
+
     search_place_name = "edit_sub_filter_data";
 }
 
@@ -4819,7 +4854,7 @@ function editOfSpecSubFilter(filter_sub_id) {
         subCategoryDeleteReqObj.then((deleteRes) => {
             unDisplay_preLoader();
             alert(deleteRes);
-            view_sub_filter_data();
+            view_sub_filter_data("");
         }).catch((deleteErrRes) => {
             console.log(deleteErrRes);
         })
@@ -6021,6 +6056,42 @@ function search_the_details() {
             
             if(search_place_name == "edit_and_delete_of_filter_data") {
                 edit_and_delete_of_filter_data(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "view_sub_filter_data") {
+        let responseObjs = make_response_details("POST", "../sub_filter/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "view_sub_filter_data") {
+                view_sub_filter_data(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "edit_sub_filter_data") {
+        let responseObjs = make_response_details("POST", "../sub_filter/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "edit_sub_filter_data") {
+                edit_sub_filter_data(response);
             }
            
     

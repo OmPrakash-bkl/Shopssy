@@ -309,6 +309,9 @@ RewriteRule ^sub_filter/update_sub_filter/?$ sub_filter/update_sub_filter.php [L
 RewriteCond %{REQUEST_METHOD} =DELETE
 RewriteRule ^sub_filter/sub_filter_deletion/filter_sub_id/([^/\*]+)?$ sub_filter/sub_filter_deletion.php?filter_sub_id=$1 [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^sub_filter/search_details/?$ sub_filter/search_details.php [L]
+
 # Sub Filter End
 
 # Prods Start
