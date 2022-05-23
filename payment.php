@@ -179,7 +179,7 @@ if(isset($_POST['order_req'])) {
         $pro_type = $row['pro_type'];
         $product_id = $row['product_id'];
         $pro_tot_price = $row['pro_tot_price'];
-        $pro_final_tot_price = $pro_tot_price + 50;
+        $pro_final_tot_price = $pro_tot_price + 0;
         $_SESSION['final_total_amt'] = $pro_final_tot_price;
         $product_detail_query = "SELECT * FROM `products` WHERE `p_id` = $product_id";
         $product_detail_result = mysqli_query($con, $product_detail_query);
@@ -219,7 +219,7 @@ if(isset($_POST['order_req'])) {
     $mail -> SMTPSecure = 'tls';
 
     $mail -> Username = 'shopssyz@gmail.com';
-    $mail -> Password = 'Shopssy$#@123';
+    $mail -> Password = 'Shop$@#123';
 
     $mail -> setFrom('shopssyz@gmail.com', 'Order Summary');
     $mail -> addAddress($_SESSION['user_login_email']);
@@ -627,7 +627,7 @@ while($row = mysqli_fetch_assoc($cart_details__result)) {
                    
                     </div>
                     <div class="information_inner_container2_divs_pricez1">
-                        &#8377; <?php echo $product_sub_total + 50; ?>.00
+                        &#8377; <?php echo $product_sub_total + 0; ?>.00
                     </div>
                 </div>
             </div>

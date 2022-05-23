@@ -34,7 +34,7 @@ if($no_of_rows <= 0){
 
    
     $mail->Username='shopssyz@gmail.com';
-    $mail->Password='Shopssy$#@123';
+    $mail->Password='Shop$@#123';
 
     
     $mail->setFrom('shopssyz@gmail.com', 'Password Reset');
@@ -52,7 +52,11 @@ if($no_of_rows <= 0){
     <b>Shopssy - The Online Shopping Site.</b>";
 
     if(!$mail->send()){
-        echo "Invalid Email";
+        ?>
+        <script>
+            alert("Invalid Email!");
+        </script>
+        <?php
     }else{
         ?>
             <script>

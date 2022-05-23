@@ -236,8 +236,8 @@ while($row = mysqli_fetch_assoc($cart_details__result)) {
                    
                     </div>
                     <div class="information_inner_container2_divs_pricez1">
-                        &#8377; <?php echo $product_sub_total + 50; 
-                        $_SESSION['T_AMT'] = $product_sub_total + 50;
+                        &#8377; <?php echo $product_sub_total + 0; 
+                        $_SESSION['T_AMT'] = $product_sub_total + 0;
                       
                         ?>.00
                     </div>
