@@ -42,7 +42,6 @@ if(!isset($_SESSION['user_login_id'])) {
     "description": "Payment",
     "image": "./images/favicon1.png",
     "handler": function (response){
-        alert(response);
     window.location.href = './success.php';
     $.ajax({
     url: './payment_proccess.php',

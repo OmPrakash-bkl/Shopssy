@@ -812,45 +812,61 @@ function deleteDetailOfForm() {
 
 /* Category View Section Start */
 
-function show_cat() {
-    let responseObj = make_user_details("GET", "../category/category_details/", "");
-display_preLoader();
-let totalC = 0;
+function show_cat(searchData) {
 
-responseObj.then((sucvalue) => {
-    unDisplay_preLoader();
-  
-    let resultData = JSON.parse(sucvalue);
-    let table_datas = `<tr><th>S.NO</th>
-    <th>CAT ID</th>
-    <th>CAT TITLE</th>
-    <th>CAT IMG NAME</th>
-    <th>CAT ICON NAME</th>
-    <th>CAT DESCRIPTION</th></tr>`;
-    for(let i = 0; i < resultData.length; i++) {
+    function UI_Fun_4(datas) {
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>CAT ID</th>
+        <th>CAT TITLE</th>
+        <th>CAT IMG NAME</th>
+        <th>CAT ICON NAME</th>
+        <th>CAT DESCRIPTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].cat_id}</td>
+            <td>${resultData[i].cat_title}</td>
+            <td>${resultData[i].cat_image_name}</td>
+            <td>${resultData[i].cat_icon_name}</td>
+            <td>${resultData[i].cat_name_description}</td>
+            </tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Category Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
         
-        table_datas+=`<tr>
-        <td>${i+1}.</td>
-        <td>${resultData[i].cat_id}</td>
-        <td>${resultData[i].cat_title}</td>
-        <td>${resultData[i].cat_image_name}</td>
-        <td>${resultData[i].cat_icon_name}</td>
-        <td>${resultData[i].cat_name_description}</td>
-        </tr>`;
-        totalC = i;
     }
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Category Details";
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
-    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
 
-    undisplay_displayed_blocked_containers(); 
-    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
-    display_blocked_containers("admin_panel_details_table_container"); 
-    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
-    display_blocked_containers("table_name_and_other_details_display_container"); 
-    }).catch((rejvalue) => {
-        console.log(rejvalue);
-    }) 
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../category/category_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_4(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_4(searchData);
+    }
     search_place_name = "show_cat";
 }
 
@@ -987,40 +1003,56 @@ if((document.getElementsByClassName("cat_name_error_message_place")[0].innerText
 }
 
 
-function edit_and_delete_category() {
-    let responseObj = make_user_details("GET", "../category/category_details/", "");
-display_preLoader();
-let totalC = 0;
+function edit_and_delete_category(searchData) {
 
-responseObj.then((sucvalue) => {
-    unDisplay_preLoader();
-  
-    let resultData = JSON.parse(sucvalue);
-    let table_datas = `<tr><th>S.NO</th>
-    <th>CAT ID</th>
-    <th>CAT TITLE</th>
-    <th>ACTION</th></tr>`;
-    for(let i = 0; i < resultData.length; i++) {
-        
-        table_datas+=`<tr>
-        <td>${i+1}.</td>
-        <td>${resultData[i].cat_id}</td>
-        <td>${resultData[i].cat_title}</td>
-        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecCategory(${resultData[i].cat_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecCategory(${resultData[i].cat_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
-        totalC = i;
+    function UI_Fun_5(datas) { 
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>CAT ID</th>
+        <th>CAT TITLE</th>
+        <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].cat_id}</td>
+            <td>${resultData[i].cat_title}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecCategory(${resultData[i].cat_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecCategory(${resultData[i].cat_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Category Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
     }
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Category Details";
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
-    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
 
-    undisplay_displayed_blocked_containers(); 
-    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
-    display_blocked_containers("admin_panel_details_table_container"); 
-    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
-    display_blocked_containers("table_name_and_other_details_display_container"); 
-    }).catch((rejvalue) => {
-        console.log(rejvalue);
-    }) 
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../category/category_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_5(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_5(searchData);
+    }
+
     search_place_name = "edit_and_delete_category";
 }
 
@@ -1066,7 +1098,7 @@ function deleteOfSpecCategory(cat_id) {
         categoryDeleteReqObj.then((deleteRes) => {
             unDisplay_preLoader();
             alert(deleteRes);
-            show_cat();
+            show_cat("");
         }).catch((deleteErrRes) => {
             console.log(deleteErrRes);
         })
@@ -5210,41 +5242,62 @@ return responseObj;
 function search_the_details() {
 
     let searchWords = document.getElementById("search_bar").value;
-    searchWords = searchWords.replace(/\/+$/g, '');
-    searchWords = searchWords.replace(/[^a-zA-Z0-9@.& ]/g, "");
-    searchWords = {
-        search_keyword: searchWords
-       }
-       searchWords = JSON.stringify(searchWords);
 
-    if(search_place_name == "show_registered_users") {
-        let responseObjs = make_response_details("POST", "../user/search_details/", `${searchWords}`);
-        display_preLoader();
+    if(!(searchWords == "")) {
+        searchWords = searchWords.replace(/\/+$/g, '');
+        searchWords = searchWords.replace(/[^a-zA-Z0-9@.,-_& ]/g, "");
+        searchWords = {
+            search_keyword: searchWords
+           }
+           searchWords = JSON.stringify(searchWords);
+   
+        if(search_place_name == "show_registered_users") {
+            let responseObjs = make_response_details("POST", "../user/search_details/", `${searchWords}`);
+            display_preLoader();
+            
+            responseObjs.then((response) => {
+                unDisplay_preLoader();
+                document.getElementById("search_bar").value = "";
+                if(search_place_name == "show_registered_users") {
+                    show_registered_users(response);
+                }
+               
+    
+            }).catch((error) => {
+                console.log(error);
+            })
+               
+        }
+        if(search_place_name == "show_users") {
+                let responseObjs = make_response_details("POST", "../user/search_full_details/", `${searchWords}`);
+                display_preLoader();
+                
+                responseObjs.then((response) => {
+                    unDisplay_preLoader();
+                    document.getElementById("search_bar").value = "";
+                    if(search_place_name == "show_users") {
+                        show_users(response);
+                    } 
+                   
+                   
         
-        responseObjs.then((response) => {
-            unDisplay_preLoader();
-            document.getElementById("search_bar").value = "";
-            if(search_place_name == "show_registered_users") {
-                show_registered_users(response);
-            }
-           
-
-        }).catch((error) => {
-            console.log(error);
-        })
-           
-    }
-    if(search_place_name == "show_users") {
+                }).catch((error) => {
+                    console.log(error);
+                    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+                })
+        }
+    
+        if(search_place_name == "edit_and_delete_users") {
             let responseObjs = make_response_details("POST", "../user/search_full_details/", `${searchWords}`);
             display_preLoader();
             
             responseObjs.then((response) => {
                 unDisplay_preLoader();
                 document.getElementById("search_bar").value = "";
-                if(search_place_name == "show_users") {
-                    show_users(response);
-                } 
-               
+                
+                if(search_place_name == "edit_and_delete_users") {
+                    edit_and_delete_users(response);
+                }
                
     
             }).catch((error) => {
@@ -5252,25 +5305,46 @@ function search_the_details() {
                 document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
             })
     }
-
-    if(search_place_name == "edit_and_delete_users") {
-        let responseObjs = make_response_details("POST", "../user/search_full_details/", `${searchWords}`);
+    
+    if(search_place_name == "show_cat") {
+        let responseObjs = make_response_details("POST", "../category/search_details/", `${searchWords}`);
         display_preLoader();
         
         responseObjs.then((response) => {
             unDisplay_preLoader();
             document.getElementById("search_bar").value = "";
             
-            if(search_place_name = "edit_and_delete_users") {
-                edit_and_delete_users(response);
+            if(search_place_name == "show_cat") {
+                show_cat(response);
             }
            
-
+    
         }).catch((error) => {
             console.log(error);
             document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
         })
-}
+    }
+    if(search_place_name == "edit_and_delete_category") {
+        let responseObjs = make_response_details("POST", "../category/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "edit_and_delete_category") {
+                edit_and_delete_category(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+
+
+    }
 
 }
 
