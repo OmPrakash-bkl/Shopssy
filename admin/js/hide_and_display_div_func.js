@@ -4061,21 +4061,24 @@ function deleteOfSpecProdReview(review_id) {
 
 
 
-function view_filter_data() {
-    
-    let responseObj = make_user_details("GET", "../filter/filter_details/", "");
-    display_preLoader();
-    let totalC = 0;
-    
-    responseObj.then((sucvalue) => {
+function view_filter_data(searchData) {
+
+    function UI_Fun_20(datas) {  
+
         unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
         let table_datas = `<tr><th>S.NO</th>
         <th>FILTER ID</th>
         <th>CAT ID</th>
         <th>TITLE</th>
         <th>DETAILS FOR WHICH PRODUCT?</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         for(let i = 0; i < resultData.length; i++) {
             
             table_datas+=`<tr>
@@ -4098,9 +4101,23 @@ function view_filter_data() {
         display_blocked_containers("admin_panel_details_table_container"); 
         document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
         display_blocked_containers("table_name_and_other_details_display_container"); 
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
+
+    }
+    
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../filter/filter_details/", "");
+        display_preLoader();
+            responseObj.then((sucvalue) => {
+                unDisplay_preLoader();
+                UI_Fun_20(sucvalue);
+                }).catch((rejvalue) => {
+                    console.log(rejvalue);
+                }) 
+        } else {
+            unDisplay_preLoader();
+            UI_Fun_20(searchData);
+        }
+
         search_place_name = "view_filter_data";
 }
 
@@ -4300,85 +4317,102 @@ document.getElementsByClassName("filter_data_submition_btn")[0].addEventListener
 
 /* Filter Edit And Delete Section Start */
 
-function edit_and_delete_of_filter_data() {
-   
-    let responseObj = make_user_details("GET", "../filter/filter_details/", "");
-display_preLoader();
-let totalC = 0;
+function edit_and_delete_of_filter_data(searchData) {
 
-responseObj.then((sucvalue) => {
-    unDisplay_preLoader();
-  
-    let resultData = JSON.parse(sucvalue);
-    let table_datas = `<tr><th>S.NO</th>
-    <th>FILTER ID</th>
-    <th>CAT ID</th>
-    <th>TITLE</th>
-    <th>DETAILS FOR WHICH PRODUCT?</th>
-    <th>ACTION</th></tr>`;
-    for(let i = 0; i < resultData.length; i++) {
-        
-        table_datas+=`<tr>
-        <td>${i+1}.</td>
-        <td>${resultData[i].filter_id}</td>
-        <td>${resultData[i].subs_cat_identification_id}</td>
-        <td>${resultData[i].filter_title}</td>
-        <td>${resultData[i].filter_details_category}</td>
-        <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecFilter(${resultData[i].filter_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecFilter(${resultData[i].filter_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
-        totalC = i;
-    }
+    function UI_Fun_21(datas) { 
 
-    let retrieveAllSubCatDetails = make_user_details("GET", "../sub_category/sub_cat_details/", "");
-   
-    retrieveAllSubCatDetails.then((resData) => {
-       
         unDisplay_preLoader();
-     
-        let resultData = JSON.parse(resData);
-        let appendedResultData = `<option value="0">Select Category</option>`;
-        for(let i = 0; i < resultData.length; i++) {
-            appendedResultData+=`<option value=${resultData[i].sub_cat_identification_id_two}>${resultData[i].sub_cat_identification_id_two} - ${resultData[i].subs_cat_title}</option>`;
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>FILTER ID</th>
+        <th>CAT ID</th>
+        <th>TITLE</th>
+        <th>DETAILS FOR WHICH PRODUCT?</th>
+        <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
         }
-        appendedResultData += `<option value="add_cat">Add New Category</option>`;
-        document.getElementById("subes_cats_id").innerHTML = appendedResultData;
-       
-    })
-
-    let responseObj = make_user_details("GET", "../filter/fetch_details_category/", "");
-    display_preLoader();
-   
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].filter_id}</td>
+            <td>${resultData[i].subs_cat_identification_id}</td>
+            <td>${resultData[i].filter_title}</td>
+            <td>${resultData[i].filter_details_category}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecFilter(${resultData[i].filter_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecFilter(${resultData[i].filter_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
     
-    responseObj.then((sucvalue) => {
-        let filter_data_category = `<option value="0">
-        Select Details</option>`;
-        unDisplay_preLoader();
-        let resultData = JSON.parse(sucvalue);
-      
-        for(let i = 0; i < resultData.length; i++) {
-           
-            filter_data_category+=`<option value="${resultData[i].filter_details_category}">
-            ${resultData[i].filter_details_category}</option>`; 
-        }
-        filter_data_category+=`<option value="new_fil_data_cat">Add New Details Section</option>`;
-        document.getElementById("details_for_which_prod").innerHTML = filter_data_category;
+        let retrieveAllSubCatDetails = make_user_details("GET", "../sub_category/sub_cat_details/", "");
        
+        retrieveAllSubCatDetails.then((resData) => {
+           
+            unDisplay_preLoader();
+         
+            let resultData = JSON.parse(resData);
+            let appendedResultData = `<option value="0">Select Category</option>`;
+            for(let i = 0; i < resultData.length; i++) {
+                appendedResultData+=`<option value=${resultData[i].sub_cat_identification_id_two}>${resultData[i].sub_cat_identification_id_two} - ${resultData[i].subs_cat_title}</option>`;
+            }
+            appendedResultData += `<option value="add_cat">Add New Category</option>`;
+            document.getElementById("subes_cats_id").innerHTML = appendedResultData;
+           
+        })
+    
+        let responseObj = make_user_details("GET", "../filter/fetch_details_category/", "");
+        display_preLoader();
+       
+        
+        responseObj.then((sucvalue) => {
+            let filter_data_category = `<option value="0">
+            Select Details</option>`;
+            unDisplay_preLoader();
+            let resultData = JSON.parse(sucvalue);
+          
+            for(let i = 0; i < resultData.length; i++) {
+               
+                filter_data_category+=`<option value="${resultData[i].filter_details_category}">
+                ${resultData[i].filter_details_category}</option>`; 
+            }
+            filter_data_category+=`<option value="new_fil_data_cat">Add New Details Section</option>`;
+            document.getElementById("details_for_which_prod").innerHTML = filter_data_category;
+           
+    
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Filter Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
 
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
+     }
+   
+     if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../filter/filter_details/", "");
+        display_preLoader();
+            responseObj.then((sucvalue) => {
+                unDisplay_preLoader();
+                UI_Fun_21(sucvalue);
+                }).catch((rejvalue) => {
+                    console.log(rejvalue);
+                }) 
+        } else {
+            unDisplay_preLoader();
+            UI_Fun_21(searchData);
+        }
 
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Filter Details";
-    document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
-    document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
-
-    undisplay_displayed_blocked_containers(); 
-    document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
-    display_blocked_containers("admin_panel_details_table_container"); 
-    document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
-    display_blocked_containers("table_name_and_other_details_display_container"); 
-    }).catch((rejvalue) => {
-        console.log(rejvalue);
-    }) 
     search_place_name = "edit_and_delete_of_filter_data";
 }
 
@@ -4424,7 +4458,7 @@ if(permission) {
     subCategoryDeleteReqObj.then((deleteRes) => {
         unDisplay_preLoader();
         alert(deleteRes);
-        view_filter_data();
+        view_filter_data("");
     }).catch((deleteErrRes) => {
         console.log(deleteErrRes);
     })
@@ -5951,6 +5985,42 @@ function search_the_details() {
             
             if(search_place_name == "delete_prod_review") {
                 delete_prod_review(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "view_filter_data") {
+        let responseObjs = make_response_details("POST", "../filter/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "view_filter_data") {
+                view_filter_data(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "edit_and_delete_of_filter_data") {
+        let responseObjs = make_response_details("POST", "../filter/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "edit_and_delete_of_filter_data") {
+                edit_and_delete_of_filter_data(response);
             }
            
     

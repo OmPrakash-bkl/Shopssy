@@ -281,6 +281,9 @@ RewriteRule ^filter/update_filter/?$ filter/update_filter.php [L]
 RewriteCond %{REQUEST_METHOD} =DELETE
 RewriteRule ^filter/filter_deletion/filter_id/([^/\*]+)?$ filter/filter_deletion.php?filter_id=$1 [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^filter/search_details/?$ filter/search_details.php [L]
+
 # Filter End
 
 # Sub Filter Start
