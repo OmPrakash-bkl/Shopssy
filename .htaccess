@@ -253,6 +253,9 @@ RewriteRule ^reviews/like_and_dislike_count/?$ reviews/like_and_dislike_count.ph
 RewriteCond %{REQUEST_METHOD} =DELETE
 RewriteRule ^reviews/prod_review_deletion/products_review_id/([^/\*]+)?$ reviews/prod_review_deletion.php?products_review_id=$1 [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^reviews/search_details/?$ reviews/search_details.php [L]
+
 # Reviews End
 
 # Filter Start

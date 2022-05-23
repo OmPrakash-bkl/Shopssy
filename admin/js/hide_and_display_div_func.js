@@ -3884,16 +3884,13 @@ function deleteOfSpecProdFaq(p_q_and_a_id) {
 
 /* Show Reviews Section Start */
 
-function show_reviews() {
-    let responseObj = make_user_details("GET", "../reviews/show_prod_reviews/", "");
-    display_preLoader();
-    let totalC = 0;
+function show_reviews(searchData) {
     
-    responseObj.then((sucvalue) => {
-        unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
+    function UI_Fun_18(datas) {  
 
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
         let reviews_id_array = [];
         for(let j = 0; j < resultData.length; j++) {
             reviews_id_array[j] = resultData[j].review_id;
@@ -3916,6 +3913,12 @@ function show_reviews() {
         <th>DESCRIPTION</th>
         <th>LIKES</th>
         <th>DISLIKES</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         for(let i = 0; i < resultData.length; i++) {
             
             table_datas+=`<tr>
@@ -3945,10 +3948,23 @@ function show_reviews() {
             console.log(rejvalue);
     }) 
 
-       
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
+     }
+
+     
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../reviews/show_prod_reviews/", "");
+        display_preLoader();
+            responseObj.then((sucvalue) => {
+                unDisplay_preLoader();
+                UI_Fun_18(sucvalue);
+                }).catch((rejvalue) => {
+                    console.log(rejvalue);
+                }) 
+        } else {
+            unDisplay_preLoader();
+            UI_Fun_18(searchData);
+        }
+
         search_place_name = "show_reviews";
 }
 
@@ -3956,15 +3972,13 @@ function show_reviews() {
 
 /* Review Delete Section Start */
 
-function delete_prod_review() {
-    let responseObj = make_user_details("GET", "../reviews/show_prod_reviews/", "");
-    display_preLoader();
-    let totalC = 0;
-    
-    responseObj.then((sucvalue) => {
+function delete_prod_review(searchData) {
+
+    function UI_Fun_19(datas) {  
+
         unDisplay_preLoader();
-      
-        let resultData = JSON.parse(sucvalue);
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
         let table_datas = `<tr>
         <th>S.NO</th>
         <th>PROD.REVIEW ID</th>
@@ -3974,6 +3988,12 @@ function delete_prod_review() {
         <th>DESCRIPTION</th>
         <th>ACTION</th>
         </tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
         for(let i = 0; i < resultData.length; i++) {
            
             table_datas+=`<tr>
@@ -3996,9 +4016,23 @@ function delete_prod_review() {
         display_blocked_containers("admin_panel_details_table_container"); 
         document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
         display_blocked_containers("table_name_and_other_details_display_container"); 
-        }).catch((rejvalue) => {
-            console.log(rejvalue);
-        }) 
+
+     }
+
+     if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../reviews/show_prod_reviews/", "");
+        display_preLoader();
+            responseObj.then((sucvalue) => {
+                unDisplay_preLoader();
+                UI_Fun_19(sucvalue);
+                }).catch((rejvalue) => {
+                    console.log(rejvalue);
+                }) 
+        } else {
+            unDisplay_preLoader();
+            UI_Fun_19(searchData);
+        }
+
         search_place_name = "delete_prod_review";
 }
 
@@ -4010,7 +4044,7 @@ function deleteOfSpecProdReview(review_id) {
         prodDeleteReqObj.then((deleteRes) => {
             unDisplay_preLoader();
             alert(deleteRes);
-            show_reviews();
+            show_reviews("");
         }).catch((deleteErrRes) => {
             console.log(deleteErrRes);
         })
@@ -5881,6 +5915,42 @@ function search_the_details() {
             
             if(search_place_name == "delete_prod_faq") {
                 delete_prod_faq(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "show_reviews") {
+        let responseObjs = make_response_details("POST", "../reviews/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "show_reviews") {
+                show_reviews(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "delete_prod_review") {
+        let responseObjs = make_response_details("POST", "../reviews/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "delete_prod_review") {
+                delete_prod_review(response);
             }
            
     

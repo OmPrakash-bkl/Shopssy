@@ -314,11 +314,11 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container9">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="show_reviews()"><i class="fa fa-eye"></i> View Review</button>
+  <button onclick="show_reviews('')"><i class="fa fa-eye"></i> View Review</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="delete_prod_review()"><i class="fa fa-trash-o"></i> Delete</button>
+  <button onclick="delete_prod_review('')"><i class="fa fa-trash-o"></i> Delete</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   </div>
