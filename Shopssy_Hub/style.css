@@ -139,6 +139,32 @@ body {
 
 /* Preloader Section End */
 
+/* Search Bar Functionality Start */
+
+.search_bar_container {
+    margin: 10px 5px;
+}
+
+.search_bar_container > center > form > input {
+    height: 30px;
+    padding: 0px 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    outline: none;
+    width: 400px;
+}
+.search_bar_container > center > form > button {
+    background-color: #1792E9;
+    border: 0px;
+    border-radius: 5px;
+    color: white;
+    height: 30px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Search Bar Functionality End */
+
 /* Responsive Section Start */
 
 @media only screen and (max-width: 1000px) {
@@ -150,10 +176,17 @@ body {
     .hub_title_container {
         font-size: 20px;
     }
+    .search_bar_container > form > input {
+        width: 180px;
+    }
+    
 }
 @media only screen and (max-width: 600px) {
     .hub_title_container {
         font-size: 18px;
+    }
+    .search_bar_container > center > form > input {
+        width: 180px;
     }
 }
 

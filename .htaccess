@@ -362,5 +362,8 @@ RewriteRule ^ordered_user_details/details_of_ordered_user/?$ ordered_user_detail
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^ordered_user_details/update_status/?$ ordered_user_details/update_status.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^ordered_user_details/search_details/?$ ordered_user_details/search_details.php [L]
+
 # Shopssy Hub End
 

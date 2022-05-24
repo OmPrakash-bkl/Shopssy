@@ -53,7 +53,6 @@ function show_ordered_user_details(searchData) {
   
     function UI_Fun_1(datas) {
       
-        let totalC = 0;
         unDisplay_preLoader();
         let resultData = JSON.parse(datas);
         let table_datas = `<tr><th>S.NO</th>
@@ -64,11 +63,10 @@ function show_ordered_user_details(searchData) {
         <th>QTY</th>
         <th>TOTAL AMT</th>
         <th>ACTION</th></tr>`;
-        if(resultData.length == 0) {
+        if(resultData[0].length == 0) {
             table_datas = `<center>
                 <h2>No Results</h2>
                 </center>`
-                totalC = -1;
         }
         for(let i = 0; i < resultData[0].length; i++) {
             let pro_id = "";
@@ -101,7 +99,7 @@ function show_ordered_user_details(searchData) {
             <td>${resultData[0][i].pro_tot_amount}</td>
             <td><button title="Edit"  onclick="makeOrderProcess(${resultData[0][i].order_id})" class="edit_button_of_table">Processing</button></td>
             </tr>`
-            totalC = i;
+         
         }
         document.getElementsByClassName("shopssy_hub_details_table")[0].innerHTML = table_datas;
     }
@@ -119,7 +117,7 @@ function show_ordered_user_details(searchData) {
             unDisplay_preLoader();
             UI_Fun_1(searchData);
     }
-        search_place_name = "edit_and_delete_users";
+       
     }
 
 
@@ -144,3 +142,41 @@ function makeOrderProcess(o_id) {
 }
 
 /* Order Status Updater Section End */
+
+/* Search Func Section Start */
+
+function search_the_details() {
+    
+    let searchWords = document.getElementById("search_bar").value;
+    if(!(searchWords == "")) {
+        searchWords = searchWords.replace(/\/+$/g, '');
+        searchWords = searchWords.replace(/[^a-zA-Z0-9@.)(,-_& ]/g, "");
+       
+        searchWords = {
+            search_keyword: searchWords
+           }
+           searchWords = JSON.stringify(searchWords);
+   
+       
+            let responseObjs = order_details_retriever("POST", "../ordered_user_details/search_details/", `${searchWords}`);
+            display_preLoader();
+            
+            responseObjs.then((response) => {
+                unDisplay_preLoader();
+                document.getElementById("search_bar").value = "";
+                show_ordered_user_details(response);
+
+            }).catch((error) => {
+                console.log(error);
+                document.getElementsByClassName("shopssy_hub_details_table")[0].innerHTML  =  `<center>
+                <h2>No Results</h2>
+                </center>`
+            })
+         
+
+        
+    }
+}
+
+/* Search Func Section End */
+

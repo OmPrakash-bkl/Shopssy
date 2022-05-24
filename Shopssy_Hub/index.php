@@ -31,6 +31,18 @@
     </center>
     </div>
     <!-- Shopssy Hub Title Section End -->
+    <!-- Search Functionality Start-->
+
+    <div class="search_bar_container">
+    <center>
+    <form action="">
+    <input type="search" placeholder="Search Details" id="search_bar" required>
+    <button type="button" onclick="search_the_details()">Search</button>
+    </form>
+    </center>
+    </div>
+
+    <!-- Search Functionality End -->
     <!-- Shopssy Hub Table Section Start -->
 <div class="shopssy_hub_details_table_container">
 <table class="shopssy_hub_details_table">
