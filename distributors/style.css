@@ -1,0 +1,193 @@
+/* Code Reset Start*/
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+a:hover, a:active, a:visited, a:link, a:focus {
+    outline: none;
+    background: none;
+    border: none;
+    background-color: none;
+}
+:focus {
+    outline: none !important;
+}
+a{
+    -webkit-tap-highlight-color: transparent;
+ }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    box-shadow: 0 0 0 30px white inset !important;
+}
+
+body {
+    /* font-family: 'Josefin Sans', sans-serif; */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px gainsboro; 
+    border-radius: 5px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #1792E9; 
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #137cc7; 
+  }
+
+/* Code Reset End*/
+
+/* Title Design Start */
+
+.distributors_title_container {
+    margin: 10px 5px;
+    font-size: 30px;
+}
+.distributors_title_container > center > h1 {
+    color: #1792E9;
+}
+
+/* Title Design End */
+
+/* Shopssy Distributors Details Table Start */
+
+.shopssy_distributors_details_table {
+    text-align: center;
+    /* border: 1px solid red; */
+    border-collapse: collapse;
+    width: 100%;
+    
+}
+.shopssy_distributors_details_table tr, .shopssy_distributors_details_table td, .shopssy_distributors_details_table th {
+    /* border: 1px solid red; */
+    padding: 15px 5px;
+    white-space: nowrap;
+    
+}
+.shopssy_distributors_details_table_container {
+    overflow-x: auto;
+}
+.shopssy_distributors_details_table td {
+    border-bottom: 2px solid #CCCCFF;
+    color: black;
+    font-size: 17px;
+}
+
+.shopssy_distributors_details_table tr:hover td {
+    border-bottom: 2px solid #BF80FF;
+}
+
+
+.shopssy_distributors_details_table th {
+    background-color: #E8F4FD;
+}
+.edit_button_of_table {
+    border: 0px;
+    border-radius: 5px;
+    height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+.edit_button_of_table {
+    background-color: #5CD65C;
+    color: rgb(51, 51, 51);
+    transition: background-color 0.2s;
+}
+.edit_button_of_table:hover {
+    background-color: #50b950;
+}
+
+
+/* Shopssy Hub Details Table End */
+
+/* Preloader Section Start */
+
+.pre_loader_container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    color: #2295E9;
+    z-index: 2;
+    font-size: 30px;
+    padding: 20%;
+    background-color: rgb(0, 0, 0, 0.1);
+    display: none;
+}
+
+/* Preloader Section End */
+
+/* Search Bar Functionality Start */
+
+.search_bar_container {
+    margin: 10px 5px;
+}
+
+.search_bar_container > center > form > input {
+    height: 30px;
+    padding: 0px 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    outline: none;
+    width: 400px;
+}
+.search_bar_container > center > form > button {
+    background-color: #1792E9;
+    border: 0px;
+    border-radius: 5px;
+    color: white;
+    height: 30px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Search Bar Functionality End */
+
+/* Responsive Section Start */
+
+@media only screen and (max-width: 1000px) {
+    .distributors_title_container {
+        font-size: 25px;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .distributors_title_container {
+        font-size: 20px;
+    }
+    .search_bar_container > form > input {
+        width: 180px;
+    }
+    
+}
+@media only screen and (max-width: 600px) {
+    .distributors_title_container {
+        font-size: 18px;
+    }
+    .search_bar_container > center > form > input {
+        width: 180px;
+    }
+}
+
+/* Responsive Section End */
