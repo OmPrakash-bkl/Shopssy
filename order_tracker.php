@@ -120,6 +120,8 @@ if(!isset($_SESSION['user_login_id'])) {
            $order_tracker_prod_price = $row['prod_price'];
            $order_tracker_offer_percentage_val = $row['offer_percentage_val'];
            $order_tracker_order_date = $row['order_date'];
+           $order_tracker_process_date = $row['process_date'];
+           $order_tracker_ready_date = $row['ready_date'];
 
         ?>
         <div class="product_display_parent_container">
@@ -261,7 +263,7 @@ if(!isset($_SESSION['user_login_id'])) {
                 <p>We are preparing your order.</p>
                 <em><?php
                 if($fetch_order_tracker_status == "processed" OR $fetch_order_tracker_status == "ready") {
-                    echo $order_tracker_order_date;
+                    echo $order_tracker_process_date;
                 } else {
                     echo "Soon";
                 }
@@ -278,7 +280,7 @@ if(!isset($_SESSION['user_login_id'])) {
                 <p>Your order is ready for pickup.</p>
                 <em><?php
                 if($fetch_order_tracker_status == "ready") {
-                    echo $order_tracker_order_date;
+                    echo $order_tracker_ready_date;
                 } else {
                     echo "Soon";
                 }

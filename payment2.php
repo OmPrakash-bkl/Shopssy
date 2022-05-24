@@ -36,7 +36,7 @@ if(!isset($_SESSION['user_login_id'])) {
     var totalAmount = payment;
     var product_id =  "P0XXX";
     var options = {
-    "key": "<Your Id>",
+    "key": "<your id>",
     "amount": (totalAmount*100), // 2000 paise = INR 20
     "name": "Shopssy",
     "description": "Payment",

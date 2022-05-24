@@ -136,7 +136,7 @@ if(isset($_POST['order_req'])) {
             $prod_offer_percentage = 50;
         }
 
-        $order_tracker_query = "INSERT INTO `order_tracker` (`order_id`, `prod_name`, `prod_img_name`, `prod_price`, `offer_percentage_val`, `order_date`) VALUES ($orders_order_id, '$prod_name', '$prod_img_name', $get_prod_price, $prod_offer_percentage, '$orders_date');";
+        $order_tracker_query = "INSERT INTO `order_tracker` (`order_id`, `prod_name`, `prod_img_name`, `prod_price`, `offer_percentage_val`, `order_date`, `process_date`, `ready_date`) VALUES ($orders_order_id, '$prod_name', '$prod_img_name', $get_prod_price, $prod_offer_percentage, '$orders_date', 'Soon', 'Soon');";
         mysqli_query($con, $order_tracker_query);
         }
 
