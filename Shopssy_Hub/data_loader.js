@@ -34,12 +34,15 @@ function order_details_retriever(method, url, sendingData) {
 return responseObj;
 }
 
-let ordered_datas = order_details_retriever("POST", "../ordered_user_details/details_of_ordered_user/", "");
-ordered_datas.then((result) => {
-    show_ordered_user_details(result);
-}).catch((errorobj) => {
-    console.log(errorobj);
-})
+function reloader() {
+    let ordered_datas = order_details_retriever("POST", "../ordered_user_details/details_of_ordered_user/", "");
+    ordered_datas.then((result) => {
+        show_ordered_user_details(result);
+    }).catch((errorobj) => {
+        console.log(errorobj);
+    })
+}
+reloader();
 
 
 /* Request Sending and Response Getting Section End */
@@ -96,7 +99,7 @@ function show_ordered_user_details(searchData) {
             <td>${pro_id}</td>
             <td>${qty}</td>
             <td>${resultData[0][i].pro_tot_amount}</td>
-            <td><button title="Edit"  onclick="makeOrderProcess(${resultData[0][i].order_id})" class="edit_button_of_table"><i class="fa fa-edit"></i></button></td>
+            <td><button title="Edit"  onclick="makeOrderProcess(${resultData[0][i].order_id})" class="edit_button_of_table">Processing</button></td>
             </tr>`
             totalC = i;
         }
@@ -121,3 +124,23 @@ function show_ordered_user_details(searchData) {
 
 
 /* Order Data Of Table Shower Section End */
+
+/* Order Status Updater Section Start */
+
+function makeOrderProcess(o_id) {
+    display_preLoader();
+    let datas = {
+        order_id: o_id
+    }
+    datas = JSON.stringify(datas);
+    let response = order_details_retriever("POST", "../ordered_user_details/update_status/", `${datas}`);
+    response.then((response) => {
+        unDisplay_preLoader();
+        alert(response);
+        reloader();
+    }).catch((error) => {
+        console.log(error);
+    })
+}
+
+/* Order Status Updater Section End */

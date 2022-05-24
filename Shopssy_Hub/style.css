@@ -102,13 +102,14 @@ body {
 .shopssy_hub_details_table th {
     background-color: #E8F4FD;
 }
-.edit_button_of_table , .delete_button_of_table {
+.edit_button_of_table {
     border: 0px;
     border-radius: 5px;
     height: 30px;
     font-size: 16px;
-    width: 40px;
     cursor: pointer;
+    padding: 5px 10px;
+    font-weight: bold;
 }
 .edit_button_of_table {
     background-color: #5CD65C;
@@ -118,14 +119,7 @@ body {
 .edit_button_of_table:hover {
     background-color: #50b950;
 }
-.delete_button_of_table {
-    background-color: #FF3300;
-    color: rgb(238, 238, 238);
-    transition: background-color 0.2s;
-}
-.delete_button_of_table:hover {
-    background-color: #e42e00;
-}
+
 
 /* Shopssy Hub Details Table End */
 
