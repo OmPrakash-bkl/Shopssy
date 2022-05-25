@@ -354,7 +354,18 @@ RewriteRule ^prods_data/search_details/?$ prods_data/search_details.php [L]
 
 # Prods End
 
+# Notifications Start
 
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^notifications/show_notifications/?$ notifications/show_notifications.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^notifications/check_notify_title/?$ notifications/check_notify_title.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^notifications/insert_notify_data/?$ notifications/insert_notify_data.php [L]
+
+# Notifications End
 
 # Shopssy Hub And Distributor Start
 

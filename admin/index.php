@@ -390,6 +390,29 @@ mysqli_query($con, $delete_unfulfill_data_query);
   </div>
 </div>
 
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(13)">
+  <h2 class="heading_text"><i class="fa fa-bell"></i> Notifications</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow13"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container13">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button onclick="show_notifications('')"><i class="fa fa-eye"></i> View Notify</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button onclick="add_notification()"><i class='fas fa-plus-square'></i> Add Notify</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button onclick="edit_and_delete_of_notify('')"><i class="fa fa-edit"></i> Edit & Delete</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
+
+
 </div>
 <!-- Hamburger Link Section Container End -->
 
@@ -935,6 +958,40 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </div>
 
 <!-- New Filter Table Creation Form End -->
+
+<!-- Notification Table Creation Form Start -->
+
+<div class="add_notification_form_container">
+
+<div class="add_notification_step1_container">
+<center>
+    <h1 class="form_title12">Category Form</h1>
+</center>
+<form action="" class="add_notification_form" method="POST">
+<input type="hidden" id="notify_id">
+  <label for="notification_title">Notification title <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="notification_title" autofocus> <br>
+  <p class="error_message_place notification_title_error_message_place"></p>
+  <label for="notification_content">Notification content <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="notification_content"> <br>
+  <p class="error_message_place notification_content_error_message_place"></p>
+  <label for="notify_for_who">Notification for who?  <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="notify_for_who"> <br>
+  <p class="error_message_place notify_for_who_error_message_place"></p>
+  <label for="notify_link">Link <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="notify_link"> <br>
+  <p class="error_message_place notify_link_desc_error_message_place"></p>
+  
+ <center>
+ <button type="button" class="notification_submition_btn">Submit</button>
+ <button type="button" class="notification_submition_btn2">Submit</button>
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- Notification Table Creation Form End -->
 
 </div>
 
