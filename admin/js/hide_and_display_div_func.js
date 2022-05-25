@@ -6490,7 +6490,42 @@ function search_the_details() {
             document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
         })
     }
+    if(search_place_name == "show_notifications") {
+        let responseObjs = make_response_details("POST", "../notifications/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "show_notifications") {
+                show_notifications(response);
+            }
+           
     
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "edit_and_delete_of_notify") {
+        let responseObjs = make_response_details("POST", "../notifications/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "edit_and_delete_of_notify") {
+                edit_and_delete_of_notify(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
 
     }
     

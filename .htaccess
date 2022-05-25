@@ -374,6 +374,9 @@ RewriteRule ^notifications/specific_notify_detail/n_id/([^/\*]+)?$ notifications
 RewriteCond %{REQUEST_METHOD} =DELETE
 RewriteRule ^notifications/notification_deletion/n_id/([^/\*]+)?$ notifications/notification_deletion.php?n_id=$1 [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^notifications/search_details/?$ notifications/search_details.php [L]
+
 # Notifications End
 
 # Shopssy Hub And Distributor Start
