@@ -5867,24 +5867,25 @@ if((document.getElementsByClassName("notification_title_error_message_place")[0]
         document.getElementsByClassName("notification_title_error_message_place")[0].innerText = "Notification title already exits!";
     }
    
-    // if(decisionPara == "update") {
-    //     if(avail_count >= 1) {
-    //         document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "Category Name already exits!";
-    //     } else {
-    //         document.getElementsByClassName("cat_name_error_message_place")[0].innerText = "";
+    if(decisionPara == "update") {
+        if(avail_count >= 1) {
+            document.getElementsByClassName("notification_title_error_message_place")[0].innerText = "Notification title already exits!";
+        } else {
+            document.getElementsByClassName("notification_title_error_message_place")[0].innerText = "";
            
-    //         let categoryUpdateDatasRes = make_user_details("POST", "../category/update_category/", `${categoryDataObj}`);
+            let notificationUpdateDatasRes = make_user_details("POST", "../notifications/update_notification/", `${notificationDataObj}`);
     
-    //         categoryUpdateDatasRes.then((goodResponse) => {
-    //             unDisplay_preLoader();
-    //             alert(goodResponse);
-    //        document.getElementById("cat_title").value = document.getElementById("cat_image_name").value = document.getElementById("cat_icon_name").value = document.getElementById("cat_name_desc").value = "";
-    //         }).catch((badResponse) => {
-    //             console.log(badResponse);
-    //         })
-    //     }
+            notificationUpdateDatasRes.then((goodResponse) => {
+                unDisplay_preLoader();
+                alert(goodResponse);
+                document.getElementById("notify_id").value = document.getElementById("notification_title").value = document.getElementById("notification_content").value  = document.getElementById("notify_for_who").value = document.getElementById("notify_link").value = "";
+
+            }).catch((badResponse) => {
+                console.log(badResponse);
+            })
+        }
         
-    // }
+    }
 
     })
   }
@@ -5892,6 +5893,122 @@ if((document.getElementsByClassName("notification_title_error_message_place")[0]
 
 
 /* Notification Add Section End */
+
+/* Notification Update Section Start */
+
+function edit_and_delete_of_notify(searchData) {
+
+    function UI_Fun_26(datas) { 
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>NOTIFY ID</th>
+        <th>TITLE</th>
+        <th>CONTENT</th>
+        <th>DATE & TIME</th>
+        <th>NOTIFY FOR WHO?(USER_ID)</th>
+        <th>NOTIFY LINK</th>
+        <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].n_id}</td>
+            <td>${resultData[i].n_title}</td>
+            <td>${resultData[i].n_content}</td>
+            <td>${resultData[i].n_time}</td>
+            <td>${resultData[i].noti_for_who}</td>
+            <td>${resultData[i].link}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfNotify(${resultData[i].n_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfNotify(${resultData[i].n_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Notification Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../notifications/show_notifications/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_26(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_26(searchData);
+    }
+
+    search_place_name = "edit_and_delete_of_notify";
+    search_box_disabler();
+}
+
+function editOfNotify(n_id) {
+    display_preLoader();
+    let responseObj = make_user_details("GET", `../notifications/specific_notify_detail/n_id/${n_id}`, "");
+
+    document.getElementsByClassName("notification_submition_btn2")[0].style.display = "inline-block";
+    document.getElementsByClassName("notification_submition_btn")[0].style.display = "none";
+
+   
+
+    responseObj.then((resObj) => {
+        unDisplay_preLoader();
+        notifyData = JSON.parse(resObj);
+        
+        document.getElementById("notify_id").value = notifyData.n_id;
+        document.getElementById("notification_title").value = notifyData.n_title;
+        document.getElementById("notification_content").value = notifyData.n_content;
+        document.getElementById("notify_for_who").value = notifyData.noti_for_who;
+        document.getElementById("notify_link").value = notifyData.link;
+       
+    })
+    document.getElementsByClassName("form_title12")[0].innerHTML = "Notification Edit Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("add_notification_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_notification_step1_container"); 
+}
+
+document.getElementsByClassName("notification_submition_btn2")[0].addEventListener("click", function(event) {
+    notification_form(event, "update");
+    });
+
+
+/* Notification Update Section End */
+
+/* Notification Delete Section Start */
+
+function deleteOfNotify(n_id) {
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let categoryDeleteReqObj = make_user_details("DELETE", `../notifications/notification_deletion/n_id/${n_id}`, ``);
+        categoryDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            show_notifications("");
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
+    }
+}
+
+/* Notification Delete Section End */
  
 /* Notification Section End */
 
