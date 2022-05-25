@@ -6016,6 +6016,19 @@ function deleteOfNotify(n_id) {
 
 /* Customer Feedback View Section Start */
 
+function feedback_remainder() {
+    let responseObj = make_user_details("GET", "../feedback/show_reddot/", "");
+        responseObj.then((sucvalue) => {
+            if(sucvalue == 0) {
+               document.getElementsByClassName("admin_panel_header_new_notify_dot")[0].style.color = "#f3f3f3";
+            } else {
+                document.getElementsByClassName("admin_panel_header_new_notify_dot")[0].style.color = "#FC0D1B";
+            }
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+}
+feedback_remainder();
 function customer_feedback(searchData) {
     
     function UI_Fun_27(datas) { 
@@ -6066,6 +6079,7 @@ function customer_feedback(searchData) {
             UI_Fun_27(sucvalue);
             }).catch((rejvalue) => {
                 console.log(rejvalue);
+                
             }) 
     } else {
         unDisplay_preLoader();
