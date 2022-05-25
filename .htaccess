@@ -379,6 +379,22 @@ RewriteRule ^notifications/search_details/?$ notifications/search_details.php [L
 
 # Notifications End
 
+# Customer Feedbacks Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^feedback/show_feedbacks/?$ feedback/show_feedbacks.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^feedback/message_replyer/?$ feedback/message_replyer.php [L]
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^feedback/specific_feedback_detail/f_id/([^/\*]+)?$ feedback/specific_feedback_detail.php?f_id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =DELETE
+RewriteRule ^feedback/feedback_deletion/f_id/([^/\*]+)?$ feedback/feedback_deletion.php?f_id=$1 [L]
+
+# Customer Feedbacks End
+
 # Shopssy Hub And Distributor Start
 
 

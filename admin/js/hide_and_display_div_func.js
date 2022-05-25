@@ -6012,6 +6012,175 @@ function deleteOfNotify(n_id) {
  
 /* Notification Section End */
 
+/* Customer Feeback Section Start */
+
+/* Customer Feedback View Section Start */
+
+function customer_feedback(searchData) {
+    
+    function UI_Fun_27(datas) { 
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>EMAIL</th>
+        <th>PH.NUMBER</th>
+        <th>MESSAGE</th>
+        <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].id}</td>
+            <td>${resultData[i].name}</td>
+            <td>${resultData[i].email}</td>
+            <td>${resultData[i].phone}</td>
+            <td>${resultData[i].message}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfFeedback(${resultData[i].id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfFeedback(${resultData[i].id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Customer Feedbacks";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../feedback/show_feedbacks/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_27(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_27(searchData);
+    }
+
+    search_place_name = "customer_feedback";
+    search_box_disabler();
+
+}
+/* Customer Feedback View Section End */
+
+/* Customer Feedback Add Section Start */
+
+document.getElementsByClassName("feedback_submition_btn")[0].addEventListener("click", function(event) {
+    cus_feedback_form(event, "insert");
+    });
+    
+    function cus_feedback_form(event, decisionPara) {
+    event.preventDefault();
+    
+    let feedback_id = document.getElementById("feedback_id").value;
+    let feedbacker_email = document.getElementById("feedbacker_email").value;
+    let feedbacker_name = document.getElementById("feedbacker_name").value;
+    let feedbacker_feedback = document.getElementById("feedbacker_feedback").value;
+    let admin_reply = document.getElementById("admin_reply").value;
+    
+    admin_reply = admin_reply.replace(/\/+$/g, '');
+    admin_reply = admin_reply.replace(/[^a-zA-Z0-9@.,')%?(!& ]/g, "");
+    
+    if(admin_reply == "") {
+        document.getElementsByClassName("admin_reply_desc_error_message_place")[0].innerText = "Reply is required!";
+    } else if(admin_reply.length <= 24) {
+        document.getElementsByClassName("admin_reply_desc_error_message_place")[0].innerText = "Reply length must be minimum 25 characters!";
+    } else {
+        document.getElementsByClassName("admin_reply_desc_error_message_place")[0].innerText = "";
+    }
+   
+    if((document.getElementsByClassName("admin_reply_desc_error_message_place")[0].innerText == "")) {
+
+        let feedback_obj = {
+            feedback_id: feedback_id,
+            feedbacker_email: feedbacker_email,
+            feedbacker_name: feedbacker_name,
+            feedbacker_feedback: feedbacker_feedback,
+            admin_reply: admin_reply
+        }
+
+        feedback_obj = JSON.stringify(feedback_obj);
+    
+        let feedbackStatusUpdateDatasRes = make_user_details("POST", "../feedback/message_replyer/", `${feedback_obj}`);
+        display_preLoader();
+        
+        feedbackStatusUpdateDatasRes.then((goodResponse) => {
+            unDisplay_preLoader();
+            alert(goodResponse);
+            document.getElementById("feedback_id").value = document.getElementById("feedbacker_email").value = document.getElementById("feedbacker_name").value = document.getElementById("feedbacker_phonenumber").value = document.getElementById("feedbacker_feedback").value = document.getElementById("admin_reply").value = "";
+
+        }).catch((badResponse) => {
+            console.log(badResponse);
+        })
+       
+      }
+    }
+
+/* Customer Feedback Add Section End */
+
+/* Customer Feedback Edit Section Start */
+
+function editOfFeedback(f_id) {
+    display_preLoader();
+    let responseObj = make_user_details("GET", `../feedback/specific_feedback_detail/f_id/${f_id}`, "");
+
+    document.getElementsByClassName("feedback_submition_btn")[0].style.display = "inline-block";
+   
+    responseObj.then((resObj) => {
+        unDisplay_preLoader();
+        feedbackData = JSON.parse(resObj);
+        
+        document.getElementById("feedback_id").value = feedbackData.id;
+        document.getElementById("feedbacker_name").value = feedbackData.name;
+        document.getElementById("feedbacker_email").value = feedbackData.email;
+        document.getElementById("feedbacker_phonenumber").value = feedbackData.phone;
+        document.getElementById("feedbacker_feedback").value = feedbackData.message;
+       
+    })
+    document.getElementsByClassName("form_title13")[0].innerHTML = "Feedback Reply Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("add_cus_feedback_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_cus_feedback_step1_container"); 
+}
+
+/* Customer Feedback Edit Section End */
+
+/* Customer Feedback Delete Section Start */
+
+function deleteOfFeedback(f_id) {
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let feedbackDeleteReqObj = make_user_details("DELETE", `../feedback/feedback_deletion/f_id/${f_id}`, ``);
+        feedbackDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            customer_feedback("");
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
+    }
+}
+
+/* Customer Feedback Delete Section End */
+
+/* Customer Feedback Section Start */
+
 /* Search Section Start */
 
 /* Request Sending and Response Getting Section Start */

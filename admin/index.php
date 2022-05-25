@@ -71,7 +71,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </div>
 <div class="admin_panel_header_right_container">
 <div><span class="admin_panel_header_new_notify_dot"><i class="fa fa-circle"></i></span>
-<button type="button" class="admin_panel_header_icons admin_panel_header_bell_icon"><i class="fa fa-bell"></i></button>
+<button onclick="customer_feedback('')" type="button" class="admin_panel_header_icons admin_panel_header_bell_icon"><i class="fa fa-bell"></i></button>
 </div>
 <div class="user_db_container">
 <div>
@@ -959,13 +959,13 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <!-- New Filter Table Creation Form End -->
 
-<!-- Notification Table Creation Form Start -->
+<!-- Notification Data Creation Form Start -->
 
 <div class="add_notification_form_container">
 
 <div class="add_notification_step1_container">
 <center>
-    <h1 class="form_title12">Category Form</h1>
+    <h1 class="form_title12">Notification Form</h1>
 </center>
 <form action="" class="add_notification_form" method="POST">
 <input type="hidden" id="notify_id">
@@ -991,7 +991,43 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 </div>
 
-<!-- Notification Table Creation Form End -->
+<!-- Notification Data Creation Form End -->
+
+<!-- Customer Feedback Form Start -->
+
+<div class="add_cus_feedback_form_container">
+
+<div class="add_cus_feedback_step1_container">
+<center>
+    <h1 class="form_title13">Customer Feedback Form</h1>
+</center>
+<form action="" class="add_cus_feedback_form" method="POST">
+<input type="hidden" id="feedback_id">
+  <label for="feedbacker_name">Name <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="feedbacker_name" autofocus disabled> <br>
+  <p class="error_message_place feedbacker_name_error_message_place"></p>
+  <label for="feedbacker_email">Email <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="feedbacker_email" disabled> <br>
+  <p class="error_message_place feedbacker_email_error_message_place"></p>
+  <label for="feedbacker_phonenumber">Phone number <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="feedbacker_phonenumber" disabled> <br>
+  <p class="error_message_place feedbacker_phonenumber_error_message_place"></p>
+  <label for="feedbacker_feedback">Message <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="feedbacker_feedback" disabled> <br>
+  <p class="error_message_place feedbacker_feedback_desc_error_message_place"></p>
+  <label for="admin_reply">Reply <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="admin_reply"> <br>
+  <p class="error_message_place admin_reply_desc_error_message_place"></p>
+  
+ <center>
+ <button type="button" class="feedback_submition_btn">Submit</button>
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- Customer Feedback Form End -->
 
 </div>
 

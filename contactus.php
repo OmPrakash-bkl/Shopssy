@@ -15,7 +15,7 @@ $emailval = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$/";
 $numberval = "/^[0-9]+$/";
 
 if(preg_match($nameval, $name) and preg_match($emailval, $email) and preg_match($numberval, $phone) and strlen($phone)==10) {
-    $sql = "INSERT INTO `contact_us` (`name`, `email`, `phone`, `message`) VALUES ('$name', '$email', '$phone', '$message');";
+    $sql = "INSERT INTO `contact_us` (`name`, `email`, `phone`, `message`, `status`) VALUES ('$name', '$email', '$phone', '$message', 'unread');";
     mysqli_query($con, $sql);
 }
 
