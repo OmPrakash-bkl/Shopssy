@@ -6709,6 +6709,24 @@ function search_the_details() {
             document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
         })
     }
+    if(search_place_name == "customer_feedback") {
+        let responseObjs = make_response_details("POST", "../feedback/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "customer_feedback") {
+                customer_feedback(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
 
     }
     

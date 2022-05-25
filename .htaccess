@@ -396,6 +396,9 @@ RewriteRule ^feedback/feedback_deletion/f_id/([^/\*]+)?$ feedback/feedback_delet
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^feedback/show_reddot/?$ feedback/show_reddot.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^feedback/search_details/?$ feedback/search_details.php [L]
+
 # Customer Feedbacks End
 
 # Shopssy Hub And Distributor Start
