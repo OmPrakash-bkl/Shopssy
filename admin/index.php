@@ -411,7 +411,27 @@ mysqli_query($con, $delete_unfulfill_data_query);
   </div>
   </div>
 </div>
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(14)">
+  <h2 class="heading_text"><i class="fa fa-newspaper-o"></i> Newsletters</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow14"></i></span>
+  </div>
 
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container14">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button onclick="show_newsletters('')"><i class="fa fa-eye"></i> View N.Letters</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button onclick="add_newsletters()"><i class='fas fa-plus-square'></i> Add N.Letter</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button onclick="edit_and_delete_of_newsletters('')"><i class="fa fa-edit"></i> Edit & Delete</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
 
 </div>
 <!-- Hamburger Link Section Container End -->

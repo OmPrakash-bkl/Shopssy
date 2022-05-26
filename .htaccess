@@ -401,6 +401,13 @@ RewriteRule ^feedback/search_details/?$ feedback/search_details.php [L]
 
 # Customer Feedbacks End
 
+# Newsletter Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^newsletter/show_newsletters/?$ newsletter/show_newsletters.php [L]
+
+# Newsletter End
+
 # Shopssy Hub And Distributor Start
 
 

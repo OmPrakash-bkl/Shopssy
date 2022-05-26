@@ -6195,6 +6195,70 @@ function deleteOfFeedback(f_id) {
 
 /* Customer Feedback Section Start */
 
+/* News Letter Section Start */
+
+function show_newsletters(searchData) {
+    function UI_Fun_28(datas) { 
+        let totalC = 0;
+        unDisplay_preLoader();
+        let resultData = JSON.parse(datas);
+        
+        let table_datas = `<tr><th>S.NO</th>
+        <th>ID</th>
+        <th>CODING OF CONTENT</th>
+        <th>TITLE</th>
+        <th>SUBJECT</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            let html_data = `${resultData[i].html_data}`;
+            html_data = html_data.replaceAll("<", "&lt");
+            html_data = html_data.replaceAll(">", "&gt");
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].s_id}</td>
+            <td><pre><code>${html_data}</code></pre></td>
+            <td>${resultData[i].title}</td>
+            <td>${resultData[i].subject}</td>
+            </tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Newsletter Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../newsletter/show_newsletters/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_28(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_28(searchData);
+    }
+
+        search_place_name = "show_newsletters";
+        search_box_disabler();
+}
+
+/* News Letter Section End */
+
 /* Search Section Start */
 
 /* Request Sending and Response Getting Section Start */
@@ -6732,8 +6796,6 @@ function search_the_details() {
     
 
 }
-
-
 
 /* Search Section End */
 
