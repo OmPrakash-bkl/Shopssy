@@ -1049,6 +1049,36 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <!-- Customer Feedback Form End -->
 
+<!-- News Letter Section Start -->
+
+<div class="add_newsletter_form_container">
+
+<div class="add_newsletter_step1_container">
+<center>
+    <h1 class="form_title14">Newsletter Form</h1>
+</center>
+<form action="" class="add_newsletter_form" method="POST">
+<input type="hidden" id="newsletter_id">
+  <label for="html_data">Coding of content <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="html_data" autofocus> <br>
+  <p class="error_message_place html_data_error_message_place"></p>
+  <label for="newsletter_title">Title <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="newsletter_title"> <br>
+  <p class="error_message_place newsletter_title_error_message_place"></p>
+  <label for="newsletter_subject">Subject <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="newsletter_subject"> <br>
+  <p class="error_message_place newsletter_subject_error_message_place"></p>
+ <center>
+ <button type="button" class="newsletter_submition_btn">Submit</button>
+ <button type="button" class="newsletter_submition_btn2">Submit</button>
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- News Letter Section End -->
+
 </div>
 
 </div>

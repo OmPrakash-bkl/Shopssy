@@ -6259,6 +6259,242 @@ function show_newsletters(searchData) {
 
 /* News Letter Section End */
 
+/* News Letter Add Section Start */
+
+function add_newsletters() {
+    document.getElementsByClassName("form_title14")[0].innerHTML = "Newsletter Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementById("newsletter_id").value = document.getElementById("html_data").value = document.getElementById("newsletter_title").value  = document.getElementById("newsletter_subject").value = "";
+    document.getElementsByClassName("newsletter_submition_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_newsletter_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_newsletter_step1_container"); 
+    document.getElementsByClassName("newsletter_submition_btn2")[0].style.display = "none";
+    document.getElementsByClassName("newsletter_submition_btn")[0].style.display = "inline-block";
+}
+
+document.getElementsByClassName("newsletter_submition_btn")[0].addEventListener("click", function(event) {
+newsletter_form(event, "insert");
+});
+
+function newsletter_form(event, decisionPara) {
+event.preventDefault();
+
+let newsletter_id = document.getElementById("newsletter_id").value;
+let html_data = document.getElementById("html_data").value;
+let newsletter_title = document.getElementById("newsletter_title").value;
+let newsletter_subject = document.getElementById("newsletter_subject").value;
+
+newsletter_title = newsletter_title.replace(/\/+$/g, '');
+newsletter_subject = newsletter_subject.replace(/\/+$/g, '');
+newsletter_title = newsletter_title.replace(/[^a-zA-Z0-9@.,)%(!& ]/g, "");
+newsletter_subject = newsletter_subject.replace(/[^a-zA-Z0-9@,)(%!. ]/g, "");
+
+// html_data = html_data.replaceAll("<", "&lt");
+// html_data = html_data.replaceAll(">", "&gt");
+
+
+
+if(html_data == "") {
+    document.getElementsByClassName("html_data_error_message_place")[0].innerText = "Coding of content is required!";
+} else if(html_data.length <= 249) {
+    document.getElementsByClassName("html_data_error_message_place")[0].innerText = "Coding of content length must be minimum 250 characters!";
+} else {
+    document.getElementsByClassName("html_data_error_message_place")[0].innerText = "";
+}
+if(newsletter_title == "") {
+    document.getElementsByClassName("newsletter_title_error_message_place")[0].innerText = "Title is required!";
+} else if(newsletter_title.length <= 7) {
+    document.getElementsByClassName("newsletter_title_error_message_place")[0].innerText = "Title length must be minimum 8 characters!";
+} else {
+    document.getElementsByClassName("newsletter_title_error_message_place")[0].innerText = "";
+}
+if(newsletter_subject == "") {
+    document.getElementsByClassName("newsletter_subject_error_message_place")[0].innerText = "Notification for who is required!";
+} else if(newsletter_subject.length <= 19) {
+    document.getElementsByClassName("newsletter_subject_error_message_place")[0].innerText = "Subject for who length must be 20 characters!";
+} else {
+    document.getElementsByClassName("newsletter_subject_error_message_place")[0].innerText = "";
+}
+
+
+if((document.getElementsByClassName("html_data_error_message_place")[0].innerText == "") && (document.getElementsByClassName("newsletter_title_error_message_place")[0].innerText == "") && (document.getElementsByClassName("newsletter_subject_error_message_place")[0].innerText == "")) {
+
+    let newsletterDataObj = {
+        newsletter_title: "we not need to check the title. because the title will repeat",
+    }
+    newsletterDataObj = JSON.stringify(newsletterDataObj);
+    display_preLoader();
+    let newsletterTitleCheckerRes = make_user_details("POST", "../newsletter/check_newsletter_title/", `${newsletterDataObj}`);
+
+    
+    newsletterTitleCheckerRes.then((response) => {
+        unDisplay_preLoader();
+        let avail_count = response;
+        newsletterDataObj = {
+            newsletter_id: newsletter_id,
+            html_data: html_data,
+            newsletter_title: newsletter_title,
+            newsletter_subject: newsletter_subject
+        }
+      
+        newsletterDataObj = JSON.stringify(newsletterDataObj);
+
+        
+    if(avail_count == 0 && decisionPara == "insert") {
+        document.getElementsByClassName("newsletter_title_error_message_place")[0].innerText = "";
+        display_preLoader();
+        if(decisionPara == "insert") {
+            let newsletterInsertDatasRes = make_user_details("POST", "../newsletter/insert_newsletter_data/", `${newsletterDataObj}`);
+    
+            newsletterInsertDatasRes.then((goodResponse) => {
+                unDisplay_preLoader();
+                alert(goodResponse);
+                document.getElementById("newsletter_id").value = document.getElementById("html_data").value = document.getElementById("newsletter_title").value  = document.getElementById("newsletter_subject").value = "";
+            }).catch((badResponse) => {
+                console.log(badResponse);
+            })
+       
+        }
+    } else {
+        document.getElementsByClassName("newsletter_title_error_message_place")[0].innerText = "Title already exits!";
+    }
+   
+    if(decisionPara == "update") {
+        if(avail_count >= 1) {
+            document.getElementsByClassName("newsletter_title_error_message_place")[0].innerText = "Title already exits!";
+        } else {
+            document.getElementsByClassName("newsletter_title_error_message_place")[0].innerText = "";
+           
+            let newsletterUpdateDatasRes = make_user_details("POST", "../newsletter/update_newsletter/", `${newsletterDataObj}`);
+    
+            newsletterUpdateDatasRes.then((goodResponse) => {
+                unDisplay_preLoader();
+                alert(goodResponse);
+                document.getElementById("newsletter_id").value = document.getElementById("html_data").value = document.getElementById("newsletter_title").value  = document.getElementById("newsletter_subject").value = "";
+
+            }).catch((badResponse) => {
+                console.log(badResponse);
+            })
+        }
+        
+    }
+
+    })
+  }
+}
+
+
+/* News Letter Add Section End */
+
+/* News Letter Update Section Start */
+
+function edit_and_delete_of_newsletters(searchData) {
+
+    function UI_Fun_29(datas) { 
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>ID</th>
+        <th>TITLE</th>
+        <th>SUBJECT</th>
+        <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].s_id}</td>
+            <td>${resultData[i].title}</td>
+            <td>${resultData[i].subject}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfNLetter(${resultData[i].s_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfNLetter(${resultData[i].s_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Newsletter Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../newsletter/show_newsletters/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_29(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_29(searchData);
+    }
+
+    search_place_name = "edit_and_delete_of_newsletters";
+    search_box_disabler();
+}
+
+function editOfNLetter(s_id) {
+    display_preLoader();
+    let responseObj = make_user_details("GET", `../newsletter/specific_nletter_detail/id/${s_id}`, "");
+
+    document.getElementsByClassName("newsletter_submition_btn2")[0].style.display = "inline-block";
+    document.getElementsByClassName("newsletter_submition_btn")[0].style.display = "none";
+
+   
+
+    responseObj.then((resObj) => {
+        unDisplay_preLoader();
+        newsletterData = JSON.parse(resObj);
+        
+        document.getElementById("newsletter_id").value = newsletterData.s_id;
+        document.getElementById("html_data").value = newsletterData.html_data;
+        document.getElementById("newsletter_title").value = newsletterData.title;
+        document.getElementById("newsletter_subject").value = newsletterData.subject;
+       
+       
+    })
+    document.getElementsByClassName("form_title14")[0].innerHTML = "Newsletter Edit Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("add_newsletter_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_newsletter_step1_container"); 
+}
+
+document.getElementsByClassName("newsletter_submition_btn2")[0].addEventListener("click", function(event) {
+    newsletter_form(event, "update");
+    });
+
+/* News Letter Update Section End */
+
+/* News Letter Delete Section Start */
+
+function deleteOfNLetter(s_id) {
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let newsletterDeleteReqObj = make_user_details("DELETE", `../newsletter/newsletter_deletion/id/${s_id}`, ``);
+        newsletterDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            show_newsletters("");
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
+    }
+}
+
+/* News Letter Delete Section End */
+
 /* Search Section Start */
 
 /* Request Sending and Response Getting Section Start */
@@ -6783,6 +7019,42 @@ function search_the_details() {
             
             if(search_place_name == "customer_feedback") {
                 customer_feedback(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "show_newsletters") {
+        let responseObjs = make_response_details("POST", "../newsletter/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "show_newsletters") {
+                show_newsletters(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "edit_and_delete_of_newsletters") {
+        let responseObjs = make_response_details("POST", "../newsletter/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "edit_and_delete_of_newsletters") {
+                edit_and_delete_of_newsletters(response);
             }
            
     

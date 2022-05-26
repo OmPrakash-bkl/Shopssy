@@ -406,6 +406,24 @@ RewriteRule ^feedback/search_details/?$ feedback/search_details.php [L]
 RewriteCond %{REQUEST_METHOD} =GET
 RewriteRule ^newsletter/show_newsletters/?$ newsletter/show_newsletters.php [L]
 
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^newsletter/check_newsletter_title/?$ newsletter/check_newsletter_title.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^newsletter/insert_newsletter_data/?$ newsletter/insert_newsletter_data.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^newsletter/update_newsletter/?$ newsletter/update_newsletter.php [L]
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^newsletter/specific_nletter_detail/id/([^/\*]+)?$ newsletter/specific_nletter_detail.php?id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =DELETE
+RewriteRule ^newsletter/newsletter_deletion/id/([^/\*]+)?$ newsletter/newsletter_deletion.php?id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^newsletter/search_details/?$ newsletter/search_details.php [L]
+
 # Newsletter End
 
 # Shopssy Hub And Distributor Start
