@@ -6586,6 +6586,17 @@ document.getElementsByClassName("admin_submition_btn")[0].addEventListener("clic
 admins_form(event, "insert");
 });
 
+let filename = "";
+let admin_photo = "";
+let admin_photo_raw_data = "";
+document.getElementById("admin_photo").addEventListener("change", function() {
+ [filename] = document.getElementById("admin_photo").files;
+    if(filename) {
+        admin_photo_raw_data = filename;
+        admin_photo = filename.name;
+    }
+})
+
 function admins_form(event, decisionPara) {
 event.preventDefault();
 
@@ -6593,7 +6604,7 @@ let admin_management_id = document.getElementById("admin_management_id").value;
 let admin_email_id = document.getElementById("admin_email_id").value;
 let admin_password = document.getElementById("admin_password").value;
 let admin_name = document.getElementById("admin_name").value;
-let admin_photo = document.getElementById("admin_photo").value;
+ admin_photo = admin_photo;
 let admin_phone_number = document.getElementById("admin_phone_number").value;
 let admin_address = document.getElementById("admin_address").value;
 let admin_type = document.getElementById("admin_type").value;
@@ -6645,7 +6656,7 @@ if(admin_photo == "") {
 
 if(admin_phone_number == "") {
     document.getElementsByClassName("admin_phone_number_error_message_place")[0].innerText = "Phone numer is required!";
-} else if(admin_phone_number.length <= 10) {
+} else if(admin_phone_number.length <= 9) {
     document.getElementsByClassName("admin_phone_number_error_message_place")[0].innerText = "Phone numer length must be 10 characters!";
 } else {
     document.getElementsByClassName("admin_phone_number_error_message_place")[0].innerText = "";
@@ -6653,7 +6664,7 @@ if(admin_phone_number == "") {
 
 if(admin_address == "") {
     document.getElementsByClassName("admin_address_error_message_place")[0].innerText = "Address for who is required!";
-} else if(admin_address.length <= 15) {
+} else if(admin_address.length <= 14) {
     document.getElementsByClassName("admin_address_error_message_place")[0].innerText = "Address length must be 15 characters!";
 } else {
     document.getElementsByClassName("admin_address_error_message_place")[0].innerText = "";
@@ -6661,7 +6672,7 @@ if(admin_address == "") {
 
 if(admin_type == "") {
     document.getElementsByClassName("admin_type_error_message_place")[0].innerText = "Admin type is required!";
-} else if(admin_type.length <= 6) {
+} else if(admin_type.length <= 5) {
     document.getElementsByClassName("admin_type_error_message_place")[0].innerText = "Admin type length must be 6 characters!";
 } else {
     document.getElementsByClassName("admin_type_error_message_place")[0].innerText = "";
@@ -6705,6 +6716,24 @@ if((document.getElementsByClassName("admin_email_id_error_message_place")[0].inn
             adminInsertDatasRes.then((goodResponse) => {
                 unDisplay_preLoader();
                 alert(goodResponse);
+
+                    var formData = new FormData();
+                formData.append("filename", admin_photo_raw_data)
+                    $.ajax({
+                          url: "../admins/image_uploader/",
+                          type: 'POST',
+                          data: formData,
+                          async: false,
+                          success: function (data) {
+                              //success callback
+                              console.log(data);
+                          },
+                          cache: false,
+                          contentType: false,
+                          processData: false
+                         });
+            
+
                 document.getElementById("admin_management_id").value = document.getElementById("admin_email_id").value = document.getElementById("admin_password").value  = document.getElementById("admin_name").value = document.getElementById("admin_photo").value = document.getElementById("admin_phone_number").value = document.getElementById("admin_address").value  = document.getElementById("admin_type").value = "";
             }).catch((badResponse) => {
                 console.log(badResponse);
@@ -6716,7 +6745,7 @@ if((document.getElementsByClassName("admin_email_id_error_message_place")[0].inn
     }
    
     if(decisionPara == "update") {
-        if(avail_count >= 1) {
+        if(avail_count >= 2) {
             document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText = "Email already exits!";
         } else {
             document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText = "";
@@ -6725,6 +6754,24 @@ if((document.getElementsByClassName("admin_email_id_error_message_place")[0].inn
     
             adminsUpdateDatasRes.then((goodResponse) => {
                 unDisplay_preLoader();
+
+                
+                var formData = new FormData();
+                formData.append("filename", admin_photo_raw_data)
+                    $.ajax({
+                          url: "../admins/image_uploader/",
+                          type: 'POST',
+                          data: formData,
+                          async: false,
+                          success: function (data) {
+                              //success callback
+                              console.log(data);
+                          },
+                          cache: false,
+                          contentType: false,
+                          processData: false
+                         });
+
                 alert(goodResponse);
                 document.getElementById("admin_management_id").value = document.getElementById("admin_email_id").value = document.getElementById("admin_password").value  = document.getElementById("admin_name").value = document.getElementById("admin_photo").value = document.getElementById("admin_phone_number").value = document.getElementById("admin_address").value  = document.getElementById("admin_type").value = "";
 
@@ -6804,7 +6851,7 @@ function edit_and_delete_of_admins(searchData) {
     search_box_disabler();
 }
 
-function editOfNLetter(a_id) {
+function editOfAdmins(a_id) {
     display_preLoader();
     let responseObj = make_user_details("GET", `../admins/specific_admin_detail/id/${a_id}`, "");
 
@@ -6821,7 +6868,7 @@ function editOfNLetter(a_id) {
         document.getElementById("admin_email_id").value = adminsData.email;
         document.getElementById("admin_password").value = adminsData.password;
         document.getElementById("admin_name").value = adminsData.name;
-        document.getElementById("admin_photo").value = adminsData.photo;
+        document.getElementById("admin_photo").src = adminsData.photo;
         document.getElementById("admin_phone_number").value = adminsData.ph_number;
         document.getElementById("admin_address").value = adminsData.address;
         document.getElementById("admin_type").value = adminsData.admin_type;

@@ -13,7 +13,7 @@ if(isset($_SERVER['REQUEST_METHOD'])) {
     if(is_numeric($search_keyword)) {
         $require_data_query = "SELECT * FROM `admin` WHERE `a_id` LIKE '%$search_keyword%';";
     } else {
-     $require_data_query = "SELECT * FROM `admin` WHERE `email` LIKE '%$search_keyword%' OR `name` LIKE '%$search_keyword%' OR `ph_number` LIKE '%$search_keyword%';"; 
+     $require_data_query = "SELECT * FROM `admin` WHERE `email` LIKE '%$search_keyword%' OR `name` LIKE '%$search_keyword%';"; 
     }
     
     $require_data_result = mysqli_query($conn, $require_data_query);

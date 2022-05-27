@@ -49,6 +49,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <script src="https://kit.fontawesome.com/628c629a17.js" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&family=Josefin+Sans:wght@700&family=Lobster&family=Pacifico&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/admin_style.css">
 
@@ -1137,7 +1138,7 @@ if(isset($_SESSION['db_u_user_type'])) {
 <center>
     <h1 class="form_title15">Newsletter Form</h1>
 </center>
-<form action="" class="add_admin_management_form" method="POST">
+<form action="" class="add_admin_management_form" method="POST" enctype="multipart/form-data">
 <input type="hidden" id="admin_management_id">
   <label for="admin_email_id">Email <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="email" id="admin_email_id" autofocus> <br>
@@ -1146,10 +1147,10 @@ if(isset($_SESSION['db_u_user_type'])) {
   <input type="password" id="admin_password"> <br>
   <p class="error_message_place admin_password_error_message_place"></p>
   <label for="admin_name">Name <span class="required_field_asterisk_symbol">*</span></label> <br>
-  <input type="file" id="admin_name"> <br>
+  <input type="text" id="admin_name"> <br>
   <p class="error_message_place admin_name_error_message_place"></p>
   <label for="admin_photo">Photo <span class="required_field_asterisk_symbol">*</span></label> <br>
-  <input type="text" id="admin_photo"> <br>
+  <input type="file" id="admin_photo"> <br>
   <p class="error_message_place admin_photo_error_message_place"></p>
   <label for="admin_phone_number">Phone number <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="admin_phone_number"> <br>
