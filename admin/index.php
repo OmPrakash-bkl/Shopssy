@@ -1149,8 +1149,8 @@ if(isset($_SESSION['db_u_user_type'])) {
   <label for="admin_name">Name <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="admin_name"> <br>
   <p class="error_message_place admin_name_error_message_place"></p>
-  <label for="admin_photo">Photo <span class="required_field_asterisk_symbol">*</span></label> <br>
-  <input type="file" id="admin_photo"> <br>
+  <label for="admin_photo">Upload Image <span class="required_field_asterisk_symbol">*</span></label>  <br>
+  <input type="file" id="admin_photo">
   <p class="error_message_place admin_photo_error_message_place"></p>
   <label for="admin_phone_number">Phone number <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="admin_phone_number"> <br>

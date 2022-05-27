@@ -6663,7 +6663,7 @@ if(admin_phone_number == "") {
 }
 
 if(admin_address == "") {
-    document.getElementsByClassName("admin_address_error_message_place")[0].innerText = "Address for who is required!";
+    document.getElementsByClassName("admin_address_error_message_place")[0].innerText = "Address is required!";
 } else if(admin_address.length <= 14) {
     document.getElementsByClassName("admin_address_error_message_place")[0].innerText = "Address length must be 15 characters!";
 } else {
