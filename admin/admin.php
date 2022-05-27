@@ -28,6 +28,7 @@
         <input type="password" name="admin_password" class="input_form_boxes" placeholder="password"> <br>
         <button type="submit" id="admin_login_form_submission" name="admin_login_form_submission">LOGIN</button>
     </form>
+    <span class="forgot_password_link"><a href="#">Forgot your password?</a></span>
     </center>
 
     </div>
