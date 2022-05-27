@@ -1365,3 +1365,11 @@ insert into newsletter(html_data, title, subject) values
 </body>
 </html>", "NewsLetter", "Fossil Smartwatch At Rs.7999.00 Only!");
 
+/* Admin */
+
+create table admin(a_id int(100) AUTO_INCREMENT, email varchar(200), password varchar(300), name varchar(200), photo varchar(200), ph_number varchar(200), address varchar(200), admin_type varchar(100), primary key(a_id));
+
+insert into admin(email, password, name, photo, ph_number, address, admin_type) values
+('omprakash2001bkl@gmail.com', 'Admin123', 'Om Prakash', 'prakash.jpg', '8838067309', '13/A, Prasanna colony, 3rd street, avaniyapuram, madurai - 12.', 'master');
+
+
