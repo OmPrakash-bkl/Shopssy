@@ -47,7 +47,7 @@ $email = $_POST['mail_add'];
             $mail->Body="<b>Dear User</b>
             <h3>We received a request to reset your password.</h3>
             <p>Kindly click the below link to reset your password</p>
-            http://localhost:3000/reset.php
+            <a href='http://localhost:3000/reset.php'>http://localhost:3000/reset.php</a>
             <br><br>
             <p>With regrads,</p>
             <b>Shopssy - The Online Shopping Site.</b>";
@@ -114,7 +114,7 @@ if(isset($_POST['recoverOfAdmin'])) {
             $mail->Body="<b>Dear Admin</b>
             <h3>We received a request to reset your password.</h3>
             <p>Kindly click the below link to reset your password</p>
-            http://localhost:3000/reset.php?rredswegtbfmogRmAjdvmxiln=1
+            <a href='http://localhost:3000/reset.php?rredswegtbfmogRmAjdvmxiln=1'>http://localhost:3000/reset.php?rredswegtbfmogRmAjdvmxiln=1</a>
             <br><br>
             <p>With regrads,</p>
             <b>Shopssy - The Online Shopping Site.</b>";

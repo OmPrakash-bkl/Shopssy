@@ -6495,6 +6495,374 @@ function deleteOfNLetter(s_id) {
 
 /* News Letter Delete Section End */
 
+/* Admin Management Section Start */
+
+/* Admins View Section Start */
+
+function show_admins(searchData) {
+    function UI_Fun_30(datas) { 
+        let totalC = 0;
+        unDisplay_preLoader();
+        let resultData = JSON.parse(datas);
+        
+        let table_datas = `<tr><th>S.NO</th>
+        <th>ID</th>
+        <th>EMAIL</th>
+        <th>PASSWORD</th>
+        <th>NAME</th>
+        <th>PHOTO</th>
+        <th>PHONE NUMBER</th>
+        <th>ADDRESS</th>
+        <th>ADMIN TYPE</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+           
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].a_id}</td>
+            <td>${resultData[i].email}</td>
+            <td>${resultData[i].password}</td>
+            <td>${resultData[i].name}</td>
+            <td><img src="./images/${resultData[i].photo}" height="80px" width="80px" alt="admin images"></td>
+            <td>${resultData[i].ph_number}</td>
+            <td>${resultData[i].address}</td>
+            <td>${resultData[i].admin_type}</td>
+            </tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Admin Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+
+    }
+
+    if(searchData == 0) { 
+        let responseObj = make_user_details("GET", "../admins/show_admins/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_30(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_30(searchData);
+    }
+
+        search_place_name = "show_admins";
+        search_box_disabler();
+}
+
+/* Admins View Section End */
+
+/* Admins Add Section Start */
+
+function add_admins() {
+    document.getElementsByClassName("form_title15")[0].innerHTML = "Admins Form";
+    undisplay_displayed_blocked_containers(); 
+
+    document.getElementById("admin_management_id").value = document.getElementById("admin_email_id").value = document.getElementById("admin_password").value  = document.getElementById("admin_name").value = document.getElementById("admin_photo").value = document.getElementById("admin_phone_number").value = document.getElementById("admin_address").value  = document.getElementById("admin_type").value = "";
+
+    document.getElementsByClassName("admin_submition_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_admin_management_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_admin_management_step1_container"); 
+    document.getElementsByClassName("admin_submition_btn2")[0].style.display = "none";
+    document.getElementsByClassName("admin_submition_btn")[0].style.display = "inline-block";
+}
+
+document.getElementsByClassName("admin_submition_btn")[0].addEventListener("click", function(event) {
+admins_form(event, "insert");
+});
+
+function admins_form(event, decisionPara) {
+event.preventDefault();
+
+let admin_management_id = document.getElementById("admin_management_id").value;
+let admin_email_id = document.getElementById("admin_email_id").value;
+let admin_password = document.getElementById("admin_password").value;
+let admin_name = document.getElementById("admin_name").value;
+let admin_photo = document.getElementById("admin_photo").value;
+let admin_phone_number = document.getElementById("admin_phone_number").value;
+let admin_address = document.getElementById("admin_address").value;
+let admin_type = document.getElementById("admin_type").value;
+
+admin_email_id = admin_email_id.replace(/\/+$/g, '');
+admin_password = admin_password.replace(/\/+$/g, '');
+admin_name = admin_name.replace(/\/+$/g, '');
+admin_phone_number = admin_phone_number.replace(/\/+$/g, '');
+admin_address = admin_address.replace(/\/+$/g, '');
+admin_type = admin_type.replace(/\/+$/g, '');
+
+admin_name = admin_name.replace(/[^a-zA-Z0-9@.,)%(!& ]/g, "");
+admin_phone_number = admin_phone_number.replace(/[^a-zA-Z0-9@,)(%!. ]/g, "");
+admin_address = admin_address.replace(/[^a-zA-Z0-9@.,)%(!& ]/g, "");
+admin_type = admin_type.replace(/[^a-zA-Z0-9@,)(%!. ]/g, "");
+
+
+if(admin_email_id == "") {
+    document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText = "Email is required!";
+} else if(admin_email_id.length <= 8) {
+    document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText = "Email length must be minimum 9 characters!";
+} else {
+    document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText = "";
+}
+
+if(admin_password == "") {
+    document.getElementsByClassName("admin_password_error_message_place")[0].innerText = "Password is required!";
+} else if(admin_password.length <= 7) {
+    document.getElementsByClassName("admin_password_error_message_place")[0].innerText = "Password length must be minimum 8 characters!";
+} else {
+    document.getElementsByClassName("admin_password_error_message_place")[0].innerText = "";
+}
+
+if(admin_name == "") {
+    document.getElementsByClassName("admin_name_error_message_place")[0].innerText = "Name is required!";
+} else if(admin_name.length <= 5) {
+    document.getElementsByClassName("admin_name_error_message_place")[0].innerText = "Name length must be 6 characters!";
+} else {
+    document.getElementsByClassName("admin_name_error_message_place")[0].innerText = "";
+}
+
+if(admin_photo == "") {
+    document.getElementsByClassName("admin_photo_error_message_place")[0].innerText = "Profile picture is required!";
+} else if(admin_photo.length <= 4) {
+    document.getElementsByClassName("admin_photo_error_message_place")[0].innerText = "Profile picture name length must be 5 characters!";
+} else {
+    document.getElementsByClassName("admin_photo_error_message_place")[0].innerText = "";
+}
+
+if(admin_phone_number == "") {
+    document.getElementsByClassName("admin_phone_number_error_message_place")[0].innerText = "Phone numer is required!";
+} else if(admin_phone_number.length <= 10) {
+    document.getElementsByClassName("admin_phone_number_error_message_place")[0].innerText = "Phone numer length must be 10 characters!";
+} else {
+    document.getElementsByClassName("admin_phone_number_error_message_place")[0].innerText = "";
+}
+
+if(admin_address == "") {
+    document.getElementsByClassName("admin_address_error_message_place")[0].innerText = "Address for who is required!";
+} else if(admin_address.length <= 15) {
+    document.getElementsByClassName("admin_address_error_message_place")[0].innerText = "Address length must be 15 characters!";
+} else {
+    document.getElementsByClassName("admin_address_error_message_place")[0].innerText = "";
+}
+
+if(admin_type == "") {
+    document.getElementsByClassName("admin_type_error_message_place")[0].innerText = "Admin type is required!";
+} else if(admin_type.length <= 6) {
+    document.getElementsByClassName("admin_type_error_message_place")[0].innerText = "Admin type length must be 6 characters!";
+} else {
+    document.getElementsByClassName("admin_type_error_message_place")[0].innerText = "";
+}
+
+
+
+if((document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText == "") && (document.getElementsByClassName("admin_password_error_message_place")[0].innerText == "") && (document.getElementsByClassName("admin_name_error_message_place")[0].innerText == "") && (document.getElementsByClassName("admin_photo_error_message_place")[0].innerText == "") && (document.getElementsByClassName("admin_phone_number_error_message_place")[0].innerText == "") && (document.getElementsByClassName("admin_address_error_message_place")[0].innerText == "") && (document.getElementsByClassName("admin_type_error_message_place")[0].innerText == "")) {
+
+    let adminsDataObj = {
+        admin_email_id: admin_email_id
+    }
+    adminsDataObj = JSON.stringify(adminsDataObj);
+    display_preLoader();
+    let adminsEmailCheckerRes = make_user_details("POST", "../admins/check_admin_email/", `${adminsDataObj}`);
+
+    
+    adminsEmailCheckerRes.then((response) => {
+        unDisplay_preLoader();
+        let avail_count = response;
+        adminsDataObj = {
+            admin_management_id: admin_management_id,
+            admin_email_id: admin_email_id,
+            admin_password: admin_password,
+            admin_name: admin_name,
+            admin_photo: admin_photo,
+            admin_phone_number: admin_phone_number,
+            admin_address: admin_address,
+            admin_type: admin_type
+        }
+      
+        adminsDataObj = JSON.stringify(adminsDataObj);
+
+        
+    if(avail_count == 0 && decisionPara == "insert") {
+        document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText = "";
+        display_preLoader();
+        if(decisionPara == "insert") {
+            let adminInsertDatasRes = make_user_details("POST", "../admins/insert_admins_data/", `${adminsDataObj}`);
+    
+            adminInsertDatasRes.then((goodResponse) => {
+                unDisplay_preLoader();
+                alert(goodResponse);
+                document.getElementById("admin_management_id").value = document.getElementById("admin_email_id").value = document.getElementById("admin_password").value  = document.getElementById("admin_name").value = document.getElementById("admin_photo").value = document.getElementById("admin_phone_number").value = document.getElementById("admin_address").value  = document.getElementById("admin_type").value = "";
+            }).catch((badResponse) => {
+                console.log(badResponse);
+            })
+       
+        }
+    } else {
+        document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText = "Email already exits!";
+    }
+   
+    if(decisionPara == "update") {
+        if(avail_count >= 1) {
+            document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText = "Email already exits!";
+        } else {
+            document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText = "";
+           
+            let adminsUpdateDatasRes = make_user_details("POST", "../admins/update_admins/", `${adminsDataObj}`);
+    
+            adminsUpdateDatasRes.then((goodResponse) => {
+                unDisplay_preLoader();
+                alert(goodResponse);
+                document.getElementById("admin_management_id").value = document.getElementById("admin_email_id").value = document.getElementById("admin_password").value  = document.getElementById("admin_name").value = document.getElementById("admin_photo").value = document.getElementById("admin_phone_number").value = document.getElementById("admin_address").value  = document.getElementById("admin_type").value = "";
+
+            }).catch((badResponse) => {
+                console.log(badResponse);
+            })
+        }
+        
+    }
+
+    })
+  }
+}
+
+
+/* Admins Add Section End */
+
+/* Admins Edit Section Start */
+
+function edit_and_delete_of_admins(searchData) {
+
+    function UI_Fun_31(datas) { 
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>ID</th>
+        <th>EMAIL</th>
+        <th>PASSWORD</th>
+        <th>NAME</th>
+        <th>PHOTO</th>
+        <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].a_id}</td>
+            <td>${resultData[i].email}</td>
+            <td>${resultData[i].password}</td>
+            <td>${resultData[i].name}</td>
+            <td>${resultData[i].photo}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfAdmins(${resultData[i].a_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfAdmins(${resultData[i].a_id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Admins Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+    }
+
+    if(searchData == 0) { 
+        let responseObj = make_user_details("GET", "../admins/show_admins/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_31(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_31(searchData);
+    }
+
+    search_place_name = "edit_and_delete_of_admins";
+    search_box_disabler();
+}
+
+function editOfNLetter(a_id) {
+    display_preLoader();
+    let responseObj = make_user_details("GET", `../admins/specific_admin_detail/id/${a_id}`, "");
+
+    document.getElementsByClassName("admin_submition_btn2")[0].style.display = "inline-block";
+    document.getElementsByClassName("admin_submition_btn")[0].style.display = "none";
+
+   
+
+    responseObj.then((resObj) => {
+        unDisplay_preLoader();
+        adminsData = JSON.parse(resObj);
+        
+        document.getElementById("admin_management_id").value = adminsData.a_id;
+        document.getElementById("admin_email_id").value = adminsData.email;
+        document.getElementById("admin_password").value = adminsData.password;
+        document.getElementById("admin_name").value = adminsData.name;
+        document.getElementById("admin_photo").value = adminsData.photo;
+        document.getElementById("admin_phone_number").value = adminsData.ph_number;
+        document.getElementById("admin_address").value = adminsData.address;
+        document.getElementById("admin_type").value = adminsData.admin_type;
+       
+       
+    })
+    document.getElementsByClassName("form_title15")[0].innerHTML = "Admins Edit Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("add_admin_management_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_admin_management_step1_container"); 
+}
+
+document.getElementsByClassName("admin_submition_btn2")[0].addEventListener("click", function(event) {
+    admins_form(event, "update");
+    });
+
+
+/* Admins Edit Section End */
+
+/* Admins Delete Section Start */
+
+function deleteOfAdmins(id) {
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let adminDeleteReqObj = make_user_details("DELETE", `../admins/admins_deletion/id/${id}`, ``);
+        adminDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            show_admins(0);
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
+    }
+}
+
+/* Admins Delete Section End */
+
+/* Admin Management Section End */
+
+
 /* Search Section Start */
 
 /* Request Sending and Response Getting Section Start */
@@ -7055,6 +7423,42 @@ function search_the_details() {
             
             if(search_place_name == "edit_and_delete_of_newsletters") {
                 edit_and_delete_of_newsletters(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "show_admins") {
+        let responseObjs = make_response_details("POST", "../admins/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "show_admins") {
+                show_admins(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "edit_and_delete_of_admins") {
+        let responseObjs = make_response_details("POST", "../admins/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "edit_and_delete_of_admins") {
+                edit_and_delete_of_admins(response);
             }
            
     

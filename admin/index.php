@@ -463,7 +463,7 @@ if(isset($_SESSION['db_u_user_type'])) {
   
     <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container15">
     <div class="hamburger_link_section_inner_hidden_floating_container">
-    <button onclick="show_admins("")"><i class="fa fa-eye"></i> View Admins</button>
+    <button onclick="show_admins(0)"><i class="fa fa-eye"></i> View Admins</button>
     <span><i class="fa fa-arrow-circle-right"></i></span>
     </div>
     <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -471,7 +471,7 @@ if(isset($_SESSION['db_u_user_type'])) {
     <span><i class="fa fa-arrow-circle-right"></i></span>
     </div>
     <div class="hamburger_link_section_inner_hidden_floating_container">
-    <button onclick="edit_and_delete_of_admins("")"><i class="fa fa-edit"></i> Edit & Delete</button>
+    <button onclick="edit_and_delete_of_admins(0)"><i class="fa fa-edit"></i> Edit & Delete</button>
     <span><i class="fa fa-arrow-circle-right"></i></span>
     </div>
     </div>
@@ -1128,6 +1128,48 @@ if(isset($_SESSION['db_u_user_type'])) {
 </div>
 
 <!-- News Letter Section End -->
+
+<!-- Admin Management Section Start -->
+
+<div class="add_admin_management_form_container">
+
+<div class="add_admin_management_step1_container">
+<center>
+    <h1 class="form_title15">Newsletter Form</h1>
+</center>
+<form action="" class="add_admin_management_form" method="POST">
+<input type="hidden" id="admin_management_id">
+  <label for="admin_email_id">Email <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="email" id="admin_email_id" autofocus> <br>
+  <p class="error_message_place admin_email_id_error_message_place"></p>
+  <label for="admin_password">Password <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="password" id="admin_password"> <br>
+  <p class="error_message_place admin_password_error_message_place"></p>
+  <label for="admin_name">Name <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="file" id="admin_name"> <br>
+  <p class="error_message_place admin_name_error_message_place"></p>
+  <label for="admin_photo">Photo <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="admin_photo"> <br>
+  <p class="error_message_place admin_photo_error_message_place"></p>
+  <label for="admin_phone_number">Phone number <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="admin_phone_number"> <br>
+  <p class="error_message_place admin_phone_number_error_message_place"></p>
+  <label for="admin_address">Address <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="admin_address"> <br>
+  <p class="error_message_place admin_address_error_message_place"></p>
+  <label for="admin_type">Admin Type <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="text" id="admin_type"> <br>
+  <p class="error_message_place admin_type_error_message_place"></p>
+ <center>
+ <button type="button" class="admin_submition_btn">Submit</button>
+ <button type="button" class="admin_submition_btn2">Submit</button>
+ </center>
+</form>
+</div>
+
+</div>
+
+<!-- Admin Management Section End -->
 
 </div>
 

@@ -426,6 +426,31 @@ RewriteRule ^newsletter/search_details/?$ newsletter/search_details.php [L]
 
 # Newsletter End
 
+# Admins Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^admins/show_admins/?$ admins/show_admins.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^admins/check_admin_email/?$ admins/check_admin_email.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^admins/insert_admins_data/$ admins/insert_admins_data.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^admins/update_admins/?$ admins/update_admins.php [L]
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^admins/specific_admin_detail/id/([^/\*]+)?$ admins/specific_admin_detail.php?id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =DELETE
+RewriteRule ^admins/admins_deletion/id/([^/\*]+)?$ admins/admins_deletion.php?id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^admins/search_details/?$ admins/search_details.php [L]
+
+# Admin End
+
 # Shopssy Hub And Distributor Start
 
 RewriteCond %{REQUEST_METHOD} =POST
