@@ -1,0 +1,164 @@
+/* Code Reset Start*/
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+a:hover, a:active, a:visited, a:link, a:focus {
+    outline: none;
+    background: none;
+    border: none;
+    background-color: none;
+}
+:focus {
+    outline: none !important;
+}
+a{
+    -webkit-tap-highlight-color: transparent;
+ }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    box-shadow: 0 0 0 30px white inset !important;
+}
+
+body {
+    /* font-family: 'Josefin Sans', sans-serif; */
+    font-family: Arial, Helvetica, sans-serif;
+    background: url('../images/blur2.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 200%;
+}
+
+/* width */
+::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px gainsboro; 
+    border-radius: 5px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #1792E9; 
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #137cc7; 
+  }
+
+/* Code Reset End*/
+
+/* Login Box Container Start */
+
+.login_box_container {
+    margin: 10% 30%;
+    height: 300px;
+    width: 40%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: rgb(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 40px 100px;
+}
+
+.company_name {
+    font-size: 40px;
+    color: rgb(0, 0, 0, 0.8);
+    margin-bottom: 10px;
+}
+
+.input_form_boxes {
+    width: 100%;
+    height: 30px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgb(0, 0, 0, 0.8);
+    margin-bottom: 40px;
+
+}
+#admin_login_form_submission {
+    border: 0px;
+    border-radius: 5px;
+    background-color: #137cc7;
+    color: black;
+    padding: 10px 20px;
+    font-weight: bold;
+    width: 100%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+#admin_login_form_submission:hover {
+    background-color: #106bad;
+}
+
+/* Login Box Container End */
+
+/* Response Section Start */
+
+@media only screen and (max-width:1200px) {
+    .login_box_container {
+        margin: 10% 20%;
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width:1000px) {
+    .login_box_container {
+        margin: 10% 25%;
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width:800px) {
+    .login_box_container {
+        margin: 10% 20%;
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width:800px) {
+    .login_box_container {
+        margin: 10% 15%;
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .login_box_container {
+        margin: 10% 10%;
+        width: 80%;
+    }
+    .login_box_container {
+        padding: 40px 50px;
+    }
+}
+
+@media only screen and (max-width:400px) {
+    .login_box_container {
+        margin: 10% 5%;
+        height: 380px;
+        width: 90%;
+    }
+    .login_box_container {
+        padding: 40px 20px;
+    }
+}
+
+/* Response Section End */
+
+
+
