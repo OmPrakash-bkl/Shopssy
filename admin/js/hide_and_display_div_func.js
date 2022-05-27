@@ -6716,7 +6716,7 @@ if((document.getElementsByClassName("admin_email_id_error_message_place")[0].inn
             adminInsertDatasRes.then((goodResponse) => {
                 unDisplay_preLoader();
                 alert(goodResponse);
-
+                display_preLoader();
                     var formData = new FormData();
                 formData.append("filename", admin_photo_raw_data)
                     $.ajax({
@@ -6732,7 +6732,7 @@ if((document.getElementsByClassName("admin_email_id_error_message_place")[0].inn
                           contentType: false,
                           processData: false
                          });
-            
+                         unDisplay_preLoader();
 
                 document.getElementById("admin_management_id").value = document.getElementById("admin_email_id").value = document.getElementById("admin_password").value  = document.getElementById("admin_name").value = document.getElementById("admin_photo").value = document.getElementById("admin_phone_number").value = document.getElementById("admin_address").value  = document.getElementById("admin_type").value = "";
             }).catch((badResponse) => {
@@ -6749,13 +6749,13 @@ if((document.getElementsByClassName("admin_email_id_error_message_place")[0].inn
             document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText = "Email already exits!";
         } else {
             document.getElementsByClassName("admin_email_id_error_message_place")[0].innerText = "";
-           
+            display_preLoader();
             let adminsUpdateDatasRes = make_user_details("POST", "../admins/update_admins/", `${adminsDataObj}`);
     
             adminsUpdateDatasRes.then((goodResponse) => {
                 unDisplay_preLoader();
 
-                
+                display_preLoader();
                 var formData = new FormData();
                 formData.append("filename", admin_photo_raw_data)
                     $.ajax({
@@ -6771,10 +6771,10 @@ if((document.getElementsByClassName("admin_email_id_error_message_place")[0].inn
                           contentType: false,
                           processData: false
                          });
-
+                         unDisplay_preLoader();
                 alert(goodResponse);
                 document.getElementById("admin_management_id").value = document.getElementById("admin_email_id").value = document.getElementById("admin_password").value  = document.getElementById("admin_name").value = document.getElementById("admin_photo").value = document.getElementById("admin_phone_number").value = document.getElementById("admin_address").value  = document.getElementById("admin_type").value = "";
-
+                undisplay_displayed_blocked_containers(); 
             }).catch((badResponse) => {
                 console.log(badResponse);
             })
@@ -6872,7 +6872,7 @@ function editOfAdmins(a_id) {
         document.getElementById("admin_phone_number").value = adminsData.ph_number;
         document.getElementById("admin_address").value = adminsData.address;
         document.getElementById("admin_type").value = adminsData.admin_type;
-       
+    
        
     })
     document.getElementsByClassName("form_title15")[0].innerHTML = "Admins Edit Form";

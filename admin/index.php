@@ -101,7 +101,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <!-- Profile and Logout Container Start -->
 
 <div class="profile_and_logout_container">
-<a href="#"><button class="profile_and_logout_container_buttons"><i class="far fa-user-circle" aria-hidden="true"></i> Profile</button></a>
+<button  onclick="editOfAdmins(1)" class="profile_and_logout_container_buttons"><i class="far fa-user-circle" aria-hidden="true"></i> Profile</button>
 <hr>
 <a href="http://localhost/my_clg_shopssy_project/admin/index.php?l9o5g0o7u5t=1"><button class="profile_and_logout_container_buttons"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button></a>
 </div>
@@ -1171,6 +1171,32 @@ if(isset($_SESSION['db_u_user_type'])) {
 </div>
 
 <!-- Admin Management Section End -->
+
+<!-- Admin Setting Section Start -->
+
+<div class="admin_profile_container">
+  <button class="admin_profile_close_button"><i class="fa fa-close"></i></button>
+<h1 class="admin_page_name"><u>Admin Profile</u></h1>
+<img src="./images/prakash.jpeg" class="admin_profile_picture" alt="admin profile picture">
+<h2 class="admin_details">Prakashzz</h2>
+<h4>(Admin)</h4> <br>
+<h2 class="admin_page_adminAccess_title"><u>Account Details</u></h2>
+<div class="account_details_of_admin">
+<label><b>Email</b></label>
+<h3 class="admin_details">omprakash2001bkl@gmail.com</h3> <br>
+<label><b>Password</b></label>
+<h3 class="admin_details">Ompra@123</h3> <br>
+<label><b>Phone Number</b></label>
+<h3 class="admin_details">8838067309</h3> <br>
+<label><b>Address</b></label>
+<h3 class="admin_details">13A, Prasanna colony, 3rd Street, Avaniyapuram, Madurai - 625012.</h3> <br>
+<label><b>Admin Type</b></label>
+<h3 class="admin_details">Slaves</h3> <br>
+</div>
+<button class="admin_profile_buttons admin_profile_buttons_edit">Edit</button> <button  class="admin_profile_buttons admin_profile_buttons_logout">Logout</button>
+</div>
+
+<!-- Admin Setting Section End -->
 
 </div>
 
