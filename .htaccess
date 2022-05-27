@@ -428,7 +428,6 @@ RewriteRule ^newsletter/search_details/?$ newsletter/search_details.php [L]
 
 # Shopssy Hub And Distributor Start
 
-
 RewriteCond %{REQUEST_METHOD} =POST
 RewriteRule ^ordered_user_details/details_of_ordered_user/?$ ordered_user_details/details_of_ordered_user.php [L]
 

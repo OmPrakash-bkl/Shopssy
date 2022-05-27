@@ -1,3 +1,14 @@
+<?php
+session_start();
+if(!(isset($_SESSION['user_login_id']))) {
+  ?>
+  <script type="text/javascript">
+  window.location.href = "http://localhost/my_clg_shopssy_project/admin/admin.php";
+  </script>
+  <?php
+}
+
+?>
 <!-- Unfulfilled Data Delection Section Start -->
 <script>
   if(localStorage.getItem('U345R47IX')) {

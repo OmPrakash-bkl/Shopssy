@@ -25,7 +25,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active{
-    box-shadow: 0 0 0 30px white inset !important;
+    box-shadow: 0 0 0 30px rgb(255, 255, 255, 0.1) inset !important;
 }
 
 body {
@@ -65,7 +65,7 @@ body {
 
 .login_box_container {
     margin: 10% 30%;
-    height: 320px;
+    height: 335px;
     width: 40%;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background-color: rgb(255, 255, 255, 0.1);
@@ -87,8 +87,8 @@ body {
     border: none;
     border-bottom: 2px solid rgb(0, 0, 0, 0.8);
     margin-bottom: 40px;
-
 }
+
 #admin_login_form_submission {
     border: 0px;
     border-radius: 5px;
@@ -112,6 +112,12 @@ body {
 .forgot_password_link > a {
    text-decoration: none;
    color: rgb(0, 0, 0, 0.8);
+}
+
+.text_of_error_message {
+    text-align: left;
+    margin-top: 5px;
+    color: red;
 }
 
 /* Login Box Container End */
@@ -159,7 +165,7 @@ body {
 @media only screen and (max-width:400px) {
     .login_box_container {
         margin: 10% 5%;
-        height: 330px;
+        height: 345px;
         width: 90%;
     }
     .login_box_container {
