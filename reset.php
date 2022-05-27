@@ -6,18 +6,15 @@ include './header.php';
 // Password Updation Fun Start
 
 $error_messages = "";
-if(isset($_POST['reset'])) {
+if(isset($_POST['reset']) || isset($_POST['resetOfAdmin'])) {
+
+
+    if(isset($_POST['reset'])) {
 
         $psw = $_POST["password"];
-
         $Email = $_SESSION['emailid'];
 
         $hash = password_hash($psw , PASSWORD_BCRYPT);
-
-        $reset_query = "SELECT * FROM `register` WHERE `email` = '$Email';";
-        $reset_result = mysqli_query($con, $reset_query);
-        $row_count = mysqli_num_rows($reset_result);
-  	    $fetch = mysqli_fetch_assoc($reset_result);
 
         if($Email){
             $new_pass = $hash;
@@ -37,6 +34,31 @@ if(isset($_POST['reset'])) {
             </script>
             <?php
         }
+    }
+    if(isset($_POST['resetOfAdmin'])) {
+
+        $psw = $_POST["password"];
+        $Email = $_SESSION['emailid'];
+
+        if($Email){
+            $update_new_pass_query = "UPDATE `admin` SET `password` = '$psw' WHERE `email` = '$Email';";
+            mysqli_query($con, $update_new_pass_query);
+
+            ?>
+            <script>
+                window.location.replace("http://localhost/my_clg_shopssy_project/admin/admin.php");
+                alert("<?php echo "Your Password Has Been Reseted Successfully."?>");
+            </script>
+            <?php
+        } else {
+            ?>
+            <script>
+               $error_messages = "Please Try Again!";
+            </script>
+            <?php
+        }
+
+    }
 
 }
 
@@ -66,7 +88,18 @@ if(isset($_POST['reset'])) {
                 <input type="password" id="newpass" name="password" required autofocus>
                 <p class="text_of_error_message"><?php echo $error_messages; ?></p>
                 </div>
-            <button type="submit" name="reset">Reset</button>
+                <?php
+                if(isset($_GET['rredswegtbfmogRmAjdvmxiln'])) {
+                    ?>
+                    <button type="submit" name="resetOfAdmin">Reset</button>
+                    <?php
+                } else {
+                    ?>
+                    <button type="submit" name="reset">Reset</button>
+                    <?php
+                }
+                ?>
+            
         </form>
        
     </div>

@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(isset($_GET['l9o5g0o7u5t'])) {
+  unset($_SESSION['user_login_id']);
+}
+
 if(!(isset($_SESSION['user_login_id']))) {
   ?>
   <script type="text/javascript">
@@ -7,6 +11,8 @@ if(!(isset($_SESSION['user_login_id']))) {
   </script>
   <?php
 }
+
+
 
 ?>
 <!-- Unfulfilled Data Delection Section Start -->
@@ -96,7 +102,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <div class="profile_and_logout_container">
 <a href="#"><button class="profile_and_logout_container_buttons"><i class="far fa-user-circle" aria-hidden="true"></i> Profile</button></a>
 <hr>
-<a href="#"><button class="profile_and_logout_container_buttons"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button></a>
+<a href="http://localhost/my_clg_shopssy_project/admin/index.php?l9o5g0o7u5t=1"><button class="profile_and_logout_container_buttons"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button></a>
 </div>
 
 <!-- Profile and Logout Container End -->
@@ -422,6 +428,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
   </div>
   </div>
 </div>
+
 <div class="hamburger_link_section_inner_container">
   <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(14)">
   <h2 class="heading_text"><i class="fa fa-newspaper-o"></i> Newsletters</h2>
@@ -430,7 +437,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
   <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container14">
   <div class="hamburger_link_section_inner_hidden_floating_container">
-  <button onclick="show_newsletters('')"><i class="fa fa-eye"></i> View N.Letters</button>
+  <button onclick="show_newsletters('')"><i class="fa fa-eye"></i> View N.Letter</button>
   <span><i class="fa fa-arrow-circle-right"></i></span>
   </div>
   <div class="hamburger_link_section_inner_hidden_floating_container">
@@ -443,6 +450,38 @@ mysqli_query($con, $delete_unfulfill_data_query);
   </div>
   </div>
 </div>
+
+<?php
+
+if(isset($_SESSION['db_u_user_type'])) {
+  if($_SESSION['db_u_user_type'] == "master") {
+    echo '<div class="hamburger_link_section_inner_container">
+    <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(15)">
+    <h2 class="heading_text"><i class="fas fa-user-cog"></i> Admins</h2>
+    <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow15"></i></span>
+    </div>
+  
+    <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container15">
+    <div class="hamburger_link_section_inner_hidden_floating_container">
+    <button onclick="show_admins("")"><i class="fa fa-eye"></i> View Admins</button>
+    <span><i class="fa fa-arrow-circle-right"></i></span>
+    </div>
+    <div class="hamburger_link_section_inner_hidden_floating_container">
+    <button onclick="add_admins()"><i class="fas fa-plus-square"></i> Add Admins</button>
+    <span><i class="fa fa-arrow-circle-right"></i></span>
+    </div>
+    <div class="hamburger_link_section_inner_hidden_floating_container">
+    <button onclick="edit_and_delete_of_admins("")"><i class="fa fa-edit"></i> Edit & Delete</button>
+    <span><i class="fa fa-arrow-circle-right"></i></span>
+    </div>
+    </div>
+  </div>';
+  }
+}
+
+?>
+
+
 
 </div>
 <!-- Hamburger Link Section Container End -->
@@ -1100,6 +1139,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 </center>
 
 <!-- Admin Panel Container End -->
+
 <script src="./js/user_icon.js"></script>
 <script src="./js/hamburger_funcs.js"></script>
 <script src="./js/hide_and_display_div_func.js"></script>

@@ -15,10 +15,12 @@ if(isset($_POST['admin_login_form_submission'])) {
             while($row = mysqli_fetch_assoc($login_result)) {
                 $db_u_user_id = $row['email'];
                 $db_u_user_pass = $row['password'];
+                $db_u_user_type = $row['admin_type'];
             }
             if(isset($db_u_user_id)) {
                if($db_u_user_id == $userName && $db_u_user_pass == $userPassword) {
                 $_SESSION['user_login_id'] = $db_u_user_id."Shopssy";
+                $_SESSION['db_u_user_type'] = $db_u_user_type;
                 ?>
                <script type="text/javascript">
                window.location.href = "http://localhost/my_clg_shopssy_project/admin/index.php";
@@ -70,7 +72,7 @@ if(isset($_POST['admin_login_form_submission'])) {
         <input type="password" name="admin_password" class="input_form_boxes" placeholder="password" required> <br>
         <button type="submit" id="admin_login_form_submission" name="admin_login_form_submission">LOGIN</button>
     </form>
-    <span class="forgot_password_link"><a href="#">Forgot your password?</a></span>
+    <span class="forgot_password_link"><a href="http://localhost:3000/recover.php?r3C0obvEtrgfioarnAtdlmpixn=1">Forgot your password?</a></span>
     </center>
 
     </div>

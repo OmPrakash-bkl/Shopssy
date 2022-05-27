@@ -65,7 +65,7 @@ body {
 
 .login_box_container {
     margin: 10% 30%;
-    height: 335px;
+    height: 350px;
     width: 40%;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background-color: rgb(255, 255, 255, 0.1);
@@ -133,15 +133,16 @@ body {
 
 @media only screen and (max-width:1000px) {
     .login_box_container {
-        margin: 10% 25%;
-        width: 50%;
+        height: 360px;
+        margin: 10% 20%;
+        width: 60%;
     }
 }
 
 @media only screen and (max-width:800px) {
     .login_box_container {
-        margin: 10% 20%;
-        width: 60%;
+        margin: 10% 17%;
+        width: 65%;
     }
 }
 
@@ -165,7 +166,7 @@ body {
 @media only screen and (max-width:400px) {
     .login_box_container {
         margin: 10% 5%;
-        height: 345px;
+        height: 370px;
         width: 90%;
     }
     .login_box_container {
