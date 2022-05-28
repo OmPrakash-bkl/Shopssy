@@ -36,7 +36,7 @@ $inputData = json_decode(file_get_contents('php://input'), true);
         $mail -> SMTPSecure = 'tls';
 
         $mail -> Username = 'shopssyz@gmail.com';
-        $mail -> Password = 'Shop$@#123';
+        $mail -> Password = 'Shopssy$@#123';
 
         $mail -> setFrom('shopssyz@gmail.com', 'Alert Message!');
         $mail -> addAddress($user_email);

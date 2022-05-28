@@ -31,7 +31,7 @@ if(isset($_SERVER['REQUEST_METHOD'])) {
     $mail -> SMTPSecure = 'tls';
 
     $mail -> Username = 'shopssyz@gmail.com';
-    $mail -> Password = 'Shop$@#123';
+    $mail -> Password = 'Shopssy$@#123';
 
     $mail -> setFrom('shopssyz@gmail.com', 'Thank You!');
     $mail -> addAddress($feedbacker_email);

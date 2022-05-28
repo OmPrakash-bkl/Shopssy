@@ -52,7 +52,7 @@ if(isset($_POST['submit'])) {
                    $mail -> SMTPSecure = 'tls';
 
                    $mail -> Username = 'shopssyz@gmail.com';
-                   $mail -> Password = 'Shop$@#123';
+                   $mail -> Password = 'Shopssy$@#123';
 
                    $mail -> setFrom('shopssyz@gmail.com', 'OTP Verification');
                    $mail -> addAddress($_POST['email']);

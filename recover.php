@@ -35,7 +35,7 @@ $email = $_POST['mail_add'];
         
            
             $mail->Username='shopssyz@gmail.com';
-            $mail->Password='Shop$@#123';
+            $mail->Password='Shopssy$@#123';
         
             
             $mail->setFrom('shopssyz@gmail.com', 'Password Reset');
@@ -102,7 +102,7 @@ if(isset($_POST['recoverOfAdmin'])) {
         
            
             $mail->Username='shopssyz@gmail.com';
-            $mail->Password='Shop$@#123';
+            $mail->Password='Shopssy$@#123';
         
             
             $mail->setFrom('shopssyz@gmail.com', 'Password Reset');

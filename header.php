@@ -732,7 +732,7 @@ if(isset($_POST['share_list_request'])) {
    $mail -> SMTPSecure = 'tls';
 
    $mail -> Username = 'shopssyz@gmail.com';
-   $mail -> Password = 'Shop$@#123';
+   $mail -> Password = 'Shopssy$@#123';
 
    $mail -> setFrom('shopssyz@gmail.com', 'Wishlist - Shopssy');
    $mail -> addAddress("$receiver_mail");

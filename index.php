@@ -27,6 +27,7 @@ if(!isset($_COOKIE['N32SL33673R'])) {
     setcookie($token_of_newsletter, 0, time() + (86400 * 730));    
 }
 
+
 if($_COOKIE['N32SL33673R'] != $newsletter_s_id) {
     
     require "./Mail/phpmailer/PHPMailerAutoload.php";
@@ -38,7 +39,7 @@ if($_COOKIE['N32SL33673R'] != $newsletter_s_id) {
     $mail -> SMTPSecure = 'tls';
 
     $mail -> Username = 'shopssyz@gmail.com';
-    $mail -> Password = 'Shop$@#123';
+    $mail -> Password = 'Shopssy$@#123';
 
     $mail -> setFrom('shopssyz@gmail.com', "$newsletter_title");
     $mail -> addAddress($_SESSION['user_login_email']);

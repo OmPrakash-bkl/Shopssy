@@ -219,7 +219,7 @@ if(isset($_POST['order_req'])) {
     $mail -> SMTPSecure = 'tls';
 
     $mail -> Username = 'shopssyz@gmail.com';
-    $mail -> Password = 'Shop$@#123';
+    $mail -> Password = 'Shopssy$@#123';
 
     $mail -> setFrom('shopssyz@gmail.com', 'Order Summary');
     $mail -> addAddress($_SESSION['user_login_email']);
