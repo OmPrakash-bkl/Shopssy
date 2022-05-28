@@ -579,6 +579,27 @@ if(isset($_SESSION['db_u_user_type'])) {
 
 ?>
 
+<div class="hamburger_link_section_inner_container">
+  <div class="hamburger_link_section_inner_heading_container" onclick="display_and_undisplay(16)">
+  <h2 class="heading_text"><i class="fa fa-envelope"></i> Subscribers</h2>
+  <span class="heading_arrow"><i class="fa fa-chevron-down hamburger_down_arrow16"></i></span>
+  </div>
+
+  <div class="hamburger_link_section_inner_hidden_container hamburger_link_section_inner_hidden_container16">
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button onclick="show_subscribers('')"><i class="fa fa-eye"></i> View Subz</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button onclick="add_subscribers()"><i class='fas fa-plus-square'></i> Add Subz</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  <div class="hamburger_link_section_inner_hidden_floating_container">
+  <button onclick="edit_and_delete_of_subscribers('')"><i class="fa fa-edit"></i> Edit & Delete</button>
+  <span><i class="fa fa-arrow-circle-right"></i></span>
+  </div>
+  </div>
+</div>
 
 
 </div>
@@ -1294,6 +1315,31 @@ if(isset($_SESSION['db_u_user_type'])) {
 </div>
 
 <!-- Admin Setting Section End -->
+
+<!-- Subscribers Section Start -->
+
+<div class="add_subscriber_form_container">
+
+<div class="add_subscriber_step1_container">
+<center>
+    <h1 class="form_title16">Subscriber Form</h1>
+</center>
+<form action="" class="add_subscriber_form" method="POST">
+<input type="hidden" id="subscriber_id">
+  <label for="subscriber_email_id">Email <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <input type="email" id="subscriber_email_id" autofocus> <br>
+  <p class="error_message_place subscriber_email_id_error_message_place"></p>
+ <center>
+ <button type="button" class="subscriber_submition_btn">Submit</button>
+ <button type="button" class="subscriber_submition_btn2">Submit</button>
+ </center>
+</form>
+</div>
+
+</div>
+
+
+<!-- Subscribers Section End -->
 
 </div>
 

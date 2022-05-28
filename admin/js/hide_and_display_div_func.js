@@ -6937,6 +6937,270 @@ function deleteOfAdmins(id) {
 
 /* Admin Management Section End */
 
+/* Subscribers Section Start */
+
+/* Subscribers View Section Start */
+
+function show_subscribers(searchData) {
+
+    function UI_Fun_32(datas) {
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>ID</th>
+        <th>SUBSCRIBERS</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].id}</td>
+            <td>${resultData[i].user_email}</td>
+            </tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Subscribers Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+        
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../subscribers/subscribers_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_32(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_32(searchData);
+    }
+    search_place_name = "show_subscribers";
+    search_box_disabler();
+}
+
+/* Subscribers View Section End */
+
+/* Subscribers Add Section Start */
+
+function add_subscribers() {
+    document.getElementsByClassName("form_title16")[0].innerHTML = "Subscriber Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementById("subscriber_id").value = document.getElementById("subscriber_email_id").value = "";
+    document.getElementsByClassName("subscriber_submition_btn")[0].style.display = "inline-block";
+    document.getElementsByClassName("add_subscriber_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_subscriber_step1_container"); 
+    document.getElementsByClassName("subscriber_submition_btn2")[0].style.display = "none";
+    document.getElementsByClassName("subscriber_submition_btn")[0].style.display = "inline-block";
+}
+
+document.getElementsByClassName("subscriber_submition_btn")[0].addEventListener("click", function(event) {
+    subscribtion_form(event, "insert");
+});
+
+function subscribtion_form(event, decisionPara) {
+event.preventDefault();
+
+let subscriber_id = document.getElementById("subscriber_id").value;
+let subscriber_email_id = document.getElementById("subscriber_email_id").value;
+subscriber_email_id = subscriber_email_id.replace(/\/+$/g, '');
+
+if(subscriber_email_id == "") {
+    document.getElementsByClassName("subscriber_email_id_error_message_place")[0].innerText = "Email is required!";
+} else if(subscriber_email_id.length <= 6) {
+    document.getElementsByClassName("subscriber_email_id_error_message_place")[0].innerText = "Email length must be minimum 7 characters!";
+} else {
+    document.getElementsByClassName("subscriber_email_id_error_message_place")[0].innerText = "";
+}
+
+
+if(document.getElementsByClassName("subscriber_email_id_error_message_place")[0].innerText == "") {
+
+    let subscriberDataObj = {
+        subscriber_email_id: subscriber_email_id,
+    }
+    subscriberDataObj = JSON.stringify(subscriberDataObj);
+    display_preLoader();
+    let subscriberCheckerRes = make_user_details("POST", "../subscribers/check_email_id/", `${subscriberDataObj}`);
+
+    
+    subscriberCheckerRes.then((response) => {
+        unDisplay_preLoader();
+        let avail_count = response;
+        subscriberDataObj = {
+            subscriber_id: subscriber_id,
+            subscriber_email_id: subscriber_email_id,
+        }
+      
+        subscriberDataObj = JSON.stringify(subscriberDataObj);
+
+        
+    if(avail_count == 0 && decisionPara == "insert") {
+        document.getElementsByClassName("subscriber_email_id_error_message_place")[0].innerText = "";
+        display_preLoader();
+        if(decisionPara == "insert") {
+            let subscriberInsertDatasRes = make_user_details("POST", "../subscribers/insert_email_data/", `${subscriberDataObj}`);
+    
+            subscriberInsertDatasRes.then((goodResponse) => {
+                unDisplay_preLoader();
+                alert(goodResponse);
+                document.getElementById("subscriber_id").value = document.getElementById("subscriber_email_id").value = "";
+            }).catch((badResponse) => {
+                console.log(badResponse);
+            })
+       
+        }
+    } else {
+        document.getElementsByClassName("subscriber_email_id_error_message_place")[0].innerText = "Email already exits!";
+    }
+   
+    if(decisionPara == "update") {
+        if(avail_count >= 1) {
+            document.getElementsByClassName("subscriber_email_id_error_message_place")[0].innerText = "Email already exits!";
+        } else {
+            document.getElementsByClassName("subscriber_email_id_error_message_place")[0].innerText = "";
+           
+            let subscriberUpdateDatasRes = make_user_details("POST", "../subscribers/update_subscriber/", `${subscriberDataObj}`);
+    
+            subscriberUpdateDatasRes.then((goodResponse) => {
+                unDisplay_preLoader();
+                alert(goodResponse);
+                document.getElementById("subscriber_id").value = document.getElementById("subscriber_email_id").value = "";
+            }).catch((badResponse) => {
+                console.log(badResponse);
+            })
+        }
+        
+    }
+
+    })
+  }
+}
+
+
+/* Subscribers Add Section End */
+
+/* Subscribers Edit Section Start */
+
+function edit_and_delete_of_subscribers(searchData) {
+
+    function UI_Fun_33(datas) { 
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>ID</th>
+        <th>SUBSCRIBERS</th>
+        <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].id}</td>
+            <td>${resultData[i].user_email}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecSubscriber(${resultData[i].id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfSpecSubscriber(${resultData[i].id})"><i class="fa fa-trash-o"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Subscriber Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../subscribers/subscribers_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_33(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_33(searchData);
+    }
+
+    search_place_name = "edit_and_delete_of_subscribers";
+    search_box_disabler();
+}
+
+function editOfSpecSubscriber(id) {
+    display_preLoader();
+    let responseObj = make_user_details("GET", `../subscribers/specific_subscriber_detail/id/${id}`, "");
+
+    document.getElementsByClassName("subscriber_submition_btn2")[0].style.display = "inline-block";
+    document.getElementsByClassName("subscriber_submition_btn")[0].style.display = "none";
+
+   
+
+    responseObj.then((resObj) => {
+        unDisplay_preLoader();
+        subscriberData = JSON.parse(resObj);
+        
+        document.getElementById("subscriber_id").value = subscriberData.id;
+        document.getElementById("subscriber_email_id").value = subscriberData.user_email;
+    })
+    document.getElementsByClassName("form_title16")[0].innerHTML = "Subscriber Edit Form";
+    undisplay_displayed_blocked_containers(); 
+    document.getElementsByClassName("add_subscriber_step1_container")[0].style.display = "block";
+    display_blocked_containers("add_subscriber_step1_container"); 
+}
+
+document.getElementsByClassName("subscriber_submition_btn2")[0].addEventListener("click", function(event) {
+    subscribtion_form(event, "update");
+    });
+
+
+/* Subscribers Edit Section End */
+
+/* Subscribers Delete Section Start */
+
+function deleteOfSpecSubscriber(id) {
+    let permission = confirm("Are you sure?");
+    if(permission) {
+        display_preLoader();
+        let subscriberDeleteReqObj = make_user_details("DELETE", `../subscribers/subscriber_deletion/id/${id}`, ``);
+        subscriberDeleteReqObj.then((deleteRes) => {
+            unDisplay_preLoader();
+            alert(deleteRes);
+            show_subscribers("");
+        }).catch((deleteErrRes) => {
+            console.log(deleteErrRes);
+        })
+    }
+}
+
+
+/* Subscribers Delete Section End */
+
+/* Subscribers Section End */
 
 /* Search Section Start */
 
@@ -7534,6 +7798,42 @@ function search_the_details() {
             
             if(search_place_name == "edit_and_delete_of_admins") {
                 edit_and_delete_of_admins(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "show_subscribers") {
+        let responseObjs = make_response_details("POST", "../subscribers/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "show_subscribers") {
+                show_subscribers(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "edit_and_delete_of_subscribers") {
+        let responseObjs = make_response_details("POST", "../subscribers/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "edit_and_delete_of_subscribers") {
+                edit_and_delete_of_subscribers(response);
             }
            
     

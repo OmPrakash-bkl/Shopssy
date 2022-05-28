@@ -454,6 +454,31 @@ RewriteRule ^admins/image_uploader/?$ admins/image_uploader.php [L]
 
 # Admin End
 
+# Subscribers Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^subscribers/subscribers_details/?$ subscribers/subscribers_details.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^subscribers/check_email_id/?$ subscribers/check_email_id.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^subscribers/insert_email_data/?$ subscribers/insert_email_data.php [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^subscribers/update_subscriber/?$ subscribers/update_subscriber.php [L]
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^subscribers/specific_subscriber_detail/id/([^/\*]+)?$ subscribers/specific_subscriber_detail.php?id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =DELETE
+RewriteRule ^subscribers/subscriber_deletion/id/([^/\*]+)?$ subscribers/subscriber_deletion.php?id=$1 [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^subscribers/search_details/?$ subscribers/search_details.php [L]
+
+# Subscribers End
+
 # Shopssy Hub And Distributor Start
 
 RewriteCond %{REQUEST_METHOD} =POST
