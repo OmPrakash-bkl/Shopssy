@@ -22,6 +22,12 @@ if(!isset($_GET['page'])) {
 $category_products_query = "SELECT * FROM `products` WHERE `p_title` LIKE '%$searchKeyword%';";
 
 $category_products_result = mysqli_query($con, $category_products_query);
+$checking_no_result = mysqli_num_rows($category_products_result);
+
+$no_results = "";
+if($checking_no_result == 0){
+    $no_results = "No Results!";
+}
 $p2 = 1;
 while($row = mysqli_fetch_assoc($category_products_result)) {
     $category_products_p_id = $row['p_id'];
@@ -334,7 +340,12 @@ if(isset($_GET['wish_btn'])) {
 
            $category_products_result = mysqli_query($con, $category_products_query);
 
-     
+           $checking_no_result = mysqli_num_rows($category_products_result);
+
+           $no_results = "";
+           if($checking_no_result == 0){
+              $no_results = "No Results!";
+            }
 
            while($row = mysqli_fetch_assoc($category_products_result)) {
                $category_products_p_image = $row['p_image'];
@@ -500,6 +511,18 @@ if(isset($_GET['wish_btn'])) {
     </div>
    </center>
    <!--products section container end-->
+
+   <?php
+   if($no_results == "No Results!") {
+       ?>
+       <div class="no_results_container">
+       <center>
+       <h1>No Results!</h1>
+       </center>
+       </div>
+       <?php
+   }
+   ?>
 
    <?php 
     include "./footer.php";

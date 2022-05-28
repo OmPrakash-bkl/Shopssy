@@ -14,7 +14,16 @@ if(isset($_POST['reset']) || isset($_POST['resetOfAdmin'])) {
         $psw = $_POST["password"];
         $Email = $_SESSION['emailid'];
 
-        $hash = password_hash($psw , PASSWORD_BCRYPT);
+        function encryption($input_data) {
+            $ciphering = "AES-128-CTR";
+            $options = 0;
+            $encryption_iv = '1234567891011121';
+            $encryption_key = "Shopssy_Data_Encryption_By_Admin";
+            $encryption_data = openssl_encrypt($input_data, $ciphering, $encryption_key, $options, $encryption_iv);
+            return $encryption_data;
+            }
+
+        $hash = encryption($psw);
 
         if($Email){
             $new_pass = $hash;

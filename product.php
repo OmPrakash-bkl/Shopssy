@@ -14,7 +14,7 @@ else {
 }
 // Page Count Fun End
 
-
+$no_results = "";
 if(isset($_GET['b_title'])) {
     $pagi_b_title = $_GET['b_title'];
     $pagi_sub_cat_identification_id_two = $_GET['sub_cat_identification_id_two'];
@@ -640,6 +640,7 @@ if(isset($_GET['searchItem'])) {
            switch($sort_val) {
                case 1:
                 $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id`=$product_b_and_i_identification_id ORDER BY `p_title`;";
+                
                 break;
                 case 2:
                     $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identification_id`=$product_b_and_i_identification_id ORDER BY `p_title` DESC;";
@@ -688,7 +689,12 @@ if(isset($_GET['searchItem'])) {
                     <?php 
     
                          $category_products_result = mysqli_query($con, $category_products_query);
-    
+                         $checking_no_result = mysqli_num_rows($category_products_result);
+
+                       if($checking_no_result == 0){
+                        $no_results = "No Results!";
+                          }
+
                       while($row = mysqli_fetch_assoc($category_products_result)) {
                       $category_products_p_image = $row['p_image'];
                        $category_products_p_star_rat = $row['p_star_rat'];
@@ -811,6 +817,7 @@ if(isset($_GET['searchItem'])) {
                     switch($sort_val) {
                         case 1:
                             $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter ORDER BY `p_title`;";
+                            
                          break;
                          case 2:
                             $category_products_query = "SELECT * FROM `products` WHERE `p_id`=$product_id_of_row_filter ORDER BY `p_title` DESC;";
@@ -829,6 +836,11 @@ if(isset($_GET['searchItem'])) {
     
                 $category_products_result = mysqli_query($con, $category_products_query);
     
+                $checking_no_result = mysqli_num_rows($category_products_result);
+                if($checking_no_result == 0){
+                    $no_results = "No Results!";
+                      }
+
                       while($row = mysqli_fetch_assoc($category_products_result)) {
                       $category_products_p_image = $row['p_image'];
                        $category_products_p_star_rat = $row['p_star_rat'];
@@ -1098,6 +1110,7 @@ if(isset($_GET['searchItem'])) {
                      switch($sort_val) {
                          case 1:
                             $category_products_query = "SELECT * FROM `products` WHERE `p_id` = $pro_value ORDER BY `p_title`;";
+                            
                           break;
                           case 2:
                             $category_products_query = "SELECT * FROM `products` WHERE `p_id` = $pro_value ORDER BY `p_title` DESC;";
@@ -1112,6 +1125,12 @@ if(isset($_GET['searchItem'])) {
                 
             $category_products_result = mysqli_query($con, $category_products_query);
 
+            
+            $checking_no_result = mysqli_num_rows($category_products_result);
+
+            if($checking_no_result == 0){
+                $no_results = "No Results!";
+                  }
            
            while($row = mysqli_fetch_assoc($category_products_result)) {
            $category_products_p_image = $row['p_image'];
@@ -1466,6 +1485,22 @@ while($dummy > $end_value) {
 $end_value++;
 }
 ?>
+
+<?php
+   if($no_results == "No Results!") {
+       ?>
+       <div class="no_results_container">
+       <center>
+       <h1>No Results!</h1>
+       </center>
+       </div>
+       <!-- <script>
+           alert("dfdf");
+       </script> -->
+       <?php
+   }
+   ?>
+
 <!-- Filter Section Hiding Fun End -->
 
 </body>

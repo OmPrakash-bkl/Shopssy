@@ -6,6 +6,9 @@ if(isset($_GET['t'])) {
     $searchKeyword = $_GET['t'];
   
 }
+
+$no_results = "";
+
 // Pagination Section Start
 if(!isset($_GET['page'])) {
     unset($_SESSION['pagination_of_product3']);
@@ -26,6 +29,11 @@ $category_products_query = "SELECT * FROM `products` WHERE `b_and_i_identificati
 
 $category_products_result = mysqli_query($con, $category_products_query);
 
+$checking_no_result = mysqli_num_rows($category_products_result);
+
+if($checking_no_result == 0){
+ $no_results = "No Results!";
+   }
 
 while($row = mysqli_fetch_assoc($category_products_result)) {
  $category_products_p_id = $row['p_id'];
@@ -337,7 +345,11 @@ if(isset($_GET['wish_btn'])) {
 
            $category_products_result = mysqli_query($con, $category_products_query);
      
+           $checking_no_result = mysqli_num_rows($category_products_result);
 
+           if($checking_no_result == 0){
+            $no_results = "No Results!";
+              }
            while($row = mysqli_fetch_assoc($category_products_result)) {
                $category_products_p_image = $row['p_image'];
                $category_products_p_star_rat = $row['p_star_rat'];
@@ -499,6 +511,20 @@ if(isset($_GET['wish_btn'])) {
    </center>
    <!--products section container end-->
 
+   <?php
+   if($no_results == "No Results!") {
+       ?>
+       <div class="no_results_container">
+       <center>
+       <h1>No Results!</h1>
+       </center>
+       </div>
+       <!-- <script>
+           alert("dfdf");
+       </script> -->
+       <?php
+   }
+   ?>
    
    <?php 
     include "./footer.php";

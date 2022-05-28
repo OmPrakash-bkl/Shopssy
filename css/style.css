@@ -4216,6 +4216,15 @@ font-family: Arial, Helvetica, sans-serif;
 
 /* Success Page Container End */
 
+/* No Results Start */
+
+.no_results_container {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px 5px 10px 5px;
+    color: #6F7079;
+}
+
+/* No Results End */
 
 /*Keyframes Start*/
 
