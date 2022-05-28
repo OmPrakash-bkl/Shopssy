@@ -6584,7 +6584,7 @@ function add_admins() {
 }
 
 document.getElementsByClassName("admin_submition_btn")[0].addEventListener("click", function(event) {
-admins_form(event, "insert");
+admins_form(event, "insert", 0);
 });
 
 let filename = "";
@@ -6598,7 +6598,7 @@ document.getElementById("admin_photo").addEventListener("change", function() {
     }
 })
 
-function admins_form(event, decisionPara) {
+function admins_form(event, decisionPara, admin_id) {
 event.preventDefault();
 
 let admin_management_id = document.getElementById("admin_management_id").value;
@@ -6704,7 +6704,23 @@ if((document.getElementsByClassName("admin_email_id_error_message_place")[0].inn
             admin_address: admin_address,
             admin_type: admin_type
         }
-      
+
+        if(decisionPara == "update") {
+          
+            if(!(admin_type == "master") && (admin_id == admin_management_id)) {
+                document.getElementById("admin_type").style.display = "none";
+                document.getElementsByClassName("removable_sections")[0].style.display = "none";
+                document.getElementsByClassName("removable_sections")[0].style.display = "none";
+                document.getElementsByClassName("hamburger_link_section_inner_container")[0].style.display = "none";
+                window.location.href = "http://localhost/my_clg_shopssy_project/admin/index.php?cghlavnegue=1";
+            } 
+            
+            if(!(admin_type == "slaves") && (admin_id == admin_management_id)) {
+                window.location.href = "http://localhost/my_clg_shopssy_project/admin/index.php?ubnxcahmqaenlgwe=1";
+            }
+          
+        }
+       
         adminsDataObj = JSON.stringify(adminsDataObj);
 
         
@@ -6852,7 +6868,9 @@ function edit_and_delete_of_admins(searchData) {
     search_box_disabler();
 }
 
+let admin_id = 0;
 function editOfAdmins(a_id) {
+    admin_id = document.getElementById("admin_unique_login_id").value;
     display_preLoader();
     let responseObj = make_user_details("GET", `../admins/specific_admin_detail/id/${a_id}`, "");
 
@@ -6873,6 +6891,15 @@ function editOfAdmins(a_id) {
         document.getElementById("admin_phone_number").value = adminsData.ph_number;
         document.getElementById("admin_address").value = adminsData.address;
         document.getElementById("admin_type").value = adminsData.admin_type;
+
+        let admin_u_l_id = document.getElementById("admin_unique_login_id").value;
+        
+        if(!(adminsData.admin_type == "master") && (admin_u_l_id == adminsData.a_id)) {
+            document.getElementById("admin_type").style.display = "none";
+            document.getElementsByClassName("removable_sections")[0].style.display = "none";
+            document.getElementsByClassName("removable_sections")[0].style.display = "none";
+            document.getElementsByClassName("hamburger_link_section_inner_container")[0].style.display = "none";
+        }
     
        
     })
@@ -6883,7 +6910,7 @@ function editOfAdmins(a_id) {
 }
 
 document.getElementsByClassName("admin_submition_btn2")[0].addEventListener("click", function(event) {
-    admins_form(event, "update");
+    admins_form(event, "update", admin_id);
     });
 
 
@@ -7525,7 +7552,34 @@ function search_the_details() {
 
 /* Showing And Unshowing Admin Profile Details Section Start */
 
-function show_admin_profile() {
+function show_admin_profile(ad_pri_id) {
+
+    
+        display_preLoader();
+        let responseObj = make_user_details("GET", `../admins/specific_admin_detail/id/${ad_pri_id}`, "");
+   
+        responseObj.then((resObj) => {
+            unDisplay_preLoader();
+            adminsData = JSON.parse(resObj);
+            
+            // document.getElementsByClassName("")[0].value = adminsData.a_id;
+            document.getElementsByClassName("admin_details_email")[0].innerText = adminsData.email;
+            document.getElementsByClassName("admin_details_pass")[0].innerText = adminsData.password;
+            document.getElementsByClassName("admin_details_name")[0].innerText = adminsData.name;
+            document.getElementsByClassName("admin_profile_picture")[0].src = `./images/${adminsData.photo}`;
+            document.getElementsByClassName("admin_details_mobi")[0].innerText = adminsData.ph_number;
+            document.getElementsByClassName("admin_details_add")[0].innerText = adminsData.address;
+            document.getElementsByClassName("admin_details_type")[0].innerText = adminsData.admin_type;
+           
+        })
+   
+    
+    // document.getElementsByClassName("admin_profile_buttons_edit")[0].addEventListener("click", function(event) {
+    //     admins_form(event, "update");
+    //});
+
+    let profile_and_logout_element_arrow = document.getElementsByClassName("user_db_arrow_icon")[0];
+    profile_and_logout_element_arrow.className = "fa fa-caret-down user_db_arrow_icon";
     display_blocked_containers("profile_and_logout_container"); 
     undisplay_displayed_blocked_containers();
     document.getElementsByClassName("admin_profile_container")[0].style.display = "block";

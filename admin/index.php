@@ -2,6 +2,28 @@
 session_start();
 if(isset($_GET['l9o5g0o7u5t'])) {
   unset($_SESSION['user_login_id']);
+  ?>
+  <script>
+document.cookie = "a4dmmziqn_lcovgjiwn_digdm=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  </script>
+  <?php
+}
+
+if(isset($_GET['cghlavnegue'])) {
+  $_SESSION['db_u_user_type'] = "slaves";
+  ?>
+  <script>
+     window.location.href = "http://localhost/my_clg_shopssy_project/admin/index.php";
+  </script>
+  <?php
+}
+if(isset($_GET['ubnxcahmqaenlgwe'])) {
+  $_SESSION['db_u_user_type'] = "master";
+  ?>
+  <script>
+     window.location.href = "http://localhost/my_clg_shopssy_project/admin/index.php";
+  </script>
+  <?php
 }
 
 if(!(isset($_SESSION['user_login_id']))) {
@@ -33,12 +55,14 @@ if(!(isset($_SESSION['user_login_id']))) {
 }
 
 /* Admin Name And Profile Setter Section Start */
-
+let admins_primary_id = 0;
 function set_name_and_pic_of_admin(admin_unique_id) {
+admins_primary_id = admin_unique_id;
     function setter_of_name_and_pic_of_admin(datas) { 
         let resultData = JSON.parse(datas);
             document.getElementsByClassName("admin_db_image")[0].src = `./images/${resultData.photo}`;
             document.getElementsByClassName("hamburger_main_container_admin_name")[0].innerHTML = `${resultData.name}`;
+            document.getElementById("admin_unique_login_id").value = admin_unique_id;
     }
 
     /* Request Sending and Response Getting Section Start */
@@ -164,8 +188,9 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <button onclick="customer_feedback('')" type="button" class="admin_panel_header_icons admin_panel_header_bell_icon"><i class="fa fa-bell"></i></button>
 </div>
 <div class="user_db_container">
+  <input type="hidden" id="admin_unique_login_id">
 <div>
-<img src="../images/myimg1.jpeg" alt="admin profile" class="admin_db_image">
+<img src="./images/empty_db.jpg" alt="admin profile" class="admin_db_image">
 </div>
 <div class="user_db_container_arrow"><i class="fa fa-caret-down user_db_arrow_icon"></i></div>
 </div>
@@ -173,7 +198,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <!-- Profile and Logout Container Start -->
 
 <div class="profile_and_logout_container">
-<button  onclick="show_admin_profile()" class="profile_and_logout_container_buttons"><i class="far fa-user-circle" aria-hidden="true"></i> Profile</button>
+<button  onclick="show_admin_profile(admins_primary_id)" class="profile_and_logout_container_buttons"><i class="far fa-user-circle" aria-hidden="true"></i> Profile</button>
 <hr>
 <a href="http://localhost/my_clg_shopssy_project/admin/index.php?l9o5g0o7u5t=1"><button class="profile_and_logout_container_buttons"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button></a>
 </div>
@@ -1230,7 +1255,7 @@ if(isset($_SESSION['db_u_user_type'])) {
   <label for="admin_address">Address <span class="required_field_asterisk_symbol">*</span></label> <br>
   <input type="text" id="admin_address"> <br>
   <p class="error_message_place admin_address_error_message_place"></p>
-  <label for="admin_type">Admin Type <span class="required_field_asterisk_symbol">*</span></label> <br>
+  <label for="admin_type" class="removable_sections">Admin Type <span class="required_field_asterisk_symbol removable_sections">*</span></label> <br>
   <input type="text" id="admin_type"> <br>
   <p class="error_message_place admin_type_error_message_place"></p>
  <center>
@@ -1249,23 +1274,23 @@ if(isset($_SESSION['db_u_user_type'])) {
 <div class="admin_profile_container">
   <button class="admin_profile_close_button" onclick="unshow_admin_profile()"><i class="fa fa-close"></i></button>
 <h1 class="admin_page_name"><u>Admin Profile</u></h1>
-<img src="./images/prakash.jpeg" class="admin_profile_picture" alt="admin profile picture">
-<h2 class="admin_details">Om Prakash</h2>
+<img src="./images/empty_db.jpg" class="admin_profile_picture" alt="admin profile picture">
+<h2 class="admin_details admin_details_name">Om Prakash</h2>
 <h4>(Admin)</h4> <br>
 <h2 class="admin_page_adminAccess_title"><u>Account Details</u></h2>
 <div class="account_details_of_admin">
 <label><b>Email</b></label>
-<h3 class="admin_details">omprakash2001bkl@gmail.com</h3> <br>
+<h3 class="admin_details admin_details_email">omprakash2001bkl@gmail.com</h3> <br>
 <label><b>Password</b></label>
-<h3 class="admin_details">Ompra@123</h3> <br>
+<h3 class="admin_details admin_details_pass">Ompra@123</h3> <br>
 <label><b>Phone Number</b></label>
-<h3 class="admin_details">8838067309</h3> <br>
+<h3 class="admin_details admin_details_mobi">8838067309</h3> <br>
 <label><b>Address</b></label>
-<h3 class="admin_details">13A, Prasanna colony, 3rd Street, Avaniyapuram, Madurai - 625012.</h3> <br>
+<h3 class="admin_details admin_details_add">13A, Prasanna colony, 3rd Street, Avaniyapuram, Madurai - 625012.</h3> <br>
 <label><b>Admin Type</b></label>
-<h3 class="admin_details">Slaves</h3> <br>
+<h3 class="admin_details admin_details_type">Slaves</h3> <br>
 </div>
-<button class="admin_profile_buttons admin_profile_buttons_edit">Edit</button> <a href="http://localhost/my_clg_shopssy_project/admin/index.php?l9o5g0o7u5t=1"><button  class="admin_profile_buttons admin_profile_buttons_logout">Logout</button></a>
+<button onclick="editOfAdmins(admins_primary_id)" class="admin_profile_buttons admin_profile_buttons_edit">Edit</button> <a href="http://localhost/my_clg_shopssy_project/admin/index.php?l9o5g0o7u5t=1"><button  class="admin_profile_buttons admin_profile_buttons_logout">Logout</button></a>
 </div>
 
 <!-- Admin Setting Section End -->
