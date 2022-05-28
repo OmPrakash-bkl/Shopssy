@@ -35,7 +35,17 @@ if(isset($_POST['submit'])) {
             if($check_rows > 0) {
                 $error_messages = "User with email is already exist!";
             } else {
-                $password_hash = password_hash($pass, PASSWORD_BCRYPT);
+                function encryption($input_data) {
+                    $ciphering = "AES-128-CTR";
+                    $options = 0;
+                    $encryption_iv = '1234567891011121';
+                    $encryption_key = "Shopssy_Data_Encryption_By_Admin";
+                    $encryption_data = openssl_encrypt($input_data, $ciphering, $encryption_key, $options, $encryption_iv);
+                    return $encryption_data;
+                    }
+
+                $password_hash = encryption($pass);
+
                 $register_query = "INSERT INTO `register` (`f_name`, `l_name`, `email`, `password`, `full_name`, `street`, `city`, `zip`, `phone_number`, `country`, `status`) VALUES ('$f_name', '$l_name', '$email', '$password_hash', '', '', '', '', '', '', 0);";
                $register_result = mysqli_query($con, $register_query);
 

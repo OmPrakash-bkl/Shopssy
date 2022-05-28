@@ -397,7 +397,7 @@ if($_GET['p'] == 1) {
     $status_of_add = "secondary";
     $p_value = $_GET['p'];
 }
-$add_retrieve_query = "SELECT * FROM `account` WHERE `user_id` = $user_id AND `status` = '$status_of_add';";
+$add_retrieve_query = "SELECT * FROM `account` WHERE `user_id` = '$user_id' AND `status` = '$status_of_add';";
 $add_retrieve_result = mysqli_query($con, $add_retrieve_query);
 while($row2 = mysqli_fetch_assoc($add_retrieve_result)) {
     $customer_add_details_street = $row2['street'];

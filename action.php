@@ -3,6 +3,7 @@ error_reporting(0);
 ini_set('display_errors', 0);
 include './db_con.php';
  session_start();
+//  session_destroy();
 // $_SESSION['user_login_id'] = "ram@gmail.comShopssy";
 // $_SESSION['user_login_email'] = "ram@gmail.com";
 //  $_SESSION['user_id'] = 4;
