@@ -350,6 +350,14 @@ if(isset($_POST['new_add'])) {
                   <!-- 3 Type Of Address Radio Btn Section End -->
                     <br>
                     <!-- Address Form Section Start -->
+                    
+                    <?php
+
+                    if(!($address_details_country == "") && !($address_details_phone == "")) {
+                        $_SESSION['ddeetcafillxs_yaorye_zfbialvlserd'] = "true";
+                    }
+
+                    ?>
 
                     <form action="" method="POST">
                     <input type="hidden" name="add_type" value="<?php echo $address_type; ?>">

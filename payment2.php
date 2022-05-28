@@ -45,6 +45,8 @@ if($cart_count_checking == 0) {
 
 // Redirect If The Cart Is Empty End
 
+$_SESSION['psarynmielnat_fqtienayl_sxeacgigown'] = 1;
+
 ?>
     
 <script src="./javascript/checkout.js"></script>
@@ -60,7 +62,7 @@ if($cart_count_checking == 0) {
     "description": "Payment",
     "image": "./images/favicon1.png",
     "handler": function (response){
-    window.location.href = './success.php';
+    window.location.href = './success2.php';
     $.ajax({
     url: './payment_proccess.php',
     type: 'POST',
@@ -69,7 +71,7 @@ if($cart_count_checking == 0) {
     razorpay_payment_id: response.razorpay_payment_id , totalAmount : totalAmount ,product_id : product_id,
     }, 
     success: function (msg) {
-    window.location.href = './success.php';
+    window.location.href = './success2.php';
     }
     });
     },

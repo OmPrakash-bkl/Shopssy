@@ -12,6 +12,14 @@ if(!isset($_SESSION['user_login_id'])) {
    <?php
 }
 
+if(!isset($_SESSION['ddeetcafillxs_yaorye_zfbialvlserd'])) {
+    ?>
+   <script type="text/javascript">
+   window.location.href = 'http://localhost:3000/index.php';
+   </script>
+   <?php
+}
+
 // Redirect If User Not Login Fun End
 
 // Redirect If The Cart Is Empty Start

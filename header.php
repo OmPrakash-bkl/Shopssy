@@ -2,6 +2,18 @@
 session_start();
 include './db_con.php';
 
+// Order Deletion Section Start
+
+if(isset($_SESSION['ueswernOtrhdnesrCmoluxndt'])) {
+    $order_ids = $_SESSION['ueswernOtrhdnesrCmoluxndt'];
+    $order_delete_query = "DELETE FROM `orders_table` WHERE `order_id` = '$order_ids';";
+    mysqli_query($con, $order_delete_query);
+    $order_delete_query = "DELETE FROM `orders_sub_table` WHERE `order_id` = '$order_ids';";
+    mysqli_query($con, $order_delete_query);
+}
+
+// Order Deletion Section End
+
 // Notification Fun Start
 
 if(isset($_SESSION['user_id'])) {

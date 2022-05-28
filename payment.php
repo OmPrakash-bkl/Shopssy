@@ -12,6 +12,14 @@ if(!isset($_SESSION['user_login_id'])) {
    <?php
 }
 
+if(!isset($_SESSION['ddeetcafillxs_yaorye_zfbialvlserd'])) {
+    ?>
+   <script type="text/javascript">
+   window.location.href = 'http://localhost:3000/index.php';
+   </script>
+   <?php
+}
+
 // Redirect If Your Not Login Fun End
 
 // Redirect If The Cart Is Empty Start
@@ -112,6 +120,9 @@ if(isset($_POST['order_req'])) {
     while($row = mysqli_fetch_assoc($order_id_retrieve_result)) {
         $orders_order_id = $row['order_id'];
     }
+
+    $_SESSION['ueswernOtrhdnesrCmoluxndt'] = $orders_order_id;
+    $_SESSION['pqaeyvmmecndtisluacwcqevsbs'] = "failer";
 
     // $payment_query = "INSERT INTO `payment` (`user_id`, `order_id`, `card_type`, `card_number`, `exp_date`, `CVV`) VALUES ($orders_user_id, $orders_order_id, '$orders_cart_type', '$orders_card_number', '$orders_card_e_date', '$orders_card_cvv_num');";
     // mysqli_query($con, $payment_query);
@@ -318,8 +329,8 @@ if(isset($_POST['order_req'])) {
         <h2 class='thank_text'>Thanks for your order!</h2>
         <h4 class='name_text'>Hi $user_full_name,</h4>
         <p class='info_text'>We are delighted that you have found something you like!</p>
-        <p class='info_text'>As soon as your package is on it's way, you will receive a delivery confirmation from us by email.</p>
-    
+        <p class='info_text'>This is your summary of your order. Your order is ready to package. Once you will receive a order confirmation mail after your payment successful!</p>
+
         <h2 class='table_heading'>Product Details</h2>
         <table class='table'>
             <tr>
@@ -375,9 +386,6 @@ if(isset($_POST['order_req'])) {
     </body>
     </html>
     ";
-
-    $delete_cart_after_booking = "DELETE FROM `cart` WHERE `u_id` = $user_id;";
-    mysqli_query($con, $delete_cart_after_booking);
 
     if(!$mail -> send()) {
         echo "Sending Mail is Failed, Invalid Email";
