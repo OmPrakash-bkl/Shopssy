@@ -98,6 +98,7 @@ return responseObj;
 }
 /* Request Sending and Response Getting Section End */
 
+
 /* Showing Register User List Table Container Start */
 let search_place_name = "";
 function show_registered_users(searchData) {

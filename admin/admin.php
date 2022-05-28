@@ -15,11 +15,13 @@ if(isset($_POST['admin_login_form_submission'])) {
             while($row = mysqli_fetch_assoc($login_result)) {
                 $db_u_user_id = $row['email'];
                 $db_u_user_pass = $row['password'];
+                $db_u_user_unique_id = $row['a_id'];
                 $db_u_user_type = $row['admin_type'];
             }
             if(isset($db_u_user_id)) {
                if($db_u_user_id == $userName && $db_u_user_pass == $userPassword) {
                 $_SESSION['user_login_id'] = $db_u_user_id."Shopssy";
+                $_SESSION['admin_login_id'] = $db_u_user_unique_id;
                 $_SESSION['db_u_user_type'] = $db_u_user_type;
                 ?>
                <script type="text/javascript">

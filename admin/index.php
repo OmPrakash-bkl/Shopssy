@@ -10,6 +10,78 @@ if(!(isset($_SESSION['user_login_id']))) {
   window.location.href = "http://localhost/my_clg_shopssy_project/admin/admin.php";
   </script>
   <?php
+} else {
+  $cook_name = "a4dmmziqn_lcovgjiwn_digdm";
+  $cook_value = $_SESSION['admin_login_id'];
+  setcookie($cook_name, $cook_value, time() + (86400 * 30), "/");
+  ?>
+  <script>
+
+    function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+/* Admin Name And Profile Setter Section Start */
+
+function set_name_and_pic_of_admin(admin_unique_id) {
+    function setter_of_name_and_pic_of_admin(datas) { 
+        let resultData = JSON.parse(datas);
+            document.getElementsByClassName("admin_db_image")[0].src = `./images/${resultData.photo}`;
+            document.getElementsByClassName("hamburger_main_container_admin_name")[0].innerHTML = `${resultData.name}`;
+    }
+
+    /* Request Sending and Response Getting Section Start */
+function make_user_details(method, url, sendingData) {
+
+let responseObj = new Promise((resolve, reject)=> {
+    const req = new XMLHttpRequest();
+    req.open(method, url, true);
+    if(method == "POST") {
+        req.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+        req.send(sendingData);
+    } else {
+        req.send();
+    }
+  
+    req.onload = function() {
+    if(this.readyState == 4 && req.status == 200) {
+    resolve(req.responseText);
+    } else {
+        reject("Not Found");
+    }
+}
+
+})
+return responseObj;
+}
+/* Request Sending and Response Getting Section End */
+
+
+    let responseObj = make_user_details("GET", `../admins/specific_admin_detail/id/${admin_unique_id}`, "");
+        responseObj.then((sucvalue) => {
+          setter_of_name_and_pic_of_admin(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+}
+
+
+/* Admin Name And Profile Setter Section End */
+
+set_name_and_pic_of_admin(getCookie("a4dmmziqn_lcovgjiwn_digdm"));
+  </script>
+  <?php
 }
 
 
@@ -134,7 +206,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 
 <!-- Hamburger Main Container Start -->
 <div class="hamburger_main_container">
-<h3>Prakashz</h3>
+<h3 class="hamburger_main_container_admin_name">Prakashz</h3>
 <p>(Admin)</p>
 </div>
 <!-- Hamburger Main Container End -->
@@ -1193,7 +1265,7 @@ if(isset($_SESSION['db_u_user_type'])) {
 <label><b>Admin Type</b></label>
 <h3 class="admin_details">Slaves</h3> <br>
 </div>
-<button class="admin_profile_buttons admin_profile_buttons_edit">Edit</button> <button  class="admin_profile_buttons admin_profile_buttons_logout">Logout</button>
+<button class="admin_profile_buttons admin_profile_buttons_edit">Edit</button> <a href="http://localhost/my_clg_shopssy_project/admin/index.php?l9o5g0o7u5t=1"><button  class="admin_profile_buttons admin_profile_buttons_logout">Logout</button></a>
 </div>
 
 <!-- Admin Setting Section End -->
