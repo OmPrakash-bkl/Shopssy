@@ -101,7 +101,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <!-- Profile and Logout Container Start -->
 
 <div class="profile_and_logout_container">
-<button  onclick="editOfAdmins(1)" class="profile_and_logout_container_buttons"><i class="far fa-user-circle" aria-hidden="true"></i> Profile</button>
+<button  onclick="show_admin_profile()" class="profile_and_logout_container_buttons"><i class="far fa-user-circle" aria-hidden="true"></i> Profile</button>
 <hr>
 <a href="http://localhost/my_clg_shopssy_project/admin/index.php?l9o5g0o7u5t=1"><button class="profile_and_logout_container_buttons"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button></a>
 </div>
@@ -1175,10 +1175,10 @@ if(isset($_SESSION['db_u_user_type'])) {
 <!-- Admin Setting Section Start -->
 
 <div class="admin_profile_container">
-  <button class="admin_profile_close_button"><i class="fa fa-close"></i></button>
+  <button class="admin_profile_close_button" onclick="unshow_admin_profile()"><i class="fa fa-close"></i></button>
 <h1 class="admin_page_name"><u>Admin Profile</u></h1>
 <img src="./images/prakash.jpeg" class="admin_profile_picture" alt="admin profile picture">
-<h2 class="admin_details">Prakashzz</h2>
+<h2 class="admin_details">Om Prakash</h2>
 <h4>(Admin)</h4> <br>
 <h2 class="admin_page_adminAccess_title"><u>Account Details</u></h2>
 <div class="account_details_of_admin">

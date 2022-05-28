@@ -7522,3 +7522,17 @@ function search_the_details() {
 
 /* Search Section End */
 
+/* Showing And Unshowing Admin Profile Details Section Start */
+
+function show_admin_profile() {
+    display_blocked_containers("profile_and_logout_container"); 
+    undisplay_displayed_blocked_containers();
+    document.getElementsByClassName("admin_profile_container")[0].style.display = "block";
+    display_blocked_containers("admin_profile_container"); 
+}
+
+function unshow_admin_profile() {
+    undisplay_displayed_blocked_containers();
+}
+
+/* Showing And Unshowing Admin Profile Details Section End */

@@ -525,15 +525,15 @@ margin-bottom: 10px;
     padding: 0px 10px 10px 10px;
 }
 
-.admin_page_adminAccess_title {
+.admin_profile_picture {
     height: 110px;
     width: 110px;
     border: 3px solid black;
     border-radius: 50%;
     margin: 10px 5px;
 }
-.admin_page_name > h2 > u {
-    margin-bottom: 10px;
+.admin_page_name {
+    margin-bottom: 5px;
 }
 
 .account_details_of_admin {
@@ -571,25 +571,35 @@ margin-bottom: 10px;
     background-color: #e42e00;
 }
 .admin_profile_close_button {
-    margin: 10px 5px;
-    float: right;
+    position: absolute;
+    right: 30px;
     background-color: transparent;
     font-size: 20px;
     color: rgb(51, 51, 51);
     border: 0px;
     cursor: pointer;
-}
-.admin_profile_close_button::after {
-    content: "";
-    clear: both;
-    display: table;
+    margin: 10px 5px;
 }
 
+.admin_page_adminAccess_title {
+    margin-bottom: 10px;
+}
+
+.admin_profile_container {
+    display: none;
+}
 
 /* Admin Panel Profile Section End */
 
 
 /* Media Query Start */
+
+@media only screen and (min-width: 1400px) {
+    .admin_profile_close_button {
+       position: relative;
+       left: 49%;
+    }
+}
 
 @media only screen and (min-width: 1400px) {
     .profile_and_logout_container {
@@ -712,6 +722,12 @@ margin: 4px auto;
 
 .add_user_step1_container, .add_user_step2_container, .add_category_step1_container, .add_sub_category_step1_container, .add_bandi_step1_container, .add_product_step1_container, .add_sub_prod_step1_container, .add_prod_spec_step1_container, .add_prod_faq_ans_step1_container, .add_filter_step1_container, .add_sub_filter_step1_container, .add_prods_data_step1_container, .new_filter_table_data_step1_container, .add_notification_step1_container, .add_cus_feedback_step1_container, .add_newsletter_step1_container, .add_admin_management_step1_container {
     width: 90%;
+}
+.admin_details {
+   font-size: 15px;
+} 
+.admin_page_name, .admin_page_adminAccess_title {
+    font-size: 22px;
 }
 
 }
