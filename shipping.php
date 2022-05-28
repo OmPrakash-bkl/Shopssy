@@ -14,6 +14,22 @@ if(!isset($_SESSION['user_login_id'])) {
 
 // Redirect If User Not Login Fun End
 
+// Redirect If The Cart Is Empty Start
+
+$user_id = $_SESSION['user_id'];
+$cart_details_query = "SELECT * FROM `cart` WHERE `u_id` = $user_id;";
+$cart_details__result = mysqli_query($con, $cart_details_query);
+$cart_count_checking = mysqli_num_rows($cart_details__result);
+if($cart_count_checking == 0) {
+ ?>
+ <script type="text/javascript">
+ window.location.href = 'http://localhost:3000/index.php';
+ </script>
+ <?php
+}
+
+// Redirect If The Cart Is Empty End
+
 // Fetching User Detail Fun Start
 
 $shipping_address = "";
