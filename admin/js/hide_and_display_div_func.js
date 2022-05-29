@@ -21,6 +21,8 @@ function undisplay_displayed_blocked_containers() {
     })
 }
 
+display_blocked_containers("home_page_graphs_container");
+
 /* Reset Section Start */
 
 document.getElementsByClassName("add_user_back_btn")[0].style.display = "inline-block";

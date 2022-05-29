@@ -591,6 +591,24 @@ margin-bottom: 10px;
 
 /* Admin Panel Profile Section End */
 
+/* Graph Section Start */
+
+.home_page_graphs_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.graph_container {
+    width: 49%;
+    border: 2px solid gainsboro;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* Graph Section End */
 
 /* Media Query Start */
 
@@ -624,7 +642,9 @@ margin-bottom: 10px;
     .admin_panel_body_content_container {
         flex: 75%;
     }
-    
+    .graph_container {
+        width: 48%;
+    }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -680,6 +700,14 @@ margin-bottom: 10px;
         font-size: 18px;
     } 
     
+.graph_container {
+    width: 100%;
+}
+
+#myChart1 {
+    height: 100%;
+}
+
 }
 
 @media only screen and (max-width: 500px) {
@@ -728,6 +756,10 @@ margin: 4px auto;
 } 
 .admin_page_name, .admin_page_adminAccess_title {
     font-size: 22px;
+}
+
+#myChart1 {
+    height: 75%;
 }
 
 }

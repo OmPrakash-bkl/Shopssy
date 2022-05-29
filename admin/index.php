@@ -159,7 +159,7 @@ mysqli_query($con, $delete_unfulfill_data_query);
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&family=Josefin+Sans:wght@700&family=Lobster&family=Pacifico&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/admin_style.css">
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body onresize="func()">
 
@@ -635,6 +635,159 @@ if(isset($_SESSION['db_u_user_type'])) {
 
 <div class="admin_panel_body_content_container">
 
+<!-- Graph Section Start -->
+
+<div class="home_page_graphs_container">
+
+<?php
+$city_names = [];
+$city_names_retrieve_query = "SELECT DISTINCT `city` FROM `account`;";
+$city_names_retrieve_result = mysqli_query($con, $city_names_retrieve_query);
+while($row = mysqli_fetch_assoc($city_names_retrieve_result)) {
+  $city_names[] = $row['city'];
+}
+
+$people_counts = [];
+
+foreach($city_names_retrieve_result as $data) {
+  $city_name = $data['city'];
+  $people_counts_retrieve_query = "SELECT COUNT(`acc_id`) AS `people_count` FROM `account` WHERE `city` = '$city_name'";
+  $people_counts_retrieve_result = mysqli_query($con, $people_counts_retrieve_query);
+  while($row = mysqli_fetch_assoc($people_counts_retrieve_result)) {
+    $people_counts[] = $row['people_count'];
+  }
+
+}
+
+
+
+?>
+
+<div class="graph_container">
+<canvas id="myChart1" height="290%"></canvas>
+</div>
+
+<script>
+  const labels = <?php echo json_encode($city_names); ?>;
+  
+var data = {
+  labels: labels,
+  datasets: [{
+    label: 'CUSTOMER COUNT BY CITIES',
+    data: <?php echo json_encode($people_counts); ?>,
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.4)',
+      'rgba(255, 159, 64, 0.4)',
+      'rgba(255, 205, 86, 0.4)',
+      'rgba(75, 192, 192, 0.4)',
+      'rgba(54, 162, 235, 0.4)',
+      'rgba(153, 102, 255, 0.4)',
+      'rgba(201, 203, 207, 0.4)'
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)'
+    ],
+    borderWidth: 1
+  }]
+};
+
+  var config = {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  },
+};
+
+  const myChart1 = new Chart(
+    document.getElementById('myChart1'),
+    config
+  );
+
+
+</script>
+
+<?php
+
+$different_kinds_of_stages_counts = [];
+$different_stages = ['ordered', 'processed', 'ready', 'canceled'];
+foreach($different_stages as $data) {
+  $different_kinds_of_stages_retrieve_query = "SELECT COUNT(`order_id`) AS `stage_count` FROM `orders_table` WHERE `p_status` = '$data'";
+  $different_kinds_of_stages_retrieve_result = mysqli_query($con, $different_kinds_of_stages_retrieve_query);
+  while($row = mysqli_fetch_assoc($different_kinds_of_stages_retrieve_result)) {
+    $different_kinds_of_stages_counts[] = $row['stage_count'];
+  }
+
+}
+
+?>
+
+<div class="graph_container">
+<canvas id="myChart2"></canvas>
+</div>
+
+<script>
+
+var data = {
+  labels: ['Ordered', 'Processed', 'Delivered', 'Cancelled'],
+  datasets: [{
+    label: 'COUNTS OF DIFFERENT ORDER STAGES',
+    data: <?php echo json_encode($different_kinds_of_stages_counts); ?>,
+    borderWidth: 1,
+    backgroundColor: ['#F8B487', '#99FFE0', '#FF80DF', '#A64DFF'],
+  }]
+};
+
+var config = {
+  type: 'pie',
+  data: data,
+  options: {
+    plugins: {
+      legend: {
+        onHover: handleHover,
+        onLeave: handleLeave
+      }
+    }
+  }
+};
+
+// Append '4d' to the colors (alpha channel), except for the hovered index
+function handleHover(evt, item, legend) {
+  legend.chart.data.datasets[0].backgroundColor.forEach((color, index, colors) => {
+    colors[index] = index === item.index || color.length === 9 ? color : color + '4D';
+  });
+  legend.chart.update();
+}
+
+// Removes the alpha channel from background colors
+function handleLeave(evt, item, legend) {
+  legend.chart.data.datasets[0].backgroundColor.forEach((color, index, colors) => {
+    colors[index] = color.length === 9 ? color.slice(0, -2) : color;
+  });
+  legend.chart.update();
+}
+
+
+  const myChart2 = new Chart(
+    document.getElementById('myChart2'),
+    config
+  );
+
+</script>
+
+</div>
+
+<!-- Graph Section End -->
 
 <!-- Table Name and Other Details Display Container Start -->
 
