@@ -1,4 +1,8 @@
 <?php
+
+error_reporting(0);
+ini_set('display_errors', 0);
+
 session_start();
 if(isset($_GET['l9o5g0o7u5t'])) {
   unset($_SESSION['user_login_id']);

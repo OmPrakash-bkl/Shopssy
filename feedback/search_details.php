@@ -13,7 +13,7 @@ if(isset($_SERVER['REQUEST_METHOD'])) {
     if(is_numeric($search_keyword)) {
         $require_data_query = "SELECT * FROM `contact_us` WHERE `id` LIKE '%$search_keyword%' AND `status` = 'unread';";
     } else {
-     $require_data_query = "SELECT * FROM `contact_us` WHERE `name` LIKE '%$search_keyword%' OR `email` LIKE '%$search_keyword%' OR `message` LIKE '%$search_keyword%';"; 
+     $require_data_query = "SELECT * FROM `contact_us` WHERE (`name` LIKE '%$search_keyword%' OR `email` LIKE '%$search_keyword%' OR `message` LIKE '%$search_keyword%') AND (`status` = 'unread');"; 
     }
     
     $require_data_result = mysqli_query($conn, $require_data_query);
