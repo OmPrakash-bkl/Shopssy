@@ -33,6 +33,10 @@ if(!(isset($_SESSION['user_login_id']))) {
   </script>
   <?php
 } else {
+
+  if(isset($_SESSION['user_login_id'])) {
+
+    
   $cook_name = "a4dmmziqn_lcovgjiwn_digdm";
   $cook_value = $_SESSION['admin_login_id'];
   setcookie($cook_name, $cook_value, time() + (86400 * 30), "/");
@@ -106,6 +110,9 @@ return responseObj;
 set_name_and_pic_of_admin(getCookie("a4dmmziqn_lcovgjiwn_digdm"));
   </script>
   <?php
+
+  }
+
 }
 
 

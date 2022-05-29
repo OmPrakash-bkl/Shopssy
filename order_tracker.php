@@ -32,7 +32,7 @@ if(!isset($_SESSION['user_login_id'])) {
     <?php 
 
      $user_id =  $_SESSION['user_id'];
-     $order_tracker_id_retrieve_query = "SELECT `order_id`, `p_status`, `user_id` FROM `orders_table` WHERE `user_id` = $user_id;";
+     $order_tracker_id_retrieve_query = "SELECT `order_id`, `p_status`, `user_id` FROM `orders_table` WHERE `user_id` = $user_id AND `p_status` = 'ordered';";
      $order_tracker_id_retrieve_result = mysqli_query($con, $order_tracker_id_retrieve_query);
      $order_tracker_check_row = mysqli_num_rows($order_tracker_id_retrieve_result);
 
@@ -297,6 +297,46 @@ if(!isset($_SESSION['user_login_id'])) {
 
         ?>
 
+        <?php
+        
+        if((isset($_POST['order_cancel_id']))) {
+            $order_can_id = $_POST['order_cancel_id'];
+            ?>
+            <div class="order_cancel_form_container">
+               <center>
+               <h1><u>Order cancellation Form</u></h1>
+               </center>
+                <form action="./order_tracker.php" method="POST">
+                <input type="hidden" name="order_cancellation_id" value="<?php echo $order_can_id; ?>">
+                <div class="order_cancel_sub_containers">
+                    <label for="payment_id">Payment id</label> <br>
+                    <input type="text" id="payment_id" name="payment_id_of_order" autofocus required>
+                </div>
+
+                <div class="order_cancel_sub_containers">
+                    <label for="amount_of_order">Amount</label> <br>
+                    <input type="text" id="amount_of_order" name="amount_of_order" required>
+                </div>
+
+                <div class="order_cancel_sub_containers">
+                    <label for="date_of_amount_paid">Date of paid</label> <br>
+                    <input type="text" id="date_of_amount_paid" name="date_of_amount_paid" required>
+                </div>
+
+                <div class="order_cancel_sub_containers">
+                    <label for="reason_of_cancel">Reason of cancel</label> <br>
+                    <input type="text" id="reason_of_cancel" name="reason_of_cancel" required>
+                </div>
+            
+            <button type="submit" name="order_cancel_confirmation">Cancel Your Order</button>
+                </form>
+            </div>
+            <?php
+        }
+
+        ?>
+
+
         <?php 
         if($order_tracker_check_row == 0) {
             ?>
@@ -306,7 +346,20 @@ if(!isset($_SESSION['user_login_id'])) {
             <?php
         }
         ?>
+
+        <?php 
+         if(!(isset($_POST['order_cancel_id'])) && !($order_tracker_check_row == 0))  {
+            ?>
+            <div class="cancel_order_btn_of_order_page">
+            <form action="./order_tracker.php" method="POST">
+            <button name="order_cancel_id" value="<?php if(isset($_GET['ordered_id'])) { echo $_GET['ordered_id']; } else {echo $fetch_order_tracker_id;} ?>">Order Cancel Request</button>
+            </form>
+            </div>
+            <?php
+         }
+        ?>
         
+
         <div class="help_btn_of_order_page">
         <a href="./contactus.php"><button>Need help?</button></a>
         </div>
@@ -318,6 +371,96 @@ if(!isset($_SESSION['user_login_id'])) {
 
     <?php 
     include "./footer.php";
+    ?>
+
+    <?php
+
+
+// Order Cancel Confirmation Section Start
+
+if(isset($_POST['order_cancel_confirmation'])) {
+
+    $order_can_id = $_POST['order_cancellation_id'];
+    $payment_id_of_order = $_POST['payment_id_of_order'];
+    $amount_of_order = $_POST['amount_of_order'];
+    $date_of_amount_paid = $_POST['date_of_amount_paid'];
+    $reason_of_cancel = $_POST['reason_of_cancel'];
+
+    $payment_id_of_order = stripcslashes($payment_id_of_order);
+    $amount_of_order = stripcslashes($amount_of_order);
+    $reason_of_cancel = stripcslashes($reason_of_cancel);
+    
+    $amount_of_order = mysqli_real_escape_string($con, $amount_of_order);
+
+    $payment_id_checker_query = "SELECT `payment_id` FROM `cancelled_orders` WHERE `payment_id` = '$payment_id_of_order';";
+    $payment_id_checker_result = mysqli_query($con, $payment_id_checker_query);
+    $payment_id_checker_count = mysqli_num_rows($payment_id_checker_result);
+    
+    if($payment_id_checker_count >= 1) {
+        ?>
+        <script>
+            alert("OOPS, Wrong Payment Id!");
+        </script>
+        <?php
+    } else {
+
+        require "./Mail/phpmailer/PHPMailerAutoload.php";
+        $mail = new PHPMailer;
+    
+        $mail->isSMTP();
+        $mail->Host='smtp.gmail.com';
+        $mail->Port=587;
+        $mail->SMTPAuth=true;
+        $mail->SMTPSecure='tls';
+    
+       
+        $mail->Username='shopssyz@gmail.com';
+        $mail->Password='Shopssy$@#123';
+    
+        
+        $mail->setFrom('shopssyz@gmail.com', 'Order cancelled!');
+        
+        $mail->addAddress($_SESSION['user_login_email']);
+        
+        $mail->isHTML(true);
+        $mail->Subject="Your order is cancelled - Shopssy";
+        $mail->Body="<h4 style='color: black;'>Dear User,</h4>
+        <h3 style='color: black;'>Your order has been cancelled, your payment will be refunded to your account in 2 to 4 business days, Thankyou.</h3>
+        
+        <p style='color: black;'>If you have any questions, contact shopssy at <a href='http://localhost:3000/contactus.php'>http://localhost:3000/contactus.php</a> or call at <a href='tel: 1234567890'>+91 1234567890</a>.</p>
+
+        <p style='color: black;'>With regrads,</p>
+        <b style='color: black;'>Shopssy - The Online Shopping Site.</b>";
+    
+        if(!$mail->send()){
+            ?>
+            <script>
+                alert("Invalid Email!");
+            </script>
+            <?php
+        } else{
+
+            
+        $cancel_order_insert_query = "INSERT INTO `cancelled_orders` (`order_id`, `payment_id`, `amount`, `date_of_paid`, `reason`) VALUES ('$order_can_id', '$payment_id_of_order', '$amount_of_order', '$date_of_amount_paid', '$reason_of_cancel');";
+        mysqli_query($con, $cancel_order_insert_query);
+
+    
+            $order_cancel_query = "UPDATE `orders_table` SET `p_status` = 'canceled' WHERE `order_id` = '$order_can_id'";
+            mysqli_query($con, $order_cancel_query);
+    
+            ?>
+            <script>
+            window.location.href = 'http://localhost:3000/index.php';
+            </script>
+            <?php
+        }
+    
+    }
+
+}
+
+// Order Cancel Confirmation Section End
+
     ?>
               
     <script src="./javascript/index.js"></script>

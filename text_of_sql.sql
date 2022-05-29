@@ -1372,4 +1372,11 @@ create table admin(a_id int(100) AUTO_INCREMENT, email varchar(200), password va
 insert into admin(email, password, name, photo, ph_number, address, admin_type) values
 ('omprakash2001bkl@gmail.com', 'Admin123', 'Om Prakash', 'prakash.jpg', '8838067309', '13/A, Prasanna colony, 3rd street, avaniyapuram, madurai - 12.', 'master');
 
+/* Cancelled Orders */
+
+create table cancelled_orders(c_o_id int(100) AUTO_INCREMENT, order_id int(100), payment_id varchar(200), amount varchar(200), date_of_paid varchar(200), reason varchar(200), primary key(c_o_id));
+
+insert into cancelled_orders(order_id, payment_id, amount, date_of_paid, reason) values
+(25, 'pay_JamhNFTteDVIxX', '1', '29/05/2022', 'ordered without my acknowledge');
+
 
