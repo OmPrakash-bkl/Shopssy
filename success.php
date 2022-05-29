@@ -144,7 +144,7 @@ if($cart_count_checking == 0) {
             </center>
             
             <p class='info_text'>Dear Customer, Your payment was successful! As soon as your package is on it's way, you will receive a delivery confirmation from us by email, Thankyou.</p>
-            
+
             <p class='help_para'>If you have any questions, contact shopssy at <a href='http://localhost:3000/contactus.php'>http://localhost:3000/contactus.php</a> or call at <a href='tel: 1234567890'>+91 1234567890</a>.</p>
             
         </body>
