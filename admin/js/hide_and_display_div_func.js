@@ -6794,6 +6794,8 @@ if((document.getElementsByClassName("admin_email_id_error_message_place")[0].inn
                 alert(goodResponse);
                 document.getElementById("admin_management_id").value = document.getElementById("admin_email_id").value = document.getElementById("admin_password").value  = document.getElementById("admin_name").value = document.getElementById("admin_photo").value = document.getElementById("admin_phone_number").value = document.getElementById("admin_address").value  = document.getElementById("admin_type").value = "";
                 undisplay_displayed_blocked_containers(); 
+                document.getElementsByClassName("home_page_graphs_container")[0].style.display = "flex";
+                 display_blocked_containers("home_page_graphs_container"); 
             }).catch((badResponse) => {
                 console.log(badResponse);
             })
@@ -6909,6 +6911,7 @@ function editOfAdmins(a_id) {
     undisplay_displayed_blocked_containers(); 
     document.getElementsByClassName("add_admin_management_step1_container")[0].style.display = "block";
     display_blocked_containers("add_admin_management_step1_container"); 
+   
 }
 
 document.getElementsByClassName("admin_submition_btn2")[0].addEventListener("click", function(event) {
@@ -7990,6 +7993,8 @@ function show_admin_profile(ad_pri_id) {
 
 function unshow_admin_profile() {
     undisplay_displayed_blocked_containers();
+    document.getElementsByClassName("home_page_graphs_container")[0].style.display = "flex";
+    display_blocked_containers("home_page_graphs_container"); 
 }
 
 /* Showing And Unshowing Admin Profile Details Section End */
