@@ -441,7 +441,7 @@ if(isset($_POST['order_cancel_confirmation'])) {
         } else{
 
             
-        $cancel_order_insert_query = "INSERT INTO `cancelled_orders` (`order_id`, `payment_id`, `amount`, `date_of_paid`, `reason`) VALUES ('$order_can_id', '$payment_id_of_order', '$amount_of_order', '$date_of_amount_paid', '$reason_of_cancel');";
+        $cancel_order_insert_query = "INSERT INTO `cancelled_orders` (`order_id`, `payment_id`, `amount`, `date_of_paid`, `reason`, `status`) VALUES ('$order_can_id', '$payment_id_of_order', '$amount_of_order', '$date_of_amount_paid', '$reason_of_cancel', '');";
         mysqli_query($con, $cancel_order_insert_query);
 
     

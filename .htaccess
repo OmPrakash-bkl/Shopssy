@@ -479,6 +479,19 @@ RewriteRule ^subscribers/search_details/?$ subscribers/search_details.php [L]
 
 # Subscribers End
 
+# Cancelled Orders Start
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^cancelled_orders/c_o_details/?$ cancelled_orders/c_o_details.php [L]
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^cancelled_orders/specific_corder_detail/id/([^/\*]+)?$ cancelled_orders/specific_corder_detail.php?id=1 [L]
+
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^cancelled_orders/search_details/?$ cancelled_orders/search_details.php [L]
+
+# Cancelled Orders End
+
 # Shopssy Hub And Distributor Start
 
 RewriteCond %{REQUEST_METHOD} =POST

@@ -7202,6 +7202,88 @@ function deleteOfSpecSubscriber(id) {
 
 /* Subscribers Section End */
 
+/* Cancel Orders Section Start */
+
+/* View Orders Section Start */
+
+function show_cancel_orders(searchData) {
+
+    function UI_Fun_34(datas) { 
+        unDisplay_preLoader();
+        let totalC = 0;
+        let resultData = JSON.parse(datas);
+        let table_datas = `<tr><th>S.NO</th>
+        <th>ID</th>
+        <th>ORDER ID</th>
+        <th>PAYMENT ID</th>
+        <th>AMOUNT</th>
+        <th>DATE OF PAID</th>
+        <th>REASON OF CANCEL</th>
+        <th>ACTION</th></tr>`;
+        if(resultData.length == 0) {
+            table_datas = `<center>
+                <h2>No Results</h2>
+                </center>`
+                totalC = -1;
+        }
+        for(let i = 0; i < resultData.length; i++) {
+            
+            table_datas+=`<tr>
+            <td>${i+1}.</td>
+            <td>${resultData[i].c_o_id}</td>
+            <td>${resultData[i].order_id}</td>
+            <td>${resultData[i].payment_id}</td>
+            <td>${resultData[i].amount}</td>
+            <td>${resultData[i].date_of_paid}</td>
+            <td>${resultData[i].reason}</td>
+            <td><button title="Edit" class="edit_button_of_table" onclick="editOfSpecCOrders(${resultData[i].c_o_id})"><i class="fa fa-eye"></i></button></td></tr>`;
+            totalC = i;
+        }
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_table_name")[0].innerHTML = "Cancelled Orders Details";
+        document.getElementsByClassName("table_name_and_other_details_display_containers_inner_left_containers_count")[0].innerHTML = `${totalC+1} details found`;
+        document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = table_datas;
+    
+        undisplay_displayed_blocked_containers(); 
+        document.getElementsByClassName("admin_panel_details_table_container")[0].style.display = "block";
+        display_blocked_containers("admin_panel_details_table_container"); 
+        document.getElementsByClassName("table_name_and_other_details_display_container")[0].style.display = "block";
+        display_blocked_containers("table_name_and_other_details_display_container"); 
+    }
+
+    if(searchData == '') { 
+        let responseObj = make_user_details("GET", "../cancelled_orders/c_o_details/", "");
+        display_preLoader();
+        responseObj.then((sucvalue) => {
+            unDisplay_preLoader();
+            UI_Fun_34(sucvalue);
+            }).catch((rejvalue) => {
+                console.log(rejvalue);
+            }) 
+    } else {
+        unDisplay_preLoader();
+        UI_Fun_34(searchData);
+    }
+
+    search_place_name = "show_cancel_orders";
+    search_box_disabler();
+}
+
+function editOfSpecCOrders(id) {
+    display_preLoader();
+    let responseObj = make_user_details("GET", `../cancelled_orders/specific_corder_detail/id/${id}`, "");
+
+    responseObj.then((resObj) => {
+        unDisplay_preLoader();
+        alert(resObj);
+        show_cancel_orders("");
+    })
+}
+
+
+/* View Orders Section End */
+
+/* Cancel Orders Section End */
+
 /* Search Section Start */
 
 /* Request Sending and Response Getting Section Start */
@@ -7834,6 +7916,24 @@ function search_the_details() {
             
             if(search_place_name == "edit_and_delete_of_subscribers") {
                 edit_and_delete_of_subscribers(response);
+            }
+           
+    
+        }).catch((error) => {
+            console.log(error);
+            document.getElementsByClassName("admin_panel_details_table")[0].innerHTML = "<center><h2>No Results</h2></center>";
+        })
+    }
+    if(search_place_name == "show_cancel_orders") {
+        let responseObjs = make_response_details("POST", "../cancelled_orders/search_details/", `${searchWords}`);
+        display_preLoader();
+        
+        responseObjs.then((response) => {
+            unDisplay_preLoader();
+            document.getElementById("search_bar").value = "";
+            
+            if(search_place_name == "show_cancel_orders") {
+                show_cancel_orders(response);
             }
            
     
