@@ -114,7 +114,7 @@ function show_registered_users(searchData) {
             <th>F.NAME</th>
             <th>L.NAME</th>
             <th>EMAIL</th>
-            <th>PASSWORD</th>
+           
             <th>VERIFIED USER?</th>
             <th>ACTION</th></tr>`;
         if(resultData.length == 0) {
@@ -137,7 +137,7 @@ function show_registered_users(searchData) {
                 <td>${resultData[i].f_name}</td>
                 <td>${resultData[i].l_name}</td>
                 <td>${resultData[i].email}</td>
-                <td>${resultData[i].password}</td>
+                
                 <td>${isVerifiedUser}</td>
                 <td><button title="Edit" class="edit_button_of_table" onclick="editOfRegisteredUser(${resultData[i].user_id})"><i class="fa fa-edit"></i></button> <button title="Delete" class="delete_button_of_table" onclick="deleteOfRegisteredUser(${resultData[i].user_id})"><i class="fa fa-trash-o"></i></button></td>
                 </tr>`;
