@@ -24,7 +24,7 @@ if(isset($_POST['admin_login_form_submission'])) {
             }
             if(isset($db_u_user_id)) {
                if($db_u_user_id == $userName && $db_u_user_pass == $userPassword) {
-                $_SESSION['user_login_id'] = $db_u_user_id."Shopssy";
+                $_SESSION['user_login1_id'] = $db_u_user_id."Shopssy";
                 $_SESSION['admin_login_id'] = $db_u_user_unique_id;
                 $_SESSION['db_u_user_type'] = $db_u_user_type;
                 ?>

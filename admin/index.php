@@ -5,7 +5,7 @@ ini_set('display_errors', 0);
 
 session_start();
 if(isset($_GET['l9o5g0o7u5t'])) {
-  unset($_SESSION['user_login_id']);
+  unset($_SESSION['user_login1_id']);
   ?>
   <script>
 document.cookie = "a4dmmziqn_lcovgjiwn_digdm=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -30,7 +30,7 @@ if(isset($_GET['ubnxcahmqaenlgwe'])) {
   <?php
 }
 
-if(!(isset($_SESSION['user_login_id']))) {
+if(!(isset($_SESSION['user_login1_id']))) {
   ?>
   <script type="text/javascript">
   window.location.href = "http://localhost/my_clg_shopssy_project/admin/admin.php";
@@ -38,7 +38,7 @@ if(!(isset($_SESSION['user_login_id']))) {
   <?php
 } else {
 
-  if(isset($_SESSION['user_login_id'])) {
+  if(isset($_SESSION['user_login1_id'])) {
 
     
   $cook_name = "a4dmmziqn_lcovgjiwn_digdm";
