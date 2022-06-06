@@ -57,7 +57,7 @@ $_SESSION['psarynmielnat_fqtienayl_sxeacgigown'] = 1;
     var product_id =  "P0XXX";
     var options = {
     "key": "",
-    "amount": (totalAmount*100), // 2000 paise = INR 20
+    "amount": (totalAmount*100), // 2000 paise = INR 20(money)
     "name": "Shopssy",
     "description": "Payment",
     "image": "./images/favicon1.png",
