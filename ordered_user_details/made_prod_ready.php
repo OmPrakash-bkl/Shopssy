@@ -43,7 +43,7 @@ $inputData = json_decode(file_get_contents('php://input'), true);
 
         $mail -> isHTML(true);
         $mail -> Subject = 'Hey, Be ready!';
-        $mail -> Body = "<b style='color: black;'>Dear customer,</b> <p style='color: black;'>Your order is ready to pick up. Our distributor will call you within 2 hours. So, keep wait with your mobile phone, Thank you.</p>
+        $mail -> Body = "<b style='color: black;'>Dear customer,</b> <p style='color: black;'>Your order is ready to pick up. Our distributor will call you within 2 hours. So, keep wait in your shipping address's location with your mobile phone, Thank you.</p>
         <br><br>
         <p style='color: black;'>With regards,</p>
         <b style='color: black;'>Shopssy - The Online Shopping Site.</b>";

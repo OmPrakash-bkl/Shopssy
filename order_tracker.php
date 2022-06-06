@@ -32,7 +32,7 @@ if(!isset($_SESSION['user_login_id'])) {
     <?php 
 
      $user_id =  $_SESSION['user_id'];
-     $order_tracker_id_retrieve_query = "SELECT `order_id`, `p_status`, `user_id` FROM `orders_table` WHERE `user_id` = $user_id AND `p_status` = 'ordered';";
+     $order_tracker_id_retrieve_query = "SELECT `order_id`, `p_status`, `user_id` FROM `orders_table` WHERE `user_id` = $user_id;";
      $order_tracker_id_retrieve_result = mysqli_query($con, $order_tracker_id_retrieve_query);
      $order_tracker_check_row = mysqli_num_rows($order_tracker_id_retrieve_result);
 
